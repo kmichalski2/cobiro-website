@@ -8,27 +8,35 @@ const CookieBanner = ({ data }) => {
     useEffect(() => {
         // check if cookie is set
         const cookieAccepted = () => {
-            var re = new RegExp('cookieConsent' + "=([^;]+)");
+            var re = new RegExp('cookieConsent=([^;]+)');
             var value = re.exec(document.cookie);
             return (value != null) ? unescape(value[1]) : null;
         }
 
-        // runs cookieAccepted and removes cookie banner if cookie is set, nad if not set adds a cookie banner
-        if( cookieAccepted() ) {
+        // runs cookieAccepted and removes cookie banner if cookie is set, and if not set adds a cookie banner
+        if( cookieAccepted() && isCookieAccepted !== true ) {
             setIsCookieAccepted(true);
-            
+            console.log('setting state');
+        }
+        if(isCookieAccepted) {
             // Fire Google Tag Manager event
             fireGTM();
-        }
+       }
     });
+
+     // Fire Google Tag Manager event
+     const fireGTM = () => {
+        console.log('Firing GTM');
+        // window.dataLayer.push({'event': 'cookiesAccepted'});
+    }
 
      // Sets cookie onclick and fires GTM
      const setCookie = () => {
         // Setting Cookie
         let d = new Date();
         d.setTime(d.getTime() + (30*24*60*60*1000));
-        const expires = "expires="+ d.toUTCString();
-        document.cookie = 'cookieConsent' + "=" + true + ";" + expires + ";path=/";
+        const expires = `expires=${d.toUTCString()}`;
+        document.cookie = `cookieConsent=${true};${expires};path=/`;
 
         // Remove Cookie Banner
         setIsCookieAccepted(true);
@@ -44,14 +52,8 @@ const CookieBanner = ({ data }) => {
                 <button className="btn btn-cookies" onClick={ setCookie }>Got it!</button>
             </div>
         );
-    }
-
-    // Fire Google Tag Manager event
-    const fireGTM = () => {
-        console.log('Firing GTM');
-        // window.dataLayer.push({'event': 'cookiesAccepted'});
-    }
-
+    } 
+    
     return (
         cookieBannerHtml
     )
