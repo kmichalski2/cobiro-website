@@ -9,9 +9,10 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Navbar from "../navbar"
-import Footer from "../footer"
+import Navbar from "./navbar"
+import Footer from "./footer"
 import "./style/app.scss"
+import CookieBanner from "./cookieConsent";
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -28,6 +29,7 @@ const Layout = ({ children }) => {
     <>
       <Navbar menuItems={data.site.siteMetadata.title} />
         <main>{children}</main>
+        <CookieBanner/>
         <Footer/>
     </>
   )

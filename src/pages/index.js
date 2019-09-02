@@ -1,11 +1,37 @@
 import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
+import JumboHeader from "../components/sections/jumboHeader"
+import ThreeUpPeople from "../components/sections/threeUpPeople"
+import ThreeUp from "../components/sections/threeUp"
+import AccordionFaq from "../components/sections/accordionFaq"
+import ExplanationImage from "../components/sections/explanationImage";
+import FeatureList from "../components/sections/featureList";
+import FeaturedCompanies from "../components/sections/featuredCompanies";
+import FeaturedTestimonialsSingle from "../components/sections/featuredTestimonalSingle";
+import JumboCta from "../components/sections/jumboCta";
+import ListPricing from "../components/sections/listPricing";
+import Quotes from "../components/sections/quotes";
+import Text from "../components/sections/text";
+import Video from "../components/sections/video";
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1 style={{ textAlign: 'center', margin: '2rem 0'}}>Hi people</h1>
+    <JumboHeader/>
+    <ThreeUp/>
+    <ExplanationImage alignment="left"/>
+    <ExplanationImage alignment="right"/>
+    <AccordionFaq/>
+    <FeatureList/>
+    <FeaturedCompanies/>
+    <FeaturedTestimonialsSingle/>
+    <ThreeUpPeople/>
+    <JumboCta/>
+    <ListPricing/>
+    <Quotes/>
+    <Text/>
+    <Video/>
   </Layout>
 )
 
