@@ -1,0 +1,31 @@
+$black: #000;
+$white: #fff;
+$blue: #177ee3;
+$yellow: #FCF22B;
+$lightgrey: #F9FBFC;
+$mediumgrey: #E6E6E6;
+$grey: #D6D6D6;
+$darkgrey: #4F525F;
+
+$colors: (
+	black: $black,
+	white: $white,
+	blue: $blue,
+	yellor: $yellow,
+	lightgrey: $lightgrey,
+	mediumgrey: $mediumgrey,
+	grey: $grey,
+	darkgrey: $darkgrey,
+);
+
+$link-color: $blue;
+$font-family-base: 'Soleil', Arial, Sans-Serif;
+$font-weight-base: 300;
+$headings-font-weight: 600;
+
+$grid-gutter: (
+  xs: 2.2rem,
+  lg: 30px
+);
+
+@import '~baseguide/scss/baseguide/00-settings/settings';

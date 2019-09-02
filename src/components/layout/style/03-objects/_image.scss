@@ -1,0 +1,17 @@
+.img-responsive {
+	max-width: 100%;
+}
+
+.img-full-width {
+	width: 100%;
+}
+
+.customer-logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.customer-logo>img {
+	width: 12.5rem;
+	margin: 0.55rem 0;
+}

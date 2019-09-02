@@ -1,0 +1,39 @@
+.accordion-text {
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	transition: all 0.4s ease;
+
+	&.expanded-accordion {
+		opacity: 1;
+		margin-top: 2rem;
+		max-height: none;
+	}
+}
+.accordion-header {
+	cursor: pointer;
+}
+// .btn-accordion {
+// 	position: absolute;
+// 	top: 1rem;
+// 	right: 1.5rem;
+// 	// top: 1.7rem;
+// 	// right: 2rem;
+
+// 	@include mq($until: md) {
+// 		top: 0.75rem;
+// 		right: 0.75rem;
+// 	}
+// }
+.accordion {
+
+	.card {
+		display: block;
+		margin-bottom: 1.25rem;
+	}
+
+	h5 {
+		margin: 0;
+		padding-right: 5%;
+	}
+}

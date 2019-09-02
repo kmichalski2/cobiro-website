@@ -1,0 +1,47 @@
+$button-bg: $blue;
+$button-hover-bg: darken($blue, 20);
+$button-border-radius: 5px;
+$button-border-color: $blue;
+$button-padding-vertical: 0.5em;
+$button-padding-horizontal: 2em;
+
+@import '~baseguide/scss/baseguide/04-components/button';
+
+.btn {
+	font-size: 1rem;
+	font-weight: 600;
+}
+@include mq($from: md) {
+	.btn-large {
+		font-size: 1.2rem;
+		padding: 1rem 1.8rem;
+	}
+}
+
+.btn-secondary {
+	background-color: transparent;
+	color: $blue;
+}
+.btn-toggle {
+	padding: 1rem;
+	position: relative;
+
+	span {
+		display: none;
+	}
+
+	&::before {
+		content: '+';
+		position: absolute;
+		top: 48%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	&.active {
+		&::before {
+			content: '-';
+		}
+	}
+
+}

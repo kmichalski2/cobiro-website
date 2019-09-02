@@ -1,0 +1,14 @@
+.feature-list-border {
+	position: relative;
+}
+.feature-list-border::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	border-bottom: 1px solid $mediumgrey;
+	margin-left: .9375rem;
+	margin-right: .9375rem;
+}
+

@@ -1,0 +1,22 @@
+@import '~baseguide/scss/baseguide/05-utilities/space';
+
+.section, .section-inner {
+	padding: 5rem 0;
+
+	@include mq($until: md) {
+		padding: 2.5rem 0;
+	}
+}
+
+.text-margin {
+	margin: 60px;
+}
+@include mq($from: xl) {
+	.text-padding {
+		padding: 0 3.75rem;
+	}
+}
+
+.margin-bottom {
+	margin-bottom: 50px;
+}

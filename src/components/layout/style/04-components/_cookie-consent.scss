@@ -1,0 +1,31 @@
+#cookie-banner {
+	position: fixed;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	bottom: 2rem;
+	left: 2rem;
+	right: 2rem;
+	padding: 2rem;
+	background-color: $white;
+	box-shadow: 0 .2rem .5rem rgba(0,0,0,.15);
+	z-index: 200;
+
+	.btn-cookie {
+		white-space: nowrap;
+	}
+
+	.p-cookie {
+		margin: 0;
+		margin-right: 2rem;
+	}
+
+	@include mq($until: md) {
+		flex-direction: column;
+
+		.p-cookie {
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+	}
+}

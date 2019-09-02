@@ -1,0 +1,29 @@
+footer {
+	border-top: 1px solid $mediumgrey;
+
+	.footer-bottom {
+		border-top: 1px solid $mediumgrey;
+		padding: 2.5rem 0;
+	}
+	.footer-image {
+		max-width: 100%;
+		margin: 1rem 0;
+	}
+	.social-link {
+		margin-left: 1rem;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	@include mq($until: md) {
+		.menu li a{
+			padding: 0.5rem 0;
+			display: block;
+		}
+	}
+}
+
+.footer-logo {
+	width: 5rem;
+}

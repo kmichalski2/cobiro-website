@@ -1,0 +1,27 @@
+.testimonal-box {
+	padding: 2.5rem 5rem;
+
+	.testimonial-image-wrapper {
+		margin-right: 2.5rem;
+	}
+	.testimonial-image {
+		width: 7.5rem;
+		max-width: 7.5rem;
+	}
+
+	@include mq($until: md) {
+		padding: 2rem;
+
+		.testimonial-image-wrapper {
+			margin-right: 1.25rem;
+		}
+
+		.testimonial-image {
+			width: 3rem;
+			max-width: 3rem;
+		}
+
+	}
+
+
+}

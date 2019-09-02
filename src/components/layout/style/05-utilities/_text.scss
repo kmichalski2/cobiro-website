@@ -1,0 +1,14 @@
+@import '~baseguide/scss/baseguide/05-utilities/text';
+
+@include loop-breakpoints {
+
+  .text-center-#{$breakpoint} {
+		text-align: center!important;
+	}
+	.text-left-#{$breakpoint} {
+		text-align: left!important;
+	}
+	.text-right-#{$breakpoint} {
+		text-align: right!important;
+	}
+}
