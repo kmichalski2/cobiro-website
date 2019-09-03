@@ -5,3 +5,55 @@
  */
 
 // You can delete this file if you're not using it
+
+const path = require(`path`);
+const { createFilePath } = require(`gatsby-source-filesystem`);
+
+exports.createPages = ({ graphql, boundActionCreators }) => {
+  const { createPage } = boundActionCreators;
+  const locales = ["en"];
+
+  locales.forEach(locale => {
+    const prefix = locale === "en" ? "" : `/${locale}`;
+    createPage({
+      path: `${prefix}/`,
+      component: path.resolve(`./src/templates/page.js`),
+      context: { locale }
+    });
+  });
+
+  Promise.all(
+    locales.map(locale => {
+      graphql(`
+      {
+        allDatoCmsPage(filter: {locale: {eq: "${locale}"}}) {
+          edges {
+            node {
+              title
+              slug
+              sections {
+                __typename
+              }
+            }
+          }
+        }
+      }
+      `).then(result => {
+        result.data.allDatoCmsPage.edges.forEach(item => {
+          const prefix = locale === "en" ? "" : `/${locale}`;
+          let p = `${prefix}/${item.node.slug}`;
+        const sections = item.node.sections.map(section => section.__typename.replace("DatoCms", ""))
+          createPage({
+            path: p,
+            component: path.resolve(`./src/templates/page.js`),
+            context: {
+              title: item.node.title,
+              sections: sections,
+              locale
+            }
+          });
+        });
+      });
+    })
+  );
+};
