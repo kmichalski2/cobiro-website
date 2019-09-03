@@ -24,23 +24,23 @@ const IndexPage = ({pageContext}) => (
                 return <JumboHeader key={index}/>
             case 'ThreeUp':
                 return <ThreeUp key={index}/>
-            case 'ExplanationImage':
+            case 'ExplanationWImage':
                 return <ExplanationImage alignment="left" key={index}/>
-            case 'AccordionFaq':
+            case 'Accordionfaq':
                 return <AccordionFaq key={index}/>
             case 'FeatureList':
                 return <FeatureList key={index}/>
-            case 'FeaturedCompanies':
+            case 'FeaturedCompany':
                 return <FeaturedCompanies key={index}/>
             case 'FeaturedTestimonialsSingle':
                 return <FeaturedTestimonialsSingle key={index}/>
-            case 'ThreeUpPeople':
+            case 'ThreeUpPerson':
                 return <ThreeUpPeople key={index}/>
-            case 'JumboCta':
+            case 'CtaJumbo':
                 return <JumboCta key={index}/>
             case 'ListPricing':
                 return <ListPricing key={index}/>
-            case 'Quotes':
+            case 'Quote':
                 return <Quotes key={index}/>
             case 'Text':
                 return <Text key={index}/>
