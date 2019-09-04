@@ -9,8 +9,8 @@
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = async function({ graphql, actions }) {
+  const { createPage } = actions;
   const locales = ["en"];
 
   locales.forEach(locale => {
@@ -39,10 +39,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
       }
       `).then(result => {
-        result.data.allDatoCmsPage.edges.forEach(item => {
+        result.data.allDatoCmsPage.edges.forEach(async function(item) {
           const prefix = locale === "en" ? "" : `/${locale}`;
           let p = `${prefix}/${item.node.slug}`;
-        const sections = item.node.sections.map(section => section.__typename.replace("DatoCms", ""))
+          let sections = item.node.sections.map(section => section.__typename.replace("DatoCms", ""));
           createPage({
             path: p,
             component: path.resolve(`./src/templates/page.js`),
