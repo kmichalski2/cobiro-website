@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
-import JumboHeader from "../components/sections/jumboHeader"
+import JumboHeader from "../components/sections/jumboHeader/jumboHeader"
 import ThreeUpPeople from "../components/sections/threeUpPeople"
 import ThreeUp from "../components/sections/threeUp"
 import AccordionFaq from "../components/sections/accordionFaq"
@@ -47,7 +47,7 @@ const IndexPage = ({pageContext}) => (
             case 'Video':
                 return <Video key={index}/>
             default:
-                break;
+                return null
             }
     })}
   </Layout>

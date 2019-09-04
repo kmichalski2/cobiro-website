@@ -1,0 +1,34 @@
+@import '../../layout/style/globals';
+
+.borderBottom {
+    border-radius: 0 0 200px 200px;
+    padding-bottom: 10rem;
+    position: relative;
+    border-bottom: 120px solid $mediumblue;
+
+    @include mq($until: lg) {
+        border-radius: 0 0 150px 150px;
+        border-bottom: 300px solid $mediumblue;
+    }
+
+    .bottomCaption {
+        width: 100%;
+        height: 120px;
+        position: absolute;
+        bottom: 0;
+        transform: translateY(120px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 200px;
+
+        @include mq($until: lg) {
+            padding: 2.5rem;
+        }
+
+
+        p {
+            margin: 0;
+        }
+    }
+}
