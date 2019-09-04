@@ -1,34 +1,70 @@
 @import '../../layout/style/globals';
 
-.borderBottom {
-    border-radius: 0 0 200px 200px;
-    padding-bottom: 10rem;
+.JumboHeader {
     position: relative;
-    border-bottom: 120px solid $mediumblue;
+    padding: 8.5rem 0;
+    overflow: hidden;
 
-    @include mq($until: lg) {
-        border-radius: 0 0 150px 150px;
-        border-bottom: 300px solid $mediumblue;
+    .text {
+        position: relative;
+        z-index: 3;
     }
 
-    .bottomCaption {
-        width: 100%;
-        height: 120px;
-        position: absolute;
-        bottom: 0;
-        transform: translateY(120px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 200px;
+
+    img {
+        margin-bottom: -8.5rem;
+        position: relative;
+        z-index: 2;
 
         @include mq($until: lg) {
-            padding: 2.5rem;
+            transform: scale(1.3);
+            transform-origin: 40% 100%;
         }
-
-
-        p {
-            margin: 0;
+        @include mq($until: md) {
+            transform: scale(1);
+            // transform-origin: 40% 100%;
         }
     }
+
+    .sway {
+        fill: $yellow;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+    }
 }
+
+// .borderBottom {
+//     border-radius: 0 0 200px 200px;
+//     padding-bottom: 10rem;
+//     position: relative;
+//     border-bottom: 120px solid $mediumblue;
+
+//     @include mq($until: lg) {
+//         border-radius: 0 0 150px 150px;
+//         border-bottom: 300px solid $mediumblue;
+//     }
+
+//     .bottomCaption {
+//         width: 100%;
+//         height: 120px;
+//         position: absolute;
+//         bottom: 0;
+//         transform: translateY(120px);
+//         display: flex;
+//         align-items: center;
+//         justify-content: space-between;
+//         padding: 0 200px;
+
+//         @include mq($until: lg) {
+//             padding: 2.5rem;
+//         }
+
+
+//         p {
+//             margin: 0;
+//         }
+//     }
+// }

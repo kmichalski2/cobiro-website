@@ -11,7 +11,7 @@ import FeaturedCompanies from "../components/sections/featuredCompanies";
 import FeaturedTestimonialsSingle from "../components/sections/featuredTestimonalSingle";
 import JumboCta from "../components/sections/jumboCta";
 import ListPricing from "../components/sections/listPricing";
-import Quotes from "../components/sections/quotes";
+import Quotes from "../components/sections/quotes/quotes";
 import Text from "../components/sections/text";
 import Video from "../components/sections/video";
 

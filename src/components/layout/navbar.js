@@ -8,13 +8,11 @@ const Navbar = ({ menuItems }) => {
     
     // Initial variables
   const body = document.querySelector('BODY')
-  const firstSection = document.querySelectorAll('section')[0];
 	const mainMenu = document.querySelector('nav.main-menu');
 	const menuToggle = document.querySelector('.menu-toggle');
 	let mainMenuHeight = mainMenu.offsetHeight;
 
   // Setting initial padding-top on body equal to height of navbar
-	firstSection.style.paddingTop = mainMenuHeight + 80 + 'px';
 
 	// Event listeners for clicks and browser resize
 	mainMenu.addEventListener( 'click', menuClickHandler, false );
