@@ -1,8 +1,9 @@
 @import url('https://use.typekit.net/dpj5gga.css');
 
-$black: #000;
+$black: #002D4F;
+$lightblack: #002d4fb3;
 $white: #fff;
-$blue: #0087EF;
+$blue: #304FFE;
 $mediumblue: #E5F6FD;
 $lightblue: #EFFAFF;
 $yellow: #FDEDD0;
@@ -14,6 +15,7 @@ $darkgrey: #4F525F;
 
 $colors: (
 	black: $black,
+	lightblack: $lightblack,
 	white: $white,
 	blue: $blue,
 	lightblue: $lightblue,

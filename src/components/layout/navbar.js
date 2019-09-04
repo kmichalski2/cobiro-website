@@ -16,7 +16,6 @@ const Navbar = ({ menuItems }) => {
 
 	// Event listeners for clicks and browser resize
 	mainMenu.addEventListener( 'click', menuClickHandler, false );
-  window.addEventListener( "resize", windowResizeHandler, false );
   
   let debounce_timer;
   window.onscroll = () => {
@@ -33,15 +32,6 @@ const Navbar = ({ menuItems }) => {
             
     }, 50);
   };
-
-
-	// Handling resizing of the browser
-	function windowResizeHandler () {
-
-		mainMenuHeight = mainMenu.offsetHeight;
-		body.style.paddingTop = mainMenuHeight + 'px';
-
-	}
 
 	// Handling all clicks on navbar
 	function menuClickHandler (event) {
