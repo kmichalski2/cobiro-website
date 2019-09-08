@@ -10,7 +10,7 @@ const Navbar = ({ menuItems }) => {
   const body = document.querySelector('BODY')
 	const mainMenu = document.querySelector('nav.main-menu');
 	const menuToggle = document.querySelector('.menu-toggle');
-	let mainMenuHeight = mainMenu.offsetHeight;
+	// let mainMenuHeight = mainMenu.offsetHeight;
 
   // Setting initial padding-top on body equal to height of navbar
 

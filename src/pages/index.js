@@ -14,14 +14,17 @@ import ListPricing from "../components/sections/listPricing";
 import Quotes from "../components/sections/quotes/quotes";
 import Text from "../components/sections/text";
 import Video from "../components/sections/video";
+import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel";
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" />
-    <JumboHeader/>
+    <SEO title="Forside" />
+    <JumboHeader textAlignment="left" jumboFooter={false} imageToBottom={true}/>
+    <FeaturedCarousel />
     <ThreeUp/>
     <ExplanationImage alignment="left"/>
     <ExplanationImage alignment="right"/>
+    <JumboHeader textAlignment="right" jumboFooter={true} imageToBottom={false}/>
     <AccordionFaq/>
     <FeatureList/>
     <FeaturedCompanies/>

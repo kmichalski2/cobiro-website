@@ -21,9 +21,9 @@ const IndexPage = ({pageContext}) => (
     {pageContext.sections.map((section, index) => {
         switch(section) {
             case 'JumboHeader':
-                return <JumboHeader key={index}/>
+                return <JumboHeader textAlignment="left" jumboFooter={false} imageToBottom={true} key={index}/>
             case 'ThreeUp':
-                return <ThreeUp key={index}/>
+                return <ThreeUp key={index}/> 
             case 'ExplanationWImage':
                 return <ExplanationImage alignment="left" key={index}/>
             case 'Accordionfaq':
