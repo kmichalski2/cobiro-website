@@ -1,13 +1,18 @@
 nav {
-	border-bottom: 1px solid $mediumgrey;
 	position: fixed;
 	width: 100%;
 	top: 0;
 	left: 0;
 	right: 0;
-	background-color: $white;
 	max-height: 100vh;
 	z-index: 200;
+	
+
+	&.navbar-bg {
+		background-color: $white;
+		border-bottom: 1px solid $mediumgrey;
+		transition: background-color 0.2s ease;
+	}
 
 	@include mq($until: lg) {
 		padding: 1rem 0;

@@ -1,0 +1,67 @@
+@import '../../layout/style/globals';
+
+.JumboHeader {
+    position: relative;
+    padding: 8.5rem 0;
+    overflow: hidden;
+
+    .text {
+        position: relative;
+        z-index: 3;
+    }
+    &.textLeft {
+        img.jumboImage {
+            @include mq($from: md) {
+                transform-origin: -40% 100%;
+            }
+        }
+    }
+    &.textRight {
+        img.jumboImage.toBottom {
+            @include mq($from: md) {
+                transform-origin: 40% 100%;
+            }
+        }
+        img.jumboImage.toBottom {
+            @include mq($from: md) {
+                transform-origin: 40% 50%;
+            }
+        }
+    }
+    img.jumboImage {
+        position: relative;
+        z-index: 2;
+        @include mq($from: md) {
+            transform: scale(1.1);
+        }
+        @include mq($until: md) {
+            transform: scale(1);
+            // transform-origin: 40% 100%;
+        }
+    
+        &.toBottom {
+            margin-bottom: -8.5rem;
+            
+        }
+        &.notToBottom {
+            width: 100%;
+        }
+    }
+
+    .sway {
+        fill: $yellow;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+    }
+}
+.footer {
+    img {
+        height: 3.75rem;
+        width: auto;
+        max-width: 100%;
+        padding: 0 1.875rem;
+    }
+}

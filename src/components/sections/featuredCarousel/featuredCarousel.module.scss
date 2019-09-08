@@ -1,0 +1,24 @@
+@import '../../layout/style/globals';
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.carousel {
+    ul {
+        width: 37%;
+        margin-right: 3%;
+
+        
+    }
+        .image {
+            width: 60%;
+            @include borderradius;
+            
+            img {
+                animation: fade-in 0.4s linear 0s;
+                width: 100%;
+            }
+    }
+}

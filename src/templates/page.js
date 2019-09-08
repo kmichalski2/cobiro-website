@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
-import JumboHeader from "../components/sections/jumboHeader"
+import JumboHeader from "../components/sections/jumboHeader/jumboHeader"
 import ThreeUpPeople from "../components/sections/threeUpPeople"
 import ThreeUp from "../components/sections/threeUp"
 import AccordionFaq from "../components/sections/accordionFaq"
@@ -11,7 +11,7 @@ import FeaturedCompanies from "../components/sections/featuredCompanies";
 import FeaturedTestimonialsSingle from "../components/sections/featuredTestimonalSingle";
 import JumboCta from "../components/sections/jumboCta";
 import ListPricing from "../components/sections/listPricing";
-import Quotes from "../components/sections/quotes";
+import Quotes from "../components/sections/quotes/quotes";
 import Text from "../components/sections/text";
 import Video from "../components/sections/video";
 
@@ -21,33 +21,33 @@ const IndexPage = ({pageContext}) => (
     {pageContext.sections.map((section, index) => {
         switch(section) {
             case 'JumboHeader':
-                return <JumboHeader key={index}/>
+                return <JumboHeader textAlignment="left" jumboFooter={false} imageToBottom={true} key={index}/>
             case 'ThreeUp':
-                return <ThreeUp key={index}/>
-            case 'ExplanationImage':
+                return <ThreeUp key={index}/> 
+            case 'ExplanationWImage':
                 return <ExplanationImage alignment="left" key={index}/>
-            case 'AccordionFaq':
+            case 'Accordionfaq':
                 return <AccordionFaq key={index}/>
             case 'FeatureList':
                 return <FeatureList key={index}/>
-            case 'FeaturedCompanies':
+            case 'FeaturedCompany':
                 return <FeaturedCompanies key={index}/>
             case 'FeaturedTestimonialsSingle':
                 return <FeaturedTestimonialsSingle key={index}/>
-            case 'ThreeUpPeople':
+            case 'ThreeUpPerson':
                 return <ThreeUpPeople key={index}/>
-            case 'JumboCta':
+            case 'CtaJumbo':
                 return <JumboCta key={index}/>
             case 'ListPricing':
                 return <ListPricing key={index}/>
-            case 'Quotes':
+            case 'Quote':
                 return <Quotes key={index}/>
             case 'Text':
                 return <Text key={index}/>
             case 'Video':
                 return <Video key={index}/>
             default:
-                break;
+                return null
             }
     })}
   </Layout>

@@ -7,25 +7,31 @@ const Navbar = ({ menuItems }) => {
   useEffect(() => {
     
     // Initial variables
-	const body = document.querySelector('BODY')
+  const body = document.querySelector('BODY')
 	const mainMenu = document.querySelector('nav.main-menu');
 	const menuToggle = document.querySelector('.menu-toggle');
-	let mainMenuHeight = mainMenu.offsetHeight;
+	// let mainMenuHeight = mainMenu.offsetHeight;
 
-	// Setting initial padding-top on body equal to height of navbar
-	body.style.paddingTop = mainMenuHeight + 'px';
+  // Setting initial padding-top on body equal to height of navbar
 
 	// Event listeners for clicks and browser resize
 	mainMenu.addEventListener( 'click', menuClickHandler, false );
-	window.addEventListener( "resize", windowResizeHandler, false );
+  
+  let debounce_timer;
+  window.onscroll = () => {
+    if(debounce_timer) {
+      window.clearTimeout(debounce_timer);
+    }
 
-	// Handling resizing of the browser
-	function windowResizeHandler () {
-
-		mainMenuHeight = mainMenu.offsetHeight;
-		body.style.paddingTop = mainMenuHeight + 'px';
-
-	}
+    debounce_timer = window.setTimeout(function() {
+      if(window.pageYOffset > 0 ) {
+        mainMenu.classList.add('navbar-bg');
+      } else {
+        mainMenu.classList.remove('navbar-bg');
+      }
+            
+    }, 50);
+  };
 
 	// Handling all clicks on navbar
 	function menuClickHandler (event) {

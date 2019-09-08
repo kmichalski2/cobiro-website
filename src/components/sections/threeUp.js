@@ -1,5 +1,6 @@
 import { Link } from "gatsby"
 import React from "react"
+import icon from "../../images/placeholder_icon.svg"
 
 const ThreeUpPeople = ({ data }) => (
 <section className="section">
@@ -11,7 +12,7 @@ const ThreeUpPeople = ({ data }) => (
 			</div>
 			<div className="col col-xs-12 col-md-4">
 				<div className="card">
-					<img src="/" className="three-up-icon" alt="alt title"/>
+					<img src={icon} className="three-up-icon" alt="alt title"/>
 					<div className="text-left text-center-md">
 						<h4>Create</h4>
 						<p className="small">Get professional ads in just few clicks and start advertising.</p>
@@ -21,7 +22,7 @@ const ThreeUpPeople = ({ data }) => (
 			</div>
             <div className="col col-xs-12 col-md-4">
 				<div className="card">
-					<img src="/" className="three-up-icon" alt="alt title"/>
+					<img src={icon} className="three-up-icon" alt="alt title"/>
 					<div className="text-left text-center-md">
 						<h4>Create</h4>
 						<p className="small">Get professional ads in just few clicks and start advertising.</p>
@@ -31,7 +32,7 @@ const ThreeUpPeople = ({ data }) => (
 			</div>
             <div className="col col-xs-12 col-md-4">
 				<div className="card">
-					<img src="/" className="three-up-icon" alt="alt title"/>
+					<img src={icon} className="three-up-icon" alt="alt title"/>
 					<div className="text-left text-center-md">
 						<h4>Create</h4>
 						<p className="small">Get professional ads in just few clicks and start advertising.</p>
