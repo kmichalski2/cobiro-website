@@ -11,6 +11,9 @@ $button-padding-horizontal: 2em;
 	font-size: 1rem;
 	font-weight: 600;
 }
+.btn-large {
+	@include borderradius;
+}
 @include mq($from: md) {
 	.btn-large {
 		font-size: 1.2rem;

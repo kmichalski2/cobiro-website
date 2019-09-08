@@ -1,17 +1,27 @@
-$black: #000;
+@import url('https://use.typekit.net/dpj5gga.css');
+
+$black: #002D4F;
+$lightblack: #002d4fb3;
 $white: #fff;
-$blue: #177ee3;
-$yellow: #FCF22B;
+$blue: #304FFE;
+$mediumblue: #E5F6FD;
+$lightblue: #EFFAFF;
+$yellow: #FDEDD0;
+$lightyellow: #FFF3E0;
 $lightgrey: #F9FBFC;
 $mediumgrey: #E6E6E6;
 $grey: #D6D6D6;
-$darkgrey: #4F525F;
+$darkgrey: #4F525F; 
 
 $colors: (
 	black: $black,
+	lightblack: $lightblack,
 	white: $white,
 	blue: $blue,
-	yellor: $yellow,
+	lightblue: $lightblue,
+	mediumblue: $mediumblue,
+	yellow: $yellow,
+	lightyellow: $lightyellow,
 	lightgrey: $lightgrey,
 	mediumgrey: $mediumgrey,
 	grey: $grey,
@@ -29,3 +39,5 @@ $grid-gutter: (
 );
 
 @import '~baseguide/scss/baseguide/00-settings/settings';
+
+

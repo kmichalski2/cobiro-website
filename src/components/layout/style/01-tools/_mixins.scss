@@ -1,1 +1,5 @@
 @import '~baseguide/scss/baseguide/01-tools/mixins';
+
+@mixin borderradius {
+    border-radius: 10px;
+}
