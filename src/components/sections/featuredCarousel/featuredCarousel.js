@@ -10,6 +10,7 @@ import imageFloating from "../../../images/placeholder_jumboimage.png"
 const FeaturedCarousel = ({ data }) => {
 
     const [activeSlide, setActiveSlide] = useState(0);
+    const [animate, setAnimate] = useState(true);
 
 
     useEffect(() => {
@@ -21,10 +22,10 @@ const FeaturedCarousel = ({ data }) => {
                 el.style.maxHeight = 0;
             }
         });
+        setAnimate(false);
     },
     [activeSlide],
     );
-
 
     const testData = [
         {title: 'One stop shop', text: 'No need for complex coordination across different marketing channels. Create and control all your marketing from one place to make work and life easier. ', image: image1, icon: ""},
@@ -34,11 +35,14 @@ const FeaturedCarousel = ({ data }) => {
         {title: 'Marketing guidance', text: 'No need for complex coordination across different marketing channels. Create and control all your marketing from one place to make work and life easier. ', image: image1, icon: ""},
 
         {title: 'Super support', text: 'No need for complex coordination across different marketing channels. Create and control all your marketing from one place to make work and life easier. ', image: image1, icon: ""},
-]
+    ]
 
-const clickHandler = (index) => {
-    setActiveSlide(index);
-}
+    const clickHandler = (index) => {
+        if (index !== activeSlide) {
+            setActiveSlide(index);
+            setAnimate(true);
+        }
+    }    
     
     return (
     <section className="section">
@@ -47,20 +51,18 @@ const clickHandler = (index) => {
                 <div className="col col-xs-12 space-xs-up">
                     <h2>Automate, sit back and relax!</h2>
                     <p>It has never been easier to run and optimize your ads</p>
-                    </div>
                 </div>
-                <div className="row center-xs">
-                    <div className="col col-xs-12">
-                    <div className={[FeaturedCarouselStyles.carousel, 'flex'].join(' ')}>
-                        <ul className="list-unstyled">
-                            {testData.map((el, index) => (
-                                <FeaturedCarouselSlide click={() => clickHandler(index)} active={activeSlide === index ? true : false } title={el.title} text={el.text} key={index}/>
-                            ))}
-                        </ul>
-                        <div className={FeaturedCarouselStyles.image}>
-                            <img src={testData[activeSlide].image} alt="" />
-                        </div>
-                    </div>
+            </div>
+            <div className="row center-xs">
+                <div className={[FeaturedCarouselStyles.carousel, 'col col-xs-12 col-lg-4'].join(' ')}>
+                    <ul className="list-unstyled">
+                        {testData.map((el, index) => (
+                            <FeaturedCarouselSlide click={() => clickHandler(index)} active={activeSlide === index ? true : false } title={el.title} text={el.text} key={index}/>
+                        ))}
+                    </ul>
+                </div>
+                <div className="col col-xs-12 col-lg-8">
+                    {!animate ? <img src={testData[activeSlide].image} className={FeaturedCarouselStyles.image} alt="" /> : null}
                 </div>
             </div>
         </div>
