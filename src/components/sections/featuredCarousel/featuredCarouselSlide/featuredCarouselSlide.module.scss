@@ -1,12 +1,12 @@
 @import '../../../layout/style/globals';
 
-li {
+li.slide {
     padding: 2.5rem 5rem;
     padding-right: 4rem;
     @include borderradius;
     cursor: pointer;
 
-    .slide-text {
+    .text {
         transition: max-height 0.4s ease;
         overflow: hidden;   
     }
@@ -23,6 +23,9 @@ li {
     img.icon {
         left: -3.5rem;
         width: 2rem;
+        position: absolute;
+        transform: translateY(-50%);
+        top: 50%;
     }
     
     img.arrow {

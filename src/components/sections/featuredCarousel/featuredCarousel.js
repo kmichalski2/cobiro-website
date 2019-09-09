@@ -54,7 +54,7 @@ const FeaturedCarousel = ({ data }) => {
                 </div>
             </div>
             <div className="row center-xs">
-                <div className={[FeaturedCarouselStyles.carousel, 'col col-xs-12 col-lg-4'].join(' ')}>
+                <div className={[FeaturedCarouselStyles.carousel, 'col col-xs-12 col-lg-4 space-xs-up'].join(' ')}>
                     <ul className="list-unstyled">
                         {testData.map((el, index) => (
                             <FeaturedCarouselSlide click={() => clickHandler(index)} active={activeSlide === index ? true : false } title={el.title} text={el.text} key={index}/>
