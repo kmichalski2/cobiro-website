@@ -41,10 +41,10 @@ const JumboHeader = ( props, { data } ) => {
 					<div className="col-xs-12">
 					<h3>Offical Partnership</h3>
 					<p className="space-xs-up">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-					<div className="flex center">
-						<img src={ gPartner } alt="facebook" />
-						<img src={ gcss } alt="facebook" />
-						<img src={ fb_iamge } alt="facebook" />
+					<div className="flex center flex-wrap">
+						<img src={ gPartner } className="space-xs-up" alt="facebook" />
+						<img src={ gcss } className="space-xs-up" alt="facebook" />
+						<img src={ fb_iamge } className="space-xs-up" alt="facebook" />
 					</div>
 					</div>
 				</div>
