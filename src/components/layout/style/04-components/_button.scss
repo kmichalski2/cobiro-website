@@ -1,9 +1,9 @@
 $button-bg: $blue;
 $button-hover-bg: darken($blue, 20);
-$button-border-radius: 5px;
+$button-border-radius: 2rem;
 $button-border-color: $blue;
-$button-padding-vertical: 0.5em;
-$button-padding-horizontal: 2em;
+$button-padding-vertical: 0.5rem;
+$button-padding-horizontal: 1.5rem;
 
 @import '~baseguide/scss/baseguide/04-components/button';
 
@@ -11,9 +11,7 @@ $button-padding-horizontal: 2em;
 	font-size: 1rem;
 	font-weight: 600;
 }
-.btn-large {
-	@include borderradius;
-}
+
 @include mq($from: md) {
 	.btn-large {
 		font-size: 1.2rem;
@@ -23,7 +21,8 @@ $button-padding-horizontal: 2em;
 
 .btn-secondary {
 	background-color: transparent;
-	color: $blue;
+	color: $black;
+	border-color: $black;
 }
 .btn-toggle {
 	padding: 1rem;

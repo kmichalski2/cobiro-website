@@ -3,7 +3,7 @@ import React from "react"
 
 import JumboHeaderStyles from "./jumboHeader.module.scss"
 
-import image from "../../../images/people_homepage.png"
+import image from "../../../images/placeholder_new_jumbo.png"
 import imageFloating from "../../../images/placeholder_jumboimage.png"
 import fb_iamge from "../../../images/placeholder_fb_jumbo.png"
 import gPartner from "../../../images/placeholder_google_partner.png"
@@ -25,7 +25,7 @@ const JumboHeader = ( props, { data } ) => {
 
 	const imageSide = (
 		<div className="col col-xs-12 col-md-6">
-			<img src={props.imageToBottom ? image : imageFloating} className={[props.imageToBottom ? JumboHeaderStyles.toBottom : JumboHeaderStyles.notToBottom, JumboHeaderStyles.jumboImage,'img-responsive img-full-width'].join(' ')} alt="Get business success with Google Ads" />
+			<img src={props.imageToRight ? image : imageFloating} className={[props.imageToRight ? JumboHeaderStyles.toRight : JumboHeaderStyles.notToBottom, JumboHeaderStyles.jumboImage,'img-responsive img-full-width'].join(' ')} alt="Get business success with Google Ads" />
 		</div>
 	);
 	const swayHighLeft = (
@@ -54,14 +54,14 @@ const JumboHeader = ( props, { data } ) => {
 	
 	return (
 	<section>
-		<div className={[JumboHeaderStyles.JumboHeader, props.textAlignment === 'left' ? JumboHeaderStyles.textLeft : JumboHeaderStyles.textRight, 'section-inner bg-lightyellow'].join(' ')}>
+		<div className={[JumboHeaderStyles.JumboHeader, props.textAlignment === 'left' ? JumboHeaderStyles.textLeft : JumboHeaderStyles.textRight, 'section-inner'].join(' ')}>
 			<div className="container">
 				<div className={[props.imageToBottom ? 'bottom-xs' : 'middle-xs', 'row'].join(' ')}>
 					{ props.textAlignment === 'left' ? textSide : imageSide }
 					{ props.textAlignment === 'left' ? imageSide : textSide }
 				</div>
 			</div>
-			{ props.textAlignment === 'left' ? swayHighLeft : swayHighRight }
+			{/* { props.textAlignment === 'left' ? swayHighLeft : swayHighRight } */}
 		</div>
 		{ props.jumboFooter ? jumboFooter : null }		
 	</section>
