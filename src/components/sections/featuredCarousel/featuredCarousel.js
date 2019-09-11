@@ -67,7 +67,6 @@ const FeaturedCarousel = ({ data }) => {
             </div>
         </div>
     </section>
-
 )}
 
 export default FeaturedCarousel

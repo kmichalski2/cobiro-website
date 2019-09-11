@@ -32,7 +32,7 @@ const ThreeUpPeople = ({ data }) => {
                     <p>Excellent management is key to excellent workflows</p>
                 </div>
                 <div className="col col-xs-12 col-md-6 col-lg-4">
-                    <div className="card people">
+                    <div className="card card-visible people">
                         <div className="card-header-wrapper">
                             <img src="/" className="card-img-large" alt="Person" />
                             <div className="flex middle-xs between-xs space-md-up text-left">
@@ -48,7 +48,7 @@ const ThreeUpPeople = ({ data }) => {
                     </div>
                 </div>
                 <div className="col col-xs-12 col-md-6 col-lg-4">
-                    <div className="card people">
+                    <div className="card card-visible people">
                         <div className="card-header-wrapper">
                             <img src="/" className="card-img-large" alt="Person" />
                             <div className="flex middle-xs between-xs space-md-up text-left">
@@ -64,7 +64,7 @@ const ThreeUpPeople = ({ data }) => {
                     </div>
                 </div>
                 <div className="col col-xs-12 col-md-6 col-lg-4">
-                    <div className="card people">
+                    <div className="card card-visible people">
                         <div className="card-header-wrapper">
                             <img src="/" className="card-img-large" alt="Person" />
                             <div className="flex middle-xs between-xs space-md-up text-left">

@@ -3,3 +3,7 @@
 @mixin borderradius {
     border-radius: 10px;
 }
+
+@mixin box-shadow {
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+}
