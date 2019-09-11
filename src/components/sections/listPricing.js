@@ -30,7 +30,7 @@ const ListPricing = ({ data }) => {
                         <p>Get the power and customization you need to run great ads. </p>
                     </div>
                     <div className="col col-xs-12 col-md-6 col-lg-4 col-lg-offset-2">
-                        <div className="card flex center list-pricing">
+                        <div className="card card-visible flex center list-pricing">
                             <div>
                                 <h4>Cobiro Free</h4>
                                 <p className="price h1">$0</p>
@@ -45,7 +45,7 @@ const ListPricing = ({ data }) => {
                         </div>
                     </div>
                     <div className="col col-xs-12 col-md-6 col-lg-4">
-                        <div className="card flex center list-pricing">
+                        <div className="card card-visible flex center list-pricing">
                             <div>
                                 <h4>Cobiro Premium</h4>
                                 <p className="price h1">$49</p>

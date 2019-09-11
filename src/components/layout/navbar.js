@@ -10,12 +10,19 @@ const Navbar = ({ menuItems }) => {
   const body = document.querySelector('BODY')
 	const mainMenu = document.querySelector('nav.main-menu');
 	const menuToggle = document.querySelector('.menu-toggle');
-	// let mainMenuHeight = mainMenu.offsetHeight;
+  let mainMenuHeight = mainMenu.offsetHeight;
+  body.style.paddingTop = `${mainMenuHeight}px`;
 
   // Setting initial padding-top on body equal to height of navbar
 
 	// Event listeners for clicks and browser resize
-	mainMenu.addEventListener( 'click', menuClickHandler, false );
+  mainMenu.addEventListener( 'click', menuClickHandler, false );
+  mainMenu.addEventListener( 'resize', resizeHandler, false );
+
+  const resizeHandler = () => {
+    mainMenuHeight = mainMenu.offsetHeight;
+    body.style.paddingTop = `${mainMenuHeight}px`;
+  }
   
   let debounce_timer;
   window.onscroll = () => {
@@ -25,9 +32,9 @@ const Navbar = ({ menuItems }) => {
 
     debounce_timer = window.setTimeout(function() {
       if(window.pageYOffset > 0 ) {
-        mainMenu.classList.add('navbar-bg');
+        mainMenu.classList.add('navbar-border');
       } else {
-        mainMenu.classList.remove('navbar-bg');
+        mainMenu.classList.remove('navbar-border');
       }
             
     }, 50);

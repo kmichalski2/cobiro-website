@@ -1,10 +1,12 @@
 import { Link } from "gatsby"
 import React from "react"
 
+import imageFloating from "../../images/placeholder_jumboimage.png"
+
 const ExplanationImage = ({ alignment }) => {
     const image = (
         <div className="img-responsive space-sm space-xs">
-            <img src="" alt="explanation left" />
+            <img src={imageFloating} alt="explanation left" />
         </div>
     );
 

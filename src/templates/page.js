@@ -13,15 +13,16 @@ import JumboCta from "../components/sections/jumboCta";
 import ListPricing from "../components/sections/listPricing";
 import Quotes from "../components/sections/quotes/quotes";
 import Text from "../components/sections/text";
-import Video from "../components/sections/video";
+import Video from "../components/sections/video/video";
 
 const IndexPage = ({pageContext}) => (
   <Layout>
     <SEO title={pageContext.title} />
+    <main>
     {pageContext.sections.map((section, index) => {
         switch(section) {
             case 'JumboHeader':
-                return <JumboHeader textAlignment="left" jumboFooter={false} imageToBottom={true} key={index}/>
+                return <JumboHeader textAlignment="left" jumboFooter={false} imageToRight={true} key={index}/>
             case 'ThreeUp':
                 return <ThreeUp key={index}/> 
             case 'ExplanationWImage':
@@ -50,6 +51,7 @@ const IndexPage = ({pageContext}) => (
                 return null
             }
     })}
+    </main>
   </Layout>
 )
 

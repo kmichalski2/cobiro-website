@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Navbar menuItems={data.site.siteMetadata.title} />
-        <main>{children}</main>
+        {children}
         <CookieBanner/>
         <Footer/>
     </>

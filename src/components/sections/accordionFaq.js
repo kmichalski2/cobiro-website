@@ -60,21 +60,21 @@ const AccordionFaq = ({ data }) => {
                         <p>We’re always looking for bright-minded people with creative and/or technical skills to join us</p>
                     </div>
                     <div className="col col-xs-12 accordion">
-                        <div className="card text-left">
+                        <div className="card card-visible text-left">
                             <div className="flex between-xs middle-xs accordion-header">
                                 <h5>AI Data Engineer</h5>
                                 <button className="btn btn-accordion btn-toggle btn-secondary" onClick={ accordionClickHandler } aria-label="Expand accordion panel"><span>+</span></button>
                             </div>
                             <div className="small accordion-text">Cobiro is automating online advertising and our AI team is looking for an ambitious Data Engineer looking to get real-life-experience building big data infrastructure. You will be the second Data Engineer in the team working with experienced industry professionals building scalable big data systems for analytics and AI applications. We are currently working on Google Ads and will expand to other platforms this year.</div>
                         </div>
-                        <div className="card text-left">
+                        <div className="card card-visible  text-left">
                             <div className="flex between-xs middle-xs accordion-header">
                                 <h5>AI Data Engineer</h5>
                                 <button className="btn btn-accordion btn-toggle btn-secondary" onClick={ accordionClickHandler } aria-label="Expand accordion panel"><span>+</span></button>
                             </div>
                             <div className="small accordion-text">Cobiro is automating online advertising and our AI team is looking for an ambitious Data Engineer looking to get real-life-experience building big data infrastructure. You will be the second Data Engineer in the team working with experienced industry professionals building scalable big data systems for analytics and AI applications. We are currently working on Google Ads and will expand to other platforms this year.</div>
                         </div>
-                        <div className="card text-left">
+                        <div className="card card-visible  text-left">
                             <div className="flex between-xs middle-xs accordion-header">
                                 <h5>AI Data Engineer</h5>
                                 <button className="btn btn-accordion btn-toggle btn-secondary" onClick={ accordionClickHandler } aria-label="Expand accordion panel"><span>+</span></button>

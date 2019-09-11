@@ -13,7 +13,7 @@ const Quotes = ({ data }) => (
                 </div>
             </div>
             <div className={[QuoteStyles.cards, 'flex'].join(' ')}>
-            <div className={[QuoteStyles.quote, 'card text-left-xs between-xs flex flex-column'].join(' ')}>
+            <div className={[QuoteStyles.quote, 'card card-visible text-left-xs between-xs flex flex-column'].join(' ')}>
                     <div className="flex start-xs middle-xs space-xs-up">
                         <img src={placeholderImage} className="img-fluid" alt="quote"/>
                         <div>
@@ -23,7 +23,7 @@ const Quotes = ({ data }) => (
                     </div>
                     <p className="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis faucibus sem, sit amet vestibulum mauris vehicula quis. Fusce cursus venenatis diam et sagittis.</p>
                 </div>
-                <div className={[QuoteStyles.quote, 'card text-left-xs between-xs flex flex-column'].join(' ')}>
+                <div className={[QuoteStyles.quote, 'card card-visible text-left-xs between-xs flex flex-column'].join(' ')}>
                     <div className="flex start-xs middle-xs space-xs-up">
                         <img src={placeholderImage} className="img-fluid" alt="quote"/>
                         <div>
@@ -33,7 +33,7 @@ const Quotes = ({ data }) => (
                     </div>
                     <p className="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis faucibus sem, sit amet vestibulum mauris vehicula quis. Fusce cursus venenatis diam et sagittis.</p>
                 </div>
-                <div className={[QuoteStyles.quote, 'card text-left-xs between-xs flex flex-column'].join(' ')}>
+                <div className={[QuoteStyles.quote, 'card card-visible text-left-xs between-xs flex flex-column'].join(' ')}>
                     <div className="flex start-xs middle-xs space-xs-up">
                         <img src={placeholderImage} className="img-fluid" alt="quote"/>
                         <div>
@@ -43,7 +43,7 @@ const Quotes = ({ data }) => (
                     </div>
                     <p className="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis faucibus sem, sit amet vestibulum mauris vehicula quis. Fusce cursus venenatis diam et sagittis.</p>
                 </div>
-                <div className={[QuoteStyles.quote, 'card text-left-xs between-xs flex flex-column'].join(' ')}>
+                <div className={[QuoteStyles.quote, 'card card-visible text-left-xs between-xs flex flex-column'].join(' ')}>
                     <div className="flex start-xs middle-xs space-xs-up">
                         <img src={placeholderImage} className="img-fluid" alt="quote"/>
                         <div>
@@ -53,7 +53,7 @@ const Quotes = ({ data }) => (
                     </div>
                     <p className="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis faucibus sem, sit amet vestibulum mauris vehicula quis. Fusce cursus venenatis diam et sagittis.</p>
                 </div>
-                <div className={[QuoteStyles.quote, 'card text-left-xs between-xs flex flex-column'].join(' ')}>
+                <div className={[QuoteStyles.quote, 'card card-visible text-left-xs between-xs flex flex-column'].join(' ')}>
                     <div className="flex start-xs middle-xs space-xs-up">
                         <img src={placeholderImage} className="img-fluid" alt="quote"/>
                         <div>
@@ -63,7 +63,7 @@ const Quotes = ({ data }) => (
                     </div>
                     <p className="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis faucibus sem, sit amet vestibulum mauris vehicula quis. Fusce cursus venenatis diam et sagittis.</p>
                 </div>
-                <div className={[QuoteStyles.quote, 'card text-left-xs between-xs flex flex-column'].join(' ')}>
+                <div className={[QuoteStyles.quote, 'card card-visible text-left-xs between-xs flex flex-column'].join(' ')}>
                     <div className="flex start-xs middle-xs space-xs-up">
                         <img src={placeholderImage} className="img-fluid" alt="quote"/>
                         <div>
@@ -73,7 +73,7 @@ const Quotes = ({ data }) => (
                     </div>
                     <p className="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis faucibus sem, sit amet vestibulum mauris vehicula quis. Fusce cursus venenatis diam et sagittis.</p>
                 </div>
-                <div className={[QuoteStyles.quote, 'card text-left-xs between-xs flex flex-column'].join(' ')}>
+                <div className={[QuoteStyles.quote, 'card card-visible text-left-xs between-xs flex flex-column'].join(' ')}>
                     <div className="flex start-xs middle-xs space-xs-up">
                         <img src={placeholderImage} className="img-fluid" alt="quote"/>
                         <div>
