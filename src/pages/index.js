@@ -19,12 +19,10 @@ import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCa
 const IndexPage = () => (
   <Layout>
     <SEO title="Forside" />
-    <JumboHeader textAlignment="left" jumboFooter={false} imageToRight={true}/>
-    <FeaturedCarousel />
+    <JumboHeader textAlignment="left" jumboFooter={true} imageToRight={true}/>
     <ThreeUp/>
-    <ExplanationImage alignment="left"/>
-    <ExplanationImage alignment="right"/>
-    <JumboHeader textAlignment="right" jumboFooter={true} imageToRight={false}/>
+    <FeaturedCarousel />
+    <ExplanationImage alignment="left" toEdge={true}/>
     <AccordionFaq/>
     <FeatureList/>
     <FeaturedCompanies/>
