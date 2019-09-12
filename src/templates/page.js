@@ -14,6 +14,8 @@ import ListPricing from "../components/sections/listPricing";
 import Quotes from "../components/sections/quotes/quotes";
 import Text from "../components/sections/text";
 import Video from "../components/sections/video/video";
+import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel";
+
 
 const IndexPage = ({pageContext}) => (
   <Layout>
@@ -22,11 +24,11 @@ const IndexPage = ({pageContext}) => (
     {pageContext.sections.map((section, index) => {
         switch(section) {
             case 'JumboHeader':
-                return <JumboHeader textAlignment="left" jumboFooter={false} imageToRight={true} key={index}/>
+                return <JumboHeader textAlignment="left" jumboFooter={true} imageToRight={true} key={index}/>
             case 'ThreeUp':
-                return <ThreeUp key={index}/> 
+                return <><ThreeUp key={index}/><FeaturedCarousel /></>
             case 'ExplanationWImage':
-                return <ExplanationImage alignment="left" key={index}/>
+                return <ExplanationImage alignment="left" toEdge={true} key={index}/>
             case 'Accordionfaq':
                 return <AccordionFaq key={index}/>
             case 'FeatureList':
