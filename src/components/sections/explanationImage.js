@@ -1,12 +1,12 @@
 import { Link } from "gatsby"
 import React from "react"
 
-import imageFloating from "../../images/placeholder_jumboimage.png"
+import imageFloating from "../../images/google.png"
 
-const ExplanationImage = ({ alignment }) => {
+const ExplanationImage = ({ alignment, toEdge }) => {
     const image = (
         <div className="img-responsive space-sm space-xs">
-            <img src={imageFloating} alt="explanation left" />
+            <img src={imageFloating} alt="explanation left" style={{width: toEdge ? '50vw' : '', maxWidth: toEdge ? 'none' : ''}}/>
         </div>
     );
 
@@ -19,7 +19,7 @@ const ExplanationImage = ({ alignment }) => {
     )
     
     return (
-        <section className="section">
+        <section className="section" style={{overflow: 'hidden'}}>
             <div className="container">
                 <div className="row middle-xs reverse">
                     <div className="col col-sm-12 col-md-6">

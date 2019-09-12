@@ -4,12 +4,12 @@ import fb from '../../images/fb.svg'
 import insta from '../../images/insta.svg'
 import twitter from '../../images/twitter.svg'
 import React from "react"
-
+import background from '../../images/footer.png'
 
 
 const Footer = ({ menuItems }) => (
-    <footer>
-        <div className="container">
+    <footer style={{backgroundImage: `url(${background})`}}>
+        <div className="container"> 
             <div className="row section end-sm">
                 <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 text-left-lg center-xs start-lg space-xs space-sm space-md">
                     <Link to="/"><img className="footer-logo space-xs space-sm space-md" src={ logo } alt="Cobiro logo" /></Link>

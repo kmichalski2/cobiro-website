@@ -35,7 +35,7 @@ const JumboHeader = ( props, { data } ) => {
 		<svg className={JumboHeaderStyles.sway} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 100"><path d="M1.917,370.722c230.827,18.69,528.046,18.431,757.332-.661,130.463-10.863,237.688-27.131,371.116-37.194,253.3-19.1,588.288-11.434,789.635,18.078l-1.917,71.463H0Z" transform="translate(0 -322.407)" fill="#fdedd0"/></svg>
 	);
 	const jumboFooter = (
-		<aside className={[JumboHeaderStyles.footer, "bg-yellow section text-center"].join(' ')}>
+		<aside className={[JumboHeaderStyles.footer, "section text-center"].join(' ')}>
 			<div className="container">
 				<div className="row">
 					<div className="col-xs-12">
