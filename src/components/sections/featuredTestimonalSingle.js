@@ -6,7 +6,7 @@ const FeaturedTestimonialsSingle = ({ data }) => (
         <div className="container">
             <div className="row middle-xs">
                 <div className="col col-xs-12 col-md-6">
-                    <h4>“My vet clinic went from just a few customers at all to an increase in customers and revenue with Cobiro”</h4>
+                    <h2>“My vet clinic went from just a few customers at all to an increase in customers and revenue with Cobiro”</h2>
                     <p className="small">- Simon Mogensen, Small Vet Clinic</p>
                 </div>
                 <div className="col col-xs-12 col-md-6">

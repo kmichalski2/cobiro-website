@@ -15,24 +15,25 @@ import Quotes from "../components/sections/quotes/quotes";
 import Text from "../components/sections/text";
 import Video from "../components/sections/video/video";
 import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel";
+import image1 from '../images/placeholder-imageleft.png'
+import image2 from '../images/placeholder_imageright.png'
+import image3 from '../images/placeholder-imageleft2.png'
+import googleImage from "../images/google.png"
+
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Forside" />
-    <JumboHeader textAlignment="left" jumboFooter={true} imageToRight={true}/>
+    <JumboHeader textAlignment="left" jumboFooter={false} imageToRight={true}/>
     <ThreeUp/>
-    <FeaturedCarousel />
-    <ExplanationImage alignment="left" toEdge={true}/>
-    <AccordionFaq/>
-    <FeatureList/>
-    <FeaturedCompanies/>
+    <ExplanationImage title="Custom marketing plan" alignment="right" imageLoaded={image1} toEdge={false}/>
+    <ExplanationImage title="Track your ad performance" alignment="left" imageLoaded={image2} toEdge={false}/>
+    <ExplanationImage title="Multiple ad platforms" alignment="right" imageLoaded={image3} toEdge={false}/>
     <FeaturedTestimonialsSingle/>
-    <ThreeUpPeople/>
-    <JumboCta/>
-    <ListPricing/>
+    <FeaturedCompanies partners={true}/>
+    <FeaturedCarousel />
     <Quotes/>
-    <Text/>
-    <Video/>
+    <JumboHeader title="Grow your business today" imageLoaded={googleImage} textAlignment="left" jumboFooter={false} imageToRight={true}/>
   </Layout>
 )
 

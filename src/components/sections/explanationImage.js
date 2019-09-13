@@ -3,16 +3,20 @@ import React from "react"
 
 import imageFloating from "../../images/google.png"
 
-const ExplanationImage = ({ alignment, toEdge }) => {
+const ExplanationImage = ({ title, imageLoaded, alignment, toEdge }) => {
     const image = (
         <div className="img-responsive space-sm space-xs">
-            <img src={imageFloating} alt="explanation left" style={{width: toEdge ? '50vw' : '', maxWidth: toEdge ? 'none' : ''}}/>
+            {imageLoaded ? 
+                (<img src={imageLoaded} alt="explanation left" style={{width: toEdge ? '50vw' : '', maxWidth: toEdge ? 'none' : ''}}/>)
+                : (<img src={imageFloating} alt="explanation left" style={{width: toEdge ? '50vw' : '', maxWidth: toEdge ? 'none' : ''}}/>)
+                }
+            
         </div>
     );
 
     const text = (
         <div className="text-padding">
-            <h3 className="">No marketing skills needed</h3>
+            <h3 className="">{title}</h3>
             <p>You don’t need any marketing skills to have great ads. Run ads like a pro — without having to rely on experts.</p>
                 <Link to="/">Show me how</Link>
         </div>
