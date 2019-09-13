@@ -1,0 +1,4 @@
+`sections {
+    __typename
+}
+`
