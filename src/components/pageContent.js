@@ -20,7 +20,7 @@ const pageContent = ({ data }) => {
   console.log('page data: ', data)
   return (
     <Layout>
-      <SEO title={ data.seoTags.title ? data.seoTags.title : data.title } description={data.seoTags.description} />
+      <SEO title={ data.seoTags ==! null ? data.seoTags.title : data.title } description={data.seoTags ==! null ? data.seoTags.description : null} />
       <main>
         {data.sections.map((section, index) => {
         switch(section.__typename.replace("DatoCms", "")) {
