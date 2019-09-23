@@ -220,6 +220,39 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                 }
+                ... on DatoCmsFeaturedCarousel {
+                  title
+                  text
+                  slides {
+                    slides {
+                      title
+                      text
+                      icon {
+                        path
+                        url
+                        fixed(width:32) {
+                          base64
+                          aspectRatio
+                          width
+                          height
+                          src
+                          srcSet
+                        }
+                      }
+                      image {
+                        fluid {
+                          base64
+                          aspectRatio
+                          width
+                          height
+                          src
+                          srcSet
+                          sizes
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }

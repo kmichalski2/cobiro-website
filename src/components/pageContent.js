@@ -29,7 +29,7 @@ const pageContent = ({ data }) => {
             case 'ThreeUp':
                 return <ThreeUp data={data.sections[index]} key={index}/>
             case 'FeaturedCarousel':
-                return <FeaturedCarousel key={index}/>
+                return <FeaturedCarousel data={data.sections[index]} key={index}/>
             case 'ExplanationWImage':
                 return <ExplanationImage data={data.sections[index]} alignment="left" toEdge={true} key={index}/>
             case 'Accordionfaq':

@@ -6,6 +6,7 @@ import arrow from "../../../../images/arrow_blue_up.svg"
 import icon from "../../../../images/placeholder_icon_nobg.svg"
 
 const FeaturedCarouselSlide = props => {
+  console.log(props.icon)
   return (
     <li
       onClick={props.click}
@@ -16,7 +17,7 @@ const FeaturedCarouselSlide = props => {
     >
       <h4>
         <img
-          src={icon}
+          src={props.icon}
           className={FeaturedCarouselStyles.icon}
           alt={[props.title, "icon"].join(" ")}
         />

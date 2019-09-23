@@ -4,12 +4,6 @@ import React from "react"
 
 import JumboHeaderStyles from "./jumboHeader.module.scss"
 
-// import image from "../../../images/placeholder_new_jumbo.png"
-// import imageFloating from "../../../images/placeholder_jumboimage.png"
-// import fb_iamge from "../../../images/placeholder_fb_jumbo.png"
-// import gPartner from "../../../images/placeholder_google_partner.png"
-// import gcss from "../../../images/placeholder_css.png"
-
 const JumboHeader = props => {
   const data = props.data
   console.log(data)
