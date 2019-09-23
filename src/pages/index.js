@@ -1,7 +1,6 @@
 import React from "react"
 import PageContent from '../components/pageContent'
 
-
 const IndexPage = ({data}) => (
   <PageContent data={data.datoCmsFrontpage}/>
 )

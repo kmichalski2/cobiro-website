@@ -8,6 +8,7 @@ import imageFloating from "../../../images/placeholder_jumboimage.png"
 import fb_iamge from "../../../images/placeholder_fb_jumbo.png"
 import gPartner from "../../../images/placeholder_google_partner.png"
 import gcss from "../../../images/placeholder_css.png"
+import { S_IFDIR } from "constants";
 
 
 const JumboHeader = ( props, { data } ) => {
@@ -22,14 +23,15 @@ const JumboHeader = ( props, { data } ) => {
 					:
 					<Link to={props.sectionContent.link.slug} className="btn btn-large space-xs space-sm">{props.sectionContent.linkTitle}</Link>
 				}
-					
 			</div>
 		</div>
 	);
 
 	const imageSide = (
 		<div className="col col-xs-12 col-md-6">
-			<img src={props.imageToRight ? image : imageFloating} className={[props.imageToRight ? JumboHeaderStyles.toRight : JumboHeaderStyles.notToBottom, JumboHeaderStyles.jumboImage,'img-responsive img-full-width'].join(' ')} alt="Get business success with Google Ads" />
+			{props.imageLoaded ? <img src={props.imageLoaded} className={[props.imageToRight ? JumboHeaderStyles.toRight : JumboHeaderStyles.notToBottom, JumboHeaderStyles.jumboImage,'img-responsive img-full-width'].join(' ')} alt="Get business success with Google Ads" />
+			: <img src={props.imageToRight ? image : imageFloating} className={[props.imageToRight ? JumboHeaderStyles.toRight : JumboHeaderStyles.notToBottom, JumboHeaderStyles.jumboImage,'img-responsive img-full-width'].join(' ')} alt="Get business success with Google Ads" />}
+			
 		</div>
 	);
 	// const swayHighLeft = (

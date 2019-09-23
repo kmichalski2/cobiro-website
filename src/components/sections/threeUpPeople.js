@@ -3,6 +3,7 @@ import React from "react"
 import linkedin from "../../images/linkedin.svg"
 
 
+
 const ThreeUpPeople = ({ data }) => {
 
     const peopleClickHandler = (event) => {
