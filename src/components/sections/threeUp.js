@@ -8,7 +8,6 @@ import splash from "../../images/video-splash-left.png"
 
 const ThreeUpPeople = props => {
   const data = props.data
-  console.log(data)
   return (
     <section className="section">
       <div className="container">

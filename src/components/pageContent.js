@@ -22,7 +22,7 @@ const pageContent = ({ data }) => {
     <Layout>
       <SEO title={data.title} description={data.description} />
       <main>
-        {/* {data.sections.map((section, index) => {
+        {data.sections.map((section, index) => {
         switch(section.__typename.replace("DatoCms", "")) {
             case 'JumboHeader':
                 return <JumboHeader data={data.sections[index]} key={index}/>
@@ -55,7 +55,7 @@ const pageContent = ({ data }) => {
             default:
                 return null
             }
-    })} */}
+    })}
       </main>
     </Layout>
   )

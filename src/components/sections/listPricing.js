@@ -49,14 +49,13 @@ const ListPricing = ({ data }) => {
           <div className="col col-xs-12 col-md-6 col-lg-4">
             <div className="card card-visible flex center list-pricing">
               <div>
-                <h4>Cobiro Premium</h4>
-                <p className="price h1">$49</p>
+                <h4>{data.tier2Title}</h4>
+                <p className="price h1">${data.tier2Price}</p>
                 <p className="small price-caption">
-                  Billed monthly. For advertisers with a large team and multiple
-                  markets.
+                {data.tier2Text}
                 </p>
-                <Link to="/" className="btn space-xs-up">
-                  Get started
+                <Link to={data.tier2ExternalLink} className="btn space-xs-up">
+                {data.tier2LinkText}
                 </Link>
                 {data.tier1Features ? (
                   <ul className="text-left-xs price-list list-unstyled">
