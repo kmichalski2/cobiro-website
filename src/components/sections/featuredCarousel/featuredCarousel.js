@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react"
 import FeaturedCarouselStyles from "./featuredCarousel.module.scss"
 import FeaturedCarouselSlide from "./featuredCarouselSlide/featuredCarouselSlide"
 
-import image1 from "../../../images/placeholder_carousel.png"
-import imageFloating from "../../../images/placeholder_jumboimage.png"
+import Img from "gatsby-image"
 
 const FeaturedCarousel = ({ data }) => {
+
+  console.log(data);
   const [activeSlide, setActiveSlide] = useState(0)
   const [animate, setAnimate] = useState(true)
 
@@ -22,39 +23,10 @@ const FeaturedCarousel = ({ data }) => {
     setAnimate(false)
   }, [activeSlide])
 
-  const testData = [
-    {
-      title: "One stop shop",
-      text:
-        "No need for complex coordination across different marketing channels. Create and control all your marketing from one place to make work and life easier. ",
-      image: image1,
-      icon: "",
-    },
+  const images = []
 
-    {
-      title: "Automated advertising",
-      text:
-        "No need for complex coordination across different marketing channels. Create and control all your marketing from one place to make work and life easier. ",
-      image: imageFloating,
-      icon: "",
-    },
-
-    {
-      title: "Marketing guidance",
-      text:
-        "No need for complex coordination across different marketing channels. Create and control all your marketing from one place to make work and life easier. ",
-      image: image1,
-      icon: "",
-    },
-
-    {
-      title: "Super support",
-      text:
-        "No need for complex coordination across different marketing channels. Create and control all your marketing from one place to make work and life easier. ",
-      image: image1,
-      icon: "",
-    },
-  ]
+  data.slides.slides.map(img => images.push(img.image.fluid));
+  console.log(images);
 
   const clickHandler = index => {
     if (index !== activeSlide) {
@@ -68,8 +40,8 @@ const FeaturedCarousel = ({ data }) => {
       <div className="container">
         <div className="row center-xs text-center space-xs-up">
           <div className="col col-xs-12 space-xs-up">
-            <h2>Automate, sit back and relax!</h2>
-            <p>It has never been easier to run and optimize your ads</p>
+            <h2>{data.title}</h2>
+            <p>{data.text}</p>
           </div>
         </div>
         <div className="row center-xs">
@@ -80,12 +52,13 @@ const FeaturedCarousel = ({ data }) => {
             ].join(" ")}
           >
             <ul className="list-unstyled">
-              {testData.map((el, index) => (
+              {data.slides.slides.map((el, index) => (
                 <FeaturedCarouselSlide
                   click={() => clickHandler(index)}
                   active={activeSlide === index ? true : false}
                   title={el.title}
                   text={el.text}
+                  icon={el.icon.fixed ? el.icon.fixed : el.icon.url}
                   key={index}
                 />
               ))}
@@ -93,8 +66,8 @@ const FeaturedCarousel = ({ data }) => {
           </div>
           <div className="col col-xs-12 col-lg-8">
             {!animate ? (
-              <img
-                src={testData[activeSlide].image}
+              <Img
+                fluid={images[activeSlide]}
                 className={FeaturedCarouselStyles.image}
                 alt=""
               />
