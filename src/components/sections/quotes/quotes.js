@@ -42,9 +42,7 @@ const Quotes = ({ data }) => {
             {q.quoteText}
           </p>
         </div>
-        ))}
-        
-        
+        ))}    
       </div>
     </div>
   </section>

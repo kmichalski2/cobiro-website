@@ -1,10 +1,5 @@
 import { Link } from "gatsby"
 import React from "react"
-import icon from "../../images/placeholder_icon.svg"
-import icon2 from "../../images/placeholder_icon2.png"
-import icon3 from "../../images/placeholder_icon3.png"
-import splash from "../../images/video-splash-left.png"
-
 
 const ThreeUpPeople = props => {
   const data = props.data
