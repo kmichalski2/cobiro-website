@@ -31,6 +31,10 @@ exports.createPages = async function({ graphql, actions }) {
             node {
               title
               slug
+              seoTags {
+                title
+                description
+              }
               sections {
                 __typename
                 ... on DatoCmsJumboHeader {
@@ -123,7 +127,6 @@ exports.createPages = async function({ graphql, actions }) {
                       sizes
                     }
                   }
-                  imageToEdge
                   leftText
                 }
                 ... on DatoCmsFeaturedTestimonialsSingle {
@@ -194,6 +197,28 @@ exports.createPages = async function({ graphql, actions }) {
                   tier2LinkText
                   tier2ExternalLink
                   tier2Features
+                }
+                ... on DatoCmsQuote {
+                  title
+                  text
+                  quotes {
+                    quotes {
+                      person
+                      country
+                      flag {
+                        fixed(width: 24) {
+                          base64
+                          aspectRatio
+                          width
+                          height
+                          srcSet
+                          src
+                          __typename
+                        }
+                      }
+                      quoteText
+                    }
+                  }
                 }
               }
             }

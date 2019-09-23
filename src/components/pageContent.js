@@ -17,10 +17,10 @@ import Video from "../components/sections/video/video"
 import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel"
 
 const pageContent = ({ data }) => {
-  console.log(data)
+  console.log('page data: ', data)
   return (
     <Layout>
-      <SEO title={data.title} description={data.description} />
+      <SEO title={ data.seoTags.title ? data.seoTags.title : data.title } description={data.seoTags.description} />
       <main>
         {data.sections.map((section, index) => {
         switch(section.__typename.replace("DatoCms", "")) {
@@ -47,7 +47,7 @@ const pageContent = ({ data }) => {
             case 'ListPricing':
                 return <ListPricing data={data.sections[index]} key={index}/>
             case 'Quote':
-                return <Quotes key={index}/>
+                return <Quotes data={data.sections[index]} key={index}/>
             case 'Text':
                 return <Text data={data.sections[index]} key={index}/>
             case 'Video':

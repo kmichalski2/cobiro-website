@@ -3,16 +3,16 @@ import Img from "gatsby-image"
 import React from "react"
 
 const ExplanationImage = ({ data }) => {
-  console.log("data: ", data)
+
   const image = (
     <div className="img-responsive space-sm space-xs">
       <Img
         fluid={data.image.fluid}
         alt={data.image.alt ? data.image.alt : data.title}
-        style={{
-          width: data.imageToEdge ? "50vw" : "",
-          maxWidth: data.imageToEdge ? "none" : "",
-        }}
+        // style={{
+        //   width: data.imageToEdge ? "50vw" : "",
+        //   maxWidth: data.imageToEdge ? "none" : "",
+        // }}
       />
     </div>
   )
@@ -26,7 +26,7 @@ const ExplanationImage = ({ data }) => {
   )
 
   return (
-    <section className="section" style={{ overflow: "hidden" }}>
+    <section className="section">
       <div className="container">
         <div className="row middle-xs reverse">
           <div className="col col-sm-12 col-md-6">
