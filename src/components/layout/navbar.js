@@ -108,116 +108,33 @@ const Navbar = ({ menuItems }) => {
                 <span className="icon-bar bottom-bar"></span>
               </button>
             </div>
-            <button className="menu-toggle btn" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="icon-bar top-bar"></span>
-              <span className="icon-bar middle-bar"></span>
-              <span className="icon-bar bottom-bar"></span>
-            </button>
-          </div>
-          <div className="col col-auto-lg main-menu-inner">
-            <ul className="list-inline">
-                  <li className="submenu-parent">
-                    <Link className="active has-submenu" to="/" target="_self">Why Cobiro?</Link>
-                    <div className="submenu">
-                      <div className="container">
-                        <div className="row">
-                            <div className="col col-xs-12 col-lg-3 has-subsubmenu">
-
-                              <Link className="submenu-title" to="/" target="_self">
-                                <img src="/" className="submenu-icon" alt="submenu icon"/>
-                                  Undermenu
-                                </Link>
-                                <div className="subsubmenu">
-                                  <ul className="list-unstyled">
-                                    <li><Link className="hidden-lg hidden-xl" to="/" target="_self">Submenu item</Link></li>
-                                    <li><Link to="/" target="_self">Subsubmenu</Link></li>
-                                  </ul>
-                              </div>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="submenu-parent">
-                    <Link className="has-submenu" to="/" target="_self">Solutions</Link>
-                    <div className="submenu">
-                      <div className="container">
-                        <div className="row">
-                            <div className="col col-xs-12 col-lg-3 has-subsubmenu">
-
-                              <Link className="submenu-title" to="/" target="_self">
-                                <img src="/" className="submenu-icon" alt="submenu icon"/>
-                                  Undermenu
-                                </Link>
-                                <div className="subsubmenu">
-                                  <ul className="list-unstyled">
-                                    <li><Link className="hidden-lg hidden-xl" to="/" target="_self">Submenu item</Link></li>
-                                    <li><Link to="/" target="_self">Subsubmenu</Link></li>
-                                  </ul>
-                              </div>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="submenu-parent">
-                    <Link className="has-submenu" to="/" target="_self">Pricing</Link>
-                    <div className="submenu">
-                      <div className="container">
-                        <div className="row">
-                            <div className="col col-xs-12 col-lg-3 has-subsubmenu">
-
-                              <Link className="submenu-title" to="/" target="_self">
-                                <img src="/" className="submenu-icon" alt="submenu icon"/>
-                                  Undermenu
-                                </Link>
-                                <div className="subsubmenu">
-                                  <ul className="list-unstyled">
-                                    <li><Link className="hidden-lg hidden-xl" to="/" target="_self">Submenu item</Link></li>
-                                    <li><Link to="/" target="_self">Subsubmenu</Link></li>
-                                  </ul>
-                              </div>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="submenu-parent">
-                    <Link className="has-submenu" to="/" target="_self">About Us</Link>
-                    <div className="submenu">
-                      <div className="container">
-                        <div className="row">
-                            <div className="col col-xs-12 col-lg-3 has-subsubmenu">
-
-                              <Link className="submenu-title" to="/" target="_self">
-                                <img src="/" className="submenu-icon" alt="submenu icon"/>
-                                  Undermenu
-                                </Link>
-                                <div className="subsubmenu">
-                                  <ul className="list-unstyled">
-                                    <li><Link className="hidden-lg hidden-xl" to="/" target="_self">Submenu item</Link></li>
-                                    <li><Link to="/" target="_self">Subsubmenu</Link></li>
-                                  </ul>
-                              </div>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="submenu-parent">
-                    <Link className="has-submenu" to="/" target="_self">Company</Link>
-                    <div className="submenu">
-                      <div className="container">
-                        <div className="row">
-                            <div className="col col-xs-12 col-lg-3 has-subsubmenu">
-
-                              <Link className="submenu-title" to="/" target="_self">
-                                <img src="/" className="submenu-icon" alt="submenu icon"/>
-                                  Undermenu
+            <div className="col col-auto-lg main-menu-inner">
+              <ul className="list-inline">
+                <li className="submenu-parent">
+                  <Link className="active has-submenu" to="/" target="_self">
+                    Menupunkt
+                  </Link>
+                  <div className="submenu">
+                    <div className="container">
+                      <div className="row">
+                        <div className="col col-xs-12 col-lg-3 has-subsubmenu">
+                          <Link className="submenu-title" to="/" target="_self">
+                            <img
+                              src="/"
+                              className="submenu-icon"
+                              alt="submenu icon"
+                            />
+                            Undermenu
+                          </Link>
+                          <div className="subsubmenu">
+                            <ul className="list-unstyled">
+                              <li>
+                                <Link
+                                  className="hidden-lg hidden-xl"
+                                  to="/"
+                                  target="_self"
+                                >
+                                  Submenu item
                                 </Link>
                               </li>
                               <li>
