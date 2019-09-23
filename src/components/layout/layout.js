@@ -12,7 +12,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Navbar from "./navbar"
 import Footer from "./footer"
 import "./style/app.scss"
-import CookieBanner from "./cookieConsent";
+import CookieBanner from "./cookieConsent"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -28,9 +28,9 @@ const Layout = ({ children }) => {
   return (
     <>
       <Navbar menuItems={data.site.siteMetadata.title} />
-        {children}
-        <CookieBanner/>
-        <Footer/>
+      {children}
+      <CookieBanner />
+      <Footer />
     </>
   )
 }

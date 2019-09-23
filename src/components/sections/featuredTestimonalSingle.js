@@ -1,20 +1,27 @@
 import React from "react"
-import quote from '../../images/quote.png'
+import Img from "gatsby-image"
+
+import splash from "../../images/splash_testimonial_single.svg"
 
 const FeaturedTestimonialsSingle = ({ data }) => (
-    <section className="section" style={{overflow: 'hidden'}}>
-        <div className="container">
-            <div className="row middle-xs">
-                <div className="col col-xs-12 col-md-6">
-                    <h2>“My vet clinic went from just a few customers at all to an increase in customers and revenue with Cobiro”</h2>
-                    <p className="small">- Simon Mogensen, Small Vet Clinic</p>
-                </div>
-                <div className="col col-xs-12 col-md-6">
-                    <img src={quote} className="testimonial-image" style={{width: '40vw', marginLeft: '10vw', maxWidth: 'none', position: 'relative'}} alt="testimonial person"/>
-                </div>
-            </div>
+  <section className="section" style={{ overflow: "hidden" }}>
+    <div className="container">
+      <div className="row middle-xs">
+        <div className="col col-xs-12 col-md-6 space-xs space-sm">
+          <h4>{data.quote}</h4>
+          <p className="small">{data.person}</p>
         </div>
-    </section>
+        <div className="col col-xs-12 col-md-6">
+          <Img
+            fluid={data.image.fluid}
+            className="testimonial-image"
+            alt={data.image.alt ? data.image.alt : data.title}
+          />
+        </div>
+      </div>
+    </div>
+    <img className="splash-right" src={splash} alt="splash shape testimonial" />
+  </section>
 )
 
 export default FeaturedTestimonialsSingle
