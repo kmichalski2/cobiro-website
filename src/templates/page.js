@@ -1,60 +1,160 @@
 import React from "react"
-import Layout from "../components/layout/layout"
-import SEO from "../components/seo"
-import JumboHeader from "../components/sections/jumboHeader/jumboHeader"
-import ThreeUpPeople from "../components/sections/threeUpPeople"
-import ThreeUp from "../components/sections/threeUp"
-import AccordionFaq from "../components/sections/accordionFaq"
-import ExplanationImage from "../components/sections/explanationImage";
-import FeatureList from "../components/sections/featureList";
-import FeaturedCompanies from "../components/sections/featuredCompanies";
-import FeaturedTestimonialsSingle from "../components/sections/featuredTestimonalSingle";
-import JumboCta from "../components/sections/jumboCta";
-import ListPricing from "../components/sections/listPricing";
-import Quotes from "../components/sections/quotes/quotes";
-import Text from "../components/sections/text";
-import Video from "../components/sections/video/video";
-import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel";
+import PageContent from "../components/pageContent"
 
-
-const IndexPage = ({pageContext}) => (
-  <Layout>
-    <SEO title={pageContext.title} />
-    <main>
-    {pageContext.sections.map((section, index) => {
-        switch(section) {
-            case 'JumboHeader':
-                return <JumboHeader textAlignment="left" jumboFooter={true} imageToRight={true} key={index}/>
-            case 'ThreeUp':
-                return <><ThreeUp key={index}/><FeaturedCarousel /></>
-            case 'ExplanationWImage':
-                return <ExplanationImage alignment="left" toEdge={true} key={index}/>
-            case 'Accordionfaq':
-                return <AccordionFaq key={index}/>
-            case 'FeatureList':
-                return <FeatureList key={index}/>
-            case 'FeaturedCompany':
-                return <FeaturedCompanies key={index}/>
-            case 'FeaturedTestimonialsSingle':
-                return <FeaturedTestimonialsSingle key={index}/>
-            case 'ThreeUpPerson':
-                return <ThreeUpPeople key={index}/>
-            case 'CtaJumbo':
-                return <JumboCta key={index}/>
-            case 'ListPricing':
-                return <ListPricing key={index}/>
-            case 'Quote':
-                return <Quotes key={index}/>
-            case 'Text':
-                return <Text key={index}/>
-            case 'Video':
-                return <Video key={index}/>
-            default:
-                return null
-            }
-    })}
-    </main>
-  </Layout>
-)
+const IndexPage = ( pageContext) => {
+    console.log('context: ', pageContext.pageContext.data);
+return <PageContent data={pageContext.pageContext.data} />
+}
 
 export default IndexPage
+
+// export const query = graphql`
+//   query {
+//     datoCmsPage {
+//       title
+//       slug
+//       sections {
+//         __typename
+//         ... on DatoCmsJumboHeader {
+//           id
+//           text
+//           linkTitle
+//           internalLink
+//           heading
+//           externalLink
+//           externalLinkUrl
+//           link {
+//             title
+//             slug
+//             position
+//           }
+//           textLeftAlignment
+//           image {
+//             alt
+//             width
+//             height
+//             fluid(
+//               maxWidth: 1500
+//               imgixParams: { fm: "webp", auto: "compress" }
+//             ) {
+//               ...GatsbyDatoCmsFluid
+//             }
+//           }
+//         }
+//         ... on DatoCmsThreeUp {
+//           title
+//           text
+//           box1Icon {
+//             alt
+//             url
+//           }
+//           box1Title
+//           box1Text
+//           box1LinkText
+//           box1Link {
+//             slug
+//           }
+//           box2Icon {
+//             url
+//             alt
+//           }
+//           box2Title
+//           box2Text
+//           box2LinkText
+//           box2Link {
+//             slug
+//           }
+//           box3Icon {
+//             url
+//             alt
+//           }
+//           box3Title
+//           box3Text
+//           box3LinkText
+//           box3Link {
+//             slug
+//           }
+//         }
+//         ... on DatoCmsExplanationWImage {
+//           title
+//           text
+//           link {
+//             slug
+//           }
+//           linkTitle
+//           image {
+//             alt
+//             width
+//             height
+//             fluid(
+//               maxWidth: 1200
+//               imgixParams: { fm: "webp", auto: "compress" }
+//             ) {
+//               ...GatsbyDatoCmsFluid
+//             }
+//           }
+//           imageToEdge
+//           leftText
+//         }
+//         ... on DatoCmsFeaturedTestimonialsSingle {
+//           quote
+//           person
+//           image {
+//             alt
+//             width
+//             height
+//             fluid(
+//               maxWidth: 1200
+//               imgixParams: { fm: "webp", auto: "compress" }
+//             ) {
+//               ...GatsbyDatoCmsFluid
+//             }
+//           }
+//         }
+//         ... on DatoCmsFeaturedCompany {
+//           title
+//           text
+//           logos {
+//             alt
+//             width
+//             height
+//             fixed(width: 200) {
+//               ...GatsbyDatoCmsFixed
+//             }
+//           }
+//         }
+//         ... on DatoCmsText {
+//           title
+//           text
+//         }
+//         ... on DatoCmsVideo {
+//           videoEmbedUrl
+//         }
+//         ... on DatoCmsCtaJumbo {
+//           title
+//           text
+//           linkTitle
+//           link {
+//             slug
+//           }
+//         }
+//         ... on DatoCmsListPricing {
+//           title
+//           text
+//           tier1Title
+//           tier1Text
+//           tier1Price
+//           tier1LinkText
+//           tier1ExternalLink
+//           tier1Features
+//           tier2Title
+//           tier2Text
+//           tier2Price
+//           tier2LinkText
+//           tier2ExternalLink
+//           tier2Features
+//         }
+//       }
+//     }
+//   }
+// `

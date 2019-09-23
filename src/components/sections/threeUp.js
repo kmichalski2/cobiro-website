@@ -1,55 +1,77 @@
 import { Link } from "gatsby"
 import React from "react"
-import icon from "../../images/placeholder_icon.svg"
-import icon2 from "../../images/placeholder_icon2.png"
-import icon3 from "../../images/placeholder_icon3.png"
-import splash from "../../images/video-splash-left.png"
 
+const ThreeUpPeople = props => {
+  const data = props.data
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="row center-xs">
+          {data.title || data.text ? (
+            <div className="col col-xs-12 text-center section-header">
+              {data.title ? <h2>{data.title}</h2> : null}
+              {data.text ? <p>{data.text}</p> : null}
+            </div>
+          ) : null}
 
-const ThreeUpPeople = ({ data }) => (
-	
-<section className="section" style={{position: 'relative'}}>
-	<div className="container" style={{position: 'relative', zIndex: 1}}>
-		<div className="row">
-			{/* <div className="col col-xs-12 text-center section-header">
-				<h2>What can you do with Cobiro?</h2>
-				<p>Get professional ads in just few clicks and start advertising.</p>
-			</div> */}
-			<div className="col col-xs-12 col-md-4">
-				<div className="card">
-					<img src={icon} className="three-up-icon" alt="alt title"/>
-					<div className="text-left text-center-md">
-						<h4>Build your skills</h4>
-						<p className="small">Get professional ads in just few clicks and start advertising.</p>
-                        <Link to="/" className="small">Learn More</Link>
-					</div>
-				</div>
-			</div>
+          {data.box1Title || data.box1Text ? (
             <div className="col col-xs-12 col-md-4">
-				<div className="card">
-					<img src={icon2} className="three-up-icon" alt="alt title"/>
-					<div className="text-left text-center-md">
-						<h4>Grow Your Business</h4>
-						<p className="small">Get professional ads in just few clicks and start advertising.</p>
-                        <Link to="/" className="small">Learn More</Link>
-					</div>
-				</div>
-			</div>
+              <div className="card">
+                <img
+                  src={data.box1Icon.url}
+                  className="three-up-icon"
+                  alt={data.box1Icon.alt ? data.box1Icon.alt : data.box1Title}
+                />
+                <div className="text-left text-center-md">
+                  <h4>{data.box1Title}</h4>
+                  <p className="small">{data.box1Text}</p>
+                  <Link to={data.box1Link.slug} className="small">
+                    {data.box1LinkText}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : null}
+          {data.box2Title || data.box2Text ? (
             <div className="col col-xs-12 col-md-4">
-				<div className="card">
-					<img src={icon3} className="three-up-icon" alt="alt title"/>
-					<div className="text-left text-center-md">
-						<h4>Expand Your Offering</h4>
-						<p className="small">Get professional ads in just few clicks and start advertising.</p>
-                        <Link to="/" className="small">Learn More</Link>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<img src={splash} style={{position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', width: '15%'}} alt="splash"/>
-</section>
-
-)
+              <div className="card">
+                <img
+                  src={data.box2Icon.url}
+                  className="three-up-icon"
+                  alt={data.box2Icon.alt ? data.box2Icon.alt : data.box2Title}
+                />
+                <div className="text-left text-center-md">
+                  <h4>{data.box2Title}</h4>
+                  <p className="small">{data.box1Text}</p>
+                  <Link to={data.box2Link.slug} className="small">
+                    {data.box2LinkText}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : null}
+          {data.box3Title || data.box3Text ? (
+            <div className="col col-xs-12 col-md-4">
+              <div className="card">
+                <img
+                  src={data.box3Icon.url}
+                  className="three-up-icon"
+                  alt={data.box3Icon.alt ? data.box3Icon.alt : data.box3Title}
+                />
+                <div className="text-left text-center-md">
+                  <h4>{data.box3Title}</h4>
+                  <p className="small">{data.box1Text}</p>
+                  <Link to={data.box3Link.slug} className="small">
+                    {data.box3LinkText}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  )
+}
 
 export default ThreeUpPeople

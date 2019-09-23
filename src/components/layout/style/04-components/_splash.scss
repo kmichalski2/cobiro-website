@@ -1,0 +1,19 @@
+
+.splash-right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 90%;
+    z-index: -1;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.12));
+}
+.splash-left {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 90%;
+    z-index: -1;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.12));
+}
