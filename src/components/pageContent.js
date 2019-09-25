@@ -41,7 +41,7 @@ const pageContent = ({ data }) => {
             case 'FeaturedTestimonialsSingle':
                 return <FeaturedTestimonialsSingle data={data.sections[index]} key={index}/>
             case 'ThreeUpPerson':
-                return <ThreeUpPeople key={index}/>
+                return <ThreeUpPeople data={data.sections[index]} key={index}/>
             case 'CtaJumbo':
                 return <JumboCta data={data.sections[index]} key={index}/>
             case 'ListPricing':
