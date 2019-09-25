@@ -62,9 +62,6 @@ const ThreeUpPeople = ({ data }) => {
             </div>
           </div>
           ))}
-          
-
-
         </div>
       </div>
     </section>
