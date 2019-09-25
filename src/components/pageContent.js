@@ -20,7 +20,7 @@ const pageContent = ({ data }) => {
   console.log('page data: ', data)
   return (
     <Layout>
-      <SEO title={ data.seoTags.title ? data.seoTags.title : data.title } description={data.seoTags.description} />
+      <SEO title={ data.seoTags ==! null ? data.seoTags.title : data.title } description={data.seoTags ==! null ? data.seoTags.description : null} />
       <main>
         {data.sections.map((section, index) => {
         switch(section.__typename.replace("DatoCms", "")) {
@@ -33,7 +33,7 @@ const pageContent = ({ data }) => {
             case 'ExplanationWImage':
                 return <ExplanationImage data={data.sections[index]} alignment="left" toEdge={true} key={index}/>
             case 'Accordionfaq':
-                return <AccordionFaq key={index}/>
+                return <AccordionFaq data={data.sections[index]} key={index}/>
             case 'FeatureList':
                 return <FeatureList key={index}/>
             case 'FeaturedCompany':
