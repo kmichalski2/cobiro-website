@@ -279,6 +279,31 @@ exports.createPages = async function({ graphql, actions }) {
                     linkedinLink
                     }
                 }
+                ... on DatoCmsFeatureList {
+                  features {
+                    title
+                    features {
+                      title
+                      text
+                      link {
+                        title
+                        slug
+                      }
+                      image {
+                        alt
+                        fluid {
+                          width
+                          srcSet
+                          src
+                          sizes
+                          height
+                          base64
+                          aspectRatio
+                        }
+                      }
+                    }
+                  }
+                }
                 ... on DatoCmsAccordionfaq {
                   title
                   text
