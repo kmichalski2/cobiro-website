@@ -11,7 +11,7 @@ const JumboCta = ({ data }) => (
             <h2>{data.title}</h2>
             <p>{data.text}</p>
             <Link
-              to={data.link.slug}
+              to={data.link.slug ? data.link.slug : '/'}
               className="btn btn-large space-xs space-sm"
             >
               {data.linkTitle}

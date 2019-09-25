@@ -16,10 +16,43 @@ import CookieBanner from "./cookieConsent"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+    query GlobalQuery {
       site {
         siteMetadata {
           title
+        }
+      }
+      allDatoCmsMenu {
+        nodes {
+          linkTitle
+          link {
+            slug
+            title
+          }
+          menuItemOrder
+          submenu {
+            title
+            icon {
+              alt
+              fixed(width: 10) {
+                aspectRatio
+                base64
+                height
+                src
+                srcSet
+                width
+              }
+              url
+            }
+            link {
+              title
+              slug
+            }
+            submenuLinks {
+              title
+              slug
+            }
+          }
         }
       }
     }
@@ -27,7 +60,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Navbar menuItems={data.site.siteMetadata.title} />
+      <Navbar menuItems={data.allDatoCmsMenu.nodes} />
       {children}
       <CookieBanner />
       <Footer />
