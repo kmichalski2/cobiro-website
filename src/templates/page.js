@@ -2,7 +2,6 @@ import React from "react"
 import PageContent from "../components/pageContent"
 
 const IndexPage = ( pageContext) => {
-    console.log('context: ', pageContext.pageContext.data);
 return <PageContent data={pageContext.pageContext.data} />
 }
 
