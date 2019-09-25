@@ -1,5 +1,5 @@
 import { Link } from "gatsby"
-import logo from "../../images/logo_circle.svg"
+import logo from "../../images/logo.svg"
 import fb from "../../images/fb.svg"
 import insta from "../../images/insta.svg"
 import twitter from "../../images/twitter.svg"
