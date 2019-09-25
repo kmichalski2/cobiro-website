@@ -11,22 +11,25 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = async function({ graphql, actions }) {
   const { createPage } = actions
-  const locales = ["en"]
+  // const locales = ["en"]
 
-  locales.forEach(locale => {
-    const prefix = locale === "en" ? "" : `/${locale}`
-    createPage({
-      path: `${prefix}/`,
-      component: path.resolve(`./src/templates/page.js`),
-      context: { locale },
-    })
-  })
+  // locales.forEach(locale => {
+  //   const prefix = locale === "en" ? "" : `/${locale}`
+  //   createPage({
+  //     path: `${prefix}/`,
+  //     component: path.resolve(`./src/templates/page.js`),
+  //     context: { locale },
+  //   })
+  // })
 
-  Promise.all(
-    locales.map(locale => {
-      graphql(`
+  // Promise.all(
+  //   locales.map(locale => {
+    // graphql(`
+    //   {
+    //     allDatoCmsPage(filter: {locale: {eq: "${locale}"}}) {
+      await graphql(`
       {
-        allDatoCmsPage(filter: {locale: {eq: "${locale}"}}) {
+        allDatoCmsPage {
           edges {
             node {
               title
@@ -270,23 +273,23 @@ exports.createPages = async function({ graphql, actions }) {
       }
       `).then(result => {
         result.data.allDatoCmsPage.edges.forEach(async function(item) {
-          const prefix = locale === "en" ? "" : `/${locale}`
-          let p = item.node.slug === '__home__' ? '/' : `${prefix}/${item.node.slug}`
+          // const prefix = locale === "en" ? "" : `/${locale}`
+          // let p = item.node.slug === '__home__' ? '/' : `${prefix}/${item.node.slug}`
+          let p = item.node.slug === '__home__' ? '/' : `/${item.node.slug}`
           // path: edge.uid === '__home__' ? '/' : `/${edge.uid}`,
           // let sections = item.node.sections.map(section =>
           //   section.__typename.replace("DatoCms", "")
           // )
-          createPage({
+          await createPage({
             path: p,
             component: path.resolve(`./src/templates/page.js`),
             context: {
               title: item.node.title,
-              locale,
               data: item.node
             },
           })
         })
       })
-    })
-  )
+  //   })
+  // )
 }
