@@ -55,6 +55,40 @@ const Layout = ({ children }) => {
           }
         }
       }
+      allDatoCmsFooter {
+        nodes {
+          column {
+            ... on DatoCmsTextElement {
+              text
+            }
+            ... on DatoCmsLinkElement {
+              externalLink
+              linkTitle
+              internalLink {
+                slug
+              }
+            }
+            ... on DatoCmsImageElement {
+              externalLink
+              image {
+                alt
+                fluid {
+                  aspectRatio
+                  base64
+                  height
+                  src
+                  srcSet
+                  width
+                  sizes
+                }
+                url
+              }
+            }
+          }
+          columnHeading
+          footerItemOrder
+        }
+      }
     }
   `)
 
@@ -63,7 +97,7 @@ const Layout = ({ children }) => {
       <Navbar menuItems={data.allDatoCmsMenu.nodes} />
       {children}
       <CookieBanner />
-      <Footer />
+      <Footer columns={data.allDatoCmsFooter.nodes}/>
     </>
   )
 }

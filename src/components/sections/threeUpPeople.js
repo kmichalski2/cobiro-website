@@ -1,8 +1,11 @@
 import { Link } from "gatsby"
 import React from "react"
 import linkedin from "../../images/linkedin.svg"
+import Img from "gatsby-image"
+
 
 const ThreeUpPeople = ({ data }) => {
+  console.log('Three up people data: ', data)
   const peopleClickHandler = event => {
     const el = event.target
     const text = el.previousElementSibling
@@ -24,19 +27,20 @@ const ThreeUpPeople = ({ data }) => {
       <div className="container">
         <div className="row center-xs">
           <div className="col col-xs-12 text-center section-header">
-            <h2>Management Team</h2>
-            <p>Excellent management is key to excellent workflows</p>
+            <h2>{data.title}</h2>
+            <p>{data.text}</p>
           </div>
-          <div className="col col-xs-12 col-md-6 col-lg-4">
+          {data.people.map((p, index) => (
+            <div key={index} className="col col-xs-12 col-md-6 col-lg-4">
             <div className="card card-visible people">
               <div className="card-header-wrapper">
-                <img src="/" className="card-img-large" alt="Person" />
+                <Img fluid={p.image.fluid} className="card-img-large" alt={p.name} />
                 <div className="flex middle-xs between-xs space-md-up text-left">
                   <div>
-                    <h4>Bo Krogsgaard</h4>
-                    <h5>CEO</h5>
+                    <h4>{p.name}</h4>
+                    <h5>{p.title}</h5>
                   </div>
-                  <Link to="/" target="_blank">
+                  <Link to={p.linkedinLink} target="_blank">
                     <img
                       className="social-icon"
                       src={linkedin}
@@ -46,11 +50,7 @@ const ThreeUpPeople = ({ data }) => {
                 </div>
               </div>
               <p className="small text-left-xs people-description">
-                Bo has been building online based companies since 1998 and
-                Cobiro is the brain child of his experience - an evolution of a
-                platform he developed for hotel booking and price comparison
-                engines. At Cobiro, Bo is our CEO, responsible for leading the
-                company towards new heights.
+                {p.text}
               </p>
               <button
                 className="btn hidden-md-up"
@@ -61,74 +61,7 @@ const ThreeUpPeople = ({ data }) => {
               </button>
             </div>
           </div>
-          <div className="col col-xs-12 col-md-6 col-lg-4">
-            <div className="card card-visible people">
-              <div className="card-header-wrapper">
-                <img src="/" className="card-img-large" alt="Person" />
-                <div className="flex middle-xs between-xs space-md-up text-left">
-                  <div>
-                    <h4>Bo Krogsgaard</h4>
-                    <h5>CEO</h5>
-                  </div>
-                  <Link to="/" target="_blank">
-                    <img
-                      className="social-icon"
-                      src={linkedin}
-                      alt="Bo Krogsgaard"
-                    />
-                  </Link>
-                </div>
-              </div>
-              <p className="small text-left-xs people-description">
-                Bo has been building online based companies since 1998 and
-                Cobiro is the brain child of his experience - an evolution of a
-                platform he developed for hotel booking and price comparison
-                engines. At Cobiro, Bo is our CEO, responsible for leading the
-                company towards new heights.
-              </p>
-              <button
-                className="btn hidden-md-up"
-                onClick={peopleClickHandler}
-                aria-label="View full profile"
-              >
-                View full profile
-              </button>
-            </div>
-          </div>
-          <div className="col col-xs-12 col-md-6 col-lg-4">
-            <div className="card card-visible people">
-              <div className="card-header-wrapper">
-                <img src="/" className="card-img-large" alt="Person" />
-                <div className="flex middle-xs between-xs space-md-up text-left">
-                  <div>
-                    <h4>Bo Krogsgaard</h4>
-                    <h5>CEO</h5>
-                  </div>
-                  <Link to="/" target="_blank">
-                    <img
-                      className="social-icon"
-                      src={linkedin}
-                      alt="Bo Krogsgaard"
-                    />
-                  </Link>
-                </div>
-              </div>
-              <p className="small text-left-xs people-description">
-                Bo has been building online based companies since 1998 and
-                Cobiro is the brain child of his experience - an evolution of a
-                platform he developed for hotel booking and price comparison
-                engines. At Cobiro, Bo is our CEO, responsible for leading the
-                company towards new heights.
-              </p>
-              <button
-                className="btn hidden-md-up"
-                onClick={peopleClickHandler}
-                aria-label="View full profile"
-              >
-                View full profile
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

@@ -35,13 +35,13 @@ const pageContent = ({ data }) => {
             case 'Accordionfaq':
                 return <AccordionFaq data={data.sections[index]} key={index}/>
             case 'FeatureList':
-                return <FeatureList key={index}/>
+                return <FeatureList data={data.sections[index]} key={index}/>
             case 'FeaturedCompany':
                 return <FeaturedCompanies data={data.sections[index]} key={index}/>
             case 'FeaturedTestimonialsSingle':
                 return <FeaturedTestimonialsSingle data={data.sections[index]} key={index}/>
             case 'ThreeUpPerson':
-                return <ThreeUpPeople key={index}/>
+                return <ThreeUpPeople data={data.sections[index]} key={index}/>
             case 'CtaJumbo':
                 return <JumboCta data={data.sections[index]} key={index}/>
             case 'ListPricing':

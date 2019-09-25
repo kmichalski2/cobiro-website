@@ -257,6 +257,53 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                 }
+                ... on DatoCmsThreeUpPerson {
+                  title
+                  text
+                  people {
+                    title
+                    text
+                    name
+                    image {
+                      alt
+                      fluid {
+                        width
+                        height
+                        srcSet
+                        base64
+                        aspectRatio
+                        src
+                        sizes
+                      }
+                    }
+                    linkedinLink
+                    }
+                }
+                ... on DatoCmsFeatureList {
+                  features {
+                    title
+                    features {
+                      title
+                      text
+                      link {
+                        title
+                        slug
+                      }
+                      image {
+                        alt
+                        fluid {
+                          width
+                          srcSet
+                          src
+                          sizes
+                          height
+                          base64
+                          aspectRatio
+                        }
+                      }
+                    }
+                  }
+                }
                 ... on DatoCmsAccordionfaq {
                   title
                   text

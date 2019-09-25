@@ -112,7 +112,9 @@ const Navbar = ({ menuItems }) => {
             </div>
             <div className="col col-auto-lg main-menu-inner">
               <ul className="list-inline">
-                {menuItems.map((item, index) => (
+                {menuItems.sort(function (a, b) {
+                    return a.menu_item_order - b.menu_item_order;
+                  }).map((item, index) => (
                   <li key={index} className="submenu-parent">
                   <Link className="active has-submenu" to={`/${item.link.slug}`} target="_self">
                     {item.linkTitle}
