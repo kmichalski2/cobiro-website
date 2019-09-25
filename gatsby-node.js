@@ -33,6 +33,7 @@ exports.createPages = async function({ graphql, actions }) {
           edges {
             node {
               title
+              homepage
               slug
               seoTags {
                 title
@@ -275,7 +276,7 @@ exports.createPages = async function({ graphql, actions }) {
         result.data.allDatoCmsPage.edges.forEach(async function(item) {
           // const prefix = locale === "en" ? "" : `/${locale}`
           // let p = item.node.slug === '__home__' ? '/' : `${prefix}/${item.node.slug}`
-          let p = item.node.slug === '__home__' ? '/' : `/${item.node.slug}`
+          let p = item.node.homepage ? '/' : `/${item.node.slug}`
           // path: edge.uid === '__home__' ? '/' : `/${edge.uid}`,
           // let sections = item.node.sections.map(section =>
           //   section.__typename.replace("DatoCms", "")

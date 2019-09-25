@@ -15,7 +15,7 @@ const JumboHeader = props => {
         {data.externalLink ? (
           <a href={data.externalLinkUrl}>{data.linkTitle}</a>
         ) : (
-          <Link to={data.link.slug} className="btn btn-large space-xs space-sm">
+          <Link to={data.link.slug ? data.link.slug : '/'} className="btn btn-large space-xs space-sm">
             {data.linkTitle}
           </Link>
         )}

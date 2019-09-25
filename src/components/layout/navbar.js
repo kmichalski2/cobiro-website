@@ -1,8 +1,10 @@
 import { Link } from "gatsby"
 import React, { useEffect } from "react"
 import logo from "../../images/logo.svg"
+import Img from "gatsby-image"
 
 const Navbar = ({ menuItems }) => {
+  console.log('Navbar items: ', menuItems);
   useEffect(() => {
     // Initial variables
     const body = document.querySelector("BODY")
@@ -110,45 +112,51 @@ const Navbar = ({ menuItems }) => {
             </div>
             <div className="col col-auto-lg main-menu-inner">
               <ul className="list-inline">
-                <li className="submenu-parent">
-                  <Link className="active has-submenu" to="/" target="_self">
-                    Menupunkt
+                {menuItems.map((item, index) => (
+                  <li key={index} className="submenu-parent">
+                  <Link className="active has-submenu" to={`/${item.link.slug}`} target="_self">
+                    {item.linkTitle}
                   </Link>
+                  {item.submenu.length > 0 ?
                   <div className="submenu">
                     <div className="container">
                       <div className="row">
-                        <div className="col col-xs-12 col-lg-3 has-subsubmenu">
-                          <Link className="submenu-title" to="/" target="_self">
+                        {item.submenu.map((sub, index) => (
+                          <div key={index} className="col col-xs-12 col-lg-3 has-subsubmenu">
+                          <Link className="submenu-title" to={sub.slug ? sub.slug : '/'} target="_self">
+                            {sub.icon.fixed ==! null ?
+                            <Img fixed={sub.icon.fixed} alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
+                            :
                             <img
-                              src="/"
-                              className="submenu-icon"
-                              alt="submenu icon"
-                            />
-                            Undermenu
+                                src={sub.icon.url}
+                                className="submenu-icon"
+                                alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}
+                              />
+                            }
+                            {sub.title}
                           </Link>
                           <div className="subsubmenu">
                             <ul className="list-unstyled">
-                              <li>
+                              {sub.submenuLinks.map((subsub, index) => (
+                                <li key={index}>
                                 <Link
-                                  className="hidden-lg hidden-xl"
-                                  to="/"
+                                  to={subsub.slug ? subsub.slug : '/'}
                                   target="_self"
                                 >
-                                  Submenu item
+                                  {subsub.title}
                                 </Link>
                               </li>
-                              <li>
-                                <Link to="/" target="_self">
-                                  Subsubmenu
-                                </Link>
-                              </li>
+                              ))}
                             </ul>
                           </div>
                         </div>
+                        ))}
                       </div>
                     </div>
                   </div>
+                  : null}
                 </li>
+                ))}
               </ul>
               <div className="main-menu-cta">
                 <Link to="/" className="btn btn-secondary" target="_blank">

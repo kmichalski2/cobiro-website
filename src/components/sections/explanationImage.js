@@ -21,7 +21,7 @@ const ExplanationImage = ({ data }) => {
     <div className="text-padding">
       <h3 className="">{data.title}</h3>
       <p>{data.text}</p>
-      <Link to={data.link.slug}>{data.linkTitle}</Link>
+      <Link to={data.link.slug ? data.link.slug : '/'}>{data.linkTitle}</Link>
     </div>
   )
 
