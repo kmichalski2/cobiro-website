@@ -253,6 +253,16 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                 }
+                ... on DatoCmsAccordionfaq {
+                  title
+                  text
+                  accordion {
+                    accordionTabs {
+                      title
+                      text
+                    }
+                  }
+                }
               }
             }
           }

@@ -33,7 +33,7 @@ const pageContent = ({ data }) => {
             case 'ExplanationWImage':
                 return <ExplanationImage data={data.sections[index]} alignment="left" toEdge={true} key={index}/>
             case 'Accordionfaq':
-                return <AccordionFaq key={index}/>
+                return <AccordionFaq data={data.sections[index]} key={index}/>
             case 'FeatureList':
                 return <FeatureList key={index}/>
             case 'FeaturedCompany':
