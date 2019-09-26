@@ -59,10 +59,7 @@ exports.createPages = async function({ graphql, actions }) {
                     alt
                     width
                     height
-                    fluid(
-                      maxWidth: 1500
-                      imgixParams: { fm: "webp", auto: "compress" }
-                    ) {
+                    fluid(maxWidth: 1000) {
                       width
                       height
                       srcSet
@@ -118,10 +115,7 @@ exports.createPages = async function({ graphql, actions }) {
                     alt
                     width
                     height
-                    fluid(
-                      maxWidth: 1200
-                      imgixParams: { fm: "webp", auto: "compress" }
-                    ) {
+                    fluid(maxWidth: 800) {
                       width
                       height
                       srcSet
@@ -140,10 +134,7 @@ exports.createPages = async function({ graphql, actions }) {
                     alt
                     width
                     height
-                    fluid(
-                      maxWidth: 1200
-                      imgixParams: { fm: "webp", auto: "compress" }
-                    ) {
+                    fluid(maxWidth: 800) {
                       width
                       height
                       srcSet
@@ -244,7 +235,7 @@ exports.createPages = async function({ graphql, actions }) {
                         }
                       }
                       image {
-                        fluid {
+                        fluid(maxWidth: 1200) {
                           base64
                           aspectRatio
                           width
@@ -266,7 +257,7 @@ exports.createPages = async function({ graphql, actions }) {
                     name
                     image {
                       alt
-                      fluid {
+                      fluid(maxWidth: 180) {
                         width
                         height
                         srcSet
@@ -291,7 +282,7 @@ exports.createPages = async function({ graphql, actions }) {
                       }
                       image {
                         alt
-                        fluid {
+                        fluid(maxWidth: 800) {
                           width
                           srcSet
                           src
