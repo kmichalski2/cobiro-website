@@ -10,12 +10,14 @@ const JumboCta = ({ data }) => (
           <div className="col col-xs-12">
             <h2>{data.title}</h2>
             <p>{data.text}</p>
+            {data.link ? 
             <Link
-              to={data.link.slug ? data.link.slug : '/'}
-              className="btn btn-large space-xs space-sm"
+            to={data.link.slug ? data.link.slug : '/'}
+            className="btn btn-large space-xs space-sm"
             >
               {data.linkTitle}
             </Link>
+            : null}
           </div>
         </div>
       </div>

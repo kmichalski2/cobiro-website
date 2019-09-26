@@ -6,19 +6,20 @@ import JumboHeaderStyles from "./jumboHeader.module.scss"
 
 const JumboHeader = props => {
   const data = props.data
-  console.log(data)
+  console.log('jumbo data: ', data)
   const textSide = (
     <div className="col col-xs-12 col-md-6 text-left-md">
       <div className={[JumboHeaderStyles.text, "text-padding"].join(" ")}>
         <h1>{data.heading}</h1>
         <p>{data.text}</p>
-        {data.externalLink ? (
+        {data.externalLinkUrl ? (
           <a href={data.externalLinkUrl}>{data.linkTitle}</a>
-        ) : (
+        ) : data.link ?
+        (
           <Link to={data.link.slug ? data.link.slug : '/'} className="btn btn-large space-xs space-sm">
             {data.linkTitle}
           </Link>
-        )}
+        ): null }
       </div>
     </div>
   )
