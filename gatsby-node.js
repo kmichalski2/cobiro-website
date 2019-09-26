@@ -165,6 +165,9 @@ exports.createPages = async function({ graphql, actions }) {
                 ... on DatoCmsText {
                   title
                   text
+                  backgroundImage {
+                    url
+                  }
                 }
                 ... on DatoCmsVideo {
                   videoEmbedUrl

@@ -3,13 +3,15 @@
 	padding: 2.5rem;
 	text-align: center;
 	position: relative;
-	background-color: white;
+	// background-color: white;
 	width: 100%;
 	margin-bottom: 2rem;
 
 	&.card-visible { 
 		@include box-shadow;
 		border: 1px solid lighten($grey, 10);
+		background-color: white;
+
 	} 
 
 	img {
