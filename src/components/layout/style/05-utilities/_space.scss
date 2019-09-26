@@ -1,14 +1,5 @@
 @import '~baseguide/scss/baseguide/05-utilities/space';
 
-.section, .section-inner {
-	position: relative;
-	padding: 5rem 0;
-
-	@include mq($until: md) {
-		padding: 2.5rem 0;
-	}
-}
-
 .text-margin {
 	margin: 60px;
 }
