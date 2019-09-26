@@ -1,8 +1,6 @@
 import React from "react"
 import Img from "gatsby-image"
 
-import splash from "../../images/splash_testimonial_single.svg"
-
 const FeaturedTestimonialsSingle = ({ data }) => (
   <section className="section" style={{ overflow: "hidden" }}>
     <div className="container">
@@ -20,7 +18,6 @@ const FeaturedTestimonialsSingle = ({ data }) => (
         </div>
       </div>
     </div>
-    <img className="splash-right" src={splash} alt="splash shape testimonial" />
   </section>
 )
 
