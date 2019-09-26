@@ -22,7 +22,7 @@ const ExplanationImage = ({ data }) => {
       <h3 className="">{data.title}</h3>
       <p>{data.text}</p>
       {data.link ? 
-      <Link to={data.link ? data.link.slug : '/'}>{data.linkTitle}</Link>
+      <Link to={data.link.slug ? data.link.slug : '/'}>{data.linkTitle}</Link>
       : null}
       
     </div>
