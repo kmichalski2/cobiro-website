@@ -34,7 +34,9 @@ const ThreeUpPeople = ({ data }) => {
             <div key={index} className="col col-xs-12 col-md-6 col-lg-4">
             <div className="card card-visible people">
               <div className="card-header-wrapper">
+                {p.image.fluid ?
                 <Img fluid={p.image.fluid} className="card-img-large" alt={p.name} />
+                : null}
                 <div className="flex middle-xs between-xs space-md-up text-left">
                   <div>
                     <h4>{p.name}</h4>
