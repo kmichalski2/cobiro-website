@@ -1,10 +1,10 @@
 import React from "react"
 import Img from "gatsby-image"
-import splash from "../../images/left-splash.png"
+// import splash from "../../images/left-splash.png"
 
 const FeaturedCompanies = ({ data }) => (
   <section className="section" style={{ position: "relative" }}>
-    <img src={splash} className="splash-left" alt="splash left" />
+    {/* <img src={splash} className="splash-left" alt="splash left" /> */}
     <div className="section-inner">
       <div className="container">
         <div className="row center-xs middle-xs text-center">
