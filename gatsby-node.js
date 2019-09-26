@@ -9,6 +9,19 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
+
+  // page.matchPath is a special key that's used for matching pages
+  // only on the client.
+  if (page.path.match(/^\/sites/)) {
+    page.matchPath = "/sites/*"
+
+    // Update the page.
+    createPage(page)
+  }
+}
+
 exports.createPages = async function({ graphql, actions }) {
   const { createPage } = actions
   // const locales = ["en"]
