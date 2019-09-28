@@ -19,6 +19,10 @@ $button-padding-horizontal: 1.5rem;
 		padding: 1rem 1.8rem;
 	}
 }
+.btn-submit-inline {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
 
 .btn-secondary {
 	background-color: transparent;
