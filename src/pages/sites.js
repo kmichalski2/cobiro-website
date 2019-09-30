@@ -15,7 +15,6 @@ const Sites = () => {
 
     useEffect(() => { 
         if(!isLoaded) {
-            console.log('use effect fired on load!')
             const url = window.location.href.split('/sites/').pop()
             setIsLoaded(true)
             submit(url)
