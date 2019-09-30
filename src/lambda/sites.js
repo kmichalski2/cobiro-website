@@ -9,7 +9,7 @@ exports.handler =  function sites(event, context, callback) {
     console.log('Endpoint: ', `${endpoint}https://www.${domain}`)
     axios({
         method: 'get',
-        url: `${endpoint}https://${domain}`,
+        url: `${endpoint}http://${domain}`,
         headers: {
           'Content-Type': 'application/json',
         }
@@ -20,7 +20,7 @@ exports.handler =  function sites(event, context, callback) {
           body: JSON.stringify({ data: response.data }),
         }),
       )
-      .catch(() => {
+      .catch((error) => {
         callback(null, {
           statusCode: 500,
           body: JSON.stringify({
