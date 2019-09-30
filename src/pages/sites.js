@@ -38,7 +38,7 @@ const Sites = () => {
             setAlert('')
             navigate(`/sites/${newUrl}`)
 
-            fetch(`/.netlify/lambda/sites?url=${newUrl}`, {
+            fetch(`/.netlify/functions/sites?url=${newUrl}`, {
                 method: 'POST'
               })
               .then((response) => {
