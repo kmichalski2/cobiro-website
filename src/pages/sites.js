@@ -22,10 +22,6 @@ const Sites = () => {
         }
     }, [isLoaded])
 
-    useEffect(() => { 
-        console.log(pageData)
-    }, [pageData])
-
     const validateUrl = (url) => {
         const re = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
         if(url.match(re)) {
@@ -49,7 +45,6 @@ const Sites = () => {
                 return response.json();
               })
               .then((response) => {
-                // console.log('DATA from Functions: ', data)
                 setPageData(response.data)
               })
               .catch((error) => console.log('ERROR fetching data: ', error));
