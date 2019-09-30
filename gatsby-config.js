@@ -1,8 +1,20 @@
 require("dotenv").config({
   path: `.env`,
 })
+var proxy = require("http-proxy-middleware");
 
 module.exports = {
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/lambda/",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/lambda/": "",
+        },
+      })
+    )
+  },
   siteMetadata: {
     title: `Cobiro`,
     description: `Cobiro helps businesses grow with AI-powered digital marketing for different channels. We guide you all way through – from creating to optimizing and managing your ads.`,

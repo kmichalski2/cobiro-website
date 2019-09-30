@@ -12,6 +12,7 @@ const Sites = () => {
     const [submission, setSubmission] = useState('');
     const [alert, setAlert] = useState('')
     const [isValidUrl, setIsValidUrl] = useState(false)
+    const [pageData, setPageData] = useState({})
 
     useEffect(() => { 
         if(!isLoaded) {
@@ -20,6 +21,10 @@ const Sites = () => {
             submit(url)
         }
     }, [isLoaded])
+
+    useEffect(() => { 
+        console.log(pageData)
+    }, [pageData])
 
     const validateUrl = (url) => {
         const re = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
@@ -36,6 +41,19 @@ const Sites = () => {
             setSubmission(newUrl)
             setAlert('')
             navigate(`/sites/${newUrl}`)
+
+            fetch(`/.netlify/lambda/sites?url=${newUrl}`, {
+                method: 'POST'
+              })
+              .then((response) => {
+                return response.json();
+              })
+              .then((response) => {
+                // console.log('DATA from Functions: ', data)
+                setPageData(response.data)
+              })
+              .catch((error) => console.log('ERROR fetching data: ', error));
+              
         } else {
             setAlert('The url you typed is not valid')
             setSubmission('')
@@ -74,7 +92,7 @@ const Sites = () => {
                         </div>
                     </form>
 
-                    {submission ? <h1>Hello {submission}</h1> : null}
+                    {pageData ? <h1>{pageData.title}</h1> : null}
                     <p>{alert ? alert : "This is the page you are looking for."}</p>
                     {submission ?
                     <a href={`http://${submission}`} className="btn btn-large">
