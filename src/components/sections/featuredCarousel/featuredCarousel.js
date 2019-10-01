@@ -25,7 +25,7 @@ const FeaturedCarousel = ({ data }) => {
 
   const images = []
 
-  data.slides.slides.map(img => images.push(img.image.fluid));
+  data.slides.slides.map(img => images.push(img.image ? img.image.fluid : null));
   console.log(images);
 
   const clickHandler = index => {
