@@ -19,8 +19,8 @@ const ExplanationImage = ({ data }) => {
 
   const text = (
     <div className="text-padding">
-      <h3 className="">{data.title}</h3>
-      <p>{data.text}</p>
+      {data.title ? <h3 className="">{data.title}</h3> : null}
+      {data.text ? <p>{data.text}</p> : null}
       {data.link ? 
       <Link to={data.link.slug ? data.link.slug : '/'}>{data.linkTitle}</Link>
       : null}
