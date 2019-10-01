@@ -42,6 +42,7 @@ const ThreeUpPeople = ({ data }) => {
                     <h4>{p.name}</h4>
                     <h5>{p.title}</h5>
                   </div>
+                  {p.linkedinLink ? 
                   <Link to={p.linkedinLink} target="_blank">
                     <img
                       className="social-icon"
@@ -49,6 +50,7 @@ const ThreeUpPeople = ({ data }) => {
                       alt="Bo Krogsgaard"
                     />
                   </Link>
+                  : null}
                 </div>
               </div>
               <p className="small text-left-xs people-description">

@@ -26,7 +26,7 @@ const ThreeUpPeople = props => {
                   <h4>{data.box1Title}</h4>
                   <p className="small">{data.box1Text}</p>
                   {data.box1Link ? 
-                  <Link to={data.box1Link ? data.box1Link.slug : '/'} className="small">
+                  <Link to={data.box1Link.slug ? data.box1Link.slug : '/'} className="small">
                   {data.box1LinkText}
                   </Link>
                   : null}
@@ -46,7 +46,7 @@ const ThreeUpPeople = props => {
                   <h4>{data.box2Title}</h4>
                   <p className="small">{data.box2Text}</p>
                   {data.box2Link ?
-                  <Link to={data.box2Link ? data.box2Link.slug : '/'} className="small">
+                  <Link to={data.box2Link.slug ? data.box2Link.slug : '/'} className="small">
                     {data.box2LinkText}
                   </Link>
                   : null }
@@ -66,7 +66,7 @@ const ThreeUpPeople = props => {
                   <h4>{data.box3Title}</h4>
                   <p className="small">{data.box3Text}</p>
                   {data.box3Link ?
-                  <Link to={data.box3Link ? data.box3Link.slug : '/'} className="small">
+                  <Link to={data.box3Link.slug ? data.box3Link.slug : '/'} className="small">
                     {data.box3LinkText}
                   </Link>
                   : null}
