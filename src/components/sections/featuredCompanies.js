@@ -10,7 +10,7 @@ const FeaturedCompanies = ({ data }) => (
         <div className="row center-xs middle-xs text-center">
           <div className="col col-xs-12 section-header">
             <h2>{data.title}</h2>
-            <p>{data.text}</p>
+            {data.text ? <p>{data.text}</p> : null}
           </div>
           {data.logos.map((l, index) => (
             <div key={index} className="customer-logo col col-xs-6 col-md-3">

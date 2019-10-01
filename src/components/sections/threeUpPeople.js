@@ -27,8 +27,8 @@ const ThreeUpPeople = ({ data }) => {
       <div className="container">
         <div className="row center-xs">
           <div className="col col-xs-12 text-center section-header">
-            <h2>{data.title}</h2>
-            <p>{data.text}</p>
+            { data.title ? <h2>{data.title}</h2> : null }
+            { data.text ? <p>{data.text}</p> : null }
           </div>
           {data.people.map((p, index) => (
             <div key={index} className="col col-xs-12 col-md-6 col-lg-4">
@@ -42,6 +42,7 @@ const ThreeUpPeople = ({ data }) => {
                     <h4>{p.name}</h4>
                     <h5>{p.title}</h5>
                   </div>
+                  {p.linkedinLink ? 
                   <Link to={p.linkedinLink} target="_blank">
                     <img
                       className="social-icon"
@@ -49,6 +50,7 @@ const ThreeUpPeople = ({ data }) => {
                       alt="Bo Krogsgaard"
                     />
                   </Link>
+                  : null}
                 </div>
               </div>
               <p className="small text-left-xs people-description">

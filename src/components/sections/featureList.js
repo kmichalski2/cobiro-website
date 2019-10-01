@@ -20,9 +20,13 @@ const FeatureList = ({ data }) => {
             <p>
               {f.text}
             </p>
-            <Link to={f.link.slug} target="_blank">
+            {f.link ?
+              <Link to={f.link.slug ? f.link.slug : '/'} target="_self">
               {f.link.title}
-            </Link>
+              </Link>
+              : null
+            }
+            
           </div>
         </div>
       </div>
