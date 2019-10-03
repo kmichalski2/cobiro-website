@@ -56,12 +56,8 @@ const AccordionFaq = ({ data }) => {
       <div className="container">
         <div className="row">
           <div className="col col-xs-12 text-center section-header">
-            {data.title ? <h2>{data.title}</h2> : null }
-            {data.text ?
-            <p>
-              {data.text}
-            </p>
-            : null }
+            { data.title ? <h2>{data.title}</h2> : null }
+            { data.text ? <p>{data.text}</p> : null }
           </div>
           <div className="col col-xs-12 accordion">
             {accordions.map((acc, index) => (

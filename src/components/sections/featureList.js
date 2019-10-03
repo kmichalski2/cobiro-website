@@ -20,10 +20,8 @@ const FeatureList = ({ data }) => {
         </div>
         <div className="col col-sm-12 col-md-8">
           <div className="text-padding">
-            <h3 className="">{f.title}</h3>
-            <p>
-              {f.text}
-            </p>
+            { f.title ? <h3 className="">{f.title}</h3> : null }
+            { f.text ? <p>{f.text}</p> : null }
             {f.link ?
               <Link to={f.link.slug ? f.link.slug : '/'} target="_self">
               {f.link.title}

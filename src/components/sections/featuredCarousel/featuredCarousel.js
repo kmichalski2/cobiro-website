@@ -39,8 +39,8 @@ const FeaturedCarousel = ({ data }) => {
       <div className="container">
         <div className="row center-xs text-center space-xs-up">
           <div className="col col-xs-12 space-xs-up">
-            <h2>{data.title}</h2>
-            {data.text ? <p>{data.text}</p> : null}
+            { data.title ? <h2>{data.title}</h2> : null }
+            { data.text ? <p>{data.text}</p> : null }
           </div>
         </div>
         <div className="row center-xs">

@@ -21,8 +21,8 @@ const ListPricing = ({ data }) => {
       <div className="container">
         <div className="row">
           <div className="col col-xs-12 text-center section-header">
-            <h2>{data.title}</h2>
-            <p>{data.text}</p>
+            { data.title ? <h2>{data.title}</h2> : null }
+            { data.text ? <p>{data.text}</p> : null }
           </div>
           <div className="col col-xs-12 col-md-6 col-lg-4 col-lg-offset-2">
             <div className="card card-visible flex center list-pricing">
