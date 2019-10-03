@@ -16,9 +16,9 @@ const JumboCta = ({ data }) => (
             >
               {data.linkTitle}
             </Link>
-            : data.external_link ?
+            : data.externalLink ?
             <a
-            href={data.external_link}
+            href={data.externalLink}
             className="btn btn-large space-xs space-sm" target="_blank"
             >
               {data.linkTitle}
