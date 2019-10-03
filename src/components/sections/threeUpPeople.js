@@ -30,19 +30,19 @@ const ThreeUpPeople = ({ data }) => {
           </div>
           {data.people.map((p, index) => (
             <div key={index} className="col col-xs-12 col-md-6 col-lg-4">
-            <div className="card card-visible people">
+            <div className="card people">
               <div className="card-header-wrapper">
                 {p.image.fluid ?
-                <Img fluid={p.image.fluid} className="card-img-large" alt={p.name} />
+                <Img fluid={p.image.fluid} className="card-img-full" alt={p.name} />
                 : 
-                <img src={p.image.url} className="card-img-large" alt={p.name} />
+                <img src={p.image.url} className="card-img-full" alt={p.name} />
                 }
-                <div className="flex middle-xs between-xs space-md-up text-left">
+                <div className="flex middle-xs between-xs text-left">
                   <div>
                     <h4>{p.name}</h4>
                     <h5>{p.title}</h5>
                   </div>
-                  {p.linkedinLink ? 
+                  {/* {p.linkedinLink ? 
                   <Link to={p.linkedinLink} target="_blank">
                     <img
                       className="social-icon"
@@ -50,7 +50,7 @@ const ThreeUpPeople = ({ data }) => {
                       alt="Bo Krogsgaard"
                     />
                   </Link>
-                  : null}
+                  : null} */}
                 </div>
               </div>
               <p className="small text-left-xs people-description">
