@@ -12,8 +12,8 @@ const Quotes = ({ data }) => {
     <div className="container-fluid">
       <div className="row section-header">
         <div className="col col-xs-12 text-center">
-          <h2>{data.title}</h2>
-          <p>{data.text}</p>
+          { data.title ? <h2>{data.title}</h2> : null }
+          { data.text ? <p>{data.text}</p> : null }
         </div>
       </div>
       <div className={[QuoteStyles.cards, "flex"].join(" ")}>
