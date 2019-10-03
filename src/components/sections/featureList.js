@@ -11,7 +11,11 @@ const FeatureList = ({ data }) => {
       <div key={index} className={ [index > 0 ? 'feature-list-border' : null, "row middle-xs section-inner"].join(' ') } >
         <div className="col col-sm-12 col-md-4">
           <div className="img-responsive space-sm space-xs">
+            {f.image.fluid ?
             <Img fluid={f.image.fluid} alt={f.image.alt ? f.image.alt : f.title} />
+            :
+            <img src={f.image.url} alt={f.image.alt ? f.image.alt : f.title} />
+            }
           </div>
         </div>
         <div className="col col-sm-12 col-md-8">

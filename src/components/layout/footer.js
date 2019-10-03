@@ -36,9 +36,9 @@ const Footer = ({ columns }) => {
                  : el.__typename === 'DatoCmsImageElement' ?
                  <a href={el.externalLink}>
                    {el.image.fixed ?
-                    <Img fixed={el.image.fixed} className="footer-image" alt={el.image.alt ? el.image.alt : 'unknown footer image'} />
+                    <Img fixed={el.image.fixed} className="footer-image" alt={el.image.alt ? el.image.alt : 'Footer image'} />
                     :
-                    <img src={el.image.url} className="footer-image" alt={el.image.alt ? el.image.alt : 'unknown footer image'} />
+                    <img src={el.image.url} className="footer-image" alt={el.image.alt ? el.image.alt : 'Footer image'} />
                   }
                   
                  </a>

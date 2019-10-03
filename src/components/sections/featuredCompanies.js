@@ -14,7 +14,11 @@ const FeaturedCompanies = ({ data }) => (
           </div>
           {data.logos.map((l, index) => (
             <div key={index} className="customer-logo col col-xs-6 col-md-3">
+              {l.fixed ?
               <Img fixed={l.fixed} alt={l.alt ? l.alt : `logo ${index + 1}`} />
+              :
+              <img src={l.url} alt={l.alt ? l.alt : `logo ${index + 1}`} />
+              }
             </div>
           ))}
         </div>

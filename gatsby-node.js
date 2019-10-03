@@ -56,6 +56,8 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                   textLeftAlignment
                   image {
+                    path
+                    url
                     alt
                     width
                     height
@@ -113,6 +115,7 @@ exports.createPages = async function({ graphql, actions }) {
                   linkTitle
                   image {
                     alt
+                    url
                     width
                     height
                     fluid(maxWidth: 800) {
@@ -132,6 +135,7 @@ exports.createPages = async function({ graphql, actions }) {
                   person
                   image {
                     alt
+                    url
                     width
                     height
                     fluid(maxWidth: 800) {
@@ -152,6 +156,7 @@ exports.createPages = async function({ graphql, actions }) {
                     alt
                     width
                     height
+                    url
                     fixed(width: 200) {
                       width
                       height
@@ -204,6 +209,8 @@ exports.createPages = async function({ graphql, actions }) {
                       person
                       country
                       flag {
+                        url
+                        alt
                         fixed(width: 24) {
                           base64
                           aspectRatio
@@ -228,6 +235,7 @@ exports.createPages = async function({ graphql, actions }) {
                       icon {
                         path
                         url
+                        alt
                         fixed(width:32) {
                           base64
                           aspectRatio
@@ -238,6 +246,8 @@ exports.createPages = async function({ graphql, actions }) {
                         }
                       }
                       image {
+                        url
+                        alt
                         fluid(maxWidth: 1200) {
                           base64
                           aspectRatio
@@ -285,6 +295,7 @@ exports.createPages = async function({ graphql, actions }) {
                       }
                       image {
                         alt
+                        url
                         fluid(maxWidth: 800) {
                           width
                           srcSet

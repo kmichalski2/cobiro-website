@@ -30,10 +30,17 @@ const Quotes = ({ data }) => {
             <div>
               <p className="small text-bold">{q.person}</p>
               <div className="flex middle-xs">
+                {q.flag.fixed ?
                 <Img fixed={q.flag.fixed}
                   className={QuoteStyles.flag}
-                  alt="flag"
+                  alt={q.flag.alt ? q.flag.alt : 'Flag'}
                 />
+                :
+                <img src={q.flag.url}
+                  className={QuoteStyles.flag}
+                  alt={q.flag.alt ? q.flag.alt : 'Flag'}
+                />
+                }
                 <p className="small">{q.country}</p>
               </div>
             </div>
