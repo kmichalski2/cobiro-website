@@ -270,6 +270,7 @@ exports.createPages = async function({ graphql, actions }) {
                     name
                     image {
                       alt
+                      url
                       fluid(maxWidth: 180) {
                         width
                         height

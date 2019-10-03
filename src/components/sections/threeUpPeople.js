@@ -36,7 +36,9 @@ const ThreeUpPeople = ({ data }) => {
               <div className="card-header-wrapper">
                 {p.image.fluid ?
                 <Img fluid={p.image.fluid} className="card-img-large" alt={p.name} />
-                : null}
+                : 
+                <img src={p.image.url} className="card-img-large" alt={p.name} />
+                }
                 <div className="flex middle-xs between-xs space-md-up text-left">
                   <div>
                     <h4>{p.name}</h4>
