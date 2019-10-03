@@ -5,7 +5,6 @@ import Img from "gatsby-image"
 
 
 const ThreeUpPeople = ({ data }) => {
-  console.log('Three up people data: ', data)
   const peopleClickHandler = event => {
     const el = event.target
     const text = el.previousElementSibling
@@ -18,7 +17,6 @@ const ThreeUpPeople = ({ data }) => {
       el.innerText = "Hide full profile"
       text.style.maxHeight = textHeight + "px"
     }
-    console.log(text, textHeight)
     el.parentNode.classList.toggle("expand")
   }
 

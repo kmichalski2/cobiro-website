@@ -8,8 +8,8 @@ const JumboCta = ({ data }) => (
       <div className="container">
         <div className="row center-xs text-center">
           <div className="col col-xs-12">
-            <h2>{data.title}</h2>
-            <p>{data.text}</p>
+            { data.title ? <h2>{data.title}</h2> : null }
+            { data.text ? <p>{data.text}</p> : null }
             {data.link ? 
             <Link
             to={data.link.slug ? data.link.slug : '/'}

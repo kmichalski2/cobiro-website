@@ -6,8 +6,8 @@ const FeaturedTestimonialsSingle = ({ data }) => (
     <div className="container">
       <div className="row middle-xs">
         <div className="col col-xs-12 col-md-6 space-xs space-sm">
-          <h4>{data.quote}</h4>
-          <p className="small">{data.person}</p>
+          { data.quote ? <h4>{data.quote}</h4> : null }
+          { data.person ? <p className="small">{data.person}</p> : null}
         </div>
         <div className="col col-xs-12 col-md-6">
           {data.image.fluid ?
