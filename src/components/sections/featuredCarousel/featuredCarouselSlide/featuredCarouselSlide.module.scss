@@ -31,13 +31,14 @@ li.slide {
     img.arrow {
         right: -2rem;
         width: 1rem;
+        transform: translateY(-50%) scaleY(-1);
     }
     
     &.active {
         background-color: rgba($blue, 0.1);
 
         img.arrow {
-            transform: translateY(-50%) scaleY(-1);
+            transform: translateY(-50%) scaleY(1);
             transition: transform 0.2s ease;
         }
     }
