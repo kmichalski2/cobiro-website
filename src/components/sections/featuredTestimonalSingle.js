@@ -10,11 +10,19 @@ const FeaturedTestimonialsSingle = ({ data }) => (
           <p className="small">{data.person}</p>
         </div>
         <div className="col col-xs-12 col-md-6">
+          {data.image.fluid ?
           <Img
             fluid={data.image.fluid}
             className="testimonial-image"
             alt={data.image.alt ? data.image.alt : data.title}
           />
+          :
+          <img
+            src={data.image.url}
+            className="testimonial-image"
+            alt={data.image.alt ? data.image.alt : data.title}
+          />
+          }
         </div>
       </div>
     </div>

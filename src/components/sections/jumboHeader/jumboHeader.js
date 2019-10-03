@@ -26,11 +26,17 @@ const JumboHeader = props => {
 
   const imageSide = (
     <div className="col col-xs-12 col-md-6">
+      {data.image.fluid ?
       <Img
-        fluid={data.image.fluid}
-        className="img-responsive img-full-width"
-        alt={data.image.alt ? data.image.alt : data.heading}
+      fluid={data.image.fluid}
+      className="img-responsive img-full-width"
+      alt={data.image.alt ? data.image.alt : data.heading}
       />
+      : 
+      <img src={data.image.url} 
+        className="img-responsive img-full-width"
+        alt={data.image.alt ? data.image.alt : data.heading} />
+      }
     </div> 
   )
   

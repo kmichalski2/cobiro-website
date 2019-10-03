@@ -25,9 +25,8 @@ const FeaturedCarousel = ({ data }) => {
 
   const images = []
 
-  data.slides.slides.map(img => images.push(img.image ? img.image.fluid : null));
+  data.slides.slides.map(img => images.push(img.image ? img.image : null));
   console.log(images);
-
   const clickHandler = index => {
     if (index !== activeSlide) {
       setActiveSlide(index)
@@ -59,6 +58,7 @@ const FeaturedCarousel = ({ data }) => {
                   title={el.title}
                   text={el.text}
                   icon={el.icon.fixed ? el.icon.fixed : el.icon.url}
+                  iconAlt={el.icon.alt ? el.icon.alt : 'Carousel icon'}
                   key={index}
                 />
               ))}
@@ -66,10 +66,17 @@ const FeaturedCarousel = ({ data }) => {
           </div>
           <div className="col col-xs-12 col-lg-8">
             {!animate ? (
+              images[activeSlide].fluid ?
               <Img
-                fluid={images[activeSlide]}
+                fluid={images[activeSlide].fluid}
                 className={FeaturedCarouselStyles.image}
-                alt=""
+                alt={images[activeSlide].alt ? images[activeSlide].alt : 'Carousel image'}
+              />
+              :
+              <img
+                src={images[activeSlide].url}
+                className={FeaturedCarouselStyles.image}
+                alt={images[activeSlide].alt ? images[activeSlide].alt : 'Carousel image'}
               />
             ) : null}
           </div>
