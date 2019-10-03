@@ -6,14 +6,18 @@ const ExplanationImage = ({ data }) => {
 
   const image = (
     <div className="img-responsive space-sm space-xs">
-      <Img
+      {data.image.fluid ?
+        <Img
         fluid={data.image.fluid}
         alt={data.image.alt ? data.image.alt : data.title}
-        // style={{
-        //   width: data.imageToEdge ? "50vw" : "",
-        //   maxWidth: data.imageToEdge ? "none" : "",
-        // }}
-      />
+        />
+        :
+        <img
+        src={data.image.url}
+        alt={data.image.alt ? data.image.alt : data.title}
+        />
+        }
+      
     </div>
   )
 
@@ -24,7 +28,6 @@ const ExplanationImage = ({ data }) => {
       {data.link ? 
       <Link to={data.link.slug ? data.link.slug : '/'}>{data.linkTitle}</Link>
       : null}
-      
     </div>
   )
 
