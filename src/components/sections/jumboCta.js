@@ -1,6 +1,5 @@
 import { Link } from "gatsby"
 import React from "react"
-import splash from "../../images/jumbocta-splash.png"
 
 const JumboCta = ({ data }) => (
   <section className="section" style={{ position: "relative" }}>
@@ -17,23 +16,18 @@ const JumboCta = ({ data }) => (
             >
               {data.linkTitle}
             </Link>
-            : null}
+            : data.externalLinkCta ?
+            <a
+            href={data.externalLinkCta}
+            className="btn btn-large space-xs space-sm" target="_blank"
+            >
+              {data.linkTitle}
+            </a>
+            : null }
           </div>
         </div>
       </div>
     </div>
-    <img
-      src={splash}
-      alt="splash background"
-      style={{
-        width: "400px",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-40%, -55%)",
-        zIndex: 0,
-      }}
-    />
   </section>
 )
 
