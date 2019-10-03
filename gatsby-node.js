@@ -184,7 +184,7 @@ exports.createPages = async function({ graphql, actions }) {
                   link {
                     slug
                   }
-                  externalLink
+                  externalLinkCta
                 }
                 ... on DatoCmsListPricing {
                   title
