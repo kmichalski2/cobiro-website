@@ -59,12 +59,13 @@ const FeaturedCarousel = ({ data }) => {
                   text={el.text}
                   icon={el.icon.fixed ? el.icon.fixed : el.icon.url}
                   iconAlt={el.icon.alt ? el.icon.alt : 'Carousel icon'}
+                  image={el.image}
                   key={index}
                 />
               ))}
             </ul>
           </div>
-          <div className="col col-xs-12 col-lg-8">
+          <div className="col col-xs-12 col-lg-8 hidden-xs hidden-sm hidden-md">
             {!animate ? (
               images[activeSlide].fluid ?
               <Img

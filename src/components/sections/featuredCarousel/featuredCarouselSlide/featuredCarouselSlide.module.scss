@@ -1,5 +1,16 @@
 @import '../../../layout/style/globals';
 
+@keyframes img-animate {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 li.slide {
     padding: 2.5rem 5rem;
     padding-right: 4rem;
@@ -14,7 +25,7 @@ li.slide {
     h4 {
         position: relative;
     }
-    img {
+    img.icon, img.arrow {
         position: absolute;
         transform: translateY(-50%);
         top: 50%;
@@ -41,5 +52,10 @@ li.slide {
             transform: translateY(-50%) scaleY(1);
             transition: transform 0.2s ease;
         }
+        .animate {
+            animation: img-animate 0.4s ease 0s;
+        }
+        
     }
+    
 }
