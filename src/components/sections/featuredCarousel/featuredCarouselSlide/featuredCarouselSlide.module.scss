@@ -12,10 +12,23 @@
 }
 
 li.slide {
-    padding: 2.5rem 5rem;
-    padding-right: 4rem;
+    
     @include borderradius;
     cursor: pointer;
+    // @include mq($from: lg) {
+
+    // }
+
+    .slideWrapper {
+        padding: 2.5rem 5rem;
+        padding-right: 4rem;
+
+        @include mq($until: lg) {
+            padding-bottom: 0;
+            margin-bottom: 2.5rem;
+        }
+    }
+
 
     .text {
         transition: max-height 0.4s ease;
@@ -44,7 +57,11 @@ li.slide {
         width: 1rem;
         transform: translateY(-50%) scaleY(-1);
     }
-    
+    .imageWrapper {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
     &.active {
         background-color: rgba($blue, 0.1);
 

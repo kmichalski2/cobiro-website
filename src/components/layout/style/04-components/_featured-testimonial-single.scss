@@ -25,3 +25,8 @@
 
 
 }
+@include mq($from: lg) {
+	.testimonial-text-wrapper {
+		padding: 2.5rem;
+	}
+}
