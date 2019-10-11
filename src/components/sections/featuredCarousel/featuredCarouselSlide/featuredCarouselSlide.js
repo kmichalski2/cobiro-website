@@ -17,6 +17,7 @@ const FeaturedCarouselSlide = props => {
         FeaturedCarouselSlideStyles.slide,
       ].join(" ")}
     >
+      <div className={FeaturedCarouselSlideStyles.slideWrapper}>
       <h4>
         <img
           src={props.icon}
@@ -37,10 +38,12 @@ const FeaturedCarouselSlide = props => {
             : [FeaturedCarouselSlideStyles.text, "slide-text"].join(" ")
         }
       >
-        <div>
+        
           <p className="small">{props.text}</p>
+          </div>
+          </div>
           {props.active ? 
-          <div className="hidden-lg hidden-xl">
+          <div className={[FeaturedCarouselSlideStyles.imageWrapper, "hidden-lg hidden-xl"].join(' ')}>
           {props.image.fluid ?
             <Img
               fluid={props.image.fluid}
@@ -55,8 +58,7 @@ const FeaturedCarouselSlide = props => {
             />}
             </div>
             : null }
-          </div>
-        </div>
+        {/* </div> */}
     </li>
   )
 }
