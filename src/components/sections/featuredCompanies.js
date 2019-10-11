@@ -12,15 +12,16 @@ const FeaturedCompanies = ({ data }) => (
             { data.title ? <h2>{data.title}</h2> : null }
             { data.text ? <p>{data.text}</p> : null }
           </div>
+          <div className="col col-xs-12 col-lg-8">
           {data.logos.map((l, index) => (
-            <div key={index} className="customer-logo col col-xs-6 col-md-3">
-              {l.fixed ?
-              <Img fixed={l.fixed} alt={l.alt ? l.alt : `logo ${index + 1}`} />
+
+              l.fixed ?
+              <Img key={index} className="customer-logo" fixed={l.fixed} alt={l.alt ? l.alt : `logo ${index + 1}`} />
               :
               <img src={l.url} alt={l.alt ? l.alt : `logo ${index + 1}`} />
-              }
-            </div>
+              
           ))}
+          </div>
         </div>
       </div>
     </div>
