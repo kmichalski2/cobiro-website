@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import JumboHeader from "../components/sections/jumboHeader/jumboHeader"
-import ThreeUpPeople from "../components/sections/threeUpPeople"
+import ThreeUpPeople from "./sections/threeUpPeople/threeUpPeople"
 import ThreeUp from "../components/sections/threeUp"
 import AccordionFaq from "../components/sections/accordionFaq"
 import ExplanationImage from "../components/sections/explanationImage"
@@ -12,12 +12,11 @@ import FeaturedTestimonialsSingle from "../components/sections/featuredTestimona
 import JumboCta from "../components/sections/jumboCta"
 import ListPricing from "../components/sections/listPricing"
 import Quotes from "../components/sections/quotes/quotes"
-import Text from "../components/sections/text"
+import Text from "./sections/text/text"
 import Video from "../components/sections/video/video"
 import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel"
 
 const pageContent = ({ data }) => {
-  console.log('page data: ', data)
   return (
     <Layout>
       <SEO title={ data.seoTags ==! null ? data.seoTags.title : data.title } description={data.seoTags ==! null ? data.seoTags.description : null} />

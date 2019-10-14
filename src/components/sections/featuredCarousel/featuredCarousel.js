@@ -7,7 +7,6 @@ import Img from "gatsby-image"
 
 const FeaturedCarousel = ({ data }) => {
 
-  console.log(data);
   const [activeSlide, setActiveSlide] = useState(0)
   const [animate, setAnimate] = useState(true)
 
@@ -26,7 +25,6 @@ const FeaturedCarousel = ({ data }) => {
   const images = []
 
   data.slides.slides.map(img => images.push(img.image ? img.image : null));
-  console.log(images);
   const clickHandler = index => {
     if (index !== activeSlide) {
       setActiveSlide(index)

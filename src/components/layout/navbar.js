@@ -4,7 +4,6 @@ import logo from "../../images/logo.svg"
 import Img from "gatsby-image"
 
 const Navbar = ({ menuItems }) => {
-  console.log('Navbar items: ', menuItems);
   useEffect(() => {
     // Initial variables
     const body = document.querySelector("BODY")
