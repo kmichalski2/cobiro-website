@@ -115,8 +115,8 @@ const Navbar = ({ menuItems }) => {
                 {menuItems.sort(function (a, b) {
                     return a.menu_item_order - b.menu_item_order;
                   }).map((item, index) => (
-                  <li key={index} className="submenu-parent">
-                  <Link className="active has-submenu" to={`/${item.link.slug}`} target="_self">
+                  <li key={index} className={item.submenu.length > 0 ? "submenu-parent" : null}>
+                  <Link className={item.submenu.length > 0 ? 'has-submenu' : null } activeClassName="active" to={item.link ? `/${item.link.slug}` : '#'} target="_self">
                     {item.linkTitle}
                   </Link>
                   {item.submenu.length > 0 ?
