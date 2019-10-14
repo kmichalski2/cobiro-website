@@ -9,7 +9,6 @@ import Img from "gatsby-image"
 
 
 const Footer = ({ columns }) => {
-  console.log('Footer data: ', columns);
   return (
   <footer style={{ backgroundImage: `url(${background})` }}>
     <div className="container">

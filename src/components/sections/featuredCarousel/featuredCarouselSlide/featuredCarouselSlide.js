@@ -8,7 +8,6 @@ import Img from "gatsby-image"
 
 
 const FeaturedCarouselSlide = props => {
-  console.log('slide image: ', props.image)
   return (
     <li
       onClick={props.click}

@@ -1,0 +1,15 @@
+@import '../../layout/style/globals';
+
+.image {
+    border-radius: 20px;
+}
+@include mq($from: lg) {
+    .image {
+        margin-bottom: 1rem;
+    }
+}
+@include mq($until: md) {
+    .textWrapper {
+        margin-left: 1rem;
+    }
+}
