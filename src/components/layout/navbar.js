@@ -125,7 +125,7 @@ const Navbar = ({ menuItems }) => {
                       <div className="row">
                         {item.submenu.map((sub, index) => (
                           <div key={index} className="col col-xs-12 col-lg-3 has-subsubmenu">
-                          <Link className="submenu-title" to={sub.slug ? sub.slug : '/'} target="_self">
+                          <Link className="submenu-title" to={sub.link.slug ? sub.link.slug : '/'} target="_self">
                             {sub.icon.fixed ==! null ?
                             <Img fixed={sub.icon.fixed} alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
                             :
