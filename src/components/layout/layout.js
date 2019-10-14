@@ -91,7 +91,7 @@ const Layout = ({ children }) => {
       }
     }
   `)
-
+  
   return (
     <>
       <Navbar menuItems={data.allDatoCmsMenu.nodes} />
