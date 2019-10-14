@@ -6,7 +6,6 @@ import Img from "gatsby-image"
 
 
 const Quotes = ({ data }) => {
-  console.log('quotes data: ', data);
   return (
   <section className="section">
     <div className="container-fluid">

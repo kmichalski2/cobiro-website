@@ -19,7 +19,7 @@ const ThreeUpPeople = props => {
               <div className="card card-visible">
                 <img
                   src={data.box1Icon.url}
-                  className="three-up-icon"
+                  className="three-up-icon space-xs-up"
                   alt={data.box1Icon.alt ? data.box1Icon.alt : data.box1Title}
                 />
                 <div className="text-left text-center-md">
@@ -39,7 +39,7 @@ const ThreeUpPeople = props => {
               <div className="card card-visible">
                 <img
                   src={data.box2Icon.url}
-                  className="three-up-icon"
+                  className="three-up-icon space-xs-up"
                   alt={data.box2Icon.alt ? data.box2Icon.alt : data.box2Title}
                 />
                 <div className="text-left text-center-md">
@@ -59,7 +59,7 @@ const ThreeUpPeople = props => {
               <div className="card card-visible">
                 <img
                   src={data.box3Icon.url}
-                  className="three-up-icon"
+                  className="three-up-icon space-xs-up"
                   alt={data.box3Icon.alt ? data.box3Icon.alt : data.box3Title}
                 />
                 <div className="text-left text-center-md">

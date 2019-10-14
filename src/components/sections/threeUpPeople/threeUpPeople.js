@@ -1,7 +1,8 @@
 import { Link } from "gatsby"
 import React from "react"
-import linkedin from "../../images/linkedin.svg"
+// import linkedin from "../../images/linkedin.svg"
 import Img from "gatsby-image"
+import ThreeUpPeopleStyles from "./threeUpPeople.module.scss"
 
 
 const ThreeUpPeople = ({ data }) => {
@@ -33,11 +34,11 @@ const ThreeUpPeople = ({ data }) => {
             <div className="card people">
               <div className="card-header-wrapper">
                 {p.image.fluid ?
-                <Img fluid={p.image.fluid} className="card-img-full" alt={p.name} />
+                <Img fluid={p.image.fluid} className={[ThreeUpPeopleStyles.image, "card-img-full"].join(' ')} alt={p.name} />
                 : 
-                <img src={p.image.url} className="card-img-full" alt={p.name} />
+                <img src={p.image.url} className={[ThreeUpPeopleStyles.image, "card-img-full"].join(' ')} alt={p.name} />
                 }
-                <div className="flex middle-xs between-xs text-left">
+                <div className={[ThreeUpPeopleStyles.textWrapper, "flex middle-xs between-xs text-left"].join(' ')}>
                   <div>
                     <h4>{p.name}</h4>
                     <h5>{p.title}</h5>

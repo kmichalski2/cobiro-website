@@ -6,7 +6,6 @@ import JumboHeaderStyles from "./jumboHeader.module.scss"
 
 const JumboHeader = props => {
   const data = props.data
-  console.log('jumbo data: ', data)
   const textSide = (
     <div className="col col-xs-12 col-md-6 text-left-md">
       <div className={[JumboHeaderStyles.text, "text-padding"].join(" ")}>
