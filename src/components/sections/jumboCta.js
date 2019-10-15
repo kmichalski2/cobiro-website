@@ -2,8 +2,8 @@ import { Link } from "gatsby"
 import React from "react"
 
 const JumboCta = ({ data }) => (
-  <section className="section" style={{ position: "relative" }}>
-    <div className="section-inner" style={{ position: "relative", zIndex: 1 }}>
+  <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')} style={{ position: "relative" }}>
+    <div className={[data.backgroundColor ? "bg-sway-inner" : null, "section-inner"].join(' ')} style={{ position: "relative", zIndex: 1 }}>
       <div className="container">
         <div className="row center-xs text-center">
           <div className="col col-xs-12">

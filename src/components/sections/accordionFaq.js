@@ -52,31 +52,33 @@ const AccordionFaq = ({ data }) => {
   }
 
   return (
-    <section className="section accordion">
-      <div className="container">
-        <div className="row">
-          <div className="col col-xs-12 text-center section-header">
-            { data.title ? <h2>{data.title}</h2> : null }
-            { data.text ? <p>{data.text}</p> : null }
-          </div>
-          <div className="col col-xs-12 accordion">
-            {accordions.map((acc, index) => (
-            <div key={index} className="card card-visible text-left">
-              <div className="flex between-xs middle-xs accordion-header">
-                <h5>{acc.title}</h5>
-                <button
-                  className="btn btn-accordion btn-toggle btn-secondary"
-                  onClick={accordionClickHandler}
-                  aria-label="Expand accordion panel"
-                >
-                  <span>+</span>
-                </button>
-              </div>
-              <div className="small accordion-text">
-                {acc.text}
-              </div>
-            </div> 
-            ))}      
+    <section className={[data.backgroundColor ? "bg-sway" : null, "section accordion"].join(' ')}>
+      <div className={data.backgroundColor ? "bg-sway-inner" : null}>
+        <div className="container">
+          <div className="row">
+            <div className="col col-xs-12 text-center section-header">
+              { data.title ? <h2>{data.title}</h2> : null }
+              { data.text ? <p>{data.text}</p> : null }
+            </div>
+            <div className="col col-xs-12 accordion">
+              {accordions.map((acc, index) => (
+              <div key={index} className="card card-visible text-left">
+                <div className="flex between-xs middle-xs accordion-header">
+                  <h5>{acc.title}</h5>
+                  <button
+                    className="btn btn-accordion btn-toggle btn-secondary"
+                    onClick={accordionClickHandler}
+                    aria-label="Expand accordion panel"
+                  >
+                    <span>+</span>
+                  </button>
+                </div>
+                <div className="small accordion-text">
+                  {acc.text}
+                </div>
+              </div> 
+              ))}      
+            </div>
           </div>
         </div>
       </div>

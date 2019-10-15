@@ -33,51 +33,53 @@ const FeaturedCarousel = ({ data }) => {
   }
 
   return (
-    <section className="section">
-      <div className="container">
-        <div className="row center-xs text-center space-xs-up">
-          <div className="col col-xs-12 space-xs-up">
-            { data.title ? <h2>{data.title}</h2> : null }
-            { data.text ? <p>{data.text}</p> : null }
+    <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
+      <div className={data.backgroundColor ? "bg-sway-inner" : null}>
+        <div className="container">
+          <div className="row center-xs text-center space-xs-up">
+            <div className="col col-xs-12 space-xs-up">
+              { data.title ? <h2>{data.title}</h2> : null }
+              { data.text ? <p>{data.text}</p> : null }
+            </div>
           </div>
-        </div>
-        <div className="row center-xs">
-          <div
-            className={[
-              FeaturedCarouselStyles.carousel,
-              "col col-xs-12 col-lg-4 space-xs-up",
-            ].join(" ")}
-          >
-            <ul className="list-unstyled">
-              {data.slides.slides.map((el, index) => (
-                <FeaturedCarouselSlide
-                  click={() => clickHandler(index)}
-                  active={activeSlide === index ? true : false}
-                  title={el.title}
-                  text={el.text}
-                  icon={el.icon.fixed ? el.icon.fixed : el.icon.url}
-                  iconAlt={el.icon.alt ? el.icon.alt : 'Carousel icon'}
-                  image={el.image}
-                  key={index}
+          <div className="row center-xs">
+            <div
+              className={[
+                FeaturedCarouselStyles.carousel,
+                "col col-xs-12 col-lg-4 space-xs-up",
+              ].join(" ")}
+            >
+              <ul className="list-unstyled">
+                {data.slides.slides.map((el, index) => (
+                  <FeaturedCarouselSlide
+                    click={() => clickHandler(index)}
+                    active={activeSlide === index ? true : false}
+                    title={el.title}
+                    text={el.text}
+                    icon={el.icon.fixed ? el.icon.fixed : el.icon.url}
+                    iconAlt={el.icon.alt ? el.icon.alt : 'Carousel icon'}
+                    image={el.image}
+                    key={index}
+                  />
+                ))}
+              </ul>
+            </div>
+            <div className="col col-xs-12 col-lg-8 hidden-xs hidden-sm hidden-md">
+              {!animate ? (
+                images[activeSlide].fluid ?
+                <Img
+                  fluid={images[activeSlide].fluid}
+                  className={FeaturedCarouselStyles.image}
+                  alt={images[activeSlide].alt ? images[activeSlide].alt : 'Carousel image'}
                 />
-              ))}
-            </ul>
-          </div>
-          <div className="col col-xs-12 col-lg-8 hidden-xs hidden-sm hidden-md">
-            {!animate ? (
-              images[activeSlide].fluid ?
-              <Img
-                fluid={images[activeSlide].fluid}
-                className={FeaturedCarouselStyles.image}
-                alt={images[activeSlide].alt ? images[activeSlide].alt : 'Carousel image'}
-              />
-              :
-              <img
-                src={images[activeSlide].url}
-                className={FeaturedCarouselStyles.image}
-                alt={images[activeSlide].alt ? images[activeSlide].alt : 'Carousel image'}
-              />
-            ) : null}
+                :
+                <img
+                  src={images[activeSlide].url}
+                  className={FeaturedCarouselStyles.image}
+                  alt={images[activeSlide].alt ? images[activeSlide].alt : 'Carousel image'}
+                />
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

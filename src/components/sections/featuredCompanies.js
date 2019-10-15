@@ -3,9 +3,9 @@ import Img from "gatsby-image"
 // import splash from "../../images/left-splash.png"
 
 const FeaturedCompanies = ({ data }) => (
-  <section className="section" style={{ position: "relative" }}>
+  <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')} style={{ position: "relative" }}>
     {/* <img src={splash} className="splash-left" alt="splash left" /> */}
-    <div className="section-inner">
+    <div className={[data.backgroundColor ? "bg-sway-inner" : null, "section-inner"].join(' ')}>
       <div className="container">
         <div className="row center-xs middle-xs text-center">
           <div className="col col-xs-12 section-header">
