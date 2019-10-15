@@ -32,14 +32,16 @@ const ExplanationImage = ({ data }) => {
   )
 
   return (
-    <section className="section">
-      <div className="container">
-        <div className="row middle-xs reverse">
-          <div className={[data.leftText ? "last-xs last-sm first-md first-lg first-xl" : null, "col col-sm-12 col-md-6"].join(' ')}>
-            {data.leftText ? text : image}
-          </div>
-          <div className="col col-sm-12 col-md-6">
-            {data.leftText ? image : text}
+    <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
+      <div className={data.backgroundColor ? "bg-sway-inner" : null}>
+        <div className="container">
+          <div className="row middle-xs reverse">
+            <div className={[data.leftText ? "last-xs last-sm first-md first-lg first-xl" : null, "col col-sm-12 col-md-6"].join(' ')}>
+              {data.leftText ? text : image}
+            </div>
+            <div className="col col-sm-12 col-md-6">
+              {data.leftText ? image : text}
+            </div>
           </div>
         </div>
       </div>

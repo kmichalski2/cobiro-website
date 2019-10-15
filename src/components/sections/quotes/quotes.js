@@ -7,8 +7,8 @@ import Img from "gatsby-image"
 
 const Quotes = ({ data }) => {
   return (
-  <section className="section">
-    <div className="container-fluid">
+  <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
+    <div className={[data.backgroundColor ? "bg-sway-inner" : null, "container-fluid"].join(' ')}>
       <div className="row section-header">
         <div className="col col-xs-12 text-center">
           { data.title ? <h2>{data.title}</h2> : null }

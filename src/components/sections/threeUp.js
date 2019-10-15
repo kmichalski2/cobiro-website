@@ -4,7 +4,8 @@ import React from "react"
 const ThreeUpPeople = props => {
   const data = props.data
   return (
-    <section className="section">
+    <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
+      <div className={data.backgroundColor ? "bg-sway-inner" : null}>
       <div className="container">
         <div className="row center-xs">
           {data.title || data.text ? (
@@ -75,6 +76,7 @@ const ThreeUpPeople = props => {
             </div>
           ) : null}
         </div>
+      </div>
       </div>
     </section>
   )
