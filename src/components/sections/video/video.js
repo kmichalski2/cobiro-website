@@ -4,7 +4,8 @@ import VideoStyles from "./video.module.scss"
 import splash from "../../../images/video-splash-left.png"
 
 const Video = ({ data }) => (
-  <section className="section relative">
+  <section className={[data.backgroundColor ? "bg-sway" : null, "section relative"].join(' ')}>
+    <div className={data.backgroundColor ? "bg-sway-inner" : null}>
     <div className="container">
       <div className="row center-xs">
         <div className="col col-xs-12">
@@ -24,6 +25,7 @@ const Video = ({ data }) => (
           </div>
         </div>
       </div>
+    </div>
     </div>
     <img src={splash} className={VideoStyles.splash} alt="splash" />
   </section>

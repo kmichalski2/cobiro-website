@@ -48,22 +48,25 @@ const JumboHeader = props => {
             ? JumboHeaderStyles.textLeft
             : JumboHeaderStyles.textRight,
           "section-inner",
+          data.backgroundColor ? 'bg-sway' : null
         ].join(" ")}
       >
-        <div className="container">
-          <div
-            className={[
-              props.imageToBottom ? "bottom-xs" : "middle-xs",
-              "row",
-            ].join(" ")}
-          >
-            {data.textLeftAlignment ? textSide : imageSide}
-            {data.textLeftAlignment ? imageSide : textSide}
+        <div className={data.backgroundColor ? "bg-sway-inner" : null}>
+          <div className="container">
+            <div
+              className={[
+                props.imageToBottom ? "bottom-xs" : "middle-xs",
+                "row",
+              ].join(" ")}
+            >
+              {data.textLeftAlignment ? textSide : imageSide}
+              {data.textLeftAlignment ? imageSide : textSide}
+            </div>
           </div>
+          {/* { props.textAlignment === 'left' ? swayHighLeft : swayHighRight } */}
         </div>
-        {/* { props.textAlignment === 'left' ? swayHighLeft : swayHighRight } */}
-      </div>
       {/* { props.jumboFooter ? jumboFooter : null }		 */}
+      </div>
     </section>
   )
 }

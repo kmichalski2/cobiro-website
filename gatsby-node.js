@@ -42,6 +42,7 @@ exports.createPages = async function({ graphql, actions }) {
               sections {
                 __typename
                 ... on DatoCmsJumboHeader {
+                  backgroundColor
                   id
                   text
                   linkTitle
@@ -73,6 +74,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsThreeUp {
+                  backgroundColor
                   title
                   text
                   box1Icon {
@@ -107,6 +109,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsExplanationWImage {
+                  backgroundColor
                   title
                   text
                   link {
@@ -131,6 +134,7 @@ exports.createPages = async function({ graphql, actions }) {
                   leftText
                 }
                 ... on DatoCmsFeaturedTestimonialsSingle {
+                  backgroundColor
                   quote
                   person
                   image {
@@ -150,6 +154,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsFeaturedCompany {
+                  backgroundColor
                   title
                   text
                   logos {
@@ -168,6 +173,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsText {
+                  backgroundColor
                   title
                   text
                   backgroundImage {
@@ -175,9 +181,11 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsVideo {
+                  backgroundColor
                   videoEmbedUrl
                 }
                 ... on DatoCmsCtaJumbo {
+                  backgroundColor
                   title
                   text
                   linkTitle
@@ -187,6 +195,7 @@ exports.createPages = async function({ graphql, actions }) {
                   externalLinkCta
                 }
                 ... on DatoCmsListPricing {
+                  backgroundColor
                   title
                   text
                   tier1Title
@@ -203,6 +212,7 @@ exports.createPages = async function({ graphql, actions }) {
                   tier2Features
                 }
                 ... on DatoCmsQuote {
+                  backgroundColor
                   title
                   text
                   quotes {
@@ -227,6 +237,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsFeaturedCarousel {
+                  backgroundColor
                   title
                   text
                   slides {
@@ -263,6 +274,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsThreeUpPerson {
+                  backgroundColor
                   title
                   text
                   people {
@@ -286,6 +298,7 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                 }
                 ... on DatoCmsFeatureList {
+                  backgroundColor
                   features {
                     title
                     features {
@@ -312,6 +325,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsAccordionfaq {
+                  backgroundColor
                   title
                   text
                   accordion {
