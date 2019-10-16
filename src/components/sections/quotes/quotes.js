@@ -27,7 +27,7 @@ const Quotes = ({ data }) => {
         breakpoints={{
           1500: {
             slidesPerPage: 3,
-          },
+          }, 
           1500: {
             slidesPerPage: 3,
           },
