@@ -1,11 +1,12 @@
 import React from "react"
 import QuoteStyles from "./quotes.module.scss"
 import placeholderImage from "../../../images/placeholder_round.svg"
-import placeholderFlag from "../../../images/placeholder_flag.png"
 import Img from "gatsby-image"
-
+import Carousel from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
 
 const Quotes = ({ data }) => {
+
   return (
   <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
     <div className={[data.backgroundColor ? "bg-sway-inner" : null, "container-fluid"].join(' ')}>
@@ -15,7 +16,33 @@ const Quotes = ({ data }) => {
           { data.text ? <p>{data.text}</p> : null }
         </div>
       </div>
-      <div className={[QuoteStyles.cards, "flex"].join(" ")}>
+      <Carousel 
+        offset={32} 
+        slidesPerPage={4}
+        centered={false} 
+        stopAutoPlayOnHover={false} 
+        animationSpeed={8000} 
+        autoPlay={8000} 
+        infinite={true}
+        breakpoints={{
+          1500: {
+            slidesPerPage: 3,
+          },
+          1500: {
+            slidesPerPage: 3,
+          },
+          1200: {
+            slidesPerPage: 2,
+          },
+          650: {
+            slidesPerPage: 1,
+            animationSpeed: 1000,
+            autoPlay: 3000,
+            offset: 0,
+            centered: true,
+          },
+        }}
+        className={[QuoteStyles.cards, QuoteStyles.slider].join(" ")}>
         {data.quotes.quotes.map((q, index) => (
           <div
           key={index}
@@ -49,7 +76,7 @@ const Quotes = ({ data }) => {
           </p>
         </div>
         ))}    
-      </div>
+      </Carousel>
     </div>
   </section>
 )}
