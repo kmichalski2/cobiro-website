@@ -1,10 +1,12 @@
+@import '../../layout/style/globals';
+
 .cards {
     width: 100vw;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    overflow: -moz-scrollbars-none;
-    -ms-overflow-style: none;
-    padding: 2rem 0;
+    // flex-wrap: nowrap;
+    // overflow-x: scroll;
+    // overflow: -moz-scrollbars-none;
+    // -ms-overflow-style: none;
+    // padding: 2rem 0;
 
     &::-webkit-scrollbar { width: 0 !important }
 
@@ -16,11 +18,15 @@
     }
 
     .quote {
-        width: 440px;
-        max-width: 80%;
-        flex-shrink: 0;
-        flex-grow: 1;
-        margin: 0 1.1rem;
+        // width: 440px;
+        // max-width: 80%;
+        // flex-shrink: 0;
+        // flex-grow: 1;
+        // margin: 0 1.1rem;
+        box-sizing: border-box;
+        @include mq($until: lg) {
+            display: block;
+        }
 
         img {
             margin: 0;
@@ -38,4 +44,11 @@
             margin: 0;
         }
     }
+}
+.slider>div>ul {
+        transition-timing-function: linear, linear !important;
+
+        &>li {
+            align-items: flex-start !important;
+        }
 }
