@@ -17,14 +17,15 @@ exports.handler =  function sites(event, context, callback) {
       .then(response =>
         callback(null, {
           statusCode: 200,
-          body: JSON.stringify({ data: response.data }),
+          body: JSON.stringify({ data: response.data, status: 200 }),
         }),
       )
       .catch((error) => {
         callback(null, {
           statusCode: 500,
           body: JSON.stringify({
-            data: 'Kunne ikke hente data.',
+            data: 'Error fetching data',
+            status: 500
           }),
         });
     });   

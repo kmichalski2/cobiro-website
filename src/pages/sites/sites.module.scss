@@ -1,0 +1,114 @@
+@import '../../components/layout/style/globals';
+
+@keyframes card-animation {
+    0% {
+        transform: scaleY(0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+@keyframes stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg) translate(-50%, -50%);
+    }
+    to {
+      transform: rotate(360deg) translate(-50%, -50%);
+    }
+  }
+
+.card {
+    animation: card-animation 0.4s ease 0s;
+    transform-origin: top center;
+}
+
+.button {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    position: relative;
+    text-align: center;
+
+    .spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        box-sizing: border-box;
+        transform: translate(-50%, -50%);
+        transform-origin: left top;
+    }
+
+    & svg {
+        width: 0;
+        height: 0;
+        fill: white;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.4s ease;
+      }
+
+      &.searching {
+        // width: 40px;
+        // border-color:gray;
+        // border-width:3px;
+        // font-size:0;
+        // border-left-color:green;
+
+        & .spinner {
+            visibility: visible;
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            border: 3px solid white;
+            border-left-color: transparent;
+            animation: rotating 0.8s 0s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+        }
+      
+        & span {
+            visibility: hidden;
+        }
+      }
+      &.searched {
+        color: white;
+        & svg {
+          height: 40px;
+          width: 40px;
+        }
+        & span {
+          visibility: hidden;
+        }
+        & .checkmark{
+        transform-origin: 50% 50%;
+          stroke: white;
+          stroke-width: 5px;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: stroke .3s cubic-bezier(0.650, 0.000, 0.450, 1.000) .1s forwards;
+      }
+
+      &:hover {
+          span {
+              display: block;
+          }
+          svg {
+              display: none;
+          }
+      }
+      }
+      
+}
+
+
+  
+  
+  
