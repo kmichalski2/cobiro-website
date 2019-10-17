@@ -86,7 +86,7 @@ const Sites = () => {
         event.preventDefault();
         submit(urlInputted)
     }
-    
+     
     return (
     <Layout>
         <SEO title={submission ? `Cobiro Marketing Hub || ${submission}` : 'Cobiro Marketing Hub'} />
