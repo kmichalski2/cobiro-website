@@ -42,7 +42,7 @@ const Sites = () => {
             const newUrl = url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
             setPageData(null)
             setSubmission(newUrl)
-            // setAlert('')
+            setAlert('')
             navigate(`/sites/${newUrl}`)
             setIsLoading(true)
             fetch(`/.netlify/functions/sites?url=${newUrl}`, {
