@@ -7,7 +7,7 @@ import SEO from "../../components/seo"
 import SitesStyles from './sites.module.scss'
 
 const Sites = () => {
-
+    
     const [isLoaded, setIsLoaded] = useState(false)
     const [urlInputted, setUrlInputted] = useState('');
     const [submission, setSubmission] = useState('');
@@ -108,7 +108,6 @@ const Sites = () => {
                                 <span className={SitesStyles.spinner}></span>
                                 <svg className={SitesStyles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><path className={SitesStyles.checkmark} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
                             </button>
-                            
                         </div>
                     </form>
 
