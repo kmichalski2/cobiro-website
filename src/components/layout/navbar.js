@@ -4,6 +4,8 @@ import logo from "../../images/logo_white.svg"
 import Img from "gatsby-image"
 
 const Navbar = ({ menuItems }) => {
+
+  console.log(menuItems)
   useEffect(() => {
     // Initial variables
     const body = document.querySelector("BODY")
@@ -13,22 +15,43 @@ const Navbar = ({ menuItems }) => {
     const menuToggle = document.querySelector(".menu-toggle")
     const btnRight = document.querySelector(".btn-right")
     const btnLeft = document.querySelector(".btn-left")
+    const subMenu = document.querySelectorAll('.submenu')
+    const subArray = Array.prototype.slice.call(subMenu);
     let mainMenuHeight = mainMenu.offsetHeight
     // body.style.paddingTop = `${mainMenuHeight}px`
     body.style.paddingTop = `0px`
     
 
     // Setting initial padding-top on body equal to height of navbar
+    const resizeHandler = () => {
+      console.log('resized')
+      setSubMenuOffset()
+      mainMenuHeight = mainMenu.offsetHeight
+      body.style.paddingTop = `${mainMenuHeight}px`
+      
+    }
 
     // Event listeners for clicks and browser resize
     mainMenu.addEventListener("click", menuClickHandler, false)
     mainMenu.addEventListener("resize", resizeHandler, false)
 
-    const resizeHandler = () => {
-      mainMenuHeight = mainMenu.offsetHeight
-      body.style.paddingTop = `0px`
-      // body.style.paddingTop = `${mainMenuHeight}px`
+    function getPageTopLeft(el) {
+      const rect = el.getBoundingClientRect();
+      const docEl = document.documentElement;
+      console.log(rect.left + (window.pageXOffset || docEl.scrollLeft || 0))
+      return rect.left + (window.pageXOffset || docEl.scrollLeft || 0)
     }
+
+    const setSubMenuOffset = () => {
+      subArray.map((sub) => {
+        let subOffset = getPageTopLeft(sub)
+        if(subOffset < 0 ) {
+          sub.style.marginLeft = -1 * subOffset + 16 + 'px'
+          sub.querySelector('.submenu-triangle').style.marginLeft = subOffset + -16 + 'px'
+        }
+      })
+    }
+    setSubMenuOffset()
 
     let debounce_timer
     window.onscroll = () => {
@@ -100,8 +123,7 @@ const Navbar = ({ menuItems }) => {
           el.nextElementSibling.offsetHeight + "px"
         setTimeout(() => (el.nextElementSibling.style.maxHeight = null), 0)
       } else {
-        el.nextElementSibling.style.maxHeight =
-          el.nextElementSibling.children[0].offsetHeight + "px"
+        el.nextElementSibling.style.maxHeight = el.nextElementSibling.children[0].offsetHeight + el.nextElementSibling.children[1].offsetHeight + "px"
         setTimeout(() => (el.nextElementSibling.style.maxHeight = "none"), 400)
       }
       el.parentNode.classList.toggle("expand")
@@ -141,12 +163,11 @@ const Navbar = ({ menuItems }) => {
                     {item.linkTitle}
                   </Link>
                   {item.submenu.length > 0 ?
-                  <div className="submenu">
-                    <div className="container">
-                      <div className="row">
+                  <div className="submenu" >
+                    <div className="submenu-inner">
                         {item.submenu.map((sub, index) => (
-                          <div key={index} className="col col-xs-12 col-lg-3 has-subsubmenu">
-                          <Link className="submenu-title" to={sub.link.slug ? sub.link.slug : '/'} target="_self">
+                          <div key={index} className="has-subsubmenu">
+                          <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? sub.link.slug : '/'} target="_self">
                             {sub.icon.fixed ==! null ?
                             <Img fixed={sub.icon.fixed} alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
                             :
@@ -174,8 +195,20 @@ const Navbar = ({ menuItems }) => {
                           </div>
                         </div>
                         ))}
-                      </div>
                     </div>
+                    { item.submenuFooterText || (item.submenuFooterLinkTitle && (item.submenuFooterLink || item.submenuFooterExternalLink)) ?
+                    <div className="submenu-footer">
+                        { item.submenuFooterText ? <p className="small">{ item.submenuFooterText }</p> : null }
+                        { item.submenuFooterLinkTitle && (item.submenuFooterLink || item.submenuFooterExternalLink) ?
+                        item.submenuFooterLink ?
+                        <Link className="text-blue block-xs" to={`/${item.submenuFooterLink.slug}`}>{ item.submenuFooterLinkTitle } →</Link>
+                        : <a className="text-blue" href={item.submenuFooterExternalLink} target="_blank">{ item.submenuFooterLinkTitle } →</a>
+                        : null }
+                        <div className="submenu-triangle"></div>
+                    </div>
+                    : null }
+                    
+                    
                   </div>
                   : null}
                 </li>
