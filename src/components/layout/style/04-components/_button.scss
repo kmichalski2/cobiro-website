@@ -10,6 +10,7 @@ $button-padding-horizontal: 1.5rem;
 .btn {
 	font-size: 1rem;
 	font-weight: 600;
+	border-radius: 5rem;
 }
 
 @include mq($from: md) {
