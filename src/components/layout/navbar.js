@@ -144,7 +144,7 @@ const Navbar = ({ menuItems }) => {
                                   to={subsub.slug ? subsub.slug : '/'}
                                   target="_self"
                                 >
-                                  {subsub.title}
+                                  {sub.submenuLinkTitles ? sub.submenuLinkTitles[index] : subsub.title}
                                 </Link>
                               </li>
                               ))}

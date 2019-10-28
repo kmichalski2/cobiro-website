@@ -52,6 +52,7 @@ const Layout = ({ children }) => {
             title
             slug
           }
+          submenuLinkTitles
         }
       }
     }
