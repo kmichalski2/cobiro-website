@@ -56,7 +56,7 @@ const Footer = ({ columns }) => {
     </div>
     <div className="footer-bottom">
       <div className="container">
-        <div className="row space-between center-xs middle-xs">
+        <div className="row space-between">
           <div className="col col-xs-12 col-md-6 text-center-xs text-left-md space-xs space-sm">
             <ul className="list-inline block-xs flex-md menu">
               <li>
@@ -70,32 +70,6 @@ const Footer = ({ columns }) => {
                 </Link>
               </li>
             </ul>
-          </div>
-          <div className="col col-xs-12 col-md-6 text-right text-center-xs text-center-sm text-right-md">
-            <a
-              href="https://www.facebook.com/CobiroAI/"
-              className="social-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={fb} alt="Facebook" />
-            </a>
-            <a
-              href="https://twitter.com/cobiroai"
-              className="social-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={twitter} alt="Twitter" />
-            </a>
-            <a
-              href="https://www.instagram.com/cobiroai/"
-              className="social-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={insta} alt="Instagram" />
-            </a>
           </div>
         </div>
       </div>
