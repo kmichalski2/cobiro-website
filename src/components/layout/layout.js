@@ -16,80 +16,80 @@ import CookieBanner from "./cookieConsent"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
-    query GlobalQuery {
-      site {
-        siteMetadata {
+  query GlobalQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allDatoCmsMenu(sort: {fields: menuItemOrder, order: ASC}) {
+      nodes {
+        linkTitle
+        link {
+          slug
           title
         }
-      }
-      allDatoCmsMenu {
-        nodes {
-          linkTitle
-          link {
-            slug
-            title
+        menuItemOrder
+        submenu {
+          title
+          icon {
+            alt
+            fixed(width: 10) {
+              aspectRatio
+              base64
+              height
+              src
+              srcSet
+              width
+            }
+            url
           }
-          menuItemOrder
-          submenu {
+          link {
             title
-            icon {
+            slug
+          }
+          submenuLinks {
+            title
+            slug
+          }
+        }
+      }
+    }
+    allDatoCmsFooter(sort: {fields: footerItemOrder, order: ASC}) {
+      nodes {
+        column {
+          ... on DatoCmsTextElement {
+            text
+          }
+          ... on DatoCmsLinkElement {
+            externalLink
+            linkTitle
+            internalLink {
+              slug
+            }
+          }
+          ... on DatoCmsImageElement {
+            externalLink
+            image {
               alt
-              fixed(width: 10) {
+              fluid {
                 aspectRatio
                 base64
                 height
                 src
                 srcSet
                 width
+                sizes
               }
               url
             }
-            link {
-              title
-              slug
-            }
-            submenuLinks {
-              title
-              slug
-            }
           }
         }
-      }
-      allDatoCmsFooter {
-        nodes {
-          column {
-            ... on DatoCmsTextElement {
-              text
-            }
-            ... on DatoCmsLinkElement {
-              externalLink
-              linkTitle
-              internalLink {
-                slug
-              }
-            }
-            ... on DatoCmsImageElement {
-              externalLink
-              image {
-                alt
-                fluid {
-                  aspectRatio
-                  base64
-                  height
-                  src
-                  srcSet
-                  width
-                  sizes
-                }
-                url
-              }
-            }
-          }
-          columnHeading
-          footerItemOrder
-        }
+        columnHeading
+        footerItemOrder
       }
     }
+  }  
   `)
   
   return (
