@@ -1,8 +1,5 @@
 import { Link } from "gatsby"
 import logo from "../../images/logo.svg"
-import fb from "../../images/fb.svg"
-import insta from "../../images/insta.svg"
-import twitter from "../../images/twitter.svg"
 import React from "react"
 import background from "../../images/footer_img.svg"
 import Img from "gatsby-image"
