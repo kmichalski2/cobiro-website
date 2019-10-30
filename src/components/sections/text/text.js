@@ -17,7 +17,7 @@ import TextStyles from "./text.module.scss"
         <div className="row center-xs">
           <div className="col col-xs-12 col-md-8 text-editor-wrapper">
             { data.title ? <h2>{data.title}</h2> : null }
-            { data.text ? <p className={TextStyles.text} dangerouslySetInnerHTML={createMarkup()}></p> : null }
+            { data.text ? <div className={TextStyles.text} dangerouslySetInnerHTML={createMarkup()}></div> : null }
           </div>
         </div>
       </div>
