@@ -215,10 +215,28 @@ exports.createPages = async function({ graphql, actions }) {
                   backgroundColor
                   title
                   text
+                  linkTitleQuotes
+                  internalLinkQuotes {
+                    slug
+                  }
+                  externalLinkQuotes
                   quotes {
                     quotes {
                       person
                       country
+                      imageLeft {
+                        url
+                        alt
+                        fixed(width: 24) {
+                          base64
+                          aspectRatio
+                          width
+                          height
+                          srcSet
+                          src
+                          __typename
+                        }
+                      }
                       flag {
                         url
                         alt
