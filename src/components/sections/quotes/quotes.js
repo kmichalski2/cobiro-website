@@ -43,7 +43,8 @@ const Quotes = ({ data }) => {
           },
         }}
         className={[QuoteStyles.cards, QuoteStyles.slider].join(" ")}>
-        {data.quotes.quotes.map((q, index) => (
+        {data.quotes ?
+        data.quotes.quotes.map((q, index) => (
           <div
           key={index}
           className={[
@@ -75,7 +76,8 @@ const Quotes = ({ data }) => {
             {q.quoteText}
           </p>
         </div>
-        ))}    
+        )) 
+        : null }   
       </Carousel>
     </div>
   </section>
