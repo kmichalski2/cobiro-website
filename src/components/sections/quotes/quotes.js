@@ -4,9 +4,10 @@ import placeholderImage from "../../../images/placeholder_round.svg"
 import Img from "gatsby-image"
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
+import { Link } from "gatsby";
 
 const Quotes = ({ data }) => {
-
+  console.log(data)
   return (
   <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
     <div className={[data.backgroundColor ? "bg-sway-inner" : null, "container-fluid"].join(' ')}>
@@ -53,11 +54,24 @@ const Quotes = ({ data }) => {
           ].join(" ")}
         >
           <div className="flex start-xs middle-xs space-xs-up">
-            <img src={placeholderImage} className="img-fluid" alt="quote" />
+          {q.imageLeft && q.imageLeft.fixed ?
+              <Img fixed={q.imageLeft.fixed}
+                className="img-fluid"
+                alt={q.imageLeft.alt ? q.imageLeft.alt : 'Quote'}
+              />
+              : q.imageLeft ?
+              <img src={q.imageLeft.url}
+              className="img-fluid"
+                alt={q.imageLeft.alt ? q.imageLeft.alt : 'Quote'}
+              />
+              : null
+            }
+            {/* <img src={placeholderImage} className="img-fluid" alt="quote" /> */}
             <div>
               <p className="small text-bold">{q.person}</p>
               <div className="flex middle-xs">
-                {q.flag.fixed ?
+                {q.flag ? 
+                q.flag.fixed ?
                 <Img fixed={q.flag.fixed}
                   className={QuoteStyles.flag}
                   alt={q.flag.alt ? q.flag.alt : 'Flag'}
@@ -67,6 +81,7 @@ const Quotes = ({ data }) => {
                   className={QuoteStyles.flag}
                   alt={q.flag.alt ? q.flag.alt : 'Flag'}
                 />
+                : null
                 }
                 <p className="small">{q.country}</p>
               </div>
@@ -77,8 +92,21 @@ const Quotes = ({ data }) => {
           </p>
         </div>
         )) 
-        : null }   
+        : null }
       </Carousel>
+      { data.linkTitleQuotes && data.internalLinkQuotes ?
+      <div className="row">
+        <div className="col col-xs-12 text-center">
+        <Link className={["btn btn-primary", QuoteStyles.button].join(' ')} to={data.internalLinkQuotes.slug ? data.internalLinkQuotes.slug : '/'}>{data.linkTitleQuotes}</Link>
+        </div>
+      </div>
+      : data.linkTitleQuotes && data.externalLinkQuotes ?
+      <div className="row">
+        <div className="col col-xs-12 text-center">
+          <a className={["btn btn-primary", QuoteStyles.button].join(' ')} href={data.externalLinkQuotes} target="_blank">{data.linkTitleQuotes}</a>
+        </div>
+      </div>
+      : null }
     </div>
   </section>
 )}
