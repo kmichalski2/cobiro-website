@@ -1,0 +1,23 @@
+@import '../../../components/layout/style/globals';
+
+.imageLeftEdge {
+    width: 60vw;
+    margin-left: calc(-60vw + 100%);
+
+    @include mq($until: md) {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+.imageRightEdge {
+    width: 60vw;
+
+    @include mq($until: md) {
+        width: 100%;
+        margin: 0;
+    }
+}
+.section {
+    overflow: hidden;
+}

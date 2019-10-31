@@ -62,7 +62,6 @@ exports.createPages = async function({ graphql, actions }) {
                     slug
                     position
                   }
-                  textLeftAlignment
                   alignment
                   image {
                     path
@@ -154,12 +153,13 @@ exports.createPages = async function({ graphql, actions }) {
                     slug
                   }
                   linkTitle
+                  imageToEdge
                   image {
                     alt
                     url
                     width
                     height
-                    fluid(maxWidth: 1200) {
+                    fluid(maxWidth: 1600) {
                       width
                       height
                       srcSet

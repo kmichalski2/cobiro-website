@@ -2,10 +2,12 @@ import { Link } from "gatsby"
 import Img from "gatsby-image"
 import React from "react"
 
-const ExplanationImage = ({ data }) => {
+import expImageStyles from './explanationImage.module.scss'
 
+const ExplanationImage = ({ data }) => {
+  console.log(data)
   const image = (
-    <div className="img-responsive space-sm space-xs">
+    <div className={["space-sm space-xs", data.leftText && data.imageToEdge ? expImageStyles.imageLeftEdge : !data.leftText && data.imageToEdge ? expImageStyles.imageRightEdge : "img-responsive"].join(' ')}>
       {data.image.fluid ?
         <Img
         fluid={data.image.fluid}
@@ -17,7 +19,6 @@ const ExplanationImage = ({ data }) => {
         alt={data.image.alt ? data.image.alt : data.title}
         />
         }
-      
     </div>
   )
 
@@ -32,7 +33,7 @@ const ExplanationImage = ({ data }) => {
   )
 
   return (
-    <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
+    <section className={[data.backgroundColor ? "bg-sway" : null, "section", expImageStyles.section].join(' ')}>
       <div className={data.backgroundColor ? "bg-sway-inner" : null}>
         <div className="container">
           <div className="row middle-xs reverse">
