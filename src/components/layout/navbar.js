@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import React, { useEffect } from "react"
-import logo from "../../images/logo.svg"
+import logo from "../../images/logo_white.svg"
 import Img from "gatsby-image"
 
 const Navbar = ({ menuItems }) => {
@@ -8,9 +8,15 @@ const Navbar = ({ menuItems }) => {
     // Initial variables
     const body = document.querySelector("BODY")
     const mainMenu = document.querySelector("nav.main-menu")
+    const menuListItems = document.querySelector(".main-menu-inner")
+    const logoInvert = document.querySelector(".brand")
     const menuToggle = document.querySelector(".menu-toggle")
+    const btnRight = document.querySelector(".btn-right")
+    const btnLeft = document.querySelector(".btn-left")
     let mainMenuHeight = mainMenu.offsetHeight
-    body.style.paddingTop = `${mainMenuHeight}px`
+    // body.style.paddingTop = `${mainMenuHeight}px`
+    body.style.paddingTop = `0px`
+    
 
     // Setting initial padding-top on body equal to height of navbar
 
@@ -20,7 +26,8 @@ const Navbar = ({ menuItems }) => {
 
     const resizeHandler = () => {
       mainMenuHeight = mainMenu.offsetHeight
-      body.style.paddingTop = `${mainMenuHeight}px`
+      body.style.paddingTop = `0px`
+      // body.style.paddingTop = `${mainMenuHeight}px`
     }
 
     let debounce_timer
@@ -32,11 +39,22 @@ const Navbar = ({ menuItems }) => {
       debounce_timer = window.setTimeout(function() {
         if (window.pageYOffset > 0) {
           mainMenu.classList.add("navbar-border")
+          menuListItems.classList.add("menu-items")
+          logoInvert.classList.add("invert")
+          btnRight.classList.remove("btn-white")
+          btnLeft.classList.remove("btn-secondary-white")
         } else {
           mainMenu.classList.remove("navbar-border")
+          menuListItems.classList.remove("menu-items")
+          logoInvert.classList.remove("invert")
+          btnRight.classList.add("btn-white")
+          btnLeft.classList.add("btn-secondary-white")
+          
         }
-      }, 100)
+      }, 0)
     }
+
+    console.log(window.pageYOffset);
 
     // Handling all clicks on navbar
     function menuClickHandler(event) {
@@ -95,7 +113,7 @@ const Navbar = ({ menuItems }) => {
             <div className="col col-auto-lg navbar-mobile">
               <div className="brand">
                 <Link to="/">
-                  <img src={logo} alt="Cobiro logo" />
+                  <img className="logo-mobile" src={logo} alt="Cobiro logo" />
                 </Link>
               </div>
               <button
@@ -160,10 +178,10 @@ const Navbar = ({ menuItems }) => {
                 ))}
               </ul>
               <div className="main-menu-cta">
-                <Link to="/" className="btn btn-secondary" target="_blank">
+                <Link to="/" className="btn btn-secondary btn-secondary-white btn-left" target="_blank">
                   Sign in
                 </Link>
-                <Link to="/" className="btn" target="_blank">
+                <Link to="/" className="btn btn-white btn-right" target="_blank">
                   Sign up
                 </Link>
               </div>
