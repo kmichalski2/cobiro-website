@@ -224,6 +224,12 @@ exports.createPages = async function({ graphql, actions }) {
                 }
                 ... on DatoCmsCtaJumbo {
                   backgroundColor
+                  topGradiantColor {
+                    hex
+                  }
+                  bottomGradiantColor {
+                    hex
+                  }
                   title
                   text
                   linkTitle
