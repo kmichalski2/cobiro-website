@@ -43,6 +43,13 @@ exports.createPages = async function({ graphql, actions }) {
                 __typename
                 ... on DatoCmsJumboHeader {
                   backgroundColor
+                  topGradiantColor {
+                    hex
+                  }
+                  bottomGradiantColor {
+                    hex
+                  }
+                  imageBehindWave
                   id
                   text
                   linkTitle
@@ -56,6 +63,7 @@ exports.createPages = async function({ graphql, actions }) {
                     position
                   }
                   textLeftAlignment
+                  alignment
                   image {
                     path
                     url
