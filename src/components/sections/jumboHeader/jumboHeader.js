@@ -21,10 +21,10 @@ const JumboHeader = props => {
         { data.heading ? <h1 className={backgroundColor ? 'text-white' : null}>{data.heading}</h1> : null }
         { data.text ? <p className={backgroundColor ? 'text-white' : null}>{data.text}</p> : null }
         {data.externalLinkUrl ? (
-          <a href={data.externalLinkUrl} className="btn btn-large btn-white space-xs space-sm">{data.linkTitle}</a>
+          <a href={data.externalLinkUrl} className={["btn btn-large space-xs space-sm", backgroundColor ? 'btn-white' : null].join(' ')}>{data.linkTitle}</a>
         ) : data.link ?
         (
-          <Link to={data.link.slug ? data.link.slug : '/'} className="btn btn-large btn-white space-xs space-sm">
+          <Link to={data.link.slug ? data.link.slug : '/'} className={["btn btn-large space-xs space-sm", backgroundColor ? 'btn-white' : null].join(' ')}>
             {data.linkTitle}
           </Link>
         ): null }
