@@ -62,7 +62,6 @@ exports.createPages = async function({ graphql, actions }) {
                     slug
                     position
                   }
-                  textLeftAlignment
                   alignment
                   image {
                     path
