@@ -53,7 +53,7 @@ const JumboHeader = props => {
   )
 
   const whiteSway = (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920.28 150.65" className={JumboHeaderStyles.whiteSways} style={{transform: data.alignment == 'image-left' ? 'scaleX(-1)' : null, bottom: data.alignment == 'image-left' ? '-1px' : 0}}><g id="Lag_2" dataName="Lag 2"><g id="Lag_1-2" dataName="Lag 1"><path id="Path_4929" dataName="Path 4929" d="M0,72.54c230.83,28.07,530,27.7,759.25-1,130.46-16.32,237.69-40.75,371.12-55.86C1383.67-13,1718.66-1.46,1920,42.86l.28,107.79H0Z" fill="#fff"/></g></g></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920.28 150.65" className={JumboHeaderStyles.whiteSways} style={{transform: data.alignment == 'image-left' ? 'scaleX(-1)' : null, bottom: data.alignment == 'image-left' ? '-1px' : 0, zIndex: 2}}><g id="Lag_2" dataName="Lag 2"><g id="Lag_1-2" dataName="Lag 1"><path id="Path_4929" dataName="Path 4929" d="M0,72.54c230.83,28.07,530,27.7,759.25-1,130.46-16.32,237.69-40.75,371.12-55.86C1383.67-13,1718.66-1.46,1920,42.86l.28,107.79H0Z" fill="#fff"/></g></g></svg>
   )
   
   return (
@@ -66,7 +66,7 @@ const JumboHeader = props => {
             : JumboHeaderStyles.textRight,
           "section-inner",
         ].join(" ")}
-        style={{zIndex: imageBehind ? 0 : 1}}
+        style={{zIndex: imageBehind ? 1 : 5}}
       >
         <div>
           <div className="container">
