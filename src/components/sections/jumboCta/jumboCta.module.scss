@@ -1,0 +1,25 @@
+@import '../../layout/style/globals';
+
+.section {
+    position: relative;
+
+    &.withBg {
+        padding-top: 12rem;
+
+        @include mq($until: md) {
+            padding-top: 7.5rem;
+        }
+    }
+
+    .whiteSways {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+    .whiteSway {
+        bottom: auto;
+        top: 0;
+        transform: rotate(180deg);
+    }
+}
