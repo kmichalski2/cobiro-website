@@ -15,6 +15,7 @@ import Quotes from "../components/sections/quotes/quotes"
 import Text from "./sections/text/text"
 import Video from "../components/sections/video/video"
 import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel"
+import Image from "../components/sections/image/image"
 
 const pageContent = ({ data }) => {
   return (
@@ -51,6 +52,8 @@ const pageContent = ({ data }) => {
                 return <Text data={data.sections[index]} key={index}/>
             case 'Video':
                 return <Video data={data.sections[index]} key={index}/>
+            case 'Image':
+                return <Image data={data.sections[index]} key={index}/>
             default:
                 return null
             }
