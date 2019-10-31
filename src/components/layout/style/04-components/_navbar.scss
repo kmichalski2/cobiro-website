@@ -6,12 +6,15 @@ nav {
 	right: 0;
 	max-height: 100vh;
 	z-index: 200;
-	background-color: $white;
+	background-color: $see-through-white;
 	padding: 0.5rem 0;
-	// border-bottom: 1px solid $mediumgrey;
-	// transition: background-color 0.2s ease;
+	border-bottom: none;
+	transition: 0.4s ease-in-out;
+	border-bottom: 1px solid #ffffff00;
 
 	&.navbar-border {
+		transition: 0.4s ease-in-out;
+		background-color: $white;
 		border-bottom: 1px solid $mediumgrey;
 	}
 

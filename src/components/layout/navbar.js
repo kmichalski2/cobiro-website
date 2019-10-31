@@ -35,7 +35,7 @@ const Navbar = ({ menuItems }) => {
         } else {
           mainMenu.classList.remove("navbar-border")
         }
-      }, 50)
+      }, 100)
     }
 
     // Handling all clicks on navbar
