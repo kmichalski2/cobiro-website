@@ -1,13 +1,13 @@
 import { Link } from "gatsby"
 import logo from "../../images/logo.svg"
 import React from "react"
-import background from "../../images/footer_img.svg"
+// import background from "../../images/footer_img.svg"
 import Img from "gatsby-image"
 
 
 const Footer = ({ columns }) => {
   return (
-  <footer style={{ backgroundImage: `url(${background})` }}>
+  <footer>
     <div className="container">
       <div className="row section end-sm">
         <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 text-left-lg center-xs start-lg space-xs space-sm space-md">
