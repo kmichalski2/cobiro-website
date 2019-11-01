@@ -16,7 +16,7 @@ nav {
 		transition: 0.4s ease-in-out;
 		background-color: $white;
 		// border-bottom: 1px solid $mediumgrey;
-		box-shadow: 0px 5px 14px rgba(0,0,0,0.0466667)
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 
 	}
 
@@ -97,21 +97,40 @@ nav {
 
 		a {
 			font-size: 1rem;
-			color: $white;
+			color: rgba($white, 0.6);
 
-			@include mq($until: lg) {
-				color: $black;
+			&.has-submenu::after {
+				border-color: $blue !important;
 			}
-
+			
 			&.active, &:hover, &:active, &:focus {
 				color: $blue;
 				text-decoration: none;
 
-				&.has-submenu::after {
-						border-color: $blue !important;
-					}
+				
 
 			}
+
+			@include mq($until: lg) {
+				color: $black;
+			}
+			@include mq($from: lg) {
+				&.has-submenu::after {
+					border-color: rgba($white, 0.7) !important;
+				}
+				&.active, &:hover, &:active, &:focus {
+					color: $white;
+					text-decoration: none;
+
+					&.has-submenu::after {
+						border-color: $white;
+					}
+					
+				}
+			}
+			
+
+			
 			&.has-submenu {
 				padding-right: 1em;
 				position: relative;
@@ -126,16 +145,24 @@ nav {
 						height: 0.5em;
 						border-width: 0;
 						transform: rotate(45deg) translate(-50%, -50%);
-						border-color: $white;
 						border-style: solid;
 						border-right-width: 0.1em;
 						border-bottom-width: 0.1em;
 						transition: transform 0.1s ease;
+
+						@include mq($from: lg) {
+							border-color: $white;
+						}
 					}
 				// }
 			}
 		}
+		
 		@include mq($from: lg) {
+			.subsubmenu li>a {
+				color: $blue;
+				font-size: 0.8rem;
+			}
 			&:hover {
 				.has-submenu {
 					&::after {
@@ -152,6 +179,13 @@ nav {
 			}
 		}
 
+	}
+	@include mq($from: lg) {
+		li>a.has-submenu::after {
+			&.active, &:hover, &:active, &:focus {
+				border-color: $black !important;
+			}
+		}
 	}
 	.main-menu-cta {
 		z-index: 30;
@@ -171,39 +205,83 @@ nav {
 	/******* Submenu *******/
 
 	.submenu-parent {
+		position: relative;
+
 		.submenu {
 			position: absolute;
 			overflow: hidden;
-			width: 100%;
-			left: 0;
-			right: 0;
-			padding: 0;
 			visibility: hidden;
-
+			
+			
+			.submenu-footer {
+				padding: 2rem 0;
+			}
 			@include mq($from: lg) {
-				top: 3.5rem;
-			}
+				.submenu-footer {
+					padding: 2.5rem;
+					background-color: $lightgrey;
+					border-bottom-right-radius: 10px;
+					border-bottom-left-radius: 10px;
+				}
 
-			&::before {
-				content: '';
-				position: absolute;
-				width: 100%;
-				height: 100%;
-				transform-origin: top;
-				transform: scaleY(0);
+				@include box-shadow-hover;
+				@include borderradius;
+				overflow: visible;
+				left: 50%;
 				background-color: $white;
-				border-bottom: 1px solid $mediumgrey;
-				transition: all 0.4s ease;
+				top: 3.5rem;
+				transform: scaleY(0.4) translateX(-50%);
+				opacity: 0;
+				transition: all 0.2s ease;
+				transform-origin: top;
+				border: 1px solid $lightgrey;
 
+				.submenu-triangle {
+					content: '';
+					position: absolute;
+					width: 1rem;
+					height: 1rem;
+					top: -0.2rem;
+					left: 50%;
+					transform: rotate(45deg) translateX(-50%);
+					background-color: $white;
+					border-left: 1px solid $lightgrey;
+					border-top: 1px solid $lightgrey;
+					// @include box-shadow-hover;
+				}
 			}
 
-			&>.container {
+			// &::before {
+			// 	content: '';
+			// 	position: absolute;
+			// 	width: 100%;
+			// 	height: 100%;
+			// 	transform-origin: top;
+			// 	transform: scaleY(0);
+			// 	background-color: $white;
+			// 	transition: all 0.4s ease;
+
+			// }
+
+			&>.submenu-inner {
 				padding-top: 3.125rem;
 				padding-bottom: 2rem;
 				transform: translateY(-2rem);
 				opacity: 0;
 				transition: all 0.2s ease;
 				transition-delay: 0s;
+
+				@include mq($from: lg) {
+					display: flex;
+					padding-left: 2.5rem;
+					padding-right: 2.5rem;
+
+					.has-subsubmenu {
+						width: 12rem;
+						padding: 0 1rem;
+					}
+				}
+				
 
 				@include mq($until: lg) {
 					padding-top: 0;
@@ -212,6 +290,8 @@ nav {
 					transition: none;
 					opacity: 1;
 				}
+
+				
 			}
 
 			.submenu-icon {
@@ -219,10 +299,6 @@ nav {
 				display: block;
 				clear: both;
 				margin-bottom: 1rem;
-			}
-
-			a {
-				color: $blue;
 			}
 
 			.submenu-title {
@@ -266,6 +342,7 @@ nav {
 					}
 				}
 				.has-subsubmenu {
+
 					&>a {
 						position: relative;
 
@@ -296,8 +373,9 @@ nav {
 					transition: max-height 0.4s ease;
 					background-color: $lightgrey;
 					padding: 0 1.1rem;
-					padding-left: 6.325rem;
-					margin: 0 -2.2rem;
+					padding-left: 5.25rem;
+					margin: 0 -1.1rem;
+					width: 100vw;
 				}
 			}
 		}
@@ -305,12 +383,14 @@ nav {
 			&:hover {
 				.submenu {
 					visibility: visible;
+					transform: scaleY(1) translateX(-50%);
+					opacity: 1;
 
-					&::before {
-						transform: scaleY(1);
-					}
+					// &::before {
+					// 	transform: scaleY(1);
+					// }
 
-					&>.container {
+					&>.submenu-inner {
 						opacity: 1;
 						transform: translateY(0);
 						transition-delay: 0.1s;
@@ -326,7 +406,7 @@ nav {
 				visibility: visible;
 				// margin-top: 1rem;
 
-				.container {
+				.submenu-inner {
 					opacity: 1;
 					transform: translateY(0);
 				}
