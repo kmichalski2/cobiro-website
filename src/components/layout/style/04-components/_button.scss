@@ -30,12 +30,24 @@ $button-padding-horizontal: 1.5rem;
 	background-color: transparent;
 	color: $white;
 	border-color: $white;
+
+	&:hover, &:active {
+		background-color: rgba($white, 0.4);
+		color: $white;
+		border-color: $white;
+	}
 }
 
 .btn-white {
 	background-color: $white;
 	border-color: $white;
 	color: $blue;
+
+	&:hover, &:active {
+		background-color: rgba($white, 0.8);
+		// border-color: $white;
+		color: $blue;
+	}
 }
 
 .btn-toggle {

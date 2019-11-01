@@ -65,8 +65,12 @@ const Navbar = ({ menuItems }) => {
 
           if (mainMenu.classList.contains("closed")) {
             menuToggle.setAttribute("aria-expanded", "true")
+            logoInvert.classList.add("invert")
           } else {
             menuToggle.setAttribute("aria-expanded", "false")
+            if(!mainMenu.classList.contains("navbar-border")) {
+            logoInvert.classList.remove("invert")
+            }
           }
 
           mainMenu.classList.toggle("closed")
