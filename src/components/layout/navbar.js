@@ -166,7 +166,7 @@ const Navbar = ({ menuItems }) => {
                   <div className="submenu" >
                     <div className="submenu-inner">
                         {item.submenu.map((sub, index) => (
-                          <div key={index} className="has-subsubmenu">
+                          <div key={index} className={ sub.submenuLinks.length > 0 ? "has-subsubmenu" : null }>
                           <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? sub.link.slug : '/'} target="_self">
                             {sub.icon.fixed ==! null ?
                             <Img fixed={sub.icon.fixed} alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
@@ -187,7 +187,7 @@ const Navbar = ({ menuItems }) => {
                                   to={subsub.slug ? subsub.slug : '/'}
                                   target="_self"
                                 >
-                                  {sub.submenuLinkTitles ? sub.submenuLinkTitles[index] : subsub.title}
+                                  {subsub.submenuLinkTitles > 0 ? subsub.submenuLinkTitles[index] : subsub.title}
                                 </Link>
                               </li>
                               ))}
@@ -204,10 +204,10 @@ const Navbar = ({ menuItems }) => {
                         <Link className="text-blue block-xs" to={`/${item.submenuFooterLink.slug}`}>{ item.submenuFooterLinkTitle } →</Link>
                         : <a className="text-blue" href={item.submenuFooterExternalLink} target="_blank">{ item.submenuFooterLinkTitle } →</a>
                         : null }
-                        <div className="submenu-triangle"></div>
+                        
                     </div>
                     : null }
-                    
+                    <div className="submenu-triangle"></div>
                     
                   </div>
                   : null}

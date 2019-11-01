@@ -30,6 +30,12 @@ const Layout = ({ children }) => {
           title
         }
         menuItemOrder
+        submenuFooterLinkTitle
+        submenuFooterText
+        submenuFooterLink {
+          slug
+        }
+        submenuFooterExternalLink
         submenu {
           title
           icon {
@@ -48,13 +54,6 @@ const Layout = ({ children }) => {
             title
             slug
           }
-          menuItemOrder
-          submenuFooterLinkTitle
-          submenuFooterText
-          submenuFooterLink {
-            slug
-          }
-          submenuFooterExternalLink
           submenuLinks {
             title
             slug

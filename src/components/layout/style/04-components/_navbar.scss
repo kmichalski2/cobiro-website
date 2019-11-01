@@ -13,8 +13,11 @@ nav {
 	border-bottom: 1px solid #ffffff00;
 
 	&.navbar-border {
+		transition: 0.4s ease-in-out;
+		background-color: $white;
 		// border-bottom: 1px solid $mediumgrey;
 		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
 	}
 
 	@include mq($until: lg) {
@@ -94,21 +97,40 @@ nav {
 
 		a {
 			font-size: 1rem;
-			color: $white;
+			color: rgba($white, 0.6);
 
-			@include mq($until: lg) {
-				color: $black;
+			&.has-submenu::after {
+				border-color: $blue !important;
 			}
-
+			
 			&.active, &:hover, &:active, &:focus {
 				color: $blue;
 				text-decoration: none;
 
-				&.has-submenu::after {
-						border-color: $blue !important;
-					}
+				
 
 			}
+
+			@include mq($until: lg) {
+				color: $black;
+			}
+			@include mq($from: lg) {
+				&.has-submenu::after {
+					border-color: rgba($white, 0.7) !important;
+				}
+				&.active, &:hover, &:active, &:focus {
+					color: $white;
+					text-decoration: none;
+
+					&.has-submenu::after {
+						border-color: $white;
+					}
+					
+				}
+			}
+			
+
+			
 			&.has-submenu {
 				padding-right: 1em;
 				position: relative;
@@ -123,16 +145,24 @@ nav {
 						height: 0.5em;
 						border-width: 0;
 						transform: rotate(45deg) translate(-50%, -50%);
-						border-color: $white;
 						border-style: solid;
 						border-right-width: 0.1em;
 						border-bottom-width: 0.1em;
 						transition: transform 0.1s ease;
+
+						@include mq($from: lg) {
+							border-color: $white;
+						}
 					}
 				// }
 			}
 		}
+		
 		@include mq($from: lg) {
+			.subsubmenu li>a {
+				color: $blue;
+				font-size: 0.8rem;
+			}
 			&:hover {
 				.has-submenu {
 					&::after {
@@ -149,6 +179,13 @@ nav {
 			}
 		}
 
+	}
+	@include mq($from: lg) {
+		li>a.has-submenu::after {
+			&.active, &:hover, &:active, &:focus {
+				border-color: $black !important;
+			}
+		}
 	}
 	.main-menu-cta {
 		z-index: 30;
