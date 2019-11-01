@@ -58,14 +58,14 @@ const ListPricing = ({ data }) => {
                   <Link to={data.tier2ExternalLink} className="btn space-xs-up">
                   {data.tier2LinkText}
                   </Link>
-                  {data.tier1Features ? (
+                  { /*data.tier1Features ? (
                     <ul className="text-left-xs price-list list-unstyled">
                       {data.tier1Features.map((feature, index) => (
                         <li key={index}>{feature}</li>
                       ))}
                     </ul>
-                  ) : null}
-                  <hr className="extra-line" />
+                      ) : null */}
+                    {/* <hr className="extra-line" /> */} 
                   {data.tier2Features ? (
                     <ul className="text-left-xs price-list list-unstyled">
                       {data.tier2Features.map((feature, index) => (
