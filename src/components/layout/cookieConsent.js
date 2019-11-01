@@ -49,7 +49,7 @@ const CookieBanner = ({ data }) => {
       <div id="cookie-banner">
         <p className="p-cookie">
           This website uses cookies to ensure you get the best experience on our
-          website. <Link to="/cookies">Learn more</Link>
+          website. <Link to="/privacy-policys">Learn more</Link>
         </p>
         <button className="btn btn-cookies" onClick={setCookie}>
           Got it!
