@@ -127,6 +127,11 @@ nav {
 					}
 					
 				}
+				&.submenu-title {
+					&:hover, &:active, &:focus {
+						color: $black;
+					}
+				}
 			}
 			
 
