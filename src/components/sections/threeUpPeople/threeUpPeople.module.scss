@@ -3,7 +3,7 @@
 .image {
     border-radius: 20px;
 }
-@include mq($from: lg) {
+@include mq($from: md) {
     .image {
         margin-bottom: 1rem;
     }
@@ -11,5 +11,12 @@
 @include mq($until: md) {
     .textWrapper {
         margin-left: 1rem;
+    }
+}
+.linkedinLink {
+    line-height: 0;
+
+    img {
+        border-radius: 4px;
     }
 }

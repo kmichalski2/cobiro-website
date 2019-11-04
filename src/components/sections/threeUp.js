@@ -27,7 +27,7 @@ const ThreeUpPeople = props => {
                   <h4>{data.box1Title}</h4>
                   <p className="small">{data.box1Text}</p>
                   {data.box1Link ? 
-                  <Link to={data.box1Link.slug ? data.box1Link.slug : '/'} className="small">
+                  <Link to={data.box1Link.slug ? `/${data.box1Link.slug}` : '/'} className="small">
                   {data.box1LinkText}
                   </Link>
                   : null}
@@ -48,7 +48,7 @@ const ThreeUpPeople = props => {
                   <h4>{data.box2Title}</h4>
                   <p className="small">{data.box2Text}</p>
                   {data.box2Link ?
-                  <Link to={data.box2Link.slug ? data.box2Link.slug : '/'} className="small">
+                  <Link to={data.box2Link.slug ? `/${data.box2Link.slug}` : '/'} className="small">
                     {data.box2LinkText}
                   </Link>
                   : null }
@@ -69,7 +69,7 @@ const ThreeUpPeople = props => {
                   <h4>{data.box3Title}</h4>
                   <p className="small">{data.box3Text}</p>
                   {data.box3Link ?
-                  <Link to={data.box3Link.slug ? data.box3Link.slug : '/'} className="small">
+                  <Link to={data.box3Link.slug ? `/${data.box3Link.slug}` : '/'} className="small">
                     {data.box3LinkText}
                   </Link>
                   : null}
@@ -90,7 +90,7 @@ const ThreeUpPeople = props => {
                   <h4>{data.box4Title}</h4>
                   <p className="small">{data.box4Text}</p>
                   {data.box4Link ?
-                  <Link to={data.box4Link.slug ? data.box4Link.slug : '/'} className="small">
+                  <Link to={data.box4Link.slug ? `/${data.box4Link.slug}` : '/'} className="small">
                     {data.box4LinkText}
                   </Link>
                   : null}
@@ -111,7 +111,7 @@ const ThreeUpPeople = props => {
                   <h4>{data.box5Title}</h4>
                   <p className="small">{data.box5Text}</p>
                   {data.box5Link ?
-                  <Link to={data.box5Link.slug ? data.box5Link.slug : '/'} className="small">
+                  <Link to={data.box5Link.slug ? `/${data.box5Link.slug}` : '/'} className="small">
                     {data.box5LinkText}
                   </Link>
                   : null}
@@ -132,7 +132,7 @@ const ThreeUpPeople = props => {
                   <h4>{data.box6Title}</h4>
                   <p className="small">{data.box6Text}</p>
                   {data.box6Link ?
-                  <Link to={data.box6Link.slug ? data.box6Link.slug : '/'} className="small">
+                  <Link to={data.box6Link.slug ? `/${data.box6Link.slug}` : '/'} className="small">
                     {data.box6LinkText}
                   </Link>
                   : null}

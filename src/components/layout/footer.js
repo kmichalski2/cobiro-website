@@ -6,7 +6,6 @@ import Img from "gatsby-image"
 
 
 const Footer = ({ columns }) => {
-  console.log(columns)
   return (
   <footer>
     <div className="container">
@@ -31,7 +30,7 @@ const Footer = ({ columns }) => {
                  {el.__typename === 'DatoCmsTextElement' ?
                  el.text
                  : el.__typename === 'DatoCmsImageElement' ?
-                 <a href={el.externalLink}>
+                 <a href={el.externalLink}  target="_blank" rel="noopener noreferrer">
                    {el.image.fixed ?
                     <Img fixed={el.image.fixed} className="footer-image" alt={el.image.alt ? el.image.alt : 'Footer image'} />
                     :
@@ -40,9 +39,9 @@ const Footer = ({ columns }) => {
                   
                  </a>
                  : (el.__typename === 'DatoCmsLinkElement' && el.externalLink) ? 
-                 <a className="small text-darkgrey" href={el.externalLink}>{el.linkTitle}</a> 
+                 <a className="small text-darkgrey" href={el.externalLink} target="_blank" rel="noopener noreferrer">{el.linkTitle}</a> 
                  : (el.__typename === 'DatoCmsLinkElement' && el.internalLink) ?
-                 <Link className="small text-darkgrey" to={el.internalLink.slug}>{el.linkTitle}</Link>
+                 <Link className="small text-darkgrey" to={`/${el.internalLink.slug}`}>{el.linkTitle}</Link>
                  : null
                 }
                </li>
