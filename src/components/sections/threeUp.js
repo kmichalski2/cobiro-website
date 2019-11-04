@@ -17,7 +17,7 @@ const ThreeUpPeople = props => {
 
           {data.box1Title && data.box1Text && data.box1Icon ? (
             <div className="col col-xs-12 col-md-4">
-              <div className="card card-visible">
+              <div className="card">
                 <img
                   src={data.box1Icon.url}
                   className="three-up-icon space-xs-up"
@@ -38,7 +38,7 @@ const ThreeUpPeople = props => {
 
           {data.box2Title && data.box2Text && data.box2Icon ? (
             <div className="col col-xs-12 col-md-4">
-              <div className="card card-visible">
+              <div className="card">
                 <img
                   src={data.box2Icon.url}
                   className="three-up-icon space-xs-up"
@@ -59,7 +59,7 @@ const ThreeUpPeople = props => {
 
           {data.box3Title && data.box3Text && data.box3Icon ? (
             <div className="col col-xs-12 col-md-4">
-              <div className="card card-visible">
+              <div className="card">
                 <img
                   src={data.box3Icon.url}
                   className="three-up-icon space-xs-up"
@@ -80,7 +80,7 @@ const ThreeUpPeople = props => {
           
           {data.box4Title && data.box4Text && data.box4Icon ? (
             <div className="col col-xs-12 col-md-4">
-              <div className="card card-visible">
+              <div className="card">
                 <img
                   src={data.box4Icon.url}
                   className="three-up-icon space-xs-up"
@@ -101,7 +101,7 @@ const ThreeUpPeople = props => {
 
           {data.box5Title && data.box5Text && data.box5Icon ? (
             <div className="col col-xs-12 col-md-4">
-              <div className="card card-visible">
+              <div className="card">
                 <img
                   src={data.box5Icon.url}
                   className="three-up-icon space-xs-up"
@@ -122,7 +122,7 @@ const ThreeUpPeople = props => {
 
           {data.box6Title && data.box6Text && data.box6Icon ? (
             <div className="col col-xs-12 col-md-4">
-              <div className="card card-visible">
+              <div className="card">
                 <img
                   src={data.box6Icon.url}
                   className="three-up-icon space-xs-up"
