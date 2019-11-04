@@ -33,6 +33,7 @@ const ListPricing = ({ data }) => {
                   <a
                     href={data.tier1ExternalLink}
                     className="btn btn-secondary space-xs-up"
+                    target="_blank" rel="noopener noreferrer"
                   >
                     {data.tier1LinkText}
                   </a>
@@ -54,7 +55,7 @@ const ListPricing = ({ data }) => {
                   <p className="small price-caption">
                   {data.tier2Text}
                   </p>
-                  <a href={data.tier2ExternalLink} className="btn space-xs-up">
+                  <a href={data.tier2ExternalLink} className="btn space-xs-up" target="_blank" rel="noopener noreferrer">
                   {data.tier2LinkText}
                   </a>
                   { /*data.tier1Features ? (
