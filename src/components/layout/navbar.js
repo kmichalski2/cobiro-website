@@ -5,7 +5,6 @@ import Img from "gatsby-image"
 
 const Navbar = ({ menuItems }) => {
 
-  console.log(menuItems)
   useEffect(() => {
     // Initial variables
     const body = document.querySelector("BODY")
@@ -24,7 +23,6 @@ const Navbar = ({ menuItems }) => {
 
     // Setting initial padding-top on body equal to height of navbar
     const resizeHandler = () => {
-      console.log('resized')
       setSubMenuOffset()
       mainMenuHeight = mainMenu.offsetHeight
       body.style.paddingTop = `${mainMenuHeight}px`
@@ -38,7 +36,6 @@ const Navbar = ({ menuItems }) => {
     function getPageTopLeft(el) {
       const rect = el.getBoundingClientRect();
       const docEl = document.documentElement;
-      console.log(rect.left + (window.pageXOffset || docEl.scrollLeft || 0))
       return rect.left + (window.pageXOffset || docEl.scrollLeft || 0)
     }
 
@@ -48,7 +45,9 @@ const Navbar = ({ menuItems }) => {
         if(subOffset < 0 ) {
           sub.style.marginLeft = -1 * subOffset + 16 + 'px'
           sub.querySelector('.submenu-triangle').style.marginLeft = subOffset + -16 + 'px'
+          return true
         }
+        return false
       })
     }
     setSubMenuOffset()
@@ -77,7 +76,6 @@ const Navbar = ({ menuItems }) => {
       }, 0)
     }
 
-    console.log(window.pageYOffset);
 
     // Handling all clicks on navbar
     function menuClickHandler(event) {
@@ -159,7 +157,7 @@ const Navbar = ({ menuItems }) => {
                     return a.menu_item_order - b.menu_item_order;
                   }).map((item, index) => (
                   <li key={index} className={item.submenu.length > 0 ? "submenu-parent" : null}>
-                  <Link className={item.submenu.length > 0 ? 'has-submenu' : null } activeClassName="active" to={item.link ? `/${item.link.slug}` : '#'} target="_self">
+                  <Link className={item.submenu.length > 0 ? 'has-submenu' : null } activeClassName="active" to={item.link ? `/${item.link.slug}` : '#'}>
                     {item.linkTitle}
                   </Link>
                   {item.submenu.length > 0 ?
@@ -167,8 +165,8 @@ const Navbar = ({ menuItems }) => {
                     <div className="submenu-inner">
                         {item.submenu.map((sub, index) => (
                           <div key={index} className={ sub.submenuLinks.length > 0 ? "has-subsubmenu" : null }>
-                          <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? sub.link.slug : '/'} target="_self">
-                            {sub.icon.fixed ==! null ?
+                          <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? `/${sub.link.slug}` : '/'} target="_self">
+                            {sub.icon.fixed ===! null ?
                             <Img fixed={sub.icon.fixed} alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
                             :
                             <img
@@ -184,7 +182,7 @@ const Navbar = ({ menuItems }) => {
                               {sub.submenuLinks.map((subsub, index) => (
                                 <li key={index}>
                                 <Link
-                                  to={subsub.slug ? subsub.slug : '/'}
+                                  to={subsub.slug ? `/${subsub.slug}` : '/'}
                                   target="_self"
                                 >
                                   {subsub.submenuLinkTitles > 0 ? subsub.submenuLinkTitles[index] : subsub.title}
@@ -202,7 +200,7 @@ const Navbar = ({ menuItems }) => {
                         { item.submenuFooterLinkTitle && (item.submenuFooterLink || item.submenuFooterExternalLink) ?
                         item.submenuFooterLink ?
                         <Link className="text-blue block-xs" to={`/${item.submenuFooterLink.slug}`}>{ item.submenuFooterLinkTitle } →</Link>
-                        : <a className="text-blue" href={item.submenuFooterExternalLink} target="_blank">{ item.submenuFooterLinkTitle } →</a>
+                        : <a className="text-blue" href={item.submenuFooterExternalLink} target="_blank" rel="noopener noreferrer">{ item.submenuFooterLinkTitle } →</a>
                         : null }
                         
                     </div>
@@ -215,12 +213,12 @@ const Navbar = ({ menuItems }) => {
                 ))}
               </ul>
               <div className="main-menu-cta">
-                <Link to="/" className="btn btn-secondary btn-secondary-white btn-left" target="_blank">
+                <a href="https://app.cobiro.com/user/login" className="btn btn-secondary btn-secondary-white btn-left" target="_blank" rel="noopener noreferrer">
                   Sign in
-                </Link>
-                <Link to="/" className="btn btn-white btn-right" target="_blank">
+                </a>
+                <a href="https://app.cobiro.com/user/signup" className="btn btn-white btn-right" target="_blank" rel="noopener noreferrer">
                   Sign up
-                </Link>
+                </a>
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ module.exports = {
     title: `Cobiro`,
     description: `Cobiro helps businesses grow by automating Google advertising for Google Search and Google Shopping. Cobiro is a toolbox that automates everything from campaign creation and optimization to bid management.`,
     author: `@mamacph`,
+    siteUrl: `https://cobiro.com/`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -30,6 +31,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

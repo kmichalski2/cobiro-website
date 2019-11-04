@@ -15,7 +15,6 @@ const CookieBanner = ({ data }) => {
     // runs cookieAccepted and removes cookie banner if cookie is set, and if not set adds a cookie banner
     if (cookieAccepted() && isCookieAccepted !== true) {
       setIsCookieAccepted(true)
-      console.log("setting state")
     }
     if (isCookieAccepted) {
       // Fire Google Tag Manager event
@@ -25,7 +24,6 @@ const CookieBanner = ({ data }) => {
 
   // Fire Google Tag Manager event
   const fireGTM = () => {
-    console.log("Firing GTM")
     // window.dataLayer.push({'event': 'cookiesAccepted'});
   }
 
