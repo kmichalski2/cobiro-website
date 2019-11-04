@@ -6,6 +6,7 @@ import Img from "gatsby-image"
 
 
 const Footer = ({ columns }) => {
+  console.log(columns)
   return (
   <footer>
     <div className="container">
@@ -40,7 +41,7 @@ const Footer = ({ columns }) => {
                  </a>
                  : (el.__typename === 'DatoCmsLinkElement' && el.externalLink) ? 
                  <a className="small text-darkgrey" href={el.externalLink}>{el.linkTitle}</a> 
-                 : (el.__typename === 'DatoCmsLinkElement' && el.internalLink.slug ==! null) ?
+                 : (el.__typename === 'DatoCmsLinkElement' && el.internalLink) ?
                  <Link className="small text-darkgrey" to={el.internalLink.slug}>{el.linkTitle}</Link>
                  : null
                 }
