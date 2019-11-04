@@ -213,10 +213,10 @@ const Navbar = ({ menuItems }) => {
                 ))}
               </ul>
               <div className="main-menu-cta">
-                <a href="https://customer.cobiro.com" className="btn btn-secondary btn-secondary-white btn-left" target="_blank" rel="noopener noreferrer">
+                <a href="https://app.cobiro.com/user/login" className="btn btn-secondary btn-secondary-white btn-left" target="_blank" rel="noopener noreferrer">
                   Sign in
                 </a>
-                <a href="https://customer.cobiro.com" className="btn btn-white btn-right" target="_blank" rel="noopener noreferrer">
+                <a href="https://app.cobiro.com/user/signup" className="btn btn-white btn-right" target="_blank" rel="noopener noreferrer">
                   Sign up
                 </a>
               </div>
