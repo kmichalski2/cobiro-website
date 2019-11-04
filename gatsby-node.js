@@ -240,6 +240,12 @@ exports.createPages = async function({ graphql, actions }) {
                 }
                 ... on DatoCmsListPricing {
                   backgroundColor
+                  topGradiantColor {
+                    hex
+                  }
+                  bottomGradiantColor {
+                    hex
+                  }
                   title
                   text
                   tier1Title
