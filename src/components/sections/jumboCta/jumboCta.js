@@ -40,7 +40,7 @@ const JumboCta = ({ data }) => {
               <a
               href={data.externalLinkCta}
               className={["btn btn-large space-xs space-sm", data.backgroundColor ? 'btn-white' : null].join(' ')} target="_blank"
-              >
+              rel="noopener noreferrer">
                 {data.linkTitle}
               </a>
               : null }

@@ -1,13 +1,11 @@
 import React from "react"
 import QuoteStyles from "./quotes.module.scss"
-import placeholderImage from "../../../images/placeholder_round.svg"
 import Img from "gatsby-image"
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import { Link } from "gatsby";
 
 const Quotes = ({ data }) => {
-  console.log(data)
   return (
   <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
     <div className={[data.backgroundColor ? "bg-sway-inner" : null, "container-fluid"].join(' ')}>
@@ -29,9 +27,6 @@ const Quotes = ({ data }) => {
           1500: {
             slidesPerPage: 3,
           }, 
-          1500: {
-            slidesPerPage: 3,
-          },
           1200: {
             slidesPerPage: 2,
           },
@@ -103,7 +98,7 @@ const Quotes = ({ data }) => {
       : data.linkTitleQuotes && data.externalLinkQuotes ?
       <div className="row">
         <div className="col col-xs-12 text-center">
-          <a className={["btn btn-primary", QuoteStyles.button].join(' ')} href={data.externalLinkQuotes} target="_blank">{data.linkTitleQuotes}</a>
+          <a className={["btn btn-primary", QuoteStyles.button].join(' ')} href={data.externalLinkQuotes} target="_blank" rel="noopener noreferrer">{data.linkTitleQuotes}</a>
         </div>
       </div>
       : null }

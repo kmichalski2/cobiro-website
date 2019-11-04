@@ -1,4 +1,3 @@
-import { Link } from "gatsby"
 import React from "react"
 import linkedin from "../../../images/linkedin.svg"
 import Img from "gatsby-image"
@@ -45,7 +44,7 @@ const ThreeUpPeople = ({ data }) => {
                       <h5>{p.title}</h5>
                     </div>
                     {p.linkedinLink ? 
-                    <a className={ThreeUpPeopleStyles.linkedinLink} href={p.linkedinLink} target="_blank">
+                    <a className={ThreeUpPeopleStyles.linkedinLink} href={p.linkedinLink} target="_blank" rel="noopener noreferrer">
                       <img
                         className="social-icon"
                         src={linkedin}

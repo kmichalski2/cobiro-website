@@ -3,7 +3,6 @@ import React from "react"
 import FeaturedCarouselSlideStyles from "./featuredCarouselSlide.module.scss"
 
 import arrow from "../../../../images/arrow_blue_up.svg"
-import icon from "../../../../images/placeholder_icon_nobg.svg"
 import Img from "gatsby-image"
 
 

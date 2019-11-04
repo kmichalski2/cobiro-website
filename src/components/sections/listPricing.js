@@ -1,4 +1,3 @@
-import { Link } from "gatsby"
 import React, { useEffect } from "react"
 
 const ListPricing = ({ data }) => {
@@ -31,12 +30,12 @@ const ListPricing = ({ data }) => {
                   <h4>{data.tier1Title}</h4>
                   <p className="price h1">${data.tier1Price}</p>
                   <p className="small price-caption">{data.tier1Text}</p>
-                  <Link
-                    to={data.tier1ExternalLink}
+                  <a
+                    href={data.tier1ExternalLink}
                     className="btn btn-secondary space-xs-up"
                   >
                     {data.tier1LinkText}
-                  </Link>
+                  </a>
                   {data.tier1Features ? (
                     <ul className="text-left-xs price-list list-unstyled">
                       {data.tier1Features.map((feature, index) => (
@@ -55,9 +54,9 @@ const ListPricing = ({ data }) => {
                   <p className="small price-caption">
                   {data.tier2Text}
                   </p>
-                  <Link to={data.tier2ExternalLink} className="btn space-xs-up">
+                  <a href={data.tier2ExternalLink} className="btn space-xs-up">
                   {data.tier2LinkText}
-                  </Link>
+                  </a>
                   { /*data.tier1Features ? (
                     <ul className="text-left-xs price-list list-unstyled">
                       {data.tier1Features.map((feature, index) => (
