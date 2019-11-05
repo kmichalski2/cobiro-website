@@ -144,6 +144,12 @@ exports.createPages = async function({ graphql, actions }) {
                   box6Link {
                     slug
                   }
+                  box1Footnote
+                  box2Footnote
+                  box3Footnote
+                  box4Footnote
+                  box5Footnote
+                  box6Footnote
                 }
                 ... on DatoCmsExplanationWImage {
                   backgroundColor
