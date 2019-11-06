@@ -45,5 +45,13 @@
 
 	@include mq($until: md) {
 		padding: 2.5rem 0;
-	}
+    } 
+}
+
+.jubmoheader-inner {
+
+    @include mq($from: lg) {
+		padding-top: 10rem!important;
+    } 
+    
 }

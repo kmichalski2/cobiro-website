@@ -60,6 +60,7 @@ const JumboHeader = props => {
         className={[
           JumboHeaderStyles.JumboHeader,
           "section-inner",
+          "jubmoheader-inner",
           alignment === 'centered' ? JumboHeaderStyles.centered : null,
         ].join(" ")}
         style={{zIndex: imageBehind ? 1 : 5}}
