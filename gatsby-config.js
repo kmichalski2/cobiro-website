@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Cobiro`,
-    description: `Cobiro helps businesses grow by automating Google advertising for Google Search and Google Shopping. Cobiro is a toolbox that automates everything from campaign creation and optimization to bid management.`,
+    description: `Cobiro helps businesses grow with AI-powered digital marketing for different channels. We guide you all way through – from creating to optimizing and managing your ads.`,
     author: `@mamacph`,
     siteUrl: `https://cobiro.com/`
   },
