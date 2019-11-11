@@ -3,7 +3,6 @@ import React, { useEffect } from "react"
 import priceStyles from './listPricing.module.scss'
 
 const ListPricing = ({ data }) => {
-  console.log(data)
   const backgroundColor = data.backgroundColor
   const topColor = data.topGradiantColor ? data.topGradiantColor.hex : null
   const bottomColor = data.bottomGradiantColor ? data.bottomGradiantColor.hex : null
