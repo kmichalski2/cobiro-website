@@ -17,14 +17,16 @@ const CookieBanner = ({ data }) => {
       setIsCookieAccepted(true)
     }
     if (isCookieAccepted) {
-      // Fire Google Tag Manager event
+      // Fire Google Tag Manager event      
       fireGTM()
     }
   })
 
   // Fire Google Tag Manager event
   const fireGTM = () => {
-    // window.dataLayer.push({'event': 'cookiesAccepted'});
+    if(window.dataLayer) {
+      window.dataLayer.push({'event': 'cookiesAccepted'});
+    }
   }
 
   // Sets cookie onclick and fires GTM
