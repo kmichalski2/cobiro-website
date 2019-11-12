@@ -40,7 +40,9 @@ const Voucher = ({ data }) => {
                     <div className="card card-visible">
                         <div className="row start-xs">
                         <div className="col col-xs-12">
-                            
+                            <label className="no-mb">
+                                <input className="input-inline" type="text"  placeholder="yourwebsite.com"/>
+                            </label>
                         </div>
                         <div className="col col-xs-12 col-md-6 col-lg-8 space-xs space-sm">
                             <p className="small text-left no-mb">{data.footnote}</p>
