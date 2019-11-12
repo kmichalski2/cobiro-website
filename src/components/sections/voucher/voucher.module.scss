@@ -26,4 +26,46 @@
         top: -1px;
         transform: rotate(180deg);
     }
+
+    label {
+        width: 100%;
+    }
+
+    .inputInline {
+        justify-content: space-between;
+        align-items: center;
+
+        label:first-child {
+            margin-right: 0.5rem;
+        }
+        label:last-child {
+            margin-left: 0.5rem;
+        }
+    }
+    .inputWebsite  {
+        position: relative;
+        display: flex;
+       
+
+        input {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left-width: 0;
+        }
+        
+    }
+    .prefix {
+        // position: absolute;
+        // left: 0;
+        // bottom: 0;
+        // width: 5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background-color: $lightgrey;
+        display: flex;
+        align-items: center;
+        border: 1px solid $grey;
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+    }
 }

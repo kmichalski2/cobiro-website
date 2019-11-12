@@ -40,9 +40,25 @@ const Voucher = ({ data }) => {
                     <div className="card card-visible">
                         <div className="row start-xs">
                         <div className="col col-xs-12">
-                            <label className="no-mb">
-                                <input className="input-inline" type="text"  placeholder="yourwebsite.com"/>
-                            </label>
+                            <div className="space-xs-up">
+                                <label className={["text-left", ].join(' ')}>
+                                    <span className="text-bold space-xs-up small">Your website</span>
+                                    <div className={VoucherStyles.inputWebsite}>
+                                        <span className={['small', VoucherStyles.prefix].join(' ')}>https://</span>
+                                        <input className="input-inline" type="text"  placeholder="yourwebsite.com"/>
+                                    </div>
+                                </label>
+                            </div>
+                            <div className={["space-xs-up flex space-between", VoucherStyles.inputInline].join(' ')}>
+                                <label className="text-left">
+                                    <span className="text-bold space-xs-up small">Your name</span>
+                                    <input className="input-inline" type="text"/>
+                                </label>
+                                <label className="text-left">
+                                    <span className="text-bold space-xs-up small">Your email</span>
+                                    <input className="input-inline" type="text"/>
+                                </label>
+                            </div>
                         </div>
                         <div className="col col-xs-12 col-md-6 col-lg-8 space-xs space-sm">
                             <p className="small text-left no-mb">{data.footnote}</p>
