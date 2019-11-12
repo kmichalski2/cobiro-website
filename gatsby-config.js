@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Cobiro`,
@@ -12,7 +16,7 @@ module.exports = {
       resolve: `gatsby-source-datocms`,
       options: {
         apiToken: `4a1dffb73eaa5ac33d603097b25cc5`,
-        preview: false,
+        previewMode: process.env.CONTEXT === 'production' || process.env.GATSBY_ENVIRONMENT === 'production' ? false : true,
         disableLiveReload: false,
       },
     },
