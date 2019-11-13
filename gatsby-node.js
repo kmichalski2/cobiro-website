@@ -424,6 +424,19 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                 }
+                ... on DatoCmsVoucherSignup {
+                  backgroundColor
+                  bottomGradiantColor {
+                    hex
+                  }
+                  footnote
+                  linkTitle
+                  text
+                  title
+                  topGradiantColor {
+                    hex
+                  }
+                }
               }
             }
           }

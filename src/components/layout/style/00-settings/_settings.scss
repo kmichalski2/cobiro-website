@@ -36,6 +36,12 @@ $font-family-base: 'Soleil', Arial, Sans-Serif;
 $font-weight-base: 300;
 $headings-font-weight: 600;
 
+$border-radius: 5px;
+$input-border-radius: $border-radius;
+$input-border-color: $grey;
+$input-padding-vertical: 0.5rem;
+$input-padding-horizontal: 1rem;
+
 $grid-gutter: (
   xs: 2.2rem,
   lg: 30px
