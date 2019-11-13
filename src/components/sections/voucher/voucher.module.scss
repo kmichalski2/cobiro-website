@@ -29,6 +29,11 @@
 
     label {
         width: 100%;
+
+        .labelText {
+            margin-bottom: 0.5rem;
+            display: block;
+        }
     }
 
     .inputInline {
@@ -50,7 +55,17 @@
         input {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
-            border-left-width: 0;
+            // display: flex;
+            // align-items: center;
+            // padding-top: 1rem;
+            // padding-bottom: 1rem;
+
+            &::placeholder {
+                color: $grey;
+                opacity: 1;
+                font-size: 0.8em;
+                vertical-align: middle;
+            }
         }
         
     }
@@ -61,11 +76,14 @@
         // width: 5rem;
         padding-left: 1rem;
         padding-right: 1rem;
+        color: $lightblack;
         background-color: $lightgrey;
         display: flex;
         align-items: center;
         border: 1px solid $grey;
+        border-right-width: 0;
         border-top-left-radius: $border-radius;
         border-bottom-left-radius: $border-radius;
+
     }
 }
