@@ -6,10 +6,94 @@ import VoucherStyles from "./voucher.module.scss"
 
 const Voucher = ({ data }) => {
 
+    const [deposit, setDeposit] = useState(25)
     const [website, setWebsite] = useState('')
+    const [isWebsiteValid, setIsWebsiteValid] = useState(false)
+    const [name, setName] = useState('')
+    const [isNameValid, setIsNameValid] = useState(false)
+    const [email, setEmail] = useState('')
+    const [isEmailValid, setIsEmailValid] = useState(false)
 
     const topColor = data.topGradiantColor ? data.topGradiantColor.hex : null
     const bottomColor = data.bottomGradiantColor ? data.bottomGradiantColor.hex : null
+
+
+    const handleFocus = (event) => {
+        event.target.classList.add(VoucherStyles.focus)
+    }
+    const handleBlur = (event) => {
+        if((!event.target.value && event.target.classList.contains(VoucherStyles.focus))) {
+            event.target.classList.add(VoucherStyles.invalid)
+        }
+        event.target.classList.remove(VoucherStyles.focus)
+    }
+    const handleChange = (event) => {
+        if(event.target.name === 'name') {
+            setName(event.target.value)
+            handleChangeName(event)
+            console.log(name)
+        } else if(event.target.name === 'email') {
+            setEmail(event.target.value)
+            handleChangeEmail(event)
+            console.log(email)
+        } else if(event.target.name === 'website') {
+            setWebsite(event.target.value)
+            handleChangeWebsite(event)
+            console.log(website)
+        }
+    }
+    const handleChangeName = (event) => {
+        if(event.target.value && event.target.classList.contains(VoucherStyles.invalid)) {
+            event.target.classList.remove(VoucherStyles.invalid)
+            setIsNameValid(true)
+        } else if(event.target.value) {
+            setIsNameValid(true)  
+        } else if(!event.target.value) {
+            setIsNameValid(false)
+        }
+    }
+    const handleChangeEmail = (event) => {
+        const email = event.target.value
+        const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm;
+        if(email.match(re)) {
+            console.log('matching')
+            event.target.classList.remove(VoucherStyles.invalid)
+            setIsEmailValid(true)
+        } else {
+            console.log('not matching')
+            event.target.classList.add(VoucherStyles.invalid)
+            setIsEmailValid(false)
+        }   
+    }
+
+    const handleChangeWebsite = (event) => {
+        if(event.target.value) {
+            setIsWebsiteValid(true)
+        }
+    }
+
+    const handleSubmit = () => {
+        const submission = {
+            data: {
+                type: "payment-requests",
+                attributes: {
+                    payment_type: "subscription",
+                    plan_id: 1,
+                    customer_id: 5,
+                    customer: {
+                        deposit,
+                        email,
+                        name,
+                        website
+                    }
+                }
+            }
+        }
+        console.log(isWebsiteValid, isNameValid, isEmailValid)
+
+        console.log(submission)
+    }
+
 
     const transparentSways = (
         <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" x="0" y="0" viewBox="0 0 1920.28 259.65" className={VoucherStyles.whiteSways}>
@@ -34,9 +118,9 @@ const Voucher = ({ data }) => {
                         { data.text ? <div className={data.backgroundColor ? VoucherStyles.textWhite : null} dangerouslySetInnerHTML={{__html: data.text}}></div> : null }
                     </div>
                     <div className="col-xs-12 space-big">
-                        <button className="btn btn-large btn-select">$10</button>
-                        <button className="btn btn-large btn-select active">$25</button>
-                        <button className="btn btn-large btn-select">$100</button>
+                        <button className={["btn btn-large btn-select", deposit === 10 ? 'active' : null].join(' ')} onClick={() => setDeposit(10)}>$10</button>
+                        <button className={["btn btn-large btn-select", deposit === 25 ? 'active' : null].join(' ')} onClick={() => setDeposit(25)}>$25</button>
+                        <button className={["btn btn-large btn-select", deposit === 100 ? 'active' : null].join(' ')} onClick={() => setDeposit(100)}>$100</button>
                     </div>
                     <div className="col-xs-12 col-md-8 space-big">
                         <div className="card card-visible">
@@ -47,18 +131,18 @@ const Voucher = ({ data }) => {
                                         <span className={["text-bold small", VoucherStyles.labelText].join(' ')}>Your website</span>
                                         <div className={VoucherStyles.inputWebsite}>
                                             <span className={['small text-darkgrey', VoucherStyles.prefix].join(' ')}>http://</span>
-                                            <input className="input-inline" type="text" placeholder="yourwebsite.com"/>
+                                            <input className="input-inline" type="text" placeholder="yourwebsite.com" name="website" value={website} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                                         </div>
                                     </label>
                                 </div>
                                 <div className={["space-xs-up flex space-between", VoucherStyles.inputInline].join(' ')}>
                                     <label className="text-left">
                                         <span className={["text-bold small", VoucherStyles.labelText].join(' ')}>Your name</span>
-                                        <input className="input-inline" type="text"/>
+                                        <input className="input-inline" type="text" name="name" value={name} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                                     </label>
                                     <label className="text-left">
                                         <span className={["text-bold small", VoucherStyles.labelText].join(' ')}>Your email</span>
-                                        <input className="input-inline" type="text"/>
+                                        <input className="input-inline" type="text" name="email" value={email} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                                     </label>
                                 </div> 
                             </div>
@@ -66,7 +150,7 @@ const Voucher = ({ data }) => {
                                 <p className="small text-left no-mb">{data.footnote}</p>
                             </div>
                             <div className="col col-xs-12 col-md-6 col-lg-4 flex start-xs end-md top-md">
-                                <button className="btn btn-large">Get Started</button>
+                                <button className={["btn btn-large", VoucherStyles.btn].join(' ')} onClick={handleSubmit} disabled={isNameValid && isEmailValid && isWebsiteValid ? false : true}>Get Started</button>
                             </div>
                             </div>
                         </div>

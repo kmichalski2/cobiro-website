@@ -34,6 +34,12 @@
             margin-bottom: 0.5rem;
             display: block;
         }
+
+        input {
+            &.invalid {
+                border-color: red;
+            }
+        }
     }
 
     .inputInline {
@@ -85,5 +91,19 @@
         border-top-left-radius: $border-radius;
         border-bottom-left-radius: $border-radius;
 
+    }
+
+    .btn {
+        &:disabled {
+            opacity: 1;
+
+            // &:hover {
+                cursor: not-allowed !important;
+                pointer-events: visible;
+            &:hover {
+                opacity: 0.65;
+                background-color: $blue;
+            }
+        }
     }
 }
