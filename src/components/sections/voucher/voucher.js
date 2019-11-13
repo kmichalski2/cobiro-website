@@ -17,31 +17,29 @@ const Voucher = ({ data }) => {
     const topColor = data.topGradiantColor ? data.topGradiantColor.hex : null
     const bottomColor = data.bottomGradiantColor ? data.bottomGradiantColor.hex : null
 
-
     const handleFocus = (event) => {
         event.target.classList.add(VoucherStyles.focus)
     }
     const handleBlur = (event) => {
-        if((!event.target.value && event.target.classList.contains(VoucherStyles.focus))) {
+        if((!event.target.value && !event.target.classList.contains(VoucherStyles.invalid))) {
             event.target.classList.add(VoucherStyles.invalid)
         }
         event.target.classList.remove(VoucherStyles.focus)
     }
+
     const handleChange = (event) => {
         if(event.target.name === 'name') {
             setName(event.target.value)
             handleChangeName(event)
-            console.log(name)
         } else if(event.target.name === 'email') {
             setEmail(event.target.value)
             handleChangeEmail(event)
-            console.log(email)
         } else if(event.target.name === 'website') {
             setWebsite(event.target.value)
             handleChangeWebsite(event)
-            console.log(website)
         }
     }
+
     const handleChangeName = (event) => {
         if(event.target.value && event.target.classList.contains(VoucherStyles.invalid)) {
             event.target.classList.remove(VoucherStyles.invalid)
@@ -52,23 +50,36 @@ const Voucher = ({ data }) => {
             setIsNameValid(false)
         }
     }
+
     const handleChangeEmail = (event) => {
         const email = event.target.value
         const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm;
         if(email.match(re)) {
-            console.log('matching')
             event.target.classList.remove(VoucherStyles.invalid)
             setIsEmailValid(true)
         } else {
-            console.log('not matching')
             event.target.classList.add(VoucherStyles.invalid)
             setIsEmailValid(false)
         }   
     }
 
     const handleChangeWebsite = (event) => {
-        if(event.target.value) {
+        const url = event.target.value
+        if(url && validateUrl(url)) {
             setIsWebsiteValid(true)
+            event.target.classList.remove(VoucherStyles.invalid)
+        } else {
+            setIsWebsiteValid(false)
+            event.target.classList.add(VoucherStyles.invalid)
+        }
+    }
+
+    const validateUrl = (url) => {
+        const re = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
+        if(url.match(re)) {
+            return true
+        } else {
+            return false
         }
     }
 
@@ -89,8 +100,7 @@ const Voucher = ({ data }) => {
                 }
             }
         }
-        console.log(isWebsiteValid, isNameValid, isEmailValid)
-
+        
         console.log(submission)
     }
 
