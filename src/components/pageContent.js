@@ -16,6 +16,7 @@ import Text from "./sections/text/text"
 import Video from "../components/sections/video/video"
 import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel"
 import Image from "../components/sections/image/image"
+import Voucher from "../components/sections/voucher/voucher"
 
 const pageContent = ({ data }) => {
   return (
@@ -54,6 +55,8 @@ const pageContent = ({ data }) => {
                 return <Video data={data.sections[index]} key={index}/>
             case 'Image':
                 return <Image data={data.sections[index]} key={index}/>
+            case 'VoucherSignup':
+                return <Voucher data={data.sections[index]} key={index}/>
             default:
                 return null
             }

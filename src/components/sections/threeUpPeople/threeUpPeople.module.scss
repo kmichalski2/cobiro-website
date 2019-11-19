@@ -1,22 +1,85 @@
 @import '../../layout/style/globals';
 
-.image {
-    border-radius: 20px;
-}
-@include mq($from: md) {
-    .image {
-        margin-bottom: 1rem;
-    }
-}
-@include mq($until: md) {
-    .textWrapper {
-        margin-left: 1rem;
-    }
-}
-.linkedinLink {
-    line-height: 0;
+.people {
+    flex-direction: column;
 
-    img {
-        border-radius: 4px;
+    .image {
+        border-radius: 20px;
+    }
+    @include mq($from: md) {
+        .image {
+            margin-bottom: 1rem;
+        }
+    }
+    
+    @include mq($until: md) {
+        .textWrapper {
+            margin-left: 1rem;
+            display: block;
+        }
+    }
+    @include mq($until: sm) {
+        .textWrapper {
+            display: flex;
+            margin-left: 0;
+            margin-top: 1.25rem;
+            h4, h5 {
+                padding-right: 0.5rem;
+            }
+        }
+    }
+    .linkedinLink {
+        line-height: 0;
+        
+        img.socialIcon {
+			width: 1.5rem;
+			max-width: 1.5rem;
+			margin: 0;
+            border-radius: 4px;
+        }
+    }
+
+    @include mq($until: md) {
+        
+        .cardHeaderWrapper {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            flex-direction: row;
+            justify-content: flex-start;
+            margin-bottom: 1.25rem;
+            position: relative;
+
+            &>div {
+                width: 100%;
+            }
+            .socialIcon {
+                position: relative;
+                right: 0;
+                top: 0;
+            }
+        }
+    }
+
+    @include mq($until: sm) {
+        .cardHeaderWrapper {
+            display: block;
+            margin-bottom: 0;
+
+            img {
+                margin-bottom: 1rem;
+            }
+
+            .socialIcon {
+                position: relative;
+            }
+        }
     }
 }
+
+
+
+
+
+
+
