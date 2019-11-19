@@ -5,20 +5,6 @@ import ThreeUpPeopleStyles from "./threeUpPeople.module.scss"
 
 
 const ThreeUpPeople = ({ data }) => {
-  const peopleClickHandler = event => {
-    const el = event.target
-    const text = el.previousElementSibling
-    const textHeight = text.scrollHeight
-
-    if (el.parentNode.classList.contains("expand")) {
-      el.innerText = "View full profile"
-      text.style.maxHeight = null
-    } else {
-      el.innerText = "Hide full profile"
-      text.style.maxHeight = textHeight + "px"
-    }
-    el.parentNode.classList.toggle("expand")
-  }
 
   return (
     <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
@@ -31,22 +17,22 @@ const ThreeUpPeople = ({ data }) => {
             </div>
             {data.people.map((p, index) => (
               <div key={index} className="col col-xs-12 col-md-6 col-lg-4">
-              <div className="card people">
-                <div className="card-header-wrapper">
+              <div className={["card", ThreeUpPeopleStyles.people].join(' ')}>
+                <div className={ThreeUpPeopleStyles.cardHeaderWrapper}>
                   {p.image.fluid ?
                   <Img fluid={p.image.fluid} className={[ThreeUpPeopleStyles.image, "card-img-full"].join(' ')} alt={p.name} />
                   : 
                   <img src={p.image.url} className={[ThreeUpPeopleStyles.image, "card-img-full"].join(' ')} alt={p.name} />
                   }
                   <div className={[ThreeUpPeopleStyles.textWrapper, "flex between-xs text-left"].join(' ')}>
-                    <div>
+                    <div className="space-md-up">
                       <h4>{p.name}</h4>
                       <h5>{p.title}</h5>
                     </div>
                     {p.linkedinLink ? 
                     <a className={ThreeUpPeopleStyles.linkedinLink} href={p.linkedinLink} target="_blank" rel="noopener noreferrer">
                       <img
-                        className="social-icon"
+                        className={ThreeUpPeopleStyles.socialIcon}
                         src={linkedin}
                         alt="Bo Krogsgaard"
                       />
@@ -54,16 +40,9 @@ const ThreeUpPeople = ({ data }) => {
                     : null}
                   </div>
                 </div>
-                <p className="small text-left-xs people-description">
+                <p className="small text-left-xs">
                   {p.text}
                 </p>
-                <button
-                  className="btn hidden-md-up"
-                  onClick={peopleClickHandler}
-                  aria-label="View full profile"
-                >
-                  View full profile
-                </button>
               </div>
             </div>
             ))}
