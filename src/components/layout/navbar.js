@@ -5,33 +5,56 @@ import Img from "gatsby-image"
 
 const Navbar = ({ menuItems }) => {
 
+  // Initial variables
+  let body
+  let mainMenu
+  let menuListItems
+  let logoInvert
+  let menuToggle
+  let btnRight
+  let btnLeft
+  let subMenu
+  let subArray
+  let windowWidth
+
   useEffect(() => {
     // Initial variables
-    const body = document.querySelector("BODY")
-    const mainMenu = document.querySelector("nav.main-menu")
-    const menuListItems = document.querySelector(".main-menu-inner")
-    const logoInvert = document.querySelector(".brand")
-    const menuToggle = document.querySelector(".menu-toggle")
-    const btnRight = document.querySelector(".btn-right")
-    const btnLeft = document.querySelector(".btn-left")
-    const subMenu = document.querySelectorAll('.submenu')
-    const subArray = Array.prototype.slice.call(subMenu);
-    let mainMenuHeight = mainMenu.offsetHeight
-    // body.style.paddingTop = `${mainMenuHeight}px`
-    body.style.paddingTop = `0px`
-    
+    body = document.querySelector("BODY")
+    mainMenu = document.querySelector("nav.main-menu")
+    menuListItems = document.querySelector(".main-menu-inner")
+    logoInvert = document.querySelector(".brand")
+    menuToggle = document.querySelector(".menu-toggle")
+    btnRight = document.querySelector(".btn-right")
+    btnLeft = document.querySelector(".btn-left")
+    subMenu = document.querySelectorAll('.submenu')
+    subArray = Array.prototype.slice.call(subMenu)
+    windowWidth = window.innerWidth
 
-    // Setting initial padding-top on body equal to height of navbar
+    // Fix for unintentional animating of menu when resizing browser window
+    if(!mainMenu.classList.contains("unhovered") && window.innerWidth > "960") {
+      mainMenu.classList.add("unhovered")
+    }
+
+    // Fix for unintentional animating of menu when resizing browser window
     const resizeHandler = () => {
       setSubMenuOffset()
-      mainMenuHeight = mainMenu.offsetHeight
-      body.style.paddingTop = `${mainMenuHeight}px`
-      
+      if(mainMenu.classList.contains("touched") && window.innerWidth > "960") {
+        mainMenu.classList.remove("touched")
+      } 
+      if(mainMenu.classList.contains("unhovered") && window.innerWidth < "960") {
+        mainMenu.classList.remove("unhovered")
+      } 
+      if(mainMenu.classList.contains("hovered")) {
+        mainMenu.classList.remove("hovered")
+      } 
+      if(!mainMenu.classList.contains("unhovered") && window.innerWidth > "960") {
+        mainMenu.classList.add("unhovered")
+      }
     }
 
     // Event listeners for clicks and browser resize
     mainMenu.addEventListener("click", menuClickHandler, false)
-    mainMenu.addEventListener("resize", resizeHandler, false)
+    window.addEventListener("resize", resizeHandler, false)
 
     function getPageTopLeft(el) {
       const rect = el.getBoundingClientRect();
@@ -40,15 +63,21 @@ const Navbar = ({ menuItems }) => {
     }
 
     const setSubMenuOffset = () => {
-      subArray.map((sub) => {
-        let subOffset = getPageTopLeft(sub)
-        if(subOffset < 0 ) {
-          sub.style.marginLeft = -1 * subOffset + 16 + 'px'
-          sub.querySelector('.submenu-triangle').style.marginLeft = subOffset + -16 + 'px'
-          return true
+        subArray.map((sub) => {
+          if(window.innerWidth > "960") {
+            let subOffset = getPageTopLeft(sub)
+            if(subOffset < 0 ) {
+              sub.style.marginLeft = -1 * subOffset + 16 + 'px'
+              sub.querySelector('.submenu-triangle').style.marginLeft = subOffset + -16 + 'px'
+              return true
+            } else {
+              sub.style.marginLeft = 0
+            }
+            return false
+        } else {
+          sub.style.marginLeft = '-1.1rem'
         }
-        return false
-      })
+        })
     }
     setSubMenuOffset()
 
@@ -59,7 +88,7 @@ const Navbar = ({ menuItems }) => {
       }
 
       debounce_timer = window.setTimeout(function() {
-        if (window.pageYOffset > 0) {
+        if (window.pageYOffset >= 1) {
           mainMenu.classList.add("navbar-border")
           menuListItems.classList.add("menu-items")
           logoInvert.classList.add("invert")
@@ -93,8 +122,12 @@ const Navbar = ({ menuItems }) => {
             logoInvert.classList.remove("invert")
             }
           }
-
           mainMenu.classList.toggle("closed")
+          mainMenu.classList.toggle("opened")
+          
+          if(!mainMenu.classList.contains("touched")) {
+            mainMenu.classList.add("touched")
+          }
         } else if (event.target.classList.contains("has-submenu")) {
           // Else Check if the clicked element is equal to it
           event.preventDefault()
@@ -129,6 +162,13 @@ const Navbar = ({ menuItems }) => {
     }
   })
 
+  const mouseEnterSubMenuHandler = (event) => {
+    if(event.target.classList.contains('has-submenu')) {
+      mainMenu.classList.add("hovered")
+      mainMenu.classList.remove("unhovered")
+    }
+  }
+
   return (
     <header>
       <nav className="main-menu closed" id="navbar">
@@ -157,7 +197,7 @@ const Navbar = ({ menuItems }) => {
                     return a.menu_item_order - b.menu_item_order;
                   }).map((item, index) => (
                   <li key={index} className={item.submenu.length > 0 ? "submenu-parent" : null}>
-                  <Link className={item.submenu.length > 0 ? 'has-submenu' : null } activeClassName="active" to={item.link ? `/${item.link.slug}` : '#'}>
+                  <Link className={item.submenu.length > 0 ? 'has-submenu' : null } activeClassName="active" to={item.link ? `/${item.link.slug}` : '#'} onMouseEnter={mouseEnterSubMenuHandler}>
                     {item.linkTitle}
                   </Link>
                   {item.submenu.length > 0 ?
