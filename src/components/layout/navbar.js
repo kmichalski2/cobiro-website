@@ -123,6 +123,7 @@ const Navbar = ({ menuItems }) => {
             }
           }
           mainMenu.classList.toggle("closed")
+          mainMenu.classList.toggle("opened")
           
           if(!mainMenu.classList.contains("touched")) {
             mainMenu.classList.add("touched")
