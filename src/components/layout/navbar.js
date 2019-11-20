@@ -88,7 +88,7 @@ const Navbar = ({ menuItems }) => {
       }
 
       debounce_timer = window.setTimeout(function() {
-        if (window.pageYOffset > 0) {
+        if (window.pageYOffset >= 1) {
           mainMenu.classList.add("navbar-border")
           menuListItems.classList.add("menu-items")
           logoInvert.classList.add("invert")
