@@ -63,15 +63,21 @@ const Navbar = ({ menuItems }) => {
     }
 
     const setSubMenuOffset = () => {
-      subArray.map((sub) => {
-        let subOffset = getPageTopLeft(sub)
-        if(subOffset < 0 ) {
-          sub.style.marginLeft = -1 * subOffset + 16 + 'px'
-          sub.querySelector('.submenu-triangle').style.marginLeft = subOffset + -16 + 'px'
-          return true
+        subArray.map((sub) => {
+          if(window.innerWidth > "960") {
+            let subOffset = getPageTopLeft(sub)
+            if(subOffset < 0 ) {
+              sub.style.marginLeft = -1 * subOffset + 16 + 'px'
+              sub.querySelector('.submenu-triangle').style.marginLeft = subOffset + -16 + 'px'
+              return true
+            } else {
+              sub.style.marginLeft = 0
+            }
+            return false
+        } else {
+          sub.style.marginLeft = '-1.1rem'
         }
-        return false
-      })
+        })
     }
     setSubMenuOffset()
 
