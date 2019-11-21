@@ -45,8 +45,8 @@ const Sites = () => {
             setAlert('')
             navigate(`/sites/${newUrl}`)
             setIsLoading(true)
-            fetch(`/.netlify/functions/sites?url=${newUrl}`, {
-                method: 'POST'
+            fetch(`https://pmp.cobiro.com/pmp/?url=http://www.${newUrl}&format=json`, {
+                method: 'GET'
               })
               .then((response) => {
                 return response.json();
@@ -54,6 +54,7 @@ const Sites = () => {
               .then((response) => {
                 if(response.status === 200) {
                     setPageData(response.data)
+                    console.log(response.data)
                 } else {
                     setAlert('Error fetching data')
                     console.log('Error fetching data')
