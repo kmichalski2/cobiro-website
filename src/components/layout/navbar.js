@@ -8,7 +8,7 @@ const Navbar = ({ menuItems }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [windowWidth, setWindowWidth] = useState(window !== undefined ? window.innerWidth : null)
+  const [windowWidth, setWindowWidth] = useState(typeof window != "undefined" ? window.innerWidth : null)
   const [mainMenuHovered, setMainMenuHovered] = useState(false)
 
   const mainMenu = React.createRef();
