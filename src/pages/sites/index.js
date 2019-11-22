@@ -7,6 +7,7 @@ import SEO from "../../components/seo"
 import SitesStyles from './sites.module.scss'
 
 const Sites = () => {
+    const axios = require('axios');
     
     const [isLoaded, setIsLoaded] = useState(false)
     const [urlInputted, setUrlInputted] = useState('');
@@ -45,13 +46,15 @@ const Sites = () => {
             setAlert('')
             navigate(`/sites/${newUrl}`)
             setIsLoading(true)
-            fetch(`https://pmp.cobiro.com/pmp/?url=http://www.${newUrl}&format=json`, {
-                method: 'GET'
-              })
-              .then((response) => {
-                return response.json();
-              })
-              .then((response) => {
+
+            axios.get('https://pmp.cobiro.com/pmp/', {
+                params: {
+                    url: `http://www.${newUrl}`,
+                    format: 'json'
+                }
+            })
+            .then(function (response) {
+                console.log(response);
                 if(response.status === 200) {
                     setPageData(response.data)
                     console.log(response.data)
@@ -59,12 +62,35 @@ const Sites = () => {
                     setAlert('Error fetching data')
                     console.log('Error fetching data')
                 }
+            })
+            .catch(function (error) {
+                console.log('Error: ', error)
+                setAlert('Error')
+            })
+            .finally(function () {
                 setIsLoading(false)
-              })
-              .catch((error) => {
-                  console.log('Error: ', error)
-                  setAlert('Error')
-              });
+            });  
+
+            // fetch(`https://pmp.cobiro.com/pmp/?url=http://www.${newUrl}&format=json`, {
+            //     method: 'GET'
+            //   })
+            //   .then((response) => {
+            //     return response.json();
+            //   })
+            //   .then((response) => {
+            //     if(response.status === 200) {
+            //         setPageData(response.data)
+            //         console.log(response.data)
+            //     } else {
+            //         setAlert('Error fetching data')
+            //         console.log('Error fetching data')
+            //     }
+            //     setIsLoading(false)
+            //   })
+            //   .catch((error) => {
+            //       console.log('Error: ', error)
+            //       setAlert('Error')
+            //   });
               
         } else {
             // setAlert('The url you typed is not valid')
