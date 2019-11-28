@@ -5,14 +5,17 @@ import VoucherStyles from "./voucher.module.scss"
 
 
 const Voucher = ({ data }) => {
+    const axios = require('axios');
 
-    const [deposit, setDeposit] = useState(25)
+    const [deposit, setDeposit] = useState(50)
     const [website, setWebsite] = useState('')
     const [isWebsiteValid, setIsWebsiteValid] = useState(false)
     const [name, setName] = useState('')
     const [isNameValid, setIsNameValid] = useState(false)
     const [email, setEmail] = useState('')
     const [isEmailValid, setIsEmailValid] = useState(false)
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const topColor = data.topGradiantColor ? data.topGradiantColor.hex : null
     const bottomColor = data.bottomGradiantColor ? data.bottomGradiantColor.hex : null
@@ -84,24 +87,33 @@ const Voucher = ({ data }) => {
     }
 
     const handleSubmit = () => {
-        const submission = {
+        setIsLoading(true)
+
+        let password = Math.random().toString(36).substring(1);
+
+        axios({
+            method: 'post',
+            url: 'https://hub.test-cobiro.com/v1/register',
             data: {
-                type: "payment-requests",
+                type: "users",
                 attributes: {
-                    payment_type: "subscription",
-                    plan_id: 1,
-                    customer_id: 5,
-                    customer: {
-                        deposit,
-                        email,
-                        name,
-                        website
-                    }
+                    email: email,
+                    first_name: name,
+                    last_name: "",
+                    password: password
                 }
-            }
-        }
-        
-        console.log(submission)
+            },
+            headers: {'Content-Type': 'application/vnd.api+json'}
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          }) 
+          .finally(function () {
+            setIsLoading(false)
+          });
     }
 
 
@@ -127,14 +139,21 @@ const Voucher = ({ data }) => {
                         { data.title ? <h2 className={data.backgroundColor ? 'text-white' : null}>{data.title}</h2> : null }
                         { data.text ? <div className={data.backgroundColor ? VoucherStyles.textWhite : null} dangerouslySetInnerHTML={{__html: data.text}}></div> : null }
                     </div>
-                    <div className="col-xs-12 space-big">
-                        <button className={["btn btn-large btn-select", deposit === 10 ? 'active' : null].join(' ')} onClick={() => setDeposit(10)}>$10</button>
-                        <button className={["btn btn-large btn-select", deposit === 25 ? 'active' : null].join(' ')} onClick={() => setDeposit(25)}>$25</button>
-                        <button className={["btn btn-large btn-select", deposit === 100 ? 'active' : null].join(' ')} onClick={() => setDeposit(100)}>$100</button>
-                    </div>
-                    <div className="col-xs-12 col-md-8 space-big">
+                    
+                    <div className="col col-xs-12 col-lg-6 space-big">
                         <div className="card card-visible">
                             <div className="row start-xs">
+                            <div className={["col col-xs-12", VoucherStyles.depositButtons].join(' ')}>
+                                <p className={["text-bold", VoucherStyles.labelText].join(' ')}>Select budget</p>
+                                <div>
+                                    <button className={["btn btn-large btn-select", deposit === 10 ? VoucherStyles.active : null].join(' ')} onClick={() => setDeposit(10)}>$10</button>
+                                    <button className={["btn btn-large btn-select", deposit === 25 ? VoucherStyles.active : null].join(' ')} onClick={() => setDeposit(25)}>$25</button>
+                                </div>
+                                <div>
+                                    <button className={["btn btn-large btn-select", VoucherStyles.mostUsed, deposit === 50 ? VoucherStyles.active : null].join(' ')} onClick={() => setDeposit(50)}>$50<span>Most used</span></button>
+                                    <button className={["btn btn-large btn-select", deposit === 100 ? VoucherStyles.active : null].join(' ')} onClick={() => setDeposit(100)}>$100</button>
+                                </div>
+                            </div>
                             <div className="col col-xs-12">
                                 <div className="space-xs-up">
                                     <label className={["text-left", ].join(' ')}>
@@ -145,7 +164,19 @@ const Voucher = ({ data }) => {
                                         </div>
                                     </label>
                                 </div>
-                                <div className={["space-xs-up flex space-between", VoucherStyles.inputInline].join(' ')}>
+                                <div className="space-xs-up">
+                                    <label className="text-left">
+                                        <span className={["text-bold small", VoucherStyles.labelText].join(' ')}>Your name</span>
+                                        <input className="input-inline" type="text" name="name" value={name} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
+                                    </label>
+                                </div>
+                                <div className="space-xs-up">
+                                    <label className="text-left">
+                                        <span className={["text-bold small", VoucherStyles.labelText].join(' ')}>Your email</span>
+                                        <input className="input-inline" type="text" name="email" value={email} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
+                                    </label>
+                                </div>
+                                {/* <div className={["space-xs-up flex space-between", VoucherStyles.inputInline].join(' ')}>
                                     <label className="text-left">
                                         <span className={["text-bold small", VoucherStyles.labelText].join(' ')}>Your name</span>
                                         <input className="input-inline" type="text" name="name" value={name} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
@@ -154,13 +185,11 @@ const Voucher = ({ data }) => {
                                         <span className={["text-bold small", VoucherStyles.labelText].join(' ')}>Your email</span>
                                         <input className="input-inline" type="text" name="email" value={email} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                                     </label>
-                                </div> 
+                                </div>  */}
                             </div>
-                            <div className="col col-xs-12 col-md-6 col-lg-8 space-xs space-sm">
-                                <p className="small text-left no-mb">{data.footnote}</p>
-                            </div>
-                            <div className="col col-xs-12 col-md-6 col-lg-4 flex start-xs end-md top-md">
-                                <button className={["btn btn-large", VoucherStyles.btn].join(' ')} onClick={handleSubmit} disabled={isNameValid && isEmailValid && isWebsiteValid ? false : true}>Get Started</button>
+                            <div className="col col-xs-12 flex top-xs top-sm start-xs flex-column-xs flex-row-sm">
+                                <p className="small text-left">{data.footnote}</p>
+    <button className={["btn btn-large", VoucherStyles.btn].join(' ')} onClick={handleSubmit} disabled={isNameValid && isEmailValid && isWebsiteValid ? false : true}>{ !isLoading ? 'Get started' : 'Loading'}</button>
                             </div>
                             </div>
                         </div>
