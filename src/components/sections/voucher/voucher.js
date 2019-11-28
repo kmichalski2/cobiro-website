@@ -1,4 +1,3 @@
-import { Link } from "gatsby"
 import React, { useState } from "react"
 
 import VoucherStyles from "./voucher.module.scss"
@@ -7,18 +6,22 @@ import VoucherStyles from "./voucher.module.scss"
 const Voucher = ({ data }) => {
     const axios = require('axios');
 
-    const [deposit, setDeposit] = useState(50)
+    const [planId, setPlanId] = useState(3)
     const [website, setWebsite] = useState('')
     const [isWebsiteValid, setIsWebsiteValid] = useState(false)
     const [name, setName] = useState('')
     const [isNameValid, setIsNameValid] = useState(false)
     const [email, setEmail] = useState('')
     const [isEmailValid, setIsEmailValid] = useState(false)
-
+    const [errors, setErrors] = useState()
     const [isLoading, setIsLoading] = useState(false)
+
 
     const topColor = data.topGradiantColor ? data.topGradiantColor.hex : null
     const bottomColor = data.bottomGradiantColor ? data.bottomGradiantColor.hex : null
+
+    const password = Math.random().toString(36).substring(1)
+
 
     const handleFocus = (event) => {
         event.target.classList.add(VoucherStyles.focus)
@@ -86,34 +89,105 @@ const Voucher = ({ data }) => {
         }
     }
 
-    const handleSubmit = () => {
-        
+    const handleSubmit = async () => {
+        setErrors()
         setIsLoading(true)
-        let password = Math.random().toString(36).substring(1);
 
-        axios({
+        await registerUser();
+    }
+
+
+    const registerUser = async () => {
+        await axios({
             method: 'post',
             url: 'https://hub.test-cobiro.com/v1/register',
             data: {
-                type: "users",
-                attributes: {
-                    email: email,
-                    first_name: name,
-                    last_name: "",
-                    password: password
+                data: {
+                    type: "users",
+                    attributes: {
+                        email: email,
+                        first_name: name,
+                        last_name: "lastname",
+                        password: password
+                    }
                 }
             },
-            headers: {'Content-Type': 'application/vnd.api+json'}
+            headers: {"Content-Type": "application/vnd.api+json"}
           })
-          .then(function (response) {
+          .then(response => {
             console.log(response);
+            setErrors()
+            // setUserId(response.data.data.id)
+            loginUser(response.data.data.id)
           })
-          .catch(function (error) {
-            console.log(error);
-          }) 
-          .finally(function () {
+          .catch(error => {
+            console.log(error.response);
+            setErrors(error.response.data.errors)
             setIsLoading(false)
-          });
+          }) 
+    }
+
+    const loginUser = async (customerId) => {
+        await axios({
+            method: 'post',
+            url: 'https://hub.test-cobiro.com/v1/login',
+            data: {
+                data: {
+                    type: "login",
+                    attributes: {
+                        email: email,
+                        password: password
+                    }
+                }
+            }
+          })
+          .then(response => {
+            console.log(response);
+            setErrors()
+            // setAccessToken(response.data.data.attributes.access_token)
+            // setRefreshToken(response.data.data.attributes.refresh_token)
+            getPaymentUrl(response.data.data.attributes.access_token, customerId)
+          })
+          .catch(error => {
+            console.log('Error: ', error.response);
+            setErrors(error.response.data.errors)
+            setIsLoading(false)
+          }) 
+    }
+
+    const getPaymentUrl = async (token, customerId) => {
+        await axios({
+            method: 'post',
+            url: 'https://hub.test-cobiro.com/v1/valitor/payment-requests',
+            data: {
+                data: {
+                    type: "payment-requests",
+                    attributes: {
+                        payment_type: "subscription",
+                        plan_id: planId,
+                        customer_id: customerId,
+                        customer: {
+                            email: email,
+                            first_name: name,
+                            last_name: "example",
+                            address: "somewhere",
+                            website: website
+                        }
+                    }
+                }
+            },
+            headers: {Authorization: `Bearer ${token}`}
+          })
+          .then(response => {
+            console.log(response);
+            setErrors()
+            window.location.href = response.data.meta.url
+          })
+          .catch(error => {
+            console.log(error.response);
+            setErrors(error.response.data.errors)
+            setIsLoading(false)
+          }) 
     }
 
 
@@ -146,12 +220,12 @@ const Voucher = ({ data }) => {
                             <div className={["col col-xs-12", VoucherStyles.depositButtons].join(' ')}>
                                 <p className={["text-bold", VoucherStyles.labelText].join(' ')}>Select budget</p>
                                 <div>
-                                    <button className={["btn btn-large btn-select", deposit === 10 ? VoucherStyles.active : null].join(' ')} onClick={() => setDeposit(10)}>$10</button>
-                                    <button className={["btn btn-large btn-select", deposit === 25 ? VoucherStyles.active : null].join(' ')} onClick={() => setDeposit(25)}>$25</button>
+                                    <button className={["btn btn-large btn-select", planId === 1 ? VoucherStyles.active : null].join(' ')} onClick={() => setPlanId(1)}>$10</button>
+                                    <button className={["btn btn-large btn-select", planId === 2 ? VoucherStyles.active : null].join(' ')} onClick={() => setPlanId(2)}>$25</button>
                                 </div>
                                 <div>
-                                    <button className={["btn btn-large btn-select", VoucherStyles.mostUsed, deposit === 50 ? VoucherStyles.active : null].join(' ')} onClick={() => setDeposit(50)}>$50<span>Most used</span></button>
-                                    <button className={["btn btn-large btn-select", deposit === 100 ? VoucherStyles.active : null].join(' ')} onClick={() => setDeposit(100)}>$100</button>
+                                    <button className={["btn btn-large btn-select", VoucherStyles.mostUsed, planId === 3 ? VoucherStyles.active : null].join(' ')} onClick={() => setPlanId(3)}>$50<span>Most used</span></button>
+                                    <button className={["btn btn-large btn-select", planId === 4 ? VoucherStyles.active : null].join(' ')} onClick={() => setPlanId(4)}>$100</button>
                                 </div>
                             </div>
                             <div className="col col-xs-12">
@@ -176,20 +250,23 @@ const Voucher = ({ data }) => {
                                         <input className="input-inline" type="text" name="email" value={email} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                                     </label>
                                 </div>
-                                {/* <div className={["space-xs-up flex space-between", VoucherStyles.inputInline].join(' ')}>
-                                    <label className="text-left">
-                                        <span className={["text-bold small", VoucherStyles.labelText].join(' ')}>Your name</span>
-                                        <input className="input-inline" type="text" name="name" value={name} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
-                                    </label>
-                                    <label className="text-left">
-                                        <span className={["text-bold small", VoucherStyles.labelText].join(' ')}>Your email</span>
-                                        <input className="input-inline" type="text" name="email" value={email} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
-                                    </label>
-                                </div>  */}
                             </div>
+                            { errors ? 
+                                <div className={["col col-xs-12 space-xs-up", VoucherStyles.errorTexts].join(' ')}>
+                                    <p className="small text-left text-red">{errors.map((err, i) => (i < errors.length - 1 && errors.length > 1) ? `${err.detail} ` : err.detail || err.title)}</p> 
+                                </div>
+                            : null }
                             <div className="col col-xs-12 flex top-xs top-sm start-xs flex-column-xs flex-row-sm">
+                                
                                 <p className="small text-left">{data.footnote}</p>
-    <button className={["btn btn-large", VoucherStyles.btn].join(' ')} onClick={handleSubmit} disabled={isNameValid && isEmailValid && isWebsiteValid ? false : true}>{ !isLoading ? 'Get started' : 'Loading'}</button>
+                                <button 
+                                    className={["btn btn-large", VoucherStyles.btn, isLoading ? VoucherStyles.btnSpinner : null]
+                                        .join(' ')} 
+                                    onClick={handleSubmit} 
+                                    disabled={isNameValid && isEmailValid && isWebsiteValid && !isLoading ? false : true}>
+                                        <span className={VoucherStyles.submitText}>Get started</span>
+                                        <span className={VoucherStyles.spinner}></span>
+                                </button>
                             </div>
                             </div>
                         </div>
