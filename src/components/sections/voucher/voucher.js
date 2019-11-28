@@ -87,8 +87,8 @@ const Voucher = ({ data }) => {
     }
 
     const handleSubmit = () => {
+        
         setIsLoading(true)
-
         let password = Math.random().toString(36).substring(1);
 
         axios({
