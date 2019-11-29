@@ -115,13 +115,13 @@ const Voucher = ({ data }) => {
             headers: {"Content-Type": "application/vnd.api+json"}
           })
           .then(response => {
-            console.log(response);
+            console.log('USER REGISTRATION RESPONSE: ', response);
             setErrors()
             // setUserId(response.data.data.id)
             loginUser(response.data.data.id)
           })
           .catch(error => {
-            console.log(error.response);
+            console.log('USER REGISTRATION ERROR: ', error.response);
             setErrors(error.response.data.errors)
             setIsLoading(false)
           }) 
@@ -142,14 +142,14 @@ const Voucher = ({ data }) => {
             }
           })
           .then(response => {
-            console.log(response);
+            console.log('USER LOGIN RESPONSE: ', response);
             setErrors()
             // setAccessToken(response.data.data.attributes.access_token)
             // setRefreshToken(response.data.data.attributes.refresh_token)
             getPaymentUrl(response.data.data.attributes.access_token, customerId)
           })
           .catch(error => {
-            console.log('Error: ', error.response);
+            console.log('USER LOGIN ERROR: ', error.response);
             setErrors(error.response.data.errors)
             setIsLoading(false)
           }) 
@@ -179,12 +179,12 @@ const Voucher = ({ data }) => {
             headers: {Authorization: `Bearer ${token}`}
           })
           .then(response => {
-            console.log(response);
+            console.log('PAYMENT URL RESPONSE: ', response);
             setErrors()
             window.location.href = response.data.meta.url
           })
           .catch(error => {
-            console.log(error.response);
+            console.log('PAYMENT URL ERROR: ', error.response);
             setErrors(error.response.data.errors)
             setIsLoading(false)
           }) 
@@ -214,7 +214,7 @@ const Voucher = ({ data }) => {
                         { data.text ? <div className={data.backgroundColor ? VoucherStyles.textWhite : null} dangerouslySetInnerHTML={{__html: data.text}}></div> : null }
                     </div>
                     
-                    <div className="col col-xs-12 col-lg-6 space-big">
+                    <div className="col col-xs-12 col-md-10 col-lg-8 col-xl-6 space-big">
                         <div className="card card-visible">
                             <div className="row start-xs">
                             <div className={["col col-xs-12", VoucherStyles.depositButtons].join(' ')}>
@@ -256,7 +256,7 @@ const Voucher = ({ data }) => {
                                     <p className="small text-left text-red">{errors.map((err, i) => (i < errors.length - 1 && errors.length > 1) ? `${err.detail} ` : err.detail || err.title)}</p> 
                                 </div>
                             : null }
-                            <div className="col col-xs-12 flex top-xs top-sm start-xs flex-column-xs flex-row-sm">
+                            <div className="col col-xs-12 flex top-xs start-xs flex-column-xs flex-row-md">
                                 
                                 <p className="small text-left">{data.footnote}</p>
                                 <button 
