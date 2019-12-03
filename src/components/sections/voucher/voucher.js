@@ -89,16 +89,16 @@ const Voucher = ({ data }) => {
         }
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         setErrors()
         setIsLoading(true)
 
-        await registerUser();
+        registerUser();
     }
 
 
-    const registerUser = async () => {
-        await axios({
+    const registerUser = () => {
+        axios({
             method: 'post',
             url: 'https://hub.test-cobiro.com/v1/register',
             data: {
@@ -127,8 +127,8 @@ const Voucher = ({ data }) => {
           }) 
     }
 
-    const loginUser = async (customerId) => {
-        await axios({
+    const loginUser = (customerId) => {
+        axios({
             method: 'post',
             url: 'https://hub.test-cobiro.com/v1/login',
             data: {
@@ -146,7 +146,7 @@ const Voucher = ({ data }) => {
             setErrors()
             // setAccessToken(response.data.data.attributes.access_token)
             // setRefreshToken(response.data.data.attributes.refresh_token)
-            getPaymentUrl(response.data.data.attributes.access_token, customerId)
+            createSite(response.data.data.attributes.access_token, customerId)
           })
           .catch(error => {
             console.log('USER LOGIN ERROR: ', error.response);
@@ -155,8 +155,40 @@ const Voucher = ({ data }) => {
           }) 
     }
 
-    const getPaymentUrl = async (token, customerId) => {
-        await axios({
+    const createSite = (token, customerId) => {
+        const domain = website.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0]
+
+        axios({
+            method: 'post',
+            url: 'https://hub.test-cobiro.com/v1/sites',
+            data: {
+                data: {
+                    type: "sites",
+                    attributes: {
+                        user: customerId,
+                        domain: `https://${domain}`
+                    }
+                }
+            },
+            headers: {Authorization: `Bearer ${token}`}
+          })
+          .then(response => {
+            console.log('CREATE SITE RESPONSE: ', response);
+            setErrors()
+            // setAccessToken(response.data.data.attributes.access_token)
+            // setRefreshToken(response.data.data.attributes.refresh_token)
+            getPaymentUrl(token, customerId, response.data.data.id)
+          })
+          .catch(error => {
+            console.log('USER LOGIN ERROR: ', error.response);
+            setErrors(error.response.data.errors)
+            setIsLoading(false)
+          }) 
+    }
+
+    const getPaymentUrl = (token, customerId, siteId) => {
+        console.log(`https://app.test-cobiro.com/user/login?token=${token}&redirectUri=site/${siteId}/store`)
+        axios({
             method: 'post',
             url: 'https://hub.test-cobiro.com/v1/valitor/payment-requests',
             data: {
@@ -166,6 +198,7 @@ const Voucher = ({ data }) => {
                         payment_type: "subscription",
                         plan_id: planId,
                         customer_id: customerId,
+                        redirect_uri: `https://app.test-cobiro.com/user/login?token=${token}&redirectUri=site/${siteId}/store`,
                         customer: {
                             email: email,
                             first_name: name,
