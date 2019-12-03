@@ -1,0 +1,16 @@
+.whiteSways {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+
+    &.frontSway {
+        z-index: 2;
+    }
+
+    &.top {
+        bottom: auto;
+        top: -1px;
+        transform: rotate(180deg);
+    }
+}
