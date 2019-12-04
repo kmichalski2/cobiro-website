@@ -30,7 +30,7 @@ const JumboHeader = props => {
       </div>
     </div>
   )
-
+ 
   const imageSide = (
     <div className={["col col-xs-12", alignment === 'centered' ? 'col-md-8' : 'col-md-6 '].join(' ')}>
       {data.image.fluid ?
