@@ -35,6 +35,8 @@ const JumboHeader = props => {
     <div className={["col col-xs-12", alignment === 'centered' ? 'col-md-8' : 'col-md-6 '].join(' ')}>
       {data.image.fluid ?
       <Img
+      loading="eager"
+      fadeIn={false}
       fluid={data.image.fluid}
       className="img-responsive img-full-width"
       alt={data.image.alt ? data.image.alt : data.heading}

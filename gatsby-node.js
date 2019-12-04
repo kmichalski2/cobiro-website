@@ -69,7 +69,7 @@ exports.createPages = async function({ graphql, actions }) {
                     alt
                     width
                     height
-                    fluid(maxWidth: 1200) {
+                    fluid(maxWidth: 900, imgixParams: {q: 50}) {
                       width
                       height
                       srcSet
@@ -165,7 +165,7 @@ exports.createPages = async function({ graphql, actions }) {
                     url
                     width
                     height
-                    fluid(maxWidth: 1600) {
+                    fluid(maxWidth: 1200) {
                       width
                       height
                       srcSet
