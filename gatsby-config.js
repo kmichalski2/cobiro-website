@@ -31,7 +31,7 @@ module.exports = {
       resolve: `gatsby-plugin-sharp`,
       options: {
         stripMetadata: true,
-        defaultQuality: 75,
+        defaultQuality: 65,
       },
     },
     `gatsby-transformer-sharp`,
