@@ -6,6 +6,9 @@ import Layout from "../../components/layout/layout"
 import SEO from "../../components/seo"
 import SitesStyles from './sites.module.scss'
 
+import Map from './Map/Map'
+
+
 const Sites = () => {
     const axios = require('axios');
     
@@ -145,10 +148,11 @@ const Sites = () => {
                     </a>
                     : null } */}
                 </div>
-                {pageData || alert ? 
+                {/* {pageData || alert ?  */}
                 <div className="col col-xs-12 col-md-6">
                     <div className={["card card-visible text-left", SitesStyles.card].join(' ')}>
-                        <h4 className=" space-xs-up">{pageData && pageData.attributes ? `Google Categories for ${submission}` : alert ? alert : 'nothing' }</h4>
+                        <Map lat={55.687169} lng={12.591030}/>
+                        {alert ? <h4 className=" space-xs-up">{pageData && pageData.attributes ? `Google Categories for ${submission}` : alert ? alert : null }</h4> : null }
                         <ul className="text-left-xs price-list list-unstyled">
                         {pageData && pageData.attributes ? 
                             pageData.attributes.google_categories.map((item, i) => (
@@ -158,7 +162,7 @@ const Sites = () => {
                         </ul>
                     </div>
                 </div>
-                : null}
+                {/* : null} */}
                 </div>
             </div>  
         </section>

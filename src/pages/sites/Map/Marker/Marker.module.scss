@@ -1,0 +1,21 @@
+.marker {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: red; 
+    z-index: 200;
+    transform: translate(-50%, -100%);
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -0.54rem;
+        left: 1.25rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: red;
+        transform-origin: center;
+        transform: rotate(45deg);
+    }
+}

@@ -1,0 +1,15 @@
+.map {
+    position: relative;
+    height: 400px; 
+    width: 100%;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 7.5rem;
+        width: 100%;
+        background: rgb(255,255,255);
+        background: linear-gradient(rgba(255,255,255,0) 0%, rgba(255,255,255,1) 75%, rgba(255,255,255,1) 100%);
+    }
+}
