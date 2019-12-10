@@ -6,6 +6,9 @@ import VoucherStyles from "./voucher.module.scss"
 const Voucher = ({ data }) => {
     const axios = require('axios');
 
+    const env = data.environment
+    const envUrl = env === 'development' ? 'test-cobiro' : env === 'staging' ? 'staging-cobiro' : env === 'production' ? 'cobiro' : null
+    console.log(env, envUrl)
     const [planId, setPlanId] = useState(3)
     const [website, setWebsite] = useState('')
     const [isWebsiteValid, setIsWebsiteValid] = useState(false)
@@ -100,7 +103,7 @@ const Voucher = ({ data }) => {
     const registerUser = () => {
         axios({
             method: 'post',
-            url: 'https://hub.test-cobiro.com/v1/register',
+            url: `https://hub.${envUrl}.com/v1/register`,
             data: {
                 data: {
                     type: "users",
@@ -130,7 +133,7 @@ const Voucher = ({ data }) => {
     const loginUser = (customerId) => {
         axios({
             method: 'post',
-            url: 'https://hub.test-cobiro.com/v1/login',
+            url: `https://hub.${envUrl}.com/v1/login`,
             data: {
                 data: {
                     type: "login",
@@ -160,7 +163,7 @@ const Voucher = ({ data }) => {
 
         axios({
             method: 'post',
-            url: 'https://hub.test-cobiro.com/v1/sites',
+            url: `https://hub.${envUrl}.com/v1/sites`,
             data: {
                 data: {
                     type: "sites",
@@ -187,10 +190,10 @@ const Voucher = ({ data }) => {
     }
 
     const getPaymentUrl = (token, customerId, siteId) => {
-        console.log(`https://app.test-cobiro.com/user/login?token=${token}&redirectUri=site/${siteId}/store`)
+        console.log(`https://app.${envUrl}.com/user/login?token=${token}&redirectUri=site/${siteId}/store`)
         axios({
             method: 'post',
-            url: 'https://hub.test-cobiro.com/v1/valitor/payment-requests',
+            url: `https://hub.${envUrl}.com/v1/valitor/payment-requests`,
             data: {
                 data: {
                     type: "payment-requests",
@@ -198,7 +201,7 @@ const Voucher = ({ data }) => {
                         payment_type: "subscription",
                         plan_id: planId,
                         customer_id: customerId,
-                        redirect_uri: `https://app.test-cobiro.com/user/login?token=${token}&redirectUri=site/${siteId}/store`,
+                        redirect_uri: `https://app.${envUrl}.com/user/login?token=${token}&redirectUri=site/${siteId}/store`,
                         customer: {
                             email: email,
                             first_name: name,

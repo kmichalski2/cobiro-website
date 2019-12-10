@@ -435,6 +435,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsVoucherSignup {
+                  environment
                   backgroundColor
                   bottomGradiantColor {
                     hex
