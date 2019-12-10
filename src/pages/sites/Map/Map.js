@@ -13,7 +13,7 @@ const Map = ({lat, lng}) => (
             lat: lat,
             lng: lng, 
         }}
-        defaultZoom={15}
+        defaultZoom={13}
         bootstrapURLKeys={{ 
             key: 'AIzaSyCGzzdJOV5nRYKiSmhvoW-kv5LSPywsPpc',
             maptype: 'roadmap',

@@ -152,14 +152,28 @@ const Sites = () => {
                 <div className="col col-xs-12 col-md-6">
                     <div className={["card card-visible text-left", SitesStyles.card].join(' ')}>
                         <Map lat={55.687169} lng={12.591030}/>
-                        {alert ? <h4 className=" space-xs-up">{pageData && pageData.attributes ? `Google Categories for ${submission}` : alert ? alert : null }</h4> : null }
-                        <ul className="text-left-xs price-list list-unstyled">
-                        {pageData && pageData.attributes ? 
-                            pageData.attributes.google_categories.map((item, i) => (
-                                <li key={i}>{item.google_category}</li>
-                            ))
-                        : null}   
-                        </ul>
+                        
+                        <div className={SitesStyles.cardText}>
+                            <div>
+                                <p className="text-bold no-mb">Address</p>
+                                <p className="small">731 Utica Ave, Brooklyn, NY<br/>
+                                11203, United States
+                                </p>
+                                <p className="text-bold no-mb">Phone</p>
+                                <p  className="small">+45 34424234
+                                </p>
+                            </div>
+                            <div>
+                                <p className="text-bold no-mb">Address</p>
+                                <p className="small">731 Utica Ave, Brooklyn, NY<br/>
+                                11203, United States
+                                </p>
+                                <p className="text-bold no-mb">Phone</p>
+                                <p className="small">+45 34424234
+                                </p>
+                            </div>
+                            {alert ? <h4 className=" space-xs-up">{pageData && pageData.attributes ? `Google Categories for ${submission}` : alert ? alert : null }</h4> : null }
+                        </div>
                     </div>
                 </div>
                 {/* : null} */}

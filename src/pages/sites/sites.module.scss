@@ -29,6 +29,19 @@
 .card {
     animation: card-animation 0.4s ease 0s;
     transform-origin: top center;
+    padding: 0;
+    overflow: hidden;
+
+    .cardText {
+      padding: 2.5rem;
+      padding-top: 0; 
+      display: flex;
+      justify-content: space-between;
+      
+      >div {
+        width: calc(50% - 1rem);
+      }
+    }
 }
 
 .button {
