@@ -6,6 +6,8 @@ import Layout from "../../components/layout/layout"
 import SEO from "../../components/seo"
 import SitesStyles from './sites.module.scss'
 
+import Waves from "../../components/waves/waves"
+
 import Map from './Map/Map'
 
 
@@ -120,12 +122,12 @@ const Sites = () => {
     return (
     <Layout>
         <SEO title={submission ? `Cobiro Marketing Hub || ${submission}` : 'Cobiro Marketing Hub'} />
-        <section className="section bg-lightblue">
-            <div className="container">
-                <div className="row ">
-                <div className="col col-xs-12 col-md-6">
+        <section className="section bg-lightblue" style={{backgroundImage: `linear-gradient(#004BD5, #62C9FF)`, position: 'relative', paddingBottom: 0, paddingTop: '7.5rem' }}>
+            <div className="container text-white">
+                <div className="row top-xs">
+                <div className="col col-xs-12 col-lg-6" style={{marginTop: '5rem'}}>
                     <h1>Marketing Plan</h1>
-                    <p>All your marketing in one place. For free. Search for your site and get personal recommendations.</p>
+                    <p className="text-white">All your marketing in one place. For free. Search for your site and get personal recommendations.</p>
                     <form onSubmit={handleSubmit}>
                         <div className="flex">
                             <label className="no-mb">
@@ -140,6 +142,7 @@ const Sites = () => {
                             </button>
                         </div>
                     </form>
+                    {alert ? <h4 className=" space-xs-up">{pageData && pageData.attributes ? `Google Categories for ${submission}` : alert ? alert : null }</h4> : null }
 
                     {/* <div>{pageData ? <code className="text-left">{JSON.stringify(pageData)}</code> : null}</div> */}
                     {/* {submission ?
@@ -149,7 +152,7 @@ const Sites = () => {
                     : null } */}
                 </div>
                 {/* {pageData || alert ?  */}
-                <div className="col col-xs-12 col-md-6">
+                <div className="col col-xs-12 col-lg-6" style={{zIndex: 5}}>
                     <div className={["card card-visible text-left", SitesStyles.card].join(' ')}>
                         <Map lat={55.687169} lng={12.591030}/>
                         
@@ -172,13 +175,14 @@ const Sites = () => {
                                 <p className="small">+45 34424234
                                 </p>
                             </div>
-                            {alert ? <h4 className=" space-xs-up">{pageData && pageData.attributes ? `Google Categories for ${submission}` : alert ? alert : null }</h4> : null }
+                         
                         </div>
                     </div>
                 </div>
                 {/* : null} */}
                 </div>
             </div>  
+            <Waves whiteSway transparentSways highWaveRight/>
         </section>
     </Layout>
     )
