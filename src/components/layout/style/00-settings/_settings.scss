@@ -1,6 +1,7 @@
 @import url('https://use.typekit.net/dpj5gga.css');
 
 $black: #002D4F;
+$mediumblack: #333;
 $lightblack: #002d4fb3;
 $white: #fff;
 $see-through-white: #ffffffd9;
@@ -32,6 +33,8 @@ $colors: (
 );
 
 $link-color: $blue;
+$text-color: $lightblack;
+$headings-color: $mediumblack;
 $font-family-base: 'Soleil', Arial, Sans-Serif;
 $font-weight-base: 300;
 $headings-font-weight: 600;

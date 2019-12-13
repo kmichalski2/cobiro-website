@@ -15,7 +15,7 @@ import TextStyles from "./text.module.scss"
     <div className={data.backgroundColor ? "bg-sway-inner" : null}>
       <div className="container">
         <div className="row center-xs">
-          <div className="col col-xs-12 col-md-8 text-editor-wrapper">
+          <div className="col col-xs-12 col-md-8">
             { data.title ? <h2>{data.title}</h2> : null }
             { data.text ? <div className={TextStyles.text} dangerouslySetInnerHTML={createMarkup()}></div> : null }
           </div>
