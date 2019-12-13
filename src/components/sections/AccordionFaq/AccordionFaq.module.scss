@@ -1,0 +1,28 @@
+.accordionText {
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	transition: all 0.4s ease;
+
+	&.expandedAccordion {
+		opacity: 1;
+		margin-top: 2rem;
+		max-height: none;
+	}
+}
+.accordion>div {
+	cursor: pointer;
+}
+
+.accordion {
+
+	>div {
+		display: block;
+		margin-bottom: 1.25rem;
+	}
+
+	h5 {
+		margin: 0;
+		padding-right: 3rem;
+	}
+}
