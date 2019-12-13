@@ -26,7 +26,7 @@ const Footer = ({ columns }) => {
            <h4 className="space-xs-up">{col.columnHeading}</h4>
            <ul className="list-unstyled menu">
              {col.column.map((el, index) => (
-               <li key={index}>
+               <li key={index} className={el.text ? 'text-darkgrey' : null}>
                  {el.text ?
                  el.text
                  : el.image ?

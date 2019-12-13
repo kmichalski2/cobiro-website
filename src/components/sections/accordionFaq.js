@@ -3,6 +3,10 @@ import React from "react"
 const AccordionFaq = ({ data }) => {
   const accordions = data.accordion.accordionTabs
 
+  function createMarkup(text) {
+    return {__html: text}
+  }
+
   const accordionClickHandler = event => {
     // Setup variables
     let el
@@ -73,8 +77,7 @@ const AccordionFaq = ({ data }) => {
                     <span>+</span>
                   </button>
                 </div>
-                <div className="small accordion-text">
-                  {acc.text}
+                <div className="small accordion-text" dangerouslySetInnerHTML={createMarkup(acc.text)}>
                 </div>
               </div> 
               ))}      
