@@ -32,9 +32,6 @@ p, a {
 	font-size: 1rem !important;
 }
 
-.text-editor-wrapper p {
-	font-size: 1.125rem !important;
-}
 .section-header {
 	margin-bottom: 3rem;
 }
@@ -59,11 +56,6 @@ p, a {
 		font-size: 1rem;
 
 		&.small {
-			font-size: 1rem !important;
-		}
-	}
-	.text-editor-wrapper {
-		p {
 			font-size: 1rem !important;
 		}
 	}

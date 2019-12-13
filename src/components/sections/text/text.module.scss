@@ -1,3 +1,14 @@
+@import '../../layout/style/globals';
+
 .text {
     line-height: 200%;
+
+    p, li {
+        font-size: 1.125rem !important;
+
+        @include mq($until: md) {
+            font-size: 1rem !important;
+        }
+    }
 }
+    
