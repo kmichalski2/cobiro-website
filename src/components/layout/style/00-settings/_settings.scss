@@ -65,13 +65,12 @@ $headings-color: $mediumblack;
 $font-family-base: 'Soleil', Arial, Sans-Serif;
 $font-weight-base: 300;
 $headings-font-weight: 600;
-$input-border-radius: $border-radius;
 
-$border-radius: 5px;
-$input-border-radius: $border-radius;
+$input-border-radius: 5rem;
 $input-border-color: $grey;
 $input-padding-vertical: 0.5rem;
 $input-padding-horizontal: 1rem;
+$input-color: $mediumblack;
 
 $grid-gutter: (
   xs: 2.2rem,

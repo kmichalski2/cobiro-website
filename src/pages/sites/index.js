@@ -7,12 +7,16 @@ import SEO from "../../components/seo"
 import SitesStyles from './sites.module.scss'
 
 import Waves from "../../components/waves/waves"
-
 import Map from './Map/Map'
+import SetupComparison from './SetupComparison/SetupComparison'
+import Services from "./Services/Services"
 
 
-const Sites = () => {
+
+
+const Sites = (props) => {
     const axios = require('axios');
+    console.log(props)
     
     const [isLoaded, setIsLoaded] = useState(false)
     const [urlInputted, setUrlInputted] = useState('');
@@ -31,6 +35,12 @@ const Sites = () => {
             submit(url)
         }
     }, [isLoaded])
+
+    useEffect(() => { 
+        if(props.location.pathname === '/sites/') {
+            setPageData(null)
+        }
+    })
 
     const validateUrl = (url) => {
         const re = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
@@ -70,32 +80,13 @@ const Sites = () => {
             })
             .catch(function (error) {
                 console.log('Error: ', error)
-                setAlert('Error')
+                console.log('Error.data: ', error.data)
+                console.log('Response: ', error.response.data.replace('<h1>', '').replace('</h1>', ''))
+                setAlert(error.response.data.replace('<h1>', '').replace('</h1>', ''))
             })
             .finally(function () {
                 setIsLoading(false)
             });  
-
-            // fetch(`https://pmp.cobiro.com/pmp/?url=http://www.${newUrl}&format=json`, {
-            //     method: 'GET'
-            //   })
-            //   .then((response) => {
-            //     return response.json();
-            //   })
-            //   .then((response) => {
-            //     if(response.status === 200) {
-            //         setPageData(response.data)
-            //         console.log(response.data)
-            //     } else {
-            //         setAlert('Error fetching data')
-            //         console.log('Error fetching data')
-            //     }
-            //     setIsLoading(false)
-            //   })
-            //   .catch((error) => {
-            //       console.log('Error: ', error)
-            //       setAlert('Error')
-            //   });
               
         } else {
             // setAlert('The url you typed is not valid')
@@ -118,72 +109,102 @@ const Sites = () => {
         event.preventDefault();
         submit(urlInputted)
     }
+
+    let openingHours = []
+    const openingHoursObj = pageData ? pageData.attributes.opening_hours : null
+    if(pageData && openingHoursObj) {
+        for (let day in openingHoursObj){
+            if(openingHoursObj.hasOwnProperty(day)){
+                openingHours.push({day: day, hour: openingHoursObj[day]})
+            }
+         }
+    }
      
     return (
     <Layout>
         <SEO title={submission ? `Cobiro Marketing Hub || ${submission}` : 'Cobiro Marketing Hub'} />
         <section className="section bg-lightblue" style={{backgroundImage: `linear-gradient(#004BD5, #62C9FF)`, position: 'relative', paddingBottom: 0, paddingTop: '7.5rem' }}>
-            <div className="container text-white">
-                <div className="row top-xs">
-                <div className="col col-xs-12 col-lg-6" style={{marginTop: '5rem'}}>
-                    <h1>Marketing Plan</h1>
-                    <p className="text-white">All your marketing in one place. For free. Search for your site and get personal recommendations.</p>
+            <div className="container text-white ">
+                <div className="row top-xs center-xs">
+                <div className={!pageData ? "col col-xs-12 col-md-8 col-lg-6 text-center center-xs space-xs-up" : "col col-xs-12 col-lg-6 space-xs-up"} style={{padding: '5rem 0 20rem 0'}}>
+                    {pageData ?
+                    <div className={SitesStyles.siteImages}>
+                        <img className={SitesStyles.desktop} src={pageData.page_speed[0].desktop.screenshot} />
+                        <img className={SitesStyles.mobile} src={pageData.page_speed[1].mobile.screenshot} />
+                    </div>
+                    : null }
+                    <h1 className={"text-white"}>{ pageData ? pageData.id.charAt(0).toUpperCase() + pageData.id.slice(1) : 'Marketing Plan'}</h1>
+                    <p className="text-white">{ pageData ? `${pageData.id.charAt(0).toUpperCase() + pageData.id.slice(1)}: ${pageData.attributes.category.replace('/', '').split('/').join(', ')}` : 'All your marketing in one place. For free. Search for your site and get personal recommendations.'}</p>
+                    {!pageData ?
+                    <>
                     <form onSubmit={handleSubmit}>
                         <div className="flex">
-                            <label className="no-mb">
+                            <label className={["no-mb", SitesStyles.label].join(' ')}>
                                 <input className="input-inline" type="text"  placeholder="Analyze any website" onChange={handleChange} value={urlInputted}/>
                             </label>
-                            {/* <input className="btn btn-submit-inline" type="submit" value={isLoading ? 'Loading' : 'Search'} onChange={handleChange} disabled={isValidUrl ? null : true}/> */}
 
-                            <button className={[SitesStyles.button, isLoading ? SitesStyles.searching : pageData && !isEditing ? SitesStyles.searched : null, "btn"].join(' ')} disabled={isValidUrl ? null : true}>
+                            <button className={[SitesStyles.button, isLoading ? SitesStyles.searching : pageData && !isEditing ? SitesStyles.searched : null, "btn btn-secondary btn-secondary-white"].join(' ')} disabled={isValidUrl ? null : true}>
                                 <span>Submit</span>
                                 <span className={SitesStyles.spinner}></span>
                                 <svg className={SitesStyles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><path className={SitesStyles.checkmark} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
                             </button>
                         </div>
                     </form>
-                    {alert ? <h4 className=" space-xs-up">{pageData && pageData.attributes ? `Google Categories for ${submission}` : alert ? alert : null }</h4> : null }
-
-                    {/* <div>{pageData ? <code className="text-left">{JSON.stringify(pageData)}</code> : null}</div> */}
-                    {/* {submission ?
-                    <a href={`http://${submission}`} className="btn btn-large">
-                    {submission}
-                    </a>
-                    : null } */}
+                    {alert ? <p className="text-white space-xs-up small">{alert}. Did you type the correct url?</p> : null }
+                    {isLoading ? <p className="text-white space-xs-up small">This may take a while. Please be patient.</p> : null }
+                    </>
+                    : null }
+                
                 </div>
-                {/* {pageData || alert ?  */}
+                {pageData ? 
                 <div className="col col-xs-12 col-lg-6" style={{zIndex: 5}}>
                     <div className={["card card-visible text-left", SitesStyles.card].join(' ')}>
                         <Map lat={55.687169} lng={12.591030}/>
                         
                         <div className={SitesStyles.cardText}>
                             <div>
-                                <p className="text-bold no-mb">Address</p>
-                                <p className="small">731 Utica Ave, Brooklyn, NY<br/>
-                                11203, United States
+                                {pageData && (pageData.attributes.address.street || pageData.attributes.address.city) ? 
+                                <>
+                                <p className="text-bold">Address</p>
+                                <p className="small text-lightblack">
+                                    {pageData.attributes.address.street ? pageData.attributes.address.street : null }<br/>
+                                    {pageData.attributes.address.city ? pageData.attributes.address.city : null}
                                 </p>
-                                <p className="text-bold no-mb">Phone</p>
-                                <p  className="small">+45 34424234
-                                </p>
+                                </>
+                                : null }
+                                {pageData && pageData.attributes.phone_number ? 
+                                <>
+                                    <p className="text-bold">Phone</p>
+                                    <p  className="small text-lightblack">{pageData.attributes.phone_number}</p>
+                                </>
+                                : null }
                             </div>
                             <div>
-                                <p className="text-bold no-mb">Address</p>
-                                <p className="small">731 Utica Ave, Brooklyn, NY<br/>
-                                11203, United States
-                                </p>
-                                <p className="text-bold no-mb">Phone</p>
-                                <p className="small">+45 34424234
-                                </p>
+                                {pageData && openingHours.length > 0 ? 
+                                <>
+                                <p className="text-bold">Opening hours</p>    
+                                {openingHours.map((day, i) => 
+                                <div key={i} className={["flex between-xs", SitesStyles.openingHours].join(' ')}>
+                                    <p className="small text-lightblack">{day.day}:</p>
+                                    <p className="small text-lightblack">{day.hour}</p>      
+                                </div>
+                                )}
+                                </>
+                                : null}
+    
                             </div>
                          
                         </div>
                     </div>
                 </div>
-                {/* : null} */}
+                : null }
                 </div>
             </div>  
             <Waves whiteSway transparentSways highWaveRight/>
         </section>
+        {pageData ? <SetupComparison pageSpeed={pageData.page_speed[0].desktop.performance.score * 100} /> : null}
+        <Services />
+        
     </Layout>
     )
 }
