@@ -6,10 +6,10 @@ exports.handler =  function sites(event, context, callback) {
     
     // console.log(context)
     const domain = event.queryStringParameters.url;
-    console.log('Endpoint: ', `${endpoint}https://www.${domain}`)
+    console.log('Endpoint: ', `${endpoint}http://www.${domain}`)
     axios({
         method: 'get',
-        url: `${endpoint}http://${domain}`,
+        url: `${endpoint}?url=http://${domain}`,
         headers: {
           'Content-Type': 'application/json',
         }
@@ -24,7 +24,7 @@ exports.handler =  function sites(event, context, callback) {
         callback(null, {
           statusCode: 500,
           body: JSON.stringify({
-            data: 'Error fetching data',
+            data: `Error fetching data from ${endpoint}&url=http://${domain}`,
             status: 500
           }),
         });

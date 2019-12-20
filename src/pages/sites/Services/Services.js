@@ -4,7 +4,7 @@ import ServicesStyles from './Services.module.scss'
 const Services = () => {
 
     return (
-        <section className="section">
+        <section className={["section", ServicesStyles.services].join(' ')}>
              <div className="container">
                 <div className="row center-xs middle-xs">
                     <div className="col col-xs-12 text-center section-header">
@@ -13,13 +13,45 @@ const Services = () => {
                     </div>
                 </div>  
                 <div className="row text-center">
-                <div className={ServicesStyles.line}></div>
-                    <div className="col col-xs-12 col-sm-2"><p className="text-bold text-black small">Google Search Marketing</p></div>
-                    <div className="col col-xs-12 col-sm-2"><p className="text-bold text-black small">Google My Business</p></div>
-                    <div className="col col-xs-12 col-sm-2"><p className="text-bold text-black small">Get Gift Card</p></div>
-                    <div className="col col-xs-12 col-sm-2"><p className="text-bold text-black small">Facebook Marketing</p></div>
-                    <div className="col col-xs-12 col-sm-2"><p className="text-bold text-black small">Instagram Marketing</p></div>
-                    <div className="col col-xs-12 col-sm-2"><p className="text-bold text-black small">Competitors</p></div> 
+                
+                    <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
+                        <div className={ServicesStyles.lineDot}>
+                            <div className={ServicesStyles.circle}></div>
+                        </div>
+                        <div className={ServicesStyles.line}></div>
+                        <p className="text-bold text-black small">Google Search Marketing</p>
+                    </div>
+                    <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
+                        <div className={ServicesStyles.lineDot}>
+                            <div className={ServicesStyles.circle}></div>
+                        </div>
+                        <p className="text-bold text-black small">Google My Business</p>
+                    </div>
+                    <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
+                        <div className={ServicesStyles.lineDot}>
+                            <div className={ServicesStyles.circle}></div>
+                        </div>
+                        <p className="text-bold text-black small">Get Gift Card</p>
+                    </div>
+                    <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
+                        <div className={ServicesStyles.lineDot}>
+                            <div className={ServicesStyles.circle}></div>
+                        </div>
+                        <p className="text-bold text-black small">Facebook Marketing</p>
+                    </div>
+                    <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
+                        <div className={ServicesStyles.lineDot}>
+                            <div className={ServicesStyles.circle}></div>
+                        </div>
+                        <p className="text-bold text-black small">Instagram Marketing</p>
+                    </div>
+                    <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
+                        <div className={ServicesStyles.lineDot}>
+                            <div className={ServicesStyles.circle}></div>
+                        </div>
+                        <p className="text-bold text-black small">Competitors</p>
+                    </div>
+
                 </div>
             </div>
         </section>

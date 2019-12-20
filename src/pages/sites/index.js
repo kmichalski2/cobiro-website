@@ -62,27 +62,27 @@ const Sites = (props) => {
             navigate(`/sites/${newUrl}`)
             setIsLoading(true)
 
-            axios.get('https://pmp.cobiro.com/pmp/', {
-                params: {
-                    url: `http://www.${newUrl}`,
-                    format: 'json'
-                }
-            })
+            axios.post(`/.netlify/functions/sites?url=${newUrl}`
+                // params: {
+                //     url: `http://www.${newUrl}`,
+                //     format: 'json'
+                // }
+            )
             .then(function (response) {
                 console.log(response);
                 if(response.status === 200) {
-                    setPageData(response.data)
-                    console.log(response.data)
+                    setPageData(response.data.data)
+                    console.log(response.data.data)
                 } else {
                     setAlert('Error fetching data')
                     console.log('Error fetching data')
                 }
             })
             .catch(function (error) {
+                console.log('Error: ', error.response)
                 console.log('Error: ', error)
-                console.log('Error.data: ', error.data)
-                console.log('Response: ', error.response.data.replace('<h1>', '').replace('</h1>', ''))
-                setAlert(error.response.data.replace('<h1>', '').replace('</h1>', ''))
+                // console.log('Response: ', error.response.data.replace('<h1>', '').replace('</h1>', ''))
+                // setAlert(error.response.data.replace('<h1>', '').replace('</h1>', ''))
             })
             .finally(function () {
                 setIsLoading(false)
