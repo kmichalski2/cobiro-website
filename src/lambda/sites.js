@@ -24,7 +24,7 @@ exports.handler =  function sites(event, context, callback) {
         callback(null, {
           statusCode: 500,
           body: JSON.stringify({
-            data: `Error fetching data from ${endpoint}&url=http://${domain}`,
+            data: `Error fetching data from ${endpoint}&url=http://${domain}: ${error}`,
             status: 500
           }),
         });
