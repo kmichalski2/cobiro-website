@@ -96,6 +96,9 @@
 	.flex-#{$breakpoint} {
 		display: flex;
 	}
+	.text-center-#{$breakpoint} {
+		text-align: center;
+	}
 }
 
 .flex {

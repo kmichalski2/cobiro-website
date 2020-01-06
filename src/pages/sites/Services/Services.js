@@ -1,6 +1,14 @@
 import React from 'react'
 import ServicesStyles from './Services.module.scss'
 
+// images
+import business from './images/business.svg'
+import fb from './images/fb.svg'
+import giftcard from './images/giftcard.svg'
+import search from './images/search.svg'
+import instagram from './images/instagram.svg'
+import placeholder from './images/placeholder.svg'
+
 const Services = () => {
 
     return (
@@ -16,38 +24,38 @@ const Services = () => {
                 
                     <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
                         <div className={ServicesStyles.lineDot}>
-                            <div className={ServicesStyles.circle}></div>
+                        <img className={ServicesStyles.circle} src={search} />
                         </div>
                         <div className={ServicesStyles.line}></div>
                         <p className="text-bold text-black small">Google Search Marketing</p>
                     </div>
                     <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
                         <div className={ServicesStyles.lineDot}>
-                            <div className={ServicesStyles.circle}></div>
+                            <img className={ServicesStyles.circle} src={business} />
                         </div>
                         <p className="text-bold text-black small">Google My Business</p>
                     </div>
                     <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
                         <div className={ServicesStyles.lineDot}>
-                            <div className={ServicesStyles.circle}></div>
+                        <img className={ServicesStyles.circle} src={giftcard} />
                         </div>
                         <p className="text-bold text-black small">Get Gift Card</p>
                     </div>
                     <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
                         <div className={ServicesStyles.lineDot}>
-                            <div className={ServicesStyles.circle}></div>
+                        <img className={ServicesStyles.circle} src={fb} />
                         </div>
                         <p className="text-bold text-black small">Facebook Marketing</p>
                     </div>
                     <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
                         <div className={ServicesStyles.lineDot}>
-                            <div className={ServicesStyles.circle}></div>
+                            <img className={ServicesStyles.circle} src={instagram} />
                         </div>
                         <p className="text-bold text-black small">Instagram Marketing</p>
                     </div>
                     <div className={["col col-xs-12 col-sm-2", ServicesStyles.service].join(' ')}>
                         <div className={ServicesStyles.lineDot}>
-                            <div className={ServicesStyles.circle}></div>
+                        <img className={ServicesStyles.circle} src={placeholder} />
                         </div>
                         <p className="text-bold text-black small">Competitors</p>
                     </div>

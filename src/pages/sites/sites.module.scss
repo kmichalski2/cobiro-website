@@ -31,6 +31,7 @@
     transform-origin: top center;
     padding: 0;
     overflow: hidden;
+    display: block;
 
     .cardText {
       padding: 2.5rem;
@@ -38,9 +39,17 @@
       display: flex;
       justify-content: space-between;
       color: $black;
-      
+
       >div {
         width: calc(50% - 1rem);
+      }
+
+      @include mq($until: md) {
+        flex-direction: column;
+
+        >div {
+          width: 100%;
+        }
       }
     }
 }
@@ -138,6 +147,10 @@
   position: relative;
   width: 20rem;
   max-width: 100%;
+
+  @include mq($until: lg) {
+    margin: auto;
+  }
 
   .desktop {
     width: calc(100% - 2.5rem);

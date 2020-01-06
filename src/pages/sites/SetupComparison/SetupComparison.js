@@ -5,6 +5,11 @@ import Logo from '../../../images/logo.svg'
 
 const SetupComparison = ({pageSpeed}) => {
     console.log(pageSpeed)
+
+    const speedIndex = 302 - (pageSpeed * 3.02 - 20)
+
+    console.log(speedIndex)
+
     return (
         <section className="section">
             <div className="container">
@@ -13,17 +18,20 @@ const SetupComparison = ({pageSpeed}) => {
                         <h2>Your current setup comparison</h2>
                         <p>Lorem ipsum dolor sit amet, consetetur se ipsum dolor sit amet, consetetur se</p>
                     </div>
-                    <div className={["col col-xs-12 col-sm-6 col-md-4", ComparisonStyles.currentCard].join(' ')}>
-                        <div className="card card-visible">
+                    <div className={["col col-xs-12 col-md-6 col-lg-4", ComparisonStyles.currentCard].join(' ')}>
+                        <div className={["card card-visible", ComparisonStyles.card].join(' ')}>
                             <p className="text-bold small text-black space-xs-up">Current</p>
-                            <div className={[ComparisonStyles.circle, ComparisonStyles.greyCircle].join(' ')} style={{backgroundImage: `conic-gradient(#4F525F ${pageSpeed}%, #E5E9ED 0%, #E5E9ED)`}}>
-                                <div className={ComparisonStyles.innerCircle}>
+                            <div className={[ComparisonStyles.circle].join(' ')}>
+                                 <svg className={ComparisonStyles.circleChart}  viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <circle className={ComparisonStyles.circleBg} cx="50" cy="50" r="45" fill="none"></circle>
+                                    <circle className={ComparisonStyles.circle} cx="50" cy="50" r="45" fill="none" strokeLinecap="round" strokeDasharray="302" style={{strokeDashoffset: speedIndex}}></circle>
+                                </svg>
                                     <div className={ComparisonStyles.circleText}>
                                         <h3>{pageSpeed}</h3>
                                         <p>Your speed</p>
                                     </div>
-                                </div>
                             </div>
+                               
                             <h3 className={ComparisonStyles.pricingHeadline}>
                                 Price: <span className="text-bold">$$$</span><span className="text-grey">$$</span>
                             </h3>
@@ -33,8 +41,8 @@ const SetupComparison = ({pageSpeed}) => {
                             </ul>
                         </div>
                     </div>
-                    <div className="col col-xs-12 col-sm-6 col-md-4">
-                        <div className="card card-visible">
+                    <div className="col col-xs-12 col-md-6 col-lg-4">
+                        <div className={["card card-visible", ComparisonStyles.card].join(' ')}>
                             <img src={Logo} className="space-xs-up"/>
                             <div className={[ComparisonStyles.circle, ComparisonStyles.greenCircle].join(' ')}>
                                 <div className={ComparisonStyles.innerCircle}>

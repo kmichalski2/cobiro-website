@@ -126,14 +126,14 @@ const Sites = (props) => {
         <section className="section bg-lightblue" style={{backgroundImage: `linear-gradient(#004BD5, #62C9FF)`, position: 'relative', paddingBottom: 0, paddingTop: '7.5rem' }}>
             <div className="container text-white ">
                 <div className="row top-xs center-xs">
-                <div className={!pageData ? "col col-xs-12 col-md-8 col-lg-6 text-center center-xs space-xs-up" : "col col-xs-12 col-lg-6 space-xs-up"} style={{padding: '5rem 0 20rem 0'}}>
+                <div className={!pageData ? "col col-xs-12 col-md-8 col-lg-6  center-xs center-sm center-md space-xs-up" : "col col-xs-12 col-lg-6 space-xs-up text-center-xs text-left-lg"} style={{paddingTop: '5rem', paddingBottom: '15rem'}}>
                     {pageData ?
                     <div className={SitesStyles.siteImages}>
                         <img className={SitesStyles.desktop} src={pageData.page_speed[0].desktop.screenshot} />
                         <img className={SitesStyles.mobile} src={pageData.page_speed[1].mobile.screenshot} />
                     </div>
                     : null }
-                    <h1 className={"text-white"}>{ pageData ? pageData.id.charAt(0).toUpperCase() + pageData.id.slice(1) : 'Marketing Plan'}</h1>
+                    <h1 className={"text-white "}>{ pageData ? pageData.id.charAt(0).toUpperCase() + pageData.id.slice(1) : 'Marketing Plan'}</h1>
                     <p className="text-white">{ pageData ? `${pageData.id.charAt(0).toUpperCase() + pageData.id.slice(1)}: ${pageData.attributes.category.replace('/', '').split('/').join(', ')}` : 'All your marketing in one place. For free. Search for your site and get personal recommendations.'}</p>
                     {!pageData ?
                     <>
@@ -162,7 +162,7 @@ const Sites = (props) => {
                         <Map lat={55.687169} lng={12.591030}/>
                         
                         <div className={SitesStyles.cardText}>
-                            <div>
+                            <div className="space-xs space-sm">
                                 {pageData && (pageData.attributes.address.street || pageData.attributes.address.city) ? 
                                 <>
                                 <p className="text-bold">Address</p>

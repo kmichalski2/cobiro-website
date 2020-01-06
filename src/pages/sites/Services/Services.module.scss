@@ -20,9 +20,22 @@
         margin-top: 2.5rem;
     }
     .lineDot {
+        position: relative;
         width: 4px;
         margin: auto;
         background-color: $blue;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background-color: $blue;
+        }
 
         .circle {
             position: absolute;
@@ -32,22 +45,23 @@
             width: 4rem;
             height: 4rem;
             border-radius: 50%;
-            background-color: $blue
+            max-width: none;
+            // background-color: $blue
         }
     }
     &:nth-child(odd) {
         .lineDot {
-            height: 2.5rem;
-            margin-top: 2.5rem;
+            height: 4rem;
+            margin-top: 3.5rem;
 
-            .circle {
-                top: 2.5rem;
-            }
+            // .circle {
+            //     top: 2.5rem;
+            // }
         }
     }
     &:nth-child(even) {
         .lineDot {
-            height: 5rem;
+            height: 7.5rem;
         }
     }
     
