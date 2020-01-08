@@ -1,0 +1,171 @@
+import React, { useState } from 'react'
+
+import SearchMarketingStyles from './SearchMarketing.module.scss'
+
+const SearchMarketing = ({ keywords }) => {
+
+    const [toolTipVisible, setToolTipVisible] = useState(false)
+    const [expandedAccordion, setExpandedAccordion] = useState(null)
+    const [accElAmount, setAccElAmount] = useState(6)
+
+    const highVolume = 32
+    const mediumVolume = 30
+    const lowVolume = 38
+
+    const labelPosCheck = (val, offset) => {
+
+        const centerPos = (val / 2) + offset
+
+        const a = (centerPos * 3.6  - 90) * (Math.PI / 180);
+        const r = 15.91549430918954
+        const cx = 19.41549430918954 - 1.5
+        const cy = 19.41549430918954 - 1.5
+
+        const multiplier = 100 / 38.8309886184
+        const x = (cx + r * Math.cos(a)) * multiplier
+        const y = (cy + r * Math.sin(a)) * multiplier
+        const pos = {y,x}
+        console.log(pos, centerPos)
+        return pos
+    }
+
+    const highVolumeLabelPos = labelPosCheck(highVolume, 0)
+    const mediumVolumeLabelPos = labelPosCheck(highVolume, highVolume)
+    const lowVolumeLabelPos = labelPosCheck(highVolume, highVolume + mediumVolume)
+
+    const keywordsReducer = (accumulator, item) => {
+        return accumulator + item.keywords.length;
+      };
+
+    const keywordsCount = keywords.reduce(keywordsReducer, 0)
+
+    const onChartElMouseEnter = (i) => {
+        setToolTipVisible(i)
+    }
+
+    const onChartElMouseLeave = () => {
+        setToolTipVisible(false)
+    }
+
+    const accordionClickHandler = (i, e) => {
+        const el = e.target
+        if(expandedAccordion === null) {
+            setExpandedAccordion(i)
+            console.log(el.parentNode)
+
+        } else {
+            setExpandedAccordion(null)
+        }
+    }
+
+    return (
+        <section className="section">
+            <div className="container">
+                <div className={["row middle-xs", SearchMarketingStyles.header].join(' ')}>
+                    <div className="col col-xs-12 col-md-6 space-xs space-sm">
+                        <h2>Google Search Marketing</h2>
+                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem</p>
+                        <ul className="list-inline">
+                            <li className={SearchMarketingStyles.legendGreen}>High Volume</li>
+                            <li className={SearchMarketingStyles.legendYellow}>Medium Volume</li>
+                            <li className={SearchMarketingStyles.legendBlue}>Low Volume</li>
+                        </ul>
+                    </div>
+                    <div className="col col-xs-12 col-md-6 text-center flex center-xs end-md">
+                        <div className={[SearchMarketingStyles.circle].join(' ')}>
+                            <svg className={SearchMarketingStyles.circleChart} width="100%" height="100%" viewBox="0 0 38.8309886184 38.8309886184" xmlns="http://www.w3.org/2000/svg">
+                                <linearGradient id="gradient1">
+                                    <stop id="stop1" offset="0%" stopColor="#92E2A1" />
+                                    <stop id="stop2" offset="100%" stopColor="#00AF21"/>
+                                </linearGradient>
+                                <linearGradient id="gradient2">
+                                    <stop id="stop1" offset="0%" stopColor="#FFD00D" />
+                                    <stop id="stop2" offset="100%" stopColor="#FF9517"/>
+                                </linearGradient>
+                                <linearGradient id="gradient3">
+                                    <stop id="stop1" offset="0%" stopColor="#72A3FF" />
+                                    <stop id="stop2" offset="100%" stopColor="#2F76FC"/>
+                                </linearGradient>
+                                <circle className={SearchMarketingStyles.circleHigh} cx="19.41549430918954" cy="19.41549430918954" r="15.91549430918954" fill="none" strokeDasharray={`${highVolume} ${100 - highVolume}`}  strokeDashoffset={25}  strokeWidth="6" stroke="url(#gradient1)" style={{filter:'url(#glow)'}} onMouseOver={() => onChartElMouseEnter(0)} onMouseLeave={() => onChartElMouseLeave()}></circle>
+                                <circle className={SearchMarketingStyles.circleMedium} cx="19.41549430918954" cy="19.41549430918954" r="15.91549430918954" fill="none" strokeDasharray={`${mediumVolume} ${100 - mediumVolume}`} strokeDashoffset={25 + (100 - highVolume)} strokeWidth="6" stroke="url(#gradient2)" onMouseOver={() => onChartElMouseEnter(1)} onMouseLeave={() => onChartElMouseLeave()}></circle>
+                                <circle className={SearchMarketingStyles.circleLow} cx="19.41549430918954" cy="19.41549430918954" r="15.91549430918954" fill="none" strokeDasharray={`${lowVolume} ${100 - lowVolume}`} strokeDashoffset={25 + (100 - highVolume - mediumVolume)}  strokeWidth="6" stroke="url(#gradient3)" onMouseOver={() => onChartElMouseEnter(2)} onMouseLeave={() => onChartElMouseLeave()}></circle>
+
+                            </svg>
+                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${highVolumeLabelPos.y}%`, left: `${highVolumeLabelPos.x}%`}}>{highVolume}%</p>
+                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${mediumVolumeLabelPos.y}%`, left: `${mediumVolumeLabelPos.x}%`}}>{mediumVolume}%</p>
+                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${lowVolumeLabelPos.y}%`, left: `${lowVolumeLabelPos.x}%`}}>{lowVolume}%</p>
+                            <div className={SearchMarketingStyles.circleText}>
+                                <h2>{keywordsCount}</h2>
+                                <p>Relevant keywords</p>
+                            </div>
+                            { toolTipVisible === 2 ?
+                            <p className={['small', SearchMarketingStyles.toolTip].join(' ')} style={{top: `${lowVolumeLabelPos.y}%`, left: `${lowVolumeLabelPos.x}%`}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
+                            : null }
+                            { toolTipVisible === 1 ?
+                            <p className={['small', SearchMarketingStyles.toolTip].join(' ')} style={{top: `${mediumVolumeLabelPos.y}%`, left: `${mediumVolumeLabelPos.x}%`}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
+                            : null }
+                            { toolTipVisible === 0 ?
+                            <p className={['small', SearchMarketingStyles.toolTip].join(' ')} style={{top: `${highVolumeLabelPos.y}%`, left: `${highVolumeLabelPos.x}%`}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore</p>
+                            : null }
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    {keywords.map((k, i) =>
+                    i <= accElAmount - 1 ?
+                    
+                        <div key={i} className="col col-xs-12">
+                            <div className={["card card-visible text-left", SearchMarketingStyles.card, expandedAccordion === i ? SearchMarketingStyles.expanded : null].join(' ')}>
+                                <button className={SearchMarketingStyles.accBtn} onClick={(event) => accordionClickHandler(i, event)}>
+                                    <span className="h4">{k.adgroup}</span>
+                                    <span className={SearchMarketingStyles.btnRight}>
+                                        <span className={SearchMarketingStyles.btnCount}>{k.keywords.length}</span>
+                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48.875' height='26.766' viewBox='0 0 48.875 26.766'%3E%3Cpath d='M227.819,107.371l20.9,20.73,20.9-20.73' transform='translate(-224.284 -103.836)' fill='none' stroke='%230087ef' stroke-linecap='round' stroke-linejoin='round' stroke-width='5'/%3E%3C/svg%3E" />
+                                    </span>
+                                </button>
+
+                                <div className={["table-responsive", SearchMarketingStyles.tableWrap].join(' ')} style={{maxHeight: expandedAccordion === i ? '200vh' : 0}}>
+                                    <table className={["table", SearchMarketingStyles.table].join(' ')}>
+                                        <thead>
+                                        <tr>
+                                            <th scope="col" className="h5">Keyword</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Potential reach</th>
+                                            <th scope="col">Rating</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {k.keywords.map((k, i) =>
+                                            <tr key={i}>
+                                                <td scope="row">{k.keyword}</td>
+                                                <td>{k.average_cpc}</td>
+                                                <td>{k.search_volume}</td>
+                                                <td>{k.relevance_rank_google}</td>
+                                            </tr>
+                                            )}
+                                        
+                                       
+                                        </tbody>
+                                    </table>
+                                    </div>
+
+                            </div>
+                        </div>
+                    : null
+                    )}
+                    {keywords.length > accElAmount ?
+                    <div className="col col-xs-12">
+                        <button className="btn block-center" onClick={() => setAccElAmount(accElAmount + 6)}>
+                            Show more
+                        </button>
+                    </div>
+                    : null }
+                </div>
+            </div>
+        </section>
+    )
+}
+
+export default SearchMarketing

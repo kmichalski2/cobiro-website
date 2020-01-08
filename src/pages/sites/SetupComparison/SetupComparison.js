@@ -4,11 +4,8 @@ import ComparisonStyles from './SetupComparison.module.scss'
 import Logo from '../../../images/logo.svg'
 
 const SetupComparison = ({pageSpeed}) => {
-    console.log(pageSpeed)
 
-    const speedIndex = 302 - (pageSpeed * 3.02 - 20)
-
-    console.log(speedIndex)
+    const speedIndex = 100 - pageSpeed
 
     return (
         <section className="section">
@@ -22,9 +19,9 @@ const SetupComparison = ({pageSpeed}) => {
                         <div className={["card card-visible", ComparisonStyles.card].join(' ')}>
                             <p className="text-bold small text-black space-xs-up">Current</p>
                             <div className={[ComparisonStyles.circle].join(' ')}>
-                                 <svg className={ComparisonStyles.circleChart}  viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                    <circle className={ComparisonStyles.circleBg} cx="50" cy="50" r="45" fill="none"></circle>
-                                    <circle className={ComparisonStyles.circle} cx="50" cy="50" r="45" fill="none" strokeLinecap="round" strokeDasharray="302" style={{strokeDashoffset: speedIndex}}></circle>
+                                 <svg className={ComparisonStyles.circleChart} width="100%" height="100%" viewBox="0 0 35.8309886184 35.8309886184" xmlns="http://www.w3.org/2000/svg">
+                                    <circle className={ComparisonStyles.circleBg} cx="17.91549430918954" cy="17.91549430918954" r="15.91549430918954" strokeWidth="3" fill="none"></circle>
+                                    <circle className={ComparisonStyles.circle} cx="17.91549430918954" cy="17.91549430918954" r="15.91549430918954" fill="none" strokeLinecap="round" strokeDasharray="100" style={{strokeDashoffset: speedIndex}} strokeDasharray="100" strokeDashoffset={speedIndex} strokeWidth="3"></circle>
                                 </svg>
                                     <div className={ComparisonStyles.circleText}>
                                         <h3>{pageSpeed}</h3>

@@ -10,6 +10,7 @@ import Waves from "../../components/waves/waves"
 import Map from './Map/Map'
 import SetupComparison from './SetupComparison/SetupComparison'
 import Services from "./Services/Services"
+import SearchMarketing from './SearchMarketing/Searchmarketing'
 
 
 
@@ -204,7 +205,7 @@ const Sites = (props) => {
         </section>
         {pageData ? <SetupComparison pageSpeed={pageData.page_speed[0].desktop.performance.score * 100} /> : null}
         <Services />
-        
+        {pageData ? <SearchMarketing keywords={pageData.google_search_ads[2].keywords}/> : null }
     </Layout>
     )
 }
