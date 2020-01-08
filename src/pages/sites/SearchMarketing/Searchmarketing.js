@@ -113,7 +113,7 @@ const SearchMarketing = ({ keywords }) => {
                     </div>
                 </div>
                 <div className="row">
-                    {keywords.map((k, i) =>
+                    {keywords && keywords.map((k, i) =>
                     i <= accElAmount - 1 ?
                     
                         <div key={i} className="col col-xs-12">
@@ -155,7 +155,7 @@ const SearchMarketing = ({ keywords }) => {
                         </div>
                     : null
                     )}
-                    {keywords.length > accElAmount ?
+                    {keywords && keywords.length > accElAmount ?
                     <div className="col col-xs-12">
                         <button className="btn block-center" onClick={() => setAccElAmount(accElAmount + 6)}>
                             Show more
