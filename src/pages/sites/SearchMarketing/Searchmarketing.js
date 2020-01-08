@@ -37,7 +37,7 @@ const SearchMarketing = ({ keywords }) => {
         return accumulator + item.keywords.length;
       };
 
-    const keywordsCount = keywords.reduce(keywordsReducer, 0)
+    const keywordsCount = keywords ? keywords.reduce(keywordsReducer, 0) : 0
 
     const onChartElMouseEnter = (i) => {
         setToolTipVisible(i)
