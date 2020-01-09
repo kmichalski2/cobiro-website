@@ -1,0 +1,113 @@
+@import '../../../../components/layout/style/globals';
+
+.card {
+    padding: 1.5rem;
+    width: 21rem;
+    max-width: 100%;
+    display: block !important;
+
+    @include mq($until: lg) {
+        width: 20rem;
+    }
+
+    &:first-child {
+        transform: scale(0.8);
+        transform-origin: left;
+        position: absolute;
+        left: 0;
+        z-index: 0;
+    }
+    
+    &:nth-child(2) {
+        z-index: 2;
+    }
+
+    p, a {
+        font-size: 0.8rem;
+        &.small {
+            font-size: 0.7rem;
+        }
+    }
+
+    .image {
+        width: calc(100% + 1.5rem) !important;
+        max-width: none !important;
+        height: 12.5rem;
+        margin-left: -1.5rem;
+        margin-bottom: 0;
+    }
+    .instaCta, .fbCta {
+        width: calc(100% + 3rem) !important;
+        margin-left: -1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+    }
+    .fbCta {
+        background-color: $lightgrey;
+
+        .fbLink {
+            border-radius: 10px;
+            border: 2px solid #707070;
+            padding: 0.375rem 0.875rem;
+            color: $black;
+        }
+    }
+    .instaCta {
+        background-color: $blue;
+        color: $white;
+        cursor: pointer;
+        margin-bottom: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0.875rem;
+            height: 0.875rem;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26.766' height='48.875' viewBox='0 0 26.766 48.875'%3E%3Cpath d='M227.819,107.371l20.9,20.73,20.9-20.73' transform='translate(-103.836 273.159) rotate(-90)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='5'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+    .instaActions {
+        position: relative;
+        margin-bottom: 0.5rem;
+
+        img {
+            height: 1.5rem;
+            width: auto;
+            margin: 0;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 0.375rem;
+            height: 0.375rem;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background-color: $grey;
+            box-shadow: -0.625rem 0 0 0 $grey, -1.25rem 0 0 0 $grey, 0.625rem 0 0 0 $blue, 1.25rem 0 0 0 $grey;
+        }
+
+        &.first {
+            &::before {
+                box-shadow: -0.625rem 0 0 0 $blue, -1.25rem 0 0 0 $grey, 0.625rem 0 0 0 $grey, 1.25rem 0 0 0 $grey;
+            }
+        }
+    }
+
+    .hr {
+        margin: 1.5rem 0;
+    }
+}

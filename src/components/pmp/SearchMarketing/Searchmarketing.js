@@ -25,7 +25,6 @@ const SearchMarketing = ({ keywords }) => {
         const x = (cx + r * Math.cos(a)) * multiplier
         const y = (cy + r * Math.sin(a)) * multiplier
         const pos = {y,x}
-        console.log(pos, centerPos)
         return pos
     }
 
@@ -48,11 +47,8 @@ const SearchMarketing = ({ keywords }) => {
     }
 
     const accordionClickHandler = (i, e) => {
-        const el = e.target
-        if(expandedAccordion === null) {
+        if(expandedAccordion === null || expandedAccordion !== i) {
             setExpandedAccordion(i)
-            console.log(el.parentNode)
-
         } else {
             setExpandedAccordion(null)
         }
@@ -119,14 +115,14 @@ const SearchMarketing = ({ keywords }) => {
                         <div key={i} className="col col-xs-12">
                             <div className={["card card-visible text-left", SearchMarketingStyles.card, expandedAccordion === i ? SearchMarketingStyles.expanded : null].join(' ')}>
                                 <button className={SearchMarketingStyles.accBtn} onClick={(event) => accordionClickHandler(i, event)}>
-                                    <span className="h4">{k.adgroup}</span>
+                                    <span className="h4">{k.adgroup.split(' - ')[0]}</span>
                                     <span className={SearchMarketingStyles.btnRight}>
                                         <span className={SearchMarketingStyles.btnCount}>{k.keywords.length}</span>
                                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48.875' height='26.766' viewBox='0 0 48.875 26.766'%3E%3Cpath d='M227.819,107.371l20.9,20.73,20.9-20.73' transform='translate(-224.284 -103.836)' fill='none' stroke='%230087ef' stroke-linecap='round' stroke-linejoin='round' stroke-width='5'/%3E%3C/svg%3E" />
                                     </span>
                                 </button>
 
-                                <div className={["table-responsive", SearchMarketingStyles.tableWrap].join(' ')} style={{maxHeight: expandedAccordion === i ? '200vh' : 0}}>
+                                <div className={["table-responsive", SearchMarketingStyles.tableWrap].join(' ')} style={{maxHeight: expandedAccordion === i ? '550px' : 0}}>
                                     <table className={["table", SearchMarketingStyles.table].join(' ')}>
                                         <thead>
                                         <tr>
@@ -145,12 +141,9 @@ const SearchMarketing = ({ keywords }) => {
                                                 <td>{k.relevance_rank_google}</td>
                                             </tr>
                                             )}
-                                        
-                                       
                                         </tbody>
                                     </table>
                                     </div>
-
                             </div>
                         </div>
                     : null

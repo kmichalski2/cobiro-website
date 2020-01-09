@@ -7,13 +7,14 @@ import SEO from "../../components/seo"
 import SitesStyles from './sites.module.scss'
 
 import Waves from "../../components/waves/waves"
-import Map from './Map/Map'
-import SetupComparison from './SetupComparison/SetupComparison'
-import Services from "./Services/Services"
-import SearchMarketing from './SearchMarketing/Searchmarketing'
-
-
-
+import Map from '../../components/pmp/Map/Map'
+import SetupComparison from '../../components/pmp/SetupComparison/SetupComparison'
+import Services from "../../components/pmp/Services/Services"
+import SearchMarketing from '../../components/pmp/SearchMarketing/Searchmarketing'
+import Competitors from '../../components/pmp/Competitors/Competitors'
+import GiftCard from '../../components/pmp/GiftCard/GiftCard'
+import JumboCta from "../../components/sections/jumboCta/jumboCta"
+import Ads from "../../components/pmp/Ads/Ads"
 
 const Sites = (props) => {
     const axios = require('axios');
@@ -206,6 +207,11 @@ const Sites = (props) => {
         {pageData ? <SetupComparison pageSpeed={pageData.page_speed[0].desktop.performance.score * 100} /> : null}
         <Services />
         {pageData ? <SearchMarketing keywords={pageData.google_search_ads[2].keywords}/> : null }
+        <GiftCard />
+        {pageData ? <Ads title="Facebook Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="facebook" sway={true} /> : null}
+        {pageData ? <Ads title="Instagram Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="instagram" sway={false} /> : null} */}
+        {pageData ? <Competitors competitors={pageData.similar_sites} /> : null}
+        <JumboCta data={{title: 'Start building your business with Cobiro ', text: 'Focus your energy on running your business, while we take care of the advertising part.', externalLinkCta: '/', linkTitle: 'Sign up for free', backgroundColor: true, topGradiantColor: {hex: '#004BD5'}, bottomGradiantColor: {hex: '#62C9FF'}}}/>
     </Layout>
     )
 }

@@ -21,7 +21,7 @@ const SetupComparison = ({pageSpeed}) => {
                             <div className={[ComparisonStyles.circle].join(' ')}>
                                  <svg className={ComparisonStyles.circleChart} width="100%" height="100%" viewBox="0 0 35.8309886184 35.8309886184" xmlns="http://www.w3.org/2000/svg">
                                     <circle className={ComparisonStyles.circleBg} cx="17.91549430918954" cy="17.91549430918954" r="15.91549430918954" strokeWidth="3" fill="none"></circle>
-                                    <circle className={ComparisonStyles.circle} cx="17.91549430918954" cy="17.91549430918954" r="15.91549430918954" fill="none" strokeLinecap="round" strokeDasharray="100" style={{strokeDashoffset: speedIndex}} strokeDasharray="100" strokeDashoffset={speedIndex} strokeWidth="3"></circle>
+                                    <circle className={ComparisonStyles.circle} cx="17.91549430918954" cy="17.91549430918954" r="15.91549430918954" fill="none"  strokeDasharray="100" style={{strokeDashoffset: speedIndex}} strokeDasharray="100" strokeDashoffset={speedIndex} strokeWidth="3"></circle>
                                 </svg>
                                     <div className={ComparisonStyles.circleText}>
                                         <h3>{pageSpeed}</h3>

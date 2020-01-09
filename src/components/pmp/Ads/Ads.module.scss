@@ -1,0 +1,18 @@
+@import '../../../components/layout/style/globals';
+
+.ads {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    width: 100%;
+    max-width: 30rem;
+    
+
+    @include mq($until: lg) {
+        justify-content: flex-end;
+        margin: auto;
+        // margin-bottom: 2.5rem;
+    }
+
+    
+}

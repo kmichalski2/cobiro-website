@@ -31,18 +31,18 @@
 .circleChart {
 
     .circle {
-        stroke: $darkgrey;
+        stroke: rgba($darkgrey, 0.7);
         stroke-width: 4px;
         transition-duration: 0;
         fill: none;
-        stroke-linecap: round;
+        
         // stroke-dasharray: 302px;
         // stroke-dashoffset: 263.1714285714288px;
         transition: all 0.4s linear 0s;
     }
     
     .circleBg {
-        stroke: $grey;
+        stroke: $mediumgrey;
         stroke-width: 4px;
         fill: none;
     }

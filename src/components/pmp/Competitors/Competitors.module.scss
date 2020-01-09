@@ -1,0 +1,19 @@
+
+
+.card {
+    padding: 1rem;
+    display: block;
+
+    .screenshot {
+        width: 100%; 
+        max-width: none;
+        height: 10rem;
+    }
+
+    .flag {
+        width: 2rem; 
+        max-width: none;
+        height: 2rem;
+        margin-bottom: 0;
+    }
+}
