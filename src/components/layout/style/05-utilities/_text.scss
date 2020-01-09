@@ -12,8 +12,14 @@
 		text-align: right!important;
 	}
 }
+strong {
+	font-weight: 700;
+}
 .text-bold {
 	font-weight: 600;
+}
+.text-normal {
+	font-weight: 400;
 }
 .text-italic {
 	font-style: italic;

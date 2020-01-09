@@ -4,16 +4,16 @@ import Marker from "./Marker/Marker";
 
 import MapStyles from './Map.module.scss'
 
-const Map = ({lat, lng}) => (
-    <div className={MapStyles.map}>
+const Map = ({lat, lng, customLook}) => (
+    <div className={[MapStyles.map, customLook ? MapStyles.customLook : null].join(' ')}>
     <GoogleMapReact
         
-        options={createMapOptions()}
+        options={customLook ? () => createMapOptions() : {styles: []}}
         defaultCenter={{
             lat: lat,
             lng: lng, 
         }}
-        defaultZoom={13}
+        defaultZoom={15}
         bootstrapURLKeys={{ 
             key: 'AIzaSyCGzzdJOV5nRYKiSmhvoW-kv5LSPywsPpc',
             maptype: 'roadmap',
@@ -23,6 +23,7 @@ const Map = ({lat, lng}) => (
         <Marker 
             lat={55.687169}
             lng={12.591030} 
+            googleMarker={!customLook}
         />
     </GoogleMapReact>
     </div>

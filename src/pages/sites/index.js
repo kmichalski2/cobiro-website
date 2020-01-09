@@ -15,6 +15,7 @@ import Competitors from '../../components/pmp/Competitors/Competitors'
 import GiftCard from '../../components/pmp/GiftCard/GiftCard'
 import JumboCta from "../../components/sections/jumboCta/jumboCta"
 import Ads from "../../components/pmp/Ads/Ads"
+import GoogleMyBusiness from "../../components/pmp/GoogleMyBusiness/GoogleMyBusiness"
 
 const Sites = (props) => {
     const axios = require('axios');
@@ -161,7 +162,7 @@ const Sites = (props) => {
                 {pageData ? 
                 <div className="col col-xs-12 col-lg-6" style={{zIndex: 5}}>
                     <div className={["card card-visible text-left", SitesStyles.card].join(' ')}>
-                        <Map lat={55.687169} lng={12.591030}/>
+                        <Map lat={55.687169} lng={12.591030} customLook={true}/>
                         
                         <div className={SitesStyles.cardText}>
                             <div className="space-xs space-sm">
@@ -207,6 +208,7 @@ const Sites = (props) => {
         {pageData ? <SetupComparison pageSpeed={pageData.page_speed[0].desktop.performance.score * 100} /> : null}
         <Services />
         {pageData ? <SearchMarketing keywords={pageData.google_search_ads[2].keywords}/> : null }
+        {pageData ? <GoogleMyBusiness domain={pageData.attributes.url} category={pageData.attributes.category.replace('/', '').split('/')[0]} address={pageData.attributes.address.street} phone={pageData.attributes.phone_number} /> : null }
         <GiftCard />
         {pageData ? <Ads title="Facebook Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="facebook" sway={true} /> : null}
         {pageData ? <Ads title="Instagram Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="instagram" sway={false} /> : null} */}

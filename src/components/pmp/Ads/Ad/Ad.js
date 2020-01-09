@@ -31,7 +31,7 @@ const Ad = ({url, ads, type, first}) => {
                     <p className={["no-mb", AdStyles.small].join(' ')}>{ads ? ads.headline_2 : null}</p>
                 </div>
                 <div>
-                    <a href={`https://${url}`} className={[AdStyles.fbLink, AdStyles.small].join(' ')}>SEE MORE</a>
+                    <a href={`https://${url}`} className={[AdStyles.fbLink, AdStyles.small].join(' ')} target="_blank">SEE MORE</a>
                 </div>
             </div>
             <hr className={AdStyles.hr}/>
@@ -45,7 +45,7 @@ const Ad = ({url, ads, type, first}) => {
 
             { type === 'instagram' ?
             <>
-            <a className={AdStyles.instaCta}>
+            <a href={`https://${url}`} className={AdStyles.instaCta} target="_blank">
                 Visit website
             </a>
             <div className={["flex between-xs", AdStyles.instaActions, first ? AdStyles.first : AdStyles.second].join(' ')} >

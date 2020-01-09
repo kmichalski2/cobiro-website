@@ -11,15 +11,9 @@
     // z-index: 200;
     transform: translate(-50%, -100%);
 
-    // &::after {
-    //     content: '';
-    //     position: absolute;
-    //     bottom: -0.54rem;
-    //     left: 1.25rem;
-    //     width: 2.5rem;
-    //     height: 2.5rem;
-    //     background-color: red;
-    //     transform-origin: center;
-    //     transform: rotate(45deg);
-    // }
+    &.googleMarker {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='118' height='191' viewBox='0 0 118 191'%3E%3Cg transform='translate(-1373 -380)'%3E%3Cellipse cx='13' cy='7' rx='13' ry='7' transform='translate(1419 557)' fill='%23ddd'/%3E%3Cellipse cx='9' cy='5' rx='9' ry='5' transform='translate(1423 559)' fill='%23c3c3c3'/%3E%3Cpath d='M59,0a59,59,0,0,1,59,59c0,39.067-55.874,82.481-55.874,121.173,0,2.911.077,5.29-3.463,5.29-3.068,0-3.083-2.627-3.083-5.29C55.58,142.256,0,97.646,0,59A59,59,0,0,1,59,0Z' transform='translate(1373 380)' fill='%23ef3a38'/%3E%3Ccircle cx='24' cy='24' r='24' transform='translate(1408 415)' fill='%239a000c'/%3E%3C/g%3E%3C/svg%3E");
+        // width: 1.5rem;
+        // height: 2.5rem;
+    }
 }
