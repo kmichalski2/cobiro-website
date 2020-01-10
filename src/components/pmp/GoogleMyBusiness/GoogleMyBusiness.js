@@ -3,20 +3,23 @@ import React from 'react'
 import BusinessStyles from './GoogleMyBusiness.module.scss'
 import Map from '../Map/Map'
 
-const GoogleMyBusiness = ({domain, category, address, phone}) => {
+const GoogleMyBusiness = ({domain, category, address, phone, searchTerm}) => {
 
     return (
         <section className="section bg-sway">
             <div className="bg-sway-inner">
                 <div className="container">
                     <div className="row middle-xs">
-                        <div className="col col-xs-12 col-md-6">
+                        <div className="col col-xs-12 col-lg-6">
                             <h2>Google My Business</h2>
                             <p className="space-xs-up">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur</p>
                             <a href="#" className="btn">Sign up</a>
                         </div>
-                        <div className="col col-xs-12 col-md-6">
+                        <div className="col col-xs-12 col-lg-6 first-xs last-lg space-xs space-sm space-md">
                             <div className={["card card-visible", BusinessStyles.card].join(' ')}>
+                                <div className={BusinessStyles.searchBar}>
+                                    <p className="small text-left">{searchTerm}</p>
+                                </div>
                                 <div className={["card card-visible text-left", BusinessStyles.cardInner].join(' ')}>
                                     <div className={BusinessStyles.map}>
                                         <Map lat={55.687169} lng={12.591030} customLook={false} />

@@ -10,6 +10,7 @@ import Waves from "../../components/waves/waves"
 import Map from '../../components/pmp/Map/Map'
 import SetupComparison from '../../components/pmp/SetupComparison/SetupComparison'
 import Services from "../../components/pmp/Services/Services"
+import SearchMarketingAd from '../../components/pmp/SearchMarketingAd/SearchMarketingAd'
 import SearchMarketing from '../../components/pmp/SearchMarketing/Searchmarketing'
 import Competitors from '../../components/pmp/Competitors/Competitors'
 import GiftCard from '../../components/pmp/GiftCard/GiftCard'
@@ -207,8 +208,9 @@ const Sites = (props) => {
         </section>
         {pageData ? <SetupComparison pageSpeed={pageData.page_speed[0].desktop.performance.score * 100} /> : null}
         <Services />
+        <SearchMarketingAd searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]} title="Google Search Marketing" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" linkText="See more" link="/" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template}  backgroundColor />
         {pageData ? <SearchMarketing keywords={pageData.google_search_ads[2].keywords}/> : null }
-        {pageData ? <GoogleMyBusiness domain={pageData.attributes.url} category={pageData.attributes.category.replace('/', '').split('/')[0]} address={pageData.attributes.address.street} phone={pageData.attributes.phone_number} /> : null }
+        {pageData ? <GoogleMyBusiness domain={pageData.attributes.url} category={pageData.attributes.category.replace('/', '').split('/')[0]} address={pageData.attributes.address.street} phone={pageData.attributes.phone_number} searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]}/> : null }
         <GiftCard />
         {pageData ? <Ads title="Facebook Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="facebook" sway={true} /> : null}
         {pageData ? <Ads title="Instagram Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="instagram" sway={false} /> : null} */}
