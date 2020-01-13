@@ -3,6 +3,7 @@
 .legendGreen, .legendYellow, .legendBlue {
     position: relative;
     padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
 
     &::before {
         content: "";
@@ -17,19 +18,20 @@
 }
 
 .legendGreen {
+    margin-right: 1rem !important;
     &::before {
         background: linear-gradient(#92E2A1, #00AF21);
     }
 }
 .legendYellow {
-    margin-left: 2rem !important;
+    margin-right: 1rem !important;
 
     &::before {
         background: linear-gradient(#FFD00D, #FF9517);
     }
 }
 .legendBlue {
-    margin-left: 2rem !important;
+    // margin-left: 2rem !important;
 
     &::before {
         background: linear-gradient(#72A3FF, #2F76FC);
@@ -50,16 +52,6 @@
     // transform: rotate(-90deg);
     // transform-origin: center;
 }
-
-// .circleHigh {
-//     stroke: #00AF21;
-// }
-// .circleMedium {
-//     stroke: yellow;
-// }
-// .circleLow {
-//     stroke: red;
-// }
 
 .circle {
     position: relative;

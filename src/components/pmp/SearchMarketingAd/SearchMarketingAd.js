@@ -12,7 +12,7 @@ const searchMarketing = ({searchTerm, title, text, linkText, link, domain, ads, 
                     <div className="row middle-xs">
                         <div className="col col-xs-12 col-lg-6">
                         <div className="text-padding">
-                        {title ? <h3>{title}</h3> : null}
+                        {title ? <h2>{title}</h2> : null}
                         {text ? <p>{text}</p> : null}
                         {link && linkText ?
                             <a href={link} className="btn space-xs-up">

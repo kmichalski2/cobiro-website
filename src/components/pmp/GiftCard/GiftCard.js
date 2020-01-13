@@ -11,7 +11,7 @@ const GiftCard = () => {
             <div className="container">
                 <div className="row middle-xs">
                     <div className="col col-xs-12 col-lg-6 text-center-xs text-left-lg">
-                        <h3>Get Gift Card</h3>
+                        <h2>Get Gift Card</h2>
                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <br/>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur</p>
                         <a href="#" className="btn">See more</a>
                     </div>

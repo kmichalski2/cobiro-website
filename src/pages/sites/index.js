@@ -130,7 +130,7 @@ const Sites = (props) => {
         <section className="section bg-lightblue" style={{backgroundImage: `linear-gradient(#004BD5, #62C9FF)`, position: 'relative', paddingBottom: 0, paddingTop: '7.5rem' }}>
             <div className="container text-white ">
                 <div className="row top-xs center-xs">
-                <div className={!pageData ? "col col-xs-12 col-md-8 col-lg-6  center-xs center-sm center-md space-xs-up" : "col col-xs-12 col-lg-6 space-xs-up text-center-xs text-left-lg"} style={{paddingTop: '5rem', paddingBottom: '15rem'}}>
+                <div className={[SitesStyles.headerText, !pageData ? "col col-xs-12 col-md-8 col-lg-6  center-xs center-sm center-md space-xs-up" : "col col-xs-12 col-lg-6 space-xs-up text-center-xs text-left-lg"].join(' ')}>
                     {pageData ?
                     <div className={SitesStyles.siteImages}>
                         <img className={SitesStyles.desktop} src={pageData.page_speed[0].desktop.screenshot} />
@@ -213,7 +213,7 @@ const Sites = (props) => {
         {pageData ? <GoogleMyBusiness domain={pageData.attributes.url} category={pageData.attributes.category.replace('/', '').split('/')[0]} address={pageData.attributes.address.street} phone={pageData.attributes.phone_number} searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]}/> : null }
         <GiftCard />
         {pageData ? <Ads title="Facebook Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="facebook" sway={true} /> : null}
-        {pageData ? <Ads title="Instagram Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="instagram" sway={false} /> : null} */}
+        {pageData ? <Ads title="Instagram Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="instagram" sway={false} /> : null} 
         {pageData ? <Competitors competitors={pageData.similar_sites} /> : null}
         <JumboCta data={{title: 'Start building your business with Cobiro ', text: 'Focus your energy on running your business, while we take care of the advertising part.', externalLinkCta: '/', linkTitle: 'Sign up for free', backgroundColor: true, topGradiantColor: {hex: '#004BD5'}, bottomGradiantColor: {hex: '#62C9FF'}}}/>
     </Layout>

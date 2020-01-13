@@ -21,7 +21,7 @@ const SetupComparison = ({pageSpeed}) => {
                             <div className={[ComparisonStyles.circle].join(' ')}>
                                  <svg className={ComparisonStyles.circleChart} width="100%" height="100%" viewBox="0 0 35.8309886184 35.8309886184" xmlns="http://www.w3.org/2000/svg">
                                     <circle className={ComparisonStyles.circleBg} cx="17.91549430918954" cy="17.91549430918954" r="15.91549430918954" strokeWidth="3" fill="none"></circle>
-                                    <circle className={ComparisonStyles.circle} cx="17.91549430918954" cy="17.91549430918954" r="15.91549430918954" fill="none"  strokeDasharray="100" style={{strokeDashoffset: speedIndex}} strokeDasharray="100" strokeDashoffset={speedIndex} strokeWidth="3"></circle>
+                                    <circle className={[ComparisonStyles.circle, ComparisonStyles.circleGrey].join(' ')} cx="17.91549430918954" cy="17.91549430918954" r="15.91549430918954" fill="none"  strokeDasharray="100" style={{strokeDashoffset: speedIndex}} strokeDasharray="100" strokeDashoffset={speedIndex} strokeWidth="3"></circle>
                                 </svg>
                                     <div className={ComparisonStyles.circleText}>
                                         <h3>{pageSpeed}</h3>
@@ -42,12 +42,19 @@ const SetupComparison = ({pageSpeed}) => {
                         <div className={["card card-visible", ComparisonStyles.card].join(' ')}>
                             <img src={Logo} className="space-xs-up"/>
                             <div className={[ComparisonStyles.circle, ComparisonStyles.greenCircle].join(' ')}>
-                                <div className={ComparisonStyles.innerCircle}>
+                                <svg className={ComparisonStyles.circleChart} width="100%" height="100%" viewBox="0 0 35.8309886184 35.8309886184" xmlns="http://www.w3.org/2000/svg">
+                                    <linearGradient id="gradient1" gradientTransform="rotate(78)">
+                                        <stop id="stop1" offset="0%" stopColor="#92E2A1" />
+                                        <stop id="stop2" offset="100%" stopColor="#00AF21"/>
+                                    </linearGradient>
+                                    <circle className={ComparisonStyles.circle} cx="17.91549430918954" cy="17.91549430918954" r="15.91549430918954" fill="none" stroke="url(#gradient1)" strokeDasharray="100" style={{strokeDashoffset: 0}} strokeDasharray="100" strokeDashoffset={0} strokeWidth="3"></circle>
+                                </svg>
+                                {/* <div className={ComparisonStyles.innerCircle}> */}
                                     <div className={ComparisonStyles.circleText}>
                                         <h3>100</h3>
                                         <p>Potential speed</p>
                                     </div>
-                                </div>
+                                {/* </div> */}
                             </div>
                             <h3 className={ComparisonStyles.pricingHeadline}>
                                 Price: <span className="text-bold">FREE</span>

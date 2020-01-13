@@ -10,14 +10,28 @@
     left: -50vw;
     height: 4px;
     background-color: $blue;
+
+    @include mq($until: md) {
+        display: none;
+    }
 }
 
 
 
 .service {
     margin-top: 5rem;
+    @include mq($until: md) {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 2rem;
+    }
+
     p {
         margin-top: 2.5rem;
+        @include mq($until: md) {
+            margin-top: -2.5rem;
+
+        }
     }
     .lineDot {
         position: relative;
@@ -25,16 +39,31 @@
         margin: auto;
         background-color: $blue;
 
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            width: 16px;
-            height: 16px;
-            transform: translateX(-50%);
-            border-radius: 50%;
-            background-color: $blue;
+        @include mq($until: md) {
+            // width: 50%;
+            // height: 4px;
+            // margin: 0;
+            height: 5rem;
+            margin: 0;
+            margin-left: 2.5rem;
+            margin-right: 2.5rem;
+            // padding-right: 2.5rem;
+
+            
+        }
+
+        @include mq($from: md) {
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 50%;
+                width: 16px;
+                height: 16px;
+                transform: translateX(-50%);
+                border-radius: 50%;
+                background-color: $blue;
+            }
         }
 
         .circle {
@@ -49,19 +78,33 @@
             // background-color: $blue
         }
     }
-    &:nth-child(odd) {
-        .lineDot {
-            height: 4rem;
-            margin-top: 3.5rem;
 
-            // .circle {
-            //     top: 2.5rem;
-            // }
+    @include mq($until: md) {
+        &:last-child {
+            .lineDot {
+                height: 0;
+            }
         }
     }
-    &:nth-child(even) {
-        .lineDot {
-            height: 7.5rem;
+    @include mq($from: md) {
+        &:nth-child(odd) {
+            .lineDot {
+                height: 4rem;
+                margin-top: 3.5rem;
+
+                @include mq($until: md) {
+                    margin-top: 0;
+                }
+                // .circle {
+                //     top: 2.5rem;
+                // }
+            }
+        }
+    
+        &:nth-child(even) {
+            .lineDot {
+                height: 7.5rem;
+            }
         }
     }
     

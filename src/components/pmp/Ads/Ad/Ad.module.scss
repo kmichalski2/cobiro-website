@@ -3,7 +3,7 @@
 .card {
     padding: 1.5rem;
     width: 21rem;
-    max-width: 100%;
+    max-width: 90%;
     display: block !important;
 
     @include mq($until: lg) {

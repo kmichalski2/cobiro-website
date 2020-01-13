@@ -12,7 +12,7 @@ const Ads = ({title, text, linkText, link, logo, domain, ads, adType, sway}) => 
                 <div className="container">
                     <div className="row middle-xs">
                         <div className="col col-xs-12 col-lg-6 text-center-xs text-left-lg">
-                            <h3>{title}</h3>
+                            <h2>{title}</h2>
                             <p>
                             {text}
                             </p>

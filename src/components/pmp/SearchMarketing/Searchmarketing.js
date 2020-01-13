@@ -29,8 +29,8 @@ const SearchMarketing = ({ keywords }) => {
     }
 
     const highVolumeLabelPos = labelPosCheck(highVolume, 0)
-    const mediumVolumeLabelPos = labelPosCheck(highVolume, highVolume)
-    const lowVolumeLabelPos = labelPosCheck(highVolume, highVolume + mediumVolume)
+    const mediumVolumeLabelPos = labelPosCheck(mediumVolume, highVolume)
+    const lowVolumeLabelPos = labelPosCheck(lowVolume, highVolume + mediumVolume)
 
     const keywordsReducer = (accumulator, item) => {
         return accumulator + item.keywords.length;

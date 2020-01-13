@@ -56,6 +56,7 @@
         padding: 1rem;
         padding-top: 0;
         overflow: hidden;
+        display: block !important;
 
         .map {
             width: calc(100% + 2rem);
@@ -92,7 +93,7 @@
             }
 
             .stars {
-                margin: 0 1rem 0 0.5rem;
+                margin: 0 0.75rem 0 0.5rem;
                 display: flex;
 
                 .star {
@@ -102,6 +103,7 @@
                     background-size: contain;
                     background-position: center;
                     background-repeat: no-repeat;
+                    margin-right: 0.25rem;
                 }
             }
         }
