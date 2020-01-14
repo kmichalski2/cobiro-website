@@ -1,0 +1,12 @@
+@import '../../layout/style/globals';
+
+.textWrap {
+    padding-right: 3.75rem;
+
+    .text {
+        margin-bottom: 1.2rem;
+        p {
+            color: $white;
+        }
+    }
+}

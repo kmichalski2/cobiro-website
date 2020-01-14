@@ -1,0 +1,194 @@
+@import '../../../layout/style/globals';
+
+
+@keyframes spinner {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(365deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        transform: translateY(-.6rem);
+        max-height: 0;
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        max-height: 5rem;
+        opacity: 1;
+    }
+}
+
+.labelText {
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 1rem;
+    text-align: left;
+    color: $lightblack
+}
+label {
+    width: 100%;
+
+    input {
+        &.invalid {
+            border-color: red;
+        }
+    }
+}
+
+.inputInline {
+    justify-content: space-between;
+    align-items: center;
+
+    label:first-child {
+        margin-right: 0.5rem;
+    }
+    label:last-child {
+        margin-left: 0.5rem;
+    }
+}
+.inputWebsite  {
+    position: relative;
+    display: flex;
+
+
+    input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+        &::placeholder {
+            color: $grey;
+            opacity: 1;
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+    }
+
+}
+.prefix {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: $lightblack;
+    background-color: $lightgrey;
+    display: flex;
+    align-items: center;
+    border: 1px solid $grey;
+    border-right-width: 0;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+}
+.footnote {
+    font-size: 0.8rem;
+}
+.depositButtons  {
+    margin-bottom: 1.875rem;
+    flex-wrap: wrap;
+
+button {
+    width: calc(25% - 0.5rem);
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: $white;
+    border-color: $blue;
+    color: $blue;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+
+    @include mq($until: md) {
+        width: calc(50% - 0.25rem);
+    }
+
+    &:first-child {
+        margin-left: 0;
+    }
+    &:last-child {
+        margin-right: 0;
+    }
+    &.active, &:hover, &:active {
+        background-color: lighten($blue, 47);
+        color: $blue;
+        border-color: $blue;
+    }
+
+    &.mostUsed {
+        position: relative;
+        span {
+            position: absolute;
+            top: 0.5rem;
+            right: -0.3rem;
+            font-size: 0.6rem;
+            padding: 0.25rem 0.3rem;
+            line-height: 1;
+            background-color: $blue;
+            color: $white;
+            font-weight: 400;
+            border-radius: 2px;
+            border-bottom-right-radius: 0;
+
+            &::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                width: 0; 
+                height: 0;
+                top: 100%;
+                border-top: calc(0.3rem - 1px) solid darken($blue, 20);
+                border-right:calc(0.3rem - 1px) solid transparent; 
+                //transform: translateY(100%);
+                
+            }
+        }
+        
+        
+    }
+}
+}
+.errorTexts {
+    animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+}
+.btn {
+    white-space: nowrap;
+    position: relative;
+    font-size: 1.2rem;
+    padding: 1rem 1.8rem;
+    width: 100%;
+
+&:disabled {
+    opacity: 1;
+    cursor: not-allowed !important;
+    pointer-events: visible;
+
+&:hover {
+    opacity: 0.65;
+    background-color: $blue;
+}
+}
+
+.submitText {
+    transition: opacity 0.2s ease;
+}
+
+&.btnSpinner {
+    .submitText {
+        opacity: 0;
+    }
+    .spinner {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        border: 2px solid $white;
+        border-top-width: 0;
+        border-right-width: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: spinner 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s infinite;
+    }
+    }
+}
