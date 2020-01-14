@@ -3,6 +3,7 @@ import React from 'react'
 import VoucherForm from '../voucher/voucherForm/voucherForm'
 import SwayTop from '../../UiElements/SwayTop/SwayTop'
 import voucherHeaderStyles from './VoucherHeader.module.scss'
+import GiftCard from '../../UiElements/GiftCard/GiftCard'
 
 const VoucherHeader = (props) => {
     const topColor = props.data.topGradiantColor
@@ -26,8 +27,10 @@ const VoucherHeader = (props) => {
                         </div>
                     </div>
                     <div className="col col-xs-12 col-lg-7 text-white" style={{marginBottom: rightSide === 'voucher' ? '-3rem' : null}}>
-                        { rightSide === 'voucher' ?
+                        { rightSide === 'form' ?
                         <VoucherForm env="development" footnote="* A Cobiro account is free. The amount of $25 deposit will only be used for your Google Ads budget to gain the $75 free voucher."/>
+                        : rightSide === 'voucher' ?
+                        <GiftCard />
                         : null }
                         
                     </div>
