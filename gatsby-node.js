@@ -95,12 +95,21 @@ exports.createPages = async function({ graphql, actions }) {
                   linkTitle
                   linkUrl
                   signUpOrVoucher
+                  environment
                   topGradiantColor {
                     hex
                   }
                   bottomGradiantColor {
                     hex
                   }
+                }
+                ... on DatoCmsExplanationGiftCard {
+                  title
+                  text
+                  linkTitle
+                  linkUrl
+                  footnote
+                  leftText
                 }
                 ... on DatoCmsThreeUp {
                   backgroundColor

@@ -10,8 +10,8 @@ const VoucherForm = ({env, footnote}) => {
     const [planId, setPlanId] = useState(2)
     const [website, setWebsite] = useState('')
     const [isWebsiteValid, setIsWebsiteValid] = useState(false)
-    const [name, setName] = useState('')
-    const [isNameValid, setIsNameValid] = useState(false)
+    // const [name, setName] = useState('')
+    // const [isNameValid, setIsNameValid] = useState(false)
     const [email, setEmail] = useState('')
     const [isEmailValid, setIsEmailValid] = useState(false)
     const [errors, setErrors] = useState()
@@ -32,10 +32,11 @@ const VoucherForm = ({env, footnote}) => {
     }
 
     const handleChange = (event) => {
-        if(event.target.name === 'name') {
-            setName(event.target.value)
-            handleChangeName(event)
-        } else if(event.target.name === 'email') {
+        // if(event.target.name === 'name') {
+        //     setName(event.target.value)
+        //     handleChangeName(event)
+        // } else 
+        if(event.target.name === 'email') {
             setEmail(event.target.value)
             handleChangeEmail(event)
         } else if(event.target.name === 'website') {
@@ -44,16 +45,16 @@ const VoucherForm = ({env, footnote}) => {
         }
     }
 
-    const handleChangeName = (event) => {
-        if(event.target.value && event.target.classList.contains(VoucherFormStyles.invalid)) {
-            event.target.classList.remove(VoucherFormStyles.invalid)
-            setIsNameValid(true)
-        } else if(event.target.value) {
-            setIsNameValid(true)  
-        } else if(!event.target.value) {
-            setIsNameValid(false)
-        }
-    }
+    // const handleChangeName = (event) => {
+    //     if(event.target.value && event.target.classList.contains(VoucherFormStyles.invalid)) {
+    //         event.target.classList.remove(VoucherFormStyles.invalid)
+    //         setIsNameValid(true)
+    //     } else if(event.target.value) {
+    //         setIsNameValid(true)  
+    //     } else if(!event.target.value) {
+    //         setIsNameValid(false)
+    //     }
+    // }
 
     const handleChangeEmail = (event) => {
         const email = event.target.value
@@ -94,6 +95,18 @@ const VoucherForm = ({env, footnote}) => {
         registerUser();
     }
 
+    const trackUser = (user_id, site_id, plan_id) => {
+        if(typeof window !== 'undefined' && typeof window.mixpanel !== 'undefined') {
+            window.mixpanel.identify(user_id);
+            window.mixpanel.track("/SeamlessBilling - Account - Account Created", {
+                "site_id-created": site_id,
+                "currency": "USD",
+                "amount_selected": plan_id === 0 ? 25 : plan_id === 1 ? 50 : plan_id === 2 ? 100 : plan_id === 3 ? 200 : null} );
+            console.log('Mixpanel: tracking user')
+        } else {
+            console.log('Mixpanel not defined')
+        }
+    }
 
     const registerUser = () => {
         axios({
@@ -104,7 +117,7 @@ const VoucherForm = ({env, footnote}) => {
                     type: "users",
                     attributes: {
                         email: email,
-                        first_name: name,
+                        // first_name: name,
                         last_name: "lastname",
                         password: password
                     }
@@ -172,9 +185,14 @@ const VoucherForm = ({env, footnote}) => {
           })
           .then(response => {
             console.log('CREATE SITE RESPONSE: ', response);
+            console.log('customer_id: ', customerId, ' site_id: ', response.data.data.id, ' plan_id: ', planId, planId === 1 ? 25 : planId === 2 ? 50 : planId === 3 ? 100 : planId === 4 ? 200 : null)
+            
             setErrors()
-            // setAccessToken(response.data.data.attributes.access_token)
-            // setRefreshToken(response.data.data.attributes.refresh_token)
+            trackUser(customerId, response.data.data.id, planId)
+
+            return response
+          })
+          .then(response => {     
             getPaymentUrl(token, customerId, response.data.data.id)
           })
           .catch(error => {
@@ -199,7 +217,7 @@ const VoucherForm = ({env, footnote}) => {
                         redirect_uri: `https://app.${envUrl}.com/user/login?token=${token}&redirectUri=site/${siteId}/store`,
                         customer: {
                             email: email,
-                            first_name: name,
+                            // first_name: name,
                             last_name: "example",
                             address: "somewhere",
                             website: website
@@ -244,12 +262,12 @@ const VoucherForm = ({env, footnote}) => {
                     </div>
                 </label>
             </div>
-            <div className="space-xs-up">
+            {/* <div className="space-xs-up">
                 <label className="text-left">
                     <span className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your name</span>
                     <input className="input-inline" type="text" name="name" value={name} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                 </label>
-            </div>
+            </div> */}
             <div className="space-xs-up">
                 <label className="text-left">
                     <span className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your email</span>
@@ -267,7 +285,7 @@ const VoucherForm = ({env, footnote}) => {
                 className={["btn btn-large space-xs-up", VoucherFormStyles.btn, isLoading ? VoucherFormStyles.btnSpinner : null]
                     .join(' ')} 
                 onClick={handleSubmit} 
-                disabled={isNameValid && isEmailValid && isWebsiteValid && !isLoading ? false : true}>
+                disabled={/*isNameValid && */isEmailValid && isWebsiteValid && !isLoading ? false : true}>
                     <span className={VoucherFormStyles.submitText}>Get started</span>
                     <span className={VoucherFormStyles.spinner}></span>
             </button>

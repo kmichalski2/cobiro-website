@@ -12,12 +12,13 @@ const VoucherHeader = (props) => {
     const link = props.data.linkUrl
     const linkTitle = props.data.linkTitle
     const rightSide = props.data.signUpOrVoucher
+    const env = props.data.environment
 
     return (
         <SwayTop topColor={topColor} bottomColor={bottomColor} >
-            <div className="container">
+            <div className={["container", rightSide === 'voucher' ? voucherHeaderStyles.header : null].join(' ')}>
                 <div className="row flex middle-xs">
-                    <div className="col col-xs-12 col-lg-5 text-white">
+                    <div className={["col col-xs-12 text-white", rightSide === 'signup' ? "col-lg-5" : "col-lg-6"].join(' ')}>
                         <div className={["space-xs space-sm space-md", voucherHeaderStyles.textWrap].join(' ')}>
                             <h1>{props.data.title}</h1>
                             <div className={voucherHeaderStyles.text} dangerouslySetInnerHTML={{__html: text}}></div>
@@ -26,9 +27,9 @@ const VoucherHeader = (props) => {
                             : null }
                         </div>
                     </div>
-                    <div className="col col-xs-12 col-lg-7 text-white" style={{marginBottom: rightSide === 'voucher' ? '-3rem' : null}}>
-                        { rightSide === 'form' ?
-                        <VoucherForm env="development" footnote="* A Cobiro account is free. The amount of $25 deposit will only be used for your Google Ads budget to gain the $75 free voucher."/>
+                    <div className={["col col-xs-12 text-white", , rightSide === 'signup' ? "col-lg-7" : "col-lg-6 first-xs last-lg space-xs space-sm space-md"].join(' ')} style={{marginBottom: rightSide === 'signup' ? '-3rem' : null}}>
+                        { rightSide === 'signup' ?
+                        <VoucherForm env={env} footnote="* A Cobiro account is free. The amount of $25 deposit will only be used for your Google Ads budget to gain the $75 free voucher."/>
                         : rightSide === 'voucher' ?
                         <GiftCard />
                         : null }
