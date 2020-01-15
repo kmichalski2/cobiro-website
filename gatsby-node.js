@@ -96,6 +96,7 @@ exports.createPages = async function({ graphql, actions }) {
                   linkUrl
                   signUpOrVoucher
                   environment
+                  footnote
                   topGradiantColor {
                     hex
                   }
@@ -190,6 +191,8 @@ exports.createPages = async function({ graphql, actions }) {
                     slug
                   }
                   linkTitle
+                  externalLinkUrl
+                  showAsButton
                   imageToEdge
                   image {
                     alt

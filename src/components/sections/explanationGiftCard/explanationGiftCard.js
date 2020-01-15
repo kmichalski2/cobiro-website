@@ -11,7 +11,7 @@ const ExplanationGiftCard = ({data}) => {
             {data.text ? <div className={explanationGiftCardStyles.text} dangerouslySetInnerHTML={{__html: data.text}}></div> : null}
       
           {data.linkTitle && data.linkUrl ? 
-          <a className="btn space-xs-up" href={data.linkUrl} target="_blank">{data.linkTitle}</a>
+          <a className="btn space-xs-up" href={data.linkUrl}>{data.linkTitle}</a>
           : null}
           <p className="small">{data.footnote}</p>
         </div>

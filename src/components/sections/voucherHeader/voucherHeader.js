@@ -13,6 +13,7 @@ const VoucherHeader = (props) => {
     const linkTitle = props.data.linkTitle
     const rightSide = props.data.signUpOrVoucher
     const env = props.data.environment
+    const footnote = props.data.footnote
 
     return (
         <SwayTop topColor={topColor} bottomColor={bottomColor} >
@@ -23,13 +24,13 @@ const VoucherHeader = (props) => {
                             <h1>{props.data.title}</h1>
                             <div className={voucherHeaderStyles.text} dangerouslySetInnerHTML={{__html: text}}></div>
                             {link && linkTitle ?
-                            <a className="btn btn-white btn-large" href={link} target="_blank">{linkTitle}</a>
+                            <a className="btn btn-white btn-large" href={link}>{linkTitle}</a>
                             : null }
                         </div>
                     </div>
                     <div className={["col col-xs-12 text-white", , rightSide === 'signup' ? "col-lg-7" : "col-lg-6 first-xs last-lg space-xs space-sm space-md"].join(' ')} style={{marginBottom: rightSide === 'signup' ? '-3rem' : null}}>
                         { rightSide === 'signup' ?
-                        <VoucherForm env={env} footnote="* A Cobiro account is free. The amount of $25 deposit will only be used for your Google Ads budget to gain the $75 free voucher."/>
+                        <VoucherForm env={env} footnote={footnote}/>
                         : rightSide === 'voucher' ?
                         <GiftCard />
                         : null }

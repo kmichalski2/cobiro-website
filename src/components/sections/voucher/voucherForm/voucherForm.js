@@ -243,7 +243,7 @@ const VoucherForm = ({env, footnote}) => {
         <div className="card card-visible">
     <div className="row start-xs">
         <div className={["col col-xs-12", VoucherFormStyles.depositButtons].join(' ')}>
-            <p className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your budget</p>
+            <p className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your monthly budget</p>
             <div className="flex between-xs flex-wrap">
                 <button className={["btn btn-large btn-select", planId === 1 ? VoucherFormStyles.active : null].join(' ')} onClick={() => setPlanId(1)}>$25</button>
                 <button className={["btn btn-large btn-select", planId === 2 ? VoucherFormStyles.active : null].join(' ')} onClick={() => setPlanId(2)}>$50</button>

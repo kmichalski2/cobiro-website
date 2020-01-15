@@ -22,7 +22,7 @@ const Voucher = ({ data }) => {
     )
 
     return (
-        <section className={[VoucherStyles.section, data.backgroundColor ? VoucherStyles.withBg : null, "section"].join(' ')} style={{backgroundImage: data.backgroundColor ? `linear-gradient(${topColor}, ${bottomColor})` : null}}>
+        <section className={[VoucherStyles.section, data.backgroundColor ? VoucherStyles.withBg : null, "section"].join(' ')} style={{backgroundImage: data.backgroundColor ? `linear-gradient(${topColor}, ${bottomColor})` : null}} id="voucher-signup">
         { data.backgroundColor ? whiteSway : null }
         <div className={[data.backgroundColor ? "bg-sway-inner" : null, "section-inner"].join(' ')} style={{ position: "relative", zIndex: 1 }}>
             <div className="container">
