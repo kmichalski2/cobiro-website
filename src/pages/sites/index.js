@@ -20,7 +20,6 @@ import GiftCardSection from "../../components/pmp/GiftCardSection/GiftCardSectio
 
 const Sites = (props) => {
     const axios = require('axios');
-    console.log(props)
     
     const [isLoaded, setIsLoaded] = useState(false)
     const [urlInputted, setUrlInputted] = useState('');
@@ -66,12 +65,7 @@ const Sites = (props) => {
             navigate(`/sites/${newUrl}`)
             setIsLoading(true)
 
-            axios.post(`/.netlify/functions/sites?url=${newUrl}`
-                // params: {
-                //     url: `http://www.${newUrl}`,
-                //     format: 'json'
-                // }
-            )
+            axios.post(`/.netlify/functions/sites?url=${newUrl}`)
             .then(function (response) {
                 console.log(response);
                 if(response.status === 200) {
@@ -85,17 +79,15 @@ const Sites = (props) => {
             .catch(function (error) {
                 console.log('Error: ', error.response)
                 console.log('Error: ', error)
-                // console.log('Response: ', error.response.data.replace('<h1>', '').replace('</h1>', ''))
-                // setAlert(error.response.data.replace('<h1>', '').replace('</h1>', ''))
             })
             .finally(function () {
                 setIsLoading(false)
             });  
               
         } else {
-            // setAlert('The url you typed is not valid')
             setSubmission('')
             navigate('/sites/')
+            setAlert('The url you typed is not valid')
         }
     }
 
@@ -130,7 +122,7 @@ const Sites = (props) => {
         <section className="section bg-lightblue" style={{backgroundImage: `linear-gradient(#004BD5, #62C9FF)`, position: 'relative', paddingBottom: 0, paddingTop: '7.5rem' }}>
             <div className="container text-white ">
                 <div className="row top-xs center-xs">
-                <div className={[SitesStyles.headerText, !pageData ? "col col-xs-12 col-md-8 col-lg-6  center-xs center-sm center-md space-xs-up" : "col col-xs-12 col-lg-6 space-xs-up text-center-xs text-left-lg"].join(' ')}>
+                <div className={[SitesStyles.headerText, !pageData ? "col col-xs-12 col-md-8 col-lg-6 text-center center-xs center-sm center-md space-xs-up" : "col col-xs-12 col-lg-6 space-xs-up text-center-xs text-left-lg"].join(' ')}>
                     {pageData ?
                     <div className={SitesStyles.siteImages}>
                         <img className={SitesStyles.desktop} src={pageData.page_speed[0].desktop.screenshot} />

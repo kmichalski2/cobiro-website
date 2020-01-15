@@ -1,6 +1,6 @@
 import React from 'react'
 
-import GiftCardStyles from './GiftCard.module.scss'
+import GiftCardStyles from './GiftCardSection.module.scss'
 
 import googleAds from '../../../images/google_ads.png'
 import GiftCard from '../../UiElements/GiftCard/GiftCard'
