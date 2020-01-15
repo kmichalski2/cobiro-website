@@ -2,7 +2,7 @@ import React from 'react'
 
 import VoucherForm from '../voucher/voucherForm/voucherForm'
 import SwayTop from '../../UiElements/SwayTop/SwayTop'
-import voucherHeaderStyles from './VoucherHeader.module.scss'
+import voucherHeaderStyles from './voucherHeader.module.scss'
 import GiftCard from '../../UiElements/GiftCard/GiftCard'
 
 const VoucherHeader = (props) => {
