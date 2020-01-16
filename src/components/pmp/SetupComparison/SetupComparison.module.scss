@@ -18,12 +18,24 @@
 
 .card {
     display: block;
+    position: relative;
+    padding-bottom: 0;
+    overflow: hidden;
+    border-width: 0 !important;
 
     img {
         margin: auto;
         width: 5rem;
         max-width: 5rem;
     } 
+
+    img.sways {
+        width: calc(100% + 5.2rem);
+        display: block;
+        max-width: none;
+        margin-left: -2.6rem;
+    }
+
 }
 .list {
     display: inline-block;

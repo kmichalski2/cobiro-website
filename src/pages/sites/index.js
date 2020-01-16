@@ -155,9 +155,12 @@ const Sites = (props) => {
                 {pageData ? 
                 <div className="col col-xs-12 col-lg-6" style={{zIndex: 5}}>
                     <div className={["card card-visible text-left", SitesStyles.card].join(' ')}>
-                        <Map lat={55.687169} lng={12.591030} customLook={true}/>
+                        <Map lat={(pageData.attributes.address.street || pageData.attributes.address.city) ? 55.687169 : null} lng={(pageData.attributes.address.street || pageData.attributes.address.city) ? 12.591030 : null} customLook={true} />
                         
-                        <div className={SitesStyles.cardText}>
+                        <div className={[SitesStyles.cardText, (!pageData.attributes.address.street || !pageData.attributes.address.street) ? SitesStyles.noResult : null].join(' ')}>
+                            
+                        {(pageData.attributes.address.street && pageData.attributes.address.street) ? 
+                            <>
                             <div className="space-xs space-sm">
                                 {pageData && (pageData.attributes.address.street || pageData.attributes.address.city) ? 
                                 <>
@@ -189,7 +192,15 @@ const Sites = (props) => {
                                 : null}
     
                             </div>
-                         
+                            </>
+                        : 
+                        <>
+                        <p className="text-center text-bold">Oops, we couldn't find you...</p>
+                        <p className="text-center">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</p>
+                        <a className="btn btn-large" href="https://customer.cobiro.com">Sign up</a>
+                        </>
+                        }
+                                    
                         </div>
                     </div>
                 </div>

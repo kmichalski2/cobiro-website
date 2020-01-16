@@ -27,7 +27,7 @@
   }
 
 .headerText {
-  padding-top: 5rem;
+  // padding-top: 5rem;
   padding-bottom: 12rem;
 
   @include mq($until: lg) {
@@ -59,6 +59,11 @@
         >div {
           width: 100%;
         }
+      }
+
+      &.noResult {
+        display: block;
+        text-align: center;
       }
     }
 }

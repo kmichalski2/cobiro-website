@@ -6,8 +6,9 @@ import business from './images/business.svg'
 import fb from './images/fb.svg'
 import giftcard from './images/giftcard.svg'
 import search from './images/search.svg'
+import googleAds from './images/google_ads_round.svg'
 import instagram from './images/instagram.svg'
-import placeholder from './images/placeholder.svg'
+import people from './images/people.svg'
 
 const Services = () => {
 
@@ -43,6 +44,12 @@ const Services = () => {
                     </div>
                     <div className={["col col-xs-12 col-md-2", ServicesStyles.service].join(' ')}>
                         <div className={ServicesStyles.lineDot}>
+                        <img className={ServicesStyles.circle} src={googleAds} />
+                        </div>
+                        <p className="text-bold text-black small">Google Shopping Ads</p>
+                    </div>
+                    <div className={["col col-xs-12 col-md-2", ServicesStyles.service].join(' ')}>
+                        <div className={ServicesStyles.lineDot}>
                         <img className={ServicesStyles.circle} src={fb} />
                         </div>
                         <p className="text-bold text-black small">Facebook Marketing</p>
@@ -55,7 +62,7 @@ const Services = () => {
                     </div>
                     <div className={["col col-xs-12 col-md-2", ServicesStyles.service].join(' ')}>
                         <div className={ServicesStyles.lineDot}>
-                        <img className={ServicesStyles.circle} src={placeholder} />
+                        <img className={ServicesStyles.circle} src={people} />
                         </div>
                         <p className="text-bold text-black small">Competitors</p>
                     </div>

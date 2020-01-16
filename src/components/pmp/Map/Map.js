@@ -4,30 +4,39 @@ import Marker from "./Marker/Marker";
 
 import MapStyles from './Map.module.scss'
 
-const Map = ({lat, lng, customLook}) => (
-    <div className={[MapStyles.map, customLook ? MapStyles.customLook : null].join(' ')}>
-    <GoogleMapReact
-        
-        options={customLook ? () => createMapOptions() : {styles: []}}
-        defaultCenter={{
-            lat: lat,
-            lng: lng, 
-        }}
-        defaultZoom={15}
-        bootstrapURLKeys={{ 
-            key: 'AIzaSyCGzzdJOV5nRYKiSmhvoW-kv5LSPywsPpc',
-            maptype: 'roadmap',
-            size: '480x360'
-        }}
-    >
-        <Marker 
-            lat={55.687169}
-            lng={12.591030} 
-            googleMarker={!customLook}
-        />
-    </GoogleMapReact>
-    </div>
-)
+const Map = ({lat, lng, customLook}) => {
+
+    const latitude = lat || 53.13482567
+    const longtitude = lng || -15.94425201
+    const zoom = lat && lng ? 15 : 1
+
+    return (
+        <div className={[MapStyles.map, customLook ? MapStyles.customLook : null].join(' ')}>
+        <GoogleMapReact
+            
+            options={customLook ? () => createMapOptions() : {styles: []}}
+            defaultCenter={{
+                lat: latitude,
+                lng: longtitude, 
+            }}
+            defaultZoom={zoom}
+            bootstrapURLKeys={{ 
+                key: 'AIzaSyCGzzdJOV5nRYKiSmhvoW-kv5LSPywsPpc',
+                maptype: 'roadmap',
+                size: '480x360'
+            }}
+        >   
+            {lat && lng ? 
+            <Marker 
+                lat={55.687169}
+                lng={12.591030} 
+                googleMarker={!customLook}
+            />
+            : null}
+        </GoogleMapReact>
+        </div>
+    )
+}
 
 export default Map
 

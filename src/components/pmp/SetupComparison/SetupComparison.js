@@ -36,6 +36,7 @@ const SetupComparison = ({pageSpeed}) => {
                                 <li>Shopify</li>
                                 <li>Your domain</li>
                             </ul>
+                            <img className={ComparisonStyles.sways} src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 450 118.28'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:url(%23a);%7D.b%7Bfill:%23fff;opacity:0.25;isolation:isolate;%7D.c%7Bfill:%23fefefe;%7D%3C/style%3E%3ClinearGradient id='a' x1='-71.34' y1='480.81' x2='-71.34' y2='480.12' gradientTransform='matrix(450, 0, 0, -112, 32328.14, 53891.58)' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23e5e6e6'/%3E%3Cstop offset='1' stop-color='%23c4c4c4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctitle%3Egreyswaybottom%3C/title%3E%3Crect class='a' y='14.56' width='450' height='103.72'/%3E%3Cpath class='b' d='M450,79.78c-54.09,13.9-124.19,13.72-177.92-.48-30.58-8.08-55.7-20.18-87-27.67C125.75,37.42,47.25,43.13.06,65.08L0,118.28l450,0Z'/%3E%3Cpath class='c' d='M0,18.91c54.09-6.83,124.19-6.74,177.92.24,30.58,4,55.7,9.91,87,13.59,59.36,7,137.86,4.18,185.05-6.6L450,0,0,0Z'/%3E%3Cpath class='b' d='M450,99.37c-54.09,6.83-124.19,6.74-177.92-.24-30.58-4-55.7-9.91-87-13.59-59.36-7-137.86-4.18-185,6.61L0,118.28l450,0Z'/%3E%3C/svg%3E" alt="Grey sways"/>
                         </div>
                     </div>
                     <div className="col col-xs-12 col-md-6 col-lg-4">
@@ -66,6 +67,7 @@ const SetupComparison = ({pageSpeed}) => {
                                 <li>Google Search</li>
                                 <li>Google Shopping</li>
                             </ul>
+                            <img className={ComparisonStyles.sways} src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 450 120.28'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill:url(%23a);%7D.b,.c,.d%7Bfill:%23fff;%7D.b%7Bopacity:0.05;%7D.b,.d%7Bisolation:isolate;%7D.d%7Bopacity:0.1;%7D%3C/style%3E%3ClinearGradient id='a' x1='-68.11' y1='429.65' x2='-68.11' y2='428.71' gradientTransform='matrix(450, 0, 0, -112, 30874.25, 48135.69)' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23415ca9'/%3E%3Cstop offset='1' stop-color='%2367beed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctitle%3Eblueswaysbottom_1%3C/title%3E%3Crect class='a' y='14.56' width='450' height='105.72'/%3E%3Cpath class='b' d='M450,81.78c-54.09,13.9-124.19,13.72-177.92-.48-30.58-8.08-55.7-20.18-87-27.67C125.75,39.42,47.25,45.13.06,67.08L0,120.28l450,0Z'/%3E%3Cpath class='c' d='M0,18.91c54.09-6.83,124.19-6.74,177.92.24,30.58,4,55.7,9.91,87,13.59,59.36,7,137.86,4.18,185.05-6.6L450,0,0,0Z'/%3E%3Cpath class='d' d='M450,101.37c-54.09,6.83-124.19,6.74-177.92-.24-30.58-4-55.7-9.91-87-13.59-59.36-7-137.86-4.18-185,6.61L0,120.28l450,0Z'/%3E%3C/svg%3E" alt="Grey sways"/>
                         </div>
                     </div>
                 </div>
