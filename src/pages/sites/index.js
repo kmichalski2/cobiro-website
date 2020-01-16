@@ -17,6 +17,7 @@ import JumboCta from "../../components/sections/jumboCta/jumboCta"
 import Ads from "../../components/pmp/Ads/Ads"
 import GoogleMyBusiness from "../../components/pmp/GoogleMyBusiness/GoogleMyBusiness"
 import GiftCardSection from "../../components/pmp/GiftCardSection/GiftCardSection"
+import GoogleShoppingAds from "../../components/pmp/GoogleShoppingAds/GoogleShoppingAds"
 
 const Sites = (props) => {
     const axios = require('axios');
@@ -32,7 +33,7 @@ const Sites = (props) => {
 
     useEffect(() => { 
         if(!isLoaded) {
-            const url = window.location.href.split('/sites/').pop()
+            const url = window.location.href.split('/sites').pop().replace('/', '')
             setIsLoaded(true)
             setUrlInputted(url)
             submit(url)
@@ -58,7 +59,7 @@ const Sites = (props) => {
         if(validateUrl(url)) {
             setIsEditing(false)
             setIsValidUrl(true)
-            const newUrl = url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
+            const newUrl = url.split('/')[0].replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
             setPageData(null)
             setSubmission(newUrl)
             setAlert('')
@@ -209,15 +210,35 @@ const Sites = (props) => {
             </div>  
             <Waves whiteSway transparentSways highWaveRight/>
         </section>
-        {pageData ? <SetupComparison pageSpeed={pageData.page_speed[0].desktop.performance.score * 100} /> : null}
+        {pageData ? 
+            <SetupComparison pageSpeed={pageData.page_speed[0].desktop.performance.score * 100} /> 
+        : null}
         <Services />
-        {pageData ?  <SearchMarketingAd searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]} title="Google Search Marketing" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" linkText="See more" link="/" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template}  backgroundColor /> : null }
-        {pageData ? <SearchMarketing keywords={pageData.google_search_ads[2].keywords}/> : null }
-        {pageData ? <GoogleMyBusiness domain={pageData.attributes.url} category={pageData.attributes.category.replace('/', '').split('/')[0]} address={pageData.attributes.address.street} phone={pageData.attributes.phone_number} searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]}/> : null }
+        {pageData ?  
+        <>
+            <SearchMarketingAd searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]} title="Google Search Marketing" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" linkText="See more" link="/" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template}  backgroundColor />
+            <SearchMarketing keywords={pageData.google_search_ads[2].keywords}/>
+            <GoogleMyBusiness domain={pageData.attributes.url} category={pageData.attributes.category.replace('/', '').split('/')[0]} address={pageData.attributes.address.street} phone={pageData.attributes.phone_number} searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]}/> 
+        </>
+        : null }
         <GiftCardSection />
-        {pageData ? <Ads title="Facebook Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="facebook" sway={true} /> : null}
-        {pageData ? <Ads title="Instagram Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="instagram" sway={false} /> : null} 
-        {pageData ? <Competitors competitors={pageData.similar_sites} /> : null}
+        {pageData ? 
+        <>
+            <GoogleShoppingAds 
+            title="Google Shopping Ads" 
+            text="Google Search is based on users intent, searches made on Google. On average about 60,000 searches are made every second globally.
+
+            You can get new users to your web-site by adding words (keywords) related to your business at Google, a setup Cobiro free tool help you doing."
+            link="https://customer.cobiro.com"
+            linkText="See more"
+            searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]}
+            domain={pageData.attributes.url}
+            />
+            <Ads title="Facebook Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="facebook" sway={false} />
+            <Ads title="Instagram Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="instagram" sway={true} />
+            <Competitors competitors={pageData.similar_sites} /> 
+        </>
+        : null}
         <JumboCta data={{title: 'Start building your business with Cobiro ', text: 'Focus your energy on running your business, while we take care of the advertising part.', externalLinkCta: '/', linkTitle: 'Sign up for free', backgroundColor: true, topGradiantColor: {hex: '#004BD5'}, bottomGradiantColor: {hex: '#62C9FF'}}}/>
     </Layout>
     )

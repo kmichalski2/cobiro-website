@@ -20,7 +20,7 @@ const Ad = ({url, ads, type, first}) => {
             </div>
             
             {type === 'facebook' ? <p className={AdStyles.small}>{ads ? ads.description : null}</p> : null }
-            <img className={AdStyles.image} src=""/>
+            <img className={AdStyles.image} src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='804' height='419' viewBox='0 0 804 419'%3E%3Cg transform='translate(-129 -165)'%3E%3Crect width='804' height='419' transform='translate(129 165)' fill='%23f0f0f0'/%3E%3Cpath d='M2638.954,463.3l41.127-68.3,29.321,38.538,66.412-84.3L2850.125,463.3Z' transform='translate(-2213.223 -7.987)' fill='%23bfbfbf'/%3E%3Cellipse cx='20.5' cy='21' rx='20.5' ry='21' transform='translate(458 320)' fill='%23bfbfbf'/%3E%3Cg transform='translate(408 283)' fill='none' stroke='%23bfbfbf' stroke-width='4'%3E%3Crect width='247' height='184' rx='12' stroke='none'/%3E%3Crect x='2' y='2' width='243' height='180' rx='10' fill='none'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"/>
 
             { type === 'facebook' ?
             <>

@@ -2,6 +2,7 @@ import React from 'react'
 
 import BusinessStyles from './GoogleMyBusiness.module.scss'
 import Map from '../Map/Map'
+import GoogleSearchBrowser from '../../UiElements/GoogleSearchBrowser/GoogleSearchBrowser'
 
 const GoogleMyBusiness = ({domain, category, address, phone, searchTerm}) => {
 
@@ -16,10 +17,8 @@ const GoogleMyBusiness = ({domain, category, address, phone, searchTerm}) => {
                             <a href="#" className="btn">Sign up</a>
                         </div>
                         <div className="col col-xs-12 col-lg-6 first-xs last-lg space-xs space-sm space-md">
-                            <div className={["card card-visible", BusinessStyles.card].join(' ')}>
-                                <div className={BusinessStyles.searchBar}>
-                                    <p className="small text-left">{searchTerm}</p>
-                                </div>
+                            <GoogleSearchBrowser searchTerm={searchTerm}>
+                           
                                 <div className={["card card-visible text-left", BusinessStyles.cardInner].join(' ')}>
                                     <div className={BusinessStyles.map}>
                                         <Map lat={55.687169} lng={12.591030} customLook={false} />
@@ -50,7 +49,8 @@ const GoogleMyBusiness = ({domain, category, address, phone, searchTerm}) => {
                                         <p className="small no-mb  text-black"><strong>Phone:</strong> {phone}</p>
                                     </div>
                                 </div>
-                            </div>
+                                </GoogleSearchBrowser>
+
                         </div>
                     </div>
                 </div>
