@@ -1,0 +1,16 @@
+.scoreWrapper {
+    display: flex;
+    justify-content: center;
+
+    img {
+        margin: 0;
+        margin-right: 0.25rem;
+        height: 1rem;
+        width: auto;
+        // max-height: 1.5rem;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

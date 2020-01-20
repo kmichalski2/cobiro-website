@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 
 import SearchMarketingStyles from './SearchMarketing.module.scss'
+import Score from '../../UiElements/Score/Score'
+
+import moneyImg from '../../../images/moneydollar.svg'
+import reachImg from '../../../images/reach.svg'
+import star from '../../../images/star.svg'
 
 const SearchMarketing = ({ keywords }) => {
 
@@ -8,9 +13,10 @@ const SearchMarketing = ({ keywords }) => {
     const [expandedAccordion, setExpandedAccordion] = useState(null)
     const [accElAmount, setAccElAmount] = useState(6)
 
-    const highVolume = 32
-    const mediumVolume = 30
-    const lowVolume = 38
+    const whiteSpaceWidth = 0.25
+    const highVolume = 32 - whiteSpaceWidth
+    const mediumVolume = 30 - whiteSpaceWidth
+    const lowVolume = 38 - whiteSpaceWidth
 
     const labelPosCheck = (val, offset) => {
 
@@ -82,14 +88,14 @@ const SearchMarketing = ({ keywords }) => {
                                     <stop id="stop1" offset="0%" stopColor="#72A3FF" />
                                     <stop id="stop2" offset="100%" stopColor="#2F76FC"/>
                                 </linearGradient>
-                                <circle className={SearchMarketingStyles.circleHigh} cx="19.41549430918954" cy="19.41549430918954" r="15.91549430918954" fill="none" strokeDasharray={`${highVolume} ${100 - highVolume}`}  strokeDashoffset={25}  strokeWidth="6" stroke="url(#gradient1)" style={{filter:'url(#glow)'}} onMouseOver={() => onChartElMouseEnter(0)} onMouseLeave={() => onChartElMouseLeave()}></circle>
-                                <circle className={SearchMarketingStyles.circleMedium} cx="19.41549430918954" cy="19.41549430918954" r="15.91549430918954" fill="none" strokeDasharray={`${mediumVolume} ${100 - mediumVolume}`} strokeDashoffset={25 + (100 - highVolume)} strokeWidth="6" stroke="url(#gradient2)" onMouseOver={() => onChartElMouseEnter(1)} onMouseLeave={() => onChartElMouseLeave()}></circle>
-                                <circle className={SearchMarketingStyles.circleLow} cx="19.41549430918954" cy="19.41549430918954" r="15.91549430918954" fill="none" strokeDasharray={`${lowVolume} ${100 - lowVolume}`} strokeDashoffset={25 + (100 - highVolume - mediumVolume)}  strokeWidth="6" stroke="url(#gradient3)" onMouseOver={() => onChartElMouseEnter(2)} onMouseLeave={() => onChartElMouseLeave()}></circle>
+                                <circle className={SearchMarketingStyles.circleHigh} cx="19.41549430918954" cy="19.41549430918954" r="15.91549430918954" fill="none" strokeDasharray={`${highVolume} ${100 - highVolume}`}  strokeDashoffset={25 - whiteSpaceWidth}  strokeWidth="6" stroke="url(#gradient1)" style={{filter:'url(#glow)'}} onMouseOver={() => onChartElMouseEnter(0)} onMouseLeave={() => onChartElMouseLeave()}></circle>
+                                <circle className={SearchMarketingStyles.circleMedium} cx="19.41549430918954" cy="19.41549430918954" r="15.91549430918954" fill="none" strokeDasharray={`${mediumVolume} ${100 - mediumVolume}`} strokeDashoffset={25 + (100 - highVolume - (whiteSpaceWidth * 2)) } strokeWidth="6" stroke="url(#gradient2)" onMouseOver={() => onChartElMouseEnter(1)} onMouseLeave={() => onChartElMouseLeave()}></circle>
+                                <circle className={SearchMarketingStyles.circleLow} cx="19.41549430918954" cy="19.41549430918954" r="15.91549430918954" fill="none" strokeDasharray={`${lowVolume} ${100 - lowVolume}`} strokeDashoffset={25 + (100 - highVolume - mediumVolume - (whiteSpaceWidth * 3))}  strokeWidth="6" stroke="url(#gradient3)" onMouseOver={() => onChartElMouseEnter(2)} onMouseLeave={() => onChartElMouseLeave()}></circle>
 
                             </svg>
-                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${highVolumeLabelPos.y}%`, left: `${highVolumeLabelPos.x}%`}}>{highVolume}%</p>
-                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${mediumVolumeLabelPos.y}%`, left: `${mediumVolumeLabelPos.x}%`}}>{mediumVolume}%</p>
-                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${lowVolumeLabelPos.y}%`, left: `${lowVolumeLabelPos.x}%`}}>{lowVolume}%</p>
+                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${highVolumeLabelPos.y}%`, left: `${highVolumeLabelPos.x}%`}}>{highVolume + whiteSpaceWidth}%</p>
+                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${mediumVolumeLabelPos.y}%`, left: `${mediumVolumeLabelPos.x}%`}}>{mediumVolume + whiteSpaceWidth}%</p>
+                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${lowVolumeLabelPos.y}%`, left: `${lowVolumeLabelPos.x}%`}}>{lowVolume +  whiteSpaceWidth}%</p>
                             <div className={SearchMarketingStyles.circleText}>
                                 <h2>{keywordsCount}</h2>
                                 <p>Relevant keywords</p>
@@ -126,19 +132,19 @@ const SearchMarketing = ({ keywords }) => {
                                     <table className={["table", SearchMarketingStyles.table].join(' ')}>
                                         <thead>
                                         <tr>
-                                            <th scope="col" className="h5">Keyword</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Potential reach</th>
-                                            <th scope="col">Rating</th>
+                                            <th scope="col" className="">Keyword</th>
+                                            <th scope="col" className="text-center">Price</th>
+                                            <th scope="col" className="text-center">Potential reach</th>
+                                            <th scope="col" className="text-center">Rating</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                             {k.keywords.map((k, i) =>
                                             <tr key={i}>
                                                 <td scope="row">{k.keyword}</td>
-                                                <td>{k.average_cpc}</td>
-                                                <td>{k.search_volume}</td>
-                                                <td>{k.relevance_rank_google}</td>
+                                                <td><Score imgSrc={moneyImg} imgHalfSrc={moneyImg} score={3} total={5}/></td>
+                                                <td><Score imgSrc={reachImg} imgHalfSrc={reachImg} score={3} total={5}/></td>
+                                                <td><Score imgSrc={star} imgHalfSrc={star} score={3} total={5}/></td>
                                             </tr>
                                             )}
                                         </tbody>

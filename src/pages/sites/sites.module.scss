@@ -31,8 +31,14 @@
   padding-bottom: 12rem;
 
   @include mq($until: lg) {
-    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
   }
+}
+
+.headerSearch {
+  padding-top: 5rem;
+  padding-bottom: 15rem;
 }
 
 .card {

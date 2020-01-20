@@ -1,21 +1,48 @@
 import React from 'react'
 
-const Score = ({}) => {
+import ScoreStyles from './Score.module.scss'
 
-    const imgSrc = ""
-    const score = 4.9
-    const total = 5
+const Score = ({imgSrc, imgHalfSrc, score, total}) => {
 
-    const imageScore = []
+    if(!imgHalfSrc) {
+        imgHalfSrc = imgSrc
+    }
 
-    for( let i = 0; i > total; i++){
-        imageScore.push(i < score)
+    let lastStar
+    const scoreDecimal = ((score * 10) % 10) / 10
+
+    if(scoreDecimal > 0) {
+        if (scoreDecimal * 10 >= 3 && scoreDecimal * 10 <= 7) {
+            lastStar = {opacity: 1, src: imgHalfSrc}
+        } else if(scoreDecimal * 10 < 3) {
+            lastStar = {opacity: 0.5, src: imgSrc}
+        } else {
+            lastStar = {opacity: 1, src: imgSrc}
+        }
+    }
+
+    const imageStars = []
+
+    for( let i = 0; i < total; i++){
+
+        // if the index is smaller than the score excluding decimals
+        if (i < score - (score % 1)) {
+            imageStars.push({opacity: 1, src: imgSrc})
+
+        // else if the score has decimals
+        } else if(scoreDecimal > 0 && i === score - scoreDecimal) {
+            imageStars.push(lastStar)
+        } else {
+            imageStars.push({opacity: 0.5, src: imgSrc})
+        }
     }
 
     return (
-        imageScore.map(score, i) => {
-            <img key={i} src={imgSrc} style={{opacity: i < score ? 1 : 0.5}}/>
-        }
+        <div className={ScoreStyles.scoreWrapper}>
+        {imageStars.map((star, i) => 
+            <img key={i} src={star.src} style={{opacity: star.opacity}}/>
+        )}
+        </div>
     )
 }
 

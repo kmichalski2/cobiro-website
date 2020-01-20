@@ -35,8 +35,11 @@ const Sites = (props) => {
         if(!isLoaded) {
             const url = window.location.href.split('/sites').pop().replace('/', '')
             setIsLoaded(true)
-            setUrlInputted(url)
-            submit(url)
+            if(url) {
+                setUrlInputted(url)
+                submit(url)
+            }
+            
         }
     }, [isLoaded])
 
@@ -123,7 +126,7 @@ const Sites = (props) => {
         <section className="section bg-lightblue" style={{backgroundImage: `linear-gradient(#004BD5, #62C9FF)`, position: 'relative', paddingBottom: 0, paddingTop: '7.5rem' }}>
             <div className="container text-white ">
                 <div className="row top-xs center-xs">
-                <div className={[SitesStyles.headerText, !pageData ? "col col-xs-12 col-md-8 col-lg-6 text-center center-xs center-sm center-md space-xs-up" : "col col-xs-12 col-lg-6 space-xs-up text-center-xs text-left-lg"].join(' ')}>
+                <div className={[SitesStyles.headerText, !pageData ? "col col-xs-12 col-md-8 col-lg-6 text-center center-xs center-sm center-md space-xs-up" : "col col-xs-12 col-lg-6 space-xs-up text-center-xs text-left-lg", !pageData ? SitesStyles.headerSearch : null].join(' ')}>
                     {pageData ?
                     <div className={SitesStyles.siteImages}>
                         <img className={SitesStyles.desktop} src={pageData.page_speed[0].desktop.screenshot} />
