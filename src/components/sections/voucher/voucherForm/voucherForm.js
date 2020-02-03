@@ -10,8 +10,6 @@ const VoucherForm = ({env, footnote}) => {
     const [planId, setPlanId] = useState(2)
     const [website, setWebsite] = useState('')
     const [isWebsiteValid, setIsWebsiteValid] = useState(false)
-    // const [name, setName] = useState('')
-    // const [isNameValid, setIsNameValid] = useState(false)
     const [email, setEmail] = useState('')
     const [isEmailValid, setIsEmailValid] = useState(false)
     const [errors, setErrors] = useState()
@@ -32,10 +30,6 @@ const VoucherForm = ({env, footnote}) => {
     }
 
     const handleChange = (event) => {
-        // if(event.target.name === 'name') {
-        //     setName(event.target.value)
-        //     handleChangeName(event)
-        // } else 
         if(event.target.name === 'email') {
             setEmail(event.target.value)
             handleChangeEmail(event)
@@ -44,17 +38,6 @@ const VoucherForm = ({env, footnote}) => {
             handleChangeWebsite(event)
         }
     }
-
-    // const handleChangeName = (event) => {
-    //     if(event.target.value && event.target.classList.contains(VoucherFormStyles.invalid)) {
-    //         event.target.classList.remove(VoucherFormStyles.invalid)
-    //         setIsNameValid(true)
-    //     } else if(event.target.value) {
-    //         setIsNameValid(true)  
-    //     } else if(!event.target.value) {
-    //         setIsNameValid(false)
-    //     }
-    // }
 
     const handleChangeEmail = (event) => {
         const email = event.target.value
@@ -155,8 +138,6 @@ const VoucherForm = ({env, footnote}) => {
           .then(response => {
             console.log('USER LOGIN RESPONSE: ', response);
             setErrors()
-            // setAccessToken(response.data.data.attributes.access_token)
-            // setRefreshToken(response.data.data.attributes.refresh_token)
             createSite(response.data.data.attributes.access_token, customerId)
           })
           .catch(error => {
