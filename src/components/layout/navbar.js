@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import logo from "../../images/logo_white.svg"
 import Img from "gatsby-image"
 
-const Navbar = ({ menuItems }) => {
+const Navbar = ({ menuItems, customCta }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
@@ -205,8 +205,8 @@ const Navbar = ({ menuItems }) => {
                 <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary btn-left", !isScrolled ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
                   Sign in
                 </a>
-                <a href="https://app.cobiro.com/user/signup" className={["btn btn-right", !isScrolled ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
-                  Sign up
+                <a href={customCta && customCta.link ? customCta.link : "https://app.cobiro.com/user/signup"} className={["btn btn-right", !isScrolled ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                  {customCta && customCta.title ? customCta.title : 'Sign up' }
                 </a>
               </div>
             </div>
