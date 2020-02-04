@@ -3,6 +3,7 @@ import logo from "../../images/logo.svg"
 import React from "react"
 // import background from "../../images/footer_img.svg"
 import Img from "gatsby-image"
+import GoogleLogo from '../googleLogo/googleLogo'
 
 
 const Footer = ({ columns }) => {
@@ -27,8 +28,14 @@ const Footer = ({ columns }) => {
            <ul className="list-unstyled menu">
              {col.column.map((el, index) => (
                <li key={index} className={el.text ? 'text-darkgrey' : null}>
-                 {el.text ?
-                 el.text
+               {el.googlePartnerLogo ?
+                <div className="googlePartnerLogo">
+                  <a href={el.externalLink} target="_blank" rel="noopener noreferrer">
+                    <GoogleLogo/>
+                  </a>
+                </div>
+                : el.text ?
+                  el.text
                  : el.image ?
                  <a href={el.externalLink}  target="_blank" rel="noopener noreferrer">
                    {el.image.fixed ?
@@ -36,14 +43,12 @@ const Footer = ({ columns }) => {
                     :
                     <img src={el.image.url} className="footer-image" alt={el.image.alt ? el.image.alt : 'Footer image'} />
                   }
-                  
                  </a>
                  : (el.externalLink) ? 
                  <a className="small text-darkgrey" href={el.externalLink} target="_blank" rel="noopener noreferrer">{el.linkTitle}</a> 
                  : el.internalLink ?
                  <Link className="small text-darkgrey" to={`/${el.internalLink.slug}`}>{el.linkTitle}</Link>
-                 : null
-                }
+                : null }
                </li>
              ))}
            </ul>
