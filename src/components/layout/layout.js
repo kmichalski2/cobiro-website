@@ -68,6 +68,10 @@ const Layout = ({ children }) => {
           ... on DatoCmsTextElement {
             text
           }
+          ... on DatoCmsGooglePartnerLogo {
+            googlePartnerLogo
+            externalLink
+          }
           ... on DatoCmsLinkElement {
             externalLink
             linkTitle

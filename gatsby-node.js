@@ -201,6 +201,7 @@ exports.createPages = async function({ graphql, actions }) {
                   backgroundColor
                   title
                   text
+                  googlePartnerLogo
                   logos {
                     alt
                     width

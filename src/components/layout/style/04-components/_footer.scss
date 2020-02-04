@@ -11,7 +11,7 @@ footer {
 		padding: 2.5rem 0;
 	}
 	.footer-image {
-		max-width: 100%;
+		max-width: 80%;
 		margin: 1rem 0;
 	}
 	.social-link {
@@ -32,3 +32,36 @@ footer {
 .footer-logo {
 	width: 8rem;
 }
+
+@include mq($from: xs) {
+	.googlePartnerLogo {
+		margin-left: -2px;
+	}
+}
+@include mq($from: sm) {
+	.googlePartnerLogo {
+		transform: scale(0.8);
+		margin-left: -11.6%;
+	}
+}
+@include mq($from: md) {
+	.googlePartnerLogo {
+		transform: scale(0.9);
+		margin-left: -6.2%;
+	}
+}
+
+@include mq($from: lg) {
+	.googlePartnerLogo {
+		transform: scale(0.65);
+		margin-left: -22.5%;
+	}
+}
+
+@include mq($from: xl) {
+	.googlePartnerLogo {
+		transform: scale(.85);
+		margin-left: -9%;
+	}
+}
+
