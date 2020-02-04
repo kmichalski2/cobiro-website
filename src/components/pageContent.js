@@ -20,7 +20,7 @@ import Voucher from "../components/sections/voucher/voucher"
 
 const pageContent = ({ data }) => {
   return (
-    <Layout>
+    <Layout customCta={ data.customCtaLinks && data.primaryCtaTitle && data.primaryCtaLink ? {title: data.primaryCtaTitle, link: data.primaryCtaLink} : null }>
       <SEO title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } description={data.seoTags && data.seoTags.description ? data.seoTags.description : null} />
       <main>
         {data.sections.map((section, index) => {

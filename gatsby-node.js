@@ -35,6 +35,9 @@ exports.createPages = async function({ graphql, actions }) {
               title
               homepage
               slug
+              customCtaLinks
+              primaryCtaTitle
+              primaryCtaLink
               seoTags {
                 title
                 description
