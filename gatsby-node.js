@@ -29,12 +29,13 @@ exports.createPages = async function({ graphql, actions }) {
     //     allDatoCmsPage(filter: {locale: {eq: "${locale}"}}) {
       await graphql(`
       {
-        allDatoCmsPage {
+        allDatoCmsPage(filter: {locale: {eq: "en"}}) {
           edges {
             node {
               title
               homepage
               slug
+              locale
               customCtaLinks
               primaryCtaTitle
               primaryCtaLink
@@ -448,13 +449,10 @@ exports.createPages = async function({ graphql, actions }) {
       }
       `).then(result => {
         result.data.allDatoCmsPage.edges.forEach(async function(item) {
-          // const prefix = locale === "en" ? "" : `/${locale}`
-          // let p = item.node.slug === '__home__' ? '/' : `${prefix}/${item.node.slug}`
-          let p = item.node.homepage ? '/' : `/${item.node.slug}`
-          // path: edge.uid === '__home__' ? '/' : `/${edge.uid}`,
-          // let sections = item.node.sections.map(section =>
-          //   section.__typename.replace("DatoCms", "")
-          // )
+          const locale = item.node.locale
+          const prefix = locale !== 'en' ? locale : ''
+          let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
+          // let p = item.node.homepage ? '/' : `/${item.node.slug}`
           await createPage({
             path: p,
             component: path.resolve(`./src/templates/page.js`),

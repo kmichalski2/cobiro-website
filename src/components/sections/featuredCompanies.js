@@ -4,7 +4,6 @@ import Img from "gatsby-image"
 import GoogleLogo from '../googleLogo/googleLogo'
 
 const FeaturedCompanies = ({ data }) => (
-  
   <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')} style={{ position: "relative" }}>
     {/* <img src={splash} className="splash-left" alt="splash left" /> */}
     <div className={[data.backgroundColor ? "bg-sway-inner" : null, "section-inner"].join(' ')}>
@@ -25,6 +24,7 @@ const FeaturedCompanies = ({ data }) => (
       </div>
     </div>
   </section>
+  
 )
 
 export default FeaturedCompanies
