@@ -220,7 +220,7 @@ const Sites = (props) => {
         {pageData ?  
         <>
             <SearchMarketingAd searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]} title="Google Search Marketing" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" linkText="See more" link="/" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template}  backgroundColor />
-            <SearchMarketing keywords={pageData.google_search_ads[2].keywords}/>
+            <SearchMarketing keywords={pageData.google_search_ads[2].adgroup_keywords} totalKeywords={pageData.attributes.keyword_count} groupedKeywords={pageData.grouped_keywords}/>
             <GoogleMyBusiness domain={pageData.attributes.url} category={pageData.attributes.category.replace('/', '').split('/')[0]} address={pageData.attributes.address.street} phone={pageData.attributes.phone_number} searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]}/> 
         </>
         : null }

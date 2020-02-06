@@ -7,16 +7,16 @@ import moneyImg from '../../../images/moneydollar.svg'
 import reachImg from '../../../images/reach.svg'
 import star from '../../../images/star.svg'
 
-const SearchMarketing = ({ keywords }) => {
+const SearchMarketing = ({ keywords, totalKeywords, groupedKeywords }) => {
 
     const [toolTipVisible, setToolTipVisible] = useState(false)
     const [expandedAccordion, setExpandedAccordion] = useState(null)
     const [accElAmount, setAccElAmount] = useState(6)
 
     const whiteSpaceWidth = 0.25
-    const highVolume = 32 - whiteSpaceWidth
-    const mediumVolume = 30 - whiteSpaceWidth
-    const lowVolume = 38 - whiteSpaceWidth
+    const highVolume = groupedKeywords.keyword_percentage.high - whiteSpaceWidth
+    const mediumVolume = groupedKeywords.keyword_percentage.medium - whiteSpaceWidth
+    const lowVolume = groupedKeywords.keyword_percentage.low - whiteSpaceWidth
 
     const labelPosCheck = (val, offset) => {
 
@@ -93,11 +93,11 @@ const SearchMarketing = ({ keywords }) => {
                                 <circle className={SearchMarketingStyles.circleLow} cx="19.41549430918954" cy="19.41549430918954" r="15.91549430918954" fill="none" strokeDasharray={`${lowVolume} ${100 - lowVolume}`} strokeDashoffset={25 + (100 - highVolume - mediumVolume - (whiteSpaceWidth * 3))}  strokeWidth="6" stroke="url(#gradient3)" onMouseOver={() => onChartElMouseEnter(2)} onMouseLeave={() => onChartElMouseLeave()}></circle>
 
                             </svg>
-                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${highVolumeLabelPos.y}%`, left: `${highVolumeLabelPos.x}%`}}>{highVolume + whiteSpaceWidth}%</p>
-                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${mediumVolumeLabelPos.y}%`, left: `${mediumVolumeLabelPos.x}%`}}>{mediumVolume + whiteSpaceWidth}%</p>
-                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${lowVolumeLabelPos.y}%`, left: `${lowVolumeLabelPos.x}%`}}>{lowVolume +  whiteSpaceWidth}%</p>
+                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${highVolumeLabelPos.y}%`, left: `${highVolumeLabelPos.x}%`}}>{Math.round(highVolume + whiteSpaceWidth)}%</p>
+                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${mediumVolumeLabelPos.y}%`, left: `${mediumVolumeLabelPos.x}%`}}>{Math.round(mediumVolume + whiteSpaceWidth)}%</p>
+                            <p className={["small text-white", SearchMarketingStyles.chartText].join(' ')} style={{top: `${lowVolumeLabelPos.y}%`, left: `${lowVolumeLabelPos.x}%`}}>{Math.round(lowVolume +  whiteSpaceWidth)}%</p>
                             <div className={SearchMarketingStyles.circleText}>
-                                <h2>{keywordsCount}</h2>
+                                <h2>{totalKeywords}</h2>
                                 <p>Relevant keywords</p>
                             </div>
                             { toolTipVisible === 2 ?
@@ -139,12 +139,12 @@ const SearchMarketing = ({ keywords }) => {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            {k.keywords.map((k, i) =>
+                                            {k.keywords.sort((a,b) => b.rating - a.rating).map((k, i) =>
                                             <tr key={i}>
                                                 <td scope="row">{k.keyword}</td>
-                                                <td><Score imgSrc={moneyImg} imgHalfSrc={moneyImg} score={3} total={5}/></td>
-                                                <td><Score imgSrc={reachImg} imgHalfSrc={reachImg} score={3} total={5}/></td>
-                                                <td><Score imgSrc={star} imgHalfSrc={star} score={3} total={5}/></td>
+                                                <td><Score imgSrc={moneyImg} imgHalfSrc={moneyImg} score={k.price} total={5}/></td>
+                                                <td><Score imgSrc={reachImg} imgHalfSrc={reachImg} score={k.potential_reach} total={5}/></td>
+                                                <td><Score imgSrc={star} imgHalfSrc={star} score={k.rating} total={5}/></td>
                                             </tr>
                                             )}
                                         </tbody>
