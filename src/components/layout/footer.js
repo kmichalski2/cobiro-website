@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg"
 import React from "react"
 // import background from "../../images/footer_img.svg"
 import Img from "gatsby-image"
-import GoogleLogo from '../googleLogo/googleLogo'
+// import GoogleLogo from '../googleLogo/googleLogo'
 
 
 const Footer = ({ columns }) => {
@@ -28,13 +28,7 @@ const Footer = ({ columns }) => {
            <ul className="list-unstyled menu">
              {col.column.map((el, index) => (
                <li key={index} className={el.text ? 'text-darkgrey' : null}>
-               {el.googlePartnerLogo ?
-                <div className="googlePartnerLogo">
-                  <a href={el.externalLink} target="_blank" rel="noopener noreferrer">
-                    <GoogleLogo/>
-                  </a>
-                </div>
-                : el.text ?
+                {el.text ?
                   el.text
                  : el.image ?
                  <a href={el.externalLink}  target="_blank" rel="noopener noreferrer">
