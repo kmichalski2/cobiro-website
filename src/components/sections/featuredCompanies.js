@@ -4,7 +4,6 @@ import Img from "gatsby-image"
 import GoogleLogo from '../googleLogo/googleLogo'
 
 const FeaturedCompanies = ({ data }) => (
-
   <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')} style={{ position: "relative" }}>
     {/* <img src={splash} className="splash-left" alt="splash left" /> */}
     <div className={[data.backgroundColor ? "bg-sway-inner" : null, "section-inner"].join(' ')}>
@@ -15,7 +14,7 @@ const FeaturedCompanies = ({ data }) => (
             { data.text ? <p>{data.text}</p> : null }
           </div>
           <div className="col col-xs-12 col-lg-8 center">
-          {data.googlePartnerLogo ? <div style={{transform: "scale(0.8)"}} className="g-partnersbadge" data-agency-id="1850113825"></div> : null }
+          { /*data.googlePartnerLogo ? <div style={{transform: "scale(0.8)"}}><GoogleLogo /></div> : null */ }
           {data.logos.map((l, index) => (
             l.fixed ? <Img key={index} className="customer-logo" fixed={l.fixed} alt={l.alt ? l.alt : `logo ${index + 1}`} />
             : <img src={l.url} alt={l.alt ? l.alt : `logo ${index + 1}`} />
