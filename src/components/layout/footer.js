@@ -7,6 +7,7 @@ import Img from "gatsby-image"
 
 
 const Footer = ({ columns }) => {
+  console.log(columns)
   return (
   <footer>
     <div className="container">
