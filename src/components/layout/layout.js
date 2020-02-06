@@ -22,7 +22,7 @@ const Layout = ({ children, customCta }) => {
         title
       }
     }
-    allDatoCmsMenu(sort: {fields: menuItemOrder, order: ASC}) {
+    allDatoCmsMenu(sort: {fields: menuItemOrder, order: ASC}, filter: {locale: {eq: "en"}}) {
       nodes {
         linkTitle
         link {
@@ -62,7 +62,7 @@ const Layout = ({ children, customCta }) => {
         }
       }
     }
-    allDatoCmsFooter(sort: {fields: footerItemOrder, order: ASC}) {
+    allDatoCmsFooter(sort: {fields: footerItemOrder, order: ASC}, filter: {locale: {eq: "en"}}) {
       nodes {
         column {
           ... on DatoCmsTextElement {
