@@ -21,7 +21,7 @@ import Voucher from "../components/sections/voucher/voucher"
 const pageContent = ({ data }) => {
   return (
     <Layout customCta={ data.customCtaLinks && data.primaryCtaTitle && data.primaryCtaLink ? {title: data.primaryCtaTitle, link: data.primaryCtaLink} : null }>
-      <SEO title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } description={data.seoTags && data.seoTags.description ? data.seoTags.description : null} />
+      <SEO title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } description={data.seoTags && data.seoTags.description ? data.seoTags.description : null} lang={data.locale}/>
       <main>
         {data.sections.map((section, index) => {
         switch(section.__typename.replace("DatoCms", "")) {
