@@ -21,7 +21,7 @@ const FeaturedCompanies = ({ data }) => (
         </div>
       </div>
     </div>
-  </section>
+  </section> 
   
 )
 
