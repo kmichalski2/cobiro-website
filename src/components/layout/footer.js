@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg"
 import React from "react"
 // import background from "../../images/footer_img.svg"
 import Img from "gatsby-image"
-import GoogleLogo from '../googleLogo/googleLogo'
+// import GoogleLogo from '../googleLogo/googleLogo'
 
 
 const Footer = ({ columns }) => {
