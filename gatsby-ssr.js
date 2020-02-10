@@ -5,3 +5,17 @@
  */
 
 // You can delete this file if you're not using it
+
+// import React from "react";
+
+// export function onRenderBody(
+//   { setHeadComponents, setPreBodyComponents }
+// ) {
+//  setHeadComponents([
+//     <script src="https://apis.google.com/js/platform.js" async defer></script>
+//   ]);
+//   setPreBodyComponents([
+//     <script src="https://apis.google.com/js/platform.js" async defer></script>
+// ]);
+// }
+
