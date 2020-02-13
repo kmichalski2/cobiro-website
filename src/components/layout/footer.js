@@ -28,11 +28,7 @@ const Footer = ({ columns }) => {
            <ul className="list-unstyled menu">
              {col.column.map((el, index) => (
                <li key={index} className={el.text ? 'text-darkgrey' : null}>
-               {el.googlePartnerLogo ?
-                <div className="googlePartnerLogo">
-                    <GoogleLogo/> <p>Google logo</p>
-               </div>
-                : el.text ?
+                { el.text ?
                   el.text
                  : el.image ?
                  <a href={el.externalLink}  target="_blank" rel="noopener noreferrer">
