@@ -67,7 +67,8 @@ function SEO({ description, lang, meta, title }) {
           content: metaDescription,
         },
       ].concat(meta)}
-    ><script src="https://apis.google.com/js/platform.js" async defer></script></Helmet>
+    ><script src="https://apis.google.com/js/platform.js" async defer></script>
+    </Helmet>
   )
 }
 
