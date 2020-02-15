@@ -129,8 +129,8 @@ const Sites = (props) => {
                 <div className={[SitesStyles.headerText, !pageData ? "col col-xs-12 col-md-8 col-lg-6 text-center center-xs center-sm center-md space-xs-up" : "col col-xs-12 col-lg-6 space-xs-up text-center-xs text-left-lg", !pageData ? SitesStyles.headerSearch : null].join(' ')}>
                     {pageData ?
                     <div className={SitesStyles.siteImages}>
-                        <img className={SitesStyles.desktop} src={pageData.page_speed[0].desktop.screenshot} />
-                        <img className={SitesStyles.mobile} src={pageData.page_speed[1].mobile.screenshot} />
+                        <img className={SitesStyles.desktop} src={pageData.page_speed.desktop.screenshot} />
+                        <img className={SitesStyles.mobile} src={pageData.page_speed.mobile.screenshot} />
                     </div>
                     : null }
                     <h1 className={"text-white "}>{ pageData ? pageData.id.charAt(0).toUpperCase() + pageData.id.slice(1) : 'Marketing Plan'}</h1>
@@ -214,14 +214,14 @@ const Sites = (props) => {
             <Waves whiteSway transparentSways highWaveRight/>
         </section>
         {pageData ? 
-            <SetupComparison pageSpeed={pageData.page_speed[0].desktop.performance.score * 100} /> 
+            <SetupComparison pageSpeed={pageData.page_speed.desktop.performance.score * 100} /> 
         : null}
         <Services />
         {pageData ?  
         <>
-            <SearchMarketingAd searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]} title="Google Search Marketing" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" linkText="See more" link="/" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template}  backgroundColor />
-            <SearchMarketing keywords={pageData.google_search_ads[2].adgroup_keywords} totalKeywords={pageData.attributes.keyword_count} groupedKeywords={pageData.grouped_keywords}/>
-            <GoogleMyBusiness domain={pageData.attributes.url} category={pageData.attributes.category.replace('/', '').split('/')[0]} address={pageData.attributes.address.street} phone={pageData.attributes.phone_number} searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]}/> 
+            <SearchMarketingAd searchTerm={pageData.google_search_ads.top_keywords.split(' ')[0]} title="Google Search Marketing" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" linkText="See more" link="/" domain={pageData.attributes.url} ads={pageData.google_search_ads.ad_template}  backgroundColor />
+            <SearchMarketing keywords={pageData.google_search_ads.adgroup_keywords} totalKeywords={pageData.attributes.keyword_count} groupedKeywords={pageData.grouped_keywords}/>
+            <GoogleMyBusiness domain={pageData.attributes.url} category={pageData.attributes.category.replace('/', '').split('/')[0]} address={pageData.attributes.address.street} phone={pageData.attributes.phone_number} searchTerm={pageData.google_search_ads.top_keywords.split(' ')[0]}/> 
         </>
         : null }
         <GiftCardSection />
@@ -234,11 +234,11 @@ const Sites = (props) => {
             You can get new users to your web-site by adding words (keywords) related to your business at Google, a setup Cobiro free tool help you doing."
             link="https://customer.cobiro.com"
             linkText="See more"
-            searchTerm={pageData.google_search_ads[0].top_keywords.split(' ')[0]}
+            searchTerm={pageData.google_search_ads.top_keywords.split(' ')[0]}
             domain={pageData.attributes.url}
             />
-            <Ads title="Facebook Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="facebook" sway={false} />
-            <Ads title="Instagram Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads[1].ad_template} adType="instagram" sway={true} />
+            <Ads title="Facebook Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads.ad_template} adType="facebook" sway={false} />
+            <Ads title="Instagram Marketing" text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" linkText="See more" link="/" logo="" domain={pageData.attributes.url} ads={pageData.google_search_ads.ad_template} adType="instagram" sway={true} />
             <Competitors competitors={pageData.similar_sites} /> 
         </>
         : null}
