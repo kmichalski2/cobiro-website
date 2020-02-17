@@ -6,7 +6,7 @@ import Img from "gatsby-image"
 
 const FeaturedCompanies = ({ data }) => {
 
-return (
+return (  
   <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')} style={{ position: "relative" }}>
     <div className={[data.backgroundColor ? "bg-sway-inner" : null, "section-inner"].join(' ')}>
       <div className="container">
@@ -22,7 +22,8 @@ return (
             l.fixed ? <Img key={index} className="customer-logo" fixed={l.fixed} alt={l.alt ? l.alt : `logo ${index + 1}`} />
             : <img src={l.url} alt={l.alt ? l.alt : `logo ${index + 1}`} />
           ))}
-            { data.googlePartnerLogo ? <div className="g-partnersbadge" data-agency-id="1850113825"></div> : null }
+          <script src="https://apis.google.com/js/platform.js" async defer></script>
+          { data.googlePartnerLogo ? <div className="g-partnersbadge" data-agency-id="1850113825"></div> : null }
           </div>
         </div>
       </div>
