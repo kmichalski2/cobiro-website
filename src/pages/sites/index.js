@@ -62,7 +62,7 @@ const Sites = (props) => {
         if(validateUrl(url)) {
             setIsEditing(false)
             setIsValidUrl(true)
-            const newUrl = url.split('/')[0].replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
+            const newUrl = url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
             setPageData(null)
             setSubmission(newUrl)
             setAlert('')
