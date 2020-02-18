@@ -3,7 +3,8 @@ import logo from "../../images/logo.svg"
 import React from "react"
 // import background from "../../images/footer_img.svg"
 import Img from "gatsby-image"
-import GoogleLogo from '../googleLogo/googleLogo'
+// import GoogleLogo from '../googleLogo/googleLogo'
+import LangSwitcher from '../hoc/langSwithcer/langSwitcher'
 
 
 const Footer = ({ columns }) => {
@@ -65,6 +66,9 @@ const Footer = ({ columns }) => {
                   Privacy Policy
                 </Link>
               </li>
+             {/* <li>
+                <LangSwitcher/>
+             </li> */}
             </ul>
           </div>
         </div>
