@@ -1,13 +1,29 @@
 import { Link } from "gatsby"
 import logo from "../../images/logo.svg"
-import React from "react"
+import React, {useState, useEffect} from "react"
 // import background from "../../images/footer_img.svg"
 import Img from "gatsby-image"
 // import GoogleLogo from '../googleLogo/googleLogo'
-import LangSwitcher from '../hoc/langSwithcer/langSwitcher'
-
+import LanguageSwitcher from '../hoc/langSwithcer/langSwitcher'
+import langStyles from '../hoc/langSwithcer/langSwitcher.module.scss'
+import { changeLocale, useIntl } from 'gatsby-plugin-intl'
 
 const Footer = ({ columns, locales }) => {
+
+console.log(locales.locale)
+
+// let activeLocale = locales.map((l, i) =>
+//   { l.locale === 'en' ? activeLocale = 'En'
+//   : l.locale === 'es' ? activeLocale = 'Es'
+//   : null }
+// )
+
+const [currentLocale, setCurrentLocale] = useState(locales.locale)
+
+  const langSwitchHandler = (l) => {
+    setCurrentLocale((l.locale))
+}
+
   return (
   <footer>
     <div className="container">
@@ -68,14 +84,22 @@ const Footer = ({ columns, locales }) => {
               </li>
             </ul>
           </div>
-          <div className="col col-xs-12 col-md-6 text-center-xs text-left-md space-xs space-sm">
-            {locales.length > 1 ? 
-              locales.map((l, i) => 
-                <Link key={i} to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value}`}>
-                  {l.locale}
-                </Link>) 
-            : null}
-          </div>
+          { locales.length > 1 ?
+
+            <div className={[langStyles.wrapper].join(' ')}>
+              <p className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{currentLocale}</p>
+                <ul className={["list-unstyled", langStyles.otherLangs].join(' ')}>
+                  {locales.map((l, i) =>
+                    <li key={i} onClick={() => langSwitchHandler(l)}>
+                      <Link to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value}`} style={{color: 'white'}}>
+                        {l.locale}  
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+            </div>
+
+          : null}
         </div>
       </div>
     </div>
