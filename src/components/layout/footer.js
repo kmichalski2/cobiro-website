@@ -7,7 +7,7 @@ import Img from "gatsby-image"
 import LangSwitcher from '../hoc/langSwithcer/langSwitcher'
 
 
-const Footer = ({ columns }) => {
+const Footer = ({ columns, locales }) => {
   return (
   <footer>
     <div className="container">
@@ -67,6 +67,14 @@ const Footer = ({ columns }) => {
                 </Link>
               </li>
             </ul>
+          </div>
+          <div className="col col-xs-12 col-md-6 text-center-xs text-left-md space-xs space-sm">
+            {locales.length > 1 ? 
+              locales.map((l, i) => 
+                <Link key={i} to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value}`}>
+                  {l.locale}
+                </Link>) 
+            : null}
           </div>
         </div>
       </div>

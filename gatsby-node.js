@@ -37,6 +37,10 @@ exports.createPages = async function({ graphql, actions }) {
               homepage
               slug
               locale
+              _allSlugLocales {
+                value
+                locale
+              }
               customCtaLinks
               primaryCtaTitle
               primaryCtaLink
@@ -459,7 +463,8 @@ exports.createPages = async function({ graphql, actions }) {
             component: path.resolve(`./src/templates/page.js`),
             context: {
               title: item.node.title,
-              data: item.node
+              data: item.node,
+              locales: item.node._allSlugLocales
             },
           })
         })
