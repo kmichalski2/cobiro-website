@@ -4,6 +4,7 @@ import React from "react"
 // import background from "../../images/footer_img.svg"
 import Img from "gatsby-image"
 // import GoogleLogo from '../googleLogo/googleLogo'
+import LangSwitcher from '../hoc/langSwithcer/langSwitcher'
 
 
 const Footer = ({ columns, locales }) => {
@@ -65,6 +66,9 @@ const Footer = ({ columns, locales }) => {
                   Privacy Policy
                 </Link>
               </li>
+             {/* <li>
+                <LangSwitcher/>
+             </li> */}
             </ul>
           </div>
           <div className="col col-xs-12 col-md-6 text-center-xs text-left-md space-xs space-sm">
