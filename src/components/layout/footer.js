@@ -66,9 +66,6 @@ const Footer = ({ columns }) => {
                   Privacy Policy
                 </Link>
               </li>
-             {/* <li>
-                <LangSwitcher/>
-             </li> */}
             </ul>
           </div>
         </div>
