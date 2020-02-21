@@ -36,6 +36,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sitemap`,
+    // `gatsby-plugin-intl`,
     {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
@@ -68,6 +69,19 @@ module.exports = {
         icon: `src/images/logo_circle.svg`, // This path is relative to the root of the site.
       },
     },
+    // {
+    //   resolve: `gatsby-plugin-intl`,
+    //   // options: {
+    //   //   // language JSON resource path
+    //   //   // path: `${__dirname}/src/i18n`,
+    //   //   // supported language
+    //   //   languages: [`en`, `es`],
+    //   //   // language file path
+    //   //   defaultLanguage: `en`,
+    //   //   // option to redirect to `/ko` when connecting `/`
+    //   //   redirect: true,
+    //   // },
+    // },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

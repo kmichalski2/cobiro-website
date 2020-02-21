@@ -1,12 +1,11 @@
 import { Link } from "gatsby"
 import logo from "../../images/logo.svg"
 import React from "react"
-// import background from "../../images/footer_img.svg"
 import Img from "gatsby-image"
-import GoogleLogo from '../googleLogo/googleLogo'
+import langStyles from '../hoc/langSwithcer/langSwitcher.module.scss'
 
+const Footer = ({ columns, locales, currentLocale }) => {
 
-const Footer = ({ columns }) => {
   return (
   <footer>
     <div className="container">
@@ -67,7 +66,25 @@ const Footer = ({ columns }) => {
               </li>
             </ul>
           </div>
-        </div>
+          { locales.length > 1 ?
+            <div className="col col-xs-12 col-md-6 text-center-xs text-right-md">
+            <div className={[langStyles.wrapper, langStyles.up].join(' ')}>
+              <p className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{currentLocale.toUpperCase()}</p>
+                <ul className={["list-unstyled", langStyles.otherLangs].join(' ')}>
+                  {locales.map((l, i) => 
+                    <li key={i}>
+                      {currentLocale !== l.locale ?
+                        <Link to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value}`} style={{color: 'white'}}>
+                          {l.locale.toUpperCase()}
+                        </Link>
+                      : null }
+                    </li>
+                  )}
+                </ul>
+            </div>
+            </div>
+          : null}
+          </div>
       </div>
     </div>
   </footer>
