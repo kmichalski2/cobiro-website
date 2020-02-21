@@ -14,7 +14,7 @@ import Footer from "./footer"
 import "./style/app.scss"
 import CookieBanner from "./cookieConsent"
 
-const Layout = ({ children, customCta, locales }) => {
+const Layout = ({ children, customCta, locales, currentLocale }) => {
   const data = useStaticQuery(graphql`
   query GlobalQuery {
     site {
@@ -108,7 +108,7 @@ const Layout = ({ children, customCta, locales }) => {
       <Navbar menuItems={data.allDatoCmsMenu.nodes} customCta={customCta}/>
       {children}
       <CookieBanner />
-      <Footer columns={data.allDatoCmsFooter.nodes} locales={locales}/>
+      <Footer columns={data.allDatoCmsFooter.nodes} locales={locales} currentLocale={currentLocale}/>
     </>
   )
 }

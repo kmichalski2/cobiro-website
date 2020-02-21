@@ -1,28 +1,10 @@
 import { Link } from "gatsby"
 import logo from "../../images/logo.svg"
-import React, {useState, useEffect} from "react"
-// import background from "../../images/footer_img.svg"
+import React from "react"
 import Img from "gatsby-image"
-// import GoogleLogo from '../googleLogo/googleLogo'
-import LanguageSwitcher from '../hoc/langSwithcer/langSwitcher'
 import langStyles from '../hoc/langSwithcer/langSwitcher.module.scss'
-import { changeLocale, useIntl } from 'gatsby-plugin-intl'
 
-const Footer = ({ columns, locales }) => {
-
-console.log(locales.locale)
-
-// let activeLocale = locales.map((l, i) =>
-//   { l.locale === 'en' ? activeLocale = 'En'
-//   : l.locale === 'es' ? activeLocale = 'Es'
-//   : null }
-// )
-
-const [currentLocale, setCurrentLocale] = useState(locales.locale)
-
-  const langSwitchHandler = (l) => {
-    setCurrentLocale((l.locale))
-}
+const Footer = ({ columns, locales, currentLocale }) => {
 
   return (
   <footer>
@@ -85,22 +67,24 @@ const [currentLocale, setCurrentLocale] = useState(locales.locale)
             </ul>
           </div>
           { locales.length > 1 ?
-
-            <div className={[langStyles.wrapper].join(' ')}>
-              <p className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{currentLocale}</p>
+            <div className="col col-xs-12 col-md-6 text-center-xs text-right-md">
+            <div className={[langStyles.wrapper, langStyles.up].join(' ')}>
+              <p className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{currentLocale.toUpperCase()}</p>
                 <ul className={["list-unstyled", langStyles.otherLangs].join(' ')}>
-                  {locales.map((l, i) =>
-                    <li key={i} onClick={() => langSwitchHandler(l)}>
-                      <Link to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value}`} style={{color: 'white'}}>
-                        {l.locale}  
-                      </Link>
+                  {locales.map((l, i) => 
+                    <li key={i}>
+                      {currentLocale !== l.locale ?
+                        <Link to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value}`} style={{color: 'white'}}>
+                          {l.locale.toUpperCase()}
+                        </Link>
+                      : null }
                     </li>
                   )}
                 </ul>
             </div>
-
+            </div>
           : null}
-        </div>
+          </div>
       </div>
     </div>
   </footer>
