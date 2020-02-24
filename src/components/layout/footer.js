@@ -6,6 +6,17 @@ import Img from "gatsby-image"
 
 const Footer = ({ columns, locales, currentLocale }) => {
 
+  let currentLocaleFull = ''
+
+  { 
+    currentLocale === 'en' ? currentLocaleFull = 'English' 
+  : currentLocale === 'es' ? currentLocaleFull = 'Spanish'
+  : currentLocale === 'fr' ? currentLocaleFull = 'French'
+  : currentLocale === 'ge' ? currentLocaleFull = 'German'
+  : currentLocale === 'it' ? currentLocaleFull = 'Italian'
+  : currentLocaleFull = 'Select Language'
+  }
+
   return (
   <footer>
     <div className="container">
@@ -58,6 +69,30 @@ const Footer = ({ columns, locales, currentLocale }) => {
               <ul><Link className="small text-darkgrey" to="/terms-of-service">Terms of Service</Link></ul>
               <ul><Link className="small text-darkgrey" to="/privacy-policy">Privacy Policy</Link></ul>
               <ul><Link className="small text-darkgrey" to="/sitemap">Sitemap</Link></ul>
+          { locales && locales.length > 1 ?
+            <div className="col col-xs-12 col-md-6 text-center-xs text-right-md">
+            <div className={[langStyles.wrapper, langStyles.up].join(' ')}>
+              <p className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{currentLocaleFull}</p>
+                <ul className={["list-unstyled", langStyles.otherLangs].join(' ')}>
+                  {locales.map((l, i) => 
+                    <li key={i}>
+                      {currentLocale !== l.locale ?
+                        <Link to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value}`} style={{color: 'white'}}>
+                          {
+                            l.locale === 'en' ? 'English' 
+                          : l.locale === 'es' ? 'Spanish' 
+                          : l.locale === 'fr' ? 'French'
+                          : l.locale === 'ge' ? 'German'
+                          : l.locale === 'it' ? 'Italian'
+                          : null }
+                        </Link>
+                      : null }
+                    </li>
+                  )}
+                </ul>
+            </div>
+            </div>
+          : null}
           </div>
         </div>
       </div>
