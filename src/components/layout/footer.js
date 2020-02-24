@@ -6,7 +6,7 @@ import Img from "gatsby-image"
 
 const Footer = ({ columns, locales, currentLocale }) => {
 
-  let currentLocaleFull = ''
+  let currentLocaleFull = '';
 
   { 
     currentLocale === 'en' ? currentLocaleFull = 'English' 
