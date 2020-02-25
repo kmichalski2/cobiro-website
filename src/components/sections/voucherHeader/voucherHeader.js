@@ -21,7 +21,7 @@ const VoucherHeader = (props) => {
                 <div className="row flex middle-xs">
                     <div className={["col col-xs-12 text-white", rightSide === 'signup' ? "col-lg-5" : "col-lg-6"].join(' ')}>
                         <div className={["space-xs space-sm space-md", voucherHeaderStyles.textWrap].join(' ')}>
-                            <h1>{props.data.title}</h1>
+                            <h1 className="text-white">{props.data.title}</h1>
                             <div className={voucherHeaderStyles.text} dangerouslySetInnerHTML={{__html: text}}></div>
                             {link && linkTitle ?
                             <a className="btn btn-white btn-large" href={link}>{linkTitle}</a>
