@@ -96,6 +96,12 @@
 	.flex-#{$breakpoint} {
 		display: flex;
 	}
+	.flex-column-#{$breakpoint} {
+		flex-direction: column;
+	}
+	.flex-row-#{$breakpoint} {
+		flex-direction: row;
+	}
 }
 
 .flex {

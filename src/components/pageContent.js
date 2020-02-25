@@ -17,10 +17,12 @@ import Video from "../components/sections/video/video"
 import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel"
 import Image from "../components/sections/image/image"
 import Voucher from "../components/sections/voucher/voucher"
+import VoucherHeader from "./sections/voucherHeader/voucherHeader"
+import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
 
-const pageContent = ({ data }) => {
+const pageContent = ({ data, locales }) => {
   return (
-    <Layout customCta={ data.customCtaLinks && data.primaryCtaTitle && data.primaryCtaLink ? {title: data.primaryCtaTitle, link: data.primaryCtaLink} : null }>
+    <Layout customCta={ data.customCtaLinks && data.primaryCtaTitle && data.primaryCtaLink ? {title: data.primaryCtaTitle, link: data.primaryCtaLink} : null } locales={locales} currentLocale={data.locale}>
       <SEO title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } description={data.seoTags && data.seoTags.description ? data.seoTags.description : null} lang={data.locale}/>
       <main>
         {data.sections.map((section, index) => {
@@ -57,6 +59,10 @@ const pageContent = ({ data }) => {
                 return <Image data={data.sections[index]} key={index}/>
             case 'VoucherSignup':
                 return <Voucher data={data.sections[index]} key={index}/>
+            case 'VoucherHeader':
+                return <VoucherHeader data={data.sections[index]} key={index}/>
+            case 'ExplanationGiftCard':
+                return <ExplanationGiftCard data={data.sections[index]} key={index}/>
             default:
                 return null
             }

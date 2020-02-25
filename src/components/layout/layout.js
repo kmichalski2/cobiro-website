@@ -14,7 +14,14 @@ import Footer from "./footer"
 import "./style/app.scss"
 import CookieBanner from "./cookieConsent"
 
-const Layout = ({ children, customCta }) => {
+const Layout = ({ children, customCta, locales, currentLocale }) => {
+  
+  if (typeof window !== 'undefined') {
+    // Make scroll behavior of internal links smooth
+    // eslint-disable-next-line global-require
+    require('smooth-scroll')('a[href*="#"]');
+  }
+
   const data = useStaticQuery(graphql`
   query GlobalQuery {
     site {
@@ -108,7 +115,7 @@ const Layout = ({ children, customCta }) => {
       <Navbar menuItems={data.allDatoCmsMenu.nodes} customCta={customCta}/>
       {children}
       <CookieBanner />
-      <Footer columns={data.allDatoCmsFooter.nodes}/>
+      <Footer columns={data.allDatoCmsFooter.nodes} locales={locales} currentLocale={currentLocale}/>
     </>
   )
 }

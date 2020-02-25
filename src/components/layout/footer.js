@@ -1,12 +1,11 @@
 import { Link } from "gatsby"
 import logo from "../../images/logo.svg"
 import React from "react"
-// import background from "../../images/footer_img.svg"
 import Img from "gatsby-image"
-import GoogleLogo from '../googleLogo/googleLogo'
+import langStyles from '../hoc/langSwithcer/langSwitcher.module.scss'
 
+const Footer = ({ columns, locales, currentLocale }) => {
 
-const Footer = ({ columns }) => {
   return (
   <footer>
     <div className="container">

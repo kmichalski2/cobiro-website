@@ -1,0 +1,43 @@
+@import '../../layout/style/globals';
+
+.hr {
+    border-top: 2px dashed $darkgrey;
+    background-color: transparent;
+    width: calc(100% + 5rem);
+    margin-left: -2.5rem;
+
+    @include mq($until: md) {
+        width: calc(100% + 2rem);
+        margin-left: -1rem;
+    }
+}
+
+.footer {
+    p, h3 {
+        margin: 0;
+    }
+
+    h3 {
+        color: #27D07B;
+    }
+}
+.googleAdsImg {
+    width: 8rem !important;
+    max-width: none !important;
+}
+.voucherAmount {
+    margin: 0;
+}
+.giftImg {
+    width: 12.5rem !important;
+    // height: 10rem;
+    max-width: none !important;
+    margin: 0 !important;
+}
+.card {
+    width: 100%;
+    max-width: 40rem;
+    margin: auto;
+    display: block !important;
+    color: #333;
+}

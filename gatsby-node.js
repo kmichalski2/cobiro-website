@@ -1,11 +1,3 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
-
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
@@ -27,8 +19,7 @@ exports.createPages = async function({ graphql, actions }) {
     // graphql(`
     //   {
     //     allDatoCmsPage(filter: {locale: {eq: "${locale}"}}) {
-      await graphql(`
-      {
+      await graphql(`{
         allDatoCmsPage(filter: {locale: {eq: "en"}}) {
           edges {
             node {
@@ -36,6 +27,10 @@ exports.createPages = async function({ graphql, actions }) {
               homepage
               slug
               locale
+              _allSlugLocales {
+                value
+                locale
+              }
               customCtaLinks
               primaryCtaTitle
               primaryCtaLink
@@ -83,6 +78,29 @@ exports.createPages = async function({ graphql, actions }) {
                       sizes
                     }
                   }
+                }
+                ... on DatoCmsVoucherHeader {
+                  title
+                  text
+                  linkTitle
+                  linkUrl
+                  signUpOrVoucher
+                  environment
+                  footnote
+                  topGradiantColor {
+                    hex
+                  }
+                  bottomGradiantColor {
+                    hex
+                  }
+                }
+                ... on DatoCmsExplanationGiftCard {
+                  title
+                  text
+                  linkTitle
+                  linkUrl
+                  footnote
+                  leftText
                 }
                 ... on DatoCmsThreeUp {
                   backgroundColor
@@ -163,6 +181,8 @@ exports.createPages = async function({ graphql, actions }) {
                     slug
                   }
                   linkTitle
+                  externalLinkUrl
+                  showAsButton
                   imageToEdge
                   image {
                     alt
@@ -430,6 +450,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsVoucherSignup {
+                  environment
                   backgroundColor
                   bottomGradiantColor {
                     hex
@@ -466,3 +487,5 @@ exports.createPages = async function({ graphql, actions }) {
   //   })
   // )
 }
+
+

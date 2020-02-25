@@ -1,0 +1,17 @@
+@import '../../layout/style/globals';
+
+@include mq($from: lg) {
+    .header {
+        padding-bottom: 10rem;
+    }
+}
+.textWrap {
+    padding-right: 3.75rem;
+
+    .text {
+        margin-bottom: 1.2rem;
+        p {
+            color: $white;
+        }
+    }
+}
