@@ -66,7 +66,7 @@ const Footer = ({ columns, locales, currentLocale }) => {
               </li>
             </ul>
           </div>
-          { locales.length > 1 ?
+          { locales && locales.length > 1 ?
             <div className="col col-xs-12 col-md-6 text-center-xs text-right-md">
             <div className={[langStyles.wrapper, langStyles.up].join(' ')}>
               <p className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{currentLocale.toUpperCase()}</p>
