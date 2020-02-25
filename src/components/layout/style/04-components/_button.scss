@@ -50,27 +50,6 @@ $button-padding-horizontal: 1.5rem;
 	}
 }
 
-.btn-select {
-	border-radius: 5px;
-	background-color: $white;
-	border-color: $blue;
-	color: $blue;
-	padding: 1rem 4rem;
-	margin: 0 0.25rem;
-
-	&:first-child {
-		margin-left: 0;
-	}
-	&:last-child {
-		margin-right: 0;
-	}
-	&.active, &:hover, &:active {
-		background-color: lighten($blue, 40);
-		color: $blue;
-		border-color: $blue;
-	}
-}
-
 .btn-toggle {
 	padding: 1rem;
 	position: relative;

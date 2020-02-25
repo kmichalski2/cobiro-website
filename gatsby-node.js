@@ -1,17 +1,9 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
-
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = async function({ graphql, actions }) {
   const { createPage } = actions
-  const locales = ["en", "es"]
+  // const locales = ["en"]
 
   // locales.forEach(locale => {
   //   const prefix = locale === "en" ? "" : `/${locale}`
@@ -27,10 +19,8 @@ exports.createPages = async function({ graphql, actions }) {
     // graphql(`
     //   {
     //     allDatoCmsPage(filter: {locale: {eq: "${locale}"}}) {
-      Promise.all(
-        locales.map(locale => { 
-          graphql(`{
-        allDatoCmsPage(filter: {locale: {eq: "${locale}"}}) {
+      await graphql(`{
+        allDatoCmsPage(filter: {locale: {eq: "en"}}) {
           edges {
             node {
               title
@@ -88,6 +78,29 @@ exports.createPages = async function({ graphql, actions }) {
                       sizes
                     }
                   }
+                }
+                ... on DatoCmsVoucherHeader {
+                  title
+                  text
+                  linkTitle
+                  linkUrl
+                  signUpOrVoucher
+                  environment
+                  footnote
+                  topGradiantColor {
+                    hex
+                  }
+                  bottomGradiantColor {
+                    hex
+                  }
+                }
+                ... on DatoCmsExplanationGiftCard {
+                  title
+                  text
+                  linkTitle
+                  linkUrl
+                  footnote
+                  leftText
                 }
                 ... on DatoCmsThreeUp {
                   backgroundColor
@@ -168,6 +181,8 @@ exports.createPages = async function({ graphql, actions }) {
                     slug
                   }
                   linkTitle
+                  externalLinkUrl
+                  showAsButton
                   imageToEdge
                   image {
                     alt
@@ -435,6 +450,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsVoucherSignup {
+                  environment
                   backgroundColor
                   bottomGradiantColor {
                     hex
@@ -453,9 +469,9 @@ exports.createPages = async function({ graphql, actions }) {
         }
       }
       `).then(result => {
-        result.data.allDatoCmsPage.edges.filter((item) => item.node.title).forEach(async function(item) {
-          const curLocale = item.node.locale
-          const prefix = curLocale !== 'en' ? curLocale : ''
+        result.data.allDatoCmsPage.edges.forEach(async function(item) {
+          const locale = item.node.locale
+          const prefix = locale !== 'en' ? locale : ''
           let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
           // let p = item.node.homepage ? '/' : `/${item.node.slug}`
           await createPage({
@@ -463,14 +479,13 @@ exports.createPages = async function({ graphql, actions }) {
             component: path.resolve(`./src/templates/page.js`),
             context: {
               title: item.node.title,
-              data: item.node,
-              locales: item.node._allSlugLocales
+              data: item.node
             },
           })
         })
       })
   //   })
-  
-}))}
+  // )
+}
 
 

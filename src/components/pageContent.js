@@ -17,6 +17,8 @@ import Video from "../components/sections/video/video"
 import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel"
 import Image from "../components/sections/image/image"
 import Voucher from "../components/sections/voucher/voucher"
+import VoucherHeader from "./sections/voucherHeader/voucherHeader"
+import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
 
 const pageContent = ({ data, locales }) => {
   return (
@@ -57,6 +59,10 @@ const pageContent = ({ data, locales }) => {
                 return <Image data={data.sections[index]} key={index}/>
             case 'VoucherSignup':
                 return <Voucher data={data.sections[index]} key={index}/>
+            case 'VoucherHeader':
+                return <VoucherHeader data={data.sections[index]} key={index}/>
+            case 'ExplanationGiftCard':
+                return <ExplanationGiftCard data={data.sections[index]} key={index}/>
             default:
                 return null
             }

@@ -15,6 +15,13 @@ import "./style/app.scss"
 import CookieBanner from "./cookieConsent"
 
 const Layout = ({ children, customCta, locales, currentLocale }) => {
+  
+  if (typeof window !== 'undefined') {
+    // Make scroll behavior of internal links smooth
+    // eslint-disable-next-line global-require
+    require('smooth-scroll')('a[href*="#"]');
+  }
+
   const data = useStaticQuery(graphql`
   query GlobalQuery {
     site {

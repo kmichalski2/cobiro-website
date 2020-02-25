@@ -26,7 +26,9 @@ const ExplanationImage = ({ data }) => {
       {data.title ? <h3 className="">{data.title}</h3> : null}
       {data.text ? <p>{data.text}</p> : null}
       {data.link ? 
-      <Link to={data.link.slug ? `/${data.link.slug}` : '/'}>{data.linkTitle}</Link>
+      <Link className={data.showAsButton ? "btn" : null} to={data.link.slug ? `/${data.link.slug}` : '/'}>{data.linkTitle}</Link>
+      : data.externalLinkUrl ?
+      <a className={data.showAsButton ? "btn" : null} href={data.externalLinkUrl}>{data.linkTitle}</a>
       : null}
     </div>
   )

@@ -41,6 +41,7 @@ $lightgrey: #E5E9ED;
 $mediumgrey: #E6E6E6;
 $grey: #D6D6D6;
 $darkgrey: #4F525F; 
+$red: rgb(214, 0, 18);
 
 $colors: (
 	black: $black,
@@ -56,6 +57,7 @@ $colors: (
 	mediumgrey: $mediumgrey,
 	grey: $grey,
 	darkgrey: $darkgrey,
+	red: $red,
 );
 
 $link-color: $blue;
@@ -67,7 +69,7 @@ $headings-font-weight: 600;
 
 $border-radius: 5px;
 $input-border-radius: $border-radius;
-$input-border-color: $grey;
+$input-border-color: $lightgrey;
 $input-padding-vertical: 0.5rem;
 $input-padding-horizontal: 1rem;
 

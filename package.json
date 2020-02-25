@@ -6,11 +6,11 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "@brainhubeu/react-carousel": "^1.10.30",
+    "axios": "^0.19.0",
     "baseguide": "^3.3.0",
     "gatsby": "^2.18.10",
     "gatsby-image": "^2.2.36",
     "gatsby-plugin-google-tagmanager": "^2.1.20",
-    "gatsby-plugin-intl": "^0.3.2",
     "gatsby-plugin-manifest": "^2.2.33",
     "gatsby-plugin-offline": "^2.2.10",
     "gatsby-plugin-react-helmet": "^3.1.18",
@@ -24,7 +24,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "smooth-scroll": "^16.1.1"
   },
   "devDependencies": {
     "prettier": "^1.19.1"
