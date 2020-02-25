@@ -66,25 +66,7 @@ const Footer = ({ columns, locales, currentLocale }) => {
               </li>
             </ul>
           </div>
-          { locales && locales.length > 1 ?
-            <div className="col col-xs-12 col-md-6 text-center-xs text-right-md">
-            <div className={[langStyles.wrapper, langStyles.up].join(' ')}>
-              <p className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{currentLocale.toUpperCase()}</p>
-                <ul className={["list-unstyled", langStyles.otherLangs].join(' ')}>
-                  {locales.map((l, i) => 
-                    <li key={i}>
-                      {currentLocale !== l.locale ?
-                        <Link to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value}`} style={{color: 'white'}}>
-                          {l.locale.toUpperCase()}
-                        </Link>
-                      : null }
-                    </li>
-                  )}
-                </ul>
-            </div>
-            </div>
-          : null}
-          </div>
+        </div>
       </div>
     </div>
   </footer>
