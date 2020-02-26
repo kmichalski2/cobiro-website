@@ -84,7 +84,8 @@ const Footer = ({ columns, locales, currentLocale }) => {
                           : l.locale === 'fr' ? 'French'
                           : l.locale === 'ge' ? 'German'
                           : l.locale === 'it' ? 'Italian'
-                          : null }
+                          : null 
+                          }
                         </Link>
                       : null }
                     </li>

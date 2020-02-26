@@ -3,7 +3,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = async function({ graphql, actions }) {
   const { createPage } = actions
-  // const locales = ["en"]
+  const locales = ["en", "es"]
 
   // locales.forEach(locale => {
   //   const prefix = locale === "en" ? "" : `/${locale}`
@@ -14,13 +14,11 @@ exports.createPages = async function({ graphql, actions }) {
   //   })
   // })
 
-  // Promise.all(
-  //   locales.map(locale => {
-    // graphql(`
-    //   {
-    //     allDatoCmsPage(filter: {locale: {eq: "${locale}"}}) {
-      await graphql(`{
-        allDatoCmsPage(filter: {locale: {eq: "en"}}) {
+  Promise.all(
+    locales.map(locale => {
+    graphql(`
+      {
+        allDatoCmsPage(filter: {locale: {eq: "${locale}"}}) {
           edges {
             node {
               title
@@ -814,7 +812,8 @@ exports.createPages = async function({ graphql, actions }) {
             component: path.resolve(`./src/templates/page.js`),
             context: {
               title: item.node.title,
-              data: item.node
+              data: item.node,
+              locales: item.node._allSlugLocales
             },
           })
         })
