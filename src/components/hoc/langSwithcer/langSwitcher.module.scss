@@ -6,6 +6,7 @@
     display: block;
     // width: 100%;
     cursor: pointer;
+    padding: 0.25rem 0.5rem;
 
     .currLang {
         font-size: 1rem;
@@ -36,6 +37,7 @@
     .otherLangs {
         min-width: 7rem;
         // border: 1px solid $mediumgrey;
+        box-sizing: border-box;
         display: block !important;
         position: absolute;
         bottom: 0;

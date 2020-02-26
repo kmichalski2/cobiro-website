@@ -24,7 +24,7 @@ const localesLong = {
 
     useEffect(() => {
         
-        setWrapperXY({y: currentLang.current.clientHeight, x: currentLang.current.clientWidth})
+        setWrapperXY({y: currentLang.current.clientHeight + 8 + 2, x: currentLang.current.clientWidth + 16 + 2})
     }, [])
 
     console.log(currentLang.current)
@@ -46,7 +46,6 @@ const localesLong = {
                   )}
                   <li ref={currentLang} className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{localesLong[currentLocale]}</li>
                 </ul>
-                {/* <p className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{currentLocaleFull}</p> */}
             </div>
           : null
     )
