@@ -802,12 +802,13 @@ exports.createPages = async function({ graphql, actions }) {
         }
       }
       `).then(result => {
-        result.data.allDatoCmsPage.edges.forEach(async function(item) {
-          const locale = item.node.locale
-          const prefix = locale !== 'en' ? locale : ''
+        result.data.allDatoCmsPage.edges.filter((item) => item.node.title).forEach(item => {
+          console.log('LOCALE: ', item.node.locale)
+          const curLocale = item.node.locale
+          const prefix = curLocale !== 'en' ? curLocale : ''
           let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
-          
-          await createPage({
+          // let p = item.node.homepage ? '/' : `/${item.node.slug}`
+          actions.createPage({
             path: p,
             component: path.resolve(`./src/templates/page.js`),
             context: {
@@ -818,6 +819,7 @@ exports.createPages = async function({ graphql, actions }) {
           })
         })
       })
+    }))
 
 
       await graphql(`
@@ -1089,7 +1091,4 @@ exports.createPages = async function({ graphql, actions }) {
           })
         })
       })
-
-}
-
-
+    }
