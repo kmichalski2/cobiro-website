@@ -23,8 +23,9 @@ const localesLong = {
     let currentLang = React.createRef();
 
     useEffect(() => {
-        
-        setWrapperXY({y: currentLang.current.clientHeight + 8 + 2, x: currentLang.current.clientWidth + 16 + 2})
+        if(currentLang && currentLang.current) {
+          setWrapperXY({y: currentLang.current.clientHeight + 16 + 2, x: currentLang.current.clientWidth + 24 + 2})
+        }
     }, [])
 
     console.log(currentLang.current)
