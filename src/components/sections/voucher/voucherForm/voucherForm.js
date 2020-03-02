@@ -196,9 +196,6 @@ const VoucherForm = ({env, footnote}) => {
                         redirect_uri: `https://app.${envUrl}.com/user/login?token=${token}&redirectUri=site/${siteId}/store`,
                         customer: {
                             email: email,
-                            // first_name: name,
-                            last_name: "example",
-                            address: "somewhere",
                             website: website
                         }
                     }
