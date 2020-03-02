@@ -100,8 +100,6 @@ const VoucherForm = ({env, footnote}) => {
                     type: "users",
                     attributes: {
                         email: email,
-                        // first_name: name,
-                        last_name: "lastname",
                         password: password
                     }
                 }
