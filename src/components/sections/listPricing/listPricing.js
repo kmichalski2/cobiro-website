@@ -10,7 +10,7 @@ const ListPricing = ({ data }) => {
   useEffect(() => {
     const priceCaptions = document.getElementsByClassName("price-caption")
 
-    if (priceCaptions.length > 0) {
+    if (priceCaptions.length > 1) {
       if (priceCaptions[0].offsetHeight > priceCaptions[1].offsetHeight) {
         priceCaptions[1].style.height = priceCaptions[0].offsetHeight + "px"
       } else if (
@@ -54,17 +54,22 @@ const ListPricing = ({ data }) => {
                 </div>
               </div>
             </div>
+            { data.tier2Title ? 
             <div className="col col-xs-12 col-md-6 col-lg-4">
               <div className={["card card-visible flex center list-pricing", priceStyles.card].join(' ')} >
                 <div>
                   <h4>{data.tier2Title}</h4>
-                  <p className="price h1">${data.tier2Price}</p>
+                  {data.tier2Price ? <p className="price h1">${data.tier2Price}</p> : null }
+                  {data.tier2Text ? 
                   <p className="small price-caption">
                   {data.tier2Text}
                   </p>
+                  : null}
+                  {data.tier2ExternalLink && data.tier2LinkText ?
                   <a href={data.tier2ExternalLink} className="btn space-xs-up" target="_blank" rel="noopener noreferrer">
                   {data.tier2LinkText}
                   </a>
+                  : null}
                   {data.tier2Features ? (
                     <ul className="text-left-xs price-list list-unstyled">
                       {data.tier2Features.map((feature, index) => (
@@ -75,6 +80,7 @@ const ListPricing = ({ data }) => {
                 </div>
               </div>
             </div>
+            : null }
           </div>
         </div>
       <Waves className={priceStyles.whiteSways} bottom="25%" whiteSway={backgroundColor ? true : false} transparentSways={backgroundColor ? true : false} highWaveRight={true}/>
