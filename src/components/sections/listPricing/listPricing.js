@@ -35,7 +35,7 @@ const ListPricing = ({ data }) => {
               <div className={["card card-visible flex center list-pricing", priceStyles.card].join(' ')}>
                 <div>
                   <h4>{data.tier1Title}</h4>
-                  <p className="price h1">${data.tier1Price}</p>
+                  <p className="price h1">${data.tier1Price}{data.tier1RecurringDescriptor ? <span className="h3 text-normal"> / {data.tier1RecurringDescriptor}</span> : null}</p>
                   <p className="small price-caption">{data.tier1Text}</p>
                   <a
                     href={data.tier1ExternalLink}

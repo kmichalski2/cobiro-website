@@ -282,12 +282,14 @@ exports.createPages = async function({ graphql, actions }) {
                   tier1Title
                   tier1Text
                   tier1Price
+                  tier1RecurringDescriptor
                   tier1LinkText
                   tier1ExternalLink
                   tier1Features
                   tier2Title
                   tier2Text
                   tier2Price
+                  tier2RecurringDescriptor
                   tier2LinkText
                   tier2ExternalLink
                   tier2Features
