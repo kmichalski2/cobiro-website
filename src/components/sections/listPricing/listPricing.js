@@ -21,8 +21,6 @@ const ListPricing = ({ data }) => {
     }
   })
 
-  console.log(data)
-
   return (
     <section className={[priceStyles.section, backgroundColor ? priceStyles.whiteBox : null, "section"].join(' ')} style={{backgroundImage: backgroundColor ? `linear-gradient(${topColor}, ${bottomColor})` : null, paddingBottom: backgroundColor ? 0 : null }} >
         <div className="container">
