@@ -98,8 +98,8 @@ const VoucherForm = ({env, footnote}) => {
             data: {
                 data: {
                     type: "users",
-                    partner_id = 1,
                     attributes: {
+                        partner_id = 1,
                         email: email,
                         password: password
                     }
