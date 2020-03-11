@@ -40,6 +40,7 @@ const PageContent = ({ data, locales }) => {
         customCta={ data.customCtaLinks && data.primaryCtaTitle && data.primaryCtaLink ? {title: data.primaryCtaTitle, link: data.primaryCtaLink} : null } 
         locales={ locales } 
         currentLocale={data.locale}
+        redirect={redirect}
         hiddenMenuItems={data.hiddenMenuItems}
         menuInverted={menuInverted}
         slug={data.slug}

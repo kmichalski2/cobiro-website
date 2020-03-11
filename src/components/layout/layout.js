@@ -14,7 +14,7 @@ import Footer from "./footer"
 import "./style/app.scss"
 import CookieBanner from "./cookieConsent"
 
-const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, menuInverted, slug, notifyerHeightHandler, hideSignUp }) => {
+const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenMenuItems, menuInverted, slug, notifyerHeightHandler, hideSignUp }) => {
   
   if (typeof window !== 'undefined') {
     // Make scroll behavior of internal links smooth
@@ -303,7 +303,7 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
       <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler}/>
       {children}
       <CookieBanner />
-      <Footer columns={data.allDatoCmsFooter.nodes} locales={locales} currentLocale={currentLocale}/>
+      <Footer columns={data.allDatoCmsFooter.nodes} locales={locales} currentLocale={currentLocale} redirect={redirect}/>
     </>
   )
 }
