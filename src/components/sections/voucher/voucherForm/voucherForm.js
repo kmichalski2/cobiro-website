@@ -84,11 +84,23 @@ const VoucherForm = ({env, footnote}) => {
             window.mixpanel.track("/SeamlessBilling - Account - Account Created", {
                 "site_id-created": site_id,
                 "currency": "USD",
-                "amount_selected": plan_id === 0 ? 25 : plan_id === 1 ? 50 : plan_id === 2 ? 100 : plan_id === 3 ? 200 : null} );
+                "amount_selected": plan_id === 1 ? 25 : plan_id === 2 ? 50 : plan_id === 3 ? 100 : plan_id === 4 ? 200 : null} );
             console.log('Mixpanel: tracking user')
         } else {
             console.log('Mixpanel not defined')
         }
+
+        if(typeof window !== 'undefined' && typeof window.dataLayer !== 'undefined') {
+            console.log('Window.dataLayer exists. Sending data: ', plan_id === 1 ? 25 : plan_id === 2 ? 50 : plan_id === 3 ? 100 : plan_id === 4 ? 200 : null, site_id)
+            window.dataLayer.push({
+              'event': '/SeamlessBilling - Account - Account Created',
+              'amount_selected': plan_id === 1 ? 25 : plan_id === 2 ? 50 : plan_id === 3 ? 100 : plan_id === 4 ? 200 : null,
+              'site_id-created' : site_id,
+              'currency': "USD"
+              });
+          } else {
+              console.log('window.dataLayer not defined')
+          }
     }
 
     const registerUser = () => {
