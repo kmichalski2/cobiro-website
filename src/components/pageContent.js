@@ -21,9 +21,19 @@ import VoucherHeader from "./sections/voucherHeader/voucherHeader"
 import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
 
 const pageContent = ({ data, locales }) => {
+
   return (
-    <Layout customCta={ data.customCtaLinks && data.primaryCtaTitle && data.primaryCtaLink ? {title: data.primaryCtaTitle, link: data.primaryCtaLink} : null } locales={locales} currentLocale={data.locale}>
-      <SEO title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } description={data.seoTags && data.seoTags.description ? data.seoTags.description : null} lang={data.locale}/>
+    <Layout 
+        customCta={ data.customCtaLinks && data.primaryCtaTitle && data.primaryCtaLink ? {title: data.primaryCtaTitle, link: data.primaryCtaLink} : null } 
+        locales={ locales } 
+        currentLocale={data.locale}
+        hiddenMenuItems={data.hiddenMenuItems}
+        >
+      <SEO 
+        title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } 
+        description={data.seoTags && data.seoTags.description ? data.seoTags.description : null} 
+        lang={data.locale}
+        />
       <main>
         {data.sections.map((section, index) => {
         switch(section.__typename.replace("DatoCms", "")) {

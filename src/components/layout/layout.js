@@ -14,7 +14,7 @@ import Footer from "./footer"
 import "./style/app.scss"
 import CookieBanner from "./cookieConsent"
 
-const Layout = ({ children, customCta, locales, currentLocale }) => {
+const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems }) => {
   
   if (typeof window !== 'undefined') {
     // Make scroll behavior of internal links smooth
@@ -36,6 +36,7 @@ const Layout = ({ children, customCta, locales, currentLocale }) => {
           slug
           title
         }
+        id
         menuItemOrder
         submenuFooterLinkTitle
         submenuFooterText
@@ -109,10 +110,20 @@ const Layout = ({ children, customCta, locales, currentLocale }) => {
     }
   }  
   `)
+
+  let menuItems
+
+  if(hiddenMenuItems.length > 0) {
+    const hiddenMenuItemsIds = hiddenMenuItems.map(item => item.id)
+    menuItems = data.allDatoCmsMenu.nodes.filter(item => !hiddenMenuItemsIds.includes(item.id))
+  } else {
+    menuItems = data.allDatoCmsMenu.nodes
+    
+  }
   
-  return (
+    return (
     <>
-      <Navbar menuItems={data.allDatoCmsMenu.nodes} customCta={customCta}/>
+      <Navbar menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems}/>
       {children}
       <CookieBanner />
       <Footer columns={data.allDatoCmsFooter.nodes} locales={locales} currentLocale={currentLocale}/>
