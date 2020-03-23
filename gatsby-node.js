@@ -38,6 +38,9 @@ exports.createPages = async function({ graphql, actions }) {
                 title
                 description
               }
+              hiddenMenuItems {
+                id
+              }
               sections {
                 __typename
                 ... on DatoCmsJumboHeader {
