@@ -14,11 +14,15 @@ const JumboHeader = props => {
   const imageBehind = data.imageBehindWave
   const alignment = data.alignment
 
+  const createMarkup = (text)  => {
+    return {__html: text}
+  }
+
   const textSide = (
     <div className={["col col-xs-12", alignment === 'centered' ? 'col-md-8 text-center space-xs-up' : 'col-md-6 text-left-md'].join(' ')}>
       <div className={[JumboHeaderStyles.text, imageBehind ? JumboHeaderStyles.textPadding : null, "text-padding"].join(" ")}>
         { data.heading ? <h1 className={backgroundColor ? 'text-white' : null}>{data.heading}</h1> : null }
-        { data.text ? <p className={backgroundColor ? 'text-white' : null}>{data.text}</p> : null }
+        { data.text ? <div className={["space-xs-up", backgroundColor ? 'text-white' : null].join(' ')} dangerouslySetInnerHTML={createMarkup(data.text)}></div> : null }
         {data.externalLinkUrl ? (
           <a href={data.externalLinkUrl} className={["btn btn-large space-xs space-sm", backgroundColor ? 'btn-white' : null, alignment === 'centered' ? 'space-xs-up' : null].join(' ')} target="_blank" rel="noopener noreferrer">{data.linkTitle}</a>
         ) : data.link ?
