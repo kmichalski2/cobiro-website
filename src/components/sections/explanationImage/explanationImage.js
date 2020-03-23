@@ -5,6 +5,13 @@ import React from "react"
 import expImageStyles from './explanationImage.module.scss'
 
 const ExplanationImage = ({ data }) => {
+
+  const createMarkup = (text)  => {
+    return {__html: text}
+  }
+
+
+
   const image = (
     <div className={["space-sm space-xs", data.leftText && data.imageToEdge ? expImageStyles.imageLeftEdge : !data.leftText && data.imageToEdge ? expImageStyles.imageRightEdge : "img-responsive"].join(' ')}>
       {data.image.fluid ?
@@ -24,7 +31,7 @@ const ExplanationImage = ({ data }) => {
   const text = (
     <div className="text-padding">
       {data.title ? <h3 className="">{data.title}</h3> : null}
-      {data.text ? <p>{data.text}</p> : null}
+      {data.text ? <div className="space-xs-up" dangerouslySetInnerHTML={createMarkup(data.text)}></div> : null}
       {data.link ? 
       <Link className={data.showAsButton ? "btn" : null} to={data.link.slug ? `/${data.link.slug}` : '/'}>{data.linkTitle}</Link>
       : data.externalLinkUrl ?
