@@ -113,7 +113,7 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems }
 
   let menuItems
 
-  if(hiddenMenuItems.length > 0) {
+  if(hiddenMenuItems && hiddenMenuItems.length > 0) {
     const hiddenMenuItemsIds = hiddenMenuItems.map(item => item.id)
     menuItems = data.allDatoCmsMenu.nodes.filter(item => !hiddenMenuItemsIds.includes(item.id))
   } else {
