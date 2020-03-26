@@ -195,7 +195,7 @@ const VoucherForm = ({env, footnote}) => {
     }
 
     const getPaymentUrl = (token, customerId, siteId) => {
-        console.log(`https://app.${envUrl}.com/user/login?token=${token}&redirectUri=site/${siteId}/store`)
+        console.log(`https://app.${envUrl}.com/user/login?token=${token}&redirectUri=site/${siteId}/store?utm_nooverride=1`)
         axios({
             method: 'post',
             url: `https://hub.${envUrl}.com/v1/valitor/payment-requests`,
@@ -206,7 +206,7 @@ const VoucherForm = ({env, footnote}) => {
                         payment_type: "subscription",
                         plan_id: planId,
                         customer_id: customerId,
-                        redirect_uri: `https://app.${envUrl}.com/user/login?token=${token}&redirectUri=site/${siteId}/store`,
+                        redirect_uri: `https://app.${envUrl}.com/user/login?token=${token}&redirectUri=site/${siteId}/store?utm_nooverride=1`,
                         customer: {
                             email: email,
                             website: website
