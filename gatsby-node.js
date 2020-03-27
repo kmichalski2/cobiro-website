@@ -178,6 +178,12 @@ exports.createPages = async function({ graphql, actions }) {
                 }
                 ... on DatoCmsExplanationWImage {
                   backgroundColor
+                  topGradiantColor {
+                    hex
+                  }
+                  bottomGradiantColor {
+                    hex
+                  }
                   title
                   text
                   link {
