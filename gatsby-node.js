@@ -460,6 +460,9 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                 }
+                ... on DatoCmsForm {
+                  formName
+                }
                 ... on DatoCmsVoucherSignup {
                   environment
                   backgroundColor
