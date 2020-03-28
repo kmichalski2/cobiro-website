@@ -460,8 +460,89 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                 }
-                ... on DatoCmsForm {
-                  formName
+                ... on DatoCmsFormSection {
+                  text
+                  title
+                  form {
+                    formName
+                    submitTitle
+                    succesPage {
+                      slug
+                    }
+                    formFields {
+                      ... on DatoCmsTextField {
+                        name
+                        helpText
+                        required
+                        placeholder
+                        label
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsTextareaField {
+                        name
+                        helpText
+                        label
+                        required
+                        placeholder
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsNumberField {
+                        name
+                        helpText
+                        required
+                        placeholder
+                        label
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsEmailField {
+                        name
+                        helpText
+                        label
+                        placeholder
+                        required
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsSelectField {
+                        name
+                        helpText
+                        label
+                        options
+                        placeholder
+                        required
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsCheckbox {
+                        name
+                        checkboxes
+                        helpText
+                        label
+                        required
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsRadioButtonField {
+                        name
+                        helpText
+                        label
+                        required
+                        radioButtons
+                        internal {
+                          type
+                        }
+                      }
+                    }
+                  }
                 }
                 ... on DatoCmsVoucherSignup {
                   environment

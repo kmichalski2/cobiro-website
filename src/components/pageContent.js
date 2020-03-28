@@ -74,7 +74,7 @@ const pageContent = ({ data, locales }) => {
                 return <VoucherHeader data={data.sections[index]} key={index}/>
             case 'ExplanationGiftCard':
                 return <ExplanationGiftCard data={data.sections[index]} key={index}/>
-            case 'Form':
+            case 'FormSection':
                 return <Form data={data.sections[index]} key={index}/>
             default:
                 return null
