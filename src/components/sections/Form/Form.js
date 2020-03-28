@@ -2,6 +2,7 @@ import React from 'react'
 import Classes from './form.module.scss'
 
 const Form = ({ data }) => {
+
     const createMarkup = (text)  => {
         return {__html: text}
       }
@@ -22,7 +23,11 @@ const Form = ({ data }) => {
                                 {form.formFields.map((f, i) =>
                                     
                                     <div key={i} className={Classes.formFields}>
-                                        <label className={Classes.label} htmlFor={f.name}>{f.label}</label>
+                                       {f.internal.type !== 'DatoCmsCheckbox' && f.internal.type !== 'DatoCmsRadioButtonField' ? 
+                                       <label className={Classes.label} htmlFor={f.name}>{f.label}</label>
+                                       : 
+                                       <p className={Classes.label}>{f.label}</p>
+                                       }
                                         {f.helpText ? 
                                             <div className={Classes.helpText} dangerouslySetInnerHTML={createMarkup(f.helpText)}></div> 
                                         : null }
@@ -93,6 +98,7 @@ const Form = ({ data }) => {
 
                                             f.radioButtons.map((b, i) => 
                                             <div key={i} >
+                                                <label >
                                                 <input 
                                                     
                                                     type="radio" 
@@ -102,7 +108,7 @@ const Form = ({ data }) => {
                                                     required={f.required || false} 
                                                     // checked={false}
                                                 />
-                                                <label htmlFor={`${f.name}-${i}`}>
+                                                
                                                     {b}
                                                 </label>
                                             </div>
@@ -111,7 +117,7 @@ const Form = ({ data }) => {
 
                                     </div>
                                 )}
-                                <button className="btn" type="submit" onSubmit={e => console.log(e)}>{form.submitTitle}</button>
+                                <button className="btn" type="submit" >{form.submitTitle}</button>
                             </form>
                         </div>
                     </div>
