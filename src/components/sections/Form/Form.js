@@ -51,9 +51,9 @@ const Form = ({ data }) => {
                                         : f.internal.type === 'DatoCmsCheckbox' ?
 
                                             f.checkboxes.map((b, i) =>
-                                                <div>
+                                                <div key={i} >
                                                     <input 
-                                                        key={i} 
+                                                        
                                                         type="checkbox" 
                                                         id={`${f.name}-${i}`} 
                                                         name={`${f.name}-${i}`} 
@@ -61,7 +61,7 @@ const Form = ({ data }) => {
                                                         required={f.required || false} 
                                                         // checked={false} 
                                                     />
-                                                    <label for={`${f.name}-${i}`}>
+                                                    <label htmlFor={`${f.name}-${i}`}>
                                                         {b}
                                                     </label>
                                                 </div>
@@ -75,7 +75,6 @@ const Form = ({ data }) => {
                                                 name={f.name} 
                                                 placeholder={f.placeholder} 
                                                 required={f.required || false} 
-                                                checked={false}
                                             >
 
                                                 <option value="">
@@ -93,9 +92,9 @@ const Form = ({ data }) => {
                                         : f.internal.type === 'DatoCmsRadioButtonField' ?
 
                                             f.radioButtons.map((b, i) => 
-                                            <div>
+                                            <div key={i} >
                                                 <input 
-                                                    key={i} 
+                                                    
                                                     type="radio" 
                                                     id={`${f.name}-${i}`} 
                                                     name={f.name} 
@@ -103,7 +102,7 @@ const Form = ({ data }) => {
                                                     required={f.required || false} 
                                                     // checked={false}
                                                 />
-                                                <label for={`${f.name}-${i}`}>
+                                                <label htmlFor={`${f.name}-${i}`}>
                                                     {b}
                                                 </label>
                                             </div>
@@ -112,7 +111,7 @@ const Form = ({ data }) => {
 
                                     </div>
                                 )}
-                                <button className="btn" type="submit">{form.submitTitle}</button>
+                                <button className="btn" type="submit" onSubmit={e => console.log(e)}>{form.submitTitle}</button>
                             </form>
                         </div>
                     </div>
