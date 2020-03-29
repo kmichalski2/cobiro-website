@@ -1,10 +1,12 @@
 import React from "react"
-import linkedin from "../../../images/linkedin.svg"
 import Img from "gatsby-image"
+import linkedin from "../../../images/linkedin.svg"
 import ThreeUpPeopleStyles from "./threeUpPeople.module.scss"
 
 
 const ThreeUpPeople = ({ data }) => {
+
+  console.log(data)
 
   return (
     <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
@@ -34,10 +36,16 @@ const ThreeUpPeople = ({ data }) => {
                       <img
                         className={ThreeUpPeopleStyles.socialIcon}
                         src={linkedin}
-                        alt="Bo Krogsgaard"
+                        alt={p.name}
                       />
                     </a>
                     : null}
+                    { p.customLogo.fluid ?
+                      <Img className={ThreeUpPeopleStyles.socialIcon} fluid={p.customLogo.fluid} alt={p.name}/>
+                    : null }
+                    { p.customLogo.url ?
+                      <a className={ThreeUpPeopleStyles.customIcon} alt="test" src={p.customLogo.url} href={p.customLogoLink} target="_blank" rel="noopener noreferrer" />
+                    : null }
                   </div>
                 </div>
                 <p className="small text-left-xs">

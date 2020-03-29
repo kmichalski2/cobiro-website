@@ -405,7 +405,21 @@ exports.createPages = async function({ graphql, actions }) {
                       }
                     }
                     linkedinLink
+                    customLogoLink
+                    customLogo {
+                      alt
+                      url
+                      fluid(maxWidth: 100) {
+                        width
+                        srcSet
+                        src
+                        sizes
+                        height
+                        base64
+                        aspectRatio
+                      }
                     }
+                  }
                 }
                 ... on DatoCmsFeatureList {
                   backgroundColor
