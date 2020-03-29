@@ -1,0 +1,37 @@
+@import '../../layout/style/globals';
+
+.formFields {
+    position: relative;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+
+    &.touched.error {
+
+        input, textarea, select {
+            border-color: $red;
+        }
+    }
+
+    .errorText {
+        position: absolute;
+        bottom: 0;
+    }
+
+    .radio input {
+        margin-right: 0.5rem;
+    }
+}
+.helpText {
+    font-size: 0.875rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+.label {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+
+    .required {
+        color: $red;
+    }
+}

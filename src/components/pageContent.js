@@ -19,6 +19,7 @@ import Image from "../components/sections/image/image"
 import Voucher from "../components/sections/voucher/voucher"
 import VoucherHeader from "./sections/voucherHeader/voucherHeader"
 import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
+import Form from "./sections/Form/Form"
 
 const pageContent = ({ data, locales }) => {
 
@@ -73,6 +74,8 @@ const pageContent = ({ data, locales }) => {
                 return <VoucherHeader data={data.sections[index]} key={index}/>
             case 'ExplanationGiftCard':
                 return <ExplanationGiftCard data={data.sections[index]} key={index}/>
+            case 'FormSection':
+                return <Form data={data.sections[index]} key={index}/>
             default:
                 return null
             }

@@ -119,6 +119,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box1Link {
                     slug
                   }
+                  box1ExternalLink
                   box2Icon {
                     url
                     alt
@@ -129,6 +130,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box2Link {
                     slug
                   }
+                  box2ExternalLink
                   box3Icon {
                     url
                     alt
@@ -139,6 +141,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box3Link {
                     slug
                   }
+                  box3ExternalLink
                   box4Icon {
                     url
                     alt
@@ -149,6 +152,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box4Link {
                     slug
                   }
+                  box4ExternalLink
                   box5Icon {
                     url
                     alt
@@ -159,6 +163,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box5Link {
                     slug
                   }
+                  box5ExternalLink
                   box6Icon {
                     url
                     alt
@@ -169,6 +174,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box6Link {
                     slug
                   }
+                  box6ExternalLink
                   box1Footnote
                   box2Footnote
                   box3Footnote
@@ -457,6 +463,93 @@ exports.createPages = async function({ graphql, actions }) {
                       src
                       srcSet
                       width
+                    }
+                  }
+                }
+                ... on DatoCmsFormSection {
+                  text
+                  title
+                  formRight
+                  form {
+                    formName
+                    submitTitle
+                    succesPage {
+                      slug
+                    }
+                    formFields {
+                      ... on DatoCmsTextField {
+                        name
+                        helpText
+                        required
+                        placeholder
+                        label
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsTextareaField {
+                        name
+                        helpText
+                        label
+                        required
+                        placeholder
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsNumberField {
+                        name
+                        helpText
+                        required
+                        placeholder
+                        label
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsEmailField {
+                        name
+                        helpText
+                        label
+                        placeholder
+                        required
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsSelectField {
+                        name
+                        helpText
+                        label
+                        options
+                        placeholder
+                        required
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsCheckbox {
+                        name
+                        checkboxes
+                        helpText
+                        label
+                        required
+                        minimumSelection
+                        maximumSelection
+                        internal {
+                          type
+                        }
+                      }
+                      ... on DatoCmsRadioButtonField {
+                        name
+                        helpText
+                        label
+                        required
+                        radioButtons
+                        internal {
+                          type
+                        }
+                      }
                     }
                   }
                 }
