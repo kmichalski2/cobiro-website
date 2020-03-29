@@ -18,3 +18,11 @@
 .space-big {
 	margin-bottom: 4rem;
 }
+
+.space-bottom-not-last {
+	margin-bottom: 1.875rem!important;
+}
+
+.space-bottom-not-last:last-child {
+	margin-bottom: 0!important;
+}
