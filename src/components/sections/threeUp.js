@@ -3,6 +3,11 @@ import React from "react"
 
 const ThreeUpPeople = props => {
   const data = props.data
+
+  const createMarkup = (html) => {
+    return {__html: html}
+  }
+
   return (
     <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
       <div className={data.backgroundColor ? "bg-sway-inner" : null}>
@@ -11,7 +16,7 @@ const ThreeUpPeople = props => {
           {data.title || data.text ? (
             <div className="col col-xs-12 text-center section-header">
               {data.title ? <h2>{data.title}</h2> : null}
-              {data.text ? <p>{data.text}</p> : null}
+              {data.text ? <div dangerouslySetInnerHTML={createMarkup(data.text)}></div> : null}
             </div>
           ) : null}
 
@@ -25,8 +30,8 @@ const ThreeUpPeople = props => {
                 />
                 <div className="text-left text-center-md">
                   <h4>{data.box1Title}</h4>
-                  <p className="small">{data.box1Text}</p>
-                  {data.box1Footnote ? <p className="text-xs-small text-italic">{data.box1Footnote}</p> : null}
+                  <div className="small" dangerouslySetInnerHTML={createMarkup(data.box1Text)}></div>
+                  {data.box1Footnote ? <div className="text-xs-small text-italic" dangerouslySetInnerHTML={createMarkup(data.box1Footnote)}></div> : null}
                   {data.box1Link ? 
                   <Link to={data.box1Link.slug ? `/${data.box1Link.slug}` : '/'} className="small">
                   {data.box1LinkText}
@@ -47,8 +52,8 @@ const ThreeUpPeople = props => {
                 />
                 <div className="text-left text-center-md">
                   <h4>{data.box2Title}</h4>
-                  <p className="small">{data.box2Text}</p>
-                  {data.box2Footnote ? <p className="text-xs-small text-italic">{data.box2Footnote}</p> : null}
+                  <div className="small" dangerouslySetInnerHTML={createMarkup(data.box2Text)}></div>
+                  {data.box2Footnote ? <div className="text-xs-small text-italic" dangerouslySetInnerHTML={createMarkup(data.box2Footnote)}></div> : null}
                   {data.box2Link ?
                   <Link to={data.box2Link.slug ? `/${data.box2Link.slug}` : '/'} className="small">
                     {data.box2LinkText}
@@ -69,8 +74,8 @@ const ThreeUpPeople = props => {
                 />
                 <div className="text-left text-center-md">
                   <h4>{data.box3Title}</h4>
-                  <p className="small">{data.box3Text}</p>
-                  {data.box3Footnote ? <p className="text-xs-small text-italic">{data.box3Footnote}</p> : null}
+                  <div className="small" dangerouslySetInnerHTML={createMarkup(data.box3Text)}></div>
+                  {data.box3Footnote ? <div className="text-xs-small text-italic" dangerouslySetInnerHTML={createMarkup(data.box3Footnote)}></div> : null}
                   {data.box3Link ?
                   <Link to={data.box3Link.slug ? `/${data.box3Link.slug}` : '/'} className="small">
                     {data.box3LinkText}
@@ -91,8 +96,8 @@ const ThreeUpPeople = props => {
                 />
                 <div className="text-left text-center-md">
                   <h4>{data.box4Title}</h4>
-                  <p className="small">{data.box4Text}</p>
-                  {data.box4Footnote ? <p className="text-xs-small text-italic">{data.box4Footnote}</p> : null}
+                  <div className="small" dangerouslySetInnerHTML={createMarkup(data.box4Text)}></div>
+                  {data.box4Footnote ? <div className="text-xs-small text-italic" dangerouslySetInnerHTML={createMarkup(data.box4Footnote)}></div> : null}
                   {data.box4Link ?
                   <Link to={data.box4Link.slug ? `/${data.box4Link.slug}` : '/'} className="small">
                     {data.box4LinkText}
@@ -113,8 +118,8 @@ const ThreeUpPeople = props => {
                 />
                 <div className="text-left text-center-md">
                   <h4>{data.box5Title}</h4>
-                  <p className="small">{data.box5Text}</p>
-                  {data.box5Footnote ? <p className="text-xs-small text-italic">{data.box5Footnote}</p> : null}
+                  <div className="small" dangerouslySetInnerHTML={createMarkup(data.box5Text)}></div>
+                  {data.box5Footnote ? <div className="text-xs-small text-italic" dangerouslySetInnerHTML={createMarkup(data.box5Footnote)}></div> : null}
                   {data.box5Link ?
                   <Link to={data.box5Link.slug ? `/${data.box5Link.slug}` : '/'} className="small">
                     {data.box5LinkText}
@@ -135,8 +140,8 @@ const ThreeUpPeople = props => {
                 />
                 <div className="text-left text-center-md">
                   <h4>{data.box6Title}</h4>
-                  <p className="small">{data.box6Text}</p>
-                  {data.box6Footnote ? <p className="text-xs-small text-italic">{data.box6Footnote}</p> : null}
+                  <div className="small" dangerouslySetInnerHTML={createMarkup(data.box6Text)}></div>
+                  {data.box6Footnote ? <div className="text-xs-small text-italic" dangerouslySetInnerHTML={createMarkup(data.box6Footnote)}></div> : null}
 
                   {data.box6Link ?
                   <Link to={data.box6Link.slug ? `/${data.box6Link.slug}` : '/'} className="small">
