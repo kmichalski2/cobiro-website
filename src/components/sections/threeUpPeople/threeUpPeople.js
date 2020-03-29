@@ -40,12 +40,13 @@ const ThreeUpPeople = ({ data }) => {
                       />
                     </a>
                     : null}
-                    { p.customLogo.fluid ?
+                    <img src={p.image.url}/>
+                    { /* p.customLogo.fluid ?
                       <Img className={ThreeUpPeopleStyles.socialIcon} fluid={p.customLogo.fluid} alt={p.name}/>
                     : null }
                     { p.customLogo.url ?
                       <a className={ThreeUpPeopleStyles.customIcon} alt="test" src={p.customLogo.url} href={p.customLogoLink} target="_blank" rel="noopener noreferrer" />
-                    : null }
+                    : null */}
                   </div>
                 </div>
                 <p className="small text-left-xs">

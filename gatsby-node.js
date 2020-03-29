@@ -409,7 +409,7 @@ exports.createPages = async function({ graphql, actions }) {
                     customLogo {
                       alt
                       url
-                      fluid(maxWidth: 100) {
+                      fluid(maxWidth: 200) {
                         width
                         srcSet
                         src
