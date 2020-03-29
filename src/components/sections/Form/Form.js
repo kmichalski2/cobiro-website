@@ -20,6 +20,7 @@ const Form = ({ data }) => {
                     <div className="col col-sm-12 col-md-6">
                         <div className="card card-visible text-left">
                             <form name={form.formName} method="post" action={`/${form.succesPage.slug}`} data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+                            <input type="hidden" name="form-name" value={form.formName} />
                             <p class="hidden">
                                 <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
                             </p>
