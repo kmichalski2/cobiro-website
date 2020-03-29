@@ -119,6 +119,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box1Link {
                     slug
                   }
+                  box1ExternalLink
                   box2Icon {
                     url
                     alt
@@ -129,6 +130,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box2Link {
                     slug
                   }
+                  box2ExternalLink
                   box3Icon {
                     url
                     alt
@@ -139,6 +141,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box3Link {
                     slug
                   }
+                  box3ExternalLink
                   box4Icon {
                     url
                     alt
@@ -149,6 +152,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box4Link {
                     slug
                   }
+                  box4ExternalLink
                   box5Icon {
                     url
                     alt
@@ -159,6 +163,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box5Link {
                     slug
                   }
+                  box5ExternalLink
                   box6Icon {
                     url
                     alt
@@ -169,6 +174,7 @@ exports.createPages = async function({ graphql, actions }) {
                   box6Link {
                     slug
                   }
+                  box6ExternalLink
                   box1Footnote
                   box2Footnote
                   box3Footnote
