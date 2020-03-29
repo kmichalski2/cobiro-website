@@ -463,6 +463,7 @@ exports.createPages = async function({ graphql, actions }) {
                 ... on DatoCmsFormSection {
                   text
                   title
+                  formRight
                   form {
                     formName
                     submitTitle
@@ -527,6 +528,8 @@ exports.createPages = async function({ graphql, actions }) {
                         helpText
                         label
                         required
+                        minimumSelection
+                        maximumSelection
                         internal {
                           type
                         }
