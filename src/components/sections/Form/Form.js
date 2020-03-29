@@ -36,7 +36,6 @@ const Form = ({ data }) => {
                                             <div className={Classes.helpText} dangerouslySetInnerHTML={createMarkup(f.helpText)}></div> 
                                         : null }
 
-
                                         { f.internal.type === 'DatoCmsTextField' || f.internal.type === 'DatoCmsEmailField' || f.internal.type === 'DatoCmsNumberField' ?
 
                                             <input 
