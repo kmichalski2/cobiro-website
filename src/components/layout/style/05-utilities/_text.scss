@@ -31,3 +31,15 @@ p {
 // li {
 // 	color: $lightblack;
 // }
+
+p, a {
+	font-size: 1.2rem;
+
+	&.small {
+		font-size: 1rem !important;
+	}
+}
+
+.small p, .small a, .small {
+	font-size: 1rem !important;
+}
