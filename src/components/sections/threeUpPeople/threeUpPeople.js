@@ -31,6 +31,12 @@ const ThreeUpPeople = ({ data }) => {
                       <h4>{p.name}</h4>
                       <h5>{p.title}</h5>
                     </div>
+                    <div className={ThreeUpPeopleStyles.icons}>
+                    { p.customLogo ? 
+                      <a className={[ThreeUpPeopleStyles.customIcon].join('')} href={p.customLogoLink ? p.customLogoLink : null} target="_blank" rel="noopener noreferrer">
+                        <img src={p.customLogo.url} className={ThreeUpPeopleStyles.socialIcon}/>
+                      </a>
+                      : null }
                     {p.linkedinLink ? 
                     <a className={ThreeUpPeopleStyles.linkedinLink} href={p.linkedinLink} target="_blank" rel="noopener noreferrer">
                       <img
@@ -40,13 +46,7 @@ const ThreeUpPeople = ({ data }) => {
                       />
                     </a>
                     : null}
-                    <img src={p.image.url}/>
-                    { /* p.customLogo.fluid ?
-                      <Img className={ThreeUpPeopleStyles.socialIcon} fluid={p.customLogo.fluid} alt={p.name}/>
-                    : null }
-                    { p.customLogo.url ?
-                      <a className={ThreeUpPeopleStyles.customIcon} alt="test" src={p.customLogo.url} href={p.customLogoLink} target="_blank" rel="noopener noreferrer" />
-                    : null */}
+                    </div>
                   </div>
                 </div>
                 <p className="small text-left-xs">
