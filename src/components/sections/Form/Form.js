@@ -61,11 +61,10 @@ const Form = ({ data }) => {
                                             f.checkboxes.map((b, i) =>
                                                 <div key={i} >
                                                     <input 
-                                                        
                                                         type="checkbox" 
                                                         id={`${f.name}-${i}`} 
                                                         name={`${f.name}-${i}`} 
-                                                        value={b} 
+                                                        // value={b} 
                                                         required={f.required || false} 
                                                         // checked={false} 
                                                     />
