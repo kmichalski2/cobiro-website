@@ -3,7 +3,8 @@ import React from "react"
 
 const ThreeUpPeople = props => {
   const data = props.data
-
+  const bigIcon = data.bigIcons
+  
   const createMarkup = (html) => {
     return {__html: html}
   }
@@ -25,7 +26,7 @@ const ThreeUpPeople = props => {
               <div className="card">
                 <img
                   src={data.box1Icon.url}
-                  className="three-up-icon space-xs-up"
+                  className={["three-up-icon space-xs-up", bigIcon ? "three-up-icon-big" : null ].join(' ')}
                   alt={data.box1Icon.alt ? data.box1Icon.alt : data.box1Title}
                 />
                 <div className="text-left text-center-md">
@@ -49,7 +50,7 @@ const ThreeUpPeople = props => {
               <div className="card">
                 <img
                   src={data.box2Icon.url}
-                  className="three-up-icon space-xs-up"
+                  className={["three-up-icon space-xs-up", bigIcon ? "three-up-icon-big" : null ].join(' ')}
                   alt={data.box2Icon.alt ? data.box2Icon.alt : data.box2Title}
                 />
                 <div className="text-left text-center-md">
@@ -73,7 +74,7 @@ const ThreeUpPeople = props => {
               <div className="card">
                 <img
                   src={data.box3Icon.url}
-                  className="three-up-icon space-xs-up"
+                  className={["three-up-icon space-xs-up", bigIcon ? "three-up-icon-big" : null ].join(' ')}
                   alt={data.box3Icon.alt ? data.box3Icon.alt : data.box3Title}
                 />
                 <div className="text-left text-center-md">
@@ -97,7 +98,7 @@ const ThreeUpPeople = props => {
               <div className="card">
                 <img
                   src={data.box4Icon.url}
-                  className="three-up-icon space-xs-up"
+                  className={["three-up-icon space-xs-up", bigIcon ? "three-up-icon-big" : null ].join(' ')}
                   alt={data.box4Icon.alt ? data.box4Icon.alt : data.box4Title}
                 />
                 <div className="text-left text-center-md">
@@ -121,7 +122,7 @@ const ThreeUpPeople = props => {
               <div className="card">
                 <img
                   src={data.box5Icon.url}
-                  className="three-up-icon space-xs-up"
+                  className={["three-up-icon space-xs-up", bigIcon ? "three-up-icon-big" : null ].join(' ')}
                   alt={data.box5Icon.alt ? data.box5Icon.alt : data.box5Title}
                 />
                 <div className="text-left text-center-md">
@@ -145,7 +146,7 @@ const ThreeUpPeople = props => {
               <div className="card">
                 <img
                   src={data.box6Icon.url}
-                  className="three-up-icon space-xs-up"
+                  className={["three-up-icon space-xs-up", bigIcon ? "three-up-icon-big" : null ].join(' ')}
                   alt={data.box6Icon.alt ? data.box6Icon.alt : data.box6Title}
                 />
                 <div className="text-left text-center-md">

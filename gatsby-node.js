@@ -109,6 +109,7 @@ exports.createPages = async function({ graphql, actions }) {
                   backgroundColor
                   title
                   text
+                  bigIcons
                   box1Icon {
                     alt
                     url
