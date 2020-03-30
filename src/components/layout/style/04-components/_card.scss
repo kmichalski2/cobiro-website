@@ -28,6 +28,16 @@
 				max-width: 8rem;
 			}
 		}
+		
+		&.three-up-icon-big {
+			width: inherit!important;
+			height: 7rem!important;
+			max-height: 7rem!important;
+
+			@include mq($until: md) {
+				max-width: 8rem;
+			}
+		}
 	}
 
 	.card-img-large {
