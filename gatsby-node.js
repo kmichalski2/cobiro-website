@@ -104,13 +104,12 @@ exports.createPages = async function({ graphql, actions }) {
                   linkUrl
                   footnote
                   leftText
-                  bigIcons
                 }
                 ... on DatoCmsThreeUp {
                   backgroundColor
                   title
                   text
-
+                  bigIcons
                   box1Icon {
                     alt
                     url

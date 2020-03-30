@@ -3,9 +3,7 @@ import React from "react"
 
 const ThreeUpPeople = props => {
   const data = props.data
-  // const bigIcon = props.data
-
-  console.log(data)
+  const bigIcon = data.bigIcons
   
   const createMarkup = (html) => {
     return {__html: html}

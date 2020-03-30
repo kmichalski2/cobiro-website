@@ -30,12 +30,13 @@
 		}
 		
 		&.three-up-icon-big {
-			width: inherit!important;
-			height: 7rem!important;
-			max-height: 7rem!important;
+			width: inherit;
+			height: 7rem;
+			max-height: 7rem;
 
 			@include mq($until: md) {
-				max-width: 8rem;
+				max-width: 3rem;
+				min-width: 3rem;
 			}
 		}
 	}
