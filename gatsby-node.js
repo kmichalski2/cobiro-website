@@ -485,6 +485,7 @@ exports.createPages = async function({ graphql, actions }) {
                   text
                   title
                   formRight
+                  formPlacement
                   form {
                     formName
                     submitTitle
