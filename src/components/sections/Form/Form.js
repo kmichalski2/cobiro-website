@@ -7,16 +7,11 @@ const Form = ({ data }) => {
         return {__html: text}
     }
 
+    const formPlacement = data.formPlacement
+
     const [errors, setErrors] = useState({})
     const [touched, setTouched] = useState({})
     const [checkboxes, setCheckboxes] = useState({})
-
-    useEffect(() => {
-        console.log(data)
-        console.log('Errors: ', errors)
-        console.log('Touched: ', touched)
-        console.log('checkboxes:', checkboxes)
-    })
 
     useEffect(() => {
         let initErrors = {}
@@ -25,8 +20,6 @@ const Form = ({ data }) => {
             
             if(f.required) {
                 if(f.internal.type === 'DatoCmsCheckbox') {
-                    const max = 6
-                    const min = 2
                     initCheckboxes = {...initCheckboxes, [f.name]: {count: 0, max: f.maximumSelection, min: f.minimumSelection}}
                 } else {
                     initErrors = {...initErrors, [f.name]: `Please enter a value`}
@@ -101,11 +94,6 @@ const Form = ({ data }) => {
                     }
                 }
                 return
-            // case 'textarea':
-            // case 'radio':
-            // case 'select-one':
-            // case 'text':
-            // case 'number':
             default:
                 return
             
@@ -116,13 +104,13 @@ const Form = ({ data }) => {
     const form = data.form
 
     const textMarkup = (
-        <div className={["first-xs col col-xs-12 col-lg-6", !data.formRight ? "last-lg" : null].join(' ')}>
+        <div className={["first-xs col col-xs-12 col-md-10 col-lg-6 space-xs-up", formPlacement === 'left' ? "last-lg" : null, formPlacement === 'center' || !formPlacement ? "text-center" : null].join(' ')}>
             <h2>{data.title}</h2>
             <div className="space-xs-up" dangerouslySetInnerHTML={createMarkup(data.text)}></div> 
         </div>
     )
     const formMarkup = (
-    <div className="col col-xs-12 col-lg-6">
+    <div className={["col col-xs-12 col-md-10", formPlacement === 'center' || !formPlacement ? "col-xl-8" : "col-lg-6"].join(' ')}>
             <div className="card card-visible text-left">
                 <form name={form.formName} method="post" action={`/${form.succesPage.slug}`} data-netlify="true" data-netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value={form.formName} />
@@ -226,7 +214,7 @@ const Form = ({ data }) => {
                         {errors[f.name] && touched[f.name] ? <p className={["text-red small", Classes.errorText].join(' ')}>{errors[f.name]}</p> : null}
                         </div>
                     )}
-                    <button className={["btn"].join(' ')}type="submit" disabled={!isEmpty(errors) ? true : false}>{form.submitTitle}</button>
+                    <button className={["btn btn-large", Classes.btn].join(' ')}type="submit" disabled={!isEmpty(errors) ? true : false}>{form.submitTitle}</button>
                 </form>
             </div>
         </div>
@@ -234,10 +222,19 @@ const Form = ({ data }) => {
     return (
         <section className="section">
             <div className="container">
-                <div className="row middle-xs">
-                    {data.formRight ? textMarkup : formMarkup}
-                    {data.formRight ? formMarkup : textMarkup}
+                <div className="row middle-xs center-xs">
+                    {formPlacement === 'right' || formPlacement === 'center' || !formPlacement ? textMarkup : formMarkup}
+                    {
+                    formPlacement === 'right' ? formMarkup 
+                    : formPlacement === 'left' ? textMarkup
+                    : null
+                    }
                 </div>
+                {formPlacement === 'center' || !formPlacement ?
+                <div className="row middle-xs center-xs">
+                    {formMarkup}
+                </div>   
+                : null }
             </div>
         </section>
     )
