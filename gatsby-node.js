@@ -484,7 +484,7 @@ exports.createPages = async function({ graphql, actions }) {
                 ... on DatoCmsFormSection {
                   text
                   title
-                  formRight
+                  formPlacement
                   form {
                     formName
                     submitTitle
