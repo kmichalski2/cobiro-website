@@ -18,7 +18,6 @@ const VoucherForm = ({env, footnote, formType}) => {
     const [isPasswordvalid, setIsPasswordValid] = useState(formType === 'izettle' ? false : true)
     // const password = Math.random().toString(36).substring(1)
 
-
     const handleFocus = (event) => {
         event.target.classList.add(VoucherFormStyles.focus)
     }
