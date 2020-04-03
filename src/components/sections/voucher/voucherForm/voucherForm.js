@@ -2,21 +2,21 @@ import React, { useState } from "react"
 
 import VoucherFormStyles from './voucherForm.module.scss'
 
-const VoucherForm = ({env, footnote}) => {
+const VoucherForm = ({env, footnote, formType}) => {
 
     const axios = require('axios');
 
     const envUrl = env === 'development' ? 'test-cobiro' : env === 'staging' ? 'staging-cobiro' : env === 'production' ? 'cobiro' : null
-    const [planId, setPlanId] = useState(2)
+    const [planId, setPlanId] = useState(formType === 'izettle' ? 6 : 2)
     const [website, setWebsite] = useState('')
     const [isWebsiteValid, setIsWebsiteValid] = useState(false)
     const [email, setEmail] = useState('')
     const [isEmailValid, setIsEmailValid] = useState(false)
     const [errors, setErrors] = useState()
     const [isLoading, setIsLoading] = useState(false)
-
-
-    const password = Math.random().toString(36).substring(1)
+    const [password, setPassword] = useState(formType === 'izettle' ? '' : Math.random().toString(36).substring(1))
+    const [isPasswordvalid, setIsPasswordValid] = useState(formType === 'izettle' ? false : true)
+    // const password = Math.random().toString(36).substring(1)
 
 
     const handleFocus = (event) => {
@@ -36,6 +36,9 @@ const VoucherForm = ({env, footnote}) => {
         } else if(event.target.name === 'website') {
             setWebsite(event.target.value)
             handleChangeWebsite(event)
+        } else if(event.target.name === 'password') {
+            setPassword(event.target.value)
+            handleChangePassword(event)
         }
     }
 
@@ -62,6 +65,18 @@ const VoucherForm = ({env, footnote}) => {
         }
     }
 
+    const handleChangePassword = event => {
+        const password = event.target.value
+        if(password.length >= 6 ) {
+            console.log('password length: ', password.length)
+            setIsPasswordValid(true)
+            event.target.classList.remove(VoucherFormStyles.invalid)
+        } else {
+            setIsPasswordValid(false)
+            event.target.classList.add(VoucherFormStyles.invalid)
+        }
+    }
+
     const validateUrl = (url) => {
         const re = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
         if(url.match(re)) {
@@ -79,12 +94,20 @@ const VoucherForm = ({env, footnote}) => {
     }
 
     const trackUser = (user_id, site_id, plan_id) => {
+
+        const eventName = formType === 'izettle' ? "/iZettle - Account - Account Created" : formType === 'voucher' ? "/SeamlessBilling - Account - Account Created" : null
+
+        const extraParams = formType === 'voucher' ? {
+                "currency": "USD",
+                "amount_selected": plan_id === 1 ? 25 : plan_id === 2 ? 50 : plan_id === 3 ? 100 : plan_id === 4 ? 200 : null
+            } : null
+
         if(typeof window !== 'undefined' && typeof window.mixpanel !== 'undefined') {
             window.mixpanel.identify(user_id);
-            window.mixpanel.track("/SeamlessBilling - Account - Account Created", {
+            window.mixpanel.track(eventName, {
                 "site_id-created": site_id,
-                "currency": "USD",
-                "amount_selected": plan_id === 1 ? 25 : plan_id === 2 ? 50 : plan_id === 3 ? 100 : plan_id === 4 ? 200 : null} );
+                ...extraParams
+                } );
             console.log('Mixpanel: tracking user')
         } else {
             console.log('Mixpanel not defined')
@@ -104,12 +127,15 @@ const VoucherForm = ({env, footnote}) => {
     }
 
     const registerUser = () => {
+        const source = formType === 'izettle' ? {source: "iZettle"} : null
+        
         axios({
             method: 'post',
             url: `https://hub.${envUrl}.com/v1/register`,
             data: {
                 data: {
                     type: "users",
+                    ...source,
                     attributes: {
                         partner_id: 1,
                         email: email,
@@ -231,6 +257,7 @@ const VoucherForm = ({env, footnote}) => {
     return (
         <div className="card card-visible">
     <div className="row start-xs">
+        {formType === 'voucher' ?
         <div className={["col col-xs-12", VoucherFormStyles.depositButtons].join(' ')}>
             <p className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your monthly budget</p>
             <div className="flex between-xs flex-wrap">
@@ -241,6 +268,7 @@ const VoucherForm = ({env, footnote}) => {
                 <button className={["btn btn-large btn-select", planId === 4 ? VoucherFormStyles.active : null].join(' ')} onClick={() => setPlanId(4)}>$200</button>
             </div>
         </div>
+        : null }
         <div className="col col-xs-12">
             <div className="space-xs-up">
                 <label className={["text-left", ].join(' ')}>
@@ -260,9 +288,17 @@ const VoucherForm = ({env, footnote}) => {
             <div className="space-xs-up">
                 <label className="text-left">
                     <span className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your email</span>
-                    <input className="input-inline" type="text" name="email" value={email} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
+                    <input className="input-inline" type="email" name="email" value={email} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                 </label>
             </div>
+            { formType === 'izettle' ? 
+            <div className="space-xs-up">
+                <label className="text-left">
+                    <span className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your password</span>
+                    <input className="input-inline" type="password" name="password" value={password} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
+                </label>
+            </div>
+            : null }
         </div>
         { errors ? 
             <div className={["col col-xs-12 space-xs-up", VoucherFormStyles.errorTexts].join(' ')}>
@@ -274,11 +310,11 @@ const VoucherForm = ({env, footnote}) => {
                 className={["btn btn-large space-xs-up", VoucherFormStyles.btn, isLoading ? VoucherFormStyles.btnSpinner : null]
                     .join(' ')} 
                 onClick={handleSubmit} 
-                disabled={/*isNameValid && */isEmailValid && isWebsiteValid && !isLoading ? false : true}>
+                disabled={isEmailValid && isWebsiteValid && isPasswordvalid && !isLoading ? false : true}>
                     <span className={VoucherFormStyles.submitText}>Get started</span>
                     <span className={VoucherFormStyles.spinner}></span>
             </button>
-            <p className={["text-left", VoucherFormStyles.footnote].join(' ')}>{footnote}</p>
+            {footnote ? <p className={["text-left text-black", VoucherFormStyles.footnote].join(' ')}>{footnote}</p> : null }
             
         </div>
         </div>
