@@ -14,6 +14,7 @@ const VoucherHeader = (props) => {
     const rightSide = props.data.signUpOrVoucher
     const env = props.data.environment
     const footnote = props.data.footnote
+    const formType = props.data.formType
 
     return (
         <SwayTop topColor={topColor} bottomColor={bottomColor} >
@@ -30,7 +31,7 @@ const VoucherHeader = (props) => {
                     </div>
                     <div className={["col col-xs-12 text-white", , rightSide === 'signup' ? "col-lg-7" : "col-lg-6 first-xs last-lg space-xs space-sm space-md"].join(' ')} style={{marginBottom: rightSide === 'signup' ? '-3rem' : null}}>
                         { rightSide === 'signup' ?
-                        <VoucherForm env={env} footnote={footnote}/>
+                        <VoucherForm env={env} footnote={footnote} formType={formType}/>
                         : rightSide === 'voucher' ?
                         <GiftCard />
                         : null }
