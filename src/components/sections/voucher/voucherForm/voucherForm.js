@@ -115,14 +115,14 @@ const VoucherForm = ({env, footnote, formType}) => {
         if(typeof window !== 'undefined' && typeof window.dataLayer !== 'undefined') {
             console.log('Window.dataLayer exists. Sending data: ', plan_id === 1 ? 25 : plan_id === 2 ? 50 : plan_id === 3 ? 100 : plan_id === 4 ? 200 : null, site_id)
             window.dataLayer.push({
-              'event': '/SeamlessBilling - Account - Account Created',
-              'amount_selected': plan_id === 1 ? 25 : plan_id === 2 ? 50 : plan_id === 3 ? 100 : plan_id === 4 ? 200 : null,
-              'site_id-created' : site_id,
-              'currency': "USD"
-              });
-          } else {
-              console.log('window.dataLayer not defined')
-          }
+                'event': '/SeamlessBilling - Account - Account Created',
+                'amount_selected': plan_id === 1 ? 25 : plan_id === 2 ? 50 : plan_id === 3 ? 100 : plan_id === 4 ? 200 : null,
+                'site_id-created' : site_id,
+                'currency': "USD"
+                });
+        } else {
+            console.log('window.dataLayer not defined')
+        }
     }
 
     const registerUser = () => {
@@ -134,10 +134,10 @@ const VoucherForm = ({env, footnote, formType}) => {
             data: {
                 data: {
                     type: "users",
-                    ...source,
                     attributes: {
                         partner_id: 1,
                         email: email,
+                        ...source,
                         password: password
                     }
                 }
@@ -147,7 +147,6 @@ const VoucherForm = ({env, footnote, formType}) => {
           .then(response => {
             console.log('USER REGISTRATION RESPONSE: ', response);
             setErrors()
-            // setUserId(response.data.data.id)
             loginUser(response.data.data.id)
           })
           .catch(error => {
