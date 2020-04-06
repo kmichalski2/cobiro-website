@@ -206,7 +206,6 @@ const VoucherForm = ({env, footnote, formType}) => {
             
             setErrors()
             trackUser(customerId, response.data.data.id, planId)
-
             return response
           })
           .then(response => {     
