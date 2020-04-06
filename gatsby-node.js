@@ -89,6 +89,7 @@ exports.createPages = async function({ graphql, actions }) {
                   linkUrl
                   signUpOrVoucher
                   environment
+                  formType
                   footnote
                   topGradiantColor {
                     hex
@@ -570,6 +571,7 @@ exports.createPages = async function({ graphql, actions }) {
                 }
                 ... on DatoCmsVoucherSignup {
                   environment
+                  formType
                   backgroundColor
                   bottomGradiantColor {
                     hex

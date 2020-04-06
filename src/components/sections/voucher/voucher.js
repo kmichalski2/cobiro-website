@@ -8,6 +8,7 @@ const Voucher = ({ data }) => {
     const env = data.environment
     const topColor = data.topGradiantColor ? data.topGradiantColor.hex : null
     const bottomColor = data.bottomGradiantColor ? data.bottomGradiantColor.hex : null
+    const formType = data.formType
 
     const transparentSways = (
         <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" x="0" y="0" viewBox="0 0 1920.28 259.65" className={VoucherStyles.whiteSways}>
@@ -33,7 +34,7 @@ const Voucher = ({ data }) => {
                     </div>
                     
                     <div className="col col-xs-12 col-md-10 col-xl-8 space-big">
-                        <VoucherForm env={env} footnote={data.footnote}/>
+                        <VoucherForm env={env} footnote={data.footnote} formType={formType}/>
                     </div>
                 </div>
             </div>
