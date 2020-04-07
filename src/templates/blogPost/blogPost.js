@@ -1,16 +1,16 @@
 import React from "react"
 import Img from "gatsby-image"
-
-import Layout from "../../components/layout/layout"
-import Classes from "./blogPost.module.scss"
 import SwayTop from "../../components/UiElements/SwayTop/SwayTop"
 import JumboCta from "../../components/sections/jumboCta/jumboCta"
 
+import Layout from "../../components/layout/layout"
+import Classes from "./blogPost.module.scss"
+
 const blogPost = ({pageContext}) => {
     const {title, featuredImage, subtitle, content, writer, category, readLength, date } = pageContext
-    console.log(title, featuredImage, subtitle, content, writer, category, readLength, date)
-    console.log(pageContext)
 
+    console.log(pageContext)
+    
     const createMarkup = (text)  => {
         return {__html: text}
     }
