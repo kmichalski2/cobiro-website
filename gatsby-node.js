@@ -605,8 +605,99 @@ exports.createPages = async function({ graphql, actions }) {
           })
         })
       })
-  //   })
-  // )
+
+
+      await graphql(`
+      {
+        allDatoCmsBlogPost {
+          edges {
+            node {
+              locale
+              title
+              slug
+              featuredImage {
+                fluid {
+                  aspectRatio
+                  width
+                  height
+                  src
+                  srcSet
+                  sizes
+                }
+                alt
+              }
+              subtitle
+              content {
+                ... on DatoCmsTextSection {
+                  __typename
+                  text
+                  internal {
+                    type
+                  }
+                }
+                ... on DatoCmsImageSection {
+                  __typename
+                  image {
+                    url
+                    alt
+                    fluid {
+                      aspectRatio
+                      height
+                      src
+                      srcSet
+                      width
+                      sizes
+                    }
+                  }
+                  credits
+                }
+                ... on DatoCmsQuoteSection {
+                  __typename
+                  quote
+                  quotedPerson
+                }
+              }
+              writer
+              category {
+                category
+              }
+              readLength
+              meta {
+                createdAt
+              }
+              internal {
+                content
+              }
+            }
+          }
+        }
+      }      
+      `).then(result => {
+        result.data.allDatoCmsBlogPost.edges.forEach(async function(item) {
+          const locale = item.node.locale
+          const prefix = locale !== 'en' ? `blog/${locale}` : 'blog'
+          let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
+          // let p = item.node.homepage ? '/' : `/${item.node.slug}`
+
+          if(item.node.content.lenth > 0) {
+            await createPage({
+              path: p,
+              component: path.resolve(`./src/templates/blogPost/blogPost.js`),
+              context: {
+                title: item.node.title,
+                featuredImage: item.node.featuredImage,
+                subtitle: item.node.subtitle,
+                content: item.node.content,
+                writer: item.node.writer,
+                category: item.node.category,
+                readLength: item.node.readLength,
+                date: item.node.meta.createdAt
+              },
+            })
+          }
+        })
+      })
+
 }
 
 
