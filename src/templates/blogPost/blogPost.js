@@ -4,6 +4,7 @@ import Img from "gatsby-image"
 import Layout from "../../components/layout/layout"
 import Classes from "./blogPost.module.scss"
 import SwayTop from "../../components/UiElements/SwayTop/SwayTop"
+import JumboCta from "../../components/sections/jumboCta/jumboCta"
 
 const blogPost = ({pageContext}) => {
     const {title, featuredImage, subtitle, content, writer, category, readLength, date } = pageContext
@@ -76,6 +77,7 @@ const blogPost = ({pageContext}) => {
                     </div>
                 </div>
             </article>
+            <JumboCta data={{topGradiantColor: {hex: "#004BD5"}, bottomGradiantColor: {hex: "#62C9FF"}, backgroundColor: true, title: "Get started", text: "See for yourself, get access to our success tool for free", linkTitle: "Give me a free website", externalLinkCta: "https://customer.cobiro.com"}} />
         </Layout>
     )
 }
