@@ -679,7 +679,7 @@ exports.createPages = async function({ graphql, actions }) {
           let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
           // let p = item.node.homepage ? '/' : `/${item.node.slug}`
 
-          if(item.node.content.lenth > 0) {
+          if(item.node.title) {
             await createPage({
               path: p,
               component: path.resolve(`./src/templates/blogPost/blogPost.js`),
