@@ -1,0 +1,35 @@
+@import '../../components/layout/style/globals';
+
+.header {
+    color: $white;
+    padding-bottom: 10rem;
+    // min-height: 20rem;
+    
+    p, h1, h2, h3, h4, h5, h6 {
+        color: $white;
+    }
+
+    .category {
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+
+    }
+}
+
+.card {
+    overflow: hidden;
+    padding: 0;
+
+    .postImg {
+
+        img {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+    }
+
+    .textWrapper {
+        padding: 2.5rem;
+    }
+
+}
