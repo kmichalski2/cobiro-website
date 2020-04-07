@@ -656,6 +656,35 @@ exports.createPages = async function({ graphql, actions }) {
                   quote
                   quotedPerson
                 }
+                ... on DatoCmsCtaSection {
+                  __typename
+                  externalLink
+                  gradiantBackground
+                  bottomColor {
+                    hex
+                  }
+                  topColor {
+                    hex
+                  }
+                  linkExternal
+                  linkInternal {
+                    ... on DatoCmsBlogPost {
+                      slug
+                      internal {
+                        type
+                      }
+                    }
+                    ... on DatoCmsPage {
+                      slug
+                      internal {
+                        type
+                      }
+                    }
+                  }
+                  linkTitle
+                  text
+                  title
+                }
               }
               writer
               category {
@@ -663,7 +692,7 @@ exports.createPages = async function({ graphql, actions }) {
               }
               readLength
               meta {
-                createdAt
+                createdAt(formatString: "MMMM DD")
               }
               internal {
                 content
