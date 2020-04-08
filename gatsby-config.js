@@ -90,12 +90,16 @@ module.exports = {
         // GraphQL query used to fetch all data for the search index. This is
         // required.
         query: `
-        {
-          localSearchBlogposts {
-            index
-            store
+          {
+            allDatoCmsBlogPost {
+              edges {
+                node {
+                  id
+                  title
+                }
+              }
+            }
           }
-        }
         `,
 
         // Field used as the reference value for each document.
@@ -116,12 +120,12 @@ module.exports = {
         // return an array of items to index in the form of flat objects
         // containing properties to index. The objects must contain the `ref`
         // field above (default: 'id'). This is required.
-        normalizer: ({ data }) =>
-          data.allMarkdownRemark.nodes.map(node => ({
+        normalizer: ({ blogData }) =>
+          blogData.allDatoCmsBlogPost.edges.map(node => ({
             id: node.id,
-            path: node.frontmatter.path,
-            title: node.frontmatter.title,
-            body: node.rawMarkdownBody,
+            // path: node.frontmatter.path,
+            title: node.title,
+            // body: node.rawMarkdownBody,
           })),
       },
     },
