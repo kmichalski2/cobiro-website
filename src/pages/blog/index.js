@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 
 
 import Classes from './blog.module.scss'
-import BlogCard from './blogCard/blogCard'
+import BlogCard from '../../components/UiElements/blogCard/blogCard'
 import Layout from '../../components/layout/layout'
 import SwayTop from '../../components/UiElements/SwayTop/SwayTop'
 import JumboCta from '../../components/sections/jumboCta/jumboCta'
