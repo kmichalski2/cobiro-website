@@ -77,8 +77,6 @@ const pageContent = ({ data, locales }) => {
                 return <ExplanationGiftCard data={data.sections[index]} key={index}/>
             case 'FormSection':
                 return <Form data={data.sections[index]} key={index}/>
-            case 'BlogSearch':
-                return <BlogSearch data={data.sections[index]} key={index}/>
             default:
                 return null
             }
