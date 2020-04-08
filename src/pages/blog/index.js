@@ -1,10 +1,10 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import { graphql, Link } from 'gatsby'
 import Img from "gatsby-image"
 
 
 import Classes from './blog.module.scss'
-
+import BlogCard from './blogCard/blogCard'
 import Layout from '../../components/layout/layout'
 import SwayTop from '../../components/UiElements/SwayTop/SwayTop'
 
@@ -14,9 +14,37 @@ const Blog = ({ data }) => {
   const posts = data.allDatoCmsBlogPost.edges
   const categories = data.allDatoCmsBlogCategory.edges
 
+  const [numberOfPosts, setNumberOfPosts] = useState(5 + 3)
+
     const createMarkup = (text)  => {
         return {__html: text}
     }
+
+    const latestPosts = []
+    const postsRest = []
+
+    for (var i = 0; i < 5; i++) {
+      latestPosts.push(
+        <BlogCard key={i} large={i === 0 ? true : false} post={posts[i]} />
+      )
+    }
+
+    for (var i = 5; i < numberOfPosts; i++) {
+      postsRest.push(
+        <BlogCard key={i} post={posts[i]} />
+      )
+    }
+
+    const morePostsHandler = () => {
+
+      console.log(posts.length, numberOfPosts)
+      if(posts.length < (numberOfPosts + 3)) {
+        setNumberOfPosts(posts.length)
+      } else {
+        setNumberOfPosts(numberOfPosts + 3)
+      }
+    }
+
 
     console.log(data)
     return (
@@ -27,13 +55,7 @@ const Blog = ({ data }) => {
                       <div className="col col-xs-12 col-lg-8 text-center">
                           <h1>{ page.title }</h1>
                           <div className="space-xs-up" dangerouslySetInnerHTML={createMarkup(page.subtitle)}></div>
-                          { categories.length > 0 ? categories.map((cat, i) => <Link key={i} to={`/blog/?cat=${cat.node.category.toLowerCase().split(" ").join("-")}`} className={["btn btn-white", Classes.category].join(' ')}>{ cat.node.category }</Link>) : null }
-
-                          {/* <p className={["small text-bold", Classes.date].join(' ')}>{date}</p>
-                          <h1>{ title }</h1>
-                          <p>{ subtitle }</p>
-                          <h4 className="space-xs-up">{ readLength } Min read - Written by { writer }</h4>
-                           */}
+                          { categories.length > 0 ? categories.map((cat, i) => <Link key={i} to={`/blog/${cat.node.category.toLowerCase().split(" ").join("-")}`} className={["btn btn-white", Classes.category].join(' ')}>{ cat.node.category }</Link>) : null }
                       </div>
                   </div>
               </div>
@@ -41,22 +63,50 @@ const Blog = ({ data }) => {
           <section className="section">
             <div className="container">
               <div className="row">
-                {posts.map((post, i) => (
-                  <div key={i} className="col col-xs-12 col-sm-6 col-lg-4">
-                    <div className={["card card-visible text-left", Classes.card].join(' ')}>
-                      {post.node.featuredImage && post.node.featuredImage.fluid ?
-                        <Img className={Classes.postImg} fluid={post.node.featuredImage.fluid} alt={post.node.featuredImage.alt || 'Featured image'} />
-                      : post.node.featuredImage && post.node.featuredImage.url ?
-                        <img className={Classes.postImg} src={post.node.featuredImage.url} alt={post.node.featuredImage.alt || 'Featured image'} />
-                      : null }
-                      <div className={Classes.textWrapper}>
-                        <h3>{ post.node.title }</h3>
-                        <p>{ post.node.subtitle }</p>
-                        <Link to={`/blog/${post.node.slug}`}><span className="text-bold">Read more</span> - { post.node.readLength} min read</Link>
-                      </div>
-                    </div>
+                {latestPosts}
+              </div>
+            </div>
+          </section>
+          <section className="section bg-lightblue-sway">
+            <div className="container">
+              <div className="row center-xs space-xs-up middle-xs">
+                <div className="col col-xs-12 col-sm-6 col-lg-4">
+                  <h2 className="h1 text-left-xs text-right-sm">{page.promiseTitle}</h2>
+                </div>
+                <div className="col col-xs-12 col-sm-6  col-lg-4">
+                  <ul className="list-unstyled price-list">
+                  {page.promiseList.map((l, i) => <li key={i}>{l}</li>)}
+                  </ul>
+                </div>
+              </div>
+              <div className="row">
+                <div className={["col col-xs-12 text-left-xs text-center-sm flex center-sm middle-xs", Classes.cobiroPromise].join(' ')}>
+                  {page.promiseSignature && page.promiseSignature.fixed ?
+                    <Img fixed={page.promiseSignature.fixed} alt={page.promiseSignature.alt || 'Cobiro promise signature'} />
+                  : page.promiseSignature && page.promiseSignature.url ?
+                    <img src={page.promiseSignature.url} alt={page.promiseSignature.alt || 'Cobiro promise signature'} />
+                  : null
+                  }
+                  <p>{ page.promiseSignatureTitle }</p>
+                </div>
+              </div>
+              </div>
+            </section>
+            <section className="section">
+              <div className="container">
+              <div className="row">
+                {postsRest}
+                {
+                  numberOfPosts < posts.length ?
+                  <div className="col-xs-12 text-center">
+                    <button className="btn" onClick={morePostsHandler}>Load more</button>
                   </div>
-                ))}
+                  : null
+                }
+                
+              </div>
+              <div className="row">
+                <h1>Search</h1>
               </div>
             </div>
           </section>
@@ -91,7 +141,7 @@ export const query = graphql`
       footerCtaTitle
       promiseList
       promiseSignature {
-        fixed {
+        fixed(width: 150) {
           aspectRatio
           srcSet
           src
@@ -113,6 +163,9 @@ export const query = graphql`
           readLength
           subtitle
           slug
+          category {
+            category
+          }
           featuredImage {
             alt
             url
