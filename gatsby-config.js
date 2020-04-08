@@ -36,6 +36,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sitemap`,
+
     // `gatsby-plugin-intl`,
     {
       resolve: "gatsby-plugin-google-tagmanager",
@@ -128,7 +129,8 @@ module.exports = {
             // path: node.frontmatter.path,
             title: node.title,
             // body: node.rawMarkdownBody,
-          })),
+          })
+          ),
       },
     },
     // {
@@ -150,3 +152,5 @@ module.exports = {
   ],
   
 }
+
+

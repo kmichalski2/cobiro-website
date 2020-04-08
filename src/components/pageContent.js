@@ -20,6 +20,7 @@ import Voucher from "../components/sections/voucher/voucher"
 import VoucherHeader from "./sections/voucherHeader/voucherHeader"
 import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
 import Form from "./sections/Form/Form"
+import BlogSearch from "./sections/blogSearch/blogSearch"
 
 const pageContent = ({ data, locales }) => {
 
@@ -76,6 +77,8 @@ const pageContent = ({ data, locales }) => {
                 return <ExplanationGiftCard data={data.sections[index]} key={index}/>
             case 'FormSection':
                 return <Form data={data.sections[index]} key={index}/>
+            case 'BlogSearch':
+                return <BlogSearch data={data.sections[index]} key={index}/>
             default:
                 return null
             }
