@@ -7,14 +7,24 @@ import Classes from './blog.module.scss'
 import BlogCard from './blogCard/blogCard'
 import Layout from '../../components/layout/layout'
 import SwayTop from '../../components/UiElements/SwayTop/SwayTop'
+import JumboCta from '../../components/sections/jumboCta/jumboCta'
 
 const Blog = ({ data }) => {
 
   const page = data.datoCmsBlogPage
   const posts = data.allDatoCmsBlogPost.edges
   const categories = data.allDatoCmsBlogCategory.edges
+  const topColor = page.topGradiantColor.hex || "#004BD5"
+  const bottomColor = page.bottomGradiantColor.hex || "#62C9FF"
 
   const [numberOfPosts, setNumberOfPosts] = useState(5 + 3)
+  const [searchTerm, setSearchTerm] = useState("")
+  const [searchResult, setSearchResult] = useState("")
+
+  const searchHandler = (e) => {
+    e.preventDefault()
+    setSearchResult(`You just searhed for ${searchTerm}. However, the search is not ready yet :( Stay tuned!`)
+  }
 
     const createMarkup = (text)  => {
         return {__html: text}
@@ -105,11 +115,24 @@ const Blog = ({ data }) => {
                 }
                 
               </div>
-              <div className="row">
-                <h1>Search</h1>
-              </div>
             </div>
           </section>
+          <section className="section">
+              <div className="container">
+                <div className="row center-xs">
+                  <div className="col col-xs-12 col-md-8 col-lg-6 text-center">
+                    <form className={["flex stretch-xs", Classes.form].join(' ')}>
+                      <input type="text" name="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                      <button className="btn" onClick={searchHandler}>
+                        Search
+                      </button>
+                    </form>
+                    {searchResult ? <p>{searchResult}</p> : null}
+                  </div>
+                </div>
+              </div>
+          </section>
+          <JumboCta data={{topGradiantColor: {hex: topColor}, bottomGradiantColor: {hex: bottomColor}, backgroundColor: true, title: page.footerCtaTitle, text: page.footerCtaText, linkTitle: page.ctaLinks && page.ctaLinks[0] ? page.ctaLinks[0].linkTitle : null, link: page.ctaLinks && page.ctaLinks[0].internalLink ? {slug: `${page.ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${page.ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (page.ctaLinks && page.ctaLinks[0].externalLink) ? page.ctaLinks[0].externalLink : null}}  />
         </Layout>
     )
 }
@@ -140,6 +163,12 @@ export const query = graphql`
       footerCtaText
       footerCtaTitle
       promiseList
+      topGradiantColor {
+        hex
+      }
+      bottomGradiantColor {
+        hex
+      }
       promiseSignature {
         fixed(width: 150) {
           aspectRatio
