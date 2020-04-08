@@ -120,8 +120,8 @@ module.exports = {
         // return an array of items to index in the form of flat objects
         // containing properties to index. The objects must contain the `ref`
         // field above (default: 'id'). This is required.
-        normalizer: ({ blogData }) =>
-          blogData.allDatoCmsBlogPost.edges.map(node => ({
+        normalizer: ({ data }) =>
+          data.allDatoCmsBlogPost.edges.map(node => ({
             id: node.id,
             // path: node.frontmatter.path,
             title: node.title,
