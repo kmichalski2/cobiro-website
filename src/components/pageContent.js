@@ -20,7 +20,6 @@ import Voucher from "../components/sections/voucher/voucher"
 import VoucherHeader from "./sections/voucherHeader/voucherHeader"
 import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
 import Form from "./sections/Form/Form"
-import BlogSearch from "./sections/blogSearch/blogSearch"
 
 const pageContent = ({ data, locales }) => {
 
