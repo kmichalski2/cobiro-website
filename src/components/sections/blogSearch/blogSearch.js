@@ -1,13 +1,17 @@
 import React, {useState} from 'react'
+import { useFlexSearch } from 'react-use-flexsearch'
 import Classes from './blogSearch.module.scss'
 import { graphql } from 'gatsby'
 
 const BlogSearch = ({ data }) => {
-    console.log(data, "searchQuery")
 
+  const index = data.localSearchBlogposts.index
+  const store = data.localSearchBlogposts.store
+  const results = useFlexSearch(query, index, store)
 
-    const [searchTerm, setSearchTerm] = useState("")
-    const [searchResult, setSearchResult] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
+  const [searchResult, setSearchResult] = useState("")
+  const [query, setQuery] = useState(null)
 
     const searchHandler = (e) => {
         e.preventDefault()
@@ -19,29 +23,32 @@ const BlogSearch = ({ data }) => {
         <div className="container">
           <div className="row center-xs">
             <div className="col col-xs-12 col-md-8 col-lg-6 text-center">
-              <form className={["flex stretch-xs", Classes.form].join(' ')}>
-                <input type="text" name="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-                <button className="btn" onClick={searchHandler}>
+              <form className={["flex stretch-xs", Classes.form].join(' ')}
+              defaultValue={{ query: '' }}
+                // initialValues={{ query: '' }}
+                onSubmit={(values, { setSubmitting }) => {
+                  setQuery(values.query)
+                  setSubmitting(false)
+                }}
+              >
+                <input type="text" name="query" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                <button className="btn" onSubmit={searchHandler} type="submit">
                   Search
                 </button>
               </form>
-              {searchResult ? <p>{searchResult}</p> : null}
+              <h4>Results:</h4>
+              <ul>
+                {results ? results.map(result => (
+                  <li key={result.id}>{result.title} you searched!</li>
+                )) : <p>No results</p>}
+              </ul>
+                { /* searchResult ? <p>{searchResult}</p> : null */ }
             </div>
+
           </div>
         </div>
     </section>
     )
 }
-
-export const query = graphql`
-  {
-    localSearchBlogposts {
-      engine
-      id
-      index
-      store
-    }
-  }
-`
 
 export default BlogSearch

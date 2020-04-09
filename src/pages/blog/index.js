@@ -14,8 +14,6 @@ import BlogSearch from '../../components/sections/blogSearch/blogSearch'
 
 const Blog = ({ data }) => {
 
-  console.log(data)
-
   const page = data.datoCmsBlogPage
   const posts = data.allDatoCmsBlogPost.edges
   const categories = data.allDatoCmsBlogCategory.edges
@@ -198,7 +196,12 @@ export const query = graphql`
         }
       }
     }
-  }  
+    localSearchBlogposts {
+      store
+      index
+    }
+  }
+    
 `
 
 export default Blog

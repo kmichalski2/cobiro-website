@@ -91,21 +91,18 @@ module.exports = {
         // GraphQL query used to fetch all data for the search index. This is
         // required.
         query: `
-          {
-            allDatoCmsBlogPost {
-              edges {
-                node {
-                  id
-                  title
-                }
-              }
+        {
+          allDatoCmsBlogPost {
+            nodes {
+              title
+              id
             }
           }
-        `,
+        }`,
 
         // Field used as the reference value for each document.
         // Default: 'id'.
-        ref: 'id',
+        ref: 'title',
 
         // List of keys to index. The values of the keys are taken from the
         // normalizer function below.
@@ -117,20 +114,21 @@ module.exports = {
         // the keys are taken from the normalizer function below.
         // Default: all fields
         // store: ['id', 'path', 'title'],
-        store: ['id', 'title'],
+        store: ['title'],
 
         // Function used to map the result from the GraphQL query. This should
         // return an array of items to index in the form of flat objects
         // containing properties to index. The objects must contain the `ref`
         // field above (default: 'id'). This is required.
         normalizer: ({ data }) =>
-          data.allDatoCmsBlogPost.edges.map(node => ({
-            id: node.id,
-            // path: node.frontmatter.path,
+          data.allDatoCmsBlogPost.nodes.map(node => ({
+            // id: node.id,
             title: node.title,
+            // subtitle: node.subtitle,
+            // slug: node.slug
+            // path: node.frontmatter.path,
             // body: node.rawMarkdownBody,
-          })
-          ),
+          })),
       },
     },
     // {
