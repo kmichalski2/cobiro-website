@@ -32,7 +32,7 @@ const BlogSearch = ({ data }) => {
                 }}
               >
                 <input type="text" name="query" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-                <button className="btn" onSubmit={searchHandler} type="submit">
+                <button className="btn" onClick={searchHandler} type="submit">
                   Search
                 </button>
               </form>
