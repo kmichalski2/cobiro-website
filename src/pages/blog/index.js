@@ -8,6 +8,8 @@ import BlogCard from '../../components/UiElements/blogCard/blogCard'
 import Layout from '../../components/layout/layout'
 import SwayTop from '../../components/UiElements/SwayTop/SwayTop'
 import JumboCta from '../../components/sections/jumboCta/jumboCta'
+import BlogPosts from '../../components/UiElements/blogPosts/blogPosts'
+import CategoryLabel from '../../components/UiElements/categoryLabel/categoryLabel'
 
 const Blog = ({ data }) => {
 
@@ -17,7 +19,6 @@ const Blog = ({ data }) => {
   const topColor = page.topGradiantColor.hex || "#004BD5"
   const bottomColor = page.bottomGradiantColor.hex || "#62C9FF"
 
-  const [numberOfPosts, setNumberOfPosts] = useState(5 + 3)
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResult, setSearchResult] = useState("")
 
@@ -30,42 +31,16 @@ const Blog = ({ data }) => {
         return {__html: text}
     }
 
-    const latestPosts = []
-    const postsRest = []
 
-    for (var i = 0; i < 5; i++) {
-      latestPosts.push(
-        <BlogCard key={i} large={i === 0 ? true : false} post={posts[i]} />
-      )
-    }
-
-    for (var i = 5; i < numberOfPosts; i++) {
-      postsRest.push(
-        <BlogCard key={i} post={posts[i]} />
-      )
-    }
-
-    const morePostsHandler = () => {
-
-      console.log(posts.length, numberOfPosts)
-      if(posts.length < (numberOfPosts + 3)) {
-        setNumberOfPosts(posts.length)
-      } else {
-        setNumberOfPosts(numberOfPosts + 3)
-      }
-    }
-
-
-    console.log(data)
     return (
         <Layout>
-          <SwayTop topColor={{hex: "#004BD5"}} bottomColor={{hex: "#62C9FF"}} >
+          <SwayTop topColor={{hex: topColor}} bottomColor={{hex: bottomColor}} >
               <div className={["container", Classes.header].join(' ')}>
                   <div className="row middle-xs center-xs">
                       <div className="col col-xs-12 col-lg-8 text-center">
                           <h1>{ page.title }</h1>
                           <div className="space-xs-up" dangerouslySetInnerHTML={createMarkup(page.subtitle)}></div>
-                          { categories.length > 0 ? categories.map((cat, i) => <Link key={i} to={`/blog/${cat.node.category.toLowerCase().split(" ").join("-")}`} className={["btn btn-white", Classes.category].join(' ')}>{ cat.node.category }</Link>) : null }
+                          { categories.length > 0 ? categories.map((cat, i) => <CategoryLabel key={i} category={cat.node.category} link={`/blog/${cat.node.slug}`} large />) : null }
                       </div>
                   </div>
               </div>
@@ -73,7 +48,7 @@ const Blog = ({ data }) => {
           <section className="section">
             <div className="container">
               <div className="row">
-                {latestPosts}
+                <BlogPosts blogPosts={posts} offset={0} fixedMax={5} addedAmount={3} firstLarge/>
               </div>
             </div>
           </section>
@@ -105,15 +80,7 @@ const Blog = ({ data }) => {
             <section className="section">
               <div className="container">
               <div className="row">
-                {postsRest}
-                {
-                  numberOfPosts < posts.length ?
-                  <div className="col-xs-12 text-center">
-                    <button className="btn" onClick={morePostsHandler}>Load more</button>
-                  </div>
-                  : null
-                }
-                
+                <BlogPosts blogPosts={posts} offset={5} addedAmount={6} />
               </div>
             </div>
           </section>
@@ -194,6 +161,7 @@ export const query = graphql`
           slug
           category {
             category
+            slug
           }
           featuredImage {
             alt
@@ -214,6 +182,7 @@ export const query = graphql`
       edges {
         node {
           category
+          slug
         }
       }
     }
