@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { graphql, Link } from 'gatsby'
 import Img from "gatsby-image"
+import Search from '../../components/sections/blogSearch/blogSearch'
 
 
 import Classes from './blog.module.scss'
@@ -10,6 +11,7 @@ import SwayTop from '../../components/UiElements/SwayTop/SwayTop'
 import JumboCta from '../../components/sections/jumboCta/jumboCta'
 import BlogPosts from '../../components/UiElements/blogPosts/blogPosts'
 import CategoryLabel from '../../components/UiElements/categoryLabel/categoryLabel'
+import BlogSearch from '../../components/sections/blogSearch/blogSearch'
 
 const Blog = ({ data }) => {
 
@@ -19,18 +21,18 @@ const Blog = ({ data }) => {
   const topColor = page.topGradiantColor.hex || "#004BD5"
   const bottomColor = page.bottomGradiantColor.hex || "#62C9FF"
 
-  const [searchTerm, setSearchTerm] = useState("")
-  const [searchResult, setSearchResult] = useState("")
+  const [numberOfPosts, setNumberOfPosts] = useState(5 + 3)
+  // const [searchTerm, setSearchTerm] = useState("")
+  // const [searchResult, setSearchResult] = useState("")
 
-  const searchHandler = (e) => {
-    e.preventDefault()
-    setSearchResult(`You just searhed for ${searchTerm}. However, the search is not ready yet :( Stay tuned!`)
-  }
+  // const searchHandler = (e) => {
+  //   e.preventDefault()
+  //   setSearchResult(`You just searhed for ${searchTerm}. However, the search is not ready yet :( Stay tuned!`)
+  // }
 
-    const createMarkup = (text)  => {
+    const createMarkup = (text)  => { 
         return {__html: text}
     }
-
 
     return (
         <Layout>
@@ -84,28 +86,14 @@ const Blog = ({ data }) => {
               </div>
             </div>
           </section>
-          <section className="section">
-              <div className="container">
-                <div className="row center-xs">
-                  <div className="col col-xs-12 col-md-8 col-lg-6 text-center">
-                    <form className={["flex stretch-xs", Classes.form].join(' ')}>
-                      <input type="text" name="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-                      <button className="btn" onClick={searchHandler}>
-                        Search
-                      </button>
-                    </form>
-                    {searchResult ? <p>{searchResult}</p> : null}
-                  </div>
-                </div>
-              </div>
-          </section>
+          <BlogSearch data={data.localSearchBlogposts}/>
           <JumboCta data={{topGradiantColor: {hex: topColor}, bottomGradiantColor: {hex: bottomColor}, backgroundColor: true, title: page.footerCtaTitle, text: page.footerCtaText, linkTitle: page.ctaLinks && page.ctaLinks[0] ? page.ctaLinks[0].linkTitle : null, link: page.ctaLinks && page.ctaLinks[0].internalLink ? {slug: `${page.ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${page.ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (page.ctaLinks && page.ctaLinks[0].externalLink) ? page.ctaLinks[0].externalLink : null}}  />
         </Layout>
     )
 }
 
 export const query = graphql`
-{
+  {
     datoCmsBlogPage {
       title
       ctaLinks {
@@ -186,7 +174,12 @@ export const query = graphql`
         }
       }
     }
-  }  
+    localSearchBlogposts {
+      store
+      index
+    }
+  }
+    
 `
 
 export default Blog
