@@ -21,7 +21,7 @@ const BlogSearch = ({ data }) => {
         <div className="container">
           <div className="row center-xs">
             <div className="col col-xs-12 col-md-8 col-lg-6 text-center">
-            <h4 className="text-center space-xs-up">Looking for something specific?</h4>
+            <h3 className="text-center space-xs-up">Looking for something specific?</h3>
               <form className={["flex stretch-xs", Classes.form].join(' ')}>
                 <input type="text" name="query" placeholder="Type to start searching..." onChange={(e) => setQuery(e.target.value)} />
                 { /* <button className="btn" onClick={searchHandler} type="submit">Search</button> */ }
