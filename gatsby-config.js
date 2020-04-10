@@ -94,27 +94,34 @@ module.exports = {
         {
           allDatoCmsBlogPost {
             nodes {
-              title
               id
+              title
+              subtitle
+              slug
+              content {
+                ... on DatoCmsTextSection {
+                  text
+                }
+              }
             }
           }
         }`,
 
         // Field used as the reference value for each document.
         // Default: 'id'.
-        ref: 'title',
+        ref: 'id',
 
         // List of keys to index. The values of the keys are taken from the
         // normalizer function below.
         // Default: all fields
-        index: ['title'],
+        index: ['title', 'id', 'subtitle', 'slug', 'text'],
         // index: [],
 
         // List of keys to store and make available in your UI. The values of
         // the keys are taken from the normalizer function below.
         // Default: all fields
         // store: ['id', 'path', 'title'],
-        store: ['title'],
+        store: ['title', 'id', 'subtitle', 'slug', 'text'],
 
         // Function used to map the result from the GraphQL query. This should
         // return an array of items to index in the form of flat objects
@@ -122,12 +129,11 @@ module.exports = {
         // field above (default: 'id'). This is required.
         normalizer: ({ data }) =>
           data.allDatoCmsBlogPost.nodes.map(node => ({
-            // id: node.id,
+            id: node.id,
             title: node.title,
-            // subtitle: node.subtitle,
-            // slug: node.slug
-            // path: node.frontmatter.path,
-            // body: node.rawMarkdownBody,
+            subtitle: node.subtitle,
+            // text: node.content.text,
+            slug: node.slug
           })),
       },
     },
