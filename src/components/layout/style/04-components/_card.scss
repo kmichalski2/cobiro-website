@@ -13,6 +13,14 @@
 		border-radius: 10px;
 	}
 
+	&.card-link {
+		padding: 1.8rem;
+
+		&:hover {
+			transform: scale(1.01);
+		}
+	}
+
 	img {
 		width: 5rem;
 		max-width: 5rem;

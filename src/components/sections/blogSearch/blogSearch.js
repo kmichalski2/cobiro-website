@@ -1,27 +1,20 @@
 import React, {useState} from 'react'
 import { useFlexSearch } from 'react-use-flexsearch'
 import Classes from './blogSearch.module.scss'
-import { graphql } from 'gatsby'
+import { Link } from 'gatsby'
+
 
 const BlogSearch = ({ data }) => {
 
-  const index = data.localSearchBlogposts.index
-  const store = data.localSearchBlogposts.store
+  const index = data.index
+  const store = data.store
   const [query, setQuery] = useState('')
 
-  const results = useFlexSearch(query, index, store)
-
-  console.log(results, 'results')
-  // console.log(index, 'index')
-  // console.log(store, 'store)
-
-  const [searchTerm, setSearchTerm] = useState("")
-  const [searchResult, setSearchResult] = useState("")
+  const results = useFlexSearch(query, index, JSON.parse(store))
   
+  console.log(results)
     const searchHandler = (e) => {
         e.preventDefault()
-        // setQuery(searchTerm)
-        // setSearchResult(`You just searhed for "${searchTerm}". However, the search is not ready yet :( Stay tuned!`)
       }
 
     return (
@@ -33,13 +26,22 @@ const BlogSearch = ({ data }) => {
                 <input type="text" name="query" onChange={(e) => setQuery(e.target.value)} />
                 { /* <button className="btn" onClick={searchHandler} type="submit">Search</button> */ }
               </form>
-              <h4>Results:</h4>
               <ul>
-                { /* results.map(result => (
-                  <li key={result.id}>{result.title}</li>
-                )) */ }
-              </ul>
-                { /* searchResult ? <p>{searchResult}</p> : null */ }
+                {results.length >= 1 ? results.map(result => (
+                  <Link to={`/blog/${result.slug}`} key={result.slug}>
+                    <li className={["space-xs-up card card-visible card-link", Classes.results].join(' ')}>
+                      <h4 className="text-blue">{result.title}</h4>
+                      {result.writer ? 
+                          <div>
+                            <p className={["text-xs-small text-mediumblack", Classes.writer, Classes.categoryCard].join(' ')}>{result.writer}</p>
+                          </div>
+                      : null }
+                      <p className="text-xs-small text-lightblack">{result.subtitle}</p>
+                    </li>
+                  </Link>
+                )) 
+                : <h4 className="text-center">Type to start searching...</h4> } 
+                </ul>
             </div>
           </div>
         </div>

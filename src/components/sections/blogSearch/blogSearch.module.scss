@@ -1,4 +1,4 @@
-
+@import '../../../components/layout/style/globals';
 
 .form {
     input {
@@ -7,4 +7,34 @@
     button {
         margin-left: 1rem;
     }
+}
+
+.results {
+    list-style: none;
+    text-align: left;
+}
+
+.writer {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+a {
+    &:hover {
+        text-decoration: none!important;
+    }
+}
+
+ul {
+    padding: 0;
+}
+
+.categoryCard {
+    font-size: 0.75rem;
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background-color: $lightblue;
+    color: $blue;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem!important;
 }

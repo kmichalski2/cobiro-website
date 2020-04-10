@@ -109,7 +109,7 @@ const Blog = ({ data }) => {
               </div>
             </div>
           </section>
-          
+          <BlogSearch data={data.localSearchBlogposts}/>
           <JumboCta data={{topGradiantColor: {hex: topColor}, bottomGradiantColor: {hex: bottomColor}, backgroundColor: true, title: page.footerCtaTitle, text: page.footerCtaText, linkTitle: page.ctaLinks && page.ctaLinks[0] ? page.ctaLinks[0].linkTitle : null, link: page.ctaLinks && page.ctaLinks[0].internalLink ? {slug: `${page.ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${page.ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (page.ctaLinks && page.ctaLinks[0].externalLink) ? page.ctaLinks[0].externalLink : null}}  />
         </Layout>
     )
