@@ -609,7 +609,7 @@ exports.createPages = async function({ graphql, actions }) {
 
       await graphql(`
       {
-        allDatoCmsBlogPost {
+        allDatoCmsBlogPost(sort: {fields: meta___publishedAt}, filter: {title: {ne: null}}) {
           edges {
             node {
               locale
@@ -689,10 +689,12 @@ exports.createPages = async function({ graphql, actions }) {
               writer
               category {
                 category
+                slug
               }
               readLength
               meta {
                 createdAt(formatString: "MMMM DD")
+                publishedAt(formatString: "MMMM DD")
               }
               internal {
                 content
@@ -700,13 +702,55 @@ exports.createPages = async function({ graphql, actions }) {
             }
           }
         }
+        datoCmsBlogPage {
+          ctaLinks {
+            ... on DatoCmsInternalLink {
+              internalLink {
+                ... on DatoCmsPage {
+                  slug
+                  __typename
+                }
+                ... on DatoCmsBlogPost {
+                  slug
+                  __typename
+                }
+              }
+              linkTitle
+            }
+            ... on DatoCmsExternalLink {
+              linkTitle
+              externalLink
+            }
+          }
+          footerCtaText
+          footerCtaTitle
+          topGradiantColor {
+            hex
+          }
+          bottomGradiantColor {
+            hex
+          }
+        }
+        allDatoCmsBlogCategory(filter: {category: {ne: null}}) {
+          edges {
+            node {
+              category
+              slug
+              locale
+            }
+          }
+        }
       }      
       `).then(result => {
+
+        posts = []
+
         result.data.allDatoCmsBlogPost.edges.forEach(async function(item) {
           const locale = item.node.locale
           const prefix = locale !== 'en' ? `blog/${locale}` : 'blog'
           let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
           // let p = item.node.homepage ? '/' : `/${item.node.slug}`
+          posts.push(item)
 
           if(item.node.title) {
             await createPage({
@@ -720,10 +764,52 @@ exports.createPages = async function({ graphql, actions }) {
                 writer: item.node.writer,
                 category: item.node.category,
                 readLength: item.node.readLength,
-                date: item.node.meta.createdAt
+                date: item.node.meta.publishedAt || item.node.meta.createdAt,
+                topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
+                bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
+                footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
+                footerCtaText: result.data.datoCmsBlogPage.footerCtaText,
+                ctaLinks: result.data.datoCmsBlogPage.ctaLinks
               },
             })
           }
+        })
+
+        result.data.allDatoCmsBlogCategory.edges.forEach(async function(item) {
+          const locale = item.node.locale
+          const prefix = locale !== 'en' ? `blog/${locale}` : 'blog'
+          let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
+
+          filteredPosts = []
+
+          posts.filter(post => post.node.category.some(cat => cat.category === item.node.category)).forEach(blogItem => {
+            console.log('CAT: ', blogItem)
+            filteredPosts.push({
+                node: {
+                  title: blogItem.node.title,
+                  featuredImage: blogItem.node.featuredImage,
+                  subtitle: blogItem.node.subtitle,
+                  category: blogItem.node.category,
+                  readLength: blogItem.node.readLength,
+                  slug: blogItem.node.slug
+                }
+            })
+          })
+
+
+          await createPage({
+            path: p,
+              component: path.resolve(`./src/templates/blogCategory/blogCategory.js`),
+              context: {
+                title: item.node.category,
+                posts: filteredPosts,
+                topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
+                bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
+                footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
+                footerCtaText: result.data.datoCmsBlogPage.footerCtaText,
+                ctaLinks: result.data.datoCmsBlogPage.ctaLinks
+              }
+          })
         })
       })
 
