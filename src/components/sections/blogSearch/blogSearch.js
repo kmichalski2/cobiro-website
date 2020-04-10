@@ -12,21 +12,22 @@ const BlogSearch = ({ data }) => {
 
   const results = useFlexSearch(query, index, JSON.parse(store))
   
-  console.log(results)
-    const searchHandler = (e) => {
-        e.preventDefault()
-      }
+  const searchHandler = (e) => {
+    e.preventDefault()
+  }
 
     return (
         <section className="section">
         <div className="container">
           <div className="row center-xs">
             <div className="col col-xs-12 col-md-8 col-lg-6 text-center">
+            <h4 className="text-center space-xs-up">Looking for something specific?</h4>
               <form className={["flex stretch-xs", Classes.form].join(' ')}>
-                <input type="text" name="query" onChange={(e) => setQuery(e.target.value)} />
+                <input type="text" name="query" placeholder="Type to start searching..." onChange={(e) => setQuery(e.target.value)} />
                 { /* <button className="btn" onClick={searchHandler} type="submit">Search</button> */ }
               </form>
               <ul>
+
                 {results.length >= 1 ? results.map(result => (
                   <Link to={`/blog/${result.slug}`} key={result.slug}>
                     <li className={["space-xs-up card card-visible card-link", Classes.results].join(' ')}>
@@ -39,8 +40,9 @@ const BlogSearch = ({ data }) => {
                       <p className="text-xs-small text-lightblack">{result.subtitle}</p>
                     </li>
                   </Link>
+                 
                 )) 
-                : <h4 className="text-center">Type to start searching...</h4> } 
+                : null }
                 </ul>
             </div>
           </div>

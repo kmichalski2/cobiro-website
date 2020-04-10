@@ -36,7 +36,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sitemap`,
-
     // `gatsby-plugin-intl`,
     {
       resolve: "gatsby-plugin-google-tagmanager",
