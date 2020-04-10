@@ -34,29 +34,6 @@ const Blog = ({ data }) => {
         return {__html: text}
     }
 
-
-    for (var i = 0; i < 5; i++) {
-      latestPosts.push(
-        <BlogCard key={i} large={i === 0 ? true : false} post={posts[i]} />
-      )
-    }
-
-    for (var i = 5; i < numberOfPosts; i++) {
-      postsRest.push(
-        <BlogCard key={i} post={posts[i]} />
-      )
-    }
-
-    const morePostsHandler = () => {
-
-      console.log(posts.length, numberOfPosts)
-      if(posts.length < (numberOfPosts + 3)) {
-        setNumberOfPosts(posts.length)
-      } else {
-        setNumberOfPosts(numberOfPosts + 3)
-      }
-    }
-
     return (
         <Layout>
           <SwayTop topColor={{hex: topColor}} bottomColor={{hex: bottomColor}} >
