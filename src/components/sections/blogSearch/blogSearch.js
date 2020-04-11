@@ -28,7 +28,7 @@ const BlogSearch = ({ data, title }) => {
             </div>
           </div>
           <div className="row center-xs">
-            <BlogPosts blogPosts={results} addedAmount={6}/>
+            <BlogPosts blogPosts={results} addedAmount={6} animate/>
           </div>
         </div>
     </section>

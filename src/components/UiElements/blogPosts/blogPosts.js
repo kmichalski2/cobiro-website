@@ -4,7 +4,8 @@ import BlogCard from '../blogCard/blogCard'
 import Classes from './blogPosts.module.scss'
 import { useState } from 'react'
 
-const BlogPosts = ({ blogPosts, offset, fixedMax, addedAmount, firstLarge }) => {
+const BlogPosts = ({ blogPosts, offset, fixedMax, addedAmount, firstLarge, animate }) => {
+    console.log('animate:', animate)
     
     const initialAMount = fixedMax || (0 + (addedAmount || 3)) 
 
@@ -27,7 +28,7 @@ const BlogPosts = ({ blogPosts, offset, fixedMax, addedAmount, firstLarge }) => 
     for (let i = offset || 0; i < (fixedMax || (offset ? numberOfPosts + offset : numberOfPosts)) && i < blogPosts.length; i++) {
         console.log(i)
         posts.push(
-            <BlogCard key={i} post={blogPosts[i]} large={firstLarge && i === 0 ? true : false}/>
+            <BlogCard key={i} post={blogPosts[i]} large={firstLarge && i === 0 ? true : false} animate={animate} />
         )
       }
 

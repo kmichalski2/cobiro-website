@@ -6,10 +6,10 @@ import Img from "gatsby-image"
 import Classes from './blogCard.module.scss'
 import CategoryLabel from '../categoryLabel/categoryLabel'
 
-const BlogCard = ({ large, post }) => {
+const BlogCard = ({ large, post, animate }) => {
 
     return(
-        <div className={["col col-xs-12", large ? "col-md-12 col-lg-8" : "col-md-6 col-lg-4"].join(' ')}>
+        <div className={["col col-xs-12", large ? "col-md-12 col-lg-8" : "col-md-6 col-lg-4", animate ? "fadeUp" : null ].join(' ')}>
           <div className={["card card-visible text-left", Classes.card].join(' ')}>
             {post.featuredImage && post.featuredImage.fluid ?
               <Img className={Classes.postImg} fluid={post.featuredImage.fluid} alt={post.featuredImage.alt || 'Featured image'} />
