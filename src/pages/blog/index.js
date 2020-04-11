@@ -16,8 +16,8 @@ import BlogSearch from '../../components/sections/blogSearch/blogSearch'
 const Blog = ({ data }) => {
 
   const page = data.datoCmsBlogPage
-  const posts = data.allDatoCmsBlogPost.edges
-  const categories = data.allDatoCmsBlogCategory.edges
+  const posts = data.allDatoCmsBlogPost.nodes
+  const categories = data.allDatoCmsBlogCategory.nodes
   const topColor = page.topGradiantColor.hex || "#004BD5"
   const bottomColor = page.bottomGradiantColor.hex || "#62C9FF"
 
@@ -42,7 +42,7 @@ const Blog = ({ data }) => {
                       <div className="col col-xs-12 col-lg-8 text-center">
                           <h1>{ page.title }</h1>
                           <div className="space-xs-up" dangerouslySetInnerHTML={createMarkup(page.subtitle)}></div>
-                          { categories.length > 0 ? categories.map((cat, i) => <CategoryLabel key={i} category={cat.node.category} link={`/blog/${cat.node.slug}`} large />) : null }
+                          { categories.length > 0 ? categories.map((cat, i) => <CategoryLabel key={i} category={cat.category} link={`/blog/${cat.slug}`} large />) : null }
                       </div>
                   </div>
               </div>
@@ -86,7 +86,7 @@ const Blog = ({ data }) => {
               </div>
             </div>
           </section>
-          <BlogSearch data={data.localSearchBlogposts}/>
+          <BlogSearch data={data.localSearchBlogposts} title={page.searchTitle}/>
           <JumboCta data={{topGradiantColor: {hex: topColor}, bottomGradiantColor: {hex: bottomColor}, backgroundColor: true, title: page.footerCtaTitle, text: page.footerCtaText, linkTitle: page.ctaLinks && page.ctaLinks[0] ? page.ctaLinks[0].linkTitle : null, link: page.ctaLinks && page.ctaLinks[0].internalLink ? {slug: `${page.ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${page.ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (page.ctaLinks && page.ctaLinks[0].externalLink) ? page.ctaLinks[0].externalLink : null}}  />
         </Layout>
     )
@@ -115,6 +115,7 @@ export const query = graphql`
           externalLink
         }
       }
+      searchTitle
       footerCtaText
       footerCtaTitle
       promiseList
@@ -141,37 +142,33 @@ export const query = graphql`
       subtitle
     }
     allDatoCmsBlogPost(filter: {title: {ne: null}}) {
-      edges {
-        node {
-          title
-          readLength
-          subtitle
+      nodes {
+        title
+        readLength
+        subtitle
+        slug
+        category {
+          category
           slug
-          category {
-            category
-            slug
-          }
-          featuredImage {
-            alt
-            url
-            fluid {
-              aspectRatio
-              height
-              sizes
-              src
-              srcSet
-              width
-            }
+        }
+        featuredImage {
+          alt
+          url
+          fluid {
+            aspectRatio
+            height
+            sizes
+            src
+            srcSet
+            width
           }
         }
       }
     }
     allDatoCmsBlogCategory(filter: {category: {ne: null}}) {
-      edges {
-        node {
-          category
-          slug
-        }
+      nodes {
+        category
+        slug
       }
     }
     localSearchBlogposts {

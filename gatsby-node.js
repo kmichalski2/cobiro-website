@@ -610,95 +610,93 @@ exports.createPages = async function({ graphql, actions }) {
       await graphql(`
       {
         allDatoCmsBlogPost(sort: {fields: meta___publishedAt}, filter: {title: {ne: null}}) {
-          edges {
-            node {
-              locale
-              title
+          nodes {
+            locale
+            title
+            slug
+            featuredImage {
+              fluid {
+                aspectRatio
+                width
+                height
+                src
+                srcSet
+                sizes
+              }
+              alt
+            }
+            subtitle
+            content {
+              ... on DatoCmsTextSection {
+                __typename
+                text
+                internal {
+                  type
+                }
+              }
+              ... on DatoCmsImageSection {
+                __typename
+                image {
+                  url
+                  alt
+                  fluid {
+                    aspectRatio
+                    height
+                    src
+                    srcSet
+                    width
+                    sizes
+                  }
+                }
+                credits
+              }
+              ... on DatoCmsQuoteSection {
+                __typename
+                quote
+                quotedPerson
+              }
+              ... on DatoCmsCtaSection {
+                __typename
+                externalLink
+                gradiantBackground
+                bottomColor {
+                  hex
+                }
+                topColor {
+                  hex
+                }
+                linkExternal
+                linkInternal {
+                  ... on DatoCmsBlogPost {
+                    slug
+                    internal {
+                      type
+                    }
+                  }
+                  ... on DatoCmsPage {
+                    slug
+                    internal {
+                      type
+                    }
+                  }
+                }
+                linkTitle
+                text
+                title
+              }
+            }
+            writer
+            category {
+              category
               slug
-              featuredImage {
-                fluid {
-                  aspectRatio
-                  width
-                  height
-                  src
-                  srcSet
-                  sizes
-                }
-                alt
-              }
-              subtitle
-              content {
-                ... on DatoCmsTextSection {
-                  __typename
-                  text
-                  internal {
-                    type
-                  }
-                }
-                ... on DatoCmsImageSection {
-                  __typename
-                  image {
-                    url
-                    alt
-                    fluid {
-                      aspectRatio
-                      height
-                      src
-                      srcSet
-                      width
-                      sizes
-                    }
-                  }
-                  credits
-                }
-                ... on DatoCmsQuoteSection {
-                  __typename
-                  quote
-                  quotedPerson
-                }
-                ... on DatoCmsCtaSection {
-                  __typename
-                  externalLink
-                  gradiantBackground
-                  bottomColor {
-                    hex
-                  }
-                  topColor {
-                    hex
-                  }
-                  linkExternal
-                  linkInternal {
-                    ... on DatoCmsBlogPost {
-                      slug
-                      internal {
-                        type
-                      }
-                    }
-                    ... on DatoCmsPage {
-                      slug
-                      internal {
-                        type
-                      }
-                    }
-                  }
-                  linkTitle
-                  text
-                  title
-                }
-              }
-              writer
-              category {
-                category
-                slug
-              }
-              readLength
-              meta {
-                createdAt(formatString: "MMMM DD")
-                publishedAt(formatString: "MMMM DD")
-              }
-              internal {
-                content
-              }
+            }
+            readLength
+            meta {
+              createdAt(formatString: "MMMM DD")
+              publishedAt(formatString: "MMMM DD")
+            }
+            internal {
+              content
             }
           }
         }
@@ -732,12 +730,10 @@ exports.createPages = async function({ graphql, actions }) {
           }
         }
         allDatoCmsBlogCategory(filter: {category: {ne: null}}) {
-          edges {
-            node {
-              category
-              slug
-              locale
-            }
+          nodes {
+            category
+            slug
+            locale
           }
         }
       }      
@@ -745,26 +741,26 @@ exports.createPages = async function({ graphql, actions }) {
 
         posts = []
 
-        result.data.allDatoCmsBlogPost.edges.forEach(async function(item) {
-          const locale = item.node.locale
+        result.data.allDatoCmsBlogPost.nodes.forEach(async function(item) {
+          const locale = item.locale
           const prefix = locale !== 'en' ? `blog/${locale}` : 'blog'
-          let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
+          let p = `${prefix}/${item.slug ? item.slug : ''}`
           // let p = item.node.homepage ? '/' : `/${item.node.slug}`
           posts.push(item)
 
-          if(item.node.title) {
+          if(item.title) {
             await createPage({
               path: p,
               component: path.resolve(`./src/templates/blogPost/blogPost.js`),
               context: {
-                title: item.node.title,
-                featuredImage: item.node.featuredImage,
-                subtitle: item.node.subtitle,
-                content: item.node.content,
-                writer: item.node.writer,
-                category: item.node.category,
-                readLength: item.node.readLength,
-                date: item.node.meta.publishedAt || item.node.meta.createdAt,
+                title: item.title,
+                featuredImage: item.featuredImage,
+                subtitle: item.subtitle,
+                content: item.content,
+                writer: item.writer,
+                category: item.category,
+                readLength: item.readLength,
+                date: item.meta.publishedAt || item.meta.createdAt,
                 topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
                 bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
                 footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
@@ -775,24 +771,22 @@ exports.createPages = async function({ graphql, actions }) {
           }
         })
 
-        result.data.allDatoCmsBlogCategory.edges.forEach(async function(item) {
-          const locale = item.node.locale
+        result.data.allDatoCmsBlogCategory.nodes.forEach(async function(item) {
+          const locale = item.locale
           const prefix = locale !== 'en' ? `blog/${locale}` : 'blog'
-          let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
+          let p = `${prefix}/${item.slug ? item.slug : ''}`
 
           filteredPosts = []
 
-          posts.filter(post => post.node.category.some(cat => cat.category === item.node.category)).forEach(blogItem => {
+          posts.filter(post => post.category.some(cat => cat.category === item.category)).forEach(blogItem => {
             console.log('CAT: ', blogItem)
             filteredPosts.push({
-                node: {
-                  title: blogItem.node.title,
-                  featuredImage: blogItem.node.featuredImage,
-                  subtitle: blogItem.node.subtitle,
-                  category: blogItem.node.category,
-                  readLength: blogItem.node.readLength,
-                  slug: blogItem.node.slug
-                }
+                title: blogItem.title,
+                featuredImage: blogItem.featuredImage,
+                subtitle: blogItem.subtitle,
+                category: blogItem.category,
+                readLength: blogItem.readLength,
+                slug: blogItem.slug
             })
           })
 
@@ -801,7 +795,7 @@ exports.createPages = async function({ graphql, actions }) {
             path: p,
               component: path.resolve(`./src/templates/blogCategory/blogCategory.js`),
               context: {
-                title: item.node.category,
+                title: item.category,
                 posts: filteredPosts,
                 topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
                 bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
