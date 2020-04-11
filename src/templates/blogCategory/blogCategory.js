@@ -3,6 +3,7 @@ import Layout from '../../components/layout/layout'
 import SwayTop from '../../components/UiElements/SwayTop/SwayTop'
 import Classes from './blogCategory.module.scss'
 import BlogPosts from '../../components/UiElements/blogPosts/blogPosts'
+import JumboCta from '../../components/sections/jumboCta/jumboCta'
 
 
 const BlogCagegory = ({ pageContext }) => {
@@ -28,6 +29,7 @@ const BlogCagegory = ({ pageContext }) => {
                 </div>
             </div>
           </section>
+          <JumboCta data={{topGradiantColor: {hex: topGradiantColor}, bottomGradiantColor: {hex: bottomGradiantColor}, backgroundColor: true, title: footerCtaTitle, text: footerCtaText, linkTitle: ctaLinks[0].linkTitle, link: ctaLinks && ctaLinks[0].internalLink ? {slug: `${ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (ctaLinks && ctaLinks[0].externalLink) ? ctaLinks[0].externalLink : null}} />
         </Layout>
     )
 }

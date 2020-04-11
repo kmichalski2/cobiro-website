@@ -17,7 +17,7 @@ const BlogCard = ({ large, post }) => {
               <img className={Classes.postImg} src={post.featuredImage.url} alt={post.featuredImage.alt || 'Featured image'} />
             : null }
             <div className={Classes.textWrapper}>
-            {post.category.map((cat, i) => <CategoryLabel key={i} category={cat.category} link={`/blog/${cat.slug}`} />)}
+            {post.category ? post.category.map((cat, i) => <CategoryLabel key={i} category={cat.category} link={`/blog/${cat.slug}`} />) : null}
               <h3>{ post.title }</h3>
               <p>{ post.subtitle }</p>
               <Link to={`/blog/${post.slug}`}><span className="text-bold">Read more</span> - { post.readLength} min read</Link>

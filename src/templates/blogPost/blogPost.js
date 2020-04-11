@@ -37,7 +37,7 @@ const blogPost = ({pageContext}) => {
                                 <h1>{ title }</h1>
                                 <p>{ subtitle }</p>
                                 <h4 className="space-xs-up">{ readLength } Min read - Written by { writer }</h4>
-                                { category.length > 0 ? category.map((cat, i) => <CategoryLabel key={i} category={cat.category} link={cat.slug}/>) : null }
+                                { category.length > 0 ? category.map((cat, i) => <CategoryLabel key={i} category={cat.category} link={`/blog/${cat.slug}`}/>) : null }
                             </div>
                             <div className="col col-xs-12 col-lg-6">
                                 <Img fluid={ featuredImage.fluid } alt={featuredImage.alt} />
