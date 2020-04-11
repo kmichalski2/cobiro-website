@@ -96,7 +96,11 @@ module.exports = {
               title
               subtitle
               slug
-              writer
+              category {
+                category
+                slug
+              }
+              readLength
             }
           }
         }`,
@@ -115,7 +119,7 @@ module.exports = {
         // the keys are taken from the normalizer function below.
         // Default: all fields
         // store: ['id', 'path', 'title'],
-        store: ['title', 'subtitle', 'slug', 'writer'],
+        store: ['title', 'subtitle', 'slug', 'category', 'readLength'],
 
         // Function used to map the result from the GraphQL query. This should
         // return an array of items to index in the form of flat objects
@@ -128,7 +132,8 @@ module.exports = {
             subtitle: node.subtitle,
             // text: node.content.text,
             slug: node.slug,
-            writer: node.writer
+            category:  node.category,
+            readLength: node.readLength
           })),
       },
     },

@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BlogCard from '../blogCard/blogCard'
 
 import Classes from './blogPosts.module.scss'
 import { useState } from 'react'
 
 const BlogPosts = ({ blogPosts, offset, fixedMax, addedAmount, firstLarge }) => {
-    console.log('POSTS: ', blogPosts)
     
     const initialAMount = fixedMax || (0 + (addedAmount || 3)) 
 
     const [numberOfPosts, setNumberOfPosts] = useState(blogPosts.length < initialAMount ? blogPosts.length : initialAMount)
 
+    useEffect(() => {
+        setNumberOfPosts(blogPosts.length < initialAMount ? blogPosts.length : initialAMount)
+    }, [blogPosts])
+
     const posts = []
-    console.log('number og POSTS: ', numberOfPosts, initialAMount, offset)
     const morePostsHandler = () => {
         console.log(numberOfPosts, fixedMax)
         if(blogPosts.length < (numberOfPosts + (addedAmount || 3))) {
