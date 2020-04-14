@@ -10,9 +10,6 @@ import CategoryLabel from "../../components/UiElements/categoryLabel/categoryLab
 
 const blogPost = ({pageContext}) => {
     const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks } = pageContext
-
-    console.log(pageContext)
-
     const createMarkup = (text)  => {
         return {__html: text}
     }

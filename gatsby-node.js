@@ -779,7 +779,6 @@ exports.createPages = async function({ graphql, actions }) {
           filteredPosts = []
 
           posts.filter(post => post.category.some(cat => cat.category === item.category)).forEach(blogItem => {
-            console.log('CAT: ', blogItem)
             filteredPosts.push({
                 title: blogItem.title,
                 featuredImage: blogItem.featuredImage,
