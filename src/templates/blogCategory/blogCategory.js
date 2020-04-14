@@ -9,8 +9,6 @@ import JumboCta from '../../components/sections/jumboCta/jumboCta'
 const BlogCagegory = ({ pageContext }) => {
 
     const {title, posts, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks} = pageContext
-
-    console.log(pageContext)
     return (
         <Layout>
             <SwayTop topColor={{hex: topGradiantColor}} bottomColor={{hex: bottomGradiantColor}} >
