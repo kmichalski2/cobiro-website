@@ -272,7 +272,7 @@ const VoucherForm = ({env, footnote, formType}) => {
                     <span className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your website</span>
                     <div className={VoucherFormStyles.inputWebsite}>
                         <span className={['small text-darkgrey', VoucherFormStyles.prefix].join(' ')}>http://</span>
-                        <input className="input-inline" type="text" placeholder="yourwebsite.com" name="website" value={website} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
+                        <input className={["input-inline", VoucherFormStyles.placeholderBig].join(' ')} type="text" placeholder="yourwebsite.com" name="website" value={website} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                     </div>
                 </label>
             </div>
@@ -302,9 +302,9 @@ const VoucherForm = ({env, footnote, formType}) => {
                 <p className="small text-left text-red">{errors.map((err, i) => (i < errors.length - 1 && errors.length > 1) ? `${err.detail} ` : err.detail || err.title)}</p> 
             </div>
         : null }
-        <div className="col col-xs-12 ">
+        <div className={["col col-xs-12", VoucherFormStyles.formFooter].join(' ')}>
             <button 
-                className={["btn btn-large space-xs-up", VoucherFormStyles.btn, isLoading ? VoucherFormStyles.btnSpinner : null]
+                className={["btn btn-large", VoucherFormStyles.btn, isLoading ? VoucherFormStyles.btnSpinner : null, footnote ? "space-xs-up" : null]
                     .join(' ')} 
                 onClick={handleSubmit} 
                 disabled={isEmailValid && isWebsiteValid && isPasswordvalid && !isLoading ? false : true}>
