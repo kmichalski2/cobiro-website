@@ -8,7 +8,7 @@ import Waves from "../../waves/waves"
 
 const JumboCta = ({ data }) => {
 
-  const bgColor = data.ctaBgColor ? data.ctaBackgroundColor.hex : null
+  const bgColor = data.ctaBgColor && data.ctaBackgroundColor.hex ? data.ctaBackgroundColor.hex : null
   const textColor = data.textColor === 'dark' ? "text-black" : "text-white"
   const btnColor = data.textColor === 'light' ? "btn-white" : null
 
