@@ -49,7 +49,7 @@ const Blog = ({ data }) => {
           </SwayTop>
           <section className="section">
             <div className="container">
-              <div className="row">
+              <div className="row center-xs">
                 <BlogPosts blogPosts={posts} offset={0} fixedMax={5} addedAmount={3} firstLarge/>
               </div>
             </div>
@@ -81,7 +81,7 @@ const Blog = ({ data }) => {
             </section>
             <section className="section">
               <div className="container">
-              <div className="row">
+              <div className="row center-xs">
                 <BlogPosts blogPosts={posts} offset={5} addedAmount={6} />
               </div>
             </div>

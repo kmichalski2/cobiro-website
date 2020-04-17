@@ -15,7 +15,7 @@ import Quotes from "../components/sections/quotes/quotes"
 import Text from "./sections/text/text"
 import Video from "../components/sections/video/video"
 import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel"
-import Image from "../components/sections/image/image"
+import ImageSection from "../components/sections/image/image"
 import Voucher from "../components/sections/voucher/voucher"
 import VoucherHeader from "./sections/voucherHeader/voucherHeader"
 import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
@@ -75,7 +75,7 @@ const PageContent = ({ data, locales }) => {
             case 'Video':
                 return <Video data={data.sections[index]} key={index}/>
             case 'Image':
-                return <Image data={data.sections[index]} key={index}/>
+                return <ImageSection data={data.sections[index]} key={index}/>
             case 'VoucherSignup':
                 return <Voucher data={data.sections[index]} key={index}/>
             case 'VoucherHeader':
