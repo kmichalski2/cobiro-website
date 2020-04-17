@@ -2,13 +2,13 @@ import React from 'react'
 
 import Classes from './Section.module.scss'
 
-const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, centered, children }) => {
-
+const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, centered, children, textColor }) => {
+    
     return (
         <section 
             className={[Classes.section, noBottomPadding ? Classes.noBottomPadding : null, paddingBottomXsSm ? Classes.paddingBottomXsSm : null].join(' ')} 
-            style={ bgColor ? { backgroundColor: bgColor } : null } 
-            >
+            style={ bgColor ? { backgroundColor: bgColor } : null }>
+
                 {children ? 
                     children
                 :

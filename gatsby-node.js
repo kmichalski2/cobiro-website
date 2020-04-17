@@ -276,11 +276,9 @@ exports.createPages = async function({ graphql, actions }) {
                   videoEmbedUrl
                 }
                 ... on DatoCmsCtaJumbo {
-                  backgroundColor
-                  topGradiantColor {
-                    hex
-                  }
-                  bottomGradiantColor {
+                  ctaBgColor
+                  textColor
+                  ctaBackgroundColor {
                     hex
                   }
                   title
@@ -766,6 +764,7 @@ exports.createPages = async function({ graphql, actions }) {
                 category: item.category,
                 readLength: item.readLength,
                 date: item.meta.publishedAt || item.meta.createdAt,
+                // ctaBackgroundColor: result.data.datoCmsBlogPage.ctaBackgroundColor ? result.data.datoCmsBlogPage.ctaBackgroundColor : null,
                 topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
                 bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
                 footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
