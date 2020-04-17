@@ -8,19 +8,13 @@ import Waves from "../../waves/waves"
 
 const JumboCta = ({ data }) => {
 
-  // const bgColor = data.bgColor ? data.ctaBackgroundColor.hex : null
-  // const textColor = data.textColor === 'dark' ? "text-black" : "text-white"
-  // const btnColor = data.textColor === 'light' ? "btn-white" : null
-
-  const bgColor = "lightgrey"
-  const textColor = "text-black"
-  const btnColor = null
+  const bgColor = data.ctaBgColor ? data.ctaBackgroundColor.hex : null
+  const textColor = data.textColor === 'dark' ? "text-black" : "text-white"
+  const btnColor = data.textColor === 'light' ? "btn-white" : null
 
   return (
     <Section
       bgColor={bgColor}
-      textColor={textColor}
-      btnColor={btnColor}
     >
         <div className="container">
           <div className="row center-xs text-center">
@@ -30,7 +24,7 @@ const JumboCta = ({ data }) => {
               {data.link ? 
               <Link
               to={data.link.slug ? data.link.slug : '/'}
-              className={["btn btn-large space-xs space-sm", data.backgroundColor ? 'btn-white' : null].join(' ')}
+              className="btn btn-large space-xs space-sm"
               >
                 {data.linkTitle}
               </Link>
