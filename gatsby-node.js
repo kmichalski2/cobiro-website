@@ -276,11 +276,9 @@ exports.createPages = async function({ graphql, actions }) {
                   videoEmbedUrl
                 }
                 ... on DatoCmsCtaJumbo {
-                  backgroundColor
-                  topGradiantColor {
-                    hex
-                  }
-                  bottomGradiantColor {
+                  bgColor
+                  textColor
+                  ctaBackgroundColor {
                     hex
                   }
                   title

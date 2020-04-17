@@ -8,24 +8,25 @@ import Waves from "../../waves/waves"
 
 const JumboCta = ({ data }) => {
 
-  const bgColor = data.backgroundColor ? data.ctaBackgroundColor : null
+  // const bgColor = data.bgColor ? data.ctaBackgroundColor.hex : null
+  // const textColor = data.textColor === 'dark' ? "text-black" : "text-white"
+  // const btnColor = data.textColor === 'light' ? "btn-white" : null
 
-  const bgColor = data.bgColor ? data.bgColor.hex : null
-  const alignment = data.alignment
-  const imageToEdges = data.imageToEdges
-  const textColor = data.textColor === 'dark' ? "text-black" : "text-white"
-  const btnColor = data.textColor === 'light' ? "btn-white" : null
+  const bgColor = "lightgrey"
+  const textColor = "text-black"
+  const btnColor = null
 
   return (
     <Section
-      bgColor={data.backgroundColor ? bgColor : null}
+      bgColor={bgColor}
+      textColor={textColor}
+      btnColor={btnColor}
     >
-      <div className={[data.backgroundColor ? "bg-sway-inner" : null, "section-inner"].join(' ')} style={{ position: "relative", zIndex: 1 }}>
         <div className="container">
           <div className="row center-xs text-center">
             <div className="col col-xs-12">
-              { data.title ? <h2 className={data.backgroundColor ? 'text-white' : null}>{data.title}</h2> : null }
-              { data.text ? <p className={data.backgroundColor ? 'text-white' : null}>{data.text}</p> : null }
+              { data.title ? <h2 className={textColor}>{data.title}</h2> : null }
+              { data.text ? <p className={textColor}>{data.text}</p> : null }
               {data.link ? 
               <Link
               to={data.link.slug ? data.link.slug : '/'}
@@ -36,7 +37,7 @@ const JumboCta = ({ data }) => {
               : data.externalLinkCta ?
               <a
               href={data.externalLinkCta}
-              className={["btn btn-large space-xs space-sm", data.backgroundColor ? 'btn-white' : null].join(' ')} target="_blank"
+              className={["btn btn-large space-xs space-sm", btnColor].join(' ')} target="_blank"
               rel="noopener noreferrer">
                 {data.linkTitle}
               </a>
@@ -44,7 +45,7 @@ const JumboCta = ({ data }) => {
             </div>
           </div>
         </div>
-      </div>
+
     </Section>
   )
 }
