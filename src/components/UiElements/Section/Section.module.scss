@@ -1,0 +1,16 @@
+@import '../../layout/style/globals';
+
+.section {
+    position: relative;
+    overflow: hidden;
+    padding: 7.5rem 0;
+
+    &.noBottomPadding {
+        padding-bottom: 0;
+    }   
+    @include mq($until: md) {
+        &.paddingBottomXsSm {
+            padding-bottom: 7.5rem;
+        }
+    }
+}

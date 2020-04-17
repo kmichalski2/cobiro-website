@@ -65,6 +65,11 @@ exports.createPages = async function({ graphql, actions }) {
                     position
                   }
                   alignment
+                  bgColor {
+                    hex
+                  }
+                  textColor
+                  imageToEdges
                   image {
                     path
                     url

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import logo from "../../images/logo_white.svg"
 import Img from "gatsby-image"
 
-const Navbar = ({ menuItems, customCta }) => {
+const Navbar = ({ menuItems, customCta, menuInverted }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
@@ -124,13 +124,13 @@ const Navbar = ({ menuItems, customCta }) => {
         <div className="container">
           <div className="row between-xs middle-xs">
             <div className="col col-auto-lg navbar-mobile">
-              <div className={["brand", isExpanded ? 'invert' : '', isScrolled ? 'invert' : null].join(' ')}>
+              <div className={["brand", menuInverted ? 'invert' : null, isExpanded ? 'invert' : '', isScrolled ? 'invert' : null].join(' ')}>
                 <Link to="/">
                   <img className="logo-mobile" src={logo} alt="Cobiro logo" />
                 </Link>
               </div>
               <button
-                className="menu-toggle btn"
+                className={["menu-toggle btn", menuInverted ? 'invert' : null].join(' ')}
                 aria-controls="navbar"
                 aria-expanded={isExpanded}
                 aria-label="Toggle navigation"
@@ -141,7 +141,7 @@ const Navbar = ({ menuItems, customCta }) => {
                 <span className="icon-bar bottom-bar"></span>
               </button>
             </div>
-            <div className={["col col-auto-lg main-menu-inner", isScrolled ? 'menu-items' : null].join(' ')}>
+            <div className={["col col-auto-lg main-menu-inner", isScrolled || menuInverted ? 'menu-items' : null].join(' ')}>
               <ul className="list-inline">
                 {menuItems.sort(function (a, b) {
                     return a.menu_item_order - b.menu_item_order;
@@ -202,10 +202,10 @@ const Navbar = ({ menuItems, customCta }) => {
                 ))}
               </ul>
               <div className="main-menu-cta">
-                <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary btn-left", !isScrolled ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary btn-left", !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
                   Sign in
                 </a>
-                <a href={customCta && customCta.link ? customCta.link : "https://app.cobiro.com/user/signup"} className={["btn btn-right", !isScrolled ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                <a href={customCta && customCta.link ? customCta.link : "https://app.cobiro.com/user/signup"} className={["btn btn-right", !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
                   {customCta && customCta.title ? customCta.title : 'Sign up' }
                 </a>
               </div>
