@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import JumboHeader from "../components/sections/jumboHeader/jumboHeader"
@@ -21,7 +21,9 @@ import VoucherHeader from "./sections/voucherHeader/voucherHeader"
 import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
 import Form from "./sections/Form/Form"
 
-const pageContent = ({ data, locales }) => {
+const PageContent = ({ data, locales }) => {
+
+    const [menuInverted, setMenuInverted] = useState(false)
 
   return (
     <Layout 
@@ -29,6 +31,7 @@ const pageContent = ({ data, locales }) => {
         locales={ locales } 
         currentLocale={data.locale}
         hiddenMenuItems={data.hiddenMenuItems}
+        menuInverted={menuInverted}
         >
       <SEO 
         title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } 
@@ -39,6 +42,11 @@ const pageContent = ({ data, locales }) => {
         {data.sections.map((section, index) => {
         switch(section.__typename.replace("DatoCms", "")) {
             case 'JumboHeader':
+                if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
+                    console.log('DARK TExt')
+                    setMenuInverted(true)
+                } 
+                console.log(menuInverted)
                 return <JumboHeader data={data.sections[index]} key={index}/>
             case 'ThreeUp':
                 return <ThreeUp data={data.sections[index]} key={index}/>
@@ -85,4 +93,4 @@ const pageContent = ({ data, locales }) => {
   )
 }
 
-export default pageContent
+export default PageContent

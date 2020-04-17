@@ -9,6 +9,12 @@
 	}
 }
 
+@include loop-breakpoints {
+
+	.space-big-#{$breakpoint}-up {
+		margin-bottom: 3.75rem;
+	}
+}
 .margin-bottom {
 	margin-bottom: 50px;
 }

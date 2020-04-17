@@ -442,7 +442,7 @@ nav {
 		&.closed .menu-toggle .icon-bar {
 			background-color: $white;
 		}
-		&.navbar-border .menu-toggle .icon-bar, .menu-toggle .icon-bar {
+		&.navbar-border .menu-toggle .icon-bar, .menu-toggle .icon-bar, .menu-toggle.invert .icon-bar {
 			background-color: $blue;
 		}
 		
