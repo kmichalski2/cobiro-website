@@ -3,7 +3,7 @@ import Img from "gatsby-image"
 import React from "react"
 
 import Classes from "./jumboHeader.module.scss"
-import Section from "../../UiElements/section/Section"
+import Section from "../../UiElements/Section/Section"
 
 const JumboHeader = ({ data }) => {
 
