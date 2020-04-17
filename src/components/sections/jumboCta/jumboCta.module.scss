@@ -4,10 +4,10 @@
     position: relative;
 
     &.withBg {
-        padding-top: 12rem;
+        // padding-top: 12rem;
 
         @include mq($until: md) {
             padding-top: 7.5rem;
         }
-    }
+    } 
 }

@@ -17,6 +17,8 @@ const JumboHeader = ({ data }) => {
     return {__html: text}
   }
 
+  console.log(bgColor)
+
   const textSide = (
     <div className={[
         "col col-xs-12", 

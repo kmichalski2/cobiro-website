@@ -1,16 +1,25 @@
 import { Link } from "gatsby"
 import React from "react"
+import Section from '../../UiElements/Section/Section'
 
-import JumboCtaStyles from "./jumboCta.module.scss"
+import Classes from "./jumboCta.module.scss"
 import Waves from "../../waves/waves"
 
 
 const JumboCta = ({ data }) => {
-  const topColor = data.topGradiantColor ? data.topGradiantColor.hex : null
-  const bottomColor = data.bottomGradiantColor ? data.bottomGradiantColor.hex : null
+
+  const bgColor = data.backgroundColor ? data.ctaBackgroundColor : null
+
+  const bgColor = data.bgColor ? data.bgColor.hex : null
+  const alignment = data.alignment
+  const imageToEdges = data.imageToEdges
+  const textColor = data.textColor === 'dark' ? "text-black" : "text-white"
+  const btnColor = data.textColor === 'light' ? "btn-white" : null
 
   return (
-    <section className={[JumboCtaStyles.section, data.backgroundColor ? JumboCtaStyles.withBg : null, "section"].join(' ')} style={{backgroundImage: data.backgroundColor ? `linear-gradient(${topColor}, ${bottomColor})` : null}}>
+    <Section
+      bgColor={data.backgroundColor ? bgColor : null}
+    >
       <div className={[data.backgroundColor ? "bg-sway-inner" : null, "section-inner"].join(' ')} style={{ position: "relative", zIndex: 1 }}>
         <div className="container">
           <div className="row center-xs text-center">
@@ -36,8 +45,7 @@ const JumboCta = ({ data }) => {
           </div>
         </div>
       </div>
-      <Waves whiteSway={data.backgroundColor ? true : false} transparentSways={data.backgroundColor ? true : false} highWaveRight={true} whiteSwayTop={true}/>
-    </section>
+    </Section>
   )
 }
 
