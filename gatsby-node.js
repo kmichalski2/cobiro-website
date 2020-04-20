@@ -475,6 +475,12 @@ exports.createPages = async function({ graphql, actions }) {
                 ... on DatoCmsImage {
                   title
                   text
+                  narrowImage
+                  videoEmbedCode
+                  bgColor {
+                    hex
+                  }
+                  textColor
                   image {
                     alt
                     url
