@@ -68,6 +68,18 @@ exports.createPages = async function({ graphql, actions }) {
                   bgColor {
                     hex
                   }
+                  icon {
+                    url
+                    fixed(height: 100) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  iconTitle
                   textColor
                   imageToEdges
                   image {
