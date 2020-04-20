@@ -471,6 +471,14 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsImage {
+                  title
+                  text
+                  narrowImage
+                  videoEmbedCode
+                  bgColor {
+                    hex
+                  }
+                  textColor
                   image {
                     alt
                     url
@@ -482,6 +490,16 @@ exports.createPages = async function({ graphql, actions }) {
                       src
                       srcSet
                       width
+                    }
+                  }
+                  featuresWIcon {
+                    features {
+                      ... on DatoCmsFeatureItem {
+                        icon {
+                          url
+                        }
+                        text
+                      }
                     }
                   }
                 }

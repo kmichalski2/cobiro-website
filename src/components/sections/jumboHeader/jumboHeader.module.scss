@@ -8,7 +8,7 @@
     min-width: 50vw;
     max-width: none;
     
-    @include mq($until: md) {
+    @include mq($until: lg) {
         min-width: calc(100vw - 1.1rem);
     }
     
@@ -18,6 +18,8 @@
     margin-top: 2.5rem;
 
     .imageToEdges {
-        min-width: calc(100vw - 33%);
+        min-width: calc(100vw - 1.1rem);
+        left: 50%;
+        transform: translateX(calc(-50vw + 1.1rem))
     }
 }

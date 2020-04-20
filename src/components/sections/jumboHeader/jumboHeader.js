@@ -4,18 +4,14 @@ import React from "react"
 
 import Classes from "./jumboHeader.module.scss"
 import Section from "../../UiElements/Section/Section"
+import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
+import ImageAll from "../../UiElements/ImageAll/ImageAll"
 
 const JumboHeader = ({ data }) => {
 
   const bgColor = data.bgColor ? data.bgColor.hex : null
   const alignment = data.alignment
   const imageToEdges = data.imageToEdges
-  const textColor = data.textColor === 'dark' ? "text-black" : "text-white"
-  const btnColor = data.textColor === 'light' ? "btn-white" : null
-
-  const createMarkup = (text)  => {
-    return {__html: text}
-  }
 
   console.log(bgColor)
 
@@ -25,16 +21,23 @@ const JumboHeader = ({ data }) => {
         alignment === 'centered' ? 'col-md-8 text-center space-xs-up' : 'col-lg-6 text-left-md',
         imageToEdges && alignment !== 'centered' ? "flex flex-column center-xs top-xs" : null
         ].join(' ')}>
-      { data.heading ? <h1 className={textColor}>{data.heading}</h1> : null }
-      { data.text ? <div className={["space-big-xs-up", textColor].join(' ')} dangerouslySetInnerHTML={createMarkup(data.text)}></div> : null }
-      {data.externalLinkUrl ? (
-        <a href={data.externalLinkUrl} className={["btn btn-large space-xs space-sm space-md", btnColor, alignment === 'centered' ? 'space-xs-up' : null].join(' ')} target="_blank" rel="noopener noreferrer">{data.linkTitle}</a>
-      ) : data.link ?
-      (
-        <Link to={data.link.slug ? data.link.slug : '/'} className={["btn btn-large space-xs space-sm space-md", btnColor, alignment === 'centered' ? 'space-xs-up' : null ].join(' ')}>
-          {data.linkTitle}
-        </Link>
-      ): null }
+      <HeaderWText 
+        classes={["space-xs space-sm space-md", alignment === 'centered' || imageToEdges ? 'space-xs-up' : null].join(' ')}
+        title={data.heading}
+        h1
+        text={data.text}
+        light={data.textColor === 'light'}
+        links={[
+          {
+            link: data.externalLinkUrl || data.link && data.link.slug,
+            title: data.linkTitle,
+            external: data.externalLinkUrl && true,
+            internal: data.link && data.link.slug && true,
+            button: true,
+            large: true,
+          }
+        ]}
+        />
     </div>
   )
  
@@ -46,20 +49,7 @@ const JumboHeader = ({ data }) => {
       imageToEdges ? "flex bottom-xs" : null
       ].join(' ')}
       >
-      {data.image.fluid ?
-        <Img
-          loading="eager"
-          fadeIn={false}
-          fluid={data.image.fluid}
-          className={["img-responsive img-full-width", imageToEdges ? Classes.imageToEdges : null].join(' ')}
-          alt={data.image.alt ? data.image.alt : data.heading}
-          />
-      : 
-        <img src={data.image.url} 
-          className="img-responsive img-full-width"
-          alt={data.image.alt ? data.image.alt : data.heading} 
-          />
-      }
+        <ImageAll image={data.image} alt={data.image.alt || data.heading} classes={imageToEdges ? Classes.imageToEdges : null} fullWidth />
     </div> 
   )
   
@@ -77,8 +67,8 @@ const JumboHeader = ({ data }) => {
               "row",
             ].join(" ")}
           >
-            { alignment === 'image-right' ? textSide : alignment === 'image-left' ? imageSide : alignment === 'centered' ? textSide : null }
-            { alignment === 'image-right' ? imageSide : alignment === 'image-left' ? textSide : alignment === 'centered' ? imageSide : null }
+            { alignment === 'image-right' || alignment === 'centered' ? textSide : imageSide }
+            { alignment === 'image-right' || alignment === 'centered' ? imageSide : textSide }
           </div>
         </div>
     </Section>  
