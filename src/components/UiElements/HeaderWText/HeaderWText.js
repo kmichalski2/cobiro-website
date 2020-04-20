@@ -3,11 +3,22 @@ import HtmlText from '../HtmlText/HtmlText'
 
 import Classes from './HeaderWText.module.scss'
 import AnyLink from '../AnyLink/AnyLink'
+import ImageAll from '../ImageAll/ImageAll'
 
-const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes }) => {
-    
+const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes, icon, iconTitle, centered }) => {
+    console.log(icon)
     return (
         <div className={classes}>
+        { icon || iconTitle ?
+        <div className={[Classes.iconRow, centered ? Classes.center : null].join(' ')}>
+            {icon ?
+            <ImageAll image ={icon} />     
+            : null}
+            {iconTitle ?
+            <h3 className={light ? Classes.white : null}>{iconTitle}</h3>
+            : null }
+        </div>
+        : null }
         {h1 && title ? 
             <h1 className={light ? Classes.white : null}>{ title }</h1>
         : h2 && title ? 

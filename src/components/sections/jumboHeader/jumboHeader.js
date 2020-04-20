@@ -23,6 +23,9 @@ const JumboHeader = ({ data }) => {
         ].join(' ')}>
       <HeaderWText 
         classes={["space-xs space-sm space-md", alignment === 'centered' || imageToEdges ? 'space-xs-up' : null].join(' ')}
+        centered={alignment === 'centered' ? true : false}
+        icon={data.icon}
+        iconTitle={data.iconTitle}
         title={data.heading}
         h1
         text={data.text}
