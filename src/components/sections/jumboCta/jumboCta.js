@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 
 import Section from '../../UiElements/Section/Section'
-import ImageAll from '../../UiElements/imageAll/imageAll'
+import ImageAll from '../../UiElements/ImageAll/ImageAll'
 
 import Classes from "./jumboCta.module.scss"
 // import Waves from "../../waves/waves"
