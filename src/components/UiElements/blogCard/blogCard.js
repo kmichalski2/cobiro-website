@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'gatsby'
 import Img from "gatsby-image"
 
+import CategoryLabel from '../categoryLabel/categoryLabel'
 
 import Classes from './blogCard.module.scss'
-import CategoryLabel from '../categoryLabel/categoryLabel'
+
 
 const BlogCard = ({ large, post, animate }) => {
 

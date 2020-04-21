@@ -210,6 +210,10 @@ exports.createPages = async function({ graphql, actions }) {
                   topGradiantColor {
                     hex
                   }
+                  bgColor {
+                    hex
+                  }
+                  textColor
                   bottomGradiantColor {
                     hex
                   }
