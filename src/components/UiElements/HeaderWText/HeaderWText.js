@@ -36,6 +36,7 @@ const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes, icon, ico
                 title={l.title} 
                 callBack={l.callBack || null} 
                 large={l.large || false} 
+                button={l.button}
                 secondary={l.secondary || false} 
                 light={ light || false }
                 classes={i > 0 ? Classes.spaceLeft : null}
