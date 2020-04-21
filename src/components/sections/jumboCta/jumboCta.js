@@ -8,12 +8,17 @@ import Classes from "./jumboCta.module.scss"
 
 const JumboCta = ({ data }) => {
 
-  const bgColor = data.ctaBgColor && data.ctaBackgroundColor.hex ? data.ctaBackgroundColor.hex : null
+  const bgColor = data.ctaBgColor && data.ctaBackgroundColor ? data.ctaBackgroundColor.hex : null
   const textColor = data.ctaBgColor && data.textColor === 'light' ? "text-white" : "text-black"
   const btnColor = data.ctaBgColor && data.textColor === 'light' ? "btn-white" : null
   const backgroundImage = data.backgroundImage
   // const backgroundImage = null
   const icon = data.icon
+
+
+  // const bgColor = data.testimonialBgColor && data.testimonialColor ? data.testimonialColor.hex : null
+  // const textColor = data.testimonialBgColor && data.testimonialTextColor  === 'light' ? "text-white" : "text-black"
+  
 
   console.log(icon)
 
