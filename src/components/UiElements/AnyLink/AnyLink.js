@@ -7,7 +7,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
 
     console.log(link, title)
 
-    const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : null, large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null].join(' ')
+    const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : Classes.textLink, large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null].join(' ')
 
     return (
         <>

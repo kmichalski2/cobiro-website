@@ -1,0 +1,14 @@
+@import '../../layout/style/globals';
+
+.card {
+	padding: 3.75rem 2.5rem;
+	text-align: center;
+	position: relative;
+	width: 100%;
+	margin-bottom: 2rem;
+    background-color: white;
+
+	&.shadow { 
+        @include box-shadow;
+	}
+}

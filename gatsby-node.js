@@ -125,6 +125,10 @@ exports.createPages = async function({ graphql, actions }) {
                 }
                 ... on DatoCmsThreeUp {
                   backgroundColor
+                  bgColor {
+                    hex
+                  }
+                  textColor
                   title
                   text
                   bigIcons
