@@ -5,10 +5,10 @@ import Classes from './HeaderWText.module.scss'
 import AnyLink from '../AnyLink/AnyLink'
 import ImageAll from '../ImageAll/ImageAll'
 
-const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes, icon, iconTitle, centered }) => {
+const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes, icon, iconTitle, centered, children }) => {
     console.log(icon)
     return (
-        <div className={classes}>
+        <div className={[classes, centered ? Classes.center : null].join(' ')}>
         { icon || iconTitle ?
         <div className={[Classes.iconRow, centered ? Classes.center : null].join(' ')}>
             {icon ?
@@ -27,7 +27,12 @@ const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes, icon, ico
             <h3 className={light ? Classes.white : null}> { title } </h3>
         : null }
         <HtmlText RawHtml={text} classes={[Classes.text, light ? Classes.white : null].join(' ')}/>
-        { links.map((l, i) => (
+        { children ? 
+            <div className={Classes.children}>
+                {children}
+            </div>
+        : null }
+        { links ? links.map((l, i) => (
             <AnyLink 
                 key={i}
                 link={l.link} 
@@ -41,7 +46,7 @@ const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes, icon, ico
                 light={ light || false }
                 classes={i > 0 ? Classes.spaceLeft : null}
             />
-        ))}
+        )) : null}
         </div>
     )
 }
