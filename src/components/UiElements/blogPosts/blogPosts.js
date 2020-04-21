@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
+import { useState } from 'react'
+
 import BlogCard from '../blogCard/blogCard'
 
 import Classes from './blogPosts.module.scss'
-import { useState } from 'react'
+
 
 const BlogPosts = ({ blogPosts, offset, fixedMax, addedAmount, firstLarge, animate }) => {
     
