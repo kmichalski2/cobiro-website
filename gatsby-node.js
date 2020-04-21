@@ -297,6 +297,18 @@ exports.createPages = async function({ graphql, actions }) {
                   ctaBackgroundColor {
                     hex
                   }
+                  backgroundImage {
+                    url
+                    fluid(maxWidth: 1200) {
+                      base64
+                      aspectRatio
+                      width
+                      height
+                      src
+                      srcSet
+                      sizes
+                    }
+                  }
                   title
                   text
                   linkTitle
