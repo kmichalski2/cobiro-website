@@ -1,13 +1,19 @@
 @import '../../layout/style/globals';
 
-.section {
-    position: relative;
+.icon {
+    width: 4.5rem;
+    margin: auto;
 
-    &.withBg {
-        // padding-top: 12rem;
-
-        @include mq($until: md) {
-            padding-top: 7.5rem;
-        }
-    } 
+    @include mq($until: lg) {
+        width: 3.5rem;
+    }
 }
+
+.content {
+    padding: 4rem 0;
+
+    @include mq($until: lg) {
+        padding: 0rem 0;
+    }
+}
+
