@@ -6,7 +6,7 @@ import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
 import ImageAll from "../../UiElements/ImageAll/ImageAll"
 
 const ExplanationImage = ({ data }) => {
-
+ 
   const image = (
     <div className={["space-sm space-xs", data.leftText && data.imageToEdge ? expImageStyles.imageLeftEdge : !data.leftText && data.imageToEdge ? expImageStyles.imageRightEdge : null].join(' ')}>
       <ImageAll 
