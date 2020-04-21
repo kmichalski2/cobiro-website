@@ -1,8 +1,10 @@
 import React from "react"
 import Img from "gatsby-image"
+import Section from '../UiElements/Section/Section'
 
 const FeaturedTestimonialsSingle = ({ data }) => (
-  <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')} style={{ overflow: "hidden" }}>
+  <Section
+  bgColor={}>
     <div className={data.backgroundColor ? "bg-sway-inner" : null}>
     <div className="container">
       <div className="row middle-xs">
@@ -30,7 +32,7 @@ const FeaturedTestimonialsSingle = ({ data }) => (
       </div>
     </div>
     </div>
-  </section>
+    </Section>
 )
 
 export default FeaturedTestimonialsSingle
