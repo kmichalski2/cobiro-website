@@ -243,6 +243,37 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                   leftText
                 }
+                ... on DatoCmsGallery {
+                  title
+                  text
+                  primaryLinkTitle
+                  secondaryLinkTitle
+                  primaryExternalLink
+                  secondaryExternalLink
+                  primaryInternalLink {
+                    slug
+                  }
+                  secondaryInternalLink {
+                    slug
+                  }
+                  images {
+                    alt
+                    url
+                    fluid(maxWidth: 400) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  bgColor {
+                    hex
+                  }
+                  textColor
+                }
                 ... on DatoCmsFeaturedTestimonialsSingle {
                   backgroundColor
                   quote

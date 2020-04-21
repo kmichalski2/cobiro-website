@@ -20,6 +20,7 @@ import Voucher from "../components/sections/voucher/voucher"
 import VoucherHeader from "./sections/voucherHeader/voucherHeader"
 import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
 import Form from "./sections/Form/Form"
+import Gallery from "./sections/gallery/gallery"
 
 const PageContent = ({ data, locales }) => {
 
@@ -76,6 +77,8 @@ const PageContent = ({ data, locales }) => {
                 return <Video data={data.sections[index]} key={index}/>
             case 'Image':
                 return <ImageSection data={data.sections[index]} key={index}/>
+            case 'Gallery':
+                return <Gallery data={data.sections[index]} key={index}/>
             case 'VoucherSignup':
                 return <Voucher data={data.sections[index]} key={index}/>
             case 'VoucherHeader':
