@@ -258,6 +258,11 @@ exports.createPages = async function({ graphql, actions }) {
                       sizes
                     }
                   }
+                  testimonialBgColor
+                  testimonialColor {
+                    hex
+                  }
+                  testimonialTextColor
                 }
                 ... on DatoCmsFeaturedCompany {
                   backgroundColor
