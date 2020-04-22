@@ -25,12 +25,12 @@ const Quotes = ({ data }) => {
       <Carousel
         itemWidth={700}
         // itemWidth={250}
-        offset={32} 
+        offset={0} 
         slidesPerPage={4}
-        centered={false} 
+        centered={true} 
         stopAutoPlayOnHover={false} 
-        animationSpeed={8000} 
-        autoPlay={8000} 
+        animationSpeed={1000}
+        autoPlay={5000} 
         infinite={true}
         breakpoints={{
           1500: {
