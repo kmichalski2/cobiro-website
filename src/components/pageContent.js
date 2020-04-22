@@ -21,6 +21,7 @@ import VoucherHeader from "./sections/voucherHeader/voucherHeader"
 import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
 import Form from "./sections/Form/Form"
 import Gallery from "./sections/gallery/gallery"
+import BlogLatest from "./sections/blogLatest"
 
 const PageContent = ({ data, locales }) => {
 
@@ -44,7 +45,6 @@ const PageContent = ({ data, locales }) => {
         switch(section.__typename.replace("DatoCms", "")) {
             case 'JumboHeader':
                 if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
-                    console.log('DARK TExt')
                     setMenuInverted(true)
                 } 
                 console.log(menuInverted)
@@ -67,6 +67,8 @@ const PageContent = ({ data, locales }) => {
                 return <ThreeUpPeople data={data.sections[index]} key={index}/>
             case 'CtaJumbo':
                 return <JumboCta data={data.sections[index]} key={index}/>
+            case 'BlogLatest':
+                return <BlogLatest data={data.sections[index]} key={index}/>
             case 'ListPricing':
                 return <ListPricing data={data.sections[index]} key={index}/>
             case 'Quote':

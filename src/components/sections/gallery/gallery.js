@@ -25,7 +25,7 @@ const Gallery = ({ data }) => {
                 <div className={["row center-xs", Classes.gallery].join(' ')}>
                     { data.images ? 
                         data.images.map((im, i) => (
-                            <div className="col col-xs-6 col-md-4">
+                            <div key={i} className="col col-xs-6 col-md-4">
                                 <ImageAll image={im} alt={im.alt} classes={Classes.image}/>
                             </div>
                         )) 
