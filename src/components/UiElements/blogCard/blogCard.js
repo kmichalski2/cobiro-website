@@ -9,17 +9,15 @@ import Card from '../Card/Card'
 import ImageAll from '../ImageAll/ImageAll'
 
 
-const BlogCard = ({ large, post, animate, shadow }) => {
+const BlogCard = ({ large, post, animate, shadow, horizontal }) => {
 
     return(
-        <div className={["col col-xs-12", large ? "" : "col-md-6 col-lg-4", animate ? "fadeUp" : null ].join(' ')}>
-          <Card smallPadding shadow={shadow} leftAligned>
-            {post.featuredImage && post.featuredImage.fluid ?
+        <div className={["col col-xs-12", !large && !horizontal ? "col-md-6 col-lg-4" : horizontal ? "col-lg-6" : null, animate ? "fadeUp" : null ].join(' ')}>
+          <Card smallPadding={!horizontal}  noPadding={horizontal} shadow={shadow} leftAligned classes={horizontal ? Classes.horizontal : null}>
+            {post.featuredImage?
               <Link to={`/blog/${post.slug}`}>
                 <ImageAll image={post.featuredImage} alt={post.featuredImage.alt || 'Featured image'} classes={Classes.postImg}/>
               </Link>
-            : post.featuredImage && post.featuredImage.url ?
-              <img className={Classes.postImg} src={post.featuredImage.url} alt={post.featuredImage.alt || 'Featured image'} />
             : null }
             <div className={Classes.textWrapper}>
             {post.category ? post.category.map((cat, i) => <CategoryLabel key={i} category={cat.category} link={`/blog/${cat.slug}`} />) : null}

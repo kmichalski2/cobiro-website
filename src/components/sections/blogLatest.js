@@ -8,7 +8,7 @@ const BlogLatest = ({ data }) => {
 
     const query = useStaticQuery(graphql`
         query BlogQuery {
-            allDatoCmsBlogPost(filter: {title: {ne: null}}) {
+            allDatoCmsBlogPost(filter: {title: {ne: null}}, limit: 3) {
                 nodes {
                   title
                   readLength
@@ -36,7 +36,6 @@ const BlogLatest = ({ data }) => {
         }
     `)
         
-    console.log(query.allDatoCmsBlogPost.nodes)
     return (
         <Section bgColor={data.bgColor && data.bgColor.hex}>
             <div className="container">
@@ -58,8 +57,6 @@ const BlogLatest = ({ data }) => {
                         />
                 </div>
             </div>
-            
-            {/* <BlogPosts /> */}
         </Section>
     )
 }

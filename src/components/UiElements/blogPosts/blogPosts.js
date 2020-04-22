@@ -4,9 +4,10 @@ import { useState } from 'react'
 import BlogCard from '../blogCard/blogCard'
 
 import Classes from './blogPosts.module.scss'
+import BlogPostsHeader from '../blogPostsHeader/blogPostsHeader'
 
 
-const BlogPosts = ({ blogPosts, offset, fixedMax, addedAmount, firstLarge, animate, shadow }) => {
+const BlogPosts = ({ blogPosts, offset, fixedMax, addedAmount, firstLarge, animate, shadow, horizontal }) => {
     
     const initialAMount = fixedMax || (0 + (addedAmount || 3)) 
 
@@ -27,7 +28,10 @@ const BlogPosts = ({ blogPosts, offset, fixedMax, addedAmount, firstLarge, anima
 
     for (let i = offset || 0; i < (fixedMax || (offset ? numberOfPosts + offset : numberOfPosts)) && i < blogPosts.length; i++) {
         posts.push(
-            <BlogCard key={i} post={blogPosts[i]} large={firstLarge && i === 0 ? true : false} animate={animate} shadow={shadow}/>
+            firstLarge && i === 0 ?
+            <BlogPostsHeader key={i} post={blogPosts[i]} />
+            :
+            <BlogCard key={i} post={blogPosts[i]} large={firstLarge && i === 0 ? true : false} animate={animate} shadow={shadow} horizontal={horizontal}/>
         )
       }
 

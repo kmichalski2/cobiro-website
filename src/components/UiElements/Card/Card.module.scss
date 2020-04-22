@@ -12,6 +12,10 @@
         padding: 1.875rem;
     }
 
+    &.noPadding {
+        padding: 0;
+    }
+
 	&.shadow { 
         @include box-shadow;
     }
