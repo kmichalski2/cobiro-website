@@ -55,11 +55,6 @@
             align-items: stretch !important;
             
         }
-
-        .BrainhubCarouselItem--active {
-            background-color: red!important;
-            color: red!important;
-        }
 }
 
 .quotesCard {
@@ -87,36 +82,3 @@
     height: 3rem!important;
     margin-right: 1.2rem;
 }
-
-// .BrainhubCarouselItem {
-
-//     .active {
-//         background-color: red!important;
-//         color: red!important;
-//     }
-    
-// }
-
-// .brainhubCarouselItem {
-
-// .active {
-//     background-color: red!important;
-//     color: red!important;
-// }}
-
-// .BrainhubCarouselItem {
-//     &.BrainhubCarouselItem--active {
-//         background-color: red!important;
-//         color: red!important;
-//     }
-// }
-
-.BrainhubCarouselItem {
-    background-color: red!important;
-    color: red!important;
-
-    &.BrainhubCarouselItem--active {
-        background-color: red!important;
-        color: red!important;
-    }
-  }
