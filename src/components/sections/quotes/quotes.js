@@ -14,8 +14,8 @@ const Quotes = ({ data }) => {
   return (
     <Section
       bgColor={bgColor}
+      
     >
-    <div className={[data.backgroundColor ? "bg-sway-inner" : null, "container-fluid"].join(' ')}>
       <div className="row section-header">
         <div className="col col-xs-12 text-center">
           { data.title ? <h2 className={textColor}>{data.title}</h2> : null }
@@ -23,26 +23,32 @@ const Quotes = ({ data }) => {
         </div>
       </div>
       <Carousel
-        itemWidth={700}
+        // itemWidth={700}
         // itemWidth={250}
         offset={0} 
         slidesPerPage={4}
         centered={true} 
-        stopAutoPlayOnHover={false} 
+        stopAutoPlayOnHover={false}
         animationSpeed={1000}
-        autoPlay={5000} 
+        autoPlay={5000}
         infinite={true}
         breakpoints={{
-          1500: {
+          2800: {
+            slidesPerPage: 4,
+          }, 
+          2200: {
             slidesPerPage: 3,
           }, 
-          1200: {
+          2000: {
             slidesPerPage: 2,
+          },
+          950: {
+            slidesPerPage: 1,
           },
           650: {
             slidesPerPage: 1,
             animationSpeed: 1000,
-            autoPlay: 3000,
+            // autoPlay: 5000,
             offset: 0,
             centered: true,
           },
@@ -60,12 +66,12 @@ const Quotes = ({ data }) => {
           <div className="flex start-xs middle-xs">
           {q.imageLeft && q.imageLeft.fixed ?
               <Img fixed={q.imageLeft.fixed}
-                className="img-fluid"
+                className={["img-fluid", Classes.icon].join(' ')}
                 alt={q.imageLeft.alt ? q.imageLeft.alt : 'Quote'}
               />
               : q.imageLeft ?
               <img src={q.imageLeft.url}
-              className="img-fluid"
+                className={["img-fluid", Classes.icon].join(' ')}
                 alt={q.imageLeft.alt ? q.imageLeft.alt : 'Quote'}
               />
               : null
@@ -109,7 +115,6 @@ const Quotes = ({ data }) => {
         </div>
       </div>
       : null */}
-    </div>
   </Section>
 )}
 
