@@ -391,6 +391,11 @@ exports.createPages = async function({ graphql, actions }) {
                   tier2Features
                 }
                 ... on DatoCmsQuote {
+                  textColor
+                  quotesBgColor
+                  quotesColor {
+                    hex
+                  }
                   backgroundColor
                   title
                   text

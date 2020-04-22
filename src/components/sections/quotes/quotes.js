@@ -4,18 +4,27 @@ import Img from "gatsby-image"
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import { Link } from "gatsby";
+import Section from '../../UiElements/Section/Section'
 
 const Quotes = ({ data }) => {
+
+  const bgColor = data.quotesBgColor && data.quotesColor ? data.quotesColor.hex : null
+  const textColor = data.quotesBgColor && data.textColor === 'light' ? "text-white" : "text-black"
+  
   return (
-  <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
+    <Section
+      bgColor={bgColor}
+    >
     <div className={[data.backgroundColor ? "bg-sway-inner" : null, "container-fluid"].join(' ')}>
       <div className="row section-header">
         <div className="col col-xs-12 text-center">
-          { data.title ? <h2>{data.title}</h2> : null }
-          { data.text ? <p>{data.text}</p> : null }
+          { data.title ? <h2 className={textColor}>{data.title}</h2> : null }
+          { data.text ? <p className={textColor}>{data.text}</p> : null }
         </div>
       </div>
-      <Carousel 
+      <Carousel
+        itemWidth={700}
+        // itemWidth={250}
         offset={32} 
         slidesPerPage={4}
         centered={false} 
@@ -43,12 +52,12 @@ const Quotes = ({ data }) => {
         data.quotes.quotes.map((q, index) => (
           <div
           key={index}
-          className={[
-            QuoteStyles.quote,
-            "card card-visible text-left-xs",
-          ].join(" ")}
+          className={[QuoteStyles.quote, QuoteStyles.quotesCard, "card card-visible text-left-xs"].join(" ")}
         >
-          <div className="flex start-xs middle-xs space-xs-up">
+        <p className="h2 space-xs-up">
+        {q.quoteText}
+      </p>
+          <div className="flex start-xs middle-xs">
           {q.imageLeft && q.imageLeft.fixed ?
               <Img fixed={q.imageLeft.fixed}
                 className="img-fluid"
@@ -82,14 +91,12 @@ const Quotes = ({ data }) => {
               </div>
             </div>
           </div>
-          <p className="small">
-            {q.quoteText}
-          </p>
+         
         </div>
         )) 
         : null }
       </Carousel>
-      { data.linkTitleQuotes && data.internalLinkQuotes ?
+      { /* data.linkTitleQuotes && data.internalLinkQuotes ?
       <div className="row">
         <div className="col col-xs-12 text-center">
         <Link className={["btn btn-primary", QuoteStyles.button].join(' ')} to={data.internalLinkQuotes.slug ? data.internalLinkQuotes.slug : '/'}>{data.linkTitleQuotes}</Link>
@@ -101,9 +108,9 @@ const Quotes = ({ data }) => {
           <a className={["btn btn-primary", QuoteStyles.button].join(' ')} href={data.externalLinkQuotes} target="_blank" rel="noopener noreferrer">{data.linkTitleQuotes}</a>
         </div>
       </div>
-      : null }
+      : null */}
     </div>
-  </section>
+  </Section>
 )}
 
 export default Quotes
