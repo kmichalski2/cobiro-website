@@ -1,5 +1,5 @@
 import React from "react"
-import QuoteStyles from "./quotes.module.scss"
+import Classes from "./quotes.module.scss"
 import Img from "gatsby-image"
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
@@ -47,14 +47,14 @@ const Quotes = ({ data }) => {
             centered: true,
           },
         }}
-        className={[QuoteStyles.cards, QuoteStyles.slider].join(" ")}>
+        className={[Classes.cards, Classes.slider].join(" ")}>
         {data.quotes ?
         data.quotes.quotes.map((q, index) => (
           <div
           key={index}
-          className={[QuoteStyles.quote, QuoteStyles.quotesCard, "card card-visible text-left-xs"].join(" ")}
+          className={[Classes.quote, Classes.quotesCard, "card card-visible text-left-xs"].join(" ")}
         >
-        <p className="h2 space-xs-up">
+        <p className={["text-black space-xs-up", Classes.quotesText].join(' ')}>
         {q.quoteText}
       </p>
           <div className="flex start-xs middle-xs">
@@ -77,12 +77,12 @@ const Quotes = ({ data }) => {
                 {q.flag ? 
                 q.flag.fixed ?
                 <Img fixed={q.flag.fixed}
-                  className={QuoteStyles.flag}
+                  className={Classes.flag}
                   alt={q.flag.alt ? q.flag.alt : 'Flag'}
                 />
                 :
                 <img src={q.flag.url}
-                  className={QuoteStyles.flag}
+                  className={Classes.flag}
                   alt={q.flag.alt ? q.flag.alt : 'Flag'}
                 />
                 : null
@@ -99,13 +99,13 @@ const Quotes = ({ data }) => {
       { /* data.linkTitleQuotes && data.internalLinkQuotes ?
       <div className="row">
         <div className="col col-xs-12 text-center">
-        <Link className={["btn btn-primary", QuoteStyles.button].join(' ')} to={data.internalLinkQuotes.slug ? data.internalLinkQuotes.slug : '/'}>{data.linkTitleQuotes}</Link>
+        <Link className={["btn btn-primary", Classes.button].join(' ')} to={data.internalLinkQuotes.slug ? data.internalLinkQuotes.slug : '/'}>{data.linkTitleQuotes}</Link>
         </div>
       </div>
       : data.linkTitleQuotes && data.externalLinkQuotes ?
       <div className="row">
         <div className="col col-xs-12 text-center">
-          <a className={["btn btn-primary", QuoteStyles.button].join(' ')} href={data.externalLinkQuotes} target="_blank" rel="noopener noreferrer">{data.linkTitleQuotes}</a>
+          <a className={["btn btn-primary", Classes.button].join(' ')} href={data.externalLinkQuotes} target="_blank" rel="noopener noreferrer">{data.linkTitleQuotes}</a>
         </div>
       </div>
       : null */}
