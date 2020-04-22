@@ -8,7 +8,15 @@
 	margin-bottom: 2rem;
     background-color: white;
 
+    &.smallPadding {
+        padding: 1.875rem;
+    }
+
 	&.shadow { 
         @include box-shadow;
-	}
+    }
+    
+    &.leftAligned {
+        text-align: left;
+    }
 }

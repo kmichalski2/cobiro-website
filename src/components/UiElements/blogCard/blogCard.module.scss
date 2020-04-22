@@ -1,10 +1,6 @@
 @import '../../../components/layout/style/globals';
 
 .card {
-    overflow: hidden;
-    padding: 0 !important;
-    display: block !important;
-
     .postImg {
 
         img {
@@ -13,8 +9,5 @@
         }
     }
 
-    .textWrapper {
-        padding: 2.5rem;
-    }
 
 }

@@ -274,6 +274,14 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                   textColor
                 }
+                ... on DatoCmsBlogLatest {
+                  title
+                  text
+                  bgColor {
+                    hex
+                  }
+                  textColor
+                }
                 ... on DatoCmsFeaturedTestimonialsSingle {
                   backgroundColor
                   quote
