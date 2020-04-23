@@ -22,6 +22,7 @@ import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftC
 import Form from "./sections/Form/Form"
 import Gallery from "./sections/gallery/gallery"
 import BlogLatest from "./sections/blogLatest"
+import ContactPerson from './sections/contactPerson/contactPerson'
 
 const PageContent = ({ data, locales }) => {
 
@@ -89,6 +90,8 @@ const PageContent = ({ data, locales }) => {
                 return <ExplanationGiftCard data={data.sections[index]} key={index}/>
             case 'FormSection':
                 return <Form data={data.sections[index]} key={index}/>
+            case 'ContactPerson':
+                return <ContactPerson data={data.sections[index]} key={index}/>
             default:
                 return null
             }

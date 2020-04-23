@@ -43,6 +43,28 @@ exports.createPages = async function({ graphql, actions }) {
               }
               sections {
                 __typename
+                ... on DatoCmsContactPerson {
+                  bgColor {
+                    hex
+                  }
+                  personEmail
+                  personName
+                  personWorkTitle
+                  sectionTitle
+                  textColor
+                  personImage {
+                    url
+                    fluid(maxWidth: 1200) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                }
                 ... on DatoCmsJumboHeader {
                   backgroundColor
                   topGradiantColor {

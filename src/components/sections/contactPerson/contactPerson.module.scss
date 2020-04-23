@@ -1,0 +1,37 @@
+@import '../../layout/style/globals';
+
+.icon {
+    width: 4rem!important;
+    height: 4rem!important;
+    margin-right: 1rem;
+    margin-left: 2.5rem;
+
+    @include mq($until: md) {
+        margin-right: 0rem;
+        margin-bottom: 2rem;
+        margin-left: 0rem;
+    }
+}
+
+
+.personText {
+    margin: 0!important;
+}
+
+.contactCard {
+    padding: 5rem 0rem;
+
+    @include mq($until: md) {
+            flex-direction: column;
+            padding: 3rem 0rem;
+    }
+
+}
+
+.personWorkTitle {
+    font-size: .8rem!important;
+
+    @include mq($until: md) {
+        padding-bottom: 2rem;
+    }
+}
