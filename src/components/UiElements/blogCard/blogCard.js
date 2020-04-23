@@ -24,7 +24,7 @@ const BlogCard = ({ large, post, animate, shadow, horizontal }) => {
               <Link to={`/blog/${post.slug}`}>
                 <h4>{ post.title }</h4>
               </Link>
-              <p className="small">By { post.writer }</p>
+              {post.writer ? <p className="small">By { post.writer }</p> : null }
             </div>
           </Card>
         </div>

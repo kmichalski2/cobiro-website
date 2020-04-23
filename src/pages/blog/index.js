@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { graphql, Link } from 'gatsby'
 import Img from "gatsby-image"
-import Search from '../../components/sections/blogSearch/blogSearch'
-
 
 import Classes from './blog.module.scss'
 import BlogCard from '../../components/UiElements/blogCard/blogCard'
@@ -11,8 +9,8 @@ import SwayTop from '../../components/UiElements/SwayTop/SwayTop'
 import JumboCta from '../../components/sections/jumboCta/jumboCta'
 import BlogPosts from '../../components/UiElements/blogPosts/blogPosts'
 import CategoryLabel from '../../components/UiElements/categoryLabel/categoryLabel'
-import BlogSearch from '../../components/sections/blogSearch/blogSearch'
 import Section from '../../components/UiElements/Section/Section'
+import FeaturedTestimonialsSingle from '../../components/sections/featuredTestimonalSingle'
 
 const Blog = ({ data }) => {
 
@@ -24,33 +22,19 @@ const Blog = ({ data }) => {
 
   console.log(data)
 
-    const createMarkup = (text)  => { 
-        return {__html: text}
-    }
 
     return (
-        <Layout menuInverted>
-          {/* <SwayTop topColor={{hex: topColor}} bottomColor={{hex: bottomColor}} >
-              <div className={["container", Classes.header].join(' ')}>
-                  <div className="row middle-xs center-xs">
-                      <div className="col col-xs-12 col-lg-8 text-center">
-                          <h1>{ page.title }</h1>
-                          <div className="space-xs-up" dangerouslySetInnerHTML={createMarkup(page.subtitle)}></div>
-                          { categories.length > 0 ? categories.map((cat, i) => <CategoryLabel key={i} category={cat.category} link={`/blog/${cat.slug}`} large />) : null }
-                      </div>
-                  </div>
-              </div>
-          </SwayTop> */}
-          <section className="section">
+        <Layout menuInverted>          
+          <BlogPosts blogPosts={posts} offset={0} fixedMax={1} addedAmount={0} firstLarge horizontal searchTitle={page.searchTitle}/>
+          <Section>
             <div className="container">
+              
               <div className="row center-xs">
-                <BlogPosts blogPosts={posts} offset={0} fixedMax={9} addedAmount={2} firstLarge horizontal />
-                <BlogPosts blogPosts={posts} offset={0} fixedMax={9} addedAmount={2} horizontal />
-                <BlogPosts blogPosts={posts} offset={0} fixedMax={9} addedAmount={2} horizontal />
-                <BlogPosts blogPosts={posts} offset={0} fixedMax={9} addedAmount={2} horizontal />
+                
+                <BlogPosts blogPosts={posts} offset={1} fixedMax={9} addedAmount={2} horizontal />
               </div>
             </div>
-          </section>
+          </Section>
           <Section bgColor={page.categoriesBgColor && page.categoriesBgColor.hex}>
             <div className="container">
               <div className="row text-center center-xs space-xs-up">
@@ -60,7 +44,7 @@ const Blog = ({ data }) => {
               </div>
               <div className="row center-xs">
               { categories.length > 0 ? categories.map((cat, i) => 
-                <div key={i} className="col col-xs-6 col-sm-4">
+                <div key={i} className="col col-xs-12 col-sm-6 col-md-4">
                   <CategoryLabel category={cat.category} link={`/blog/${cat.slug}`} large background/>
                 </div>) : null }
               </div>
@@ -91,15 +75,17 @@ const Blog = ({ data }) => {
               </div>
               </div>
             </section> */}
-            <section className="section">
+            <Section>
               <div className="container">
               <div className="row center-xs">
-                <BlogPosts blogPosts={posts} offset={9} addedAmount={4} horizontal/>
+                <BlogPosts blogPosts={posts} offset={9} addedAmount={4} horizontal />
               </div>
             </div>
-          </section>
-          {/* <BlogSearch data={data.localSearchBlogposts} title={page.searchTitle}/> */}
-          <JumboCta data={{topGradiantColor: {hex: topColor}, bottomGradiantColor: {hex: bottomColor}, backgroundColor: true, title: page.footerCtaTitle, text: page.footerCtaText, linkTitle: page.ctaLinks && page.ctaLinks[0] ? page.ctaLinks[0].linkTitle : null, link: page.ctaLinks && page.ctaLinks[0].internalLink ? {slug: `${page.ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${page.ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (page.ctaLinks && page.ctaLinks[0].externalLink) ? page.ctaLinks[0].externalLink : null}}  />
+            </Section>
+              <FeaturedTestimonialsSingle data={{quote: page.quote, person: page.quotedPerson, testimonialColor: page.quoteBgColor, image: page.quoteImage, testimonialTextColor: page.quoteTextColor}}/>
+          
+          
+          <JumboCta data={{ctaBgColor: page.ctaBgColor, ctaBackgroundColor: page.ctaBgColor, textColor: page.footerCtaTextColor, title: page.footerCtaTitle, text: page.footerCtaText, linkTitle: page.ctaLinks && page.ctaLinks[0] ? page.ctaLinks[0].linkTitle : null, link: page.ctaLinks && page.ctaLinks[0].internalLink ? {slug: `${page.ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${page.ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (page.ctaLinks && page.ctaLinks[0].externalLink) ? page.ctaLinks[0].externalLink : null}}  />
         </Layout>
     )
 }
@@ -181,7 +167,7 @@ export const query = graphql`
       promiseTitle
       subtitle
     }
-    allDatoCmsBlogPost(filter: {title: {ne: null}}) {
+    allDatoCmsBlogPost(filter: {title: {ne: null}}, sort: {fields: meta___createdAt, order: DESC}) {
       nodes {
         title
         readLength

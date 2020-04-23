@@ -1,14 +1,25 @@
 import React, {useState} from 'react'
 import { useFlexSearch } from 'react-use-flexsearch'
+import { useStaticQuery, graphql } from "gatsby"
+
 import Classes from './blogSearch.module.scss'
 import { Link } from 'gatsby'
 import BlogPosts from '../../UiElements/blogPosts/blogPosts'
 
 
-const BlogSearch = ({ data, title }) => {
+const BlogSearch = ({ title }) => {
 
-  const index = data.index
-  const store = data.store
+  const search = useStaticQuery(graphql`
+        query SearchQuery {
+          localSearchBlogposts {
+            store
+            index
+          }
+        }
+    `)
+
+  const index = search.localSearchBlogposts.index
+  const store = search.localSearchBlogposts.store
   const [query, setQuery] = useState('')
 
   const results = useFlexSearch(query, index, JSON.parse(store))
@@ -17,22 +28,16 @@ const BlogSearch = ({ data, title }) => {
     e.preventDefault()
   }
     return (
-        <section className="section">
-        <div className="container">
-          <div className="row center-xs">
-            <div className="col col-xs-12 col-md-8 col-lg-6 text-center space-xs-up">
-            {title ? <h3 className="text-center space-xs-up">{ title }</h3> : null }
+      <>
+            <div className="col col-xs-12 space-xs-up">
               <form className={["flex stretch-xs", Classes.form].join(' ')}>
-                <input type="text" name="query" placeholder="Type to start searching..." onChange={(e) => setQuery(e.target.value)} />
+                <input type="text" name="query" placeholder={title} onChange={(e) => setQuery(e.target.value)} />
               </form>
             </div>
-          </div>
-          <div className="row center-xs">
-            <BlogPosts blogPosts={results} addedAmount={6} animate/>
-          </div>
-        </div>
-    </section>
+        <BlogPosts blogPosts={results} shadow addedAmount={6} animate/>
+        </>
     )
 }
+
 
 export default BlogSearch
