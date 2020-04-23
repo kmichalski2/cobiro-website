@@ -1,33 +1,37 @@
 import React from 'react'
 import Layout from '../../components/layout/layout'
 import SwayTop from '../../components/UiElements/SwayTop/SwayTop'
-import Classes from './blogCategory.module.scss'
 import BlogPosts from '../../components/UiElements/blogPosts/blogPosts'
 import JumboCta from '../../components/sections/jumboCta/jumboCta'
+import Section from '../../components/UiElements/Section/Section'
+import FeaturedTestimonialsSingle from '../../components/sections/featuredTestimonalSingle'
 
 
 const BlogCagegory = ({ pageContext }) => {
 
-    const {title, posts, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks} = pageContext
+    const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor} = pageContext
+
+    console.log(textColor)
     return (
         <Layout>
-            <SwayTop topColor={{hex: topGradiantColor}} bottomColor={{hex: bottomGradiantColor}} >
-              <div className={["container", Classes.header].join(' ')}>
+            <Section bgColor={bgColor.hex}>
+              <div className="container">
                   <div className="row middle-xs center-xs">
                       <div className="col col-xs-12 col-lg-8 text-center">
-                          <h1 className="text-white">{ title }</h1>
+                          <h1 className={textColor === 'light' ? "text-white" : null}>{ title }</h1>
                       </div>
                   </div>
               </div>
-          </SwayTop>
-          <section className="section">
-            <div className="container">
-                <div className="row center-xs">
-                    <BlogPosts blogPosts={posts} addedAmount={3} />
+            </Section>
+            <Section>
+                <div className="container">
+                    <div className="row">
+                        <BlogPosts blogPosts={posts} addedAmount={4} horizontal/>
+                    </div>
                 </div>
-            </div>
-          </section>
-          <JumboCta data={{topGradiantColor: {hex: topGradiantColor}, bottomGradiantColor: {hex: bottomGradiantColor}, backgroundColor: true, title: footerCtaTitle, text: footerCtaText, linkTitle: ctaLinks[0].linkTitle, link: ctaLinks && ctaLinks[0].internalLink ? {slug: `${ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (ctaLinks && ctaLinks[0].externalLink) ? ctaLinks[0].externalLink : null}} />
+            </Section>
+            <FeaturedTestimonialsSingle data={{quote: quote, person: person, testimonialColor: quoteBgColor, image: quoteImage, testimonialTextColor: quoteTextColor}}/>
+            <JumboCta data={{ctaBackgroundColor: {hex: bgColor.hex}, textColor: textColor, ctaBgColor: true, title: footerCtaTitle, text: footerCtaText, linkTitle: ctaLinks[0].linkTitle, link: ctaLinks && ctaLinks[0].internalLink ? {slug: `${ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (ctaLinks && ctaLinks[0].externalLink) ? ctaLinks[0].externalLink : null}} />
         </Layout>
     )
 }

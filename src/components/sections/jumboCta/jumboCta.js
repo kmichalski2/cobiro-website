@@ -23,7 +23,7 @@ const JumboCta = ({ data }) => {
   // const textColor = data.testimonialBgColor && data.testimonialTextColor  === 'light' ? "text-white" : "text-black"
   
 
-  console.log(icon)
+  console.log(bgColor)
 
   return (
     <Section

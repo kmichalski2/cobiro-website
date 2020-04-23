@@ -29,7 +29,7 @@ const BlogPosts = ({ blogPosts, offset, fixedMax, addedAmount, firstLarge, anima
     for (let i = offset || 0; i < (fixedMax || (offset ? numberOfPosts + offset : numberOfPosts)) && i < blogPosts.length; i++) {
         posts.push(
             firstLarge && i === 0 ?
-            <BlogPostsHeader key={i} post={blogPosts[i]} searchTitle={searchTitle}/>
+            <BlogPostsHeader key={i} post={blogPosts[i]} searchTitle={searchTitle} search/>
             :
             <BlogCard key={i} post={blogPosts[i]} large={firstLarge && i === 0 ? true : false} animate={animate} shadow={shadow} horizontal={horizontal}/>
         )

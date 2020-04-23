@@ -815,6 +815,24 @@ exports.createPages = async function({ graphql, actions }) {
           }
         }
         datoCmsBlogPage {
+          quote
+          quotedPerson
+          quoteImage {
+            alt
+            url
+            fluid {
+              aspectRatio
+              height
+              sizes
+              src
+              srcSet
+              width
+            }
+          }
+          quoteTextColor
+          quoteBgColor {
+            hex
+          }
           ctaLinks {
             ... on DatoCmsInternalLink {
               internalLink {
@@ -842,6 +860,10 @@ exports.createPages = async function({ graphql, actions }) {
           bottomGradiantColor {
             hex
           }
+          ctaBgColor {
+            hex
+          }
+          footerCtaTextColor
         }
         allDatoCmsBlogCategory(filter: {category: {ne: null}}) {
           nodes {
@@ -853,7 +875,13 @@ exports.createPages = async function({ graphql, actions }) {
       }      
       `).then(result => {
 
-        posts = []
+        let posts = []
+
+        let otherPosts = []
+
+        for(i = 0; i < 3; i++) {
+          otherPosts.push(result.data.allDatoCmsBlogPost.nodes[i])
+        }
 
         result.data.allDatoCmsBlogPost.nodes.forEach(async function(item) {
           const locale = item.locale
@@ -861,6 +889,8 @@ exports.createPages = async function({ graphql, actions }) {
           let p = `${prefix}/${item.slug ? item.slug : ''}`
           // let p = item.node.homepage ? '/' : `/${item.node.slug}`
           posts.push(item)
+
+          
 
           if(item.title) {
             await createPage({
@@ -875,12 +905,14 @@ exports.createPages = async function({ graphql, actions }) {
                 category: item.category,
                 readLength: item.readLength,
                 date: item.meta.publishedAt || item.meta.createdAt,
-                // ctaBackgroundColor: result.data.datoCmsBlogPage.ctaBackgroundColor ? result.data.datoCmsBlogPage.ctaBackgroundColor : null,
+                ctaBackgroundColor: result.data.datoCmsBlogPage.ctaBgColor,
+                textColor: result.data.datoCmsBlogPage.footerCtaTextColor,
                 topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
                 bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
                 footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
                 footerCtaText: result.data.datoCmsBlogPage.footerCtaText,
-                ctaLinks: result.data.datoCmsBlogPage.ctaLinks
+                ctaLinks: result.data.datoCmsBlogPage.ctaLinks,
+                otherPosts: otherPosts
               },
             })
           }
@@ -913,9 +945,16 @@ exports.createPages = async function({ graphql, actions }) {
                 posts: filteredPosts,
                 topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
                 bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
+                bgColor: result.data.datoCmsBlogPage.ctaBgColor,
+                textColor: result.data.datoCmsBlogPage.footerCtaTextColor,
                 footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
                 footerCtaText: result.data.datoCmsBlogPage.footerCtaText,
-                ctaLinks: result.data.datoCmsBlogPage.ctaLinks
+                ctaLinks: result.data.datoCmsBlogPage.ctaLinks,
+                quote: result.data.datoCmsBlogPage.quote,
+                person: result.data.datoCmsBlogPage.quotedPerson, 
+                quoteBgColor: result.data.datoCmsBlogPage.quoteBgColor, 
+                quoteImage: result.data.datoCmsBlogPage.quoteImage, 
+                testimonialTextColor: result.data.datoCmsBlogPage.quoteTextColor
               }
           })
         })

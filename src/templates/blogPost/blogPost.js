@@ -7,15 +7,21 @@ import Layout from "../../components/layout/layout"
 import Classes from "./blogPost.module.scss"
 import { Link } from "gatsby"
 import CategoryLabel from "../../components/UiElements/categoryLabel/categoryLabel"
+import Section from "../../components/UiElements/Section/Section"
+import BlogPosts from "../../components/UiElements/blogPosts/blogPosts"
+import BlogPostsHeader from "../../components/UiElements/blogPostsHeader/blogPostsHeader"
 
 const blogPost = ({pageContext}) => {
-    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks } = pageContext
+    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts } = pageContext
     const createMarkup = (text)  => {
         return {__html: text}
     }
 
+    console.log(otherPosts)
+
     return (
         <Layout 
+            menuInverted={true}
             // locales={ locales } 
             // currentLocale={data.locale}
             // hiddenMenuItems={data.hiddenMenuItems}
@@ -25,8 +31,11 @@ const blogPost = ({pageContext}) => {
                 description={data.seoTags && data.seoTags.description ? data.seoTags.description : null} 
                 lang={data.locale}
                 /> */}
+
+            <BlogPostsHeader post={{title, subtitle, category, featuredImage, writer, readLength}} metaFields/>
             <article>
-                <SwayTop topColor={{hex: "#004BD5"}} bottomColor={{hex: "#62C9FF"}} >
+                
+                {/* <SwayTop topColor={{hex: "#004BD5"}} bottomColor={{hex: "#62C9FF"}} >
                     <div className={["container", Classes.header].join(' ')}>
                         <div className="row middle-xs">
                             <div className="col col-xs-12 col-lg-6">
@@ -41,7 +50,7 @@ const blogPost = ({pageContext}) => {
                             </div>
                         </div>
                     </div>
-                </SwayTop>
+                </SwayTop> */}
                 <div className="section">
                     <div className="container">
                         <div className="row center-xs">
@@ -100,7 +109,17 @@ const blogPost = ({pageContext}) => {
                     </div>
                 </div>
             </article>
-            <JumboCta data={{topGradiantColor: {hex: topGradiantColor}, bottomGradiantColor: {hex: bottomGradiantColor}, backgroundColor: true, title: footerCtaTitle, text: footerCtaText, linkTitle: ctaLinks[0].linkTitle, link: ctaLinks && ctaLinks[0].internalLink ? {slug: `${ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (ctaLinks && ctaLinks[0].externalLink) ? ctaLinks[0].externalLink : null}} />
+            <Section>
+                <div className="container">
+                    <div className="row">
+                        <div className="col col-xs-12 space-xs-up text-center">
+                            <h2>People also read</h2>
+                        </div>
+                        <BlogPosts blogPosts={otherPosts} shadow />
+                    </div>
+                </div>
+            </Section>
+            <JumboCta data={{ctaBackgroundColor: ctaBackgroundColor, ctaBgColor: ctaBackgroundColor ? true : false, textColor: textColor, title: footerCtaTitle, text: footerCtaText, linkTitle: ctaLinks[0].linkTitle, link: ctaLinks && ctaLinks[0].internalLink ? {slug: `${ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (ctaLinks && ctaLinks[0].externalLink) ? ctaLinks[0].externalLink : null}} />
         </Layout>
     )
 }
