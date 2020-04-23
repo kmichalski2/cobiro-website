@@ -9,7 +9,7 @@ import FeaturedTestimonialsSingle from '../../components/sections/featuredTestim
 
 const BlogCagegory = ({ pageContext }) => {
 
-    const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, quotedPerson, quoteBgColor, quoteImage, quoteTextColor} = pageContext
+    const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor} = pageContext
 
     console.log(textColor)
     return (
@@ -30,7 +30,7 @@ const BlogCagegory = ({ pageContext }) => {
                     </div>
                 </div>
             </Section>
-            <FeaturedTestimonialsSingle data={{quote: quote, person: quotedPerson, testimonialColor: quoteBgColor, image: quoteImage, testimonialTextColor: quoteTextColor}}/>
+            <FeaturedTestimonialsSingle data={{quote: quote, person: person, testimonialColor: quoteBgColor, image: quoteImage, testimonialTextColor: quoteTextColor}}/>
             <JumboCta data={{ctaBackgroundColor: {hex: bgColor.hex}, textColor: textColor, ctaBgColor: true, title: footerCtaTitle, text: footerCtaText, linkTitle: ctaLinks[0].linkTitle, link: ctaLinks && ctaLinks[0].internalLink ? {slug: `${ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (ctaLinks && ctaLinks[0].externalLink) ? ctaLinks[0].externalLink : null}} />
         </Layout>
     )
