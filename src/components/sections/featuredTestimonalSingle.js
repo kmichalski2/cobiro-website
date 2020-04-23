@@ -6,8 +6,8 @@ import ImageAll from '../UiElements/ImageAll/ImageAll'
 
 const FeaturedTestimonialsSingle = ({ data }) => {
 
-  const bgColor = data.testimonialBgColor && data.testimonialColor ? data.testimonialColor.hex : null
-  const textColor = data.testimonialBgColor && data.testimonialTextColor  === 'light' ? "text-white" : "text-black"
+  const bgColor = data.testimonialColor ? data.testimonialColor.hex : null
+  const textColor = data.testimonialTextColor  === 'light' ? "text-white" : null
   
   return (
     <Section

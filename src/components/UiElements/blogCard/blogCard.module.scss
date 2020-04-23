@@ -1,13 +1,21 @@
 @import '../../../components/layout/style/globals';
 
-.card {
-    .postImg {
+.horizontal {
+    display: flex;
+    // align-items: center;
+    margin: 3.125rem 0 !important;
+    padding-right: 2.8125rem !important;
 
-        img {
-            width: 100% !important;
-            max-width: 100% !important;
-        }
+    .postImg {
+        width: 8.75rem;
+        margin-right: 1.25rem;
     }
 
+}
+.postImg {
 
+    img {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 }

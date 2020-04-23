@@ -1,6 +1,6 @@
 @import '../../layout/style/globals';
 
-.text {
+.text, .headerSpacing {
     margin-bottom: 2.5rem;
 }
 
@@ -24,6 +24,14 @@
         margin-right: 1rem;
         height: 2rem;
     }
+
+    &.iconLarge {
+        img {
+            height: 5rem;
+            margin-right: 0;
+        }
+    }
+
     h3 {
         margin: 0;
     }
