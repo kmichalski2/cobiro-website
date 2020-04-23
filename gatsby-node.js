@@ -810,6 +810,24 @@ exports.createPages = async function({ graphql, actions }) {
           }
         }
         datoCmsBlogPage {
+          quote
+          quotedPerson
+          quoteImage {
+            alt
+            url
+            fluid {
+              aspectRatio
+              height
+              sizes
+              src
+              srcSet
+              width
+            }
+          }
+          quoteTextColor
+          quoteBgColor {
+            hex
+          }
           ctaLinks {
             ... on DatoCmsInternalLink {
               internalLink {
@@ -837,6 +855,10 @@ exports.createPages = async function({ graphql, actions }) {
           bottomGradiantColor {
             hex
           }
+          ctaBgColor {
+            hex
+          }
+          footerCtaTextColor
         }
         allDatoCmsBlogCategory(filter: {category: {ne: null}}) {
           nodes {
@@ -908,9 +930,16 @@ exports.createPages = async function({ graphql, actions }) {
                 posts: filteredPosts,
                 topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
                 bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
+                bgColor: result.data.datoCmsBlogPage.ctaBgColor,
+                textColor: result.data.datoCmsBlogPage.footerCtaTextColor,
                 footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
                 footerCtaText: result.data.datoCmsBlogPage.footerCtaText,
-                ctaLinks: result.data.datoCmsBlogPage.ctaLinks
+                ctaLinks: result.data.datoCmsBlogPage.ctaLinks,
+                quote: result.data.datoCmsBlogPage.quote,
+                person: result.data.datoCmsBlogPage.quotedPerson, 
+                testimonialColor: result.data.datoCmsBlogPage.quoteBgColor, 
+                image: result.data.datoCmsBlogPage.quoteImage, 
+                testimonialTextColor: result.data.datoCmsBlogPage.quoteTextColor
               }
           })
         })
