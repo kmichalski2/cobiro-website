@@ -13,8 +13,6 @@ const JumboHeader = ({ data }) => {
   const alignment = data.alignment
   const imageToEdges = data.imageToEdges
 
-  console.log(bgColor)
-
   const textSide = (
     <div className={[
         "col col-xs-12", 

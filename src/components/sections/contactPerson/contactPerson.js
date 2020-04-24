@@ -5,8 +5,6 @@ import ImageAll from '../../UiElements/ImageAll/ImageAll'
 
 const PersonContact = ({ data }) => {
 
-    console.log(data)
-
     const bgColor = data.bgColor ? data.bgColor.hex : null
     const textColor = data.textColor === 'light' ? "text-white" : "text-black"
     const title = data.sectionTitle

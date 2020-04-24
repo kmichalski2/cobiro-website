@@ -11,7 +11,6 @@ const BlogCagegory = ({ pageContext }) => {
 
     const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor} = pageContext
 
-    console.log(textColor)
     return (
         <Layout>
             <Section bgColor={bgColor.hex}>

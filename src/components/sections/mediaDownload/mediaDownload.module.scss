@@ -1,0 +1,15 @@
+@import '../../layout/style/globals';
+
+.downloadButton {
+    margin-top: 2rem;
+}
+
+.downloadCard {
+    padding: 5rem 1rem;
+    
+        @include mq($until: md) {
+                flex-direction: column;
+                padding: 3rem 0rem;
+                align-items: center!important;
+    }
+}

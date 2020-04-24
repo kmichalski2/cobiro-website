@@ -24,6 +24,7 @@ import Gallery from "./sections/gallery/gallery"
 import BlogLatest from "./sections/blogLatest"
 import ContactPerson from './sections/contactPerson/contactPerson'
 import PricingTables from "./sections/pricingTables/pricingTables"
+import MediaDownload from './sections/mediaDownload/mediaDownload'
 
 const PageContent = ({ data, locales }) => {
 
@@ -49,7 +50,6 @@ const PageContent = ({ data, locales }) => {
                 if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
                     setMenuInverted(true)
                 } 
-                console.log(menuInverted)
                 return <JumboHeader data={data.sections[index]} key={index}/>
             case 'ThreeUp':
                 return <ThreeUp data={data.sections[index]} key={index}/>
@@ -95,6 +95,8 @@ const PageContent = ({ data, locales }) => {
                 return <ContactPerson data={data.sections[index]} key={index}/>
             case 'PricingTable':
                 return <PricingTables data={data.sections[index]} key={index}/>
+            case 'MediaDownload':
+                return <MediaDownload data={data.sections[index]} key={index}/>
             default:
                 return null
             }

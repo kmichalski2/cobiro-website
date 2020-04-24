@@ -65,6 +65,19 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                 }
+                ... on DatoCmsMediaDownload {
+                    mediaDownloadCardText
+                    mediaDownloadCardTitle
+                    mediaDownloadFiles
+                    mediaDownloadIcon {
+                      url
+                      fluid {
+                        src
+                      }
+                    }
+                    mediaDownloadText
+                    mediaDownloadTitle
+                  }
                 ... on DatoCmsJumboHeader {
                   backgroundColor
                   topGradiantColor {
