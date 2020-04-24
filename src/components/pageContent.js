@@ -23,6 +23,7 @@ import Form from "./sections/Form/Form"
 import Gallery from "./sections/gallery/gallery"
 import BlogLatest from "./sections/blogLatest"
 import ContactPerson from './sections/contactPerson/contactPerson'
+import PricingTables from "./sections/pricingTables/pricingTables"
 
 const PageContent = ({ data, locales }) => {
 
@@ -92,6 +93,8 @@ const PageContent = ({ data, locales }) => {
                 return <Form data={data.sections[index]} key={index}/>
             case 'ContactPerson':
                 return <ContactPerson data={data.sections[index]} key={index}/>
+            case 'PricingTable':
+                return <PricingTables data={data.sections[index]} key={index}/>
             default:
                 return null
             }

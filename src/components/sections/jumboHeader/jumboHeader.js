@@ -44,7 +44,7 @@ const JumboHeader = ({ data }) => {
     </div>
   )
  
-  const imageSide = (
+  const imageSide = data.image ? (
     <div className={[
       "col col-xs-12", 
       alignment === 'centered' ? 'col-md-8' : 'col-lg-6',
@@ -54,7 +54,7 @@ const JumboHeader = ({ data }) => {
       >
         <ImageAll image={data.image} alt={data.image.alt || data.heading} classes={imageToEdges ? Classes.imageToEdges : null} fullWidth />
     </div> 
-  )
+  ) : null  
   
   return (
     <Section 
