@@ -12,7 +12,7 @@ const ThreeUpPeople = ({ data }) => {
     <Section bgColor={data.bgColor && data.bgColor.hex}>
       <div className={data.backgroundColor ? "bg-sway-inner" : null}>
         <div className="container">
-          <div className="row center-xs">
+          <div className="row center-xs stretch-xs">
             {data.title || data.text ? (
               <div className="col col-xs-12 text-center section-header">
                 {data.title ? <h2 className={data.textColor === 'light' ? "text-white" : null}>{data.title}</h2> : null}
@@ -21,7 +21,7 @@ const ThreeUpPeople = ({ data }) => {
             ) : null}
 
             {data.box1Title && data.box1Text && data.box1Icon ? (
-              <div className="col col-xs-12 col-md-4">
+              <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box1Icon} 
                   alt={data.box1Icon.alt ? data.box1Icon.alt : data.box1Title} 
@@ -39,7 +39,7 @@ const ThreeUpPeople = ({ data }) => {
             ) : null}
 
             {data.box2Title && data.box2Text && data.box2Icon ? (
-              <div className="col col-xs-12 col-md-4">
+              <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box2Icon} 
                   alt={data.box2Icon.alt ? data.box2Icon.alt : data.box2Title} 
@@ -57,7 +57,7 @@ const ThreeUpPeople = ({ data }) => {
             ) : null}
 
             {data.box3Title && data.box3Text && data.box3Icon ? (
-              <div className="col col-xs-12 col-md-4">
+              <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box3Icon} 
                   alt={data.box3Icon.alt ? data.box3Icon.alt : data.box3Title} 
@@ -75,7 +75,7 @@ const ThreeUpPeople = ({ data }) => {
             ) : null}
             
             {data.box4Title && data.box4Text && data.box4Icon ? (
-              <div className="col col-xs-12 col-md-4">
+              <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box4Icon} 
                   alt={data.box4Icon.alt ? data.box4Icon.alt : data.box4Title} 
@@ -93,7 +93,7 @@ const ThreeUpPeople = ({ data }) => {
             ) : null}
 
             {data.box5Title && data.box5Text && data.box5Icon ? (
-              <div className="col col-xs-12 col-md-4">
+              <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box5Icon} 
                   alt={data.box5Icon.alt ? data.box5Icon.alt : data.box5Title} 
@@ -111,7 +111,7 @@ const ThreeUpPeople = ({ data }) => {
             ) : null}
 
             {data.box6Title && data.box6Text && data.box6Icon ? (
-              <div className="col col-xs-12 col-md-4">
+              <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box6Icon} 
                   alt={data.box6Icon.alt ? data.box6Icon.alt : data.box6Title} 
