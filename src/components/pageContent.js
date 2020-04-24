@@ -50,7 +50,6 @@ const PageContent = ({ data, locales }) => {
                 if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
                     setMenuInverted(true)
                 } 
-                console.log(menuInverted)
                 return <JumboHeader data={data.sections[index]} key={index}/>
             case 'ThreeUp':
                 return <ThreeUp data={data.sections[index]} key={index}/>

@@ -20,9 +20,6 @@ const Blog = ({ data }) => {
   const topColor = page.topGradiantColor.hex || "#004BD5"
   const bottomColor = page.bottomGradiantColor.hex || "#62C9FF"
 
-  console.log(data)
-
-
     return (
         <Layout menuInverted>          
           <BlogPosts blogPosts={posts} offset={0} fixedMax={1} addedAmount={0} firstLarge horizontal searchTitle={page.searchTitle}/>

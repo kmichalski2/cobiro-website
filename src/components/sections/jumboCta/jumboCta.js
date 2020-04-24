@@ -21,9 +21,7 @@ const JumboCta = ({ data }) => {
 
   // const bgColor = data.testimonialBgColor && data.testimonialColor ? data.testimonialColor.hex : null
   // const textColor = data.testimonialBgColor && data.testimonialTextColor  === 'light' ? "text-white" : "text-black"
-  
 
-  console.log(bgColor)
 
   return (
     <Section

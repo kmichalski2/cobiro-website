@@ -7,7 +7,7 @@ import AnyLink from '../AnyLink/AnyLink'
 import Classes from './IconCard.module.scss'
 
 const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow }) => {
-    console.log(shadow)
+
     return (
         <Card shadow={shadow}>
             <ImageAll 

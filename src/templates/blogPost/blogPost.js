@@ -17,8 +17,6 @@ const blogPost = ({pageContext}) => {
         return {__html: text}
     }
 
-    console.log(otherPosts)
-
     return (
         <Layout 
             menuInverted={true}

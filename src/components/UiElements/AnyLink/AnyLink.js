@@ -5,8 +5,6 @@ import Classes from './AnyLink.module.scss'
 
 const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes}) => {
 
-    console.log(link, title)
-
     const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : Classes.textLink, large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null].join(' ')
 
     return (

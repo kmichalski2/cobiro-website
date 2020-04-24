@@ -66,14 +66,9 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsMediaDownload {
-                    bgColor {
-                      hex
-                    }
                     mediaDownloadCardText
                     mediaDownloadCardTitle
-                    mediaDownloadFiles {
-                      url
-                    }
+                    mediaDownloadFiles
                     mediaDownloadIcon {
                       url
                       fluid {
