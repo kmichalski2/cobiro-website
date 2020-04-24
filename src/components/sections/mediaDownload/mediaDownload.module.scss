@@ -7,9 +7,13 @@
 .downloadCard {
     padding: 5rem 1rem;
     
-        @include mq($until: md) {
-                flex-direction: column;
-                padding: 3rem 0rem;
-                align-items: center!important;
+    @include mq($until: md) {
+        flex-direction: column;
+        padding: 3rem 0rem;
+        align-items: center !important;
+
+        img {
+            margin-right: 0!important;
+        }
     }
 }
