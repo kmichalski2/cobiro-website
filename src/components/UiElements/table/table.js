@@ -1,19 +1,24 @@
 import React from 'react'
 
 import TableRow from './tableRow/tableRow'
+import ImageAll from '../ImageAll/ImageAll'
 
-const Table = ({name, headers, rows}) => {
+import Classes from './table.module.scss'
+
+const Table = ({name, headers, rows, icon}) => {
+
+    console.log(rows)
 
     return (
-        <table className="table">
+        <table className={["table", Classes.table].join(' ')}>
             <thead>
                 <tr>
-                { name ? <th>{ name }</th> : null }
-                { headers ? headers.map((h, i) => <th key={i}>{ h }</th>) : null }
+                { name ? <th className={[Classes.tableName, Classes.tableHeader].join(' ')}>{icon ? <ImageAll image={icon} alt={icon.alt || name} classes={Classes.icon} /> : null}{ name }</th> : null }
+                { headers ? headers.map((h, i) => <th key={i} className={Classes.tableHeader}>{ h }</th>) : null }
                 </tr>
             </thead>
             <tbody>
-                { rows ? rows.map((r, i) => <TableRow  key={i} rowHeader={} rows={} />) : null}
+                { rows ? rows.map((r, i) => <TableRow  key={i} rowHeader={r.rowName} label={r.label} cols={r.cols} nested={r.nested} />) : null}
             </tbody>
             </table>
     )

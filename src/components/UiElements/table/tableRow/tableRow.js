@@ -1,11 +1,13 @@
 import React from 'react'
 
-const TableRow = ({rowHeader, rows}) => {
+import Classes from './tableRow.module.scss'
 
+const TableRow = ({rowHeader, cols, label, nested}) => {
+    
     return (
         <tr>
-            { rowHeader ? <th scope="row">{rowHeader}</th> : null }
-            { rows ? rows.map((r, i) => <td key={i}>{r}</td>) : null }
+            { rowHeader ? <th scope="row" className={nested ? Classes.nested : null}>{rowHeader} {label}</th> : null }
+            { cols ? cols.map((c, i) => <td key={i}>{c}</td>) : null }
         </tr>
     )
 }
