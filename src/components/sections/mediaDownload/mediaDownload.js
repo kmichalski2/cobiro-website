@@ -14,7 +14,7 @@ const MediaDownload = ({data}) => {
     const mediaKitLink = data.mediaDownloadFiles ? data.mediaDownloadFiles : null
     // const bgColor = data.bgColor ? data.bgColor.hex : null - Remember to ad bgColor in node.js if this is activated
     const bgColor = null
-    const textColor = null
+    const textColor = null 
     // const textColor = data.textColor === 'light' ? "text-white" : "text-black" - Remember to ad textColor in node.js if this is activated
     
     return (
