@@ -33,8 +33,15 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
       nodes {
         linkTitle
         link {
-          slug
-          title
+          ... on DatoCmsPage {
+            id
+            title
+            slug
+          }
+          ... on DatoCmsBlogPage {
+            title
+            slug
+          }
         }
         id
         menuItemOrder
@@ -59,12 +66,26 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
             url
           }
           link {
-            title
-            slug
+            ... on DatoCmsPage {
+              id
+              title
+              slug
+            }
+            ... on DatoCmsBlogPage {
+              title
+              slug
+            }
           }
           submenuLinks {
-            title
-            slug
+            ... on DatoCmsPage {
+              id
+              title
+              slug
+            }
+            ... on DatoCmsBlogPage {
+              title
+              slug
+            }
           }
           submenuLinkTitles
         }
