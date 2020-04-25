@@ -123,7 +123,7 @@ exports.createPages = async function({ graphql, actions }) {
                     alt
                     width
                     height
-                    fluid(maxWidth: 900, imgixParams: {q: 50}) {
+                    fluid(maxWidth: 1200, imgixParams: {q: 50}) {
                       width
                       height
                       srcSet
@@ -458,7 +458,7 @@ exports.createPages = async function({ graphql, actions }) {
                       imageLeft {
                         url
                         alt
-                        fixed(width: 24) {
+                        fixed(width: 48) {
                           base64
                           aspectRatio
                           width
@@ -471,7 +471,7 @@ exports.createPages = async function({ graphql, actions }) {
                       flag {
                         url
                         alt
-                        fixed(width: 24) {
+                        fixed(width: 48) {
                           base64
                           aspectRatio
                           width

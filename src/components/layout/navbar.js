@@ -10,20 +10,32 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [windowWidth, setWindowWidth] = useState(typeof window != "undefined" ? window.innerWidth : null)
   const [mainMenuHovered, setMainMenuHovered] = useState(false)
-
+  let [refs, setRefs] = useState({})
   const mainMenu = React.createRef();
   let mainMenuNode
-  const refs = {}
+  // let refs = {}
 
-  menuItems.forEach((item, i) => {
-    if(item.submenu.length > 0) {
-      refs[`ref_${i}`] = React.createRef()
-    }
-  });
+  
 
   useEffect(() => {
+    
+    let tempRefs = {}
+
+    menuItems.forEach((item, i) => {
+      if(item.submenu.length > 0) {
+        // refs[`ref_${i}`] = React.createRef()
+
+        tempRefs = {...tempRefs, [`ref_${i}`]: React.createRef()}
+      }
+    });
+
+    setRefs(tempRefs)
+    
+  }, [menuItems])
+ 
+  useEffect(() => {
     mainMenuNode = mainMenu.current
-    window.addEventListener("resize", resizeHandler, false)
+    window.addEventListener("resize", () => resizeHandler())
     setSubMenuOffset()
 
     // Add white bg and shadow to menu on scroll
@@ -34,10 +46,10 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
         setIsScrolled(false)
       }
     }
-    return () => {
-      window.removeEventListener("resize", resizeHandler, false)
-    }
-  })
+    // return () => {
+    //   window.removeEventListener("resize", resizeHandler)
+    // }
+  }, [refs])
 
   const resizeHandler = () => {
     setSubMenuOffset()
@@ -55,14 +67,16 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
     for (var prop in refs) {
       if (refs[prop].current && Object.prototype.hasOwnProperty.call(refs, prop)) {
           const sub = refs[prop].current
+          
           if(window.innerWidth > "960") {
-            let subOffset = getPageTopLeft(sub)
+            const subOffset = getPageTopLeft(sub)
             if(subOffset < 0 ) {
               sub.style.marginLeft = -1 * subOffset + 16 + 'px'
               sub.querySelector('.submenu-triangle').style.marginLeft = subOffset + -16 + 'px'
               return true
             } else {
               sub.style.marginLeft = 0
+              sub.querySelector('.submenu-triangle').style.marginLeft = 0
             }
             return false
         } else {
