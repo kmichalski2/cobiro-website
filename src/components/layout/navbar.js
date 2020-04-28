@@ -2,6 +2,7 @@ import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
 import logo from "../../images/logo_white.svg"
 import Img from "gatsby-image"
+import ImageAll from '../UiElements/ImageAll/ImageAll'
 
 const Navbar = ({ menuItems, customCta, menuInverted }) => {
 
@@ -169,18 +170,12 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                     <div className="submenu-inner">
                         {item.submenu.map((sub, index) => (
                           <div key={index} className={ sub.submenuLinks.length > 0 ? "has-subsubmenu" : null }>
+                          {sub.title || sub.icon ? 
                           <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? `/${sub.link.slug}` : '/'} target="_self" onClick={subSubMenuClickHandler}>
-                            {sub.icon.fixed ===! null ?
-                            <Img fixed={sub.icon.fixed} alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
-                            :
-                            <img
-                                src={sub.icon.url}
-                                className="submenu-icon"
-                                alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}
-                              />
-                            }
+                            <ImageAll classes="submenu-icon" image={sub.icon} alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
                             {sub.title}
                           </Link>
+                          : null}
                           <div className="subsubmenu">
                             <ul className="list-unstyled">
                               {sub.submenuLinks.map((subsub, index) => (
@@ -189,7 +184,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                                   to={subsub.slug ? `/${subsub.slug}` : '/'}
                                   target="_self"
                                 >
-                                  {subsub.submenuLinkTitles > 0 ? subsub.submenuLinkTitles[index] : subsub.title}
+                                  {sub.submenuLinkTitles && sub.submenuLinkTitles.length > 0 ? sub.submenuLinkTitles[index] : subsub.title}
                                 </Link>
                               </li>
                               ))}
