@@ -72,7 +72,13 @@ exports.createPages = async function({ graphql, actions }) {
                     mediaDownloadIcon {
                       url
                       fluid {
+                        width
+                        height
+                        srcSet
+                        base64
+                        aspectRatio
                         src
+                        sizes
                       }
                     }
                     mediaDownloadText
