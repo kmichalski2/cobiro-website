@@ -172,7 +172,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                           <div key={index} className={ sub.submenuLinks.length > 0 ? "has-subsubmenu" : null }>
                           {sub.title || sub.icon ? 
                           <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? `/${sub.link.slug}` : '/'} target="_self" onClick={subSubMenuClickHandler}>
-                            <ImageAll classes="submenu-icon" image={sub.icon} alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
+                            <ImageAll classes="submenu-icon" image={sub.icon} alt={sub.icon && sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
                             {sub.title}
                           </Link>
                           : null}
