@@ -159,6 +159,10 @@ exports.createPages = async function({ graphql, actions }) {
                   bottomGradiantColor {
                     hex
                   }
+                  bgColor {
+                    hex
+                  }
+                  textColor
                 }
                 ... on DatoCmsExplanationGiftCard {
                   title
@@ -781,6 +785,10 @@ exports.createPages = async function({ graphql, actions }) {
                   topGradiantColor {
                     hex
                   }
+                  bgColor {
+                    hex
+                  }
+                  textColor
                 }
               }
             }
