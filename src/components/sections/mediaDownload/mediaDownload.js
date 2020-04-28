@@ -29,9 +29,11 @@ const MediaDownload = ({data}) => {
                     <div className="col col-xs-12 col-lg-8 col-md-7 space-md space-sm space-xs">
                         <HtmlText RawHtml={text} classes={textColor}/>
                     </div>
-                    <div className="col col-xs-12 col-sm-10 col-lg-4 col-md-5 center">
+                    <div className="col col-xs-12 col-sm-10 col-lg-4 col-md-5">
                         <div className={["card card-square", Classes.downloadCard].join(' ')}>
-                            <ImageAll image={downloadIcon} classes={Classes.icon}/>
+                        <div className={[Classes.icon].join(' ')}>
+                            <ImageAll image={downloadIcon} className={Classes.icon}/>
+                        </div>
                             <h3>{cardTitle}</h3>
                             <p className="small">{cardText}</p>
                             <a className={["btn", Classes.downloadButton].join(' ')} href={mediaKitLink} target="_blank" rel="noreferrer noopener">Get media kit</a>
