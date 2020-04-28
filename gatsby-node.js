@@ -977,7 +977,7 @@ exports.createPages = async function({ graphql, actions }) {
 
         let otherPosts = []
 
-        for(i = 0; i < 3; i++) {
+        for(i = 0; i < 3 && i < result.data.allDatoCmsBlogPost.nodes.length; i++) {
           otherPosts.push(result.data.allDatoCmsBlogPost.nodes[i])
         }
 
