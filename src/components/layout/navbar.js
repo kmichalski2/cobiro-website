@@ -189,7 +189,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                                   to={subsub.slug ? `/${subsub.slug}` : '/'}
                                   target="_self"
                                 >
-                                  {subsub.submenuLinkTitles > 0 ? subsub.submenuLinkTitles[index] : subsub.title}
+                                  {sub.submenuLinkTitles && sub.submenuLinkTitles.length > 0 ? sub.submenuLinkTitles[index] : subsub.title}
                                 </Link>
                               </li>
                               ))}
