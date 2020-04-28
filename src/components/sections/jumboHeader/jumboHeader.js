@@ -36,7 +36,18 @@ const JumboHeader = ({ data }) => {
             internal: data.link && data.link.slug && true,
             button: true,
             large: true,
+          },
+          data.secondaryLinkTitle && (data.secondaryLink || data.secondaryExternalLinkUrl) ?
+          {
+            link: data.secondaryExternalLinkUrl || data.secondaryLink && data.secondaryLink.slug,
+            title: data.secondaryLinkTitle,
+            external: data.secondaryExternalLinkUrl && true,
+            internal: data.secondaryLink && data.secondaryLink.slug && true,
+            button: true,
+            large: true,
+            secondary: true
           }
+          : ""
         ]}
         />
     </div>

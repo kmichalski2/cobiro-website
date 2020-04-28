@@ -99,6 +99,16 @@ exports.createPages = async function({ graphql, actions }) {
                     slug
                     position
                   }
+                  secondaryLinkTitle
+                  secondaryLink {
+                    ... on DatoCmsPage {
+                      slug
+                    }
+                    ... on DatoCmsBlogPage {
+                      slug
+                    }
+                  }
+                  secondaryExternalLinkUrl
                   alignment
                   bgColor {
                     hex
@@ -410,6 +420,16 @@ exports.createPages = async function({ graphql, actions }) {
                   link {
                     slug
                   }
+                  secondaryLinkTitle
+                  secondaryLink {
+                    ... on DatoCmsPage {
+                      slug
+                    }
+                    ... on DatoCmsBlogPage {
+                      slug
+                    }
+                  }
+                  secondaryExternalLinkUrl
                   externalLinkCta
                 }
                 ... on DatoCmsListPricing {
