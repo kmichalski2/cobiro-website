@@ -11,17 +11,22 @@ import BlogPosts from '../../components/UiElements/blogPosts/blogPosts'
 import CategoryLabel from '../../components/UiElements/categoryLabel/categoryLabel'
 import Section from '../../components/UiElements/Section/Section'
 import FeaturedTestimonialsSingle from '../../components/sections/featuredTestimonalSingle'
+import SEO from '../../components/seo'
 
 const Blog = ({ data }) => {
 
   const page = data.datoCmsBlogPage
   const posts = data.allDatoCmsBlogPost.nodes
   const categories = data.allDatoCmsBlogCategory.nodes
-  const topColor = page.topGradiantColor.hex || "#004BD5"
-  const bottomColor = page.bottomGradiantColor.hex || "#62C9FF"
+  const seoTags = page.seoTags
 
     return (
-        <Layout menuInverted>          
+        <Layout menuInverted>     
+        <SEO 
+          title={ seoTags && seoTags.title ? seoTags.title : page.title } 
+          description={seoTags && seoTags.description ? seoTags.description : null} 
+          lang={data.locale}
+          />
           <BlogPosts blogPosts={posts} offset={0} fixedMax={1} addedAmount={0} firstLarge horizontal searchTitle={page.searchTitle}/>
           <Section>
             <div className="container">
@@ -91,6 +96,11 @@ export const query = graphql`
   {
     datoCmsBlogPage {
       title
+      locale
+      seoTags {
+        title
+        description
+      }
       ctaLinks {
         ... on DatoCmsInternalLink {
           internalLink {
