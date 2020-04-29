@@ -825,6 +825,10 @@ exports.createPages = async function({ graphql, actions }) {
           nodes {
             locale
             title
+            seoTags {
+              title
+              description
+            }
             slug
             featuredImage {
               fluid {

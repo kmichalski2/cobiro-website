@@ -10,9 +10,10 @@ import CategoryLabel from "../../components/UiElements/categoryLabel/categoryLab
 import Section from "../../components/UiElements/Section/Section"
 import BlogPosts from "../../components/UiElements/blogPosts/blogPosts"
 import BlogPostsHeader from "../../components/UiElements/blogPostsHeader/blogPostsHeader"
+import SEO from "../../components/seo"
 
 const blogPost = ({pageContext}) => {
-    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts } = pageContext
+    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, locale } = pageContext
     const createMarkup = (text)  => {
         return {__html: text}
     }
@@ -21,34 +22,17 @@ const blogPost = ({pageContext}) => {
         <Layout 
             menuInverted={true}
             // locales={ locales } 
-            // currentLocale={data.locale}
-            // hiddenMenuItems={data.hiddenMenuItems}
+            currentLocale={locale}
             >
-            {/* <SEO 
-                title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } 
-                description={data.seoTags && data.seoTags.description ? data.seoTags.description : null} 
-                lang={data.locale}
-                /> */}
+            <SEO 
+                title={ seoTags && seoTags.title ? seoTags.title : title } 
+                description={seoTags && seoTags.description ? seoTags.description : null} 
+                lang={locale}
+                />
+
 
             <BlogPostsHeader post={{title, subtitle, category, featuredImage, writer, readLength}} metaFields/>
             <article>
-                
-                {/* <SwayTop topColor={{hex: "#004BD5"}} bottomColor={{hex: "#62C9FF"}} >
-                    <div className={["container", Classes.header].join(' ')}>
-                        <div className="row middle-xs">
-                            <div className="col col-xs-12 col-lg-6">
-                                <p className={["small text-bold", Classes.date].join(' ')}>{date}</p>
-                                <h1>{ title }</h1>
-                                <p>{ subtitle }</p>
-                                <h4 className="space-xs-up">{ readLength } Min read - Written by { writer }</h4>
-                                { category.length > 0 ? category.map((cat, i) => <CategoryLabel key={i} category={cat.category} link={`/blog/${cat.slug}`}/>) : null }
-                            </div>
-                            <div className="col col-xs-12 col-lg-6">
-                                <Img fluid={ featuredImage.fluid } alt={featuredImage.alt} />
-                            </div>
-                        </div>
-                    </div>
-                </SwayTop> */}
                 <div className="section">
                     <div className="container">
                         <div className="row center-xs">
