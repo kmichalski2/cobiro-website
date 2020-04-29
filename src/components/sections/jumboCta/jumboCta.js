@@ -29,7 +29,7 @@ const JumboCta = ({ data }) => {
     >
         <div className="container">
           <div className="row text-center center-xs">
-            <div className="col-xs-10 col-xl-8">
+            <div className="col-xs-12 col-md-8 col-lg-6">
               <div className={backgroundImage ? Classes.content : null}>
               
                 {/* { icon ? <div className={Classes.iconWrapper}><ImageAll image={icon} classes={Classes.icon}/></div> : null }

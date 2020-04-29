@@ -12,14 +12,15 @@ const ThreeUpPeople = ({ data }) => {
     <Section bgColor={data.bgColor && data.bgColor.hex}>
       <div className={data.backgroundColor ? "bg-sway-inner" : null}>
         <div className="container">
-          <div className="row center-xs stretch-xs">
+          <div className="row center-xs">
             {data.title || data.text ? (
-              <div className="col col-xs-12 text-center section-header">
+              <div className="col col-xs-12 col-md-8 col-lg-6 text-center section-header">
                 {data.title ? <h2 className={data.textColor === 'light' ? "text-white" : null}>{data.title}</h2> : null}
                 <HtmlText RawHtml={data.text} classes={data.textColor === 'light' ? "text-white" : null}/>
               </div>
             ) : null}
-
+          </div>
+          <div className="row center-xs stretch-xs">
             {data.box1Title && data.box1Text && data.box1Icon ? (
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
