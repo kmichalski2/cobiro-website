@@ -902,6 +902,18 @@ exports.createPages = async function({ graphql, actions }) {
               }
             }
             writer
+            writerImage {
+              fixed(width: 48) {
+                width
+                height
+                srcSet
+                base64
+                aspectRatio
+                src
+              }
+              url
+              alt
+            }
             category {
               category
               slug
@@ -1004,6 +1016,7 @@ exports.createPages = async function({ graphql, actions }) {
                 subtitle: item.subtitle,
                 content: item.content,
                 writer: item.writer,
+                writerImage: item.writerImage,
                 category: item.category,
                 readLength: item.readLength,
                 date: item.meta.publishedAt || item.meta.createdAt,

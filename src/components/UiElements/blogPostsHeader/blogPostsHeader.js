@@ -9,7 +9,6 @@ import BlogSearch from '../../sections/blogSearch/blogSearch'
 import { Link } from 'gatsby'
 
 const BlogPostsHeader = ({post, searchTitle, search, metaFields}) => {
-
     return (
         <Section noBottomPadding>
             <div className="container">
@@ -28,7 +27,7 @@ const BlogPostsHeader = ({post, searchTitle, search, metaFields}) => {
                             <p>{post.subtitle}</p>
                             {metaFields ?
                             <div className={Classes.meta}>
-                                <div className={Classes.writerIcon}></div>
+                                <ImageAll image={post.writerImage} alt={post.writerImage ? post.writerImage.alt : null} classes={Classes.writerIcon}/>
                                 <div>
                                     <p className="small no-mb">{post.writer}</p>
                                     <p className="small text-italic">{post.readLength} min read</p>
