@@ -2,7 +2,10 @@
 
 .tableName {
     text-align: center !important;
-    width: 50%;
+
+    @include mq($from: lg) {
+        width: 50%;
+    }
 
     .icon {
         height: 1.25rem;

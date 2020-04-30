@@ -29,10 +29,6 @@ const PricingTables = ({ data }) => {
         }
     }
 
-    const toggleColumnsMobileHandler = () => {
-
-    }
-
     console.log(pricingTables)
     return (
         <Section>

@@ -585,24 +585,15 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsPricingTable {
-                  tier2Name
-                  tier1Name
                   columnHeadings
                   pricingTables {
                     row {
                       columns
                       labelText
                       labelColor
-                      commingSoon
                       nestedRow
-                      new
                       rowName
-                      tier1Element
-                      tier1Text
-                      tier2Element
-                      tier2Text
                     }
-                    columns
                     tableName
                     icon {
                       url
