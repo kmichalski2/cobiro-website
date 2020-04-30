@@ -23,8 +23,14 @@
     width: 100%;
 
     @include mq($until: md) {
-        display: block;
+        .hiddenMobile {
+            display: none;
+        }
     }
+
+    // @include mq($until: md) {
+    //     display: block;
+    // }
     td, th {
         padding: 2rem 1rem;
         border-color: $lightgrey;
@@ -34,11 +40,11 @@
     }
     td {
         text-align: center !important;
-        min-width: 10rem;
+        // min-width: 10rem;
     }
-    th {
-        min-width: 15rem;
-    }
+    // th {
+    //     min-width: 15rem;
+    // }
     tr {
         color: $black;
         background-color: transparent !important;
