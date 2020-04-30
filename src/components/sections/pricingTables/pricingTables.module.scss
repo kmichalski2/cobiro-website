@@ -17,16 +17,16 @@
 .tabs {
     display: none;
     @include mq($until: md) {
-    position: fixed;
+    // position: fixed;
     padding: 1.1rem 1.1rem;
-    bottom: 0;
-    left: 0;
+    // bottom: 0;
+    // left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: $white;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
-    z-index: 10;
+    // background-color: $white;
+    // box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    // z-index: 10;
 
     .tab {
         border-radius: 0;

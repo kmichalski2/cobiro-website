@@ -35,6 +35,9 @@ const PricingTables = ({ data }) => {
             <div className="container">
                 <div className="row">
                     <div className="col col-xs-12">
+                        
+                        {pricingTables ? pricingTables.map((t, i) => 
+                        <>
                         {columnHeadings && columnHeadings.length > 1 ? 
                         
                             <div className={Classes.tabs}>
@@ -48,7 +51,6 @@ const PricingTables = ({ data }) => {
                             </div>
                         
                         : null}
-                        {pricingTables ? pricingTables.map((t, i) => 
                             <div key={i} className={Classes.table}>
                                 <Table  
                                     name={t.tableName} icon={t.icon} 
@@ -65,6 +67,7 @@ const PricingTables = ({ data }) => {
                                         })
                                     } /> 
                             </div>
+                            </>
                         ) : null}
                     </div>
                 </div>
