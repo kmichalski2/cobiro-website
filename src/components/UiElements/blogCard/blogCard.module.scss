@@ -1,0 +1,26 @@
+@import '../../../components/layout/style/globals';
+
+.horizontal {
+    display: flex;
+    // align-items: center;
+    margin: 3.125rem 0 !important;
+    padding-right: 2.8125rem !important;
+
+    .postImg {
+        width: 8.75rem;
+        margin-right: 1.25rem;
+    }
+
+}
+.postImg {
+    margin-bottom: 1.25rem;
+
+    img {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+.paddingBottom {
+    padding-bottom: 1.5rem !important;
+}

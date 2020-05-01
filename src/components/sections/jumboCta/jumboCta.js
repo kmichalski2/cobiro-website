@@ -1,43 +1,93 @@
-import { Link } from "gatsby"
 import React from "react"
+import { Link } from "gatsby"
 
-import JumboCtaStyles from "./jumboCta.module.scss"
-import Waves from "../../waves/waves"
+import Section from '../../UiElements/Section/Section'
+import ImageAll from '../../UiElements/ImageAll/ImageAll'
+
+import Classes from "./jumboCta.module.scss"
+import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
+// import Waves from "../../waves/waves"
 
 
 const JumboCta = ({ data }) => {
-  const topColor = data.topGradiantColor ? data.topGradiantColor.hex : null
-  const bottomColor = data.bottomGradiantColor ? data.bottomGradiantColor.hex : null
+
+  const bgColor = data.ctaBgColor && data.ctaBackgroundColor ? data.ctaBackgroundColor.hex : null
+  const textColor = data.ctaBgColor && data.textColor === 'light' ? "text-white" : "text-black"
+  const btnColor = data.ctaBgColor && data.textColor === 'light' ? "btn-white" : null
+  const backgroundImage = data.backgroundImage
+  // const backgroundImage = null
+  const icon = data.icon
+
+
+  // const bgColor = data.testimonialBgColor && data.testimonialColor ? data.testimonialColor.hex : null
+  // const textColor = data.testimonialBgColor && data.testimonialTextColor  === 'light' ? "text-white" : "text-black"
+
 
   return (
-    <section className={[JumboCtaStyles.section, data.backgroundColor ? JumboCtaStyles.withBg : null, "section"].join(' ')} style={{backgroundImage: data.backgroundColor ? `linear-gradient(${topColor}, ${bottomColor})` : null}}>
-      <div className={[data.backgroundColor ? "bg-sway-inner" : null, "section-inner"].join(' ')} style={{ position: "relative", zIndex: 1 }}>
+    <Section
+      bgColor={bgColor && !backgroundImage ? bgColor : null}
+    >
         <div className="container">
-          <div className="row center-xs text-center">
-            <div className="col col-xs-12">
-              { data.title ? <h2 className={data.backgroundColor ? 'text-white' : null}>{data.title}</h2> : null }
-              { data.text ? <p className={data.backgroundColor ? 'text-white' : null}>{data.text}</p> : null }
-              {data.link ? 
-              <Link
-              to={data.link.slug ? data.link.slug : '/'}
-              className={["btn btn-large space-xs space-sm", data.backgroundColor ? 'btn-white' : null].join(' ')}
-              >
-                {data.linkTitle}
-              </Link>
-              : data.externalLinkCta ?
-              <a
-              href={data.externalLinkCta}
-              className={["btn btn-large space-xs space-sm", data.backgroundColor ? 'btn-white' : null].join(' ')} target="_blank"
-              rel="noopener noreferrer">
-                {data.linkTitle}
-              </a>
-              : null }
+          <div className="row text-center center-xs">
+            <div className="col-xs-12 col-md-8 col-lg-6">
+              <div className={backgroundImage ? Classes.content : null}>
+              
+                {/* { icon ? <div className={Classes.iconWrapper}><ImageAll image={icon} classes={Classes.icon}/></div> : null }
+                { data.title ? <h2 className={textColor}>{data.title}</h2> : null }
+                { data.text ? <p className={textColor}>{data.text}</p> : null }
+                {data.link ?
+                <Link
+                to={data.link.slug ? data.link.slug : '/'}
+                className="btn btn-large space-xs space-sm"
+                >
+                  {data.linkTitle}
+                </Link>
+                : data.externalLinkCta ?
+                <a
+                href={data.externalLinkCta}
+                className={["btn btn-large space-xs space-sm", btnColor].join(' ')} target="_blank"
+                rel="noopener noreferrer">
+                  {data.linkTitle}
+                </a>
+                : null } */}
+
+                <HeaderWText 
+                  icon={icon}
+                  iconLarge
+                  centered
+                  title={data.title}
+                  h2
+                  text={data.text}
+                  links={[
+                    {
+                      link: data.link || data.externalLinkCta,
+                      internal: data.link && data.link.slug ? true : false,
+                      external: data.externalLinkCta ? true : false,
+                      title: data.linkTitle,
+                      button: true,
+                      large: true
+                    },
+                    data.secondaryLinkTitle && (data.secondaryLink || data.secondaryExternalLinkUrl) ?
+                    {
+                      link: data.secondaryExternalLinkUrl || data.secondaryLink && data.secondaryLink.slug,
+                      title: data.secondaryLinkTitle,
+                      external: data.secondaryExternalLinkUrl && true,
+                      internal: data.secondaryLink && data.secondaryLink.slug && true,
+                      button: true,
+                      large: true,
+                      secondary: true
+                    }
+                    : ""
+                  ]}
+                  light={data.textColor === 'light'}
+
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <Waves whiteSway={data.backgroundColor ? true : false} transparentSways={data.backgroundColor ? true : false} highWaveRight={true} whiteSwayTop={true}/>
-    </section>
+      { backgroundImage ? <ImageAll backgroundImage image={backgroundImage}/> : null }
+    </Section>
   )
 }
 

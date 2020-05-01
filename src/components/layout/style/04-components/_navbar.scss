@@ -261,7 +261,7 @@ nav {
 					padding-left: 2.5rem;
 					padding-right: 2.5rem;
 
-					.has-subsubmenu {
+					>div {
 						width: 12rem;
 						padding: 0 1rem;
 					}
@@ -442,7 +442,7 @@ nav {
 		&.closed .menu-toggle .icon-bar {
 			background-color: $white;
 		}
-		&.navbar-border .menu-toggle .icon-bar, .menu-toggle .icon-bar {
+		&.navbar-border .menu-toggle .icon-bar, .menu-toggle .icon-bar, .menu-toggle.invert .icon-bar {
 			background-color: $blue;
 		}
 		

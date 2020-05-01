@@ -14,7 +14,7 @@ import Footer from "./footer"
 import "./style/app.scss"
 import CookieBanner from "./cookieConsent"
 
-const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems }) => {
+const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, menuInverted }) => {
   
   if (typeof window !== 'undefined') {
     // Make scroll behavior of internal links smooth
@@ -33,8 +33,15 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems }
       nodes {
         linkTitle
         link {
-          slug
-          title
+          ... on DatoCmsPage {
+            id
+            title
+            slug
+          }
+          ... on DatoCmsBlogPage {
+            title
+            slug
+          }
         }
         id
         menuItemOrder
@@ -59,12 +66,26 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems }
             url
           }
           link {
-            title
-            slug
+            ... on DatoCmsPage {
+              id
+              title
+              slug
+            }
+            ... on DatoCmsBlogPage {
+              title
+              slug
+            }
           }
           submenuLinks {
-            title
-            slug
+            ... on DatoCmsPage {
+              id
+              title
+              slug
+            }
+            ... on DatoCmsBlogPage {
+              title
+              slug
+            }
           }
           submenuLinkTitles
         }
@@ -123,7 +144,7 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems }
   
     return (
     <>
-      <Navbar menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems}/>
+      <Navbar menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted}/>
       {children}
       <CookieBanner />
       <Footer columns={data.allDatoCmsFooter.nodes} locales={locales} currentLocale={currentLocale}/>

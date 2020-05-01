@@ -1,81 +1,81 @@
-@import '../../layout/style/globals';
+// @import '../../layout/style/globals';
 
-.wrapper {
-    min-width: 3.5rem;
-    background-color: $blue;
-    border-radius: 10px;
-    color: $white;
-    padding: 0.25rem 0.5rem;
-    display: inline-block;
-    position: relative;
-    // margin-left: 0.5rem;
-    padding-right: 1.5rem;
-    cursor: pointer;
-    // animation: fadein 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
+// .wrapper {
+//     min-width: 3.5rem;
+//     background-color: $blue;
+//     border-radius: 10px;
+//     color: $white;
+//     padding: 0.25rem 0.5rem;
+//     display: inline-block;
+//     position: relative;
+//     // margin-left: 0.5rem;
+//     padding-right: 1.5rem;
+//     cursor: pointer;
+//     // animation: fadein 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
 
-    .currLang {
-        font-size: 1rem;
-        position: relative;
-        z-index: 1;
-        &::after {
-            content: '';
-            position: absolute;
-            height: 0.5rem;
-            width: 0.8rem;
-            top: 50%;
-            transform: translateY(-50%) scaleY(1);
-            right: -1rem;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7.713' height='5.217' viewBox='0 0 7.713 5.217'%3E%3Cpath d='M-8181.449,10353l3.15,3.737,3.153-3.737' transform='translate(8182.153 -10352.296)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1'/%3E%3C/svg%3E");
-            transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
-    }
-    &:hover .currLang::after {
-        transform: translateY(-50%) scaleY(-1);
-    }
-    .otherLangs {
-        min-width: 3.5rem;
-        display: block !important;
-        position: absolute;
-        transform: scale(0);
-        transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        background-color: $blue;
-        padding: 0.25rem 0.5rem;
-        opacity: 0;
-        left: 0;
-        border-radius: 10px;
-        z-index: 0;
+//     .currLang {
+//         font-size: 1rem;
+//         position: relative;
+//         z-index: 1;
+//         &::after {
+//             content: '';
+//             position: absolute;
+//             height: 0.5rem;
+//             width: 0.8rem;
+//             top: 50%;
+//             transform: translateY(-50%) scaleY(1);
+//             right: -1rem;
+//             background-size: contain;
+//             background-position: center;
+//             background-repeat: no-repeat;
+//             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7.713' height='5.217' viewBox='0 0 7.713 5.217'%3E%3Cpath d='M-8181.449,10353l3.15,3.737,3.153-3.737' transform='translate(8182.153 -10352.296)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1'/%3E%3C/svg%3E");
+//             transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+//         }
+//     }
+//     &:hover .currLang::after {
+//         transform: translateY(-50%) scaleY(-1);
+//     }
+//     .otherLangs {
+//         min-width: 3.5rem;
+//         display: block !important;
+//         position: absolute;
+//         transform: scale(0);
+//         transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//         background-color: $blue;
+//         padding: 0.25rem 0.5rem;
+//         opacity: 0;
+//         left: 0;
+//         border-radius: 10px;
+//         z-index: 0;
 
-        li {
-            display: block;
-            // padding-right: 1.1rem;
-            text-align: center;
+//         li {
+//             display: block;
+//             // padding-right: 1.1rem;
+//             text-align: center;
 
-            a {
-                font-size: 1rem;
-                // padding-left: 0.1rem;
-                left: 0;
-            }
-        }
-    }
-    &.up .otherLangs {
-        padding-bottom: 2rem;
-        transform-origin: bottom;
-        bottom: 0;
-    }
-    &.down .otherLangs {
-        padding-top: 2rem;
-        transform-origin: top;
-        top: 0;
-    }
+//             a {
+//                 font-size: 1rem;
+//                 // padding-left: 0.1rem;
+//                 left: 0;
+//             }
+//         }
+//     }
+//     &.up .otherLangs {
+//         padding-bottom: 2rem;
+//         transform-origin: bottom;
+//         bottom: 0;
+//     }
+//     &.down .otherLangs {
+//         padding-top: 2rem;
+//         transform-origin: top;
+//         top: 0;
+//     }
     
-    &:hover {
+//     &:hover {
 
-        .otherLangs {
-            transform: scale(1);
-            opacity: 1;
-        }
-    }
-}
+//         .otherLangs {
+//             transform: scale(1);
+//             opacity: 1;
+//         }
+//     }
+// }

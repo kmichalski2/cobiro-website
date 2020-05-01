@@ -1,0 +1,38 @@
+@import '../../layout/style/globals';
+
+.downloadButton {
+    margin-top: 2rem;
+}
+
+.downloadCard {
+    padding: 5rem 1rem;
+    // justify-content: center;
+    
+    @include mq($until: md) {
+        flex-direction: column;
+        padding: 3rem 0rem;
+        align-items: center !important;
+
+        img {
+            margin-right: 0!important;
+        }
+    }
+}
+
+
+.icon {
+    width: 5rem!important;
+    height: 5rem!important;
+    margin: auto;
+    margin-bottom: 2rem;
+
+    @include mq($until: md) {
+        margin-bottom: 0rem;
+        width: 5rem!important;
+        height: 5rem!important;
+
+        img {
+            transform: translate(25%);
+        }
+    }
+}

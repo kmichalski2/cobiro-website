@@ -4,34 +4,22 @@
     overflow: hidden;
 }
 
-.JumboHeader {
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-
-    @include mq($until: xl) {
-        padding-bottom: 0;
-        padding-top: 7.5rem;
-    } 
-
-    &.centered {
-        padding-top: 7.5rem;
+.imageToEdges {
+    min-width: 50vw;
+    max-width: none;
+    
+    @include mq($until: lg) {
+        min-width: calc(100vw - 1.1rem);
     }
+    
+}
 
-    .text {
-        position: relative;
-        z-index: 3;
+.centered {
+    margin-top: 2.5rem;
 
-        &.textPadding {
-        padding-bottom: 7.5rem;
-
-            @include mq($until: md) {
-                padding-bottom: 0;
-            }
-
-            @include mq($from: xl) {
-                padding-bottom: 0;
-            }
-        }
+    .imageToEdges {
+        min-width: calc(100vw - 1.1rem);
+        left: 50%;
+        transform: translateX(calc(-50vw + 1.1rem))
     }
 }

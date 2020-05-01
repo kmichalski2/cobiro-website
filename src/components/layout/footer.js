@@ -2,7 +2,7 @@ import { Link } from "gatsby"
 import logo from "../../images/logo.svg"
 import React from "react"
 import Img from "gatsby-image"
-import langStyles from '../hoc/langSwithcer/langSwitcher.module.scss'
+// import langStyles from '../hoc/langSwithcer/langSwitcher.module.scss'
 
 const Footer = ({ columns, locales, currentLocale }) => {
 
@@ -10,15 +10,6 @@ const Footer = ({ columns, locales, currentLocale }) => {
   <footer>
     <div className="container">
       <div className="row section end-sm">
-        <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 text-left-lg center-xs start-lg space-xs space-sm space-md">
-          <Link to="/">
-            <img
-              className="footer-logo space-xs space-sm space-md"
-              src={logo}
-              alt="Cobiro logo"
-            />
-          </Link>
-        </div>
         {columns.sort(function (a, b) {
           return a.footerItemOrder - b.footerItemOrder;
         }).map((col, index) => (
@@ -52,19 +43,19 @@ const Footer = ({ columns, locales, currentLocale }) => {
     <div className="footer-bottom">
       <div className="container">
         <div className="row space-between">
-          <div className="col col-xs-12 col-md-6 text-center-xs text-left-md space-xs space-sm">
+        <div className="col col-sm-12 col-md-6 col-lg-8 text-center-sm space-xs space-sm">
             <ul className="list-inline block-xs flex-md menu">
               <li>
-                <Link className="small text-darkgrey" to="/terms-of-service">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link className="small text-darkgrey" to="/privacy-policy">
-                  Privacy Policy
-                </Link>
+                <p className="small text-darkgrey">
+                  Copyright &#169; 2020 Cobiro
+                </p>
               </li>
             </ul>
+          </div>
+          <div className="col col-sm-12 col-md-6 col-lg-4 text-center-sm space-xs space-sm justify-between-lg justify-between-xl justify-between-md">
+              <ul><Link className="small text-darkgrey" to="/terms-of-service">Terms of Service</Link></ul>
+              <ul><Link className="small text-darkgrey" to="/privacy-policy">Privacy Policy</Link></ul>
+              <ul><Link className="small text-darkgrey" to="/sitemap">Sitemap</Link></ul>
           </div>
         </div>
       </div>

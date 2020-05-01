@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import JumboHeader from "../components/sections/jumboHeader/jumboHeader"
@@ -15,13 +15,20 @@ import Quotes from "../components/sections/quotes/quotes"
 import Text from "./sections/text/text"
 import Video from "../components/sections/video/video"
 import FeaturedCarousel from "../components/sections/featuredCarousel/featuredCarousel"
-import Image from "../components/sections/image/image"
+import ImageSection from "../components/sections/image/image"
 import Voucher from "../components/sections/voucher/voucher"
 import VoucherHeader from "./sections/voucherHeader/voucherHeader"
 import ExplanationGiftCard from "./sections/explanationGiftCard/explanationGiftCard"
 import Form from "./sections/Form/Form"
+import Gallery from "./sections/gallery/gallery"
+import BlogLatest from "./sections/blogLatest"
+import ContactPerson from './sections/contactPerson/contactPerson'
+import PricingTables from "./sections/pricingTables/pricingTables"
+import MediaDownload from './sections/mediaDownload/mediaDownload'
 
-const pageContent = ({ data, locales }) => {
+const PageContent = ({ data, locales }) => {
+
+    const [menuInverted, setMenuInverted] = useState(false)
 
   return (
     <Layout 
@@ -29,6 +36,7 @@ const pageContent = ({ data, locales }) => {
         locales={ locales } 
         currentLocale={data.locale}
         hiddenMenuItems={data.hiddenMenuItems}
+        menuInverted={menuInverted}
         >
       <SEO 
         title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } 
@@ -39,6 +47,9 @@ const pageContent = ({ data, locales }) => {
         {data.sections.map((section, index) => {
         switch(section.__typename.replace("DatoCms", "")) {
             case 'JumboHeader':
+                if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
+                    setMenuInverted(true)
+                } 
                 return <JumboHeader data={data.sections[index]} key={index}/>
             case 'ThreeUp':
                 return <ThreeUp data={data.sections[index]} key={index}/>
@@ -58,6 +69,8 @@ const pageContent = ({ data, locales }) => {
                 return <ThreeUpPeople data={data.sections[index]} key={index}/>
             case 'CtaJumbo':
                 return <JumboCta data={data.sections[index]} key={index}/>
+            case 'BlogLatest':
+                return <BlogLatest data={data.sections[index]} key={index}/>
             case 'ListPricing':
                 return <ListPricing data={data.sections[index]} key={index}/>
             case 'Quote':
@@ -67,15 +80,26 @@ const pageContent = ({ data, locales }) => {
             case 'Video':
                 return <Video data={data.sections[index]} key={index}/>
             case 'Image':
-                return <Image data={data.sections[index]} key={index}/>
+                return <ImageSection data={data.sections[index]} key={index}/>
+            case 'Gallery':
+                return <Gallery data={data.sections[index]} key={index}/>
             case 'VoucherSignup':
                 return <Voucher data={data.sections[index]} key={index}/>
             case 'VoucherHeader':
+                if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
+                    setMenuInverted(true)
+                } 
                 return <VoucherHeader data={data.sections[index]} key={index}/>
             case 'ExplanationGiftCard':
                 return <ExplanationGiftCard data={data.sections[index]} key={index}/>
             case 'FormSection':
                 return <Form data={data.sections[index]} key={index}/>
+            case 'ContactPerson':
+                return <ContactPerson data={data.sections[index]} key={index}/>
+            case 'PricingTable':
+                return <PricingTables data={data.sections[index]} key={index}/>
+            case 'MediaDownload':
+                return <MediaDownload data={data.sections[index]} key={index}/>
             default:
                 return null
             }
@@ -85,4 +109,4 @@ const pageContent = ({ data, locales }) => {
   )
 }
 
-export default pageContent
+export default PageContent

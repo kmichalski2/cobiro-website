@@ -1,0 +1,26 @@
+@import '../../layout/style/globals';
+
+.card {
+	padding: 3.75rem 2.5rem;
+	text-align: center;
+	position: relative;
+	width: 100%;
+	margin-bottom: 2rem;
+    background-color: white;
+
+    &.smallPadding {
+        padding: 1.25rem;
+    }
+
+    &.noPadding {
+        padding: 0;
+    }
+
+	&.shadow { 
+        @include box-shadow;
+    }
+    
+    &.leftAligned {
+        text-align: left;
+    }
+}

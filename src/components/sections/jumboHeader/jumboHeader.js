@@ -2,85 +2,88 @@ import { Link } from "gatsby"
 import Img from "gatsby-image"
 import React from "react"
 
-import JumboHeaderStyles from "./jumboHeader.module.scss"
-import Waves from "../../waves/waves"
+import Classes from "./jumboHeader.module.scss"
+import Section from "../../UiElements/Section/Section"
+import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
+import ImageAll from "../../UiElements/ImageAll/ImageAll"
 
-const JumboHeader = props => {
-  const data = props.data
+const JumboHeader = ({ data }) => {
 
-  const backgroundColor = data.backgroundColor
-  const topColor = data.topGradiantColor ? data.topGradiantColor.hex : null
-  const bottomColor = data.bottomGradiantColor ? data.bottomGradiantColor.hex : null
-  const imageBehind = data.imageBehindWave
+  const bgColor = data.bgColor ? data.bgColor.hex : null
   const alignment = data.alignment
-
-  const createMarkup = (text)  => {
-    return {__html: text}
-  }
+  const imageToEdges = data.imageToEdges
 
   const textSide = (
-    <div className={["col col-xs-12", alignment === 'centered' ? 'col-md-8 text-center space-xs-up' : 'col-md-6 text-left-md'].join(' ')}>
-      <div className={[JumboHeaderStyles.text, imageBehind ? JumboHeaderStyles.textPadding : null, "text-padding"].join(" ")}>
-        { data.heading ? <h1 className={backgroundColor ? 'text-white' : null}>{data.heading}</h1> : null }
-        { data.text ? <div className={["space-xs-up", backgroundColor ? 'text-white' : null].join(' ')} dangerouslySetInnerHTML={createMarkup(data.text)}></div> : null }
-        {data.externalLinkUrl ? (
-          <a href={data.externalLinkUrl} className={["btn btn-large space-xs space-sm", backgroundColor ? 'btn-white' : null, alignment === 'centered' ? 'space-xs-up' : null].join(' ')} target="_blank" rel="noopener noreferrer">{data.linkTitle}</a>
-        ) : data.link ?
-        (
-          <Link to={data.link.slug ? data.link.slug : '/'} className={["btn btn-large space-xs space-sm", backgroundColor ? 'btn-white' : null, alignment === 'centered' ? 'space-xs-up' : null ].join(' ')}>
-            {data.linkTitle}
-          </Link>
-        ): null }
-      </div>
+    <div className={[
+        "col col-xs-12", 
+        alignment === 'centered' ? 'col-md-8 text-center space-xs-up' : 'col-lg-6 text-left-md',
+        imageToEdges && alignment !== 'centered' ? "flex flex-column center-xs top-xs" : null
+        ].join(' ')}>
+      <HeaderWText 
+        classes={["space-xs space-sm space-md", alignment === 'centered' || imageToEdges ? 'space-xs-up' : null].join(' ')}
+        centered={alignment === 'centered' ? true : false}
+        icon={data.icon}
+        iconTitle={data.iconTitle}
+        title={data.heading}
+        h1
+        text={data.text}
+        light={data.textColor === 'light'}
+        links={[
+          {
+            link: data.externalLinkUrl || data.link && data.link.slug,
+            title: data.linkTitle,
+            external: data.externalLinkUrl && true,
+            internal: data.link && data.link.slug && true,
+            button: true,
+            large: true,
+          },
+          data.secondaryLinkTitle && (data.secondaryLink || data.secondaryExternalLinkUrl) ?
+          {
+            link: data.secondaryExternalLinkUrl || data.secondaryLink && data.secondaryLink.slug,
+            title: data.secondaryLinkTitle,
+            external: data.secondaryExternalLinkUrl && true,
+            internal: data.secondaryLink && data.secondaryLink.slug && true,
+            button: true,
+            large: true,
+            secondary: true
+          }
+          : ""
+        ]}
+        />
     </div>
   )
  
-  const imageSide = (
-    <div className={["col col-xs-12", alignment === 'centered' ? 'col-md-8' : 'col-md-6 '].join(' ')}>
-      {data.image.fluid ?
-      <Img
-      loading="eager"
-      fadeIn={false}
-      fluid={data.image.fluid}
-      className="img-responsive img-full-width"
-      alt={data.image.alt ? data.image.alt : data.heading}
-      />
-      : 
-      <img src={data.image.url} 
-        className="img-responsive img-full-width"
-        alt={data.image.alt ? data.image.alt : data.heading} />
-      }
+  const imageSide = data.image ? (
+    <div className={[
+      "col col-xs-12", 
+      alignment === 'centered' ? 'col-md-8' : 'col-lg-6',
+      alignment === 'image-left' ? "end-xs space-xs space-sm space-md" : null,
+      imageToEdges ? "flex bottom-xs" : null
+      ].join(' ')}
+      >
+        <ImageAll image={data.image} alt={data.image.alt || data.heading} classes={imageToEdges ? Classes.imageToEdges : null} fullWidth />
     </div> 
-  )
+  ) : null  
   
   return (
-    <section className={JumboHeaderStyles.Section} style={{backgroundImage: backgroundColor ? `linear-gradient(${topColor}, ${bottomColor})` : null, position: 'relative' }}>
-      <div
-        className={[
-          JumboHeaderStyles.JumboHeader,
-          "section-inner",
-          "jubmoheader-inner",
-          alignment === 'centered' ? JumboHeaderStyles.centered : null,
-        ].join(" ")}
-        style={{zIndex: imageBehind ? 1 : 5}}
+    <Section 
+      bgColor={bgColor} 
+      noBottomPadding={imageToEdges}
+      paddingBottomXsSm={alignment === 'image-left'}
       >
-        <div>
-          <div className="container">
-            <div
-              className={[
-                alignment === 'centered' ? 'flex-column ' : null,
-                imageBehind ? 'bottom-xs middle-lg' : null,
-                "row middle-xs",
-              ].join(" ")}
-            >
-              { alignment === 'image-right' ? textSide : alignment === 'image-left' ? imageSide : alignment === 'centered' ? textSide : null }
-              { alignment === 'image-right' ? imageSide : alignment === 'image-left' ? textSide : alignment === 'centered' ? imageSide : null }
-            </div>
+        <div className="container">
+          <div
+            className={[
+              alignment === 'centered' ? ['center-xs', Classes.centered].join(' ') : null,
+              imageToEdges && alignment !== 'centered' ? "stretch-xs" : "middle-xs",
+              "row",
+            ].join(" ")}
+          >
+            { alignment === 'image-right' || alignment === 'centered' ? textSide : imageSide }
+            { alignment === 'image-right' || alignment === 'centered' ? imageSide : textSide }
           </div>
-        </div>      
-      </div>
-      <Waves whiteSway={backgroundColor ? true : false} transparentSways={backgroundColor ? true : false} highWaveRight={alignment === 'image-right' || alignment === 'centered' ? true : false}/>
-    </section>
+        </div>
+    </Section>  
   )
 }
 

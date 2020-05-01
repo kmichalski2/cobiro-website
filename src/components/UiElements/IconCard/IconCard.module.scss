@@ -1,0 +1,49 @@
+@import '../../layout/style/globals';
+
+.icon {
+    margin-bottom: 1.875rem;
+    width: 5rem;
+    max-width: 5rem;
+    width: auto;
+    max-width: 100%;
+    height: 3rem;
+    max-height: 3rem;
+
+    @include mq($until: md) {
+        max-width: 8rem;
+    }
+
+    &.iconBig {
+        width: inherit;
+        height: 7rem;
+        max-height: 7rem;
+
+        @include mq($until: md) {
+            max-width: 3rem;
+            min-width: 3rem;
+        }
+    }
+}
+
+.textWrapper {
+    text-align: center;
+    
+    .text {
+        margin-bottom: 1.875rem;
+        word-wrap: break-word;
+        
+        p {
+            
+            font-size: 1rem;
+        }
+    }
+
+    .footnote {
+        font-size: 0.8rem;
+        font-style: italic;
+    }
+
+    .link {
+        font-size: 1rem;
+    }
+}

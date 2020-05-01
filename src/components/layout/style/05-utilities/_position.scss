@@ -58,6 +58,9 @@
 		-moz-align-items: center;
 		align-items: center;
 	}
+	.stretch-#{$breakpoint} {
+		align-items: stretch;
+	}
 
 	.bottom-#{$breakpoint} {
 		-webkit-box-align: end;

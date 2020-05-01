@@ -1,20 +1,30 @@
 @import '../../../components/layout/style/globals';
 
 .imageLeftEdge {
-    width: 60vw;
-    margin-left: calc(-60vw + 100%);
+    width: calc(50vw - 1.1rem);
+    margin-left: calc(-50vw + 100% + 1.1rem);
+
+    @include mq($from: lg) {
+        width: calc(50vw - 0.9375rem);
+        margin-left: calc(-50vw + 100% + 0.9375rem);
+    }
 
     @include mq($until: md) {
-        width: 100%;
+        width: calc(100VW - 1.1rem);
         margin: 0;
+        margin-left: -1.1rem;
     }
 }
 
 .imageRightEdge {
-    width: 60vw;
+    width: calc(50vw - 1.1rem);
+
+    @include mq($from: lg) {
+        width: calc(50vw - 0.9375rem);
+    }
 
     @include mq($until: md) {
-        width: 100%;
+        width: calc(100VW - 1.1rem);
         margin: 0;
     }
 }

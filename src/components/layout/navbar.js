@@ -2,28 +2,41 @@ import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
 import logo from "../../images/logo_white.svg"
 import Img from "gatsby-image"
+import ImageAll from '../UiElements/ImageAll/ImageAll'
 
-const Navbar = ({ menuItems, customCta }) => {
+const Navbar = ({ menuItems, customCta, menuInverted }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [windowWidth, setWindowWidth] = useState(typeof window != "undefined" ? window.innerWidth : null)
   const [mainMenuHovered, setMainMenuHovered] = useState(false)
-
+  let [refs, setRefs] = useState({})
   const mainMenu = React.createRef();
   let mainMenuNode
-  const refs = {}
+  // let refs = {}
 
-  menuItems.forEach((item, i) => {
-    if(item.submenu.length > 0) {
-      refs[`ref_${i}`] = React.createRef()
-    }
-  });
+  
 
   useEffect(() => {
+    
+    let tempRefs = {}
+
+    menuItems.forEach((item, i) => {
+      if(item.submenu.length > 0) {
+        // refs[`ref_${i}`] = React.createRef()
+
+        tempRefs = {...tempRefs, [`ref_${i}`]: React.createRef()}
+      }
+    });
+
+    setRefs(tempRefs)
+    
+  }, [menuItems])
+ 
+  useEffect(() => {
     mainMenuNode = mainMenu.current
-    window.addEventListener("resize", resizeHandler, false)
+    window.addEventListener("resize", () => resizeHandler())
     setSubMenuOffset()
 
     // Add white bg and shadow to menu on scroll
@@ -34,10 +47,10 @@ const Navbar = ({ menuItems, customCta }) => {
         setIsScrolled(false)
       }
     }
-    return () => {
-      window.removeEventListener("resize", resizeHandler, false)
-    }
-  })
+    // return () => {
+    //   window.removeEventListener("resize", resizeHandler)
+    // }
+  }, [refs])
 
   const resizeHandler = () => {
     setSubMenuOffset()
@@ -55,14 +68,16 @@ const Navbar = ({ menuItems, customCta }) => {
     for (var prop in refs) {
       if (refs[prop].current && Object.prototype.hasOwnProperty.call(refs, prop)) {
           const sub = refs[prop].current
+          
           if(window.innerWidth > "960") {
-            let subOffset = getPageTopLeft(sub)
+            const subOffset = getPageTopLeft(sub)
             if(subOffset < 0 ) {
               sub.style.marginLeft = -1 * subOffset + 16 + 'px'
               sub.querySelector('.submenu-triangle').style.marginLeft = subOffset + -16 + 'px'
               return true
             } else {
               sub.style.marginLeft = 0
+              sub.querySelector('.submenu-triangle').style.marginLeft = 0
             }
             return false
         } else {
@@ -124,13 +139,13 @@ const Navbar = ({ menuItems, customCta }) => {
         <div className="container">
           <div className="row between-xs middle-xs">
             <div className="col col-auto-lg navbar-mobile">
-              <div className={["brand", isExpanded ? 'invert' : '', isScrolled ? 'invert' : null].join(' ')}>
+              <div className={["brand", menuInverted ? 'invert' : null, isExpanded ? 'invert' : '', isScrolled ? 'invert' : null].join(' ')}>
                 <Link to="/">
                   <img className="logo-mobile" src={logo} alt="Cobiro logo" />
                 </Link>
               </div>
               <button
-                className="menu-toggle btn"
+                className={["menu-toggle btn", menuInverted ? 'invert' : null].join(' ')}
                 aria-controls="navbar"
                 aria-expanded={isExpanded}
                 aria-label="Toggle navigation"
@@ -141,7 +156,7 @@ const Navbar = ({ menuItems, customCta }) => {
                 <span className="icon-bar bottom-bar"></span>
               </button>
             </div>
-            <div className={["col col-auto-lg main-menu-inner", isScrolled ? 'menu-items' : null].join(' ')}>
+            <div className={["col col-auto-lg main-menu-inner", isScrolled || menuInverted ? 'menu-items' : null].join(' ')}>
               <ul className="list-inline">
                 {menuItems.sort(function (a, b) {
                     return a.menu_item_order - b.menu_item_order;
@@ -155,18 +170,12 @@ const Navbar = ({ menuItems, customCta }) => {
                     <div className="submenu-inner">
                         {item.submenu.map((sub, index) => (
                           <div key={index} className={ sub.submenuLinks.length > 0 ? "has-subsubmenu" : null }>
+                          {sub.title || sub.icon ? 
                           <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? `/${sub.link.slug}` : '/'} target="_self" onClick={subSubMenuClickHandler}>
-                            {sub.icon.fixed ===! null ?
-                            <Img fixed={sub.icon.fixed} alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
-                            :
-                            <img
-                                src={sub.icon.url}
-                                className="submenu-icon"
-                                alt={sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}
-                              />
-                            }
+                            <ImageAll classes="submenu-icon" image={sub.icon} alt={sub.icon && sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
                             {sub.title}
                           </Link>
+                          : null}
                           <div className="subsubmenu">
                             <ul className="list-unstyled">
                               {sub.submenuLinks.map((subsub, index) => (
@@ -175,7 +184,7 @@ const Navbar = ({ menuItems, customCta }) => {
                                   to={subsub.slug ? `/${subsub.slug}` : '/'}
                                   target="_self"
                                 >
-                                  {subsub.submenuLinkTitles > 0 ? subsub.submenuLinkTitles[index] : subsub.title}
+                                  {sub.submenuLinkTitles && sub.submenuLinkTitles.length > 0 ? sub.submenuLinkTitles[index] : subsub.title}
                                 </Link>
                               </li>
                               ))}
@@ -202,10 +211,10 @@ const Navbar = ({ menuItems, customCta }) => {
                 ))}
               </ul>
               <div className="main-menu-cta">
-                <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary btn-left", !isScrolled ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary btn-left", !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
                   Sign in
                 </a>
-                <a href={customCta && customCta.link ? customCta.link : "https://app.cobiro.com/user/signup"} className={["btn btn-right", !isScrolled ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                <a href={customCta && customCta.link ? customCta.link : "https://app.cobiro.com/user/signup"} className={["btn btn-right", !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
                   {customCta && customCta.title ? customCta.title : 'Sign up' }
                 </a>
               </div>

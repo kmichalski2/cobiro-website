@@ -1,25 +1,42 @@
 import React from "react"
-import Img from "gatsby-image"
-import ImageStyles from "./image.module.scss"
+import ImageAll from "../../UiElements/ImageAll/ImageAll"
 
-const Image = ({ data }) => {
+import Classes from "./image.module.scss"
+import Section from "../../UiElements/Section/Section"
+import HtmlText from "../../UiElements/HtmlText/HtmlText"
+
+const ImageSection = ({ data }) => {
+
     return (
-        <section className={ImageStyles.section}>
-            <svg className={ImageStyles.topSway} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 61" preserveAspectRatio="xMidYMid slice" x="0" y="0" ><path d="M1920,28.54S1725,0,1387.75,0,816.35,61,456.07,61,0,48.16,0,48.16V0H1920Z" fill="#fff"/></svg>
-            {data.image.fluid ?
-                <Img className="img-full-width"
-                fluid={data.image.fluid}
-                alt={data.image.alt ? data.image.alt : data.title}
-                />
-                :
-                <img className="img-full-width"
-                src={data.image.url}
-                alt={data.image.alt ? data.image.alt : data.title}
-                />
-            }
-            <svg className={ImageStyles.bottomSway} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 61" preserveAspectRatio="xMidYMid slice" x="0" y="0" ><path d="M0,33.35S195,61,532.25,61,1103.65,0,1463.93,0,1920,13.72,1920,13.72V61H0Z" fill="#fff"/></svg>
-        </section>
+        <Section bgColor={data.bgColor && data.bgColor.hex}>
+            <div className="container">
+                <div className={["row center-xs", data.textColor === 'light' ? "text-white" : null].join(' ')}>
+                    <div className="col col-xs-12 col-md-8 text-center">
+                        { data.title ? <h2 className={["space-xs-up", data.textColor === 'light' ? "text-white" : null].join(' ')}>{data.title}</h2> : null }
+                        {data.image ? 
+                            <ImageAll image={data.image} fullWidth alt={data.image.alt || data.title} classes={[data.narrowImage ? null : Classes.fullWidth, data.text || data.featuresWIcon ? "space-xs-up" : null].join(' ')} />
+                        : null}
+                        {data.videoEmbedCode && !data.image ?
+                            <div className={["embed-responsive", data.narrowImage ? null : [Classes.fullWidth, Classes.noBorderRadius].join(' '), data.text || data.featuresWIcon ? "space-xs-up" : null].join(' ')}>
+                                <iframe src={data.videoEmbedCode} width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            </div>
+                        : null }
+                        <HtmlText RawHtml={data.text} classes={["space-xs-up", data.textColor === 'light' ? "text-white" : null].join(' ')}/>
+                        {data.featuresWIcon ?
+                            <div className="row center-xs">
+                            {data.featuresWIcon.features.map((f, i) => 
+                                <div key={i} className="col col-xs-6 col-md-3 space-xs-up">
+                                    <ImageAll image={f.icon} classes={Classes.icon}/>
+                                    <p  className="small">{f.text}</p>
+                                </div>
+                            )}
+                            </div>
+                        : null }
+                    </div>
+                </div>
+            </div>
+        </Section>
     )
 }
 
-export default Image
+export default ImageSection

@@ -6,8 +6,6 @@ import ThreeUpPeopleStyles from "./threeUpPeople.module.scss"
 
 const ThreeUpPeople = ({ data }) => {
 
-  console.log(data)
-
   return (
     <section className={[data.backgroundColor ? "bg-sway" : null, "section"].join(' ')}>
       <div className={data.backgroundColor ? "bg-sway-inner" : null}>
