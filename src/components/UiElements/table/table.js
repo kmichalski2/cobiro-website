@@ -5,7 +5,7 @@ import ImageAll from '../ImageAll/ImageAll'
 
 import Classes from './table.module.scss'
 
-const Table = ({name, headers, rows, icon}) => {
+const Table = ({name, headers, activeCol, rows, icon}) => {
 
     console.log(rows)
 
@@ -14,11 +14,11 @@ const Table = ({name, headers, rows, icon}) => {
             <thead>
                 <tr>
                 { name ? <th className={[Classes.tableName, Classes.tableHeader].join(' ')}>{icon ? <ImageAll image={icon} alt={icon.alt || name} classes={Classes.icon} /> : null}{ name }</th> : null }
-                { headers ? headers.map((h, i) => <th key={i} className={Classes.tableHeader}>{ h }</th>) : null }
+                { headers ? headers.map((h, i) => <th key={i} className={[Classes.tableHeader, activeCol ==! i ? Classes.hiddenMobile : null].join(' ')}>{ h }</th>) : null }
                 </tr>
             </thead>
             <tbody>
-                { rows ? rows.map((r, i) => <TableRow  key={i} rowHeader={r.rowName} label={r.label} cols={r.cols} nested={r.nested} />) : null}
+                { rows ? rows.map((r, i) => <TableRow  key={i} rowHeader={r.rowName} label={r.label} cols={r.cols} nested={r.nested} activeCol={activeCol}/>) : null}
             </tbody>
             </table>
     )

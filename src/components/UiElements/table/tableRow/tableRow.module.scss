@@ -1,4 +1,19 @@
+@import '../../../layout/style/globals';
+
 .nested {
     font-weight: 400;
-    padding-left: 4rem !important;
+
+    @include mq($from: md) {
+        padding-left: 4rem !important;
+    }
+}
+@include mq($until: md) {
+
+    .hiddenMobile {
+        display: none;
+    }
+
+}
+.marginRight {
+    margin-right: 0.5rem;
 }

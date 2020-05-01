@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Section from '../../UiElements/Section/Section'
 import Table from '../../UiElements/table/table'
 import Checkmark from '../../UiElements/checkmark/checkmark'
@@ -8,20 +8,24 @@ import Cross from '../../UiElements/cross/cross'
 import Label from '../../UiElements/label/label'
 
 const PricingTables = ({ data }) => {
-    const {pricingTables, tier1Name, tier2Name} = data
+    const {pricingTables, columnHeadings} = data
 
-    const tierElementPicker = (el, text) => {
+    const [activeCol, setActiveCol] = useState(0)
+
+    console.log(columnHeadings)
+
+    const tierElementPicker = (el) => {
         if(el === 'cross') {
             return <Cross classes={Classes.center} />
         }
         else if(el === "checkmark") {
             return <Checkmark classes={Classes.center} />
         }
-        else if(el === "text") {
-            return text
+        else if(el === "empty") {
+            return ""
         }
         else {
-            return null
+            return el
         }
     }
 
@@ -30,23 +34,40 @@ const PricingTables = ({ data }) => {
         <Section>
             <div className="container">
                 <div className="row">
-                    <div className="col-xs-12">
+                    <div className="col col-xs-12">
+                        
                         {pricingTables ? pricingTables.map((t, i) => 
+                        <>
+                        {columnHeadings && columnHeadings.length > 1 ? 
+                        
+                            <div className={Classes.tabs}>
+                                { columnHeadings.map((h, i) => 
+                                    <button 
+                                        key={i} 
+                                        className={["btn btn-secondary", Classes.tab, activeCol === i ? Classes.active : null].join(' ')}
+                                        onClick={() => setActiveCol(i)}
+                                        >{h}</button>
+                                ) }
+                            </div>
+                        
+                        : null}
                             <div key={i} className={Classes.table}>
                                 <Table  
                                     name={t.tableName} icon={t.icon} 
-                                    headers={[tier1Name, tier2Name]} 
+                                    headers={columnHeadings}
+                                    activeCol={activeCol}
                                     rows={
                                         t.row.map(r => { 
                                             return {
                                                 rowName: r.rowName, 
-                                                label: r.commingSoon || r.new ? <Label classes={Classes.marginLeft} label={r.commingSoon ? "Comming soon" : r.new ? "New" : null} color={r.commingSoon ? "blue" : r.new ? "green" : null}/> : null, 
+                                                label: r.labelText ? <Label label={r.labelText} color={r.labelColor || "blue"}/> : null, 
                                                 nested: r.nestedRow, 
-                                                cols: [tierElementPicker(r.tier1Element, r.tier1Text), tierElementPicker(r.tier2Element, r.tier2Text)]
+                                                cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : []
                                             }
                                         })
                                     } /> 
                             </div>
+                            </>
                         ) : null}
                     </div>
                 </div>

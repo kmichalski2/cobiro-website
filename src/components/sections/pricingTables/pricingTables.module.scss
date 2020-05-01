@@ -1,4 +1,6 @@
 
+@import '../../layout/style/globals';
+
 .table {
     margin-bottom: 3.75rem;
 
@@ -7,5 +9,51 @@
     }
     .marginLeft {
         margin-left: 1rem;
+    }
+
+    
+}
+
+.tabs {
+    display: none;
+    @include mq($until: md) {
+    // position: fixed;
+    padding: 1.1rem 1.1rem;
+    // bottom: 0;
+    // left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    // background-color: $white;
+    // box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    // z-index: 10;
+
+    .tab {
+        border-radius: 0;
+        
+        border-right-width: 0;
+
+        &:last-child {
+            border-right-width: 1px;
+            border-top-right-radius: 5rem;
+            border-bottom-right-radius: 5rem;
+        }
+
+        &:first-child {
+            border-top-left-radius: 5rem;
+            border-bottom-left-radius: 5rem;
+        }
+
+        &.active {
+            background-color: $blue;
+            color: $white;
+        }
+
+        
+
+                
+        
+        }
+
     }
 }
