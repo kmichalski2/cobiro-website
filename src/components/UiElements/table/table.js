@@ -7,8 +7,6 @@ import Classes from './table.module.scss'
 
 const Table = ({name, headers, activeCol, rows, icon}) => {
 
-    console.log(rows)
-
     return (
         <table className={["table", Classes.table].join(' ')}>
             <thead>

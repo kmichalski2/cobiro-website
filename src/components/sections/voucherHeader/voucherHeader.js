@@ -18,8 +18,6 @@ const VoucherHeader = (props) => {
     const backgroundColor = props.data.bgColor && props.data.bgColor.hex
     const light = props.data.textColor === 'light'
 
-    console.log(props.data.textColor)
-
     return (
         <Section bgColor={backgroundColor}>
             <div className="container">

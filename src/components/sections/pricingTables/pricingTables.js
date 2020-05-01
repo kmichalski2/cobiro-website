@@ -12,8 +12,6 @@ const PricingTables = ({ data }) => {
 
     const [activeCol, setActiveCol] = useState(0)
 
-    console.log(columnHeadings)
-
     const tierElementPicker = (el) => {
         if(el === 'cross') {
             return <Cross classes={Classes.center} />
@@ -29,7 +27,6 @@ const PricingTables = ({ data }) => {
         }
     }
 
-    console.log(pricingTables)
     return (
         <Section>
             <div className="container">
