@@ -22,7 +22,7 @@ const VoucherHeader = (props) => {
         <Section bgColor={backgroundColor}>
             <div className="container">
                 <div className="row flex middle-xs">
-                    <div className={["col col-xs-12 text-white", rightSide === 'signup' ? "col-lg-5" : "col-lg-6"].join(' ')}>
+                    <div className={["col col-xs-12", rightSide === 'signup' ? "col-lg-5" : "col-lg-6"].join(' ')}>
                         <HeaderWText 
                             title={props.data.title}
                             h1
