@@ -86,6 +86,9 @@ const PageContent = ({ data, locales }) => {
             case 'VoucherSignup':
                 return <Voucher data={data.sections[index]} key={index}/>
             case 'VoucherHeader':
+                if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
+                    setMenuInverted(true)
+                } 
                 return <VoucherHeader data={data.sections[index]} key={index}/>
             case 'ExplanationGiftCard':
                 return <ExplanationGiftCard data={data.sections[index]} key={index}/>
