@@ -55,7 +55,6 @@ const blogPost = ({pageContext}) => {
 
                                             return (
                                                 <div key={i} className={[Classes.section, Classes.quote].join(' ')} style={{backgroundColor: s.bgColor && s.bgColor.hex}}>
-                                                    {/* <div className={Classes.quoteElement}></div> */}
                                                     <blockquote className={s.textColor === 'light' ? "text-white" : null}>"{ s.quote }"</blockquote>
                                                     { s.quotedPerson ? <p className={s.textColor === 'light' ? "text-white" : null}>- { s.quotedPerson }</p> : null }
                                                 </div>
@@ -63,8 +62,6 @@ const blogPost = ({pageContext}) => {
 
                                         case 'CtaSection':
                                             
-                                            // const topColor = s.gradiantBackground && s.topColor && s.topColor.hex ? s.topColor.hex : "#F4F9FC"
-                                            // const bottomColor = s.gradiantBackground && s.bottomColor && s.bottomColor.hex ? s.bottomColor.hex : "#F4F9FC"
                                             const bgColor = s.bgColor && s.bgColor.hex
                                             const whiteText = s.textColor === 'light'
 
