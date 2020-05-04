@@ -866,6 +866,10 @@ exports.createPages = async function({ graphql, actions }) {
                 __typename
                 quote
                 quotedPerson
+                bgColor {
+                  hex
+                }
+                textColor
               }
               ... on DatoCmsCtaSection {
                 __typename
@@ -877,6 +881,10 @@ exports.createPages = async function({ graphql, actions }) {
                 topColor {
                   hex
                 }
+                bgColor {
+                  hex
+                }
+                textColor
                 linkExternal
                 linkInternal {
                   ... on DatoCmsBlogPost {
