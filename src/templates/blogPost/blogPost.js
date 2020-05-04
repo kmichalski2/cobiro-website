@@ -103,4 +103,3 @@ const blogPost = ({pageContext}) => {
 }
 
 export default blogPost
-
