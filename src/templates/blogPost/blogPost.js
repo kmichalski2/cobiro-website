@@ -35,17 +35,17 @@ const blogPost = ({pageContext}) => {
             <article className={Classes.article}>
                 <div className="container">
                     <div className="row center-xs">
-                        <div className="col col-xs-12 col-sm-10 col-lg-8" >
+                        <div className="col col-xs-12 col-md-10 col-lg-8" >
                             {content.map((s,i) => {
                                 if(s.__typename){
                                     switch(s.__typename.replace("DatoCms", "")) {
                                         case 'TextSection':
 
-                                            return <div key={i} dangerouslySetInnerHTML={createMarkup( s.text )}></div>
+                                            return <div key={i} className={Classes.section} dangerouslySetInnerHTML={createMarkup( s.text )}></div>
 
                                         case 'ImageSection':
                                             return (
-                                                <div key={i} className={Classes.imageSection}>
+                                                <div key={i} className={Classes.section}>
                                                 { s.image.fluid ? <Img fluid={s.image.fluid} alt={s.image.alt} className="space-xs-up"/> : <img src={s.image.url} alt={s.image.alt}/> }
                                                 { s.credits ? <p className="small text-center">{ s.credits }</p> : null }
                                                 </div>
@@ -54,7 +54,7 @@ const blogPost = ({pageContext}) => {
                                         case 'QuoteSection':
 
                                             return (
-                                                <div key={i} className={Classes.quote} style={{backgroundColor: s.bgColor && s.bgColor.hex}}>
+                                                <div key={i} className={[Classes.section, Classes.quote].join(' ')} style={{backgroundColor: s.bgColor && s.bgColor.hex}}>
                                                     {/* <div className={Classes.quoteElement}></div> */}
                                                     <blockquote className={s.textColor === 'light' ? "text-white" : null}>"{ s.quote }"</blockquote>
                                                     { s.quotedPerson ? <p className={s.textColor === 'light' ? "text-white" : null}>- { s.quotedPerson }</p> : null }
@@ -69,7 +69,7 @@ const blogPost = ({pageContext}) => {
                                             const whiteText = s.textColor === 'light'
 
                                             return (
-                                                <div key={i} className={[whiteText ? Classes.gradiantCta : null, Classes.cta].join(' ')} style={{backgroundColor: bgColor}}>
+                                                <div key={i} className={[Classes.section, whiteText ? Classes.gradiantCta : null, Classes.cta].join(' ')} style={{backgroundColor: bgColor}}>
                                                     
                                                         <h2>{s.title}</h2>
                                                         <div className="space-xs-up" dangerouslySetInnerHTML={createMarkup(s.text)}></div>

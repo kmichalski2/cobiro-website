@@ -1,33 +1,77 @@
 @import '../../components/layout/style/globals';
 
 .article {
-    padding: 10rem 0 0 0;
+    padding: 7.5rem 0 0 0;
 
-    ul {
-        list-style: none;
-        li {
-            position: relative;
+    .section {
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+
+        &:first-child {
+            margin-top: 0;
         }
-        li::before {
-            // content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
-            // color: $blue; /* Change the color */
-            // font-weight: 700; /* If you want it to be bold */
-            // display: inline-block; /* Needed to add space between the bullet and the text */
-            // width: 1em; /* Also needed for space (tweak if needed) */
-            // margin-left: -1em; /* Also needed for space (tweak if needed) */
-            content: '';
-            display: inline-block;
-            position: absolute;
-            left: -1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0.5rem;
-            height: 0.5rem;
-            border-radius: 50%;
-            background-color: $blue;
-          }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        ul {
+            list-style: none;
+            li {
+                position: relative;
+            }
+            li::before {
+                content: '';
+                display: inline-block;
+                position: absolute;
+                left: -1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 0.5rem;
+                height: 0.5rem;
+                border-radius: 50%;
+                background-color: $blue;
+              }
+        }
+
+        &.quote {
+            padding: 5rem;
+
+            @include mq($until: lg) {
+                padding: 2.5rem;
+            }
+            
+            blockquote {
+                font-size: 1.6rem;
+                font-weight: 600;
+            }
+            p {
+                font-size: 1.125rem;
+            }
+        }
+
+        &.cta {
+            position: relative;
+            padding: 10rem 0;
+            width: 100vw;
+            left: 50%;
+            margin-left: -50vw;
+            padding-left: calc(50vw - 50%);
+            padding-right: calc(50vw - 50%);
+            text-align: center;
+
+            &.gradiantCta {
+                color: $white;
+                p, h1, h2, h3, h4, h5, h6 {
+                    color: $white;
+                }
+            }
+        }
     }
+
+    
 }
+
 .header {
     p, h1, h2, h3, h4, h5, h6 {
         color: $white;
@@ -52,43 +96,3 @@
     }
 }
 
-.imageSection {
-    margin: 5rem 0;
-}
-
-.quote {
-    margin: 5rem 0;
-    padding: 5rem;
-
-    @include mq($until: lg) {
-        padding: 2.5rem;
-    }
-    
-    blockquote {
-        font-size: 1.6rem;
-        font-weight: 600;
-    }
-    p {
-        font-size: 1.125rem;
-    }
-}
-
-.cta {
-    position: relative;
-    padding: 10rem 0;
-    width: 100vw;
-    left: 50%;
-    margin-left: -50vw;
-    padding-left: calc(50vw - 50%);
-    padding-right: calc(50vw - 50%);
-    text-align: center;
-    margin-top: 5rem;
-    margin-bottom: 5rem;
-
-    &.gradiantCta {
-        color: $white;
-        p, h1, h2, h3, h4, h5, h6 {
-            color: $white;
-        }
-    }
-}
