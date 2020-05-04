@@ -51,6 +51,7 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
           slug
         }
         submenuFooterExternalLink
+        expandedMobile
         submenu {
           title
           icon {

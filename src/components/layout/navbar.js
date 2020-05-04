@@ -14,8 +14,8 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
   let [refs, setRefs] = useState({})
   const mainMenu = React.createRef();
   let mainMenuNode
-  // let refs = {}
 
+  console.log(menuItems)
   
 
   useEffect(() => {
@@ -161,7 +161,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                 {menuItems.sort(function (a, b) {
                     return a.menu_item_order - b.menu_item_order;
                   }).map((item, index) => (
-                  <li key={index} className={item.submenu.length > 0 ? "submenu-parent" : null}>
+                  <li key={index} className={[item.submenu.length > 0 ? "submenu-parent" : null, item.expandedMobile ? 'expandedDefault' : null].join(' ')}>
                   <Link className={item.submenu.length > 0 ? 'has-submenu' : null } activeClassName="active" to={item.link ? `/${item.link.slug}` : '#'} onMouseEnter={mouseEnterSubMenuHandler} onClick={subMenuClickHandler}>
                     {item.linkTitle}
                   </Link>
