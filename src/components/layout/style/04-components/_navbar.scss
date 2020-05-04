@@ -413,21 +413,20 @@ nav {
 		
 	}
 	.expandedDefault.submenu-parent {
-		padding-top: 0!important;
-		.has-submenu {
-			display: none;
-		}
-		.submenu {
-			border: none;
-		}
-		a::after {
-			content: none !important;
-		}
-		// .subsubmenu {
-		// 	background-color: transparent !important;
-		// }
-		.submenu-footer {
-			display: none;
+		@include mq($until: lg) {
+			padding-top: 0!important;
+			.has-submenu {
+				display: none;
+			}
+			.submenu {
+				border: none;
+			}
+			a::after {
+				content: none !important;
+			}
+			.submenu-footer {
+				display: none;
+			}
 		}
 	}
 
