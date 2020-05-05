@@ -97,7 +97,7 @@ const Gallery = ({ data }) => {
                         external={data.primaryExternalLink}
                         button
                         large
-                        classes={Classes.btnLast}
+                        classes={data.secondaryInternalLink || data.secondaryExternalLink ? Classes.btnLast : null}
                         light={data.textColor === 'light'}
                         />
                 </div>
