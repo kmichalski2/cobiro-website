@@ -14,7 +14,6 @@ const Quotes = ({ data }) => {
   return (
     <Section
       bgColor={bgColor}
-      
     >
       <div className="row section-header">
         <div className="col col-xs-12 text-center">
@@ -48,7 +47,6 @@ const Quotes = ({ data }) => {
           650: {
             slidesPerPage: 1,
             animationSpeed: 1000,
-            // autoPlay: 5000,
             offset: 0,
             centered: true,
           },
