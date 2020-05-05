@@ -8,10 +8,7 @@ import Classes from './gallery.module.scss'
 import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 const Gallery = ({ data }) => {
-
-    var windowWidth = window.innerWidth
-    console.log('windowWidth', windowWidth)
-
+    
     return (
         <Section bgColor={data.bgColor && data.bgColor.hex}>
             <div className="container">
