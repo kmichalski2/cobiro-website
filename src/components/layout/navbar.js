@@ -92,7 +92,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
         setIsToggleTouched(true)
   }
 
-  const subSubMenuClickHandler = (event) => {
+  const subSubMenuClickHandler = (event, clickable) => {
     if (windowWidth < 960 && event.target.parentNode.classList.contains("has-subsubmenu")) {
       if (!clickable) {
         event.preventDefault()
