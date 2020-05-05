@@ -94,7 +94,9 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
 
   const subSubMenuClickHandler = (event) => {
     if (windowWidth < 960 && event.target.parentNode.classList.contains("has-subsubmenu")) {
-      event.preventDefault()
+      if (!clickable) {
+        event.preventDefault()
+      }
       event.target.parentNode.classList.toggle("expanded")
       if (event.target.parentNode.classList.contains("expanded")) {
         event.target.nextElementSibling.style.maxHeight =
@@ -168,7 +170,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                         {item.submenu.map((sub, index) => (
                           <div key={index} className={ sub.submenuLinks.length > 0 ? "has-subsubmenu" : null }>
                           {sub.title || sub.icon ? 
-                          <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? `/${sub.link.slug}` : '/'} target="_self" onClick={subSubMenuClickHandler}>
+                          <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? `/${sub.link.slug}` : '/'} target="_self" onClick={(e) => subSubMenuClickHandler(e, item.expandedMobile)}>
                             <ImageAll classes="submenu-icon" image={sub.icon} alt={sub.icon && sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
                             {sub.title}
                           </Link>
