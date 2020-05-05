@@ -13,10 +13,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
   const [mainMenuHovered, setMainMenuHovered] = useState(false)
   let [refs, setRefs] = useState({})
   const mainMenu = React.createRef();
-  let mainMenuNode
-
-  console.log(menuItems)
-  
+  let mainMenuNode  
 
   useEffect(() => {
     
