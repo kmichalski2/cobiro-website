@@ -13,10 +13,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
   const [mainMenuHovered, setMainMenuHovered] = useState(false)
   let [refs, setRefs] = useState({})
   const mainMenu = React.createRef();
-  let mainMenuNode
-  // let refs = {}
-
-  
+  let mainMenuNode  
 
   useEffect(() => {
     
@@ -95,9 +92,11 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
         setIsToggleTouched(true)
   }
 
-  const subSubMenuClickHandler = (event) => {
+  const subSubMenuClickHandler = (event, clickable) => {
     if (windowWidth < 960 && event.target.parentNode.classList.contains("has-subsubmenu")) {
-      event.preventDefault()
+      if (!clickable) {
+        event.preventDefault()
+      }
       event.target.parentNode.classList.toggle("expanded")
       if (event.target.parentNode.classList.contains("expanded")) {
         event.target.nextElementSibling.style.maxHeight =
@@ -161,7 +160,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                 {menuItems.sort(function (a, b) {
                     return a.menu_item_order - b.menu_item_order;
                   }).map((item, index) => (
-                  <li key={index} className={item.submenu.length > 0 ? "submenu-parent" : null}>
+                  <li key={index} className={[item.submenu.length > 0 ? "submenu-parent" : null, item.expandedMobile ? 'expandedDefault' : null].join(' ')}>
                   <Link className={item.submenu.length > 0 ? 'has-submenu' : null } activeClassName="active" to={item.link ? `/${item.link.slug}` : '#'} onMouseEnter={mouseEnterSubMenuHandler} onClick={subMenuClickHandler}>
                     {item.linkTitle}
                   </Link>
@@ -171,7 +170,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                         {item.submenu.map((sub, index) => (
                           <div key={index} className={ sub.submenuLinks.length > 0 ? "has-subsubmenu" : null }>
                           {sub.title || sub.icon ? 
-                          <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? `/${sub.link.slug}` : '/'} target="_self" onClick={subSubMenuClickHandler}>
+                          <Link className="submenu-title text-bold text-darkgrey" to={sub.link.slug ? `/${sub.link.slug}` : '/'} target="_self" onClick={(e) => subSubMenuClickHandler(e, item.expandedMobile)}>
                             <ImageAll classes="submenu-icon" image={sub.icon} alt={sub.icon && sub.icon.alt ? sub.icon.alt : `${sub.title} icon`}/>
                             {sub.title}
                           </Link>
