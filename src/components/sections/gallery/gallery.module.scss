@@ -1,3 +1,5 @@
+@import '../../layout/style/globals';
+
 .image {
     margin-bottom: 1.875rem;
 }
@@ -8,3 +10,11 @@
 .btnLast {
     margin-left: 1rem;
 }
+
+.cards {
+    width: 100vw;
+    padding: 0 0.5rem 0 0.5rem;
+
+    &::-webkit-scrollbar { width: 0 !important }
+}
+
