@@ -37,7 +37,7 @@ const Gallery = ({ data }) => {
                 { data.images ? 
                     <Carousel
                         itemWidth={250}
-                        offset={0}
+                        offset={15}
                         slidesPerPage={4}
                         centered={true} 
                         stopAutoPlayOnHover={false}
