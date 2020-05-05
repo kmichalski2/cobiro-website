@@ -37,7 +37,7 @@ const Gallery = ({ data }) => {
                 { data.images ? 
                     <Carousel
                         itemWidth={250}
-                        offset={15}
+                        offset={0}
                         slidesPerPage={4}
                         centered={true} 
                         stopAutoPlayOnHover={false}
@@ -47,10 +47,10 @@ const Gallery = ({ data }) => {
                         breakpoints={{
                             2800: {
                                 slidesPerPage: 4,
-                            }, 
+                            },
                             2200: {
                                 slidesPerPage: 3,
-                            }, 
+                            },
                             2000: {
                                 slidesPerPage: 2,
                             },
