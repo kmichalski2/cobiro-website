@@ -1,0 +1,73 @@
+@import '../../../style/globals';
+
+.subMenuTitle {
+    &:hover, &:active, &:focus {
+        color: $black;
+    }
+}
+@include mq($from: lg) {
+    .subSubMenu li>a {
+        color: $blue;
+        font-size: 0.8rem;
+    }
+}
+
+@include mq($from: lg) {
+    .subMenuColumn {
+        width: calc((73.125rem - 5rem - 1.875rem) / 4);
+        padding-right: 1rem;
+    }
+}
+
+.subMenuIcon {
+    width: 3.125rem;
+    display: block;
+    clear: both;
+    margin-bottom: 1rem;
+}
+
+.subMenuTitle {
+    padding-bottom: 1rem;
+    display: block;
+}
+
+@include mq($until: lg) {
+
+    .hasSubSubMenu {
+
+        &>a {
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                right: 0.1em;
+                top: 50%;
+                width: 0.5em;
+                height: 0.5em;
+                border-width: 0;
+                transform: rotate(-45deg) translate(50%, -50%);
+                border-color: $darkgrey;
+                border-style: solid;
+                border-right-width: 0.1em;
+                border-bottom-width: 0.1em;
+                transition: transform 0.1s ease;
+            }
+        }
+
+        &.expanded>a::after {
+            transform: rotate(45deg) translate(-50%,-50%);
+        }
+    }
+    .subSubMenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        background-color: $lightgrey;
+        padding: 0 1.1rem;
+        padding-left: 5.25rem;
+        margin: 0 -1.1rem;
+        width: 100vw;
+    }
+
+}

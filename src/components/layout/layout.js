@@ -9,7 +9,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Navbar from "./navbar"
+import Navbar from "./navbar/navbar"
 import Footer from "./footer"
 import "./style/app.scss"
 import CookieBanner from "./cookieConsent"
@@ -52,44 +52,133 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
         }
         submenuFooterExternalLink
         expandedMobile
-        submenu {
-          title
-          icon {
-            alt
-            fixed(width: 10) {
-              aspectRatio
-              base64
-              height
-              src
-              srcSet
-              width
-            }
-            url
+        submenuTitle
+        submenuDescription
+        submenuColumn1Title
+        submenuColumn1Icon {
+          alt
+          url
+          fixed(width: 16) {
+            width
+            srcSet
+            src
+            sizes
+            height
+            aspectRatio
           }
-          link {
-            ... on DatoCmsPage {
-              id
-              title
-              slug
-            }
-            ... on DatoCmsBlogPage {
-              title
-              slug
-            }
-          }
-          submenuLinks {
-            ... on DatoCmsPage {
-              id
-              title
-              slug
-            }
-            ... on DatoCmsBlogPage {
-              title
-              slug
-            }
-          }
-          submenuLinkTitles
         }
+        submenuColumn1Links {
+          linkTitle
+          externalLink
+          internalLink {
+            ... on DatoCmsPage {
+              slug
+              __typename
+              internal {
+                type
+              }
+            }
+            ... on DatoCmsBlogPage {
+              slug
+              __typename
+              internal {
+                type
+              }
+            }
+          }
+          linkDescription
+        }
+        submenuColumn2Title
+        submenuColumn2Icon {
+          alt
+          url
+          fixed(width: 16) {
+            width
+            srcSet
+            src
+            sizes
+            height
+            aspectRatio
+          }
+        }
+        submenuColumn2Links {
+          linkTitle
+          externalLink
+          internalLink {
+            ... on DatoCmsPage {
+              slug
+              __typename
+              internal {
+                type
+              }
+            }
+            ... on DatoCmsBlogPage {
+              slug
+              __typename
+              internal {
+                type
+              }
+            }
+          }
+          linkDescription
+        }
+        submenuColumn3Title
+        submenuColumn3Icon {
+          alt
+          url
+          fixed(width: 16) {
+            width
+            srcSet
+            src
+            sizes
+            height
+            aspectRatio
+          }
+        }
+        submenuColumn3Links {
+          linkTitle
+          externalLink
+          internalLink {
+            ... on DatoCmsPage {
+              slug
+              __typename
+              internal {
+                type
+              }
+            }
+            ... on DatoCmsBlogPage {
+              slug
+              __typename
+              internal {
+                type
+              }
+            }
+          }
+          linkDescription
+        }
+        rightColumnTitle
+      rightColumnDescription
+      rightColumnLinks {
+        externalLink
+        linkTitle
+        linkDescription
+        internalLink {
+          ... on DatoCmsPage {
+            slug
+            __typename
+            internal {
+              type
+            }
+          }
+          ... on DatoCmsBlogPage {
+            slug
+            __typename
+            internal {
+              type
+            }
+          }
+        }
+      }
       }
     }
     allDatoCmsFooter(sort: {fields: footerItemOrder, order: ASC}, filter: {locale: {eq: "en"}}) {

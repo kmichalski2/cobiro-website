@@ -1,0 +1,122 @@
+@import '../../style/globals';
+
+.menuItem {
+
+    @include mq($until: lg) {
+
+        &.expanded {
+            padding-bottom: 0;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    a {
+        font-size: 1rem;
+        color: rgba($white, 0.6);
+
+        // &.hasSubMenu::after {
+        //     border-color: $blue !important;
+        // }
+        
+        &.active, &:hover, &:active, &:focus {
+            // color: $blue;
+            text-decoration: none;
+        }
+
+        @include mq($until: lg) {
+            color: $black;
+        }
+        @include mq($from: lg) {
+            // &.hasSubMenu::after {
+            //     border-color: rgba($white, 0.7) !important;
+            // }
+            &.active, &:hover, &:active, &:focus {
+                color: $black;
+                text-decoration: none;
+
+                // &.hasSubMenu::after {
+                //     border-color: $white;
+                // }	
+            }
+        }
+        
+        &.hasSubMenu {
+            padding-right: 1em;
+            position: relative;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    right: 0.1em;
+                    top: 50%;
+                    width: 0.5em;
+                    height: 0.5em;
+                    border-width: 0;
+                    transform: rotate(45deg) translate(-50%, -50%);
+                    border-style: solid;
+                    border-right-width: 0.1em;
+                    border-bottom-width: 0.1em;
+                    transition: transform 0.1s ease;
+
+                    // @include mq($from: lg) {
+                    //     border-color: $white;
+                    // }
+                }
+        }
+    }
+    
+    @include mq($from: lg) {
+        &:hover {
+            .hasSubMenu {
+                &::after {
+                    transform: rotate(-135deg) translate(10%, 10%);
+                }
+            }
+        }
+    }
+    &.expand {
+        .hasSubMenu {
+            &::after {
+                transform: rotate(-135deg) translate(10%, 10%);
+            }
+        }
+    }
+
+}
+
+
+.subMenuParent {
+    position: relative;
+
+    
+    
+
+    &.expandedDefault {
+
+        .submenu {
+            max-height: none;
+
+            .has-subsubmenu { 
+                .subsubmenu {
+                    max-height: none;
+                }
+            }
+        }
+
+    }
+}
+
+
+.hasSubMenu:after {
+    border-color: $black!important;
+}
+@include mq($from: lg) {
+    li>a.hasSubMenu::after {
+        &.active, &:hover, &:active, &:focus {
+            border-color: $black !important;
+        }
+    }
+}

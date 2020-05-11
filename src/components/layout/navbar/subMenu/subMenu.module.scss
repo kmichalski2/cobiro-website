@@ -1,0 +1,136 @@
+@import '../../style/globals';
+
+.subMenu {
+    position: absolute;
+    overflow: hidden;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    
+    .subMenuFooter {
+        padding: 2rem 0;
+    }
+    @include mq($from: lg) {
+        .subMenuFooter {
+            padding: 2.5rem;
+            background-color: $lightgrey;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        @include box-shadow-hover;
+        @include borderradius;
+        overflow: visible;
+        left: 50%;
+        background-color: $white;
+        top: 3.5rem;
+        transform: scaleY(0.4) translateX(-50%);
+        opacity: 0;
+        //transition: all 0.2s ease;
+        transform-origin: top;
+        border: 1px solid $lightgrey;
+
+        .subMenuTriangle {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            top: -0.2rem;
+            left: 50%;
+            transform: rotate(45deg) translateX(-50%);
+            background-color: $white;
+            border-left: 1px solid $lightgrey;
+            border-top: 1px solid $lightgrey;
+        }
+    }
+
+    &>.subMenuInner {
+        padding-top: 3.125rem;
+        padding-bottom: 2rem;
+        transform: translateY(-2rem);
+        opacity: 0;
+        transition: all 0.2s ease;
+        transition-delay: 0s;
+
+        @include mq($from: lg) {
+            display: flex;
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
+
+        @include mq($until: lg) {
+            padding-top: 0;
+            padding-bottom: 0;
+            transform: none;
+            transition: none;
+            opacity: 1;
+        }		
+    }
+
+
+    @include mq($until: lg) {
+        overflow:hidden;
+        position: relative;
+        top: 1rem;
+        margin-left: -1.1rem;
+        margin-right: -1.1rem;
+        width: 100vw;
+        padding: 0 1.1rem;
+        max-height: 0;
+        visibility: visible;
+        transition: max-height 0.4s ease;
+
+        .subMenuTitle {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+
+            .subMenuIcon {
+                margin: 0;
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    
+}
+
+.expand {
+    .submenu {
+        @include mq($until: lg) {
+            border-top: 1px solid $mediumgrey;
+            visibility: visible;
+
+            .submenu-inner {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    }  
+}
+
+
+    .submenu {
+        &.hovered, &.unhovered {
+            transition: all 0.4s ease;
+        }
+    }
+
+
+@include mq($from: lg) {
+    &:hover {
+        .subMenu.show {
+            visibility: visible;
+            transform: scaleY(1) translateX(-50%);
+            opacity: 1;
+            
+
+
+            &>.subMenuInner {
+                transition: all 0.4s ease;
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0.1s;
+            }
+        }
+    }
+}

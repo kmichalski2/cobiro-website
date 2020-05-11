@@ -261,9 +261,9 @@ nav {
 					padding-left: 2.5rem;
 					padding-right: 2.5rem;
 
-					>div {
-						width: 12rem;
-						padding: 0 1rem;
+					.submenuColumn {
+						width: calc((73.125rem - 5rem - 1.875rem) / 4);
+						padding-right: 1rem;
 					}
 				}
 
@@ -423,9 +423,6 @@ nav {
 			}
 			a::after {
 				content: none !important;
-			}
-			.submenu-footer {
-				display: none;
 			}
 		}
 	}
