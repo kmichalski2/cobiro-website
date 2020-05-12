@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from "gatsby"
-import SubMenu from '../submenu/submenu'
+import SubMenu from '../subMenu/subMenu'
 
 import Classes from './menuItem.module.scss'
 
