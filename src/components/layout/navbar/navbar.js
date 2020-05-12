@@ -67,32 +67,35 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
         setIsToggleTouched(true)
   }
 
+  const mainMenuHoveredHandler = () => {
+    setMainMenuHovered(true) 
+  }
   
 
-  const subMenuClickHandler = (event) => {
-    const el = event.target
+  // const subMenuClickHandler = (event) => {
+  //   const el = event.target
     
-    if ( windowWidth < 960 && el.parentNode.classList.contains(Classes.submenuParent) ) {
+  //   if ( windowWidth < 960 && el.parentNode.classList.contains(Classes.submenuParent) ) {
 
-      event.preventDefault()
+  //     event.preventDefault()
       
-      if ( el.parentNode.classList.contains("expand") ) {
-        el.nextElementSibling.style.maxHeight =
-        el.nextElementSibling.offsetHeight + "px"
-        setTimeout(() => (el.nextElementSibling.style.maxHeight = null), 0)
-      } else {
-        el.nextElementSibling.style.maxHeight = el.nextElementSibling.children[0].offsetHeight + el.nextElementSibling.children[1].offsetHeight + "px"
-        setTimeout(() => (el.nextElementSibling.style.maxHeight = "none"), 400)
-      }
-      el.parentNode.classList.toggle("expand")
-    }
-  }
+  //     if ( el.parentNode.classList.contains("expand") ) {
+  //       el.nextElementSibling.style.maxHeight =
+  //       el.nextElementSibling.offsetHeight + "px"
+  //       setTimeout(() => (el.nextElementSibling.style.maxHeight = null), 0)
+  //     } else {
+  //       el.nextElementSibling.style.maxHeight = el.nextElementSibling.children[0].offsetHeight + el.nextElementSibling.children[1].offsetHeight + "px"
+  //       setTimeout(() => (el.nextElementSibling.style.maxHeight = "none"), 400)
+  //     }
+  //     el.parentNode.classList.toggle("expand")
+  //   }
+  // }
 
-  const mouseEnterSubMenuHandler = (event) => {
-    if(event.target.classList.contains('has-submenu')) {
-      setMainMenuHovered(true) 
-    }
-  }
+  // const mouseEnterSubMenuHandler = (event) => {
+  //   if(event.target.classList.contains('has-submenu')) {
+  //     setMainMenuHovered(true) 
+  //   }
+  // }
 
   return (
     <header>
@@ -122,7 +125,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
             <div className={["col col-auto-lg", Classes.mainMenuInner, isScrolled || menuInverted ? Classes.menuItems : null].join(' ')}>
               <ul className={["list-inline", Classes.menuItemsList].join(' ')}>
                 {menuItems.sort((a, b) => a.menu_item_order - b.menu_item_order).map((item, index) => (
-                    <MenuItem key={index} inverted={isScrolled || menuInverted} item={item} subMenuClickHandler={subMenuClickHandler} mouseEnterSubMenuHandler={mouseEnterSubMenuHandler}/>
+                    <MenuItem key={index} inverted={isScrolled || menuInverted} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler}/>
                 ))}
               </ul>
               <div className={["main-menu-cta visible-lg-up"].join(' ')}>

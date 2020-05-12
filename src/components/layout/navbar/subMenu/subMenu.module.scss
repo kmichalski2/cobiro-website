@@ -6,6 +6,7 @@
     visibility: hidden;
     transition: all 0.4s ease;
     
+    
     .subMenuFooter {
         padding: 2rem 0;
     }
@@ -30,6 +31,7 @@
         //transition: all 0.2s ease;
         transform-origin: top;
         border: 1px solid $lightgrey;
+        
 
         .subMenuTriangle {
             content: '';
@@ -70,16 +72,17 @@
 
 
     @include mq($until: lg) {
-        overflow:hidden;
-        position: relative;
-        top: 1rem;
+        position: absolute;
         margin-left: -1.1rem;
         margin-right: -1.1rem;
         width: 100vw;
+        min-height: 100vw;
         padding: 0 1.1rem;
-        max-height: 0;
         visibility: visible;
-        transition: max-height 0.4s ease;
+        transition: transform 0.4s ease;
+        transform: translate(100vw, 0);
+        background-color: $white;
+        padding-top: 2rem;
 
         .subMenuTitle {
             display: flex;
@@ -96,18 +99,24 @@
     
 }
 
-.expand {
-    .submenu {
-        @include mq($until: lg) {
-            border-top: 1px solid $mediumgrey;
-            visibility: visible;
+// .expand {
+//     .submenu {
+//         @include mq($until: lg) {
+//             border-top: 1px solid $mediumgrey;
+//             visibility: visible;
 
-            .submenuInner {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    }  
+//             .submenuInner {
+//                 opacity: 1;
+//                 transform: translateY(0);
+//             }
+//         }
+//     }  
+// }
+
+@include mq($until: lg) {
+    .subMenu.expand {
+        transform: translate(0, 0);
+    }
 }
 
 

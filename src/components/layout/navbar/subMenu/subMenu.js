@@ -7,7 +7,7 @@ import AnyLink from '../../../UiElements/AnyLink/AnyLink'
 import Classes from './subMenu.module.scss'
 
 
-const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescription, show }) => {
+const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescription, show, expand }) => {
     console.log('columns: ', columns)
 
     useEffect(() => {
@@ -43,6 +43,8 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
           // }
       }
 
+      
+
       const subSubMenuClickHandler = (event, clickable) => {
         if (window.innerWidth < 960 && event.target.parentNode.classList.contains(Classes.hasSubMenu)) {
           if (!clickable) {
@@ -60,7 +62,7 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
       
 
     return (
-        <div className={[Classes.subMenu, show ? Classes.show : null].join(' ')} ref={submenu}>
+        <div className={[Classes.subMenu, show ? Classes.show : null, expand ? Classes.expand : null].join(' ')} ref={submenu}>
             <div className={Classes.subMenuInner}>
               <div>
                 <div className="space-xs-up">

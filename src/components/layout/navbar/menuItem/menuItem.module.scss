@@ -55,11 +55,13 @@
         &.hasSubMenu {
             padding-right: 1em;
             position: relative;
+            transition: padding 0.2s ease;
 
             @include mq($until: lg) {
                 &:hover {
                     &:after {
-                        transform: translate(50%, -10%) rotate(0deg) translateY(50%) translateX(0.3rem);
+                        // transform: translate(50%, -10%) rotate(0deg) translateY(50%) translateX(0.3rem);
+                        // transform: rotate
                     }
                 }
             }
@@ -85,12 +87,45 @@
                         background-image: url("../../../../images/menuArrow.png")!important;
                         background-size: 1rem;
                         background-repeat: no-repeat;
+                        background-position: center;
                         top: 50%;
-                        width: 1.5em;
-                        height: 1.5em;
-                        transform: translate(50%, -10%) rotate(0deg) translateY(50%);
+                        width: 1em;
+                        height: 1em;
+                        transform: translate(50%, 50%);
                         transition: transform 0.2s ease;
                         border-style: none;
+                    }
+                }
+
+                
+
+                @include mq($until: lg) {
+                    
+                    &::before {
+                        content: '';
+                        position: absolute; 
+                        left: 0.4rem;
+                        background-image: url("../../../../images/menuArrow.png")!important;
+                        background-size: 1rem;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        top: 50%;
+                        width: 1em;
+                        height: 1em;
+                        transform-origin: 0 0;
+                        transform: translate(-150%, 50%) rotate(180deg);
+                        transition: transform 0.2s ease;
+                        border-style: none;
+                    }
+
+                    &.subMenuExpanded {
+                        padding-left: 2rem; 
+                        &::after {
+                            transform: translate(10rem, 50%);
+                        }
+                        &::before {
+                            transform: translate(50%, 50%) rotate(180deg);
+                        }
                     }
                 }
         }
@@ -108,7 +143,7 @@
     &.expand {
         .hasSubMenu {
             &::after {
-                transform: rotate(-135deg) translate(10%, 10%);
+                transform: translate(0%, 50%) rotate(90deg);
             }
         }
     }
