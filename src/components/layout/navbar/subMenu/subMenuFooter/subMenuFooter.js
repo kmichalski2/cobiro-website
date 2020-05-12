@@ -8,8 +8,8 @@ const SubMenuFooter = ({ text, externalLink, internalLink, linkTitle }) => {
         <div className={[Classes.subMenuFooter, "center text-center"].join(' ')}>
             { text ? <p className={["small", Classes.subMenuFooterText].join(' ')}>{ text }</p> : null }
             <AnyLink 
-                external={externalLink}
-                internal={internalLink}
+                external={externalLink && true}
+                internal={internalLink && true}
                 link={externalLink || internalLink && internalLink.slug}
                 title={linkTitle}
                 button

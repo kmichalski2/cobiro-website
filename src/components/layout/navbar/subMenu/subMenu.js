@@ -8,42 +8,49 @@ import Classes from './subMenu.module.scss'
 import SubMenuFooter from './subMenuFooter/subMenuFooter'
 
 
-const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescription, show, expand }) => {
+const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescription, show, expand,  contentContainer}) => {
     console.log('columns: ', columns)
 
     useEffect(() => {
         setSubMenuOffset()
-        console.log('SHOW: ', show)
-    })
+    },[])
+
     
+
     const submenu = React.createRef()
+    const subMenuTriangle = React.createRef()
 
     function getPageTopLeft(el) {
         const rect = el.getBoundingClientRect();
-        const docEl = document.documentElement;
-        return rect.left + (window.pageXOffset || docEl.scrollLeft || 0)
+        const docEl = contentContainer.current;
+        console.log(docEl, rect.left, (window.innerWidth - docEl.clientWidth) / 2)
+        return rect.left - (window.pageXOffset || ((window.innerWidth - docEl.clientWidth) / 2) || 0)
+
       }
       const setSubMenuOffset = () => {
-          // if (submenu.current) {
-          //     const sub = submenu.current
+          if (submenu.current) {
+              const sub = submenu.current
               
-          //     if(window.innerWidth > "960") {
-          //       const subOffset = getPageTopLeft(sub)
-          //       if(subOffset < 0 ) {
-          //         sub.style.marginLeft = -1 * subOffset + 16 + 'px'
-          //         sub.querySelector(Classes.subMenuTriangle).style.marginLeft = subOffset + -16 + 'px'
-          //         return true
-          //       } else {
-          //         sub.style.marginLeft = 0
-          //         sub.querySelector(Classes.subMenuTriangle).style.marginLeft = 0
-          //       }
-          //       return false
-          //   } else {
-          //     sub.style.marginLeft = '-1.1rem'
-          //   }
-          // }
-      }
+              if(window.innerWidth > "960") {
+                const subOffset = getPageTopLeft(sub)
 
+                console.log('OFFSET: ', subOffset)
+
+                if(subOffset < 0 ) {
+                  sub.style.marginLeft = -1 * subOffset + 16 + 'px'
+                  subMenuTriangle.current.style.marginLeft = subOffset + -16 + 'px'
+                  return true
+                } else {
+                  sub.style.marginLeft = 0
+                  subMenuTriangle.current.style.marginLeft = 0
+                }
+                return false
+            } else {
+              sub.style.marginLeft = '-1.1rem'
+            }
+          }
+      }
+      // setSubMenuOffset()
       
 
       // const subSubMenuClickHandler = (event, clickable) => {
@@ -97,21 +104,10 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
                 </div>
                 
                 { footer.submenuFooterText || (footer.submenuFooterLinkTitle && (footer.submenuFooterLink || footer.submenuFooterExternalLink)) ?
-                // <div className={[Classes.subMenuFooter, "center text-center"].join(' ')}>
-                //     { footer.submenuFooterText ? <p className={["small", Classes.submenuFooterText].join(' ')}>{ footer.submenuFooterText }</p> : null }
-                //     <AnyLink 
-                //       internal={footer.submenuFooterExternalLink && true}
-                //       external={footer.submenuFooterLink && footer.submenuFooterLink.slug && true}
-                //       link={footer.submenuFooterExternalLink || footer.submenuFooterLink && footer.submenuFooterLink.slug}
-                //       title={footer.submenuFooterLinkTitle}
-                //       button
-                //     />
-                    
-                // </div>
                 <SubMenuFooter 
                   text={footer.submenuFooterText}
-                  externalLink={footer.submenuFooterExternalLink && true}
-                  internalLink={footer.submenuFooterLink && footer.submenuFooterLink.slug && true}
+                  externalLink={footer.submenuFooterExternalLink}
+                  internalLink={footer.submenuFooterLink && footer.submenuFooterLink.slug}
                   linkTitle={footer.submenuFooterLinkTitle}
                   classes={Classes.subMenuFooter}
                 />
@@ -119,7 +115,7 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
                 
                 : null }
             
-            <div className={Classes.subMenuTriangle}></div>
+            <div ref={subMenuTriangle} className={Classes.subMenuTriangle}></div>
         </div>
     )
 }

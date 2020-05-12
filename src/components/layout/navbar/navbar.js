@@ -16,24 +16,9 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
   // let [refs, setRefs] = useState({})
   // const mainMenu = React.createRef();
   // let mainMenuNode  
+  const contentContainer = React.createRef()
 
 
-  // useEffect(() => {
-    
-  //   let tempRefs = {}
-
-  //   menuItems.forEach((item, i) => {
-  //     if(item.submenu && item.submenu.length > 0) {
-  //       // refs[`ref_${i}`] = React.createRef()
-
-  //       tempRefs = {...tempRefs, [`ref_${i}`]: React.createRef()}
-  //     }
-  //   });
-
-  //   setRefs(tempRefs)
-    
-  // }, [menuItems])
- 
   useEffect(() => {
     // mainMenuNode = mainMenu.current
     window.addEventListener("resize", () => resizeHandler())
@@ -72,36 +57,11 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
   }
   
 
-  // const subMenuClickHandler = (event) => {
-  //   const el = event.target
-    
-  //   if ( windowWidth < 960 && el.parentNode.classList.contains(Classes.submenuParent) ) {
-
-  //     event.preventDefault()
-      
-  //     if ( el.parentNode.classList.contains("expand") ) {
-  //       el.nextElementSibling.style.maxHeight =
-  //       el.nextElementSibling.offsetHeight + "px"
-  //       setTimeout(() => (el.nextElementSibling.style.maxHeight = null), 0)
-  //     } else {
-  //       el.nextElementSibling.style.maxHeight = el.nextElementSibling.children[0].offsetHeight + el.nextElementSibling.children[1].offsetHeight + "px"
-  //       setTimeout(() => (el.nextElementSibling.style.maxHeight = "none"), 400)
-  //     }
-  //     el.parentNode.classList.toggle("expand")
-  //   }
-  // }
-
-  // const mouseEnterSubMenuHandler = (event) => {
-  //   if(event.target.classList.contains('has-submenu')) {
-  //     setMainMenuHovered(true) 
-  //   }
-  // }
-
   return (
     <header>
       <nav className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, isScrolled ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">
-        <div className="container">
-          <div className="row between-xs middle-xs">
+        <div  className="container">
+          <div ref={contentContainer} className="row between-xs middle-xs">
             <div className={["col col-auto-lg", Classes.navbarMobile].join(' ')} >
               <div className={[Classes.brand, menuInverted ? Classes.invert : null, isExpanded ? Classes.invert : null, isScrolled ? Classes.invert : null].join(' ')}>
                 <Link to="/">
@@ -125,7 +85,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
             <div className={["col col-auto-lg", Classes.mainMenuInner, isScrolled || menuInverted ? Classes.menuItems : null].join(' ')}>
               <ul className={["list-inline", Classes.menuItemsList].join(' ')}>
                 {menuItems.sort((a, b) => a.menu_item_order - b.menu_item_order).map((item, index) => (
-                    <MenuItem key={index} inverted={isScrolled || menuInverted} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler}/>
+                    <MenuItem key={index} inverted={isScrolled || menuInverted} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer}/>
                 ))}
               </ul>
               <div className={["visible-xs-up", Classes.mainMenuCta].join(' ')}>
@@ -136,28 +96,6 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                   {customCta && customCta.title ? customCta.title : 'Sign up' }
                 </a>                  
               </div>
-
-              {/* { menuItems[0].submenuFooterText || (menuItems[0].submenuFooterLinkTitle && (menuItems[0].submenuFooterLink || menuItems[0].submenuFooterExternalLink)) ?
-                // <div className={[Classes.subMenuFooter, Classes.menuCta, "center text-center hidden-lg-up"].join(' ')}>
-                //     { menuItems[0].submenuFooterText ? <p className={[Classes.submenuFooterText].join(' ')}>{ menuItems[0].submenuFooterText }</p> : null }
-                //     <AnyLink 
-                //       internal={menuItems[0].submenuFooterExternalLink && true}
-                //       external={menuItems[0].submenuFooterLink && menuItems[0].submenuFooterLink.slug && true}
-                //       link={menuItems[0].submenuFooterExternalLink || menuItems[0].submenuFooterLink && menuItems[0].submenuFooterLink.slug}
-                //       title={menuItems[0].submenuFooterLinkTitle}
-                //       button
-                //     />
-                    
-                // </div>
-                <SubMenuFooter 
-                  text={footer.submenuFooterText}
-                  externalLink={menuItems[0].submenuFooterExternalLink && true}
-                  internalLink={menuItems[0].submenuFooterLink && menuItems[0].submenuFooterLink.slug && true}
-                  linkTitle={footer.submenuFooterLinkTitle}
-                  classes={Classes.subMenuFooter}
-              />
-              : null } */}
-
             </div>
           </div>
         </div>

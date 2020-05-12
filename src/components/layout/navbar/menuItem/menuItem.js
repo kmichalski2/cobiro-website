@@ -4,7 +4,7 @@ import SubMenu from '../submenu/submenu'
 
 import Classes from './menuItem.module.scss'
 
-const MenuItem = ({ item, inverted, mainMenuHoveredHandler }) => {
+const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer }) => {
     console.log('item', item)
 
     const [hovered, setHovered] = useState(false)
@@ -90,6 +90,7 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler }) => {
                         description: item.rightColumnDescription,
                         links: item.rightColumnLinks
                     }}
+                    contentContainer={contentContainer}
                     />
             : null}
             

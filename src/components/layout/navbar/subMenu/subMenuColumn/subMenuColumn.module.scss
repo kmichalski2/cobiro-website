@@ -5,16 +5,20 @@
         color: $black;
     }
 }
+
+.subSubMenu li>a {
+    color: $black;
+}
 @include mq($from: lg) {
     .subSubMenu li>a {
-        color: $black;
+        
         font-size: 0.8rem;
     }
 }
 
 @include mq($from: lg) {
     .subMenuColumn {
-        width: calc((73.125rem - 5rem - 1.875rem) / 4);
+        width: calc((73.125rem - 5rem - 1.875rem) / 4 - 0.55rem);
         padding-right: 1rem;
     }
 }
