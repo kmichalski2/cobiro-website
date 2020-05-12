@@ -33,12 +33,14 @@
 			height: 100%;
 			top: 0;
 			left: 0;
-			transition: background-color 0.4s 0.4s ease;
+			transition: background-color 0.4s 0.4s ease, border 0.6s 0.4s linear;
+			border-bottom: 1px solid $grey;
 		}
 
 		&.closed::before {
 			background-color: transparent;
 			transition: none;
+			border-bottom: none;
 		}
 
 		.navbarMobile {
@@ -94,7 +96,7 @@
 			top: 0;
 			bottom: 0;
 			background-color: $white;
-			padding-top: 5rem;
+			padding-top: 4.5rem;
 			padding-bottom: 2rem;
 			display: block;
 			transform: translateX(0);
@@ -114,6 +116,22 @@
 		a:first-child {
 			margin-right: 0.5rem;
 		}
+
+		@include mq($until: lg) {
+			background-color: #E5E9ED;
+			padding: 1.75rem;
+			margin-top: 1.875rem; 
+			
+			// a {
+			// 	display: block;
+			// 	margin: 0;
+
+			// 	&:first-child {
+			// 		margin-bottom: 0.9375rem;
+			// 	}
+			// }
+		}
+
 	}
 	.menuToggle {
 		display: none;
@@ -250,26 +268,5 @@
 		}
 	}
 
-.menuCta {
-	@include mq($until: lg) {
-		display: flex;
-		background-color: $lightgrey;
-		flex-direction: column;
-		padding: 1.75rem;
-		margin-top: 2rem;
-		
-		.footerText {
-			font-size: 4rem;
-		}
-	}	
-}
 
-.submenuFooterText {
-	font-size: 1rem;
-
-	@include mq($until: lg) {
-		font-size: 1.125rem;
-	}
-
-}
 

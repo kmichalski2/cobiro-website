@@ -128,7 +128,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                     <MenuItem key={index} inverted={isScrolled || menuInverted} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler}/>
                 ))}
               </ul>
-              <div className={["main-menu-cta visible-lg-up"].join(' ')}>
+              <div className={["visible-xs-up", Classes.mainMenuCta].join(' ')}>
                 <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
                   Sign in
                 </a>
@@ -137,19 +137,26 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                 </a>                  
               </div>
 
-              { menuItems[0].submenuFooterText || (menuItems[0].submenuFooterLinkTitle && (menuItems[0].submenuFooterLink || menuItems[0].submenuFooterExternalLink)) ?
-                <div className={[Classes.subMenuFooter, Classes.menuCta, "center text-center hidden-lg-up"].join(' ')}>
-                    { menuItems[0].submenuFooterText ? <p className={[Classes.submenuFooterText].join(' ')}>{ menuItems[0].submenuFooterText }</p> : null }
-                    <AnyLink 
-                      internal={menuItems[0].submenuFooterExternalLink && true}
-                      external={menuItems[0].submenuFooterLink && menuItems[0].submenuFooterLink.slug && true}
-                      link={menuItems[0].submenuFooterExternalLink || menuItems[0].submenuFooterLink && menuItems[0].submenuFooterLink.slug}
-                      title={menuItems[0].submenuFooterLinkTitle}
-                      button
-                    />
+              {/* { menuItems[0].submenuFooterText || (menuItems[0].submenuFooterLinkTitle && (menuItems[0].submenuFooterLink || menuItems[0].submenuFooterExternalLink)) ?
+                // <div className={[Classes.subMenuFooter, Classes.menuCta, "center text-center hidden-lg-up"].join(' ')}>
+                //     { menuItems[0].submenuFooterText ? <p className={[Classes.submenuFooterText].join(' ')}>{ menuItems[0].submenuFooterText }</p> : null }
+                //     <AnyLink 
+                //       internal={menuItems[0].submenuFooterExternalLink && true}
+                //       external={menuItems[0].submenuFooterLink && menuItems[0].submenuFooterLink.slug && true}
+                //       link={menuItems[0].submenuFooterExternalLink || menuItems[0].submenuFooterLink && menuItems[0].submenuFooterLink.slug}
+                //       title={menuItems[0].submenuFooterLinkTitle}
+                //       button
+                //     />
                     
-                </div>
-              : null }
+                // </div>
+                <SubMenuFooter 
+                  text={footer.submenuFooterText}
+                  externalLink={menuItems[0].submenuFooterExternalLink && true}
+                  internalLink={menuItems[0].submenuFooterLink && menuItems[0].submenuFooterLink.slug && true}
+                  linkTitle={footer.submenuFooterLinkTitle}
+                  classes={Classes.subMenuFooter}
+              />
+              : null } */}
 
             </div>
           </div>

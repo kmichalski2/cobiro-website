@@ -5,6 +5,7 @@ import HtmlText from '../../../UiElements/HtmlText/HtmlText'
 import AnyLink from '../../../UiElements/AnyLink/AnyLink'
 
 import Classes from './subMenu.module.scss'
+import SubMenuFooter from './subMenuFooter/subMenuFooter'
 
 
 const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescription, show, expand }) => {
@@ -45,20 +46,20 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
 
       
 
-      const subSubMenuClickHandler = (event, clickable) => {
-        if (window.innerWidth < 960 && event.target.parentNode.classList.contains(Classes.hasSubMenu)) {
-          if (!clickable) {
-            event.preventDefault()
-          }
-          event.target.parentNode.classList.toggle("expanded")
-          if (event.target.parentNode.classList.contains("expanded")) {
-            event.target.nextElementSibling.style.maxHeight =
-              event.target.nextElementSibling.children[0].offsetHeight + "px"
-          } else {
-            event.target.nextElementSibling.style.maxHeight = null
-          }
-        }
-      }
+      // const subSubMenuClickHandler = (event, clickable) => {
+      //   if (window.innerWidth < 960 && event.target.parentNode.classList.contains(Classes.hasSubMenu)) {
+      //     if (!clickable) {
+      //       event.preventDefault()
+      //     }
+      //     event.target.parentNode.classList.toggle("expanded")
+      //     if (event.target.parentNode.classList.contains("expanded")) {
+      //       event.target.nextElementSibling.style.maxHeight =
+      //         event.target.nextElementSibling.children[0].offsetHeight + "px"
+      //     } else {
+      //       event.target.nextElementSibling.style.maxHeight = null
+      //     }
+      //   }
+      // }
       
 
     return (
@@ -67,7 +68,7 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
               <div>
                 <div className="space-xs-up">
                   <h3>{ submenuTitle }</h3>
-                  <HtmlText RawHtml={submenuDescription} classes="small" />
+                  <HtmlText RawHtml={submenuDescription} classes="small  hidden-xs hidden-sm hidden-md" />
                 </div>
                 <div className="flex-lg">
                   {columns && columns.length > 0 ? columns.map((sub, index) => (
@@ -78,7 +79,6 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
                         icon={sub.icon} 
                         link={sub.link} 
                         submenuLinks={sub.submenuLinks}
-                        subSubMenuClickHandler={subSubMenuClickHandler}
                       />
                       
                   )) : null}
@@ -87,27 +87,35 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
               <div className={Classes.borderLeft}>
                 <div className="space-xs-up">
                   <h3>{ columnRight.title }</h3>
-                  <HtmlText RawHtml={columnRight.description} classes={["small", Classes.columnRightSpacing].join(' ')} />
+                  <HtmlText RawHtml={columnRight.description} classes={["small hidden-xs hidden-sm hidden-md", Classes.columnRightSpacing].join(' ')} />
                 </div>
                   <SubMenuColumn 
-                    subSubMenuClickHandler={subSubMenuClickHandler}
                     submenuLinks={columnRight.links}
+                    expandedDefault
                   />
               </div>
                 </div>
                 
                 { footer.submenuFooterText || (footer.submenuFooterLinkTitle && (footer.submenuFooterLink || footer.submenuFooterExternalLink)) ?
-                <div className={[Classes.subMenuFooter, "center text-center"].join(' ')}>
-                    { footer.submenuFooterText ? <p className={["small", Classes.submenuFooterText].join(' ')}>{ footer.submenuFooterText }</p> : null }
-                    <AnyLink 
-                      internal={footer.submenuFooterExternalLink && true}
-                      external={footer.submenuFooterLink && footer.submenuFooterLink.slug && true}
-                      link={footer.submenuFooterExternalLink || footer.submenuFooterLink && footer.submenuFooterLink.slug}
-                      title={footer.submenuFooterLinkTitle}
-                      button
-                    />
+                // <div className={[Classes.subMenuFooter, "center text-center"].join(' ')}>
+                //     { footer.submenuFooterText ? <p className={["small", Classes.submenuFooterText].join(' ')}>{ footer.submenuFooterText }</p> : null }
+                //     <AnyLink 
+                //       internal={footer.submenuFooterExternalLink && true}
+                //       external={footer.submenuFooterLink && footer.submenuFooterLink.slug && true}
+                //       link={footer.submenuFooterExternalLink || footer.submenuFooterLink && footer.submenuFooterLink.slug}
+                //       title={footer.submenuFooterLinkTitle}
+                //       button
+                //     />
                     
-                </div>
+                // </div>
+                <SubMenuFooter 
+                  text={footer.submenuFooterText}
+                  externalLink={footer.submenuFooterExternalLink && true}
+                  internalLink={footer.submenuFooterLink && footer.submenuFooterLink.slug && true}
+                  linkTitle={footer.submenuFooterLinkTitle}
+                  classes={Classes.subMenuFooter}
+                />
+
                 
                 : null }
             

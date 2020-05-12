@@ -32,14 +32,14 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler }) => {
       }
     
       const mouseEnterSubMenuHandler = (event) => {
-        if(event.target.classList.contains(Classes.hasSubMenu)) {
+        if(window.innerWidth > 959 && event.target.classList.contains(Classes.hasSubMenu)) {
             mainMenuHoveredHandler()
         }
       }
 
     return (
         <li 
-            className={[Classes.menuItem, inverted ? Classes.inverted : null, item.submenuColumn1Links && (item.submenuColumn1Links.length > 0) ? Classes.subMenuParent : null].join(' ')}
+            className={[Classes.menuItem, inverted ? Classes.inverted : null, item.submenuColumn1Links && (item.submenuColumn1Links.length > 0) ? Classes.subMenuParent : null, subMenuExpanded ? Classes.expanded : null].join(' ')}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >

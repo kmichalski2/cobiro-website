@@ -10,6 +10,7 @@
 
         &.expanded {
             padding-bottom: 0;
+            border-bottom: 1px solid $grey;
         }
 
         &:last-child {
@@ -17,21 +18,18 @@
         }
     }
 
-    a {
-       
+    &>a {
+        display: block;
         // color: rgba($white, 0.6);
         @include mq($until: lg) {
             color: $darkblue;
             font-weight: 600;
             font-size: 1.625rem;
+            position: relative;
         }
      
-        // &.hasSubMenu::after {
-        //     border-color: $blue !important;
-        // }
         
         &.active, &:hover, &:active, &:focus {
-            // color: $blue;
             text-decoration: none;
         }
 
@@ -39,16 +37,9 @@
             color: $black;
         }
         @include mq($from: lg) {
-            // &.hasSubMenu::after {
-            //     border-color: rgba($white, 0.7) !important;
-            // }
             &.active, &:hover, &:active, &:focus {
                 color: $black;
                 text-decoration: none;
-
-                // &.hasSubMenu::after {
-                //     border-color: $white;
-                // }	
             }
         }
         
@@ -57,15 +48,7 @@
             position: relative;
             transition: padding 0.2s ease;
 
-            @include mq($until: lg) {
-                &:hover {
-                    &:after {
-                        // transform: translate(50%, -10%) rotate(0deg) translateY(50%) translateX(0.3rem);
-                        // transform: rotate
-                    }
-                }
-            }
-
+            @include mq($from: lg) {
                 &::after {
                     content: '';
                     position: absolute;
@@ -80,54 +63,57 @@
                     border-bottom-width: 0.1em;
                     transition: transform 0.1s ease;
 
-                    @include mq($until: lg) {
-                        content: '';
-                        position: relative;
-                        float: right!important;
-                        background-image: url("../../../../images/menuArrow.png")!important;
-                        background-size: 1rem;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        top: 50%;
-                        width: 1em;
-                        height: 1em;
-                        transform: translate(50%, 50%);
-                        transition: transform 0.2s ease;
-                        border-style: none;
-                    }
+                   
                 }
-
+            }
+ 
+            @include mq($until: lg) {
                 
+                &::before {
+                    content: '';
+                    position: absolute; 
+                    left: -1rem;
+                    background-image: url("../../../../images/menuArrow.png")!important;
+                    background-size: 1rem;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    top: 50%;
+                    width: 1em;
+                    height: 1em;
+                    transform: translate(-150%, -50%) rotate(180deg);
+                    transition: transform 0.2s ease;
+                    border-style: none;
+                }
 
-                @include mq($until: lg) {
-                    
-                    &::before {
-                        content: '';
-                        position: absolute; 
-                        left: 0.4rem;
-                        background-image: url("../../../../images/menuArrow.png")!important;
-                        background-size: 1rem;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        top: 50%;
-                        width: 1em;
-                        height: 1em;
-                        transform-origin: 0 0;
-                        transform: translate(-150%, 50%) rotate(180deg);
-                        transition: transform 0.2s ease;
-                        border-style: none;
+                &.subMenuExpanded {
+                    padding-left: 2rem; 
+                    &::after {
+                        transform: translate(10rem, -50%);
                     }
-
-                    &.subMenuExpanded {
-                        padding-left: 2rem; 
-                        &::after {
-                            transform: translate(10rem, 50%);
-                        }
-                        &::before {
-                            transform: translate(50%, 50%) rotate(180deg);
-                        }
+                    &::before {
+                        transform: translate(50%, -50%) rotate(180deg);
                     }
                 }
+            }
+        }
+
+        @include mq($until: lg) {
+
+            &::after {
+                content: '';
+                position: absolute;
+                background-image: url("../../../../images/menuArrow.png")!important;
+                background-size: 1rem;
+                background-repeat: no-repeat;
+                background-position: center;
+                top: 50%;
+                right: 0;
+                width: 1em;
+                height: 1em;
+                transform: translate(0, -50%);
+                transition: transform 0.2s ease;
+                border-style: none;
+            }
         }
     }
     
@@ -173,6 +159,7 @@
 .hasSubMenu:after {
     border-color: $black!important;
 }
+
 @include mq($from: lg) {
     li>a.hasSubMenu::after {
         &.active, &:hover, &:active, &:focus {
@@ -180,7 +167,3 @@
         }
     }
 }
-
-
-
-

@@ -23,26 +23,17 @@
     width: 5.125rem;
     display: block;
     clear: both;
-    // margin-bottom: 1rem;
-    // margin-left: -1.5rem;
-
-    // img {
-    //     margin-right: 1.5rem;
-    // }
-
 }
-
-// .subMenuTitle {
-//     padding-bottom: 1rem;
-//     display: block;
-//     color: $black!important;   
-// }
 
 .subMenuTitle {
     display: flex;
     align-items: center;
     padding: 1rem 0;
     color: $black!important; 
+
+    @include mq($until: lg) {
+        font-size: 1.375rem;
+    }
 
     .subMenuIcon {
         margin: 0;
@@ -60,34 +51,44 @@
             &::after {
                 content: '';
                 position: absolute;
-                right: 0.1em;
+                background-image: url("../../../../../images/menuArrow.png")!important;
+                background-size: 1rem;
+                background-repeat: no-repeat;
+                background-position: center;
                 top: 50%;
-                width: 0.5em;
-                height: 0.5em;
-                border-width: 0;
-                transform: rotate(-45deg) translate(50%, -50%);
-                border-color: $darkgrey;
-                border-style: solid;
-                border-right-width: 0.1em;
-                border-bottom-width: 0.1em;
-                transition: transform 0.1s ease;
-                
+                right: 0;
+                width: 1em;
+                height: 1em;
+                transform-origin: center center;
+                transform: translate(0, -50%) rotate(90deg);
+                transition: transform 0.2s ease;
             }
         }
 
         &.expanded>a::after {
-            transform: rotate(45deg) translate(-50%,-50%);
+            transform: rotate(-90deg) translate(50%, 0);
         }
     }
     .subSubMenu {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s ease;
-        background-color: $lightgrey;
-        padding: 0 1.1rem;
-        padding-left: 5.25rem;
-        margin: 0 -1.1rem;
-        width: 100vw;
+        // background-color: $lightgrey;
+        // padding: 0 1.1rem;
+        // padding-left: 5.25rem;
+        // margin: 0 -1.1rem;
+        // width: 100vw;
+
+        &.expandedDefault {
+            max-height: none;
+        }
+        .subSubMenuItem {
+            font-size: 1.125rem;
+        }
+    }
+
+    .subMenuDescription {
+        display: none;
     }
 }
 
