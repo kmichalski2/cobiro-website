@@ -4,7 +4,7 @@ import ImageAll from '../../../../UiElements/ImageAll/ImageAll'
 import AnyLink from '../../../../UiElements/AnyLink/AnyLink'
 import HtmlText from '../../../../UiElements/HtmlText/HtmlText'
 
-import Classes from './submenuColumn.module.scss'
+import Classes from './subMenuColumn.module.scss'
 
 const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault }) => {
 
