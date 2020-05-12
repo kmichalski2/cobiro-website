@@ -5,7 +5,7 @@ import SubMenu from '../submenu/submenu'
 import Classes from './menuItem.module.scss'
 
 const MenuItem = ({ item, mouseEnterSubMenuHandler, subMenuClickHandler, inverted }) => {
-    console.log(item)
+    console.log('item', item)
 
     const [hovered, setHovedered] = useState(false)
 
@@ -14,12 +14,11 @@ const MenuItem = ({ item, mouseEnterSubMenuHandler, subMenuClickHandler, inverte
             className={[Classes.menuItem, inverted ? Classes.inverted : null, item.submenuColumn1Links && (item.submenuColumn1Links.length > 0) ? Classes.subMenuParent : null].join(' ')}
             onMouseEnter={() => setHovedered(true)}
             onMouseLeave={() => setHovedered(false)}
-
         >
             <Link 
                 className={item.submenuColumn1Links && (item.submenuColumn1Links.length > 0) ? Classes.hasSubMenu : null } 
-                activeClassName="active" 
-                to={item.link ? `/${item.link.slug}` : '#'} 
+                activeClassName="active"
+                to={item.link ? `/${item.link.slug}` : '#'}
                 onMouseEnter={mouseEnterSubMenuHandler} 
                 onClick={subMenuClickHandler}
             >

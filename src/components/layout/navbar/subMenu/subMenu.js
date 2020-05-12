@@ -85,7 +85,7 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
               <div className={Classes.borderLeft}>
                 <div className="space-xs-up">
                   <h3>{ columnRight.title }</h3>
-                  <HtmlText RawHtml={columnRight.description} classes="small" />
+                  <HtmlText RawHtml={columnRight.description} classes={["small", Classes.columnRightSpacing].join(' ')} />
                 </div>
                   <SubMenuColumn 
                     subSubMenuClickHandler={subSubMenuClickHandler}
@@ -95,8 +95,8 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
                 </div>
                 
                 { footer.submenuFooterText || (footer.submenuFooterLinkTitle && (footer.submenuFooterLink || footer.submenuFooterExternalLink)) ?
-                <div className={Classes.subMenuFooter}>
-                    { footer.submenuFooterText ? <p className="small">{ footer.submenuFooterText }</p> : null }
+                <div className={[Classes.subMenuFooter, "center text-center"].join(' ')}>
+                    { footer.submenuFooterText ? <p className={["small", Classes.submenuFooterText].join(' ')}>{ footer.submenuFooterText }</p> : null }
                     <AnyLink 
                       internal={footer.submenuFooterExternalLink && true}
                       external={footer.submenuFooterLink && footer.submenuFooterLink.slug && true}

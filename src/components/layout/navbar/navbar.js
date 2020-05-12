@@ -2,6 +2,7 @@ import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
 import logo from "../../../images/logo_white.svg"
 import MenuItem from './menuItem/menuItem'
+import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 import Classes from './navbar.module.scss'
 
@@ -16,7 +17,6 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
   // const mainMenu = React.createRef();
   // let mainMenuNode  
 
-  console.log(menuItems)
 
   // useEffect(() => {
     
@@ -105,6 +105,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                   <img className={Classes.logoMobile} src={logo} alt="Cobiro logo" />
                 </Link>
               </div>
+
               <button
                 className={[Classes.menuToggle, menuInverted ? Classes.invert : null].join(' ')}
                 aria-controls="navbar"
@@ -116,6 +117,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                 <span className={[Classes.iconBar, Classes.middleBar].join(' ')}></span>
                 <span className={[Classes.iconBar, Classes.bottomBar].join(' ')}></span>
               </button>
+
             </div>
             <div className={["col col-auto-lg", Classes.mainMenuInner, isScrolled || menuInverted ? Classes.menuItems : null].join(' ')}>
               <ul className={["list-inline", Classes.menuItemsList].join(' ')}>
@@ -123,14 +125,29 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
                     <MenuItem key={index} inverted={isScrolled || menuInverted} item={item} subMenuClickHandler={subMenuClickHandler} mouseEnterSubMenuHandler={mouseEnterSubMenuHandler}/>
                 ))}
               </ul>
-              <div className="main-menu-cta">
+              <div className={["main-menu-cta visible-lg-up"].join(' ')}>
                 <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
                   Sign in
                 </a>
                 <a href={customCta && customCta.link ? customCta.link : "https://app.cobiro.com/user/signup"} className={["btn", Classes.btnRight, !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
                   {customCta && customCta.title ? customCta.title : 'Sign up' }
-                </a>
+                </a>                  
               </div>
+
+              { menuItems[0].submenuFooterText || (menuItems[0].submenuFooterLinkTitle && (menuItems[0].submenuFooterLink || menuItems[0].submenuFooterExternalLink)) ?
+                <div className={[Classes.subMenuFooter, Classes.menuCta, "center text-center hidden-lg-up"].join(' ')}>
+                    { menuItems[0].submenuFooterText ? <p className={[Classes.submenuFooterText].join(' ')}>{ menuItems[0].submenuFooterText }</p> : null }
+                    <AnyLink 
+                      internal={menuItems[0].submenuFooterExternalLink && true}
+                      external={menuItems[0].submenuFooterLink && menuItems[0].submenuFooterLink.slug && true}
+                      link={menuItems[0].submenuFooterExternalLink || menuItems[0].submenuFooterLink && menuItems[0].submenuFooterLink.slug}
+                      title={menuItems[0].submenuFooterLinkTitle}
+                      button
+                    />
+                    
+                </div>
+              : null }
+
             </div>
           </div>
         </div>

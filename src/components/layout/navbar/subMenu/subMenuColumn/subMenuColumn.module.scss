@@ -7,7 +7,7 @@
 }
 @include mq($from: lg) {
     .subSubMenu li>a {
-        color: $blue;
+        color: $black;
         font-size: 0.8rem;
     }
 }
@@ -20,15 +20,34 @@
 }
 
 .subMenuIcon {
-    width: 3.125rem;
+    width: 5.125rem;
     display: block;
     clear: both;
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
+    // margin-left: -1.5rem;
+
+    // img {
+    //     margin-right: 1.5rem;
+    // }
+
 }
 
+// .subMenuTitle {
+//     padding-bottom: 1rem;
+//     display: block;
+//     color: $black!important;   
+// }
+
 .subMenuTitle {
-    padding-bottom: 1rem;
-    display: block;
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    color: $black!important; 
+
+    .subMenuIcon {
+        margin: 0;
+        margin-right: 1rem;
+    }
 }
 
 @include mq($until: lg) {
@@ -52,6 +71,7 @@
                 border-right-width: 0.1em;
                 border-bottom-width: 0.1em;
                 transition: transform 0.1s ease;
+                
             }
         }
 
@@ -69,5 +89,18 @@
         margin: 0 -1.1rem;
         width: 100vw;
     }
+}
 
+.indented {
+    padding-left: 2rem;
+
+ 
+}
+
+.subMenuItem {
+    padding-bottom: 0.875rem;
+    
+    p {
+        font-size: 0.625rem;
+    }
 }
