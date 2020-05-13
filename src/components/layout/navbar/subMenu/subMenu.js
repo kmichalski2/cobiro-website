@@ -9,7 +9,6 @@ import SubMenuFooter from './subMenuFooter/subMenuFooter'
 
 
 const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescription, show, expand,  contentContainer}) => {
-    console.log('columns: ', columns)
 
     const [offset, setOffset] = useState(0)
     const [triangleOffset, setTriangleOffset] = useState(0)
@@ -21,7 +20,6 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
 
     
     const resizeHandler = () => {
-      console.log('resizing')
       setSubMenuOffset()
     }
 
@@ -33,7 +31,6 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
     function getPageTopLeft(el) {
         const rect = el.getBoundingClientRect();
         const docEl = contentContainer.current;
-        console.log(docEl, rect.left, (window.innerWidth - docEl.clientWidth) / 2)
         return rect.left - (window.pageXOffset || ((window.innerWidth - docEl.clientWidth) / 2) || 0)
 
       }
@@ -43,8 +40,6 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
               
               if(window.innerWidth > "960") {
                 const subOffset = getPageTopLeft(sub)
-
-                console.log('OFFSET: ', subOffset)
 
                 if(subOffset < 0 ) {
                   // sub.style.marginLeft = -1 * subOffset + 16 + 'px'

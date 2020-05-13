@@ -5,13 +5,11 @@ import SubMenu from '../subMenu/subMenu'
 import Classes from './menuItem.module.scss'
 
 const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer }) => {
-    console.log('item', item)
 
     const [hovered, setHovered] = useState(false)
     const [subMenuExpanded, setSubMenuExpanded] = useState(false)
 
     const subMenuClickHandler = (event) => {
-        console.log('clicked')
 
         // const el = event.target
         
