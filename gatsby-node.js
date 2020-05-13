@@ -38,6 +38,9 @@ exports.createPages = async function({ graphql, actions }) {
                 title
                 description
               }
+              seoMetaTags {
+                tags
+              }
               hiddenMenuItems {
                 id
               }
@@ -824,6 +827,9 @@ exports.createPages = async function({ graphql, actions }) {
             seoTags {
               title
               description
+            }
+            seoMetaTags {
+              tags
             }
             slug
             featuredImage {

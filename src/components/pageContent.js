@@ -42,6 +42,7 @@ const PageContent = ({ data, locales }) => {
         title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } 
         description={data.seoTags && data.seoTags.description ? data.seoTags.description : null} 
         lang={data.locale}
+        meta={data.seoMetaTags.tags}
         />
       <main>
         {data.sections.map((section, index) => {
