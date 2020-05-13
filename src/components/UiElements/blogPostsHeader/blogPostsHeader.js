@@ -20,9 +20,13 @@ const BlogPostsHeader = ({post, searchTitle, search, metaFields}) => {
                 <div className="row middle-xs">
                     <div className="col col-xs-12 col-lg-6 space-xs space-sm space-md">
                         {post.category ? post.category.map((cat, i) => <CategoryLabel key={i} category={cat.category} link={`/blog/${cat.slug}`} large />) : null}
+                        {post.slug ? 
                         <Link to={`blog/${post.slug}`} className="text-black">
                             <h1 className={Classes.title}>{post.title}</h1>
-                            </Link>
+                        </Link>  
+                        :  <h1 className={Classes.title}>{post.title}</h1>
+                        }
+                        
                             
                             <p>{post.subtitle}</p>
                             {metaFields ?
@@ -37,9 +41,14 @@ const BlogPostsHeader = ({post, searchTitle, search, metaFields}) => {
                         
                     </div>
                     <div className="col col-xs-12 col-lg-6">
+                        {post.slug ?
                         <Link to={`blog/${post.slug}`}>
                             <ImageAll image={post.featuredImage} alt={post.featuredImage.alt || post.title} />
                         </Link>
+                        : 
+                        <ImageAll image={post.featuredImage} alt={post.featuredImage.alt || post.title} />
+                        }
+                        
                     </div>
                 </div>
             </div>

@@ -38,6 +38,9 @@ exports.createPages = async function({ graphql, actions }) {
                 title
                 description
               }
+              seoMetaTags {
+                tags
+              }
               hiddenMenuItems {
                 id
               }
@@ -825,6 +828,9 @@ exports.createPages = async function({ graphql, actions }) {
               title
               description
             }
+            seoMetaTags {
+              tags
+            }
             slug
             featuredImage {
               fluid {
@@ -1031,7 +1037,8 @@ exports.createPages = async function({ graphql, actions }) {
                 footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
                 footerCtaText: result.data.datoCmsBlogPage.footerCtaText,
                 ctaLinks: result.data.datoCmsBlogPage.ctaLinks,
-                otherPosts: otherPosts
+                otherPosts: otherPosts,
+                seoMetaTags: item.seoMetaTags
               },
             })
           }
