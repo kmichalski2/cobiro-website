@@ -52,7 +52,15 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault }) => 
                             noArrow
                             classes={Classes.subSubMenuItem}
                         />
-                        <HtmlText RawHtml={subsub.linkDescription} classes={["hidden-xs hiden-sm hidden-md", Classes.subMenuDescription].join(' ')}/>
+                        <AnyLink 
+                            title={subsub.linkDescription}
+                            external={subsub.externalLink && true}
+                            internal={!subsub.externalLink && true}
+                            link={subsub.externalLink || subsub.internalLink && subsub.internalLink.slug}
+                            noArrow
+                            classes={["hidden-xs hiden-sm hidden-md", Classes.subMenuDescription].join(' ')}
+                        />
+
                     </li>
                     ))}
                 </ul>

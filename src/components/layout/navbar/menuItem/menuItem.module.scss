@@ -4,6 +4,10 @@
     @include mq($from: lg) {
         margin-left: 2rem !important;
         padding: 1rem 0;
+
+        &>a {
+            font-size: 1rem;
+        }
     }
 
     @include mq($until: lg) {

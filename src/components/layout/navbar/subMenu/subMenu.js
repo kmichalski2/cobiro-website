@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "gatsby"
 import SubMenuColumn from './subMenuColumn/subMenuColumn'
 import HtmlText from '../../../UiElements/HtmlText/HtmlText'
@@ -11,9 +11,19 @@ import SubMenuFooter from './subMenuFooter/subMenuFooter'
 const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescription, show, expand,  contentContainer}) => {
     console.log('columns: ', columns)
 
+    const [offset, setOffset] = useState(0)
+    const [triangleOffset, setTriangleOffset] = useState(0)
+
     useEffect(() => {
         setSubMenuOffset()
+        window.addEventListener("resize", resizeHandler)
     },[])
+
+    
+    const resizeHandler = () => {
+      console.log('resizing')
+      setSubMenuOffset()
+    }
 
     
 
@@ -37,16 +47,21 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
                 console.log('OFFSET: ', subOffset)
 
                 if(subOffset < 0 ) {
-                  sub.style.marginLeft = -1 * subOffset + 16 + 'px'
-                  subMenuTriangle.current.style.marginLeft = subOffset + -16 + 'px'
+                  // sub.style.marginLeft = -1 * subOffset + 16 + 'px'
+                  setOffset(-1 * subOffset + 16)
+                  setTriangleOffset(subOffset + -16)
+                  // subMenuTriangle.current.style.marginLeft = subOffset + -16 + 'px'
                   return true
                 } else {
-                  sub.style.marginLeft = 0
-                  subMenuTriangle.current.style.marginLeft = 0
+                  // sub.style.marginLeft = 0
+                  // subMenuTriangle.current.style.marginLeft = 0
+                  setOffset(0)
+                  setTriangleOffset(0)
                 }
                 return false
             } else {
-              sub.style.marginLeft = '-1.1rem'
+              // sub.style.marginLeft = '-1.1rem'
+              setOffset(-17.6)
             }
           }
       }
@@ -70,7 +85,7 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
       
 
     return (
-        <div className={[Classes.subMenu, show ? Classes.show : null, expand ? Classes.expand : null].join(' ')} ref={submenu}>
+        <div className={[Classes.subMenu, show ? Classes.show : null, expand ? Classes.expand : null].join(' ')} ref={submenu} style={{marginLeft: `${offset}px`}}>
             <div className={Classes.subMenuInner}>
               <div>
                 <div className="space-xs-up">
@@ -115,7 +130,7 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
                 
                 : null }
             
-            <div ref={subMenuTriangle} className={Classes.subMenuTriangle}></div>
+            <div ref={subMenuTriangle} className={Classes.subMenuTriangle} style={{marginLeft: `${triangleOffset}px`}}></div>
         </div>
     )
 }

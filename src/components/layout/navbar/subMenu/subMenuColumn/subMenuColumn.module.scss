@@ -19,6 +19,7 @@
 @include mq($from: lg) {
     .subMenuColumn {
         width: calc((73.125rem - 5rem - 1.875rem) / 4 - 0.55rem);
+        max-width: calc((100vw - 5rem - 1.875rem) / 4 - 0.55rem);
         padding-right: 1rem;
     }
 }
@@ -77,11 +78,6 @@
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s ease;
-        // background-color: $lightgrey;
-        // padding: 0 1.1rem;
-        // padding-left: 5.25rem;
-        // margin: 0 -1.1rem;
-        // width: 100vw;
 
         &.expandedDefault {
             max-height: none;
@@ -105,7 +101,10 @@
 .subMenuItem {
     padding-bottom: 0.875rem;
     
-    p {
+    .subMenuDescription {
+        display: block;
         font-size: 0.625rem;
+        font-weight: 400;
+        margin-bottom: 0;
     }
 }
