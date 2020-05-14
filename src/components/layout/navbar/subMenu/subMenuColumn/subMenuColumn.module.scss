@@ -1,5 +1,6 @@
 @import '../../../style/globals';
 
+
 .subMenuTitle {
     &:hover, &:active, &:focus {
         color: $black;
@@ -18,9 +19,23 @@
 
 @include mq($from: lg) {
     .subMenuColumn {
-        width: calc((73.125rem - 5rem - 1.875rem) / 4 - 0.55rem);
-        max-width: calc((100vw - 5rem - 1.875rem) / 4 - 0.55rem);
+        width: calc((73.125rem - 5rem - 1.875rem - 2.2rem) / 4);
+    max-width: calc((100vw - 5rem - 1.875rem - 2.2rem) / 4);
         padding-right: 1rem;
+        box-sizing: border-box;
+    }
+}
+
+.borderLeft {
+    padding-left: 2.2rem;
+    @include mq($from: lg) {
+        width: calc((73.125rem - 5rem - 1.875rem - 2.2rem) / 4 + 2.2rem);
+        max-width: calc((100vw - 5rem - 1.875rem - 2.2rem) / 4 + 1.1rem);
+        box-sizing: border-box;
+    }
+
+    @include mq($until: lg) {
+        padding-left: 0;
     }
 }
 
