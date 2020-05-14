@@ -12,7 +12,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 function SEO({ description, lang, meta, title }) {
 
-  const { site } = useStaticQuery(
+    const { site } = useStaticQuery(
     graphql`
       query {
         site {
@@ -67,7 +67,7 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
-        ...meta.map(m => m.attributes ? m.attributes : false)
+        ...meta.filter(m => m.attributes ? m.attributes : false)
       ]}
     > 
     <script src="https://apis.google.com/js/platform.js" async defer></script>

@@ -6,7 +6,7 @@ import HtmlText from '../../../../UiElements/HtmlText/HtmlText'
 
 import Classes from './subMenuColumn.module.scss'
 
-const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault }) => {
+const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borderLeft }) => {
 
 
     const subSubMenuClickHandler = (event, clickable) => {
@@ -29,7 +29,7 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault }) => 
 
     
     return (
-        <div className={ [Classes.subMenuColumn, "submenuColumn", submenuLinks.length > 0 ? Classes.hasSubSubMenu : null ].join(' ')}>
+        <div className={ [Classes.subMenuColumn, borderLeft ? Classes.borderLeft : null, "submenuColumn", submenuLinks.length > 0 ? Classes.hasSubSubMenu : null ].join(' ')}>
             {title || icon ? 
             <Link 
                 className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
