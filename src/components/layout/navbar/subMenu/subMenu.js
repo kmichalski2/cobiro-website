@@ -88,6 +88,8 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
                   <HtmlText RawHtml={columnRight.description} classes={["small hidden-xs hidden-sm hidden-md", Classes.columnRightSpacing].join(' ')} />
                 </div>
                   <SubMenuColumn 
+                    title={columnRight.subMenuTitle}
+                    icon={columnRight.subMenuIcon}
                     submenuLinks={columnRight.links}
                     expandedDefault
                     borderLeft

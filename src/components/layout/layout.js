@@ -156,9 +156,23 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
           }
           linkDescription
         }
+
         rightColumnTitle
-      rightColumnDescription
-      rightColumnLinks {
+        rightColumnDescription
+        submenuColumnRightTitle
+        submenuColumnRightIcon {
+          alt
+          url
+          fixed(width: 16) {
+            width
+            srcSet
+            src
+            sizes
+            height
+            aspectRatio
+          }
+        }
+        rightColumnLinks {
         externalLink
         linkTitle
         linkDescription
