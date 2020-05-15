@@ -3,9 +3,9 @@ import { Link } from 'gatsby'
 
 import Classes from './AnyLink.module.scss'
 
-const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes}) => {
+const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes, noArrow}) => {
 
-    const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : Classes.textLink, large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null].join(' ')
+    const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null].join(' ')
 
     return (
         <>

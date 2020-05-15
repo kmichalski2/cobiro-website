@@ -1,0 +1,125 @@
+@import '../../../style/globals';
+
+
+.subMenuTitle {
+    &:hover, &:active, &:focus {
+        color: $black;
+    }
+}
+
+.subSubMenu li>a {
+    color: $black;
+}
+@include mq($from: lg) {
+    .subSubMenu li>a {
+        
+        font-size: 0.8rem;
+    }
+}
+
+@include mq($from: lg) {
+    .subMenuColumn {
+        width: calc((73.125rem - 5rem - 1.875rem - 2.2rem) / 4);
+    max-width: calc((100vw - 5rem - 1.875rem - 2.2rem) / 4);
+        padding-right: 1rem;
+        box-sizing: border-box;
+    }
+}
+
+.borderLeft {
+    padding-left: 2.2rem;
+    @include mq($from: lg) {
+        width: calc((73.125rem - 5rem - 1.875rem - 2.2rem) / 4 + 2.2rem);
+        max-width: calc((100vw - 5rem - 1.875rem - 2.2rem) / 4 + 1.1rem);
+        box-sizing: border-box;
+    }
+
+    @include mq($until: lg) {
+        padding-left: 0;
+    }
+}
+
+.subMenuIcon {
+    width: 5.125rem;
+    display: block;
+    clear: both;
+}
+
+.subMenuTitle {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    color: $black!important; 
+
+    @include mq($until: lg) {
+        font-size: 1.375rem;
+    }
+
+    .subMenuIcon {
+        margin: 0;
+        margin-right: 1rem;
+    }
+}
+
+@include mq($until: lg) {
+
+    .hasSubSubMenu {
+
+        &>a {
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                background-image: url("../../../../../images/menuArrow.png")!important;
+                background-size: 1rem;
+                background-repeat: no-repeat;
+                background-position: center;
+                top: 50%;
+                right: 0;
+                width: 1em;
+                height: 1em;
+                transform-origin: center center;
+                transform: translate(0, -50%) rotate(90deg);
+                transition: transform 0.2s ease;
+            }
+        }
+
+        &.expanded>a::after {
+            transform: rotate(-90deg) translate(50%, 0);
+        }
+    }
+    .subSubMenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+
+        &.expandedDefault {
+            max-height: none;
+        }
+        .subSubMenuItem {
+            font-size: 1.125rem;
+        }
+    }
+
+    .subMenuDescription {
+        display: none;
+    }
+}
+
+.indented {
+    padding-left: 2rem;
+
+ 
+}
+
+.subMenuItem {
+    padding-bottom: 0.875rem;
+    
+    .subMenuDescription {
+        display: block;
+        font-size: 0.625rem;
+        font-weight: 400;
+        margin-bottom: 0;
+    }
+}
