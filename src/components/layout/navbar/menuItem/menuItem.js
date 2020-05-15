@@ -91,6 +91,8 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer }) 
                     columnRight={{
                         title: item.rightColumnTitle,
                         description: item.rightColumnDescription,
+                        subMenuTitle: item.submenuColumnRightTitle,
+                        subMenuIcon: item.submenuColumnRightIcon,
                         links: item.rightColumnLinks
                     }}
                     contentContainer={contentContainer}

@@ -31,12 +31,12 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
                 className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
                 to={link && link.slug ? link.slug : "#"} 
                 target="_self" 
-                onClick={!expandedDefault ? (e) => subSubMenuClickHandler(e) : null}>
+                onClick={(e) => subSubMenuClickHandler(e)}>
             <ImageAll classes={Classes.subMenuIcon} image={icon} alt={icon && icon.alt ? icon.alt : `${title} icon`}/>
             {title}
             </Link>
             : null}
-            <div className={[Classes.subSubMenu, expandedDefault ? Classes.expandedDefault : null].join(' ')}>
+            <div className={[Classes.subSubMenu].join(' ')}>
                 <ul className="list-unstyled">
                     {submenuLinks.map((subsub, index) => (
                     <li key={index} className={[Classes.subMenuItem, icon ? Classes.indented : null].join(' ')}>
