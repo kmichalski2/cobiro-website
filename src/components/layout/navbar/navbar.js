@@ -85,7 +85,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
             <div className={["col col-auto-lg", Classes.mainMenuInner, isScrolled || menuInverted ? Classes.menuItems : null].join(' ')}>
               <ul className={["list-inline", Classes.menuItemsList].join(' ')}>
                 {menuItems.sort((a, b) => a.menu_item_order - b.menu_item_order).map((item, index) => (
-                    <MenuItem key={index} inverted={isScrolled || menuInverted} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer}/>
+                    <MenuItem key={index} inverted={isScrolled || menuInverted ? true : false} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer}/>
                 ))}
               </ul>
               <div className={["visible-xs-up", Classes.mainMenuCta].join(' ')}>
