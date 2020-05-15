@@ -14,6 +14,8 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
     const [triangleOffset, setTriangleOffset] = useState(0)
     const [windowWidth, setWindowWidth] = useState()
 
+    const isSingleColumn = columns.length === 1
+
     useEffect(() => {
       setWindowWidth(window.innerWidth)        
       window.addEventListener("resize", resizeHandler)
@@ -80,6 +82,7 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
                         link={sub.link} 
                         submenuLinks={sub.submenuLinks}
                         expandedDefault={!sub.title && true}
+                        isSingleColumn={isSingleColumn}
                       />  
                   )) : null}
                 </div>

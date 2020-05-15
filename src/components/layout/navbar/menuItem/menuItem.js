@@ -55,7 +55,7 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer }) 
             >
                 {item.linkTitle}
             </Link>
-            {item.submenuColumn1Links || item.submenuColumn2Links || item.submenuColumn2Links || item.rightColumnLinks ?
+            {item.submenuColumn1Links.length > 0 || item.submenuColumn2Links.length > 0 || item.submenuColumn2Links.length > 0 || item.rightColumnLinks.length > 0 ?
                 <SubMenu 
                     show={hovered}
                     expand={subMenuExpanded}
