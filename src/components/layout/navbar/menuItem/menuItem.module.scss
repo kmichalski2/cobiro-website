@@ -34,7 +34,7 @@
     }
 
     @include mq($until: lg) {
-        transition: all 0.4s ease;
+        transition: all 0.2s linear;
 
         &.otherSubMenuExpanded {
             max-height: 0;
