@@ -5,7 +5,7 @@ import SubMenu from '../subMenu/subMenu'
 import Classes from './menuItem.module.scss'
 
 const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer }) => {
-
+    console.log('SUBMENU ITEM: ', item)
     const [hovered, setHovered] = useState(false)
     const [subMenuExpanded, setSubMenuExpanded] = useState(false)
 
@@ -55,7 +55,7 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer }) 
             >
                 {item.linkTitle}
             </Link>
-            {item.submenuColumn1Title ?
+            {item.submenuColumn1Links.length > 0 || item.submenuColumn2Links.length > 0 || item.submenuColumn2Links.length > 0 || item.rightColumnLinks.length > 0 ?
                 <SubMenu 
                     show={hovered}
                     expand={subMenuExpanded}
@@ -69,32 +69,32 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer }) 
                     submenuTitle={item.submenuTitle}
                     submenuDescription={item.submenuDescription}
                     columns={[
-                        ...(item.submenuColumn1Title ?
+                        ...(item.submenuColumn1Title || item.submenuColumn1Links.length > 0 ?
                         [{
                             title: item.submenuColumn1Title,
                             icon: item.submenuColumn1Icon,
                             submenuLinks: item.submenuColumn1Links
                         }] : []),
-                        ...(item.submenuColumn2Title ?
+                        ...(item.submenuColumn2Title || item.submenuColumn2Links.length > 0 ?
                         [{
                             title: item.submenuColumn2Title,
                             icon: item.submenuColumn2Icon,
                             submenuLinks: item.submenuColumn2Links
                         }] : []),
-                        ...(item.submenuColumn3Title ?
+                        ...(item.submenuColumn3Title || item.submenuColumn3Links.length > 0 ?
                         [{
                             title: item.submenuColumn3Title,
                             icon: item.submenuColumn3Icon,
                             submenuLinks: item.submenuColumn3Links
                         }] : [])
                     ]}
-                    columnRight={{
+                    columnRight={item.rightColumnLinks || item.rightColumnLinks.length > 0 ? {
                         title: item.rightColumnTitle,
                         description: item.rightColumnDescription,
                         subMenuTitle: item.submenuColumnRightTitle,
                         subMenuIcon: item.submenuColumnRightIcon,
                         links: item.rightColumnLinks
-                    }}
+                    } : null}
                     contentContainer={contentContainer}
                     />
             : null}
