@@ -42,7 +42,7 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer }) 
 
     return (
         <li 
-            className={[Classes.menuItem, inverted ? Classes.inverted : null, item.submenuColumn1Links && (item.submenuColumn1Links.length > 0) ? Classes.subMenuParent : null, subMenuExpanded ? Classes.expanded : null].join(' ')}
+            className={[Classes.menuItem, !inverted ? Classes.menuItemLight : null, item.submenuColumn1Links && (item.submenuColumn1Links.length > 0) ? Classes.subMenuParent : null, subMenuExpanded ? Classes.expanded : null].join(' ')}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >

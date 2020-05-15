@@ -8,6 +8,27 @@
         &>a {
             font-size: 1rem;
         }
+
+        &.menuItemLight {
+
+            &>a {
+                color: rgba($white, 0.6);
+
+                &.hasSubMenu::after {
+                    border-color: rgba($white, 0.6) !important;
+                }
+            }
+
+            &.menuItemLight>a:hover {
+                color: $white;
+
+                &.hasSubMenu::after {
+                    border-color: $white !important;
+                }
+            }
+
+           
+        }
     }
 
     @include mq($until: lg) {
