@@ -5,8 +5,10 @@ import SubMenu from '../subMenu/subMenu'
 import Classes from './menuItem.module.scss'
 
 const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, expandHandler, index, subMenuExpanded }) => {
-    console.log('SUBMENU ITEM: ', item)
+    
     const [hovered, setHovered] = useState(false)
+
+    const hasSubMenuItems = item.submenuColumn1Links.length > 0 || item.submenuColumn2Links.length > 0 || item.submenuColumn2Links.length > 0 || item.rightColumnLinks.length > 0
     // const [subMenuExpanded, setSubMenuExpanded] = useState(false)
 
     // const subMenuClickHandler = (event) => {
@@ -51,11 +53,11 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
                 activeClassName="active"
                 to={item.link ? `/${item.link.slug}` : '#'}
                 onMouseEnter={mouseEnterSubMenuHandler} 
-                onClick={(e) => expandHandler(e, index)}
+                onClick={hasSubMenuItems ? (e) => expandHandler(e, index) : null}
             >
                 {item.linkTitle}
             </Link>
-            {item.submenuColumn1Links.length > 0 || item.submenuColumn2Links.length > 0 || item.submenuColumn2Links.length > 0 || item.rightColumnLinks.length > 0 ?
+            {hasSubMenuItems ?
                 <SubMenu 
                     show={hovered}
                     expand={subMenuExpanded === index}
