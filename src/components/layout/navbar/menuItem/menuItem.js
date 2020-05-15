@@ -10,6 +10,11 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer }) 
     const [subMenuExpanded, setSubMenuExpanded] = useState(false)
 
     const subMenuClickHandler = (event) => {
+        const el = event.target
+         if ( window.innerWidth < 960 && el.parentNode.classList.contains(Classes.subMenuParent) ) {
+            event.preventDefault()
+            setSubMenuExpanded(!subMenuExpanded)
+        }
 
         // const el = event.target
         
@@ -46,7 +51,7 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer }) 
                 activeClassName="active"
                 to={item.link ? `/${item.link.slug}` : '#'}
                 onMouseEnter={mouseEnterSubMenuHandler} 
-                onClick={() => setSubMenuExpanded(!subMenuExpanded)}
+                onClick={(e) => subMenuClickHandler(e)}
             >
                 {item.linkTitle}
             </Link>

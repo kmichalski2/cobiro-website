@@ -9,21 +9,17 @@ import Classes from './subMenuColumn.module.scss'
 const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borderLeft }) => {
 
 
-    const subSubMenuClickHandler = (event, clickable) => {
-
-        event.preventDefault()
+    const subSubMenuClickHandler = (event) => {
         
         if (window.innerWidth < 960 && event.target.parentNode.classList.contains(Classes.hasSubSubMenu)) {
-          if (!clickable) {
             event.preventDefault()
-          }
-          event.target.parentNode.classList.toggle(Classes.expanded)
-          if (event.target.parentNode.classList.contains(Classes.expanded)) {
-            event.target.nextElementSibling.style.maxHeight =
-              event.target.nextElementSibling.children[0].offsetHeight + "px"
-          } else {
-            event.target.nextElementSibling.style.maxHeight = null
-          }
+            event.target.parentNode.classList.toggle(Classes.expanded)
+            if (event.target.parentNode.classList.contains(Classes.expanded)) {
+                event.target.nextElementSibling.style.maxHeight =
+                event.target.nextElementSibling.children[0].offsetHeight + "px"
+            } else {
+                event.target.nextElementSibling.style.maxHeight = null
+            }
         }
       }
 
