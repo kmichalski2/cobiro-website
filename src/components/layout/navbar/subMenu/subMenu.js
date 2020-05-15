@@ -9,7 +9,7 @@ import SubMenuFooter from './subMenuFooter/subMenuFooter'
 
 
 const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescription, show, expand,  contentContainer}) => {
-
+  console.log('SUBMENU ', columns, columnRight)
     const [offset, setOffset] = useState(0)
     const [triangleOffset, setTriangleOffset] = useState(0)
     const [windowWidth, setWindowWidth] = useState()
@@ -65,11 +65,12 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
     return (
         <div className={[Classes.subMenu, show ? Classes.show : null, expand ? Classes.expand : null].join(' ')} ref={submenu} style={{marginLeft: `${offset}px`}}>
             <div className={Classes.subMenuInner}>
-              <div>
+              <div>{submenuTitle || submenuDescription ? 
                 <div className="space-xs-up">
-                  <h3>{ submenuTitle }</h3>
-                  <HtmlText RawHtml={submenuDescription} classes="small  hidden-xs hidden-sm hidden-md" />
+                  {submenuTitle ? <h3>{ submenuTitle }</h3> : null}
+                  {submenuDescription ? <HtmlText RawHtml={submenuDescription} classes="small  hidden-xs hidden-sm hidden-md" /> : null }
                 </div>
+                : null}
                 <div className="flex-lg">
                   {columns && columns.length > 0 ? columns.map((sub, index) => (
                       <SubMenuColumn 
@@ -78,10 +79,12 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
                         icon={sub.icon} 
                         link={sub.link} 
                         submenuLinks={sub.submenuLinks}
+                        expandedDefault={!sub.title && true}
                       />  
                   )) : null}
                 </div>
               </div>
+              {columnRight.subMenuTitle || columnRight.links.length > 0 ?
               <div className={Classes.borderLeft}>
                 <div className={["space-xs-up", Classes.colRightTitle].join(' ')}>
                   <h3>{ columnRight.title }</h3>
@@ -91,10 +94,11 @@ const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescriptio
                     title={columnRight.subMenuTitle}
                     icon={columnRight.subMenuIcon}
                     submenuLinks={columnRight.links}
-                    expandedDefault
+                    expandedDefault={!columnRight.subMenuTitle && true}
                     borderLeft
                   />
               </div>
+              : null}
                 </div>
                 { footer.submenuFooterText || (footer.submenuFooterLinkTitle && (footer.submenuFooterLink || footer.submenuFooterExternalLink)) ?
                 <SubMenuFooter 

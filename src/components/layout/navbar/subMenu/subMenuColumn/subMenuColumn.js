@@ -36,7 +36,7 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
             {title}
             </Link>
             : null}
-            <div className={[Classes.subSubMenu].join(' ')}>
+            <div className={[Classes.subSubMenu, expandedDefault ? Classes.expandedDefault : null].join(' ')}>
                 <ul className="list-unstyled">
                     {submenuLinks.map((subsub, index) => (
                     <li key={index} className={[Classes.subMenuItem, icon ? Classes.indented : null].join(' ')}>
