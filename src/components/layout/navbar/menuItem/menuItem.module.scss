@@ -29,9 +29,19 @@
 
            
         }
+
+        
     }
 
     @include mq($until: lg) {
+        transition: all 0.2s linear;
+
+        &.otherSubMenuExpanded {
+            max-height: 0;
+            padding: 0 !important;
+            overflow: hidden;
+            opacity: 0;
+        }
 
         &.expanded {
             padding-bottom: 0;

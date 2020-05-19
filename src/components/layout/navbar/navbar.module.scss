@@ -121,6 +121,12 @@
 			background-color: #E5E9ED;
 			padding: 1.75rem;
 			margin-top: 1.875rem; 
+			opacity: 1;
+			transition: opacity 0.1s linear;
+
+			&.hiddenCta {
+				opacity: 0;
+			}
 			
 			// a {
 			// 	display: block;

@@ -13,6 +13,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [windowWidth, setWindowWidth] = useState(typeof window != "undefined" ? window.innerWidth : null)
   const [mainMenuHovered, setMainMenuHovered] = useState(false)
+  const [subMenuExpanded, setSubMenuExpanded] = useState(null)
   // let [refs, setRefs] = useState({})
   // const mainMenu = React.createRef();
   // let mainMenuNode  
@@ -56,6 +57,10 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
     setMainMenuHovered(true) 
   }
   
+  const expandHandler = (e, i) => {
+    e.preventDefault()
+    setSubMenuExpanded(subMenuExpanded !== i ? i : null)
+  }
 
   return (
     <header>
@@ -85,10 +90,10 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
             <div className={["col col-auto-lg", Classes.mainMenuInner, isScrolled || menuInverted ? Classes.menuItems : null].join(' ')}>
               <ul className={["list-inline", Classes.menuItemsList].join(' ')}>
                 {menuItems.sort((a, b) => a.menu_item_order - b.menu_item_order).map((item, index) => (
-                    <MenuItem key={index} inverted={isScrolled || menuInverted ? true : false} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer}/>
+                    <MenuItem key={index} inverted={isScrolled || menuInverted ? true : false} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer} expandHandler={expandHandler} subMenuExpanded={subMenuExpanded} index={index}/>
                 ))}
               </ul>
-              <div className={["visible-xs-up", Classes.mainMenuCta].join(' ')}>
+              <div className={["visible-xs-up", Classes.mainMenuCta, subMenuExpanded !== null ? Classes.hiddenCta : null].join(' ')}>
                 <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
                   Sign in
                 </a>
