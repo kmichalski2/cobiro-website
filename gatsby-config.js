@@ -2,7 +2,13 @@ require("dotenv").config({
   path: `.env`,
 })
 
+
+
 module.exports = {
+  proxy: {
+    prefix: "/.netlify/functions",
+    url: "http://localhost:9000",
+  },
   siteMetadata: {
     title: `Cobiro`,
     description: `Cobiro helps businesses grow with AI-powered digital marketing for different channels. We guide you all way through – from creating to optimizing and managing your ads.`,

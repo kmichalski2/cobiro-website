@@ -23,6 +23,7 @@
     "gatsby-source-datocms": "^2.1.29",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-transformer-sharp": "^2.4.4",
+    "netlify-lambda": "^1.6.3",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -39,11 +40,13 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "build": "gatsby build && functions build",
+    "develop": "gatsby develop && unctions serve",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
+    "functions build": "netlify-lambda build src/functions",
+    "functions serve": "netlify-lambda serve src/functions",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
   },
   "repository": {

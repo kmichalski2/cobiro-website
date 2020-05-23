@@ -1,0 +1,32 @@
+const axios = require('axios');
+require('dotenv').config();
+
+exports.handler =  function sites(event, context, callback) {
+    const endpoint = process.env.FORMS_ENDPOINT;
+    
+    // console.log(context)
+    const queryStrings = event.queryStringParameters
+    console.log('Endpoint: ', `${endpoint}/${queryStrings}`)
+    // axios({
+    //     method: 'get',
+    //     url: `${endpoint}?url=http://${domain}`,
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     }
+    //   })
+    //   .then(response =>
+    //     callback(null, {
+    //       statusCode: 200,
+    //       body: JSON.stringify({ data: response.data, status: 200 }),
+    //     }),
+    //   )
+    //   .catch((error) => {
+    //     callback(null, {
+    //       statusCode: 500,
+    //       body: JSON.stringify({
+    //         data: `Error fetching data from ${endpoint}&url=http://${domain}: ${error}`,
+    //         status: 500
+    //       }),
+    //     });
+    // });   
+  }
