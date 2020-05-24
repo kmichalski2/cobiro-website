@@ -26,7 +26,7 @@ import ContactPerson from './sections/contactPerson/contactPerson'
 import PricingTables from "./sections/pricingTables/pricingTables"
 import MediaDownload from './sections/mediaDownload/mediaDownload'
 
-const PageContent = ({ data, locales }) => {
+const PageContent = ({ data, locales, notifications }) => {
 
     const [menuInverted, setMenuInverted] = useState(false)
 
@@ -37,6 +37,7 @@ const PageContent = ({ data, locales }) => {
         currentLocale={data.locale}
         hiddenMenuItems={data.hiddenMenuItems}
         menuInverted={menuInverted}
+        notifications={notifications}
         >
       <SEO 
         title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } 

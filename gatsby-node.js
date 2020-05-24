@@ -799,19 +799,54 @@ exports.createPages = async function({ graphql, actions }) {
             }
           }
         }
+        allDatoCmsNotification(filter: {locale: {eq: "en"}}) {
+          edges {
+            node {
+              text
+              textColor
+              bgColor {
+                hex
+              }
+              pages {
+                slug
+                title
+              }
+            }
+          }
+        }
       }
       `).then(result => {
         result.data.allDatoCmsPage.edges.forEach(async function(item) {
           const locale = item.node.locale
           const prefix = locale !== 'en' ? locale : ''
           let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
-          // let p = item.node.homepage ? '/' : `/${item.node.slug}`
+          
+          const notifications = result.data.allDatoCmsNotification.edges.map(e => e.node).filter((n) => {
+            if(n.pages && n.pages.length > 0) {
+              let isChosenPage = false
+
+              n.pages.map((p) => {
+                if(p.slug === item.node.slug) {
+                  isChosenPage = true
+                }
+              })
+              
+              return isChosenPage
+            } else {
+              return true
+            }
+          })
+
+          // if pages, check if slug === slug
+          // else insert
+
           await createPage({
             path: p,
             component: path.resolve(`./src/templates/page.js`),
             context: {
               title: item.node.title,
-              data: item.node
+              data: item.node,
+              notifications: notifications
             },
           })
         })
