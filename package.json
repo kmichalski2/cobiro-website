@@ -45,8 +45,8 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "functions build": "netlify-lambda build src/functions",
-    "functions serve": "netlify-lambda serve src/functions",
+    "functions:build": "netlify-lambda build src/functions",
+    "functions:serve": "netlify-lambda serve src/functions",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
   },
   "repository": {

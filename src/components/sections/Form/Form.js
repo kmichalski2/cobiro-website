@@ -26,12 +26,15 @@ const Form = ({ data }) => {
             if(f.required) {
                 if(f.internal.type === 'DatoCmsCheckbox') {
                     initCheckboxes = {...initCheckboxes, [f.name]: {count: 0, max: f.maximumSelection, min: f.minimumSelection}}
-                    setSubmission({...submission, [f.name]: ""})
+                    
                 } else {
                     initErrors = {...initErrors, [f.name]: `Please enter a value`}
-                    setSubmission({...submission, [f.name]: ""})
                 }
             }
+
+            
+
+            
             
         })
         if(initErrors) {
@@ -45,8 +48,26 @@ const Form = ({ data }) => {
     }, [data])
 
     useEffect(() => {
+        let emptySubmission = {}
+        form.formFields.map(f => {
+            if(f.internal.type === 'DatoCmsCheckbox') {
+                console.log('SETTINGS CHECKBOXES')
+                
+                f.checkboxes.map(c => { emptySubmission = {...emptySubmission, [c]: "false"}})
+                console.log('CHECKBOXES: ', emptySubmission)
+                console.log({...submission, ...emptySubmission })
+                
+            } else {
+                emptySubmission = {...emptySubmission, [f.name]: ""}
+            }
+        })
+        setSubmission(emptySubmission)
+    },[form])
+
+    useEffect(() => {
+
         console.log(submission)
-    }, submission)
+    }, [submission])
 
     const isEmpty = (obj) => {
         return Object.keys(obj).length === 0 && obj.constructor === Object
@@ -64,7 +85,7 @@ const Form = ({ data }) => {
             setSubmission({...submission, [e.target.name]: value})
         } else{
             setTouched({...touched, [e.target.name.split('-')[0]]: "yes"})
-            setSubmission({...submission, [e.target.name]: e.target.checked})
+            setSubmission({...submission, [e.target.name]: e.target.checked === true ? "true" : "false"})
         }
 
         if(e.target.required && !e.target.value && !errors[e.target.name] && e.target.type !== 'checkbox') {
@@ -126,9 +147,7 @@ const Form = ({ data }) => {
 
         console.log(submission)
         
-        const query = Object.keys(submission).map(k => k + '=' + encodeURIComponent(submission[k])).join('&')
-        console.log(query)
-        axios.post(`/.netlify/functions/submit?${query}`)
+        axios.post(`/.netlify/functions/submit`, { endpoint: data.formEndpoint, data: submission})
             .then(function (response) {
                 console.log(response);
                 // if(response.status === 200) {
@@ -205,10 +224,10 @@ const Form = ({ data }) => {
                                         <input 
                                             type="checkbox" 
                                             id={`${f.name}-${i}`} 
-                                            name={`${f.name}-${i}`} 
+                                            name={b} 
                                             required={f.required || false} 
                                             onChange={handleChange}
-                                            value={submission[f.name]}
+                                            value={submission[b]}
                                         />
                                         <label htmlFor={`${f.name}-${i}`}>
                                             {b}
