@@ -13,26 +13,26 @@ exports.handler =  function sites(event, context, callback) {
     // const queryStrings = event.queryStringParameters
     // console.log(queryStrings)
     console.log('Endpoint: ', `${endpoint}${body.endpoint}?${searchParams}`)
-    // axios({
-    //     method: 'get',
-    //     url: `${endpoint}?url=http://${domain}`,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     }
-    //   })
-    //   .then(response =>
-    //     callback(null, {
-    //       statusCode: 200,
-    //       body: JSON.stringify({ data: response.data, status: 200 }),
-    //     }),
-    //   )
-    //   .catch((error) => {
-    //     callback(null, {
-    //       statusCode: 500,
-    //       body: JSON.stringify({
-    //         data: `Error fetching data from ${endpoint}&url=http://${domain}: ${error}`,
-    //         status: 500
-    //       }),
-    //     });
-    // });   
+    axios({
+        method: 'get',
+        url: `${endpoint}${body.endpoint}?${searchParams}`,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(response =>
+        callback(null, {
+          statusCode: 200,
+          body: JSON.stringify({ data: response.data, status: 200 }),
+        }),
+      )
+      .catch((error) => {
+        callback(null, {
+          statusCode: 500,
+          body: JSON.stringify({
+            data: `Error sending data: ${error}`,
+            status: 500
+          }),
+        });
+    });   
   }
