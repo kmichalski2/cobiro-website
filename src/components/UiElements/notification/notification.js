@@ -3,14 +3,16 @@ import HtmlText from '../HtmlText/HtmlText'
 
 import Classes from './notification.module.scss'
 
-const Notification = ({ text, textColor, bgColor, offsetTop }) => {
-    console.log('OFFSET: ', offsetTop)
+const Notification = ({ text, textColor, bgColor, notifyerHeightHandler }) => {
+ 
+    const notifiyerRef = React.createRef()
 
     useEffect(() => {
-        console.log(offsetTop)
-    }, [offsetTop])
+        notifyerHeightHandler(notifiyerRef.current && notifiyerRef.current.offsetHeight)
+    }, [notifiyerRef])
+
     return (
-        <div className="container">
+        <div className="container" ref={notifiyerRef}>
             <div className="row">
                 <div className="col col-xs-12">
                     <div className={Classes.notification} style={bgColor && bgColor.hex ? {backgroundColor: bgColor.hex} : null}>

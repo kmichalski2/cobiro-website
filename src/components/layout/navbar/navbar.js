@@ -7,7 +7,7 @@ import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 import Classes from './navbar.module.scss'
 
-const Navbar = ({ menuItems, customCta, menuInverted, notifications }) => {
+const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
@@ -16,13 +16,14 @@ const Navbar = ({ menuItems, customCta, menuInverted, notifications }) => {
   const [mainMenuHovered, setMainMenuHovered] = useState(false)
   const [subMenuExpanded, setSubMenuExpanded] = useState(null)
   const [navbarHeight, setNavbarHeight] = useState()
+  const [notifyersHeight, setNotifyersHeight] = useState(0)
   // let [refs, setRefs] = useState({})
   // const mainMenu = React.createRef();
   // let mainMenuNode  
   const contentContainer = React.createRef()
   const navbarRef = React.createRef()
 
-  console.log(notifications)
+  console.log(notification)
 
 
   useEffect(() => {
@@ -40,6 +41,8 @@ const Navbar = ({ menuItems, customCta, menuInverted, notifications }) => {
     // return () => {
     //   window.removeEventListener("resize", resizeHandler)
     // }
+
+    
   })
 
   useEffect(() => {
@@ -55,7 +58,9 @@ const Navbar = ({ menuItems, customCta, menuInverted, notifications }) => {
   }
 
   
-
+  const notifyerNavbarHeightHandler = (height) => {
+    setNotifyersHeight(height)
+  }
   // Click handlers below
 
   const toggleClickHandler = () => {
@@ -116,8 +121,10 @@ const Navbar = ({ menuItems, customCta, menuInverted, notifications }) => {
         </div>
         
       </nav>
-      <div style={navbarHeight ? {position: 'fixed', width: '100%', left: 0, zIndex: 100, top: navbarHeight + 16 + 'px'} : null}>
-      {notifications.map((n, i) => <Notification key={i} text={n.text} textColor={n.textColor} bgColor={n.bgColor} offsetTop={navbarHeight} />)}
+      <div className={[Classes.notifyer, isScrolled ? Classes.notifyerScrolled : null, navbarHeight ? Classes.notifyerVisible : null].join(' ')} style={navbarHeight ? {top: navbarHeight + 'px'} : null}>
+      {notification && 
+       <Notification text={notification.text} textColor={notification.textColor} bgColor={notification.bgColor} notifyerHeightHandler={notifyerHeightHandler}/>
+      }
       </div>
     </header>
   )

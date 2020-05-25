@@ -242,6 +242,24 @@
 	}
 }
 
+.notifyer {
+	position: fixed; 
+	width: 100%;
+	left: 0;
+	z-index: 100;
+	transition: margin 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+	opacity: 0;
+	transform: translateY(-1rem);
+
+	&.notifyerScrolled {
+		margin-top: 1rem;
+	}
+	&.notifyerVisible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
 .menuItems {
 
 	&>ul>li>a {

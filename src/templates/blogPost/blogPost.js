@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Img from "gatsby-image"
 import SwayTop from "../../components/UiElements/SwayTop/SwayTop"
 import JumboCta from "../../components/sections/jumboCta/jumboCta"
@@ -12,10 +12,16 @@ import BlogPosts from "../../components/UiElements/blogPosts/blogPosts"
 import BlogPostsHeader from "../../components/UiElements/blogPostsHeader/blogPostsHeader"
 import SEO from "../../components/seo"
 
-const blogPost = ({pageContext}) => {
+const BlogPost = ({pageContext}) => {
     const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, seoMetaTags, locale, writerImage } = pageContext
     const createMarkup = (text)  => {
         return {__html: text}
+    }
+
+    const [notificationPadding, setNotificationPadding] = useState(0)
+
+    const notifyerHeightHandler = (height) => {
+        setNotificationPadding(height)
     }
 
     return (
@@ -23,6 +29,7 @@ const blogPost = ({pageContext}) => {
             menuInverted={true}
             // locales={ locales } 
             currentLocale={locale}
+            notifyerHeightHandler={notifyerHeightHandler}
             >
             <SEO 
                 title={ seoTags && seoTags.title ? seoTags.title : title } 
@@ -32,7 +39,7 @@ const blogPost = ({pageContext}) => {
                 />
 
 
-            <BlogPostsHeader post={{title, subtitle, category, featuredImage, writer, readLength, writerImage}} metaFields/>
+            <BlogPostsHeader post={{title, subtitle, category, featuredImage, writer, readLength, writerImage}} metaFields  notificationPadding={notificationPadding}/>
             <article className={Classes.article}>
                 <div className="container">
                     <div className="row center-xs">
@@ -103,4 +110,4 @@ const blogPost = ({pageContext}) => {
     )
 }
 
-export default blogPost
+export default BlogPost
