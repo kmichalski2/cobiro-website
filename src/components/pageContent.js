@@ -29,6 +29,12 @@ import MediaDownload from './sections/mediaDownload/mediaDownload'
 const PageContent = ({ data, locales }) => {
 
     const [menuInverted, setMenuInverted] = useState(false)
+    
+    const [notificationPadding, setNotificationPadding] = useState(0)
+
+    const notifyerHeightHandler = (height) => {
+        setNotificationPadding(height)
+    }
 
   return (
     <Layout 
@@ -37,6 +43,8 @@ const PageContent = ({ data, locales }) => {
         currentLocale={data.locale}
         hiddenMenuItems={data.hiddenMenuItems}
         menuInverted={menuInverted}
+        slug={data.slug}
+        notifyerHeightHandler={notifyerHeightHandler}
         >
       <SEO 
         title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } 
@@ -51,7 +59,7 @@ const PageContent = ({ data, locales }) => {
                 if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
                     setMenuInverted(true)
                 } 
-                return <JumboHeader data={data.sections[index]} key={index}/>
+                return <JumboHeader data={data.sections[index]} key={index} notificationPadding={index === 0 ? notificationPadding : null}/>
             case 'ThreeUp':
                 return <ThreeUp data={data.sections[index]} key={index}/>
             case 'FeaturedCarousel':

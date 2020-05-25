@@ -20,14 +20,20 @@ const Blog = ({ data }) => {
   const categories = data.allDatoCmsBlogCategory.nodes
   const seoTags = page.seoTags
 
+  const [notificationPadding, setNotificationPadding] = useState(0)
+
+    const notifyerHeightHandler = (height) => {
+        setNotificationPadding(height)
+    }
+
     return (
-        <Layout menuInverted>     
+        <Layout menuInverted notifyerHeightHandler={notifyerHeightHandler}>     
         <SEO 
           title={ seoTags && seoTags.title ? seoTags.title : page.title } 
           description={seoTags && seoTags.description ? seoTags.description : null} 
           lang={data.locale}
           />
-          <BlogPosts blogPosts={posts} offset={0} fixedMax={1} addedAmount={0} firstLarge horizontal searchTitle={page.searchTitle}/>
+          <BlogPosts blogPosts={posts} offset={0} fixedMax={1} addedAmount={0} firstLarge horizontal searchTitle={page.searchTitle} notificationPadding={notificationPadding}/>
           <Section>
             <div className="container">
               

@@ -1,13 +1,13 @@
 import { Link } from "gatsby"
 import Img from "gatsby-image"
-import React from "react"
+import React, { useState } from "react"
 
 import Classes from "./jumboHeader.module.scss"
 import Section from "../../UiElements/Section/Section"
 import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
 import ImageAll from "../../UiElements/ImageAll/ImageAll"
 
-const JumboHeader = ({ data }) => {
+const JumboHeader = ({ data,  notificationPadding }) => {
 
   const bgColor = data.bgColor ? data.bgColor.hex : null
   const alignment = data.alignment
@@ -70,6 +70,7 @@ const JumboHeader = ({ data }) => {
       bgColor={bgColor} 
       noBottomPadding={imageToEdges}
       paddingBottomXsSm={alignment === 'image-left'}
+      addedPadding={notificationPadding}
       >
         <div className="container">
           <div

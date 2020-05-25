@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../../components/layout/layout'
 import SwayTop from '../../components/UiElements/SwayTop/SwayTop'
 import BlogPosts from '../../components/UiElements/blogPosts/blogPosts'
@@ -9,11 +9,17 @@ import FeaturedTestimonialsSingle from '../../components/sections/featuredTestim
 
 const BlogCagegory = ({ pageContext }) => {
 
+    const [notificationPadding, setNotificationPadding] = useState(0)
+
+    const notifyerHeightHandler = (height) => {
+        setNotificationPadding(height)
+    }
+
     const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor} = pageContext
 
     return (
-        <Layout>
-            <Section bgColor={bgColor.hex}>
+        <Layout notifyerHeightHandler={notifyerHeightHandler}>
+            <Section bgColor={bgColor.hex} addedPadding={notificationPadding}>
               <div className="container">
                   <div className="row middle-xs center-xs">
                       <div className="col col-xs-12 col-lg-8 text-center">

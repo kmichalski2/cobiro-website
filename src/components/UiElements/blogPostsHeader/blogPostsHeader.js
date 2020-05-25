@@ -8,9 +8,10 @@ import Classes from './blogPostsHeader.module.scss'
 import BlogSearch from '../../sections/blogSearch/blogSearch'
 import { Link } from 'gatsby'
 
-const BlogPostsHeader = ({post, searchTitle, search, metaFields}) => {
+const BlogPostsHeader = ({post, searchTitle, search, metaFields, notificationPadding}) => {
+    console.log('notificationPadding HEADER', notificationPadding)
     return (
-        <Section noBottomPadding>
+        <Section noBottomPadding addedPadding={notificationPadding}>
             <div className="container">
                 {search ?
                 <div className="row">

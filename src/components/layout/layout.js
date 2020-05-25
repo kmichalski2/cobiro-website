@@ -14,7 +14,7 @@ import Footer from "./footer"
 import "./style/app.scss"
 import CookieBanner from "./cookieConsent"
 
-const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, menuInverted }) => {
+const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, menuInverted, slug, notifyerHeightHandler }) => {
   
   if (typeof window !== 'undefined') {
     // Make scroll behavior of internal links smooth
@@ -233,8 +233,45 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
         footerItemOrder
       }
     }
+    allDatoCmsNotification(filter: {locale: {eq: "en"}}) {
+      edges {
+        node {
+          text
+          textColor
+          bgColor {
+            hex
+          }
+          pages {
+            slug
+            title
+          }
+        }
+      }
+    }
   }  
   `)
+
+
+  const notifications = data.allDatoCmsNotification.edges.map(e => e.node)
+
+  const getNotification = (slug) => {
+    let pageNotification
+  
+    notifications.map(n => {
+      if(n.pages && n.pages.length > 0) {
+        n.pages.map(p => {
+          if(p.slug === slug) {
+            pageNotification = n
+          }
+        })
+        
+      } else if(!pageNotification) {
+        pageNotification = n
+      }
+    })
+    console.log('************************* NOTIFICATIONS: ', slug, pageNotification)
+    return pageNotification
+  }
 
   let menuItems
 
@@ -248,7 +285,7 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
   
     return (
     <>
-      <Navbar menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted}/>
+      <Navbar menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler}/>
       {children}
       <CookieBanner />
       <Footer columns={data.allDatoCmsFooter.nodes} locales={locales} currentLocale={currentLocale}/>
