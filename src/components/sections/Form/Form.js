@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Classes from './form.module.scss'
+import AnyLink from '../../UiElements/AnyLink/AnyLink';
 
 const Form = ({ data }) => {
     const axios = require('axios');
@@ -13,10 +14,27 @@ const Form = ({ data }) => {
 
     console.log(form.formFields)
 
+    let emptySubmission = {}
+        form.formFields.map(f => {
+            if(f.internal.type === 'DatoCmsCheckbox') {
+                console.log('SETTINGS CHECKBOXES')
+                
+                f.checkboxes.map(c => { emptySubmission = {...emptySubmission, [c]: "false"}})
+                console.log('CHECKBOXES: ', emptySubmission)
+                console.log({...submission, ...emptySubmission })
+                
+            } else {
+                emptySubmission = {...emptySubmission, [f.name]: ""}
+            }
+        })
+
     const [errors, setErrors] = useState({})
     const [touched, setTouched] = useState({})
     const [checkboxes, setCheckboxes] = useState({})
-    const [submission, setSubmission] = useState({})
+    const [submission, setSubmission] = useState(emptySubmission)
+    const [submitting, setSubmitting] = useState(false)
+    const [submitted, setSubmitted] = useState(false)
+    const [submitError, setSubmitError] = useState()
 
     useEffect(() => {
         let initErrors = {}
@@ -47,22 +65,22 @@ const Form = ({ data }) => {
         
     }, [data])
 
-    useEffect(() => {
-        let emptySubmission = {}
-        form.formFields.map(f => {
-            if(f.internal.type === 'DatoCmsCheckbox') {
-                console.log('SETTINGS CHECKBOXES')
+    // useEffect(() => {
+    //     let emptySubmission = {}
+    //     form.formFields.map(f => {
+    //         if(f.internal.type === 'DatoCmsCheckbox') {
+    //             console.log('SETTINGS CHECKBOXES')
                 
-                f.checkboxes.map(c => { emptySubmission = {...emptySubmission, [c]: "false"}})
-                console.log('CHECKBOXES: ', emptySubmission)
-                console.log({...submission, ...emptySubmission })
+    //             f.checkboxes.map(c => { emptySubmission = {...emptySubmission, [c]: "false"}})
+    //             console.log('CHECKBOXES: ', emptySubmission)
+    //             console.log({...submission, ...emptySubmission })
                 
-            } else {
-                emptySubmission = {...emptySubmission, [f.name]: ""}
-            }
-        })
-        setSubmission(emptySubmission)
-    },[form])
+    //         } else {
+    //             emptySubmission = {...emptySubmission, [f.name]: ""}
+    //         }
+    //     })
+    //     setSubmission(emptySubmission)
+    // },[form])
 
     useEffect(() => {
 
@@ -146,6 +164,7 @@ const Form = ({ data }) => {
         e.preventDefault()
 
         console.log(submission)
+        setSubmitting(true)
         
         axios.post(`/.netlify/functions/submit`, { endpoint: data.formEndpoint, data: submission})
             .then(function (response) {
@@ -157,6 +176,12 @@ const Form = ({ data }) => {
                 //     setAlert('Error fetching data')
                 //     console.log('Error fetching data')
                 // }
+                setSubmitting(false)
+                if(response.status === 200) {
+                    setSubmitted(true)
+                } else {
+                    setSubmitError('An error occured. Please check your submission and try again.')
+                }
             })
             .catch(function (error) {
                 console.log('Error: ', error.response)
@@ -283,7 +308,9 @@ const Form = ({ data }) => {
                         {errors[f.name] && touched[f.name] ? <p className={["text-red small", Classes.errorText].join(' ')}>{errors[f.name]}</p> : null}
                         </div>
                     )}
-                    <button className={["btn btn-large", Classes.btn].join(' ')} onClick={(e) => submitHandler(e)} disabled={!isEmpty(errors) ? true : false}>{form.submitTitle}</button>
+                    <AnyLink button large callBack={submitHandler} title={form.submitTitle} disabled={!isEmpty(errors) ? true : false} submitted={submitted} submitting={submitting} submitError={submitError} />
+                    {submitError && <p className={Classes.submitError}>{submitError}</p>}
+                    {/* <button className={["btn btn-large", Classes.btn].join(' ')} onClick={(e) => submitHandler(e)} disabled={!isEmpty(errors) ? true : false}>{form.submitTitle}</button> */}
                 </form>
             </div>
         </div>
