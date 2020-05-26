@@ -132,7 +132,6 @@ const Form = ({ data }) => {
     const submitHandler = (e) => {
         e.preventDefault()
 
-        console.log(submission)
         setSubmitting(true)
         
         axios.post(`/.netlify/functions/submit`, { endpoint: data.formEndpoint, data: submission})

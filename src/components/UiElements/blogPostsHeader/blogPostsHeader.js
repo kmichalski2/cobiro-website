@@ -9,7 +9,6 @@ import BlogSearch from '../../sections/blogSearch/blogSearch'
 import { Link } from 'gatsby'
 
 const BlogPostsHeader = ({post, searchTitle, search, metaFields, notificationPadding}) => {
-    console.log('notificationPadding HEADER', notificationPadding)
     return (
         <Section noBottomPadding addedPadding={notificationPadding}>
             <div className="container">

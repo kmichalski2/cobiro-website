@@ -7,12 +7,7 @@ exports.handler =  function sites(event, context, callback) {
     const searchParams = querystring.stringify(body.data);
 
     const endpoint = process.env.FORMS_ENDPOINT;
-    // const query = Object.keys(event.body).map(k => k + '=' + encodeURIComponent(event.body[k])).join('&')
-    // const query = encodeQueryData(event.body)
 
-    // const queryStrings = event.queryStringParameters
-    // console.log(queryStrings)
-    console.log('Endpoint: ', `${endpoint}${body.endpoint}?${searchParams}`)
     axios({
         method: 'get',
         url: `${endpoint}${body.endpoint}?${searchParams}`,

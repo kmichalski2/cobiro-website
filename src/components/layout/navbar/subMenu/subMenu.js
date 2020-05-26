@@ -9,7 +9,6 @@ import SubMenuFooter from './subMenuFooter/subMenuFooter'
 
 
 const SubMenu = ({ footer, columns, columnRight, submenuTitle, submenuDescription, show, expand,  contentContainer}) => {
-  console.log('SUBMENU ', columns, columnRight)
     const [offset, setOffset] = useState(0)
     const [triangleOffset, setTriangleOffset] = useState(0)
     const [windowWidth, setWindowWidth] = useState()

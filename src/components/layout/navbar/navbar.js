@@ -23,9 +23,6 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
   const contentContainer = React.createRef()
   const navbarRef = React.createRef()
 
-  console.log(notification)
-
-
   useEffect(() => {
     // mainMenuNode = mainMenu.current
     window.addEventListener("resize", () => resizeHandler())
@@ -47,7 +44,6 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
 
   useEffect(() => {
     setNavbarHeight(navbarRef.current.offsetHeight)
-    console.log(navbarRef.current.offsetHeight)
   }, [navbarRef])
 
   const resizeHandler = () => {
