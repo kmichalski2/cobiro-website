@@ -1,12 +1,13 @@
 import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
 import logo from "../../../images/logo_white.svg"
+import Notification from '../../UiElements/notification/notification'
 import MenuItem from './menuItem/menuItem'
 import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 import Classes from './navbar.module.scss'
 
-const Navbar = ({ menuItems, customCta, menuInverted }) => {
+const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
@@ -14,11 +15,13 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
   const [windowWidth, setWindowWidth] = useState(typeof window != "undefined" ? window.innerWidth : null)
   const [mainMenuHovered, setMainMenuHovered] = useState(false)
   const [subMenuExpanded, setSubMenuExpanded] = useState(null)
+  const [navbarHeight, setNavbarHeight] = useState()
+  const [notifyersHeight, setNotifyersHeight] = useState(0)
   // let [refs, setRefs] = useState({})
   // const mainMenu = React.createRef();
   // let mainMenuNode  
   const contentContainer = React.createRef()
-
+  const navbarRef = React.createRef()
 
   useEffect(() => {
     // mainMenuNode = mainMenu.current
@@ -35,7 +38,13 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
     // return () => {
     //   window.removeEventListener("resize", resizeHandler)
     // }
+
+    
   })
+
+  useEffect(() => {
+    setNavbarHeight(navbarRef.current.offsetHeight)
+  }, [navbarRef])
 
   const resizeHandler = () => {
     // setSubMenuOffset()
@@ -45,7 +54,9 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
   }
 
   
-
+  const notifyerNavbarHeightHandler = (height) => {
+    setNotifyersHeight(height)
+  }
   // Click handlers below
 
   const toggleClickHandler = () => {
@@ -64,7 +75,7 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
 
   return (
     <header>
-      <nav className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, isScrolled ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">
+      <nav ref={navbarRef} className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, isScrolled ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">
         <div  className="container">
           <div ref={contentContainer} className="row between-xs middle-xs">
             <div className={["col col-auto-lg", Classes.navbarMobile].join(' ')} >
@@ -104,7 +115,13 @@ const Navbar = ({ menuItems, customCta, menuInverted }) => {
             </div>
           </div>
         </div>
+        
       </nav>
+      <div className={[Classes.notifyer, isScrolled ? Classes.notifyerScrolled : null, navbarHeight ? Classes.notifyerVisible : null].join(' ')} style={navbarHeight ? {top: navbarHeight + 'px'} : null}>
+      {notification && 
+       <Notification text={notification.text} textColor={notification.textColor} bgColor={notification.bgColor} notifyerHeightHandler={notifyerHeightHandler}/>
+      }
+      </div>
     </header>
   )
 }

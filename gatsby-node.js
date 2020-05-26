@@ -693,6 +693,7 @@ exports.createPages = async function({ graphql, actions }) {
                   text
                   title
                   formPlacement
+                  formEndpoint
                   form {
                     formName
                     submitTitle
@@ -805,7 +806,7 @@ exports.createPages = async function({ graphql, actions }) {
           const locale = item.node.locale
           const prefix = locale !== 'en' ? locale : ''
           let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
-          // let p = item.node.homepage ? '/' : `/${item.node.slug}`
+          
           await createPage({
             path: p,
             component: path.resolve(`./src/templates/page.js`),

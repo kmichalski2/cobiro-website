@@ -2,8 +2,8 @@ import React from 'react'
 
 import Classes from './checkmark.module.scss'
 
-const Checkmark = ({classes}) => (
-    <div className={[Classes.checkmark, classes].join(' ')}></div>
+const Checkmark = ({classes, white}) => (
+    <div className={[Classes.checkmark, white ? Classes.white : null, classes].join(' ')}></div>
 )
 
 export default Checkmark
