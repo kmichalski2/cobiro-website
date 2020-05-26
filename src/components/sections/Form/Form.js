@@ -310,7 +310,7 @@ const Form = ({ data }) => {
                         {errors[f.name] && touched[f.name] ? <p className={["text-red small", Classes.errorText].join(' ')}>{errors[f.name]}</p> : null}
                         </div>
                     )}
-                    <AnyLink button large callBack={submitHandler} title={form.submitTitle} disabled={!isEmpty(errors) ? true : false} submitted={submitted} submitting={submitting} submitError={submitError} />
+                    <AnyLink button large callBack={submitHandler} title={form.submitTitle} disabled={!isEmpty(errors) || submitted ? true : false} submitted={submitted} submitting={submitting} submitError={submitError} />
                     {submitError && <p className={Classes.submitError}>{submitError}</p>}
                     {/* <button className={["btn btn-large", Classes.btn].join(' ')} onClick={(e) => submitHandler(e)} disabled={!isEmpty(errors) ? true : false}>{form.submitTitle}</button> */}
                 </form>
