@@ -23,13 +23,13 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
             </a>
         : title && callBack ?
             <button className={ classNames } onClick={callBack} disabled={disabled || false}>
-                <span className={submitting || submitted ? Classes.buttonTitleHidden : null} >{title}</span>
+                <span className={submitting || submitted || submitError ? Classes.buttonTitleHidden : null} >{title}</span>
                 {submitting ?
                     <Loader classes={Classes.submitting} /> :
                 submitted ?
                     <Checkmark classes={Classes.submitted} white={true} /> :
                 submitError ?
-                    <Cross classes={Classes.submitError}/>
+                    <Cross classes={Classes.submitError} white/>
             : null}
             </button>
         : null

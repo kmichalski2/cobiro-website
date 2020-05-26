@@ -93,7 +93,9 @@ const Form = ({ data }) => {
 
     const handleChange = (e, value) => {
         
-        
+        if(submitError){
+            setSubmitError(null)
+        }
 
         if(e.target.type !== 'checkbox' && e.target.type !== 'radio') {
             setTouched({...touched, [e.target.name]: "yes"})
@@ -180,10 +182,13 @@ const Form = ({ data }) => {
                 if(response.status === 200) {
                     setSubmitted(true)
                 } else {
+                    setSubmitting(false)
                     setSubmitError('An error occured. Please check your submission and try again.')
                 }
             })
             .catch(function (error) {
+                setSubmitting(false)
+                setSubmitError('An error occured. Please check your submission and try again.')
                 console.log('Error: ', error.response)
                 console.log('Error: ', error)
             })
