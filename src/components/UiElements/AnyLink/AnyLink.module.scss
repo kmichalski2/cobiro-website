@@ -4,6 +4,26 @@
 	font-size: 0.875rem;
 	font-weight: 600;
 	border-radius: 5rem;
+
+	position: relative;
+
+	
+
+	.submitted, .submitting, .submitError {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.submitError {
+		opacity: 1;
+	}
+
+	.buttonTitleHidden {
+		visibility: hidden;
+
+	}
 }
 
 .textLink {
@@ -68,5 +88,16 @@
 		background-color: rgba($white, 0.8);
 		// border-color: $white;
 		color: $blue;
+	}
+}
+.btnDanger {
+	background-color: $red !important;
+	border-color: $red!important;
+	color: $white!important;
+
+	&:hover, &:active {
+		background-color: rgba($red, 0.8)!important;
+		// border-color: $white;
+		color: $white!important;
 	}
 }
