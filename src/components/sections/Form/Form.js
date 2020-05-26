@@ -12,14 +12,10 @@ const Form = ({ data }) => {
     const formPlacement = data.formPlacement
     const form = data.form
 
-    console.log(form.formFields)
-
     let emptySubmission = {}
         form.formFields.map(f => {
             if(f.internal.type === 'DatoCmsCheckbox') {
-                
                 f.checkboxes.map(c => { emptySubmission = {...emptySubmission, [c]: "false"}})
-                
             } else {
                 emptySubmission = {...emptySubmission, [f.name]: ""}
             }
@@ -47,10 +43,6 @@ const Form = ({ data }) => {
                 }
             }
 
-            
-
-            
-            
         })
         if(initErrors) {
             setErrors({...errors, ...initErrors})
@@ -59,30 +51,8 @@ const Form = ({ data }) => {
             setCheckboxes({...checkboxes, ...initCheckboxes})
         }
 
-        
     }, [data])
 
-    // useEffect(() => {
-    //     let emptySubmission = {}
-    //     form.formFields.map(f => {
-    //         if(f.internal.type === 'DatoCmsCheckbox') {
-    //             console.log('SETTINGS CHECKBOXES')
-                
-    //             f.checkboxes.map(c => { emptySubmission = {...emptySubmission, [c]: "false"}})
-    //             console.log('CHECKBOXES: ', emptySubmission)
-    //             console.log({...submission, ...emptySubmission })
-                
-    //         } else {
-    //             emptySubmission = {...emptySubmission, [f.name]: ""}
-    //         }
-    //     })
-    //     setSubmission(emptySubmission)
-    // },[form])
-
-    useEffect(() => {
-
-        console.log(submission)
-    }, [submission])
 
     const isEmpty = (obj) => {
         return Object.keys(obj).length === 0 && obj.constructor === Object
@@ -167,14 +137,6 @@ const Form = ({ data }) => {
         
         axios.post(`/.netlify/functions/submit`, { endpoint: data.formEndpoint, data: submission})
             .then(function (response) {
-                console.log(response);
-                // if(response.status === 200) {
-                //     setPageData(response.data.data)
-                //     console.log(response.data.data)
-                // } else {
-                //     setAlert('Error fetching data')
-                //     console.log('Error fetching data')
-                // }
                 setSubmitting(false)
                 if(response.status === 200) {
                     setSubmitted(true)
@@ -186,12 +148,8 @@ const Form = ({ data }) => {
             .catch(function (error) {
                 setSubmitting(false)
                 setSubmitError('An error occured. Please check your submission and try again.')
-                console.log('Error: ', error.response)
-                console.log('Error: ', error)
             })
     }
-
-    
 
     const textMarkup = (
         <div className={["first-xs col col-xs-12 col-md-10 col-lg-6 space-xs-up", formPlacement === 'left' ? "last-lg" : null, formPlacement === 'center' || !formPlacement ? "text-center" : null].join(' ')}>
@@ -202,12 +160,7 @@ const Form = ({ data }) => {
     const formMarkup = (
     <div className={["col col-xs-12 col-md-10", formPlacement === 'center' || !formPlacement ? "col-xl-8" : "col-lg-6"].join(' ')}>
             <div className="card card-visible text-left">
-                {/* <form name={form.formName} method="post" action={`/${form.succesPage.slug}`} data-netlify="true" data-netlify-honeypot="bot-field"> */}
                 <form name={form.formName}>
-                {/* <input type="hidden" name="form-name" value={form.formName} /> */}
-                <p className="hidden">
-                    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-                </p>
                     {form.formFields.map((f, i) =>
                         
                         <div key={i} className={[Classes.formFields, errors && errors[f.name] ? Classes.error : null, touched && touched[f.name] ? Classes.touched : null].join(' ')}>
@@ -292,7 +245,6 @@ const Form = ({ data }) => {
                                 <div key={i} className={Classes.radio}>
                                     <label >
                                     <input 
-                                        
                                         type="radio" 
                                         id={`${f.name}-${i}`} 
                                         name={f.name} 
@@ -312,7 +264,6 @@ const Form = ({ data }) => {
                     )}
                     <AnyLink button large callBack={submitHandler} title={form.submitTitle} disabled={!isEmpty(errors) || submitted ? true : false} submitted={submitted} submitting={submitting} submitError={submitError} />
                     {submitError && <p className={Classes.submitError}>{submitError}</p>}
-                    {/* <button className={["btn btn-large", Classes.btn].join(' ')} onClick={(e) => submitHandler(e)} disabled={!isEmpty(errors) ? true : false}>{form.submitTitle}</button> */}
                 </form>
             </div>
         </div>
