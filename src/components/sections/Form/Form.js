@@ -17,11 +17,8 @@ const Form = ({ data }) => {
     let emptySubmission = {}
         form.formFields.map(f => {
             if(f.internal.type === 'DatoCmsCheckbox') {
-                console.log('SETTINGS CHECKBOXES')
                 
                 f.checkboxes.map(c => { emptySubmission = {...emptySubmission, [c]: "false"}})
-                console.log('CHECKBOXES: ', emptySubmission)
-                console.log({...submission, ...emptySubmission })
                 
             } else {
                 emptySubmission = {...emptySubmission, [f.name]: ""}
