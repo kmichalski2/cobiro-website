@@ -269,7 +269,6 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
         pageNotification = n
       }
     })
-    console.log('************************* NOTIFICATIONS: ', slug, pageNotification)
     return pageNotification
   }
 

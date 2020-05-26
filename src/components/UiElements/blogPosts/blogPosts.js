@@ -11,8 +11,6 @@ const BlogPosts = ({ blogPosts, offset, fixedMax, addedAmount, firstLarge, anima
     
     const initialAMount = fixedMax || (0 + (addedAmount || 3)) 
 
-    console.log('notificationPadding', notificationPadding)
-
     const [numberOfPosts, setNumberOfPosts] = useState(blogPosts.length < initialAMount ? blogPosts.length : initialAMount)
 
     useEffect(() => {
