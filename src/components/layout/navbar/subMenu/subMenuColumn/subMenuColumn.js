@@ -38,13 +38,13 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
                     {title}
                 </Link>
                 :
-                <p
+                <div
                     className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
                                        onClick={(e) => subSubMenuClickHandler(e)}>
                 
                 <ImageAll classes={Classes.subMenuIcon} image={icon} alt={icon && icon.alt ? icon.alt : `${title} icon`}/>
                     {title}
-                </p>
+                </div>
             : null}
             <div className={[Classes.subSubMenu, expandedDefault ? Classes.expandedDefault : null].join(' ')}>
                 <ul className="list-unstyled">
