@@ -9,6 +9,8 @@ import BlogSearch from '../../sections/blogSearch/blogSearch'
 import { Link } from 'gatsby'
 
 const BlogPostsHeader = ({post, searchTitle, search, metaFields, notificationPadding}) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const publishDate = post.date ? new Date(post.date) : null
     return (
         <Section noBottomPadding addedPadding={notificationPadding}>
             <div className="container">
@@ -29,6 +31,7 @@ const BlogPostsHeader = ({post, searchTitle, search, metaFields, notificationPad
                         
                             
                             <p>{post.subtitle}</p>
+                            {publishDate !== null ? <p className="small text-bold">{publishDate.toLocaleString('en-US', options)}</p> : null}
                             {metaFields ?
                             <div className={Classes.meta}>
                                 <ImageAll image={post.writerImage} alt={post.writerImage ? post.writerImage.alt : null} classes={Classes.writerIcon}/>

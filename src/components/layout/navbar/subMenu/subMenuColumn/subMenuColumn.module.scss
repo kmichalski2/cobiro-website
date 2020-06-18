@@ -55,6 +55,7 @@
     padding: 1rem 0;
     color: $black!important; 
     margin-bottom: 0;
+    font-size: 1.2rem;
 
     @include mq($until: lg) {
         font-size: 1.375rem;

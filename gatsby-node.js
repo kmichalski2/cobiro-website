@@ -821,10 +821,11 @@ exports.createPages = async function({ graphql, actions }) {
 
       await graphql(`
       {
-        allDatoCmsBlogPost(sort: {fields: meta___publishedAt}, filter: {title: {ne: null}}) {
+        allDatoCmsBlogPost(sort: {fields: date}, filter: {title: {ne: null}}) {
           nodes {
             locale
             title
+            date
             seoTags {
               title
               description
@@ -930,6 +931,7 @@ exports.createPages = async function({ graphql, actions }) {
               slug
             }
             readLength
+
             meta {
               createdAt(formatString: "MMMM DD")
               publishedAt(formatString: "MMMM DD")
@@ -1030,7 +1032,7 @@ exports.createPages = async function({ graphql, actions }) {
                 writerImage: item.writerImage,
                 category: item.category,
                 readLength: item.readLength,
-                date: item.meta.publishedAt || item.meta.createdAt,
+                date: item.date,
                 ctaBackgroundColor: result.data.datoCmsBlogPage.ctaBgColor,
                 textColor: result.data.datoCmsBlogPage.footerCtaTextColor,
                 topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
