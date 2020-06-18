@@ -39,7 +39,7 @@ const BlogPost = ({pageContext}) => {
                 />
 
 
-            <BlogPostsHeader post={{title, subtitle, category, featuredImage, writer, readLength, writerImage}} metaFields  notificationPadding={notificationPadding}/>
+            <BlogPostsHeader post={{title, subtitle, category, featuredImage, writer, readLength, writerImage, date}} metaFields  notificationPadding={notificationPadding}/>
             <article className={Classes.article}>
                 <div className="container">
                     <div className="row center-xs">

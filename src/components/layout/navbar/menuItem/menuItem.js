@@ -74,18 +74,21 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
                         ...(item.submenuColumn1Title || item.submenuColumn1Links.length > 0 ?
                         [{
                             title: item.submenuColumn1Title,
+                            link: item.submenuColumn1Link,
                             icon: item.submenuColumn1Icon,
                             submenuLinks: item.submenuColumn1Links
                         }] : []),
                         ...(item.submenuColumn2Title || item.submenuColumn2Links.length > 0 ?
                         [{
                             title: item.submenuColumn2Title,
+                            link: item.submenuColumn2Link,
                             icon: item.submenuColumn2Icon,
                             submenuLinks: item.submenuColumn2Links
                         }] : []),
                         ...(item.submenuColumn3Title || item.submenuColumn3Links.length > 0 ?
                         [{
                             title: item.submenuColumn3Title,
+                            link: item.submenuColumn3Link,
                             icon: item.submenuColumn3Icon,
                             submenuLinks: item.submenuColumn3Links
                         }] : [])
@@ -94,6 +97,7 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
                         title: item.rightColumnTitle,
                         description: item.rightColumnDescription,
                         subMenuTitle: item.submenuColumnRightTitle,
+                        link: item.submenuColumnRightLink,
                         subMenuIcon: item.submenuColumnRightIcon,
                         links: item.rightColumnLinks
                     } : null}
