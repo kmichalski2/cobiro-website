@@ -55,6 +55,9 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
         submenuTitle
         submenuDescription
         submenuColumn1Title
+        submenuColumn1Link {
+          slug
+        }
         submenuColumn1Icon {
           alt
           url
@@ -68,6 +71,7 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
           }
         }
         submenuColumn1Links {
+          hiddenOnDesktop
           linkTitle
           externalLink
           internalLink {
@@ -89,6 +93,9 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
           linkDescription
         }
         submenuColumn2Title
+        submenuColumn2Link {
+          slug
+        }
         submenuColumn2Icon {
           alt
           url
@@ -102,6 +109,7 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
           }
         }
         submenuColumn2Links {
+          hiddenOnDesktop
           linkTitle
           externalLink
           internalLink {
@@ -123,6 +131,9 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
           linkDescription
         }
         submenuColumn3Title
+        submenuColumn3Link {
+          slug
+        }
         submenuColumn3Icon {
           alt
           url
@@ -136,6 +147,7 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
           }
         }
         submenuColumn3Links {
+          hiddenOnDesktop
           linkTitle
           externalLink
           internalLink {
@@ -160,6 +172,9 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
         rightColumnTitle
         rightColumnDescription
         submenuColumnRightTitle
+        submenuColumnRightLink {
+          slug
+        }
         submenuColumnRightIcon {
           alt
           url
@@ -173,26 +188,27 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
           }
         }
         rightColumnLinks {
-        externalLink
-        linkTitle
-        linkDescription
-        internalLink {
-          ... on DatoCmsPage {
-            slug
-            __typename
-            internal {
-              type
+          hiddenOnDesktop
+          externalLink
+          linkTitle
+          linkDescription
+          internalLink {
+            ... on DatoCmsPage {
+              slug
+              __typename
+              internal {
+                type
+              }
             }
-          }
-          ... on DatoCmsBlogPage {
-            slug
-            __typename
-            internal {
-              type
+            ... on DatoCmsBlogPage {
+              slug
+              __typename
+              internal {
+                type
+              }
             }
           }
         }
-      }
       }
     }
     allDatoCmsFooter(sort: {fields: footerItemOrder, order: ASC}, filter: {locale: {eq: "en"}}) {

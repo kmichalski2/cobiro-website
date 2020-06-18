@@ -54,9 +54,11 @@
     align-items: center;
     padding: 1rem 0;
     color: $black!important; 
+    margin-bottom: 0;
 
     @include mq($until: lg) {
         font-size: 1.375rem;
+        cursor: pointer;
     }
 
     .subMenuIcon {
@@ -69,8 +71,11 @@
 
     .hasSubSubMenu {
 
-        &>a {
+        &>.subMenuTitle {
             position: relative;
+            &:active, &:visited, &:focus {
+                text-decoration: none;
+            }
 
             &::after {
                 content: '';
@@ -89,7 +94,7 @@
             }
         }
 
-        &.expanded>a::after {
+        &.expanded>.subMenuTitle::after {
             transform: rotate(-90deg) translate(50%, 0);
         }
     }
@@ -107,7 +112,7 @@
     }
 
     .subMenuDescription {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -119,6 +124,12 @@
 
 .subMenuItem {
     padding-bottom: 0.875rem;
+
+    @include mq($from: lg) {
+        &.hiddenDesktop {
+            display: none;   
+        }
+    }
     
     .subMenuDescription {
         display: block;

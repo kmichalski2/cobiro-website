@@ -27,19 +27,29 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
     return (
         <div className={ [Classes.subMenuColumn, isSingleColumn && !title ? Classes.narrow : null, borderLeft ? Classes.borderLeft : null, "submenuColumn", submenuLinks.length > 0 ? Classes.hasSubSubMenu : null ].join(' ')}>
             {title || icon ? 
-            <Link 
-                className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
-                to={link && link.slug ? link.slug : "#"} 
-                target="_self" 
-                onClick={(e) => subSubMenuClickHandler(e)}>
-            <ImageAll classes={Classes.subMenuIcon} image={icon} alt={icon && icon.alt ? icon.alt : `${title} icon`}/>
-            {title}
-            </Link>
+                link && link.slug ?
+                <Link 
+                    className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
+                    to={link && link.slug ? link.slug : "#"} 
+                    target="_self" 
+                    onClick={(e) => subSubMenuClickHandler(e)}>
+                
+                <ImageAll classes={Classes.subMenuIcon} image={icon} alt={icon && icon.alt ? icon.alt : `${title} icon`}/>
+                    {title}
+                </Link>
+                :
+                <p
+                    className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
+                                       onClick={(e) => subSubMenuClickHandler(e)}>
+                
+                <ImageAll classes={Classes.subMenuIcon} image={icon} alt={icon && icon.alt ? icon.alt : `${title} icon`}/>
+                    {title}
+                </p>
             : null}
             <div className={[Classes.subSubMenu, expandedDefault ? Classes.expandedDefault : null].join(' ')}>
                 <ul className="list-unstyled">
                     {submenuLinks.map((subsub, index) => (
-                    <li key={index} className={[Classes.subMenuItem, icon ? Classes.indented : null].join(' ')}>
+                    <li key={index} className={[Classes.subMenuItem, icon ? Classes.indented : null, subsub.hiddenOnDesktop ? Classes.hiddenDesktop : null].join(' ')}>
                         <AnyLink 
                             title={subsub.linkTitle}
                             external={subsub.externalLink && true}
