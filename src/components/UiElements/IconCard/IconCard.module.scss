@@ -18,10 +18,10 @@
         height: 7rem;
         max-height: 7rem;
 
-        @include mq($until: md) {
-            max-width: 3rem;
-            min-width: 3rem;
-        }
+        // @include mq($until: md) {
+        //     max-width: 3rem;
+        //     min-width: 3rem;
+        // }
     }
 }
 
