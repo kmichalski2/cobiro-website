@@ -6,13 +6,13 @@ import AnyLink from '../AnyLink/AnyLink'
 
 import Classes from './IconCard.module.scss'
 
-const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow }) => {
+const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg }) => {
 
     return (
         <Card shadow={shadow}>
             <ImageAll 
                 image={image} 
-                classes={[Classes.icon, iconBig ? Classes.iconBig : null].join(' ')}
+                classes={[Classes.icon, iconImg ? Classes.iconImg : iconBig ? Classes.iconBig : null].join(' ')}
                 alt={alt}/>
            
                 <div className={Classes.textWrapper}>

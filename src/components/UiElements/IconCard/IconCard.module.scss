@@ -23,6 +23,16 @@
         //     min-width: 3rem;
         // }
     }
+
+    &.iconImg {
+        width: inherit;
+        height: 12rem!important;
+        max-height: 12rem!important;
+
+        @include mq($until: md) {
+            max-width: unset!important;
+        }
+    }
 }
 
 .textWrapper {

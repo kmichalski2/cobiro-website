@@ -190,6 +190,7 @@ exports.createPages = async function({ graphql, actions }) {
                   title
                   text
                   bigIcons
+                  imagesInsteadOfIcons
                   box1Icon {
                     alt
                     url
