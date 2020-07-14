@@ -7,6 +7,7 @@ import HtmlText from "../UiElements/HtmlText/HtmlText"
 
 const ThreeUpPeople = ({ data }) => {
   const bigIcon = data.bigIcons
+  const iconImg = data.imagesInsteadOfIcons
 
   return (
     <Section bgColor={data.bgColor && data.bgColor.hex}>
@@ -27,6 +28,7 @@ const ThreeUpPeople = ({ data }) => {
                   image={data.box1Icon} 
                   alt={data.box1Icon.alt ? data.box1Icon.alt : data.box1Title} 
                   iconBig={bigIcon} 
+                  iconImg={iconImg} 
                   title={data.box1Title} 
                   text={data.box1Text} 
                   footnote={data.box1Footnote} 
@@ -44,7 +46,8 @@ const ThreeUpPeople = ({ data }) => {
                 <IconCard 
                   image={data.box2Icon} 
                   alt={data.box2Icon.alt ? data.box2Icon.alt : data.box2Title} 
-                  iconBig={bigIcon} 
+                  iconBig={bigIcon}
+                  iconImg={iconImg}
                   title={data.box2Title} 
                   text={data.box2Text} 
                   footnote={data.box2Footnote} 
@@ -62,7 +65,8 @@ const ThreeUpPeople = ({ data }) => {
                 <IconCard 
                   image={data.box3Icon} 
                   alt={data.box3Icon.alt ? data.box3Icon.alt : data.box3Title} 
-                  iconBig={bigIcon} 
+                  iconBig={bigIcon}
+                  iconImg={iconImg}
                   title={data.box3Title} 
                   text={data.box3Text} 
                   footnote={data.box3Footnote} 
@@ -80,7 +84,8 @@ const ThreeUpPeople = ({ data }) => {
                 <IconCard 
                   image={data.box4Icon} 
                   alt={data.box4Icon.alt ? data.box4Icon.alt : data.box4Title} 
-                  iconBig={bigIcon} 
+                  iconBig={bigIcon}
+                  iconImg={iconImg}
                   title={data.box4Title} 
                   text={data.box4Text} 
                   footnote={data.box4Footnote} 
@@ -98,7 +103,8 @@ const ThreeUpPeople = ({ data }) => {
                 <IconCard 
                   image={data.box5Icon} 
                   alt={data.box5Icon.alt ? data.box5Icon.alt : data.box5Title} 
-                  iconBig={bigIcon} 
+                  iconBig={bigIcon}
+                  iconImg={iconImg}
                   title={data.box5Title} 
                   text={data.box5Text} 
                   footnote={data.box5Footnote} 
@@ -116,7 +122,8 @@ const ThreeUpPeople = ({ data }) => {
                 <IconCard 
                   image={data.box6Icon} 
                   alt={data.box6Icon.alt ? data.box6Icon.alt : data.box6Title} 
-                  iconBig={bigIcon} 
+                  iconBig={bigIcon}
+                  iconImg={iconImg}
                   title={data.box6Title} 
                   text={data.box6Text} 
                   footnote={data.box6Footnote} 
