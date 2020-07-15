@@ -26,6 +26,7 @@ exports.createPages = async function({ graphql, actions }) {
               title
               homepage
               slug
+              hideSignupButtons
               locale
               _allSlugLocales {
                 value
