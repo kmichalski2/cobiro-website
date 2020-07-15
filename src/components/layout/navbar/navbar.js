@@ -7,7 +7,7 @@ import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 import Classes from './navbar.module.scss'
 
-const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler }) => {
+const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler, hideSignUp }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
@@ -104,6 +104,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
                     <MenuItem key={index} inverted={isScrolled || menuInverted ? true : false} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer} expandHandler={expandHandler} subMenuExpanded={subMenuExpanded} index={index}/>
                 ))}
               </ul>
+              {!hideSignUp ?
               <div className={["visible-xs-up", Classes.mainMenuCta, subMenuExpanded !== null ? Classes.hiddenCta : null].join(' ')}>
                 <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
                   Sign in
@@ -112,6 +113,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
                   {customCta && customCta.title ? customCta.title : 'Sign up' }
                 </a>                  
               </div>
+              : null}
             </div>
           </div>
         </div>

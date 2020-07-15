@@ -27,11 +27,10 @@ import PricingTables from "./sections/pricingTables/pricingTables"
 import MediaDownload from './sections/mediaDownload/mediaDownload'
 
 const PageContent = ({ data, locales }) => {
-
-    const [menuInverted, setMenuInverted] = useState(false)
     
+    const hideSignUp = data.hideSignupButtons
+    const [menuInverted, setMenuInverted] = useState(false)
     const [notificationPadding, setNotificationPadding] = useState(0)
-
     const notifyerHeightHandler = (height) => {
         setNotificationPadding(height)
     }
@@ -45,6 +44,7 @@ const PageContent = ({ data, locales }) => {
         menuInverted={menuInverted}
         slug={data.slug}
         notifyerHeightHandler={notifyerHeightHandler}
+        hideSignUp={hideSignUp}
         >
       <SEO 
         title={ data.seoTags && data.seoTags.title ? data.seoTags.title : data.title } 
