@@ -18,9 +18,19 @@
         height: 7rem;
         max-height: 7rem;
 
+        // @include mq($until: md) {
+        //     max-width: 3rem;
+        //     min-width: 3rem;
+        // }
+    }
+
+    &.iconImg {
+        width: inherit;
+        height: 12rem!important;
+        max-height: 12rem!important;
+
         @include mq($until: md) {
-            max-width: 3rem;
-            min-width: 3rem;
+            max-width: unset!important;
         }
     }
 }
