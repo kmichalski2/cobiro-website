@@ -47,8 +47,8 @@ const Footer = ({ columns, locales, currentLocale, redirect  }) => {
     <div className="footer-bottom">
       <div className="container">
         <div className="row space-between">
-        <div className="col col-sm-12 col-md-6 col-lg-8 text-center-sm space-xs space-sm">
-            <ul className="list-inline block-xs flex-md menu">
+          <div className="col col-sm-12 col-lg-4 text-center-sm space-xs space-sm space-md flex-lg middle-lg">
+            <ul className="list-inline block-xs flex-lg menu">
               <li>
                 <p className="small text-darkgrey">
                   Copyright &#169; 2020 Cobiro
@@ -56,16 +56,21 @@ const Footer = ({ columns, locales, currentLocale, redirect  }) => {
               </li>
             </ul>
           </div>
-          <div className="col col-sm-12 col-md-6 col-lg-4 text-center-sm space-xs space-sm justify-between-lg justify-between-xl justify-between-md">
-              <ul><Link className="small text-darkgrey" to="/terms-of-service">Terms of Service</Link></ul>
-              <ul><Link className="small text-darkgrey" to="/privacy-policy">Privacy Policy</Link></ul>
-              <ul><Link className="small text-darkgrey" to="/sitemap">Sitemap</Link></ul>
-          { locales && locales.length > 1 ?
+          <div className="col col-sm-12 col-lg-8 text-center-sm space-xs space-sm space-md center-xs end-lg middle-lg flex">
+              <ul className="list-inline block-xs flex-lg middle-xs menu">
+                <li><Link className="small text-darkgrey" to="/terms-of-service">Terms of Service</Link></li>
+                <li><Link className="small text-darkgrey" to="/privacy-policy">Privacy Policy</Link></li>
+              <li className="space-xs space-sm space-md"><Link className="small text-darkgrey" to="/sitemap">Sitemap</Link></li>
+              <li><LangSwitcher locales={locales} currentLocale={currentLocale} redirect={redirect}/>            </li>
+              </ul>
+              
+          
+          </div>
+          {/* { locales && locales.length > 1 ?
             <div className="col col-xs-12 col-md-6 text-center-xs text-right-md flex end-md center-xs">
-            <LangSwitcher locales={locales} currentLocale={currentLocale} redirect={redirect}/>            
+            
           </div>
-          : null}
-          </div>
+          : null} */}
         </div>
       </div>
     </div>

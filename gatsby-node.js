@@ -1,9 +1,14 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
+require("dotenv").config({
+  path: `.env`,
+})
+
+
 exports.createPages = async function({ graphql, actions }) {
   const { createPage } = actions
-  const locales = ["en", "es"]
+  // const locales = ["en", "es", "da", "nb", "sv", "de", "fr", "es-ES", "it", "pt-PT", "pl-PL"]
 
   // locales.forEach(locale => {
   //   const prefix = locale === "en" ? "" : `/${locale}`
@@ -14,11 +19,30 @@ exports.createPages = async function({ graphql, actions }) {
   //   })
   // })
 
+let locales
+  await graphql(`
+  query LanguagesPublished {
+    allDatoCmsLanguage {
+      nodes {
+        locale
+        title
+        published
+      }
+    }
+  }`).then(result => {
+    if(process.env.NODE_ENV === 'production') {
+      locales = [...result.data.allDatoCmsLanguage.nodes.filter(lang => lang.published)]
+    } else {
+      locales = [...result.data.allDatoCmsLanguage.nodes]
+    }
+  })
+
+console.log('**************************************************** CONTEXT: ', process.env.NODE_ENV)
   Promise.all(
     locales.map(locale => {
     graphql(`
       {
-        allDatoCmsPage(filter: {locale: {eq: "${locale}"}}) {
+        allDatoCmsPage(filter: {locale: {eq: "${locale.locale}"}}) {
           edges {
             node {
               title
@@ -814,7 +838,7 @@ exports.createPages = async function({ graphql, actions }) {
             context: {
               title: item.node.title,
               data: item.node,
-              locales: item.node._allSlugLocales
+              locales: item.node._allSlugLocales.filter(locale => locales.find(l => l.locale === locale.locale))
             },
           })
         })

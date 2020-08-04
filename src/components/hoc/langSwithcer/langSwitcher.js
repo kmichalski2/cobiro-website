@@ -9,10 +9,17 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
   const localesLong = {
       en: "English",
       es: "Spanish",
+      da: "Danish",
+      nb: "Norwegian",
+      sv: "Swedish",
       fr: "French",
       ge: "German",
-      it: "Italian"
+      it: "Italian",
+      de: "German",
+      'pt-PT': "Portuguese",
+      'pl-PL': "Polish"
   }
+  
   console.log('REDIRECT: ', redirect)
 
     let currentLang = React.createRef();
@@ -54,7 +61,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
                     currentLocale !== l.locale ?<li key={i}>
                       
                         <Link 
-                          to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value}`} style={{color: 'white'}}
+                          to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value || ''}`} style={{color: 'white'}}
                           state={{ redirect: false }}>
                             {localesLong[l.locale]}
                         </Link>

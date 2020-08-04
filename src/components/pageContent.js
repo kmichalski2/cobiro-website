@@ -26,7 +26,7 @@ import ContactPerson from './sections/contactPerson/contactPerson'
 import PricingTables from "./sections/pricingTables/pricingTables"
 import MediaDownload from './sections/mediaDownload/mediaDownload'
 
-const PageContent = ({ data, locales }) => {
+const PageContent = ({ data, locales, redirect }) => {
     
     const hideSignUp = data.hideSignupButtons
     const [menuInverted, setMenuInverted] = useState(false)
