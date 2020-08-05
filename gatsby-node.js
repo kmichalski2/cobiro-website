@@ -30,7 +30,7 @@ let locales
       }
     }
   }`).then(result => {
-    if(process.env.NODE_ENV === 'production') {
+    if(process.env.NODE_ENV === 'production' || process.env.CONTEXT === 'production' || process.env.GATSBY_ENVIRONMENT === 'production') {
       locales = [...result.data.allDatoCmsLanguage.nodes.filter(lang => lang.published)]
     } else {
       locales = [...result.data.allDatoCmsLanguage.nodes]
@@ -838,7 +838,7 @@ console.log('**************************************************** CONTEXT: ', pr
             context: {
               title: item.node.title,
               data: item.node,
-              locales: item.node._allSlugLocales.filter(locale => locales.find(l => l.locale === locale.locale))
+              locales: item.node._allSlugLocales.filter(locale => locales.find(l => l.locale === locale.locale)).map(locale => ({...locale, value: locale.locale ==! 'en' ? `${locale.locale}/${locale.value}` : locale.value, title: locales.find(l => l.locale === locale.locale).title }))
             },
           })
         })

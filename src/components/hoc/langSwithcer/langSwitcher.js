@@ -6,21 +6,7 @@ import langStyles from './langSwitcher.module.scss'
 
 const LangSwitcher = ({ locales, currentLocale, redirect }) => {
   const [wrapperXY, setWrapperXY] = useState(null)
-  const localesLong = {
-      en: "English",
-      es: "Spanish",
-      da: "Danish",
-      nb: "Norwegian",
-      sv: "Swedish",
-      fr: "French",
-      ge: "German",
-      it: "Italian",
-      de: "German",
-      'pt-PT': "Portuguese",
-      'pl-PL': "Polish"
-  }
-  
-  console.log('REDIRECT: ', redirect)
+
 
     let currentLang = React.createRef();
 
@@ -39,16 +25,16 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
         
         console.log('LANG: ', myLanguage, currentLocale, locales)
 
-        const currLocalePath = `${myLanguage === 'en' ? '' : myLanguage}/${locales.filter(l => l.locale === myLanguage)[0].value}`
+        // const currLocalePath = `${myLanguage === 'en' ? '' : myLanguage}/${locales.filter(l => l.locale === myLanguage)[0].value}`
 
-        if(myLanguage !== currentLocale && redirect !== false) {
-          console.log('navigating to ', currLocalePath, myLanguage, currentLocale)
-          navigate(`/${currLocalePath}`, 
-            {
-              state: { redirect: false },
-            }
-          )
-        }
+        // if(myLanguage !== currentLocale && redirect !== false) {
+        //   console.log('navigating to ', currLocalePath, myLanguage, currentLocale)
+        //   navigate(`/${currLocalePath}`, 
+        //     {
+        //       state: { redirect: false },
+        //     }
+        //   )
+        // }
 
     }, [])
 
@@ -63,13 +49,13 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
                         <Link 
                           to={`${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value || ''}`} style={{color: 'white'}}
                           state={{ redirect: false }}>
-                            {localesLong[l.locale]}
+                            {l.title}
                         </Link>
                       
                     </li>
                     : null
                   )}
-                  <li ref={currentLang} className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{localesLong[currentLocale]}</li>
+                  <li ref={currentLang} className={[langStyles.currLang, "no-mb text-small"].join(' ')}>{locales.find(l => l.locale === currentLocale).title}</li>
                 </ul>
             </div>
           : null

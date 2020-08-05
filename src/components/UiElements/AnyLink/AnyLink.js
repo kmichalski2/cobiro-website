@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
-
+import {CurrentLocaleContext} from '../../pageContent'
+// import { Link, useIntl } from "gatsby-plugin-intl"
 import Classes from './AnyLink.module.scss'
 import Checkmark from '../checkmark/checkmark'
 import Loader from '../loader/loader'
@@ -8,13 +9,23 @@ import Cross from '../cross/cross'
 
 const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes, noArrow, disabled, submitting, submitted, submitError}) => {
 
-    const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
+    // const currentLang = useIntl().locale
 
+    const currentLang = useContext(CurrentLocaleContext)
+
+    console.log('currentLang', currentLang)
+
+    // const currentLang = 'de'
+
+    // console.log('currentLang', currentLang)
+
+    const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
+    
     return (
         <>
         {
         link && title && internal ?
-            <Link className={ classNames } to={link}>
+            <Link className={ classNames } to={currentLang === 'en' ? link : `/${currentLang}/${link}`}>
                 {title}
             </Link>
         : link && title && external ?
