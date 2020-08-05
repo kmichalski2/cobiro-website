@@ -30,7 +30,7 @@ let locales
       }
     }
   }`).then(result => {
-    if(process.env.NODE_ENV === 'production' || process.env.CONTEXT === 'production' || process.env.GATSBY_ENVIRONMENT === 'production') {
+    if(process.env.CONTEXT === 'production' || process.env.GATSBY_ENVIRONMENT === 'production') {
       locales = [...result.data.allDatoCmsLanguage.nodes.filter(lang => lang.published)]
     } else {
       locales = [...result.data.allDatoCmsLanguage.nodes]
