@@ -29,8 +29,9 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
         title
       }
     }
-    allDatoCmsMenu(sort: {fields: menuItemOrder, order: ASC}, filter: {locale: {eq: "en"}}) {
+    allDatoCmsMenu(sort: {fields: menuItemOrder, order: ASC}, filter: {linkTitle: {ne: null}}) {
       nodes {
+        locale
         linkTitle
         link {
           ... on DatoCmsPage {
@@ -211,8 +212,9 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
         }
       }
     }
-    allDatoCmsFooter(sort: {fields: footerItemOrder, order: ASC}, filter: {locale: {eq: "en"}}) {
+    allDatoCmsFooter(sort: {fields: footerItemOrder, order: ASC}, filter: {columnHeading: {ne: null}}) {
       nodes {
+        locale
         column {
           ... on DatoCmsTextElement {
             text
@@ -249,18 +251,17 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
         footerItemOrder
       }
     }
-    allDatoCmsNotification(filter: {locale: {eq: "en"}}) {
-      edges {
-        node {
-          text
-          textColor
-          bgColor {
-            hex
-          }
-          pages {
-            slug
-            title
-          }
+    allDatoCmsNotification(filter: {text: {ne: null}}) {
+      nodes {
+        locale
+        text
+        textColor
+        bgColor {
+          hex
+        }
+        pages {
+          slug
+          title
         }
       }
     }
@@ -268,7 +269,7 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
   `)
 
 
-  const notifications = data.allDatoCmsNotification.edges.map(e => e.node)
+  const notifications = data.allDatoCmsNotification.nodes.filter(n => n.locale === currentLocale)
 
   const getNotification = (slug) => {
     let pageNotification
@@ -292,9 +293,9 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
 
   if(hiddenMenuItems && hiddenMenuItems.length > 0) {
     const hiddenMenuItemsIds = hiddenMenuItems.map(item => item.id)
-    menuItems = data.allDatoCmsMenu.nodes.filter(item => !hiddenMenuItemsIds.includes(item.id))
+    menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === currentLocale).filter(item => !hiddenMenuItemsIds.includes(item.id))
   } else {
-    menuItems = data.allDatoCmsMenu.nodes
+    menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === currentLocale)
     
   }
   
@@ -303,7 +304,7 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
       <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler}/>
       {children}
       <CookieBanner />
-      <Footer columns={data.allDatoCmsFooter.nodes} locales={locales} currentLocale={currentLocale} redirect={redirect}/>
+      <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === currentLocale)} locales={locales} currentLocale={currentLocale} redirect={redirect}/>
     </>
   )
 }
