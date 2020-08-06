@@ -37,7 +37,7 @@ let locales
     }
   })
 
-console.log('**************************************************** CONTEXT: ', process.env.NODE_ENV)
+console.log('**************************************************** CONTEXT: ', process.env.CONTEXT, process.env.GATSBY_ENVIRONMENT)
   Promise.all(
     locales.map(locale => {
     graphql(`
