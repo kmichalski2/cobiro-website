@@ -301,7 +301,7 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
   
     return (
     <>
-      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler}/>
+      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale}/>
       {children}
       <CookieBanner />
       <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === currentLocale)} locales={locales} currentLocale={currentLocale} redirect={redirect}/>

@@ -7,7 +7,7 @@ import Checkmark from '../checkmark/checkmark'
 import Loader from '../loader/loader'
 import Cross from '../cross/cross'
 
-const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes, noArrow, disabled, submitting, submitted, submitError}) => {
+const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes, noArrow, noPadding, disabled, submitting, submitted, submitError, children, regular}) => {
 
     // const currentLang = useIntl().locale
 
@@ -19,18 +19,20 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
 
     // console.log('currentLang', currentLang)
 
-    const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
+    const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null, noPadding && Classes.noPadding, regular && Classes.regular].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
     
     return (
         <>
         {
-        link && title && internal ?
+        link && title && internal || link && children ?
             <Link className={ classNames } to={currentLang === 'en' ? link : `/${currentLang}/${link}`}>
                 {title}
+                {children}
             </Link>
-        : link && title && external ?
+        : link && title && external || link && children ?
             <a className={ classNames } href={link} target="_blank" rel="noopener noreferrer">
                 { title }
+                {children}
             </a>
         : title && callBack ?
             <button className={ classNames } onClick={callBack} disabled={disabled || false}>
@@ -42,6 +44,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
                 submitError ?
                     <Cross classes={Classes.submitError} white/>
             : null}
+            {children}
             </button>
         : null
         }

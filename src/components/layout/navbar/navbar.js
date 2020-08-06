@@ -7,7 +7,7 @@ import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 import Classes from './navbar.module.scss'
 
-const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler, hideSignUp }) => {
+const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler, hideSignUp, locales, currentLocale }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
@@ -73,6 +73,9 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
     setSubMenuExpanded(subMenuExpanded !== i ? i : null)
   }
 
+  const homeSlug = locales.find(l => l.locale === currentLocale).value
+
+
   return (
     <header>
       <nav ref={navbarRef} className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, isScrolled ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">
@@ -80,9 +83,9 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
           <div ref={contentContainer} className="row between-xs middle-xs">
             <div className={["col col-auto-lg", Classes.navbarMobile].join(' ')} >
               <div className={[Classes.brand, menuInverted ? Classes.invert : null, isExpanded ? Classes.invert : null, isScrolled ? Classes.invert : null].join(' ')}>
-                <Link to="/">
+                <AnyLink link={`/${homeSlug !== null ? homeSlug : ''}`} noArrow noPadding regular>
                   <img className={Classes.logoMobile} src={logo} alt="Cobiro logo" />
-                </Link>
+                </AnyLink>
               </div>
 
               <button
