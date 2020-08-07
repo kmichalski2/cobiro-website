@@ -32,6 +32,8 @@ const Footer = ({ columns, locales, currentLocale }) => {
                  <a className="small text-darkgrey" href={el.externalLink} target="_blank" rel="noopener noreferrer">{el.linkTitle}</a> 
                  : el.internalLink ?
                  <Link className="small text-darkgrey" to={`/${el.internalLink.slug}`}>{el.linkTitle}</Link>
+                : el.googlePartnerLogo ?
+                  <div className="g-partnersbadge" data-agency-id="1850113825"></div>
                 : null }
                </li>
              ))}
