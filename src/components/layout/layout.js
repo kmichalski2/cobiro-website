@@ -304,10 +304,10 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
     }
   }  
   `)
-  const homePage = data.allDatoCmsPage.nodes.find(p => p.locale === currentLocale)
+  const homePage = data.allDatoCmsPage.nodes.find(p => p.locale === (currentLocale || 'en'))
   const homeSlug = homePage && homePage.slug
 
-  console.log('Page', data.allDatoCmsPage.nodes, data.allDatoCmsPage.nodes.find(p => p.locale === currentLocale))
+  console.log('homeSlug: ', homeSlug)
 
   const notifications = data.allDatoCmsNotification.nodes.filter(n => n.locale === currentLocale)
 
@@ -333,18 +333,18 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
 
   if(hiddenMenuItems && hiddenMenuItems.length > 0) {
     const hiddenMenuItemsIds = hiddenMenuItems.map(item => item.id)
-    menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === currentLocale).filter(item => !hiddenMenuItemsIds.includes(item.id))
+    menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === (currentLocale || 'en')).filter(item => !hiddenMenuItemsIds.includes(item.id))
   } else {
-    menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === currentLocale)
+    menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === (currentLocale || 'en'))
     
   }
   
     return (
     <>
-      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === currentLocale)[0]} homeSlug={homeSlug}/>
+      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale || 'en'} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === (currentLocale && currentLocale[0] || 'en'))} homeSlug={homeSlug}/>
       {children}
       <CookieBanner />
-      <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === currentLocale)} locales={locales} currentLocale={currentLocale} redirect={redirect} bottomLinks={data.allDatoCmsFooterBottom.nodes.filter(n => n.locale === currentLocale)[0]}/>
+      <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === (currentLocale || 'en'))} locales={locales} currentLocale={currentLocale || 'en'} redirect={redirect} bottomLinks={data.allDatoCmsFooterBottom.nodes.filter(n => n.locale === (currentLocale && currentLocale[0] || 'en'))}/>
     </>
   )
 }

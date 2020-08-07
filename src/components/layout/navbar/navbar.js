@@ -72,7 +72,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
     e.preventDefault()
     setSubMenuExpanded(subMenuExpanded !== i ? i : null)
   }
-
+console.log('Navbar homeSLug', `/${!homeSlug ? '' : homeSlug}`)
   return (
     <header>
       <nav ref={navbarRef} className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, isScrolled ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">
@@ -80,7 +80,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
           <div ref={contentContainer} className="row between-xs middle-xs">
             <div className={["col col-auto-lg", Classes.navbarMobile].join(' ')} >
               <div className={[Classes.brand, menuInverted ? Classes.invert : null, isExpanded ? Classes.invert : null, isScrolled ? Classes.invert : null].join(' ')}>
-                <AnyLink link={`/${homeSlug !== null ? homeSlug : ''}`} noArrow noPadding regular>
+                <AnyLink link={`/${!homeSlug ? '' : homeSlug}`} noArrow noPadding regular>
                   <img className={Classes.logoMobile} src={logo} alt="Cobiro logo" />
                 </AnyLink>
               </div>
