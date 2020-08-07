@@ -22,8 +22,7 @@ return (
             l.fixed ? <Img key={index} className="customer-logo" fixed={l.fixed} alt={l.alt ? l.alt : `logo ${index + 1}`} />
             : <img src={l.url} alt={l.alt ? l.alt : `logo ${index + 1}`} />
           ))}
-          <script src="https://apis.google.com/js/platform.js" async defer></script>
-          { data.googlePartnerLogo ? <div className="g-partnersbadge" data-agency-id="1850113825"></div> : null }
+          { data.googlePartnerLogo ? <div className="g-partnersbadge" data-agency-id="1850113825"></div>: null }
           </div>
         </div>
       </div>
