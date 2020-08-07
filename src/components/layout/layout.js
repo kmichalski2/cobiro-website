@@ -304,8 +304,9 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
     }
   }  
   `)
-  const homeSlug = data.allDatoCmsPage.nodes.find(p => p.locale === currentLocale).slug
-  // const homeSlug = ''
+  const homePage = data.allDatoCmsPage.nodes.find(p => p.locale === currentLocale)
+  const homeSlug = homePage && homePage.slug
+
   console.log('Page', data.allDatoCmsPage.nodes, data.allDatoCmsPage.nodes.find(p => p.locale === currentLocale))
 
   const notifications = data.allDatoCmsNotification.nodes.filter(n => n.locale === currentLocale)
