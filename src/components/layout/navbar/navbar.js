@@ -72,7 +72,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
     e.preventDefault()
     setSubMenuExpanded(subMenuExpanded !== i ? i : null)
   }
-console.log('Navbar homeSLug', `/${!homeSlug ? '' : homeSlug}`)
+console.log('CTAS', menuCta)
   return (
     <header>
       <nav ref={navbarRef} className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, isScrolled ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">

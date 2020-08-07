@@ -307,8 +307,6 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
   const homePage = data.allDatoCmsPage.nodes.find(p => p.locale === (currentLocale || 'en'))
   const homeSlug = homePage && homePage.slug
 
-  console.log('homeSlug: ', homeSlug)
-
   const notifications = data.allDatoCmsNotification.nodes.filter(n => n.locale === currentLocale)
 
   const getNotification = (slug) => {
@@ -341,10 +339,10 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
   
     return (
     <>
-      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale || 'en'} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === (currentLocale && currentLocale[0] || 'en'))} homeSlug={homeSlug}/>
+      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale || 'en'} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]} homeSlug={homeSlug}/>
       {children}
       <CookieBanner />
-      <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === (currentLocale || 'en'))} locales={locales} currentLocale={currentLocale || 'en'} redirect={redirect} bottomLinks={data.allDatoCmsFooterBottom.nodes.filter(n => n.locale === (currentLocale && currentLocale[0] || 'en'))}/>
+      <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === (currentLocale || 'en'))} locales={locales} currentLocale={currentLocale || 'en'} redirect={redirect} bottomLinks={data.allDatoCmsFooterBottom.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]}/>
     </>
   )
 }
