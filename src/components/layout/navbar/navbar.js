@@ -7,7 +7,7 @@ import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 import Classes from './navbar.module.scss'
 
-const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler, hideSignUp, locales, currentLocale }) => {
+const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler, hideSignUp, locales, currentLocale, menuCta, homeSlug }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
@@ -73,9 +73,6 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
     setSubMenuExpanded(subMenuExpanded !== i ? i : null)
   }
 
-  const homeSlug = locales.find(l => l.locale === currentLocale).value
-
-
   return (
     <header>
       <nav ref={navbarRef} className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, isScrolled ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">
@@ -109,12 +106,17 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
               </ul>
               {!hideSignUp ?
               <div className={["visible-xs-up", Classes.mainMenuCta, subMenuExpanded !== null ? Classes.hiddenCta : null].join(' ')}>
-                <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
-                  Sign in
+                {menuCta.secondaryLink && menuCta.secondaryLinkTitle ?
+                <a href={menuCta.secondaryLink} className={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                  {menuCta.secondaryLinkTitle}
                 </a>
-                <a href={customCta && customCta.link ? customCta.link : "https://app.cobiro.com/user/signup"} className={["btn", Classes.btnRight, !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
-                  {customCta && customCta.title ? customCta.title : 'Sign up' }
-                </a>                  
+                : null}
+                
+                {customCta && customCta.link || menuCta.primaryLink && menuCta.primaryLinkTitle ?
+                <a href={customCta && customCta.link ? customCta.link : menuCta.primaryLink} className={["btn", Classes.btnRight, !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                  {customCta && customCta.title ? customCta.title : menuCta.primaryLinkTitle }
+                </a>
+                : null}       
               </div>
               : null}
             </div>

@@ -251,6 +251,37 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
         footerItemOrder
       }
     }
+    allDatoCmsFooterBottom {
+    nodes {
+      locale
+      linkItems {
+        ... on DatoCmsExtLink {
+          __typename
+          externalLink
+          linkTitle
+          locale
+        }
+        ... on DatoCmsLink {
+          __typename
+          locale
+          linkTitle
+          link {
+            slug
+            locale
+          }
+        }
+      }
+    }
+  }
+  allDatoCmsMenuCta {
+    nodes {
+      locale
+      secondaryLinkTitle
+      secondaryLink
+      primaryLinkTitle
+      primaryLink
+    }
+  }
     allDatoCmsNotification(filter: {text: {ne: null}}) {
       nodes {
         locale
@@ -265,9 +296,17 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
         }
       }
     }
+    allDatoCmsPage(filter: {homepage: {eq: true}}) {
+      nodes {
+        locale
+        slug
+      }
+    }
   }  
   `)
-
+  const homeSlug = data.allDatoCmsPage.nodes.find(p => p.locale === currentLocale).slug
+  // const homeSlug = ''
+  console.log('Page', data.allDatoCmsPage.nodes, data.allDatoCmsPage.nodes.find(p => p.locale === currentLocale))
 
   const notifications = data.allDatoCmsNotification.nodes.filter(n => n.locale === currentLocale)
 
@@ -301,10 +340,10 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
   
     return (
     <>
-      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale}/>
+      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === currentLocale)[0]} homeSlug={homeSlug}/>
       {children}
       <CookieBanner />
-      <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === currentLocale)} locales={locales} currentLocale={currentLocale} redirect={redirect}/>
+      <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === currentLocale)} locales={locales} currentLocale={currentLocale} redirect={redirect} bottomLinks={data.allDatoCmsFooterBottom.nodes.filter(n => n.locale === currentLocale)[0]}/>
     </>
   )
 }

@@ -13,8 +13,6 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
 
     const currentLang = useContext(CurrentLocaleContext)
 
-    console.log('currentLang', currentLang)
-
     // const currentLang = 'de'
 
     // console.log('currentLang', currentLang)
@@ -25,7 +23,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
         <>
         {
         link && title && internal || link && children ?
-            <Link className={ classNames } to={currentLang === 'en' ? link : `/${currentLang}/${link}`}>
+            <Link className={ classNames } to={currentLang === 'en' ? (link.charAt(0) === '/' ? link : `/${link}`) : `/${currentLang}/${link}`}>
                 {title}
                 {children}
             </Link>

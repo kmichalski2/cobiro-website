@@ -34,7 +34,7 @@ const PricingTables = ({ data }) => {
                     <div className="col col-xs-12">
                         
                         {pricingTables ? pricingTables.map((t, i) => 
-                        <>
+                        <div key={i}>
                         {columnHeadings && columnHeadings.length > 1 ? 
                         
                             <div className={Classes.tabs}>
@@ -64,7 +64,7 @@ const PricingTables = ({ data }) => {
                                         })
                                     } /> 
                             </div>
-                            </>
+                            </div>
                         ) : null}
                     </div>
                 </div>

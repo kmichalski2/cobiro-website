@@ -46,7 +46,7 @@ const PageContent = ({ data, locales, redirect }) => {
     <CurrentLocaleProvicer value={data.locale}>
     <Layout 
         customCta={ data.customCtaLinks && data.primaryCtaTitle && data.primaryCtaLink ? {title: data.primaryCtaTitle, link: data.primaryCtaLink} : null } 
-        locales={ locales } 
+        locales={ locales }
         currentLocale={data.locale}
         redirect={redirect}
         hiddenMenuItems={data.hiddenMenuItems}

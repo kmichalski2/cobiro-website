@@ -3,11 +3,12 @@ import logo from "../../images/logo.svg"
 import React from "react"
 import Img from "gatsby-image"
 import LangSwitcher from "../hoc/langSwithcer/langSwitcher"
+import AnyLink from "../UiElements/AnyLink/AnyLink"
 
 
-const Footer = ({ columns, locales, currentLocale, redirect  }) => {
+const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
 
-
+console.log('BOTTOM', bottomLinks)
   return (
   <footer>
     <div className="container">
@@ -51,26 +52,25 @@ const Footer = ({ columns, locales, currentLocale, redirect  }) => {
             <ul className="list-inline block-xs flex-lg menu">
               <li>
                 <p className="small text-darkgrey">
-                  Copyright &#169; 2020 Cobiro
+                  Copyright &#169; {new Date().getFullYear()} Cobiro
                 </p>
               </li>
             </ul>
           </div>
           <div className="col col-sm-12 col-lg-8 text-center-sm space-xs space-sm space-md center-xs end-lg middle-lg flex">
               <ul className="list-inline block-xs flex-lg middle-xs menu">
-                <li><Link className="small text-darkgrey" to="/terms-of-service">Terms of Service</Link></li>
-                <li><Link className="small text-darkgrey" to="/privacy-policy">Privacy Policy</Link></li>
-              <li className="space-xs space-sm space-md"><Link className="small text-darkgrey" to="/sitemap">Sitemap</Link></li>
-              <li><LangSwitcher locales={locales} currentLocale={currentLocale} redirect={redirect}/>            </li>
-              </ul>
-              
-          
+                {bottomLinks && bottomLinks.linkItems && bottomLinks.linkItems.length > 0 ?
+                bottomLinks.linkItems.map((l, i ) => (
+                  <li key={i}>
+                    <AnyLink link={l.externalLink || l.link && l.link.slug} title={l.linkTitle} internal={l.__typename === 'DatoCmsLink' } external={l.__typename === 'DatoCmsExtLink'} noArrow noPadding regular classes="small text-darkgrey"/>
+                  </li>)
+                )
+              : null}
+              <li className="space-top-xs-up no-space-lg-up ">
+                <LangSwitcher locales={locales} currentLocale={currentLocale} redirect={redirect}/>            
+              </li>
+            </ul>
           </div>
-          {/* { locales && locales.length > 1 ?
-            <div className="col col-xs-12 col-md-6 text-center-xs text-right-md flex end-md center-xs">
-            
-          </div>
-          : null} */}
         </div>
       </div>
     </div>

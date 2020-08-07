@@ -34,12 +34,15 @@
     // @include mq($until: md) {
     //     display: block;
     // }
-    td, th {
-        padding: 2rem 1rem;
-        border-color: $lightgrey;
-        border-width: 1px !important;
-        border-left: 1px solid $lightgrey;
-        vertical-align: middle;
+
+    tr {
+        td, th {
+            padding: 2rem 1rem;
+            border-color: $lightgrey;
+            border-width: 1px !important;
+            border-left: 1px solid $lightgrey;
+            vertical-align: middle;
+        }
     }
     td {
         text-align: center !important;
