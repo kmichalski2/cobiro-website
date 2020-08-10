@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
-import {CurrentLocaleContext} from '../../pageContent'
+import {CurrentLocaleContext} from '../../layout/layout'
 // import { Link, useIntl } from "gatsby-plugin-intl"
 import Classes from './AnyLink.module.scss'
 import Checkmark from '../checkmark/checkmark'
@@ -12,7 +12,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
     // const currentLang = useIntl().locale
 
     const currentLang = useContext(CurrentLocaleContext)
-
+    console.log('ANYLINK: ', link, currentLang)
     const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null, noPadding && Classes.noPadding, regular && Classes.regular].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
     
     return (

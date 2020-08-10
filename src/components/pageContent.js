@@ -26,8 +26,8 @@ import ContactPerson from './sections/contactPerson/contactPerson'
 import PricingTables from "./sections/pricingTables/pricingTables"
 import MediaDownload from './sections/mediaDownload/mediaDownload'
 
-export const CurrentLocaleContext = React.createContext({})
-export const CurrentLocaleProvicer = CurrentLocaleContext.Provider
+// export const CurrentLocaleContext = React.createContext({})
+// export const CurrentLocaleProvicer = CurrentLocaleContext.Provider
 
 const PageContent = ({ data, locales, redirect }) => {
     
@@ -43,7 +43,7 @@ const PageContent = ({ data, locales, redirect }) => {
 
     
   return (
-    <CurrentLocaleProvicer value={data.locale}>
+    // <CurrentLocaleProvicer value={data.locale}>
     <Layout 
         customCta={ data.customCtaLinks && data.primaryCtaTitle && data.primaryCtaLink ? {title: data.primaryCtaTitle, link: data.primaryCtaLink} : null } 
         locales={ locales }
@@ -126,7 +126,7 @@ const PageContent = ({ data, locales, redirect }) => {
         </main>
         
     </Layout>
-    </CurrentLocaleProvicer>
+    // </CurrentLocaleProvicer>
   )
 }
 

@@ -7,7 +7,7 @@ import AnyLink from "../UiElements/AnyLink/AnyLink"
 
 
 const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
-
+console.log('columns: ', columns)
   return (
   <footer>
     <div className="container">

@@ -51,7 +51,7 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
             <Link 
                 className={[item.submenuColumn1Links && (item.submenuColumn1Links.length > 0) ? Classes.hasSubMenu : null, subMenuExpanded === index ? Classes.subMenuExpanded : null].join(' ') } 
                 activeClassName="active"
-                to={item.link ? `${currentLocale !== 'en' && item.link.slug !== 'blog' ? '/' + currentLocale : ''}/${item.link.slug}` : '/#'}
+                to={item.link ? `${currentLocale !== 'en' ? '/' + currentLocale : ''}/${item.link.slug}` : '/#'}
                 onMouseEnter={mouseEnterSubMenuHandler} 
                 onClick={hasSubMenuItems ? (e) => expandHandler(e, index) : null}
             >
