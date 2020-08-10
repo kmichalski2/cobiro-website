@@ -8,7 +8,6 @@ import AnyLink from "../UiElements/AnyLink/AnyLink"
 
 const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
 
-console.log('BOTTOM', bottomLinks)
   return (
   <footer>
     <div className="container">
@@ -32,10 +31,10 @@ console.log('BOTTOM', bottomLinks)
                   }
                  </a>
                  : (el.externalLink) ? 
-                 <a className="small text-darkgrey" href={el.externalLink} target="_blank" rel="noopener noreferrer">{el.linkTitle}</a> 
+                 <AnyLink link={el.externalLink} title={el.linkTitle} external={true} noArrow noPadding regular classes="small text-darkgrey"/>
                  : el.internalLink ?
-                 <Link className="small text-darkgrey" to={`/${el.internalLink.slug}`}>{el.linkTitle}</Link>
-                : el.googlePartnerLogo ?
+                 <AnyLink link={`/${el.internalLink.slug}`} title={el.linkTitle} internal={true} noArrow noPadding regular classes="small text-darkgrey"/>
+                 : el.googlePartnerLogo ?
                   <div className="g-partnersbadge" data-agency-id="1850113825"></div>
                 : null }
                </li>

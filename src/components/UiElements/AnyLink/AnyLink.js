@@ -13,10 +13,6 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
 
     const currentLang = useContext(CurrentLocaleContext)
 
-    // const currentLang = 'de'
-
-    console.log('currentLang', currentLang, link)
-
     const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null, noPadding && Classes.noPadding, regular && Classes.regular].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
     
     return (

@@ -4,7 +4,7 @@ import SubMenu from '../subMenu/subMenu'
 
 import Classes from './menuItem.module.scss'
 
-const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, expandHandler, index, subMenuExpanded }) => {
+const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, expandHandler, index, subMenuExpanded, currentLocale }) => {
     
     const [hovered, setHovered] = useState(false)
 
@@ -51,7 +51,7 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
             <Link 
                 className={[item.submenuColumn1Links && (item.submenuColumn1Links.length > 0) ? Classes.hasSubMenu : null, subMenuExpanded === index ? Classes.subMenuExpanded : null].join(' ') } 
                 activeClassName="active"
-                to={item.link ? `/${item.link.slug}` : '/#'}
+                to={item.link ? `${currentLocale !== 'en' && item.link.slug !== 'blog' ? '/' + currentLocale : ''}/${item.link.slug}` : '/#'}
                 onMouseEnter={mouseEnterSubMenuHandler} 
                 onClick={hasSubMenuItems ? (e) => expandHandler(e, index) : null}
             >

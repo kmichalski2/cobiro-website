@@ -72,7 +72,6 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
     e.preventDefault()
     setSubMenuExpanded(subMenuExpanded !== i ? i : null)
   }
-console.log('CTAS', menuCta)
   return (
     <header>
       <nav ref={navbarRef} className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, isScrolled ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">
@@ -101,7 +100,7 @@ console.log('CTAS', menuCta)
             <div className={["col col-auto-lg", Classes.mainMenuInner, isScrolled || menuInverted ? Classes.menuItems : null].join(' ')}>
               <ul className={["list-inline", Classes.menuItemsList].join(' ')}>
                 {menuItems.sort((a, b) => a.menu_item_order - b.menu_item_order).map((item, index) => (
-                    <MenuItem key={index} inverted={isScrolled || menuInverted ? true : false} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer} expandHandler={expandHandler} subMenuExpanded={subMenuExpanded} index={index}/>
+                    <MenuItem key={index} inverted={isScrolled || menuInverted ? true : false} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer} expandHandler={expandHandler} subMenuExpanded={subMenuExpanded} index={index} currentLocale={currentLocale}/>
                 ))}
               </ul>
               {!hideSignUp ?
