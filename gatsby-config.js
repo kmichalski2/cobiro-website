@@ -145,16 +145,16 @@ module.exports = {
     },
     // {
     //   resolve: `gatsby-plugin-intl`,
-    //   // options: {
-    //   //   // language JSON resource path
-    //   //   // path: `${__dirname}/src/i18n`,
-    //   //   // supported language
-    //   //   languages: [`en`, `es`],
-    //   //   // language file path
-    //   //   defaultLanguage: `en`,
-    //   //   // option to redirect to `/ko` when connecting `/`
-    //   //   redirect: true,
-    //   // },
+    //   options: {
+    //     // language JSON resource path
+    //     path: `${__dirname}/src/i18n`,
+    //     // supported language
+    //     languages: [`en`, `es`, `da`, `nb`, `sv`, `de`, `fr`, `es-ES`, `it`, `pt-PT`, `pl-PL`],
+    //     // language file path
+    //     defaultLanguage: `en`,
+    //     // option to redirect to `/ko` when connecting `/`
+    //     redirect: false,
+    //   },
     // },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

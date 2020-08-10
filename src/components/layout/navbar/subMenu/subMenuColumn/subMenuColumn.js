@@ -30,7 +30,7 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
                 link && link.slug ?
                 <Link 
                     className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
-                    to={link && link.slug ? link.slug : "#"} 
+                    to={link && link.slug ? `/${link.slug}` : "#"} 
                     target="_self" 
                     onClick={(e) => subSubMenuClickHandler(e)}>
                 
