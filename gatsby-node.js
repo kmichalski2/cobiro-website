@@ -31,14 +31,14 @@ let locales
       }
     }
   }`).then(result => {
-    if(process.env.CONTEXT === 'production' || process.env.GATSBY_ENVIRONMENT === 'production') {
+    if(process.env.NODE_ENV === 'production' || process.env.GATSBY_ENVIRONMENT === 'production') {
       locales = [...result.data.allDatoCmsLanguage.nodes.filter(lang => lang.published)]
     } else {
       locales = [...result.data.allDatoCmsLanguage.nodes]
     }
   })
 
-console.log('**************************************************** CONTEXT: ', process.env.CONTEXT, process.env.GATSBY_ENVIRONMENT)
+console.log('**************************************************** CONTEXT: ', process.env.NODE_ENV, process.env.GATSBY_ENVIRONMENT)
   Promise.all(
     locales.map(locale => {
     graphql(`
@@ -1158,7 +1158,6 @@ console.log('**************************************************** CONTEXT: ', pr
           const localPosts = result.data.allDatoCmsBlogPost.nodes.filter(post => {
            
             if(post.locale === locale) {
-             console.log('POST LOCALE **********************', post.locale, post.title)
               return true
             } else {
              if(!post._allSlugLocales.some(sl => sl.locale === locale)) {
@@ -1409,7 +1408,6 @@ console.log('**************************************************** CONTEXT: ', pr
          const localPosts = result.data.allDatoCmsBlogPost.nodes.filter(post => {
            
            if(post.locale === locale) {
-            console.log('POST LOCALE **********************', post.locale, post.title)
              return true
            } else {
             if(!post._allSlugLocales.some(sl => sl.locale === locale)) {

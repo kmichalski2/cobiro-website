@@ -89,6 +89,7 @@ const BlogPost = ({pageContext}) => {
                                                 </div>                                                    
                                             )
                                     }
+                                    
                                 }
                             })}
                         </div>
