@@ -999,6 +999,7 @@ console.log('**************************************************** CONTEXT: ', pr
             }
           }
           quoteTextColor
+          otherPostsTitle
           quoteBgColor {
             hex
           }
@@ -1084,6 +1085,7 @@ console.log('**************************************************** CONTEXT: ', pr
                   footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
                   footerCtaText: result.data.datoCmsBlogPage.footerCtaText,
                   ctaLinks: result.data.datoCmsBlogPage.ctaLinks,
+                  otherPostsTitle: result.data.datoCmsBlogPage.otherPostsTitle,
                   otherPosts: otherPosts,
                   seoMetaTags: item.seoMetaTags,
                   locale: locale
