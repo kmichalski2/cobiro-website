@@ -95,6 +95,7 @@ console.log('**************************************************** CONTEXT: ', pr
                     mediaDownloadCardText
                     mediaDownloadCardTitle
                     mediaDownloadFiles
+                    linkTitle
                     mediaDownloadIcon {
                       url
                       fluid {

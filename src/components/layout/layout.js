@@ -343,7 +343,7 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
     menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === (currentLocale || 'en'))
     
   }
-  
+  console.log('MENU ITEMS: ', menuItems)
     return (
     <CurrentLocaleProvicer value={currentLocale}>
       <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale || 'en'} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]} homeSlug={homeSlug}/>

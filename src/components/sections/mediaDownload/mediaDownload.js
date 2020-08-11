@@ -12,6 +12,7 @@ const MediaDownload = ({data}) => {
     const cardText = data.mediaDownloadCardText ? data.mediaDownloadCardText : null
     const downloadIcon = data.mediaDownloadIcon ? data.mediaDownloadIcon : null
     const mediaKitLink = data.mediaDownloadFiles ? data.mediaDownloadFiles : null
+    const mediaLinkTitle = data.linkTitle || 'Get media kit'
     // const bgColor = data.bgColor ? data.bgColor.hex : null - Remember to ad bgColor in node.js if this is activated
     const bgColor = null
     const textColor = null 
@@ -36,7 +37,7 @@ const MediaDownload = ({data}) => {
                         </div>
                             <h3>{cardTitle}</h3>
                             <p className="small">{cardText}</p>
-                            <a className={["btn", Classes.downloadButton].join(' ')} href={mediaKitLink} target="_blank" rel="noreferrer noopener">Get media kit</a>
+                            <a className={["btn", Classes.downloadButton].join(' ')} href={mediaKitLink} target="_blank" rel="noreferrer noopener">{ mediaLinkTitle }</a>
                         </div>
                     </div>
                 </div>
