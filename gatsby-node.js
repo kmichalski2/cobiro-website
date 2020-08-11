@@ -78,6 +78,7 @@ console.log('**************************************************** CONTEXT: ', pr
                   personWorkTitle
                   sectionTitle
                   textColor
+                  linkTitle
                   personImage {
                     url
                     fluid(maxWidth: 1200) {
@@ -967,6 +968,7 @@ console.log('**************************************************** CONTEXT: ', pr
               }
             }
             readLength
+            locale
 
             meta {
               createdAt(formatString: "MMMM DD")
@@ -1075,6 +1077,7 @@ console.log('**************************************************** CONTEXT: ', pr
                   locale: locale
                 },
               })
+              posts.push(item)
             }
           }
 
@@ -1097,14 +1100,13 @@ console.log('**************************************************** CONTEXT: ', pr
                   return item.category
                 }
               })
-              posts.push(item)
+              
               createBlogPostPage(item, p, locale, category)
             } else {
               const locale = item.locale
               const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
               let p = `${prefix}/${item.slug ? item.slug : ''}`
               // let p = item.node.homepage ? '/' : `/${item.node.slug}`
-              posts.push(item)
               createBlogPostPage(item, p, locale)
             }
           })
@@ -1247,6 +1249,7 @@ console.log('**************************************************** CONTEXT: ', pr
         }
         allDatoCmsBlogPost(filter: {title: {ne: null}}, sort: {fields: meta___createdAt, order: DESC}) {
             nodes {
+              locale
               title
               readLength
               subtitle
