@@ -1081,14 +1081,18 @@ console.log('**************************************************** CONTEXT: ', pr
 
           await locales.map(l => {
             if(!item._allSlugLocales.find(sl => sl.locale === l.locale)) {
-              // If a published locale is not existing in __allSlugLocales
+              // If a published locale does not exist in __allSlugLocales
               const locale = l.locale
               const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
               let p = `${prefix}/${item.slug ? item.slug : ''}`
               const category = item.category.map(c => { 
                 const currCatLocale = c._allCategoryLocales.find(cl => cl.locale === locale)
                 if (currCatLocale) {
-                  return {category: currCatLocale.value, slug: result.data.allDatoCmsBlogCategory.nodes.find(bc => bc.category === currCatLocale.value).slug}
+                  const categoryObj = {category: currCatLocale.value, slug: result.data.allDatoCmsBlogCategory.nodes.find(bc => bc.category === currCatLocale.value).slug}
+                  
+                  // item.category = categoryObj
+
+                  return categoryObj
                 } else {
                   return item.category
                 }
