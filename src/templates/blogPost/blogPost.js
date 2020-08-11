@@ -13,7 +13,7 @@ import BlogPostsHeader from "../../components/UiElements/blogPostsHeader/blogPos
 import SEO from "../../components/seo"
 
 const BlogPost = ({pageContext}) => {
-    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, seoMetaTags, locale, writerImage } = pageContext
+    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, seoMetaTags, locale, writerImage, otherPostsTitle } = pageContext
     const createMarkup = (text)  => {
         return {__html: text}
     }
@@ -99,7 +99,7 @@ const BlogPost = ({pageContext}) => {
                 <div className="container">
                     <div className="row">
                         <div className="col col-xs-12 space-xs-up text-center">
-                            <h2>People also read</h2>
+                            <h2>{otherPostsTitle || 'People also read'}</h2>
                         </div>
                         <BlogPosts blogPosts={otherPosts} shadow />
                     </div>

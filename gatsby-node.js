@@ -1,5 +1,6 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const _ = require('lodash');
 
 require("dotenv").config({
   path: `.env`,
@@ -829,7 +830,6 @@ console.log('**************************************************** CONTEXT: ', pr
       }
       `).then(result => {
         result.data.allDatoCmsPage.edges.filter((item) => item.node.title).forEach(item => {
-          console.log('LOCALE: ', item.node.locale)
           const curLocale = item.node.locale
           const prefix = curLocale !== 'en' ? curLocale : ''
           let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
@@ -966,6 +966,10 @@ console.log('**************************************************** CONTEXT: ', pr
                 locale
                 value
               }
+              _allSlugLocales {
+                locale
+                value
+              }
             }
             readLength
             locale
@@ -995,6 +999,7 @@ console.log('**************************************************** CONTEXT: ', pr
             }
           }
           quoteTextColor
+          otherPostsTitle
           quoteBgColor {
             hex
           }
@@ -1035,6 +1040,14 @@ console.log('**************************************************** CONTEXT: ', pr
             category
             slug
             locale
+            _allCategoryLocales {
+              locale
+              value
+            }
+            _allSlugLocales {
+              locale
+              value
+            }
           }
         }
       }      
@@ -1072,12 +1085,13 @@ console.log('**************************************************** CONTEXT: ', pr
                   footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
                   footerCtaText: result.data.datoCmsBlogPage.footerCtaText,
                   ctaLinks: result.data.datoCmsBlogPage.ctaLinks,
+                  otherPostsTitle: result.data.datoCmsBlogPage.otherPostsTitle,
                   otherPosts: otherPosts,
                   seoMetaTags: item.seoMetaTags,
                   locale: locale
                 },
               })
-              posts.push(item)
+              
             }
           }
 
@@ -1101,12 +1115,15 @@ console.log('**************************************************** CONTEXT: ', pr
                 }
               })
               
+              posts.push(item)
               createBlogPostPage(item, p, locale, category)
             } else {
               const locale = item.locale
               const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
               let p = `${prefix}/${item.slug ? item.slug : ''}`
               // let p = item.node.homepage ? '/' : `/${item.node.slug}`
+
+              posts.push(item)
               createBlogPostPage(item, p, locale)
             }
           })
@@ -1118,17 +1135,91 @@ console.log('**************************************************** CONTEXT: ', pr
           let p = `${prefix}/${item.slug ? item.slug : ''}`
 
           filteredPosts = []
+          // posts.filter(post => {
+          //   if(post.category.some(cat => cat.category === item.category)) {
+          //     return true
+          //   } else if (item._allCategoryLocales.find(cl => cl.value === post.category)) {
+          //     return true
+          //   }
+          // }
+            
+          // ).forEach(blogItem => {
+          //   filteredPosts.push({
+          //     title: blogItem.title,
+          //     featuredImage: blogItem.featuredImage,
+          //     subtitle: blogItem.subtitle,
+          //     category: blogItem.category,
+          //     readLength: blogItem.readLength,
+          //     slug: blogItem.slug
+          // })
+          // })
 
-          posts.filter(post => post.category.some(cat => cat.category === item.category)).forEach(blogItem => {
-            filteredPosts.push({
-                title: blogItem.title,
-                featuredImage: blogItem.featuredImage,
-                subtitle: blogItem.subtitle,
-                category: blogItem.category,
-                readLength: blogItem.readLength,
-                slug: blogItem.slug
-            })
+          // || cat.category._allCategoryLocales.find(cl => cl.value === item.category)
+          const localPosts = result.data.allDatoCmsBlogPost.nodes.filter(post => {
+           
+            if(post.locale === locale) {
+             console.log('POST LOCALE **********************', post.locale, post.title)
+              return true
+            } else {
+             if(!post._allSlugLocales.some(sl => sl.locale === locale)) {
+                 return true
+             } else {
+               return false
+             }
+            }
+          }).map(post => {
+            if(post.locale !== locale && post.locale === 'en') {
+              let newPost = _.cloneDeep(post)
+ 
+              newPost.locale = locale
+              newPost.category.map(c => {
+                if(c.locale !== locale) {
+ 
+ 
+                  let newCat = c
+ 
+                  c._allCategoryLocales.map(cl => {
+                    if(cl.locale === locale) {
+                     newCat.category = cl.value
+                    }
+                  })
+ 
+                  c._allSlugLocales.map(cl => {
+                   if(cl.locale === locale) {
+                     newCat.slug = cl.value
+                   }
+                 })
+                  
+ 
+                 return newCat
+                } else {
+                  return c
+                }
+              })
+ 
+              return newPost
+            } else {
+              return post
+            }
+          }).filter(p => {
+            if(p.category.some(cat => cat._allCategoryLocales.find(cl => cl.value === item.category))) {
+              return true
+            } else {
+              return false
+            }
           })
+
+          // posts.filter(post => post.category.some(cat => cat.category === item.category)).filter(post => post.locale === item.locale).forEach(blogItem => {
+
+          //   filteredPosts.push({
+          //       title: blogItem.title,
+          //       featuredImage: blogItem.featuredImage,
+          //       subtitle: blogItem.subtitle,
+          //       category: blogItem.category,
+          //       readLength: blogItem.readLength,
+          //       slug: blogItem.slug
+          //   })
+          // })
 
 
           await createPage({
@@ -1136,7 +1227,7 @@ console.log('**************************************************** CONTEXT: ', pr
               component: path.resolve(`./src/templates/blogCategory/blogCategory.js`),
               context: {
                 title: item.category,
-                posts: filteredPosts,
+                posts: localPosts,
                 topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
                 bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
                 bgColor: result.data.datoCmsBlogPage.ctaBgColor,
@@ -1148,7 +1239,8 @@ console.log('**************************************************** CONTEXT: ', pr
                 person: result.data.datoCmsBlogPage.quotedPerson, 
                 quoteBgColor: result.data.datoCmsBlogPage.quoteBgColor, 
                 quoteImage: result.data.datoCmsBlogPage.quoteImage, 
-                testimonialTextColor: result.data.datoCmsBlogPage.quoteTextColor
+                testimonialTextColor: result.data.datoCmsBlogPage.quoteTextColor,
+                locale: item.locale
               }
           })
         })
@@ -1161,7 +1253,7 @@ console.log('**************************************************** CONTEXT: ', pr
 
       await graphql(`
       query BlogQuery {
-        allDatoCmsBlogPage {
+        allDatoCmsBlogPage(filter: {title: {ne: null}}) {
           nodes {
             title
             locale
@@ -1258,6 +1350,18 @@ console.log('**************************************************** CONTEXT: ', pr
               category {
                 category
                 slug
+                _allCategoryLocales {
+                  locale
+                  value
+                }
+                _allSlugLocales {
+                  locale
+                  value
+                }
+              }
+              _allSlugLocales {
+                locale
+                value
               }
               featuredImage {
                 alt
@@ -1302,18 +1406,74 @@ console.log('**************************************************** CONTEXT: ', pr
 
           .filter(n => locales.find(l => l.locale === n.locale)).
           */
-          if(item.title) {
-            await createPage({
-              path: p,
-              component: path.resolve(`./src/templates/blogPage/blogPage.js`),
-              context: {
-                page: page,
-                posts: result.data.allDatoCmsBlogPost.nodes,
-                categories: result.data.allDatoCmsBlogCategory.nodes.filter(n => n.locale === locale),
-                locales: item._allSlugLocales.filter(locale => locales.find(l => l.locale === locale.locale)).map(locale => ({...locale, value: locale.locale ==! 'en' ? `${locale.locale}/${locale.value}` : locale.value, title: locales.find(l => l.locale === locale.locale).title }))
-              },
-            })
+         const localPosts = result.data.allDatoCmsBlogPost.nodes.filter(post => {
+           
+           if(post.locale === locale) {
+            console.log('POST LOCALE **********************', post.locale, post.title)
+             return true
+           } else {
+            if(!post._allSlugLocales.some(sl => sl.locale === locale)) {
+                return true
+            } else {
+              return false
+            }
+           }
+         }).map(post => {
+           if(post.locale !== locale && post.locale === 'en') {
+             let newPost = _.cloneDeep(post)
+
+             newPost.locale = locale
+             newPost.category.map(c => {
+               if(c.locale !== locale) {
+
+
+                 let newCat = c
+
+                 c._allCategoryLocales.map(cl => {
+                   if(cl.locale === locale) {
+                    newCat.category = cl.value
+                   }
+                 })
+
+                 c._allSlugLocales.map(cl => {
+                  if(cl.locale === locale) {
+                    newCat.slug = cl.value
+                  }
+                })
+                 
+
+                return newCat
+               } else {
+                 return c
+               }
+             })
+
+             return newPost
+           } else {
+             return post
+           }
+         })
+
+         await locales.map(async l => {
+          if(l.locale === item.locale) {
+            if(item.title) {
+              
+              
+
+              await createPage({
+                path: p,
+                component: path.resolve(`./src/templates/blogPage/blogPage.js`),
+                context: {
+                  page: page,
+                  posts: localPosts,
+                  categories: result.data.allDatoCmsBlogCategory.nodes.filter(n => n.locale === locale),
+                  locales: item._allSlugLocales.filter(locale => locales.find(l => l.locale === locale.locale)).map(locale => ({...locale, value: locale.locale ==! 'en' ? `${locale.locale}/${locale.value}` : locale.value, title: locales.find(l => l.locale === locale.locale).title }))
+                },
+              })
+            }
           }
+        })
+          
         })
       })
     }
