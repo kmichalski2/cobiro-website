@@ -966,6 +966,10 @@ console.log('**************************************************** CONTEXT: ', pr
                 locale
                 value
               }
+              _allSlugLocales {
+                locale
+                value
+              }
             }
             readLength
             locale
@@ -1036,6 +1040,10 @@ console.log('**************************************************** CONTEXT: ', pr
             slug
             locale
             _allCategoryLocales {
+              locale
+              value
+            }
+            _allSlugLocales {
               locale
               value
             }
@@ -1145,17 +1153,71 @@ console.log('**************************************************** CONTEXT: ', pr
           // })
 
           // || cat.category._allCategoryLocales.find(cl => cl.value === item.category)
-          posts.filter(post => post.category.some(cat => cat.category === item.category)).filter(post => post.locale === item.locale).forEach(blogItem => {
-
-            filteredPosts.push({
-                title: blogItem.title,
-                featuredImage: blogItem.featuredImage,
-                subtitle: blogItem.subtitle,
-                category: blogItem.category,
-                readLength: blogItem.readLength,
-                slug: blogItem.slug
-            })
+          const localPosts = result.data.allDatoCmsBlogPost.nodes.filter(post => {
+           
+            if(post.locale === locale) {
+             console.log('POST LOCALE **********************', post.locale, post.title)
+              return true
+            } else {
+             if(!post._allSlugLocales.some(sl => sl.locale === locale)) {
+                 return true
+             } else {
+               return false
+             }
+            }
+          }).map(post => {
+            if(post.locale !== locale && post.locale === 'en') {
+              let newPost = _.cloneDeep(post)
+ 
+              newPost.locale = locale
+              newPost.category.map(c => {
+                if(c.locale !== locale) {
+ 
+ 
+                  let newCat = c
+ 
+                  c._allCategoryLocales.map(cl => {
+                    if(cl.locale === locale) {
+                     newCat.category = cl.value
+                    }
+                  })
+ 
+                  c._allSlugLocales.map(cl => {
+                   if(cl.locale === locale) {
+                     newCat.slug = cl.value
+                   }
+                 })
+                  
+ 
+                 return newCat
+                } else {
+                  return c
+                }
+              })
+ 
+              return newPost
+            } else {
+              return post
+            }
+          }).filter(p => {
+            if(p.category.some(cat => cat._allCategoryLocales.find(cl => cl.value === item.category))) {
+              return true
+            } else {
+              return false
+            }
           })
+
+          // posts.filter(post => post.category.some(cat => cat.category === item.category)).filter(post => post.locale === item.locale).forEach(blogItem => {
+
+          //   filteredPosts.push({
+          //       title: blogItem.title,
+          //       featuredImage: blogItem.featuredImage,
+          //       subtitle: blogItem.subtitle,
+          //       category: blogItem.category,
+          //       readLength: blogItem.readLength,
+          //       slug: blogItem.slug
+          //   })
+          // })
 
 
           await createPage({
@@ -1163,7 +1225,7 @@ console.log('**************************************************** CONTEXT: ', pr
               component: path.resolve(`./src/templates/blogCategory/blogCategory.js`),
               context: {
                 title: item.category,
-                posts: filteredPosts,
+                posts: localPosts,
                 topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
                 bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
                 bgColor: result.data.datoCmsBlogPage.ctaBgColor,
