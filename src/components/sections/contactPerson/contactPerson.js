@@ -12,6 +12,7 @@ const PersonContact = ({ data }) => {
     const personImage = data.personImage
     const personName = data.personName
     const personWorkTitle = data.personWorkTitle
+    const linkTitle = data.linkTitle
     
     return (
         <Section
@@ -32,7 +33,7 @@ const PersonContact = ({ data }) => {
                                 </div>
                             </div>
                             <div className="col-xs-12 col-md-6 center">
-                                <a className={["btn", Classes.contactButton].join(' ')} href={`mailto:${email}`}>Contact</a>
+                                <a className={["btn", Classes.contactButton].join(' ')} href={`mailto:${email}`}>{ linkTitle || 'Contact' }</a>
                             </div>
                         </div>
                     </div>

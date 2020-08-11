@@ -78,6 +78,7 @@ console.log('**************************************************** CONTEXT: ', pr
                   personWorkTitle
                   sectionTitle
                   textColor
+                  linkTitle
                   personImage {
                     url
                     fluid(maxWidth: 1200) {
@@ -967,6 +968,7 @@ console.log('**************************************************** CONTEXT: ', pr
               }
             }
             readLength
+            locale
 
             meta {
               createdAt(formatString: "MMMM DD")
@@ -1075,32 +1077,36 @@ console.log('**************************************************** CONTEXT: ', pr
                   locale: locale
                 },
               })
+              posts.push(item)
             }
           }
 
 
           await locales.map(l => {
             if(!item._allSlugLocales.find(sl => sl.locale === l.locale)) {
-              // If a published locale is not existing in __allSlugLocales
+              // If a published locale does not exist in __allSlugLocales
               const locale = l.locale
               const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
               let p = `${prefix}/${item.slug ? item.slug : ''}`
               const category = item.category.map(c => { 
                 const currCatLocale = c._allCategoryLocales.find(cl => cl.locale === locale)
                 if (currCatLocale) {
-                  return {category: currCatLocale.value, slug: result.data.allDatoCmsBlogCategory.nodes.find(bc => bc.category === currCatLocale.value).slug}
+                  const categoryObj = {category: currCatLocale.value, slug: result.data.allDatoCmsBlogCategory.nodes.find(bc => bc.category === currCatLocale.value).slug}
+                  
+                  // item.category = categoryObj
+
+                  return categoryObj
                 } else {
                   return item.category
                 }
               })
-              posts.push(item)
+              
               createBlogPostPage(item, p, locale, category)
             } else {
               const locale = item.locale
               const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
               let p = `${prefix}/${item.slug ? item.slug : ''}`
               // let p = item.node.homepage ? '/' : `/${item.node.slug}`
-              posts.push(item)
               createBlogPostPage(item, p, locale)
             }
           })
@@ -1243,6 +1249,7 @@ console.log('**************************************************** CONTEXT: ', pr
         }
         allDatoCmsBlogPost(filter: {title: {ne: null}}, sort: {fields: meta___createdAt, order: DESC}) {
             nodes {
+              locale
               title
               readLength
               subtitle
