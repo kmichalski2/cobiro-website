@@ -15,10 +15,10 @@ const BlogCagegory = ({ pageContext }) => {
         setNotificationPadding(height)
     }
 
-    const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor} = pageContext
+    const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor, locale} = pageContext
 
     return (
-        <Layout notifyerHeightHandler={notifyerHeightHandler}>
+        <Layout notifyerHeightHandler={notifyerHeightHandler} currentLocale={locale}>
             <Section bgColor={bgColor.hex} addedPadding={notificationPadding}>
               <div className="container">
                   <div className="row middle-xs center-xs">

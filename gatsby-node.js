@@ -1237,7 +1237,8 @@ console.log('**************************************************** CONTEXT: ', pr
                 person: result.data.datoCmsBlogPage.quotedPerson, 
                 quoteBgColor: result.data.datoCmsBlogPage.quoteBgColor, 
                 quoteImage: result.data.datoCmsBlogPage.quoteImage, 
-                testimonialTextColor: result.data.datoCmsBlogPage.quoteTextColor
+                testimonialTextColor: result.data.datoCmsBlogPage.quoteTextColor,
+                locale: item.locale
               }
           })
         })
