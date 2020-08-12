@@ -102,9 +102,22 @@ module.exports = {
               title
               subtitle
               slug
+              locale
               category {
                 category
                 slug
+                _allCategoryLocales {
+                    locale
+                    value
+                }
+                _allSlugLocales {
+                    locale
+                    value
+                  }
+              }
+              _allSlugLocales {
+                locale
+                value
               }
               readLength
             }
@@ -125,7 +138,7 @@ module.exports = {
         // the keys are taken from the normalizer function below.
         // Default: all fields
         // store: ['id', 'path', 'title'],
-        store: ['title', 'subtitle', 'slug', 'category', 'readLength'],
+        store: ['title', 'subtitle', 'slug', 'category', 'readLength', '_allSlugLocales', 'locale'],
 
         // Function used to map the result from the GraphQL query. This should
         // return an array of items to index in the form of flat objects
@@ -139,22 +152,24 @@ module.exports = {
             // text: node.content.text,
             slug: node.slug,
             category:  node.category,
-            readLength: node.readLength
+            readLength: node.readLength,
+            locale: node.locale,
+            _allSlugLocales: node._allSlugLocales
           })),
       },
     },
     // {
     //   resolve: `gatsby-plugin-intl`,
-    //   // options: {
-    //   //   // language JSON resource path
-    //   //   // path: `${__dirname}/src/i18n`,
-    //   //   // supported language
-    //   //   languages: [`en`, `es`],
-    //   //   // language file path
-    //   //   defaultLanguage: `en`,
-    //   //   // option to redirect to `/ko` when connecting `/`
-    //   //   redirect: true,
-    //   // },
+    //   options: {
+    //     // language JSON resource path
+    //     path: `${__dirname}/src/i18n`,
+    //     // supported language
+    //     languages: [`en`, `es`, `da`, `nb`, `sv`, `de`, `fr`, `es-ES`, `it`, `pt-PT`, `pl-PL`],
+    //     // language file path
+    //     defaultLanguage: `en`,
+    //     // option to redirect to `/ko` when connecting `/`
+    //     redirect: false,
+    //   },
     // },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

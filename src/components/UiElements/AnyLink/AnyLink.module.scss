@@ -51,6 +51,14 @@
 			right: -0.2rem;
 		}
 	}
+
+	&.noPadding {
+		padding: 0;
+	}
+
+	&.regular {
+		font-weight: 400;
+	}
 }
 
 @include mq($from: md) {

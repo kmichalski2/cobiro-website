@@ -7,7 +7,7 @@ import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 import Classes from './navbar.module.scss'
 
-const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler, hideSignUp }) => {
+const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler, hideSignUp, locales, currentLocale, menuCta, homeSlug }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
@@ -72,7 +72,6 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
     e.preventDefault()
     setSubMenuExpanded(subMenuExpanded !== i ? i : null)
   }
-
   return (
     <header>
       <nav ref={navbarRef} className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, isScrolled ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">
@@ -80,9 +79,9 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
           <div ref={contentContainer} className="row between-xs middle-xs">
             <div className={["col col-auto-lg", Classes.navbarMobile].join(' ')} >
               <div className={[Classes.brand, menuInverted ? Classes.invert : null, isExpanded ? Classes.invert : null, isScrolled ? Classes.invert : null].join(' ')}>
-                <Link to="/">
+                <AnyLink link={`/${!homeSlug ? '' : homeSlug}`} noArrow noPadding regular>
                   <img className={Classes.logoMobile} src={logo} alt="Cobiro logo" />
-                </Link>
+                </AnyLink>
               </div>
 
               <button
@@ -101,17 +100,22 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
             <div className={["col col-auto-lg", Classes.mainMenuInner, isScrolled || menuInverted ? Classes.menuItems : null].join(' ')}>
               <ul className={["list-inline", Classes.menuItemsList].join(' ')}>
                 {menuItems.sort((a, b) => a.menu_item_order - b.menu_item_order).map((item, index) => (
-                    <MenuItem key={index} inverted={isScrolled || menuInverted ? true : false} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer} expandHandler={expandHandler} subMenuExpanded={subMenuExpanded} index={index}/>
+                    <MenuItem key={index} inverted={isScrolled || menuInverted ? true : false} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer} expandHandler={expandHandler} subMenuExpanded={subMenuExpanded} index={index} currentLocale={currentLocale}/>
                 ))}
               </ul>
               {!hideSignUp ?
               <div className={["visible-xs-up", Classes.mainMenuCta, subMenuExpanded !== null ? Classes.hiddenCta : null].join(' ')}>
-                <a href="https://app.cobiro.com/user/login" className={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
-                  Sign in
+                {menuCta.secondaryLink && menuCta.secondaryLinkTitle ?
+                <a href={menuCta.secondaryLink} className={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                  {menuCta.secondaryLinkTitle}
                 </a>
-                <a href={customCta && customCta.link ? customCta.link : "https://app.cobiro.com/user/signup"} className={["btn", Classes.btnRight, !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
-                  {customCta && customCta.title ? customCta.title : 'Sign up' }
-                </a>                  
+                : null}
+                
+                {customCta && customCta.link || menuCta.primaryLink && menuCta.primaryLinkTitle ?
+                <a href={customCta && customCta.link ? customCta.link : menuCta.primaryLink} className={["btn", Classes.btnRight, !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                  {customCta && customCta.title ? customCta.title : menuCta.primaryLinkTitle }
+                </a>
+                : null}       
               </div>
               : null}
             </div>

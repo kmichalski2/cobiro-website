@@ -14,8 +14,14 @@ import Footer from "./footer"
 import "./style/app.scss"
 import CookieBanner from "./cookieConsent"
 
-const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, menuInverted, slug, notifyerHeightHandler, hideSignUp }) => {
+export const CurrentLocaleContext = React.createContext({})
+export const CurrentLocaleProvicer = CurrentLocaleContext.Provider
+
+const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenMenuItems, menuInverted, slug, notifyerHeightHandler, hideSignUp }) => {
   
+
+
+
   if (typeof window !== 'undefined') {
     // Make scroll behavior of internal links smooth
     // eslint-disable-next-line global-require
@@ -29,8 +35,9 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
         title
       }
     }
-    allDatoCmsMenu(sort: {fields: menuItemOrder, order: ASC}, filter: {locale: {eq: "en"}}) {
+    allDatoCmsMenu(sort: {fields: menuItemOrder, order: ASC}, filter: {linkTitle: {ne: null}}) {
       nodes {
+        locale
         linkTitle
         link {
           ... on DatoCmsPage {
@@ -211,8 +218,9 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
         }
       }
     }
-    allDatoCmsFooter(sort: {fields: footerItemOrder, order: ASC}, filter: {locale: {eq: "en"}}) {
+    allDatoCmsFooter(sort: {fields: footerItemOrder, order: ASC}, filter: {columnHeading: {ne: null}}) {
       nodes {
+        locale
         column {
           ... on DatoCmsTextElement {
             text
@@ -249,26 +257,63 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
         footerItemOrder
       }
     }
-    allDatoCmsNotification(filter: {locale: {eq: "en"}}) {
-      edges {
-        node {
-          text
-          textColor
-          bgColor {
-            hex
-          }
-          pages {
+    allDatoCmsFooterBottom {
+    nodes {
+      locale
+      linkItems {
+        ... on DatoCmsExtLink {
+          __typename
+          externalLink
+          linkTitle
+          locale
+        }
+        ... on DatoCmsLink {
+          __typename
+          locale
+          linkTitle
+          link {
             slug
-            title
+            locale
           }
         }
       }
     }
+  }
+  allDatoCmsMenuCta {
+    nodes {
+      locale
+      secondaryLinkTitle
+      secondaryLink
+      primaryLinkTitle
+      primaryLink
+    }
+  }
+    allDatoCmsNotification(filter: {text: {ne: null}}) {
+      nodes {
+        locale
+        text
+        textColor
+        bgColor {
+          hex
+        }
+        pages {
+          slug
+          title
+        }
+      }
+    }
+    allDatoCmsPage(filter: {homepage: {eq: true}}) {
+      nodes {
+        locale
+        slug
+      }
+    }
   }  
   `)
+  const homePage = data.allDatoCmsPage.nodes.find(p => p.locale === (currentLocale || 'en'))
+  const homeSlug = homePage && homePage.slug
 
-
-  const notifications = data.allDatoCmsNotification.edges.map(e => e.node)
+  const notifications = data.allDatoCmsNotification.nodes.filter(n => n.locale === currentLocale)
 
   const getNotification = (slug) => {
     let pageNotification
@@ -292,19 +337,18 @@ const Layout = ({ children, customCta, locales, currentLocale, hiddenMenuItems, 
 
   if(hiddenMenuItems && hiddenMenuItems.length > 0) {
     const hiddenMenuItemsIds = hiddenMenuItems.map(item => item.id)
-    menuItems = data.allDatoCmsMenu.nodes.filter(item => !hiddenMenuItemsIds.includes(item.id))
+    menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === (currentLocale || 'en')).filter(item => !hiddenMenuItemsIds.includes(item.id))
   } else {
-    menuItems = data.allDatoCmsMenu.nodes
+    menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === (currentLocale || 'en'))
     
   }
-  
     return (
-    <>
-      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler}/>
+    <CurrentLocaleProvicer value={currentLocale}>
+      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale || 'en'} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]} homeSlug={homeSlug}/>
       {children}
       <CookieBanner />
-      <Footer columns={data.allDatoCmsFooter.nodes} locales={locales} currentLocale={currentLocale}/>
-    </>
+      <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === (currentLocale || 'en'))} locales={locales} currentLocale={currentLocale || 'en'} redirect={redirect} bottomLinks={data.allDatoCmsFooterBottom.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]}/>
+      </CurrentLocaleProvicer>
   )
 }
 

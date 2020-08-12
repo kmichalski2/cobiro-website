@@ -2,10 +2,11 @@ import { Link } from "gatsby"
 import logo from "../../images/logo.svg"
 import React from "react"
 import Img from "gatsby-image"
-// import langStyles from '../hoc/langSwithcer/langSwitcher.module.scss'
+import LangSwitcher from "../hoc/langSwithcer/langSwitcher"
+import AnyLink from "../UiElements/AnyLink/AnyLink"
 
-const Footer = ({ columns, locales, currentLocale }) => {
 
+const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
   return (
   <footer>
     <div className="container">
@@ -29,10 +30,10 @@ const Footer = ({ columns, locales, currentLocale }) => {
                   }
                  </a>
                  : (el.externalLink) ? 
-                 <a className="small text-darkgrey" href={el.externalLink} target="_blank" rel="noopener noreferrer">{el.linkTitle}</a> 
+                 <AnyLink link={el.externalLink} title={el.linkTitle} external={true} noArrow noPadding regular classes="small text-darkgrey"/>
                  : el.internalLink ?
-                 <Link className="small text-darkgrey" to={`/${el.internalLink.slug}`}>{el.linkTitle}</Link>
-                : el.googlePartnerLogo ?
+                 <AnyLink link={`/${el.internalLink.slug}`} title={el.linkTitle} internal={true} noArrow noPadding regular classes="small text-darkgrey"/>
+                 : el.googlePartnerLogo ?
                   <div className="g-partnersbadge" data-agency-id="1850113825"></div>
                 : null }
                </li>
@@ -45,19 +46,28 @@ const Footer = ({ columns, locales, currentLocale }) => {
     <div className="footer-bottom">
       <div className="container">
         <div className="row space-between">
-        <div className="col col-sm-12 col-md-6 col-lg-8 text-center-sm space-xs space-sm">
-            <ul className="list-inline block-xs flex-md menu">
+          <div className="col col-sm-12 col-lg-4 text-center-sm space-xs space-sm space-md flex-lg middle-lg">
+            <ul className="list-inline block-xs flex-lg menu">
               <li>
                 <p className="small text-darkgrey">
-                  Copyright &#169; 2020 Cobiro
+                  Copyright &#169; {new Date().getFullYear()} Cobiro
                 </p>
               </li>
             </ul>
           </div>
-          <div className="col col-sm-12 col-md-6 col-lg-4 text-center-sm space-xs space-sm justify-between-lg justify-between-xl justify-between-md">
-              <ul><Link className="small text-darkgrey" to="/terms-of-service">Terms of Service</Link></ul>
-              <ul><Link className="small text-darkgrey" to="/privacy-policy">Privacy Policy</Link></ul>
-              <ul><Link className="small text-darkgrey" to="/sitemap">Sitemap</Link></ul>
+          <div className="col col-sm-12 col-lg-8 text-center-sm space-xs space-sm space-md center-xs end-lg middle-lg flex">
+              <ul className="list-inline block-xs flex-lg middle-xs menu">
+                {bottomLinks && bottomLinks.linkItems && bottomLinks.linkItems.length > 0 ?
+                bottomLinks.linkItems.map((l, i ) => (
+                  <li key={i}>
+                    <AnyLink link={l.externalLink || l.link && l.link.slug} title={l.linkTitle} internal={l.__typename === 'DatoCmsLink' } external={l.__typename === 'DatoCmsExtLink'} noArrow noPadding regular classes="small text-darkgrey"/>
+                  </li>)
+                )
+              : null}
+              <li className="space-top-xs-up no-space-lg-up ">
+                <LangSwitcher locales={locales} currentLocale={currentLocale} redirect={redirect}/>            
+              </li>
+            </ul>
           </div>
         </div>
       </div>

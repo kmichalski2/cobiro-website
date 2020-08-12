@@ -22,7 +22,7 @@ const FeaturedTestimonialsSingle = ({ data }) => {
             </div>
           </div>
           <div className="col col-xs-12 col-lg-6">
-          <ImageAll image={data.image} alt={data.image.alt ? data.image.alt : data.title}/>
+          <ImageAll image={data.image} alt={data.image && data.image.alt ? data.image.alt : data.title}/>
           </div>
         </div>
       </div>

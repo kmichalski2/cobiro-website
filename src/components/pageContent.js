@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, createContext } from "react"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import JumboHeader from "../components/sections/jumboHeader/jumboHeader"
@@ -26,7 +26,10 @@ import ContactPerson from './sections/contactPerson/contactPerson'
 import PricingTables from "./sections/pricingTables/pricingTables"
 import MediaDownload from './sections/mediaDownload/mediaDownload'
 
-const PageContent = ({ data, locales }) => {
+// export const CurrentLocaleContext = React.createContext({})
+// export const CurrentLocaleProvicer = CurrentLocaleContext.Provider
+
+const PageContent = ({ data, locales, redirect }) => {
     
     const hideSignUp = data.hideSignupButtons
     const [menuInverted, setMenuInverted] = useState(false)
@@ -35,11 +38,17 @@ const PageContent = ({ data, locales }) => {
         setNotificationPadding(height)
     }
 
+
+    
+
+    
   return (
+    // <CurrentLocaleProvicer value={data.locale}>
     <Layout 
         customCta={ data.customCtaLinks && data.primaryCtaTitle && data.primaryCtaLink ? {title: data.primaryCtaTitle, link: data.primaryCtaLink} : null } 
-        locales={ locales } 
+        locales={ locales }
         currentLocale={data.locale}
+        redirect={redirect}
         hiddenMenuItems={data.hiddenMenuItems}
         menuInverted={menuInverted}
         slug={data.slug}
@@ -52,69 +61,72 @@ const PageContent = ({ data, locales }) => {
         lang={data.locale}
         meta={data.seoMetaTags.tags}
         />
-      <main>
-        {data.sections.map((section, index) => {
-        switch(section.__typename.replace("DatoCms", "")) {
-            case 'JumboHeader':
-                if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
-                    setMenuInverted(true)
-                } 
-                return <JumboHeader data={data.sections[index]} key={index} notificationPadding={index === 0 ? notificationPadding : null}/>
-            case 'ThreeUp':
-                return <ThreeUp data={data.sections[index]} key={index}/>
-            case 'FeaturedCarousel':
-                return <FeaturedCarousel data={data.sections[index]} key={index}/>
-            case 'ExplanationWImage':
-                return <ExplanationImage data={data.sections[index]} alignment="left" toEdge={true} key={index}/>
-            case 'Accordionfaq':
-                return <AccordionFaq data={data.sections[index]} key={index}/>
-            case 'FeatureList':
-                return <FeatureList data={data.sections[index]} key={index}/>
-            case 'FeaturedCompany':
-                return <FeaturedCompanies data={data.sections[index]} key={index}/>
-            case 'FeaturedTestimonialsSingle':
-                return <FeaturedTestimonialsSingle data={data.sections[index]} key={index}/>
-            case 'ThreeUpPerson':
-                return <ThreeUpPeople data={data.sections[index]} key={index}/>
-            case 'CtaJumbo':
-                return <JumboCta data={data.sections[index]} key={index}/>
-            case 'BlogLatest':
-                return <BlogLatest data={data.sections[index]} key={index}/>
-            case 'ListPricing':
-                return <ListPricing data={data.sections[index]} key={index}/>
-            case 'Quote':
-                return <Quotes data={data.sections[index]} key={index}/>
-            case 'Text':
-                return <Text data={data.sections[index]} key={index}/>
-            case 'Video':
-                return <Video data={data.sections[index]} key={index}/>
-            case 'Image':
-                return <ImageSection data={data.sections[index]} key={index}/>
-            case 'Gallery':
-                return <Gallery data={data.sections[index]} key={index}/>
-            case 'VoucherSignup':
-                return <Voucher data={data.sections[index]} key={index}/>
-            case 'VoucherHeader':
-                if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
-                    setMenuInverted(true)
-                } 
-                return <VoucherHeader data={data.sections[index]} key={index}/>
-            case 'ExplanationGiftCard':
-                return <ExplanationGiftCard data={data.sections[index]} key={index}/>
-            case 'FormSection':
-                return <Form data={data.sections[index]} key={index}/>
-            case 'ContactPerson':
-                return <ContactPerson data={data.sections[index]} key={index}/>
-            case 'PricingTable':
-                return <PricingTables data={data.sections[index]} key={index}/>
-            case 'MediaDownload':
-                return <MediaDownload data={data.sections[index]} key={index}/>
-            default:
-                return null
-            }
-    })}
-      </main>
+        
+        <main>
+            {data.sections.map((section, index) => {
+            switch(section.__typename.replace("DatoCms", "")) {
+                case 'JumboHeader':
+                    if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
+                        setMenuInverted(true)
+                    } 
+                    return <JumboHeader data={data.sections[index]} key={index} notificationPadding={index === 0 ? notificationPadding : null}/>
+                case 'ThreeUp':
+                    return <ThreeUp data={data.sections[index]} key={index}/>
+                case 'FeaturedCarousel':
+                    return <FeaturedCarousel data={data.sections[index]} key={index}/>
+                case 'ExplanationWImage':
+                    return <ExplanationImage data={data.sections[index]} alignment="left" toEdge={true} key={index}/>
+                case 'Accordionfaq':
+                    return <AccordionFaq data={data.sections[index]} key={index}/>
+                case 'FeatureList':
+                    return <FeatureList data={data.sections[index]} key={index}/>
+                case 'FeaturedCompany':
+                    return <FeaturedCompanies data={data.sections[index]} key={index}/>
+                case 'FeaturedTestimonialsSingle':
+                    return <FeaturedTestimonialsSingle data={data.sections[index]} key={index}/>
+                case 'ThreeUpPerson':
+                    return <ThreeUpPeople data={data.sections[index]} key={index}/>
+                case 'CtaJumbo':
+                    return <JumboCta data={data.sections[index]} key={index}/>
+                case 'BlogLatest':
+                    return <BlogLatest data={data.sections[index]} key={index}/>
+                case 'ListPricing':
+                    return <ListPricing data={data.sections[index]} key={index}/>
+                case 'Quote':
+                    return <Quotes data={data.sections[index]} key={index}/>
+                case 'Text':
+                    return <Text data={data.sections[index]} key={index}/>
+                case 'Video':
+                    return <Video data={data.sections[index]} key={index}/>
+                case 'Image':
+                    return <ImageSection data={data.sections[index]} key={index}/>
+                case 'Gallery':
+                    return <Gallery data={data.sections[index]} key={index}/>
+                case 'VoucherSignup':
+                    return <Voucher data={data.sections[index]} key={index}/>
+                case 'VoucherHeader':
+                    if(data.sections[index].textColor === 'dark' && menuInverted !== true) {
+                        setMenuInverted(true)
+                    } 
+                    return <VoucherHeader data={data.sections[index]} key={index}/>
+                case 'ExplanationGiftCard':
+                    return <ExplanationGiftCard data={data.sections[index]} key={index}/>
+                case 'FormSection':
+                    return <Form data={data.sections[index]} key={index}/>
+                case 'ContactPerson':
+                    return <ContactPerson data={data.sections[index]} key={index}/>
+                case 'PricingTable':
+                    return <PricingTables data={data.sections[index]} key={index}/>
+                case 'MediaDownload':
+                    return <MediaDownload data={data.sections[index]} key={index}/>
+                default:
+                    return null
+                }
+        })}
+        </main>
+        
     </Layout>
+    // </CurrentLocaleProvicer>
   )
 }
 

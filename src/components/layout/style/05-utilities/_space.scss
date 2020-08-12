@@ -14,12 +14,21 @@
 	.space-big-#{$breakpoint}-up {
 		margin-bottom: 3.75rem;
 	}
+	.space-top-#{$breakpoint}-up {
+		margin-top: 1.875rem;
+	}
+	.no-space-#{$breakpoint}-up {
+		margin: 0;
+	}
 }
 .margin-bottom {
 	margin-bottom: 50px;
 }
 .no-mb {
 	margin-bottom: 0;
+}
+.no-mt {
+	margin-top: 0;
 }
 .space-big {
 	margin-bottom: 4rem;

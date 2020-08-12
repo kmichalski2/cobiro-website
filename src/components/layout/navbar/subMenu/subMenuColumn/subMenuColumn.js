@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from "gatsby"
 import ImageAll from '../../../../UiElements/ImageAll/ImageAll'
 import AnyLink from '../../../../UiElements/AnyLink/AnyLink'
 import HtmlText from '../../../../UiElements/HtmlText/HtmlText'
-
+import {CurrentLocaleContext} from '../../../layout'
 import Classes from './subMenuColumn.module.scss'
 
 const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borderLeft, isSingleColumn }) => {
-
+    
+    
+    const currentLocale = useContext(CurrentLocaleContext)
 
     const subSubMenuClickHandler = (event) => {
         
@@ -30,7 +32,7 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
                 link && link.slug ?
                 <Link 
                     className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
-                    to={link && link.slug ? link.slug : "#"} 
+                    to={link && link.slug ? `${currentLocale !== 'en' ? '/' + currentLocale : ''}/${link.slug}` : "#"} 
                     target="_self" 
                     onClick={(e) => subSubMenuClickHandler(e)}>
                 
