@@ -21,8 +21,6 @@ const Blog = ({ pageContext }) => {
   const seoTags = page.seoTags
   const locales = pageContext.locales
 
-  console.log('BLOG POSTS: ', posts)
-
   const [notificationPadding, setNotificationPadding] = useState(0)
 
     const notifyerHeightHandler = (height) => {
