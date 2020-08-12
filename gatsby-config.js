@@ -102,6 +102,7 @@ module.exports = {
               title
               subtitle
               slug
+              locale
               category {
                 category
                 slug
@@ -137,7 +138,7 @@ module.exports = {
         // the keys are taken from the normalizer function below.
         // Default: all fields
         // store: ['id', 'path', 'title'],
-        store: ['title', 'subtitle', 'slug', 'category', 'readLength', '_allSlugLocales'],
+        store: ['title', 'subtitle', 'slug', 'category', 'readLength', '_allSlugLocales', 'locale'],
 
         // Function used to map the result from the GraphQL query. This should
         // return an array of items to index in the form of flat objects
@@ -152,6 +153,7 @@ module.exports = {
             slug: node.slug,
             category:  node.category,
             readLength: node.readLength,
+            locale: node.locale,
             _allSlugLocales: node._allSlugLocales
           })),
       },

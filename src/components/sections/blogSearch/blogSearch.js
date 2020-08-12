@@ -25,13 +25,64 @@ const BlogSearch = ({ title }) => {
 
   const results = useFlexSearch(query, index, JSON.parse(store))
   
+  // .filter(post => {
+          
+  //   if(post.locale === locale) {
+  //     return true
+  //   } else {
+  //     if(!post._allSlugLocales.some(sl => sl.locale === locale)) {
+  //         return true
+  //     } else {
+  //       return false
+  //     }
+  //   }
+  // }).map(post => {
+  //   if(post.locale !== locale && post.locale === 'en') {
+  //     let newPost = cloneDeep(post)
+
+  //     newPost.locale = locale
+  //     newPost.category.map(c => {
+  //       if(c.locale !== locale) {
+
+
+  //         let newCat = c
+
+  //         c._allCategoryLocales.map(cl => {
+  //           if(cl.locale === locale) {
+  //             newCat.category = cl.value
+  //           }
+  //         })
+
+  //         c._allSlugLocales.map(cl => {
+  //           if(cl.locale === locale) {
+  //             newCat.slug = cl.value
+  //           }
+  //         })
+          
+
+  //         return newCat
+  //       } else {
+  //         return c
+  //       }
+  //     })
+
+  //     return newPost
+  //   } else {
+  //     return post
+  //   }
+  // })
+
+
+  
   useEffect(() => {
       if(results.length > 0) {
         setPosts(results.filter(post => {
           
           if(post.locale === locale) {
+            console.log('current locale')
             return true
           } else {
+            console.log('not current locale', locale)
             if(!post._allSlugLocales.some(sl => sl.locale === locale)) {
                 return true
             } else {
@@ -78,7 +129,7 @@ const BlogSearch = ({ title }) => {
   }, [query])
 
 
-  console.log(results)
+  console.log(results, posts)
   
   const searchHandler = (e) => {
     e.preventDefault()

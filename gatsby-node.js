@@ -1057,11 +1057,7 @@ let locales
 
         let posts = []
 
-        let otherPosts = []
-
-        for(i = 0; i < 3 && i < result.data.allDatoCmsBlogPost.nodes.length; i++) {
-          otherPosts.push(result.data.allDatoCmsBlogPost.nodes[i])
-        }
+        
 
 
         
@@ -1071,6 +1067,59 @@ let locales
           const createBlogPostPage = async (item, p, locale, category) => {
             if(item.title) {
               const localBlogPage = result.data.allDatoCmsBlogPage.nodes.find(bp => bp.locale === locale)
+
+              let otherPosts = []
+
+        const localPosts = result.data.allDatoCmsBlogPost.nodes.filter(post => {
+           
+          if(post.locale === locale) {
+            return true
+          } else {
+           if(!post._allSlugLocales.some(sl => sl.locale === locale)) {
+               return true
+           } else {
+             return false
+           }
+          }
+        }).map(post => {
+          if(post.locale !== locale && post.locale === 'en') {
+            let newPost = _.cloneDeep(post)
+    
+            newPost.locale = locale
+            newPost.category.map(c => {
+              if(c.locale !== locale) {
+    
+    
+                let newCat = c
+    
+                c._allCategoryLocales.map(cl => {
+                  if(cl.locale === locale) {
+                   newCat.category = cl.value
+                  }
+                })
+    
+                c._allSlugLocales.map(cl => {
+                 if(cl.locale === locale) {
+                   newCat.slug = cl.value
+                 }
+               })
+                
+    
+               return newCat
+              } else {
+                return c
+              }
+            })
+    
+            return newPost
+          } else {
+            return post
+          }
+        })
+
+        for(i = 0; i < 3 && i < result.data.allDatoCmsBlogPost.nodes.length; i++) {
+          otherPosts.push(localPosts[i])
+        }
 
               await createPage({
                 path: p,
