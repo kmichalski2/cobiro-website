@@ -10,7 +10,7 @@ const BlogLatest = ({ data }) => {
 
     const query = useStaticQuery(graphql`
         query BlogQuery {
-            allDatoCmsBlogPost(filter: {title: {ne: null}}, limit: 3) {
+            allDatoCmsBlogPost(sort: {fields: date}, filter: {title: {ne: null}}, limit: 3) {
                 nodes {
                   title
                   readLength
