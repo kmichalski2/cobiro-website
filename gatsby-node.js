@@ -983,57 +983,60 @@ console.log('**************************************************** CONTEXT: ', pr
             }
           }
         }
-        datoCmsBlogPage {
-          quote
-          quotedPerson
-          quoteImage {
-            alt
-            url
-            fluid {
-              aspectRatio
-              height
-              sizes
-              src
-              srcSet
-              width
-            }
-          }
-          quoteTextColor
-          otherPostsTitle
-          quoteBgColor {
-            hex
-          }
-          ctaLinks {
-            ... on DatoCmsInternalLink {
-              internalLink {
-                ... on DatoCmsPage {
-                  slug
-                  __typename
-                }
-                ... on DatoCmsBlogPost {
-                  slug
-                  __typename
-                }
+        allDatoCmsBlogPage {
+          nodes {
+            locale
+            quote
+            quotedPerson
+            quoteImage {
+              alt
+              url
+              fluid {
+                aspectRatio
+                height
+                sizes
+                src
+                srcSet
+                width
               }
-              linkTitle
             }
-            ... on DatoCmsExternalLink {
-              linkTitle
-              externalLink
+            quoteTextColor
+            otherPostsTitle
+            quoteBgColor {
+              hex
             }
+            ctaLinks {
+              ... on DatoCmsInternalLink {
+                internalLink {
+                  ... on DatoCmsPage {
+                    slug
+                    __typename
+                  }
+                  ... on DatoCmsBlogPost {
+                    slug
+                    __typename
+                  }
+                }
+                linkTitle
+              }
+              ... on DatoCmsExternalLink {
+                linkTitle
+                externalLink
+              }
+            }
+            footerCtaText
+            footerCtaTitle
+            topGradiantColor {
+              hex
+            }
+            bottomGradiantColor {
+              hex
+            }
+            ctaBgColor {
+              hex
+            }
+            footerCtaTextColor
           }
-          footerCtaText
-          footerCtaTitle
-          topGradiantColor {
-            hex
-          }
-          bottomGradiantColor {
-            hex
-          }
-          ctaBgColor {
-            hex
-          }
-          footerCtaTextColor
         }
         allDatoCmsBlogCategory(filter: {category: {ne: null}}) {
           nodes {
@@ -1061,10 +1064,15 @@ console.log('**************************************************** CONTEXT: ', pr
           otherPosts.push(result.data.allDatoCmsBlogPost.nodes[i])
         }
 
+
+        
+
         result.data.allDatoCmsBlogPost.nodes.forEach(async function(item) {
           
           const createBlogPostPage = async (item, p, locale, category) => {
             if(item.title) {
+              const localBlogPage = result.data.allDatoCmsBlogPage.nodes.find(bp => bp.locale === locale)
+
               await createPage({
                 path: p,
                 component: path.resolve(`./src/templates/blogPost/blogPost.js`),
@@ -1078,14 +1086,14 @@ console.log('**************************************************** CONTEXT: ', pr
                   category: category || item.category,
                   readLength: item.readLength,
                   date: item.date,
-                  ctaBackgroundColor: result.data.datoCmsBlogPage.ctaBgColor,
-                  textColor: result.data.datoCmsBlogPage.footerCtaTextColor,
-                  topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
-                  bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
-                  footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
-                  footerCtaText: result.data.datoCmsBlogPage.footerCtaText,
-                  ctaLinks: result.data.datoCmsBlogPage.ctaLinks,
-                  otherPostsTitle: result.data.datoCmsBlogPage.otherPostsTitle,
+                  ctaBackgroundColor: localBlogPage.ctaBgColor,
+                  textColor: localBlogPage.footerCtaTextColor,
+                  topGradiantColor: localBlogPage.topGradiantColor ? localBlogPage.topGradiantColor.hex : "#004BD5",
+                  bottomGradiantColor: localBlogPage.bottomGradiantColor ? localBlogPage.bottomGradiantColor.hex : "#62C9FF",
+                  footerCtaTitle: localBlogPage.footerCtaTitle,
+                  footerCtaText: localBlogPage.footerCtaText,
+                  ctaLinks: localBlogPage.ctaLinks,
+                  otherPostsTitle: localBlogPage.otherPostsTitle,
                   otherPosts: otherPosts,
                   seoMetaTags: item.seoMetaTags,
                   locale: locale
@@ -1220,6 +1228,7 @@ console.log('**************************************************** CONTEXT: ', pr
           //   })
           // })
 
+          const localBlogPage = result.data.allDatoCmsBlogPage.nodes.find(bp => bp.locale === locale)
 
           await createPage({
             path: p,
@@ -1227,18 +1236,18 @@ console.log('**************************************************** CONTEXT: ', pr
               context: {
                 title: item.category,
                 posts: localPosts,
-                topGradiantColor: result.data.datoCmsBlogPage.topGradiantColor ? result.data.datoCmsBlogPage.topGradiantColor.hex : "#004BD5",
-                bottomGradiantColor: result.data.datoCmsBlogPage.bottomGradiantColor ? result.data.datoCmsBlogPage.bottomGradiantColor.hex : "#62C9FF",
-                bgColor: result.data.datoCmsBlogPage.ctaBgColor,
-                textColor: result.data.datoCmsBlogPage.footerCtaTextColor,
-                footerCtaTitle: result.data.datoCmsBlogPage.footerCtaTitle,
-                footerCtaText: result.data.datoCmsBlogPage.footerCtaText,
-                ctaLinks: result.data.datoCmsBlogPage.ctaLinks,
-                quote: result.data.datoCmsBlogPage.quote,
-                person: result.data.datoCmsBlogPage.quotedPerson, 
-                quoteBgColor: result.data.datoCmsBlogPage.quoteBgColor, 
-                quoteImage: result.data.datoCmsBlogPage.quoteImage, 
-                testimonialTextColor: result.data.datoCmsBlogPage.quoteTextColor,
+                topGradiantColor: localBlogPage.topGradiantColor ? localBlogPage.topGradiantColor.hex : "#004BD5",
+                bottomGradiantColor: localBlogPage.bottomGradiantColor ? localBlogPage.bottomGradiantColor.hex : "#62C9FF",
+                bgColor: localBlogPage.ctaBgColor,
+                textColor: localBlogPage.footerCtaTextColor,
+                footerCtaTitle: localBlogPage.footerCtaTitle,
+                footerCtaText: localBlogPage.footerCtaText,
+                ctaLinks: localBlogPage.ctaLinks,
+                quote: localBlogPage.quote,
+                person: localBlogPage.quotedPerson, 
+                quoteBgColor: localBlogPage.quoteBgColor, 
+                quoteImage: localBlogPage.quoteImage, 
+                testimonialTextColor: localBlogPage.quoteTextColor,
                 locale: item.locale
               }
           })
