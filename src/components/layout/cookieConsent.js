@@ -1,19 +1,23 @@
 import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
 
+export const cookieAccepted = (name) => {
+  var re = new RegExp(`${name}=([^;]+)`)
+  var value = re.exec(document.cookie)
+  return value != null ? unescape(value[1]) : null
+}
+
+export const cookieConsent = 'cookieConsent'
+
 const CookieBanner = ({ data }) => {
   const [isCookieAccepted, setIsCookieAccepted] = useState(false)
 
   useEffect(() => {
     // check if cookie is set
-    const cookieAccepted = () => {
-      var re = new RegExp("cookieConsent=([^;]+)")
-      var value = re.exec(document.cookie)
-      return value != null ? unescape(value[1]) : null
-    }
+    
 
     // runs cookieAccepted and removes cookie banner if cookie is set, and if not set adds a cookie banner
-    if (cookieAccepted() && isCookieAccepted !== true) {
+    if (cookieAccepted(cookieConsent) && isCookieAccepted !== true) {
       setIsCookieAccepted(true)
     }
     if (isCookieAccepted) {
@@ -35,7 +39,7 @@ const CookieBanner = ({ data }) => {
     let d = new Date()
     d.setTime(d.getTime() + 30 * 24 * 60 * 60 * 1000)
     const expires = `expires=${d.toUTCString()}`
-    document.cookie = `cookieConsent=${true};${expires};path=/`
+    document.cookie = `${cookieConsent}=${true};${expires};path=/`
 
     // Remove Cookie Banner
     setIsCookieAccepted(true)
