@@ -11,6 +11,9 @@ const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
   <footer>
     <div className="container">
       <div className="row section end-sm">
+      <div className="col col-xs-12 col-sm-6 col-md-4 col-lg-2 text-left-lg center-xs start-lg space-xs space-sm space-md">
+          <LangSwitcher locales={locales} currentLocale={currentLocale} redirect={redirect}/>  
+        </div>
         {columns.sort(function (a, b) {
           return a.footerItemOrder - b.footerItemOrder;
         }).map((col, index) => (
@@ -64,9 +67,9 @@ const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
                   </li>)
                 )
               : null}
-              <li className="space-top-xs-up no-space-lg-up ">
+              {/* <li className="space-top-xs-up no-space-lg-up ">
                 <LangSwitcher locales={locales} currentLocale={currentLocale} redirect={redirect}/>            
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
