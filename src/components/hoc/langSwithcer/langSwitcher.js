@@ -16,25 +16,25 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
           setWrapperXY({y: currentLang.current.clientHeight + 16 + 2, x: currentLang.current.clientWidth + 24 + 2})
         }
 
-        // const localesArr = locales.map((l => l.locale))
+        const localesArr = locales.map((l => l.locale))
     
-        // const myLanguage = browserLang({
-        //   languages: localesArr, 
-        //   fallback: 'en',
-        // });
+        const myLanguage = browserLang({
+          languages: localesArr, 
+          fallback: 'en',
+        });
         
-        // console.log('LANG: ', myLanguage, currentLocale, locales)
+        console.log('LANG: ', browserLang(), myLanguage, currentLocale, locales)
+        console.log(window.navigator.languages && window.navigator.languages[0])
+        const currLocalePath = `${myLanguage === 'en' ? '' : myLanguage || null}/${locales.filter(l => l.locale === myLanguage)[0].value || ''}`
 
-        // const currLocalePath = `${myLanguage === 'en' ? '' : myLanguage || null}/${locales.filter(l => l.locale === myLanguage)[0].value || ''}`
-
-        // if(myLanguage !== currentLocale && redirect !== false) {
-        //   console.log('navigating to ', currLocalePath)
-        //   navigate(`/${currLocalePath}`, 
-        //     {
-        //       state: { redirect: false },
-        //     }
-        //   )
-        // }
+        if(myLanguage !== currentLocale && redirect !== false) {
+          console.log('navigating to ', currLocalePath)
+          navigate(`/${currLocalePath}`, 
+            {
+              state: { redirect: false },
+            }
+          )
+        }
 
     }, [])
 
