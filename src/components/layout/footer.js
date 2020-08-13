@@ -10,8 +10,8 @@ const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
   return (
   <footer>
     <div className="container">
-      <div className="row section end-sm">
-      <div className="col col-xs-12 col-sm-6 col-md-4 col-lg-2 text-left-lg center-xs start-lg space-xs space-sm space-md">
+      <div className="row section end-sm text-center-xs text-left-sm">
+      <div className="col col-xs-12 col-sm-6 col-md-4 col-lg-2 text-left-lg center-xs start-lg space-xs space-sm space-md flex-xs block-sm">
           <LangSwitcher locales={locales} currentLocale={currentLocale} redirect={redirect}/>  
         </div>
         {columns.sort(function (a, b) {
@@ -48,7 +48,7 @@ const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
     </div>
     <div className="footer-bottom">
       <div className="container">
-        <div className="row space-between">
+        <div className="row space-between text-center-xs text-left-sm">
           <div className="col col-sm-12 col-lg-4 text-center-sm space-xs space-sm space-md flex-lg middle-lg">
             <ul className="list-inline block-xs flex-lg menu">
               <li>
