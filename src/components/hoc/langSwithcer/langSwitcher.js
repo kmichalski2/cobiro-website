@@ -44,18 +44,21 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
             )
         }
 
-        const localesArr = locales.map((l => l.locale))
+        if(redirect !== false) {
+
+          const localesArr = locales.map((l => l.locale))
     
-        const myLanguage = browserLang({
-          languages: localesArr, 
-          fallback: 'en',
-        });
-        
-        const exactMatchLocale = localesArr.some(l => l === browserLang())
-        const partialMatchLocale = localesArr.find(l => l.includes(browserLang()))
+          const myLanguage = browserLang({
+            languages: localesArr, 
+            fallback: 'en',
+          });
+          
+          const exactMatchLocale = localesArr.some(l => l === browserLang())
+          const partialMatchLocale = localesArr.find(l => l.includes(browserLang()))
 
           const chosenLang = getCookie(chosenLangCookie)
           let lang
+
           if(chosenLang) {
             lang = chosenLang
           } else {
@@ -65,10 +68,10 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
 
           if(lang !== currentLocale || chosenLang !== currentLocale) {
             console.log('redirect', redirect)
-            if(redirect !== false) {
-              redirectUser(currLocalePath)
-            }
-          }        
+            redirectUser(currLocalePath)
+          }
+        }  
+                
         
 
     }, [])
