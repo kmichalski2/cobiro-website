@@ -25,6 +25,8 @@ import BlogLatest from "./sections/blogLatest"
 import ContactPerson from './sections/contactPerson/contactPerson'
 import PricingTables from "./sections/pricingTables/pricingTables"
 import MediaDownload from './sections/mediaDownload/mediaDownload'
+import ExpandablePersonsCard from './sections/expandablePersonsCard/expandablePersonsCard'
+
 
 // export const CurrentLocaleContext = React.createContext({})
 // export const CurrentLocaleProvicer = CurrentLocaleContext.Provider
@@ -38,10 +40,6 @@ const PageContent = ({ data, locales, redirect }) => {
         setNotificationPadding(height)
     }
 
-
-    
-
-    
   return (
     // <CurrentLocaleProvicer value={data.locale}>
     <Layout 
@@ -119,6 +117,8 @@ const PageContent = ({ data, locales, redirect }) => {
                     return <PricingTables data={data.sections[index]} key={index}/>
                 case 'MediaDownload':
                     return <MediaDownload data={data.sections[index]} key={index}/>
+                case 'ExpandablePersonsCard':
+                    return <ExpandablePersonsCard data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }
