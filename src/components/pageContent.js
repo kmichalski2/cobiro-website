@@ -40,10 +40,6 @@ const PageContent = ({ data, locales, redirect }) => {
         setNotificationPadding(height)
     }
 
-
-    
-
-    
   return (
     // <CurrentLocaleProvicer value={data.locale}>
     <Layout 
