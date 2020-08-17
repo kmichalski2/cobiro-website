@@ -16,6 +16,7 @@ module.exports = {
     siteUrl: `https://cobiro.com/`
   },
   plugins: [
+    `gatsby-plugin-polyfill-io`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     {
