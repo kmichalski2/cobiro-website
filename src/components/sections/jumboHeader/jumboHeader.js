@@ -17,7 +17,7 @@ const JumboHeader = ({ data,  notificationPadding }) => {
     <div className={[
         "col col-xs-12", 
         alignment === 'centered' ? 'col-md-8 text-center space-xs-up' : 'col-lg-6 text-left-md',
-        imageToEdges && alignment !== 'centered' ? "flex flex-column center-xs top-xs" : null
+        imageToEdges && alignment !== 'centered' ? "flex flex-column center-xs" : null
         ].join(' ')}>
       <HeaderWText 
         classes={["space-xs space-sm space-md", alignment === 'centered' || imageToEdges ? 'space-xs-up' : null].join(' ')}
