@@ -104,7 +104,7 @@
 
 	}
 	.brand img {
-		width: 6rem;
+		width: 6.2rem;
 	}
 	.brand a {
 		line-height: 0;
@@ -270,11 +270,11 @@
 
 .invert, .opened .navbarMobile div {
 
-	&.brand>a>img {
-		-webkit-filter: invert(100%); /* safari 6.0 - 9.0 */
-		filter: invert(100%);
-		transition: 0.4s ease-in-out;
-	}
+	// &.brand>a>img {
+	// 	-webkit-filter: invert(100%); /* safari 6.0 - 9.0 */
+	// 	filter: invert(100%);
+	// 	transition: 0.4s ease-in-out;
+	// }
 }
 
 .btnRight {
