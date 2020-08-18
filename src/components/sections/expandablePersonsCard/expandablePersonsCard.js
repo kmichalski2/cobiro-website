@@ -15,7 +15,7 @@ const ExpandablePersonsCard = ({ data }) => {
   const persons = [...data.people]
 
   
-  const screenWidth = window ? window.innerWidth < 680 ? 1 : window.innerWidth < 960 ? 2 : 3 : 3
+  const screenWidth = typeof window !== `undefined` ? window.innerWidth < 680 ? 1 : window.innerWidth < 960 ? 2 : 3 : 3
   const [personExpanded, setPersonExpanded] = useState(false)
 
 
