@@ -629,7 +629,7 @@ let locales
                     image {
                       alt
                       url
-                      fluid(maxWidth: 180) {
+                      fluid(maxWidth: 500) {
                         width
                         height
                         srcSet
