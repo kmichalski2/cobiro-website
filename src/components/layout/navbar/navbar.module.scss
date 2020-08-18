@@ -268,15 +268,6 @@
 	}	
 }
 
-.invert, .opened .navbarMobile div {
-
-	&.brand>a>img {
-		-webkit-filter: invert(100%); /* safari 6.0 - 9.0 */
-		filter: invert(100%);
-		transition: 0.4s ease-in-out;
-	}
-}
-
 .btnRight {
 	@include mq($until: lg) {
 			background-color: $blue;
