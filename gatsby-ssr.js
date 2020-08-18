@@ -19,7 +19,7 @@
 // ]);
 // }
 
-export const onRenderBody =({ setPostBodyComponents }, options) =>{
+export const onRenderBody =({ setPostBodyComponents }) =>{
         setPostBodyComponents([
             <script
                 src="https://cdn.polyfill.io/v3/polyfill.min.js"
