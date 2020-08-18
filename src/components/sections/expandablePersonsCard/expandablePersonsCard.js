@@ -17,9 +17,6 @@ const ExpandablePersonsCard = ({ data }) => {
   
   const screenWidth = typeof window !== `undefined` ? window.innerWidth < 680 ? 1 : window.innerWidth < 960 ? 2 : 3 : 3
   const [personExpanded, setPersonExpanded] = useState(false)
-
-
-  console.log(window.innerWidth, screenWidth, 'innerWidth')
   
   return (
     <section className="section">
@@ -52,13 +49,12 @@ const ExpandablePersonsCard = ({ data }) => {
                 </div>
                 {((index + 1) % screenWidth === 0) && index < expanded + screenWidth || index === (persons.length - 1)?
                   (expanded === index || expanded === index - 1|| expanded === index - 2) ?
-                  <>
                     <ExpandedPerson persons={persons[expanded]} expanded={expanded}/>
-                  </>
                   : null
                 : null
                 }
               </>
+              
             ))}
           </div>
         </div>

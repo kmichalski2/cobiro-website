@@ -6,7 +6,6 @@ import Classes from "../expandablePersonsCard.module.scss"
 const ExpandedPerson = ( {persons, expanded} ) => {
     
   const p = persons
-  console.log(expanded, 'expanded')
     
     return (
         <>
