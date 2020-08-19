@@ -13,7 +13,7 @@ import BlogPostsHeader from "../../components/UiElements/blogPostsHeader/blogPos
 import SEO from "../../components/seo"
 
 const BlogPost = ({pageContext}) => {
-    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, seoMetaTags, locale, writerImage, otherPostsTitle } = pageContext
+    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, seoMetaTags, locale, writerImage, otherPostsTitle, locales, location } = pageContext
     const createMarkup = (text)  => {
         return {__html: text}
     }
@@ -27,7 +27,7 @@ const BlogPost = ({pageContext}) => {
     return (
         <Layout 
             menuInverted={true}
-            // locales={ locales } 
+            locales={ locales } 
             currentLocale={locale}
             notifyerHeightHandler={notifyerHeightHandler}
             >
@@ -36,6 +36,8 @@ const BlogPost = ({pageContext}) => {
                 description={seoTags && seoTags.description ? seoTags.description : null} 
                 lang={locale}
                 meta={seoMetaTags.tags}
+                locales={locales}
+                location={location}
                 />
 
 

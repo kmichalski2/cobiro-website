@@ -5,7 +5,7 @@ import BlogPosts from '../../components/UiElements/blogPosts/blogPosts'
 import JumboCta from '../../components/sections/jumboCta/jumboCta'
 import Section from '../../components/UiElements/Section/Section'
 import FeaturedTestimonialsSingle from '../../components/sections/featuredTestimonalSingle'
-
+import SEO from "../../components/seo"
 
 const BlogCagegory = ({ pageContext }) => {
 
@@ -15,10 +15,16 @@ const BlogCagegory = ({ pageContext }) => {
         setNotificationPadding(height)
     }
 
-    const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor, locale} = pageContext
+    const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor, locale, locales, location} = pageContext
 
     return (
-        <Layout notifyerHeightHandler={notifyerHeightHandler} currentLocale={locale}>
+        <Layout notifyerHeightHandler={notifyerHeightHandler} currentLocale={locale} locales={locales}>
+             <SEO 
+                title={ title } 
+                lang={locale}
+                locales={locales}
+                location={location}
+                />
             <Section bgColor={bgColor.hex} addedPadding={notificationPadding}>
               <div className="container">
                   <div className="row middle-xs center-xs">
