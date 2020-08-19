@@ -2,7 +2,7 @@ import React from "react"
 import PageContent from "../components/pageContent"
 
 const IndexPage = ( pageContext) => {
-return <PageContent data={pageContext.pageContext.data} locales={pageContext.pageContext.locales} redirect={pageContext.location.state && pageContext.location.state.redirect }/>
+return <PageContent data={pageContext.pageContext.data} locales={pageContext.pageContext.locales} redirect={pageContext.location.state && pageContext.location.state.redirect} location={pageContext.location}/>
 }
 
 export default IndexPage

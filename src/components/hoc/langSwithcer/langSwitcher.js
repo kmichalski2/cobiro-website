@@ -64,7 +64,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
           } else {
             lang = (partialMatchLocale && !exactMatchLocale) ? partialMatchLocale : myLanguage
           }
-          const currLocalePath = `${lang === 'en' ? '' : lang || null}/${locales.filter(l => l.locale === lang)[0].value || ''}`
+          const currLocalePath = `${lang === 'en' ? '' : lang || null}/${locales && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).value || ''}`
 
           if(lang !== currentLocale || chosenLang !== currentLocale) {
             console.log('redirect', redirect)

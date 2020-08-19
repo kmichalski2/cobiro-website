@@ -26,7 +26,6 @@ const Blog = ({ pageContext }) => {
     const notifyerHeightHandler = (height) => {
         setNotificationPadding(height)
     }
-
     return (
         <Layout 
           menuInverted 
@@ -38,6 +37,8 @@ const Blog = ({ pageContext }) => {
           title={ seoTags && seoTags.title ? seoTags.title : page.title } 
           description={seoTags && seoTags.description ? seoTags.description : null} 
           lang={page.locale}
+          locales={locales}
+          location={pageContext.location}
           />
           <BlogPosts blogPosts={posts} offset={0} fixedMax={1} addedAmount={0} firstLarge horizontal searchTitle={page.searchTitle} notificationPadding={notificationPadding}/>
           <Section>
