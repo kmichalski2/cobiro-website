@@ -44,7 +44,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
             )
         }
 
-        if(redirect !== false) {
+        if(redirect !== false && locales) {
 
           const localesArr = locales.map((l => l.locale))
     

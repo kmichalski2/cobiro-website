@@ -1,6 +1,7 @@
 import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
 import logo from "../../../images/logo.svg"
+import logoInvert from "../../../images/logo_white.svg"
 import Notification from '../../UiElements/notification/notification'
 import MenuItem from './menuItem/menuItem'
 import AnyLink from '../../UiElements/AnyLink/AnyLink'
@@ -80,7 +81,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
             <div className={["col col-auto-lg", Classes.navbarMobile].join(' ')} >
               <div className={[Classes.brand, menuInverted ? Classes.invert : null, isExpanded ? Classes.invert : null, isScrolled ? Classes.invert : null].join(' ')}>
                 <AnyLink link={`/${!homeSlug ? '' : homeSlug}`} noArrow noPadding regular>
-                  <img className={Classes.logoMobile} src={logo} alt="Cobiro logo" />
+                  <img className={Classes.logoMobile} src={menuInverted || isScrolled ? logo : logoInvert} alt="Cobiro logo" />
                 </AnyLink>
               </div>
 
