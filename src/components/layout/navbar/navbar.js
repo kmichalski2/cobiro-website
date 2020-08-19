@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
-import logo from "../../../images/logo_white.svg"
+import logo from "../../../images/logo.svg"
 import Notification from '../../UiElements/notification/notification'
 import MenuItem from './menuItem/menuItem'
 import AnyLink from '../../UiElements/AnyLink/AnyLink'

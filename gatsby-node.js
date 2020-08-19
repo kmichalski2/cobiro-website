@@ -619,6 +619,43 @@ let locales
                     }
                   }
                 }
+                ... on DatoCmsExpandablePersonsCard {
+                  title
+                  text
+                  people {
+                    title
+                    text
+                    name
+                    image {
+                      alt
+                      url
+                      fluid(maxWidth: 500) {
+                        width
+                        height
+                        srcSet
+                        base64
+                        aspectRatio
+                        src
+                        sizes
+                      }
+                    }
+                    linkedinLink
+                    customLogoLink
+                    customLogo {
+                      alt
+                      url
+                      fluid(maxWidth: 200) {
+                        width
+                        srcSet
+                        src
+                        sizes
+                        height
+                        base64
+                        aspectRatio
+                      }
+                    }
+                  }
+                }
                 ... on DatoCmsPricingTable {
                   columnHeadings
                   pricingTables {
