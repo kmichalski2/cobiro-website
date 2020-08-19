@@ -1243,7 +1243,7 @@ let locales
           })
         })
 
-        result.data.allDatoCmsBlogCategory.nodes.forEach(async function(item) {
+        result.data.allDatoCmsBlogCategory.nodes.filter(n => locales.some(l => l.locale === n.locale)).forEach(async function(item) {
           const locale = item.locale
           const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
           let p = `${prefix}/${item.slug ? item.slug : ''}`
