@@ -10,8 +10,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
-
+function SEO({ description, lang, meta, title, locales, location }) {
     const { site } = useStaticQuery(
     graphql`
       query {
@@ -25,7 +24,7 @@ function SEO({ description, lang, meta, title }) {
       }
     `
   )
-
+  const url = typeof window !== 'undefined' ? window.location.origin : '';
   const metaDescription = description || site.siteMetadata.description
   return (
     <Helmet
@@ -70,6 +69,9 @@ function SEO({ description, lang, meta, title }) {
         ...meta.filter(m => m.attributes ? m.attributes : false)
       ]}
     > 
+    {locales && locales.length > 0 && locales.map(locale => 
+        <link rel="alternate" href={`${url}${locale.locale !== 'en' ? `/${locale.locale}/${locale.value || ''}` : `/${locale.value}`}`} hrefLang={locale.locale} key={locale}/>
+    )}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     </Helmet>
   )

@@ -31,7 +31,7 @@ import ExpandablePersonsCard from './sections/expandablePersonsCard/expandablePe
 // export const CurrentLocaleContext = React.createContext({})
 // export const CurrentLocaleProvicer = CurrentLocaleContext.Provider
 
-const PageContent = ({ data, locales, redirect }) => {
+const PageContent = ({ data, locales, redirect, location }) => {
     
     const hideSignUp = data.hideSignupButtons
     const [menuInverted, setMenuInverted] = useState(false)
@@ -58,6 +58,8 @@ const PageContent = ({ data, locales, redirect }) => {
         description={data.seoTags && data.seoTags.description ? data.seoTags.description : null} 
         lang={data.locale}
         meta={data.seoMetaTags.tags}
+        locales={locales}
+        location={location}
         />
         
         <main>
