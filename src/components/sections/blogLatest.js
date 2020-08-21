@@ -51,7 +51,7 @@ const BlogLatest = ({ data }) => {
         }
     `)
 
-    const locale = useContext(CurrentLocaleContext)
+    const locale = useContext(CurrentLocaleContext).locale
         
     const posts = query.allDatoCmsBlogPost.nodes.filter(post => {
            

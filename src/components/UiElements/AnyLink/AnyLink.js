@@ -9,7 +9,8 @@ import Cross from '../cross/cross'
 
 const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes, noArrow, noPadding, disabled, submitting, submitted, submitError, children, regular}) => {
 
-    const currentLang = useContext(CurrentLocaleContext)
+    const currentLang = useContext(CurrentLocaleContext).locale
+    const customLangCode = useContext(CurrentLocaleContext).customLangCode
 
     const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null, noPadding && Classes.noPadding, regular && Classes.regular].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
     
@@ -17,7 +18,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
         <>
         {
         link && title && internal || link && children ?
-            <Link className={ classNames } to={typeof currentLang === 'string' || currentLang instanceof String ? (currentLang === 'en' ? (link.charAt(0) === '/' ? link : `/${link}`) : `/${currentLang}/${link}`) : '/'}>
+            <Link className={ classNames } to={typeof currentLang === 'string' || currentLang instanceof String ? (currentLang === 'en' ? (link.charAt(0) === '/' ? link : `/${link}`) : `/${customLangCode || currentLang}/${link}`) : '/'}>
                 {title}
                 {children}
             </Link>
