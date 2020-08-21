@@ -9,16 +9,9 @@ require("dotenv").config({
 
 exports.createPages = async function({ graphql, actions }) {
   const { createPage } = actions
-  // const locales = ["en", "es", "da", "nb", "sv", "de", "fr", "es-ES", "it", "pt-PT", "pl-PL"]
 
-  // locales.forEach(locale => {
-  //   const prefix = locale === "en" ? "" : `/${locale}`
-  //   createPage({
-  //     path: `${prefix}/`,
-  //     component: path.resolve(`./src/templates/page.js`),
-  //     context: { locale },
-  //   })
-  // })
+  const hrefLangKey = 'hrefLang'
+  const customLangKey = 'customLang'
 
   const createLocalesArr = (nodes, prefix) => {
     // Finding slugs for other locale for this blog post
@@ -30,7 +23,7 @@ exports.createPages = async function({ graphql, actions }) {
     locales.map(l => {
       const localePost = otherLocalesPosts.find(lp => lp.locale === l.locale)
       if(localePost) {
-        postLocales.push({locale: localePost.locale, value: `${prefix ? prefix + '/' : ''}${localePost.slug}`, title: l.title})
+        postLocales.push({locale: localePost.locale, value: `${prefix ? prefix + '/' : ''}${localePost.slug}`, title: l.title, [hrefLangKey]: l.hreflangAttribute, [customLangKey]: l.languageCode})
       } else {
         postLocales.push({locale: l.locale, value: `${prefix ? prefix + '/' : ''}${enPostSlug}`, title: l.title})
       }
@@ -40,7 +33,11 @@ exports.createPages = async function({ graphql, actions }) {
     return postLocales
   }
 
-let locales
+  
+
+
+  let locales
+  
   await graphql(`
   query LanguagesPublished {
     allDatoCmsLanguage {
@@ -48,6 +45,8 @@ let locales
         locale
         title
         published
+        languageCode
+        hreflangAttribute
       }
     }
   }`).then(result => {
@@ -57,6 +56,20 @@ let locales
       locales = [...result.data.allDatoCmsLanguage.nodes]
     }
   })
+
+
+  const createPath = (locale, slug, prefix) => {
+
+    const langPrefix = locale !== 'en' ? ((locales && locales.length > 0 && locales.find(l => l.locale === locale) && locales.find(l => l.locale === locale).languageCode) || locale) : ''
+    const path = `${langPrefix}/${prefix ? prefix + '/' : ''}${slug || ''}`
+
+    return path
+
+    // const prefix = locale !== 'en' ? locale : ''
+    // let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
+  }
+
+
 
   Promise.all(
     locales.map(locale => {
@@ -886,17 +899,17 @@ let locales
       }
       `).then(result => {
         result.data.allDatoCmsPage.edges.filter((item) => item.node.title).forEach(item => {
-          const curLocale = item.node.locale
-          const prefix = curLocale !== 'en' ? curLocale : ''
-          let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
-          // let p = item.node.homepage ? '/' : `/${item.node.slug}`
+          const locale = item.node.locale
+          // const prefix = locale !== 'en' ? locale : ''
+          // let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
+          const p = createPath(locale, item.node.slug)
           actions.createPage({
             path: p,
             component: path.resolve(`./src/templates/page.js`),
             context: {
               title: item.node.title,
               data: item.node,
-              locales: item.node._allSlugLocales.filter(locale => locales.find(l => l.locale === locale.locale)).map(locale => ({...locale, value: locale.locale ==! 'en' ? `${locale.locale}/${locale.value}` : locale.value, title: locales.find(l => l.locale === locale.locale).title }))
+              locales: item.node._allSlugLocales.filter(locale => locales.find(l => l.locale === locale.locale)).map(locale => ({...locale, value: locale.locale ==! 'en' ? `${locale.locale}/${locale.value}` : locale.value, title: locales.find(l => l.locale === locale.locale).title, [hrefLangKey]: locales.find(l => l.locale === locale.locale).hreflangAttribute, [customLangKey]: locales.find(l => l.locale === locale.locale).languageCode }))
             },
           })
         })
@@ -1214,8 +1227,11 @@ let locales
             if(!item._allSlugLocales.find(sl => sl.locale === l.locale)) {
               // If a published locale does not exist in __allSlugLocales
               const locale = l.locale
-              const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
-              let p = `${prefix}/${item.slug ? item.slug : ''}`
+              // const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
+              // let p = `${prefix}/${item.slug ? item.slug : ''}`
+
+              const p = createPath(locale, item.slug, 'blog')
+
               const category = item.category.map(c => { 
                 const currCatLocale = c._allCategoryLocales.find(cl => cl.locale === locale)
                 if (currCatLocale) {
@@ -1233,8 +1249,9 @@ let locales
               createBlogPostPage(item, p, locale, category)
             } else {
               const locale = item.locale
-              const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
-              let p = `${prefix}/${item.slug ? item.slug : ''}`
+              // const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
+              // let p = `${prefix}/${item.slug ? item.slug : ''}`
+              const p = createPath(locale, item.slug, 'blog')
               // let p = item.node.homepage ? '/' : `/${item.node.slug}`
 
               posts.push(item)
@@ -1245,8 +1262,10 @@ let locales
 
         result.data.allDatoCmsBlogCategory.nodes.filter(n => locales.some(l => l.locale === n.locale)).forEach(async function(item) {
           const locale = item.locale
-          const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
-          let p = `${prefix}/${item.slug ? item.slug : ''}`
+          // const prefix = locale !== 'en' ? `${locale}/blog` : 'blog'
+          // let p = `${prefix}/${item.slug ? item.slug : ''}`
+
+          const p = createPath(locale, item.slug, 'blog')
 
           const catLocales = createLocalesArr(result.data.allDatoCmsBlogCategory.nodes, 'blog')
 
@@ -1476,8 +1495,20 @@ let locales
 
         result.data.allDatoCmsBlogPage.nodes.forEach(async function(item) {
           const locale = item.locale
-          const prefix = locale !== 'en' ? locale : ''
-          let p = `${prefix}/${item.slug ? item.slug : 'blog'}`
+          const p = createPath(locale, item.slug ? item.slug : 'blog', '')
+          
+          
+          // const prefix = locale !== 'en' ? locales.find(l => l.locale === locale).languageCode || locale : ''
+          // let p = `${prefix}/${item.slug ? item.slug : 'blog'}`
+
+
+          // const createPath = (locale, slug, prefix) => {
+
+          //   const langPrefix = locale !== 'en' ? locales.find(l => l.locale === locale).languageCode || locale : ''
+          //   const path = `${langPrefix}/${prefix ? prefix + '/' : ''}${slug || ''}`
+        
+          //   return path
+          // }
           
           const page = item
 
@@ -1541,7 +1572,7 @@ let locales
                   page: page,
                   posts: localPosts,
                   categories: result.data.allDatoCmsBlogCategory.nodes.filter(n => n.locale === locale),
-                  locales: item._allSlugLocales.filter(locale => locales.find(l => l.locale === locale.locale)).map(locale => ({...locale, value: locale.locale ==! 'en' ? `${locale.locale}/${locale.value}` : locale.value, title: locales.find(l => l.locale === locale.locale).title }))
+                  locales: item._allSlugLocales.filter(locale => locales.find(l => l.locale === locale.locale)).map(locale => ({...locale, value: locale.locale ==! 'en' ? `${locale.locale}/${locale.value}` : locale.value, title: locales.find(l => l.locale === locale.locale).title, [customLangKey]: locales.find(l => l.locale === locale.locale).languageCode, [hrefLangKey]: locales.find(l => l.locale === locale.locale).hreflangAttribute}))
                 },
               })
             }

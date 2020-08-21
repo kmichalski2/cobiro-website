@@ -8,7 +8,8 @@ import BlogPosts from '../../UiElements/blogPosts/blogPosts'
 import cloneDeep from 'lodash/cloneDeep';
 
 const BlogSearch = ({ title }) => {
-  const locale = useContext(CurrentLocaleContext)
+  const locale = useContext(CurrentLocaleContext).locale
+  
   const search = useStaticQuery(graphql`
         query SearchQuery {
           localSearchBlogposts {

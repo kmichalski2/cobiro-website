@@ -20,8 +20,6 @@ export const CurrentLocaleProvicer = CurrentLocaleContext.Provider
 const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenMenuItems, menuInverted, slug, notifyerHeightHandler, hideSignUp }) => {
   
 
-
-
   if (typeof window !== 'undefined') {
     // Make scroll behavior of internal links smooth
     // eslint-disable-next-line global-require
@@ -343,8 +341,8 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
     
   }
     return (
-    <CurrentLocaleProvicer value={currentLocale}>
-      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale || 'en'} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]} homeSlug={homeSlug}/>
+    <CurrentLocaleProvicer value={{locale: currentLocale, customLangCode: locales && locales.length > 0 && locales.find(l => l.locale === currentLocale) && locales.find(l => l.locale === currentLocale).customLang}}>
+      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale || 'en'} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]} homeSlug={homeSlug} customLangCode={locales && locales.length > 0 && locales.find(l => l.locale === currentLocale) && locales.find(l => l.locale === currentLocale).customLang} />
       {children}
       <CookieBanner />
       <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === (currentLocale || 'en'))} locales={locales} currentLocale={currentLocale || 'en'} redirect={redirect} bottomLinks={data.allDatoCmsFooterBottom.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]}/>

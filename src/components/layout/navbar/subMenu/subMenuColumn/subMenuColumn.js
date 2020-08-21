@@ -9,7 +9,8 @@ import Classes from './subMenuColumn.module.scss'
 const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borderLeft, isSingleColumn }) => {
     
     
-    const currentLocale = useContext(CurrentLocaleContext)
+    const currentLocale = useContext(CurrentLocaleContext).locale
+    const customLangCode = useContext(CurrentLocaleContext).customLangCode
 
     const subSubMenuClickHandler = (event) => {
         
@@ -32,7 +33,7 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
                 link && link.slug ?
                 <Link 
                     className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
-                    to={link && link.slug ? `${currentLocale !== 'en' ? '/' + currentLocale : ''}/${link.slug}` : "#"} 
+                    to={link && link.slug ? `${currentLocale !== 'en' ? '/' + (customLangCode || currentLocale) : ''}/${link.slug}` : "#"} 
                     target="_self" 
                     onClick={(e) => subSubMenuClickHandler(e)}>
                 
