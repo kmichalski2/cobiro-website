@@ -13,19 +13,19 @@ exports.createPages = async function({ graphql, actions }) {
   const hrefLangKey = 'hrefLang'
   const customLangKey = 'customLang'
 
-  const createLocalesArr = (nodes, prefix) => {
+  const createLocalesArr = (nodes, slug, prefix) => {
     // Finding slugs for other locale for this blog post
     let postLocales = []
 
-    const otherLocalesPosts = nodes.filter(post => post._allSlugLocales.some(sl => sl.value === post.slug))
-    const enPostSlug = otherLocalesPosts.find(lp => lp.locale === 'en').slug
+    const allLocalesPosts = nodes.filter(post => post._allSlugLocales.some(sl => sl.value === slug))
+    const enPostSlug = allLocalesPosts.find(lp => lp.locale === 'en').slug
     
     locales.map(l => {
-      const localePost = otherLocalesPosts.find(lp => lp.locale === l.locale)
+      const localePost = allLocalesPosts.find(lp => lp.locale === l.locale)
       if(localePost) {
         postLocales.push({locale: localePost.locale, value: `${prefix ? prefix + '/' : ''}${localePost.slug}`, title: l.title, [hrefLangKey]: l.hreflangAttribute, [customLangKey]: l.languageCode})
       } else {
-        postLocales.push({locale: l.locale, value: `${prefix ? prefix + '/' : ''}${enPostSlug}`, title: l.title})
+        postLocales.push({locale: l.locale, value: `${prefix ? prefix + '/' : ''}${enPostSlug}`, title: l.title, [hrefLangKey]: l.hreflangAttribute, [customLangKey]: l.languageCode})
       }
 
     })
@@ -1129,7 +1129,7 @@ exports.createPages = async function({ graphql, actions }) {
 
         result.data.allDatoCmsBlogPost.nodes.forEach(async function(item) {
 
-          const postLocales = createLocalesArr(result.data.allDatoCmsBlogPost.nodes, 'blog')
+          const postLocales = createLocalesArr(result.data.allDatoCmsBlogPost.nodes, item.slug, 'blog')
           
           const createBlogPostPage = async (item, p, locale, category) => {
             if(item.title) {
@@ -1267,7 +1267,7 @@ exports.createPages = async function({ graphql, actions }) {
 
           const p = createPath(locale, item.slug, 'blog')
 
-          const catLocales = createLocalesArr(result.data.allDatoCmsBlogCategory.nodes, 'blog')
+          const catLocales = createLocalesArr(result.data.allDatoCmsBlogCategory.nodes, item.slug, 'blog')
 
           const localPosts = result.data.allDatoCmsBlogPost.nodes.filter(post => {
            

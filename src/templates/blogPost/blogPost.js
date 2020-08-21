@@ -17,7 +17,6 @@ const BlogPost = ({pageContext}) => {
     const createMarkup = (text)  => {
         return {__html: text}
     }
-
     const [notificationPadding, setNotificationPadding] = useState(0)
 
     const notifyerHeightHandler = (height) => {
