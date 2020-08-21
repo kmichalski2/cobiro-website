@@ -63,7 +63,9 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
           } else {
             lang = (partialMatchLocale && !exactMatchLocale) ? partialMatchLocale : myLanguage
           }
-          const currLocalePath = `${lang === 'en' ? '' : lang || null}/${locales && locales.length > 0 && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).value || ''}`
+          const currLocalePath = `${lang === 'en' ? '' : (locales && locales.length > 0 && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).customLang || lang) || null}/${locales && locales.length > 0 && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).value || ''}`
+
+          console.log(currLocalePath)
 
           if(lang !== currentLocale || chosenLang !== currentLocale) {
             console.log('redirect', redirect)
