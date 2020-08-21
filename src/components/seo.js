@@ -29,7 +29,8 @@ function SEO({ description, lang, meta, title, locales, location }) {
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        // lang
+        lang: (locales && locales.length > 0 && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).hrefLang) || lang,
       }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
@@ -70,7 +71,7 @@ function SEO({ description, lang, meta, title, locales, location }) {
       ]}
     > 
     {locales && locales.length > 0 && locales.map(locale => 
-        <link rel="alternate" href={`${url}${locale.locale !== 'en' ? `/${locale.locale}/${locale.value || ''}` : `/${locale.value}`}`} hrefLang={locale.locale} key={locale}/>
+        <link rel="alternate" href={`${url}${locale.locale !== 'en' ? `/${locale.customLang || locale.locale}/${locale.value || ''}` : `/${locale.value}`}`} hrefLang={locale.hrefLang || locale.locale} key={locale}/>
     )}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     </Helmet>

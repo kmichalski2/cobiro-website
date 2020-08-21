@@ -9,7 +9,6 @@ import langStyles from './langSwitcher.module.scss'
 const LangSwitcher = ({ locales, currentLocale, redirect }) => {
   const [wrapperXY, setWrapperXY] = useState(null)
   
-
     let currentLang = React.createRef();
     const chosenLangCookie = 'chosenLang'
 
@@ -64,7 +63,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
           } else {
             lang = (partialMatchLocale && !exactMatchLocale) ? partialMatchLocale : myLanguage
           }
-          const currLocalePath = `${lang === 'en' ? '' : lang || null}/${locales && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).value || ''}`
+          const currLocalePath = `${lang === 'en' ? '' : lang || null}/${locales && locales.length > 0 && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).value || ''}`
 
           if(lang !== currentLocale || chosenLang !== currentLocale) {
             console.log('redirect', redirect)
@@ -79,7 +78,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
     const langSwitcherClickHandler = (e, l) => {
       e.preventDefault()
 
-      const path = `${l.locale === 'en' ? '/' : `/${l.locale}`}/${l.value || ''}`
+      const path = `${l.locale === 'en' ? '/' : `/${l.customLang || l.locale}`}/${l.value || ''}`
       if(cookieAccepted(cookieConsent)) {
 
         // Setting Cookie
@@ -106,7 +105,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
                 
                   <Link 
                     onClick={(e) => langSwitcherClickHandler(e, l)}
-                    to={`${l.locale === 'en' ? '' : `/${l.locale}`}/${l.value || ''}`} style={{color: 'white'}}
+                    to={`${l.locale === 'en' ? '' : `/${l.customLang || l.locale}`}/${l.value || ''}`} style={{color: 'white'}}
                     state={{ redirect: false }}>
                       {l.title}
                   </Link>
