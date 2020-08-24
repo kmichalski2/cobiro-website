@@ -5,8 +5,13 @@ import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import AnyLink from "../components/UiElements/AnyLink/AnyLink"
 
-const NotFoundPage = () => (
-  <Layout menuInverted>
+// const location = window.location && window.location.search || ''
+
+const NotFoundPage = ({location}) => (
+  <Layout 
+    menuInverted
+    location={location}
+    >
     <SEO title="404: Not found" />
     <section className="section" style={{padding: '10rem 0'}}>
       <div className="container">

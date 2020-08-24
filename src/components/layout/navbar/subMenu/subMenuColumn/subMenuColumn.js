@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link } from "gatsby"
 import ImageAll from '../../../../UiElements/ImageAll/ImageAll'
 import AnyLink from '../../../../UiElements/AnyLink/AnyLink'
@@ -11,8 +11,14 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
     
     const currentLocale = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
+    const location = useContext(CurrentLocaleContext).location
+    
+    const [search, setSearch] = useState()
+    
+    useEffect(() => {
+        setSearch(location.search)
+    }, [location.search])
 
-    const search = typeof window !== 'undefined' ? window.location && window.location.search : null
     
     const subSubMenuClickHandler = (event) => {
         
