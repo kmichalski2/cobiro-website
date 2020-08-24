@@ -11,6 +11,7 @@ import Section from "../../components/UiElements/Section/Section"
 import BlogPosts from "../../components/UiElements/blogPosts/blogPosts"
 import BlogPostsHeader from "../../components/UiElements/blogPostsHeader/blogPostsHeader"
 import SEO from "../../components/seo"
+import AnyLink from "../../components/UiElements/AnyLink/AnyLink"
 
 const BlogPost = ({pageContext}) => {
     const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, seoMetaTags, locale, writerImage, otherPostsTitle, locales, location } = pageContext
@@ -79,13 +80,26 @@ const BlogPost = ({pageContext}) => {
                                                     
                                                         <h2>{s.title}</h2>
                                                         <div className="space-xs-up" dangerouslySetInnerHTML={createMarkup(s.text)}></div>
-                                                        {
+                                                        <AnyLink 
+                                                            to={
+                                                                !s.externalLink ? 
+                                                                    `${ s.linkInternal.internal && s.linkInternal.internal.type === 'DatoCmsBlogPost' ? "blog/" : "" }${s.linkInternal.slug}`
+                                                                : s.linkExternal ?
+                                                                    s.linkExternal
+                                                                : null
+                                                            }
+                                                            title={s.linkTitle}
+                                                            internal={!s.externalLink}
+                                                            external={s.linkExternal}
+                                                            classes={["btn btn-large", whiteText ? "btn-white" : null].join(' ')}
+                                                            />
+                                                        {/* {
                                                             !s.externalLink ?
                                                                 <Link className={["btn btn-large", whiteText ? "btn-white" : null].join(' ')} to={`${ s.linkInternal.internal && s.linkInternal.internal.type === 'DatoCmsBlogPost' ? "blog/" : "" }${s.linkInternal.slug}`}>{s.linkTitle}</Link>
                                                             : s.linkExternal ?
                                                                 <a className={["btn btn-large", whiteText ? "btn-white" : null].join(' ')} href={s.linkExternal} target="_blank">{s.linkTitle}</a>
                                                             : null
-                                                        }
+                                                        } */}
                                                     
                                                 </div>                                                    
                                             )

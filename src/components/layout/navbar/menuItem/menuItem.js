@@ -9,32 +9,8 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
     const [hovered, setHovered] = useState(false)
 
     const hasSubMenuItems = item.submenuColumn1Links.length > 0 || item.submenuColumn2Links.length > 0 || item.submenuColumn2Links.length > 0 || item.rightColumnLinks.length > 0
-    // const [subMenuExpanded, setSubMenuExpanded] = useState(false)
 
-    // const subMenuClickHandler = (event) => {
-    //     const el = event.target
-    //      if ( window.innerWidth < 960 && el.parentNode.classList.contains(Classes.subMenuParent) ) {
-    //         event.preventDefault()
-    //         setSubMenuExpanded(!subMenuExpanded)
-    //     }
-
-    //     // const el = event.target
-        
-    //     // if ( window.innerWidth < 960 && el.parentNode.classList.contains(Classes.subMenuParent) ) {
-    
-    //     //   event.preventDefault()
-          
-    //     //   if ( el.parentNode.classList.contains(Classes.expand) ) {
-    //     //     el.nextElementSibling.style.maxHeight =
-    //     //     el.nextElementSibling.offsetHeight + "px"
-    //     //     setTimeout(() => (el.nextElementSibling.style.maxHeight = null), 0)
-    //     //   } else {
-    //     //     el.nextElementSibling.style.maxHeight = el.nextElementSibling.children[0].offsetHeight + el.nextElementSibling.children[1].offsetHeight + "px"
-    //     //     setTimeout(() => (el.nextElementSibling.style.maxHeight = "none"), 400)
-    //     //   }
-    //     //   el.parentNode.classList.toggle(Classes.expand)
-    //     // }
-    //   }
+    const search = typeof window !== 'undefined' ? window.location && window.location.search : null
     
       const mouseEnterSubMenuHandler = (event) => {
         if(window.innerWidth > 959 && event.target.classList.contains(Classes.hasSubMenu)) {
@@ -51,7 +27,7 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
             <Link 
                 className={[item.submenuColumn1Links && (item.submenuColumn1Links.length > 0) ? Classes.hasSubMenu : null, subMenuExpanded === index ? Classes.subMenuExpanded : null].join(' ') } 
                 activeClassName="active"
-                to={item.link ? `${currentLocale !== 'en' ? '/' + (customLangCode || currentLocale) : ''}/${item.link.slug}` : '/#'}
+                to={(item.link ? `${currentLocale !== 'en' ? '/' + (customLangCode || currentLocale) : ''}/${item.link.slug}` : '/#') + search || ''}
                 onMouseEnter={mouseEnterSubMenuHandler} 
                 onClick={hasSubMenuItems ? (e) => expandHandler(e, index) : null}
             >
