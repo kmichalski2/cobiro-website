@@ -18,7 +18,12 @@ const BlogCagegory = ({ pageContext, location }) => {
     const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor, locale, locales} = pageContext
 
     return (
-        <Layout notifyerHeightHandler={notifyerHeightHandler} currentLocale={locale} locales={locales}>
+        <Layout 
+            notifyerHeightHandler={notifyerHeightHandler} 
+            currentLocale={locale} 
+            locales={locales}
+            location={location}
+            >
              <SEO 
                 title={ title } 
                 lang={locale}
