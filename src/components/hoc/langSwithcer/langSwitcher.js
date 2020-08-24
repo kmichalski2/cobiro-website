@@ -11,8 +11,8 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
   
     let currentLang = React.createRef();
     const chosenLangCookie = 'chosenLang'
-
-
+    const search = typeof window !== 'undefined' ? window.location && window.location.search : null
+    
     useEffect(() => {
 
       if(currentLang && currentLang.current) {
@@ -65,11 +65,9 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
           }
           const currLocalePath = `${lang === 'en' ? '' : (locales && locales.length > 0 && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).customLang || lang) || null}/${locales && locales.length > 0 && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).value || ''}`
 
-          console.log(currLocalePath)
 
           if(lang !== currentLocale || chosenLang !== currentLocale) {
-            console.log('redirect', redirect)
-            redirectUser(currLocalePath)
+            redirectUser(currLocalePath + search || '')
           }
         }  
                 
@@ -79,7 +77,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
     const langSwitcherClickHandler = (e, l) => {
       e.preventDefault()
 
-      const path = `${l.locale === 'en' ? '/' : `/${l.customLang || l.locale}`}/${l.value || ''}`
+      const path = `${l.locale === 'en' ? '/' : `/${l.customLang || l.locale}`}/${l.value || ''}${search || ''}`
       if(cookieAccepted(cookieConsent)) {
 
         // Setting Cookie
@@ -106,7 +104,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
                 
                   <Link 
                     onClick={(e) => langSwitcherClickHandler(e, l)}
-                    to={`${l.locale === 'en' ? '' : `/${l.customLang || l.locale}`}/${l.value || ''}`} style={{color: 'white'}}
+                    to={`${l.locale === 'en' ? '' : `/${l.customLang || l.locale}`}/${l.value || ''}${search || ''}`} style={{color: 'white'}}
                     state={{ redirect: false }}>
                       {l.title}
                   </Link>

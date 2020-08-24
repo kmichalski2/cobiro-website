@@ -12,6 +12,8 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
     const currentLocale = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
 
+    const search = typeof window !== 'undefined' ? window.location && window.location.search : null
+    
     const subSubMenuClickHandler = (event) => {
         
         if (window.innerWidth < 960 && event.target.parentNode.classList.contains(Classes.hasSubSubMenu)) {
@@ -33,11 +35,11 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
                 link && link.slug ?
                 <Link 
                     className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
-                    to={link && link.slug ? `${currentLocale !== 'en' ? '/' + (customLangCode || currentLocale) : ''}/${link.slug}` : "#"} 
+                    to={(link && link.slug ? `${currentLocale !== 'en' ? '/' + (customLangCode || currentLocale) : ''}/${link.slug}` : "#") + search || ''} 
                     target="_self" 
                     onClick={(e) => subSubMenuClickHandler(e)}>
                 
-                <ImageAll classes={Classes.subMenuIcon} image={icon} alt={icon && icon.alt ? icon.alt : `${title} icon`}/>
+                    <ImageAll classes={Classes.subMenuIcon} image={icon} alt={icon && icon.alt ? icon.alt : `${title} icon`}/>
                     {title}
                 </Link>
                 :
