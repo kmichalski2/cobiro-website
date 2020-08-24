@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link, navigate } from "gatsby"
 import browserLang from 'browser-lang';
 
 import {cookieAccepted, cookieConsent} from '../../layout/cookieConsent'
-
+import {CurrentLocaleContext} from '../../layout/layout'
 import langStyles from './langSwitcher.module.scss'
 
 const LangSwitcher = ({ locales, currentLocale, redirect }) => {
@@ -12,16 +12,19 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
     let currentLang = React.createRef();
     const chosenLangCookie = 'chosenLang'
 
-    const [search, setSearch] = useState('')
+    const location = useContext(CurrentLocaleContext).location
+    const search = location.search
+
+    // const [search, setSearch] = useState('')
 
     // let search = ''
     // if(typeof window !== 'undefined') {
     //     search = window.location && window.location.search || ''
     // }
     
-    useEffect(() => {
-        setSearch(window.location.search || '')
-    }, [typeof window !== 'undefined' && window.location && window.location.search])
+    // useEffect(() => {
+    //     setSearch(window.location.search || '')
+    // }, [typeof window !== 'undefined' && window.location && window.location.search])
     
     useEffect(() => {
 

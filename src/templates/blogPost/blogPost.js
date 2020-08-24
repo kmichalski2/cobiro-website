@@ -30,6 +30,7 @@ const BlogPost = ({pageContext}) => {
             locales={ locales } 
             currentLocale={locale}
             notifyerHeightHandler={notifyerHeightHandler}
+            location={location}
             >
             <SEO 
                 title={ seoTags && seoTags.title ? seoTags.title : title } 

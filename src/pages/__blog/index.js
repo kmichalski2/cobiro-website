@@ -13,7 +13,7 @@ import Section from '../../components/UiElements/Section/Section'
 import FeaturedTestimonialsSingle from '../../components/sections/featuredTestimonalSingle'
 import SEO from '../../components/seo'
 
-const Blog = ({ data }) => {
+const Blog = ({ data, location }) => {
 
   const page = data.datoCmsBlogPage
   const posts = data.allDatoCmsBlogPost.nodes
@@ -27,7 +27,11 @@ const Blog = ({ data }) => {
     }
 
     return (
-        <Layout menuInverted notifyerHeightHandler={notifyerHeightHandler}>     
+        <Layout 
+          menuInverted 
+          notifyerHeightHandler={notifyerHeightHandler}
+          location={location}
+          >     
         <SEO 
           title={ seoTags && seoTags.title ? seoTags.title : page.title } 
           description={seoTags && seoTags.description ? seoTags.description : null} 

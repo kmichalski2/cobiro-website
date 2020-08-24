@@ -10,17 +10,22 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
 
     const currentLang = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
+    const location = useContext(CurrentLocaleContext).location
 
-    const [search, setSearch] = useState('')
+    // const [search, setSearch] = useState('')
 
     // let search = ''
     // if(typeof window !== 'undefined') {
     //     search = window.location && window.location.search || ''
     // }
     
-    useEffect(() => {
-        setSearch(window.location.search || '')
-    }, [typeof window !== 'undefined' && window.location && window.location.search])
+    // useEffect(() => {
+    //     setSearch(window.location.search || '')
+    // }, [typeof window !== 'undefined' && window.location && window.location.search])
+
+    const search = location.search
+
+    console.log('AnyLink search: ', search)
 
     const signUpIn = external && link.includes('app.cobiro.com/user/')
 
