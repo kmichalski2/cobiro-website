@@ -13,8 +13,8 @@ import BlogPostsHeader from "../../components/UiElements/blogPostsHeader/blogPos
 import SEO from "../../components/seo"
 import AnyLink from "../../components/UiElements/AnyLink/AnyLink"
 
-const BlogPost = ({pageContext}) => {
-    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, seoMetaTags, locale, writerImage, otherPostsTitle, locales, location } = pageContext
+const BlogPost = ({pageContext, location}) => {
+    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, seoMetaTags, locale, writerImage, otherPostsTitle, locales } = pageContext
     const createMarkup = (text)  => {
         return {__html: text}
     }

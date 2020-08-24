@@ -7,7 +7,7 @@ import Section from '../../components/UiElements/Section/Section'
 import FeaturedTestimonialsSingle from '../../components/sections/featuredTestimonalSingle'
 import SEO from "../../components/seo"
 
-const BlogCagegory = ({ pageContext }) => {
+const BlogCagegory = ({ pageContext, location }) => {
 
     const [notificationPadding, setNotificationPadding] = useState(0)
 
@@ -15,7 +15,7 @@ const BlogCagegory = ({ pageContext }) => {
         setNotificationPadding(height)
     }
 
-    const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor, locale, locales, location} = pageContext
+    const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor, locale, locales} = pageContext
 
     return (
         <Layout notifyerHeightHandler={notifyerHeightHandler} currentLocale={locale} locales={locales}>
