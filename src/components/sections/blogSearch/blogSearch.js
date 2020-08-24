@@ -80,10 +80,8 @@ const BlogSearch = ({ title }) => {
         setPosts(results.filter(post => {
           
           if(post.locale === locale) {
-            console.log('current locale')
             return true
           } else {
-            console.log('not current locale', locale)
             if(!post._allSlugLocales.some(sl => sl.locale === locale)) {
                 return true
             } else {
@@ -128,9 +126,6 @@ const BlogSearch = ({ title }) => {
       )
     }
   }, [query])
-
-
-  console.log(results, posts)
   
   const searchHandler = (e) => {
     e.preventDefault()

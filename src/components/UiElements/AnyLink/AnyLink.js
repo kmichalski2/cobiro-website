@@ -19,7 +19,6 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
     }, [location.search])
 
     const signUpIn = external && link.includes('app.cobiro.com/user/')
-    console.log(location)
 
     const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null, noPadding && Classes.noPadding, regular && Classes.regular].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
     
