@@ -23,7 +23,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
     //     setSearch(window.location.search || '')
     // }, [typeof window !== 'undefined' && window.location && window.location.search])
 
-    const search = location.search
+    // const search = location.search
     const signUpIn = external && link.includes('app.cobiro.com/user/')
 
     const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null, noPadding && Classes.noPadding, regular && Classes.regular].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
@@ -38,15 +38,15 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
                     typeof currentLang === 'string' || currentLang instanceof String ? 
                         (currentLang === 'en' ? 
                             (link.charAt(0) === '/' ? 
-                                link + search 
-                            : `/${link}${search}`) 
-                        : `/${customLangCode || currentLang || ''}/${link}${search}`) 
-                    : '/' + (customLangCode || currentLang || '') + search}>
+                                link + location.search 
+                            : `/${link}${location.search}`) 
+                        : `/${customLangCode || currentLang || ''}/${link}${location.search}`) 
+                    : '/' + (customLangCode || currentLang || '') + location.search}>
                 {title}
                 {children}
             </Link>
         : link && title && external || link && children ?
-            <a className={ classNames } href={`${link}${signUpIn && search ? search : ''}`} target="_blank" rel="noopener noreferrer">
+            <a className={ classNames } href={`${link}${signUpIn && location.search ? location.search : ''}`} target="_blank" rel="noopener noreferrer">
                 { title }
                 {children}
             </a>
