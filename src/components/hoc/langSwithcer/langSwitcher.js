@@ -13,7 +13,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
     const chosenLangCookie = 'chosenLang'
 
     const location = useContext(CurrentLocaleContext).location
-    const [search, setSearch] = useState()
+    const [search, setSearch] = useState(location.search)
     
     useEffect(() => {
         setSearch(location.search)
@@ -74,7 +74,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
 
 
           if(lang !== currentLocale || chosenLang !== currentLocale) {
-            redirectUser(currLocalePath + search || '')
+            redirectUser(currLocalePath + (search || ''))
           }
         }  
                 
