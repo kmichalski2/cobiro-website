@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link } from "gatsby"
 import SubMenu from '../subMenu/subMenu'
 import {CurrentLocaleContext} from '../../layout'
@@ -11,18 +11,12 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
     const hasSubMenuItems = item.submenuColumn1Links.length > 0 || item.submenuColumn2Links.length > 0 || item.submenuColumn2Links.length > 0 || item.rightColumnLinks.length > 0
 
     const location = useContext(CurrentLocaleContext).location
-    const search = location.search
+    const [search, setSearch] = useState()
     
-    // const [search, setSearch] = useState('')
+    useEffect(() => {
+        setSearch(location.search)
+    }, [location.search])
 
-    // let search = ''
-    // if(typeof window !== 'undefined') {
-    //     search = window.location && window.location.search || ''
-    // }
-    
-    // useEffect(() => {
-    //     setSearch(window.location.search || '')
-    // }, [typeof window !== 'undefined' && window.location && window.location.search])
 
     const mouseEnterSubMenuHandler = (event) => {
     if(window.innerWidth > 959 && event.target.classList.contains(Classes.hasSubMenu)) {

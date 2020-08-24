@@ -13,18 +13,12 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
     const chosenLangCookie = 'chosenLang'
 
     const location = useContext(CurrentLocaleContext).location
-    const search = location.search
-
-    // const [search, setSearch] = useState('')
-
-    // let search = ''
-    // if(typeof window !== 'undefined') {
-    //     search = window.location && window.location.search || ''
-    // }
+    const [search, setSearch] = useState()
     
-    // useEffect(() => {
-    //     setSearch(window.location.search || '')
-    // }, [typeof window !== 'undefined' && window.location && window.location.search])
+    useEffect(() => {
+        setSearch(location.search)
+    }, [location.search])
+
     
     useEffect(() => {
 

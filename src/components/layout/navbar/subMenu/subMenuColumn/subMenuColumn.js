@@ -12,18 +12,13 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
     const currentLocale = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
     const location = useContext(CurrentLocaleContext).location
-    const search = location.search
     
-    // const [search, setSearch] = useState('')
+    const [search, setSearch] = useState()
+    
+    useEffect(() => {
+        setSearch(location.search)
+    }, [location.search])
 
-    // let search = ''
-    // if(typeof window !== 'undefined') {
-    //     search = window.location && window.location.search || ''
-    // }
-    
-    // useEffect(() => {
-    //     setSearch(window.location.search || '')
-    // }, [typeof window !== 'undefined' && window.location && window.location.search])
     
     const subSubMenuClickHandler = (event) => {
         
