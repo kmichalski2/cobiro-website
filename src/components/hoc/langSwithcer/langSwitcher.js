@@ -11,13 +11,17 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
   
     let currentLang = React.createRef();
     const chosenLangCookie = 'chosenLang'
-    let search = ''
-    if(typeof window !== 'undefined') {
-        search = window.location && window.location.search || ''
-    } 
+
+    const [search, setSearch] = useState(typeof window !== 'undefined' && window.location && window.location.search || '')
+
+    // let search = ''
+    // if(typeof window !== 'undefined') {
+    //     search = window.location && window.location.search || ''
+    // } 
     
     useEffect(() => {
 
+      setSearch(typeof window !== 'undefined' && window.location && window.location.search || '')
       if(currentLang && currentLang.current) {
           setWrapperXY({y: currentLang.current.clientHeight + 16 + 2, x: currentLang.current.clientWidth + 24 + 2})
         }

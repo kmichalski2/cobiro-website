@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "gatsby"
 import SubMenu from '../subMenu/subMenu'
 
@@ -9,17 +9,22 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
     const [hovered, setHovered] = useState(false)
 
     const hasSubMenuItems = item.submenuColumn1Links.length > 0 || item.submenuColumn2Links.length > 0 || item.submenuColumn2Links.length > 0 || item.rightColumnLinks.length > 0
+    const [search, setSearch] = useState(typeof window !== 'undefined' && window.location && window.location.search || '')
 
-    let search = ''
-    if(typeof window !== 'undefined') {
-        search = window.location && window.location.search || ''
-    }
+    // let search = ''
+    // if(typeof window !== 'undefined') {
+    //     search = window.location && window.location.search || ''
+    // }
     
-      const mouseEnterSubMenuHandler = (event) => {
-        if(window.innerWidth > 959 && event.target.classList.contains(Classes.hasSubMenu)) {
-            mainMenuHoveredHandler()
-        }
-      }
+    useEffect(() => {
+        setSearch(typeof window !== 'undefined' && window.location && window.location.search || '')
+    }, [])
+
+    const mouseEnterSubMenuHandler = (event) => {
+    if(window.innerWidth > 959 && event.target.classList.contains(Classes.hasSubMenu)) {
+        mainMenuHoveredHandler()
+    }
+    }
 
     return (
         <li 
