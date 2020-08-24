@@ -11,7 +11,10 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
   
     let currentLang = React.createRef();
     const chosenLangCookie = 'chosenLang'
-    const search = typeof window !== 'undefined' ? window.location && window.location.search : null
+    let search = ''
+    if(typeof window !== 'undefined') {
+        search = window.location && window.location.search || ''
+    } 
     
     useEffect(() => {
 

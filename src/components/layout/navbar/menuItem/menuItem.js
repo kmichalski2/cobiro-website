@@ -10,7 +10,10 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
 
     const hasSubMenuItems = item.submenuColumn1Links.length > 0 || item.submenuColumn2Links.length > 0 || item.submenuColumn2Links.length > 0 || item.rightColumnLinks.length > 0
 
-    const search = typeof window !== 'undefined' ? window.location && window.location.search : null
+    let search = ''
+    if(typeof window !== 'undefined') {
+        search = window.location && window.location.search || ''
+    }
     
       const mouseEnterSubMenuHandler = (event) => {
         if(window.innerWidth > 959 && event.target.classList.contains(Classes.hasSubMenu)) {

@@ -12,7 +12,10 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
     const currentLocale = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
 
-    const search = typeof window !== 'undefined' ? window.location && window.location.search : null
+    let search = ''
+    if(typeof window !== 'undefined') {
+        search = window.location && window.location.search || ''
+    }
     
     const subSubMenuClickHandler = (event) => {
         
