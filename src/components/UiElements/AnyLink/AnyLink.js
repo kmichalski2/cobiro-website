@@ -11,7 +11,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
     const currentLang = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
 
-    const [search, setSearch] = useState(typeof window !== 'undefined' && window.location && window.location.search || '')
+    const [search, setSearch] = useState('')
 
     // let search = ''
     // if(typeof window !== 'undefined') {
@@ -19,8 +19,9 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
     // }
     
     useEffect(() => {
-        setSearch(typeof window !== 'undefined' && window.location && window.location.search || '')
-    }, [])
+        setSearch(window.location.search || '')
+    }, [typeof window !== 'undefined' && window.location && window.location.search])
+
     const signUpIn = external && link.includes('app.cobiro.com/user/')
 
     const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null, noPadding && Classes.noPadding, regular && Classes.regular].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
@@ -29,7 +30,16 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
         <>
         {
         link && title && internal || link && children ?
-            <Link className={ classNames } to={typeof currentLang === 'string' || currentLang instanceof String ? (currentLang === 'en' ? (link.charAt(0) === '/' ? link + search : `/${link}${search}`) : `/${customLangCode || currentLang || ''}/${link}${search}`) : '/' + (customLangCode || currentLang || '') + search}>
+            <Link 
+                className={ classNames } 
+                to={
+                    typeof currentLang === 'string' || currentLang instanceof String ? 
+                        (currentLang === 'en' ? 
+                            (link.charAt(0) === '/' ? 
+                                link + search 
+                            : `/${link}${search}`) 
+                        : `/${customLangCode || currentLang || ''}/${link}${search}`) 
+                    : '/' + (customLangCode || currentLang || '') + search}>
                 {title}
                 {children}
             </Link>

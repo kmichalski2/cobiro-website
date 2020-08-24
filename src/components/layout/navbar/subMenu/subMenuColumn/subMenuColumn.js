@@ -12,7 +12,7 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
     const currentLocale = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
 
-    const [search, setSearch] = useState(typeof window !== 'undefined' && window.location && window.location.search || '')
+    const [search, setSearch] = useState('')
 
     // let search = ''
     // if(typeof window !== 'undefined') {
@@ -20,8 +20,8 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
     // }
     
     useEffect(() => {
-        setSearch(typeof window !== 'undefined' && window.location && window.location.search || '')
-    }, [])
+        setSearch(window.location.search || '')
+    }, [typeof window !== 'undefined' && window.location && window.location.search])
     
     const subSubMenuClickHandler = (event) => {
         

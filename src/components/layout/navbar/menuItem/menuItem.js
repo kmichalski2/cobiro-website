@@ -9,7 +9,8 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
     const [hovered, setHovered] = useState(false)
 
     const hasSubMenuItems = item.submenuColumn1Links.length > 0 || item.submenuColumn2Links.length > 0 || item.submenuColumn2Links.length > 0 || item.rightColumnLinks.length > 0
-    const [search, setSearch] = useState(typeof window !== 'undefined' && window.location && window.location.search || '')
+    
+    const [search, setSearch] = useState('')
 
     // let search = ''
     // if(typeof window !== 'undefined') {
@@ -17,8 +18,8 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
     // }
     
     useEffect(() => {
-        setSearch(typeof window !== 'undefined' && window.location && window.location.search || '')
-    }, [])
+        setSearch(window.location.search || '')
+    }, [typeof window !== 'undefined' && window.location && window.location.search])
 
     const mouseEnterSubMenuHandler = (event) => {
     if(window.innerWidth > 959 && event.target.classList.contains(Classes.hasSubMenu)) {
