@@ -1,5 +1,6 @@
 import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
+import AnyLink from "../UiElements/AnyLink/AnyLink"
 
 export const cookieAccepted = (name) => {
   var re = new RegExp(`${name}=([^;]+)`)
@@ -53,7 +54,7 @@ const CookieBanner = ({ data }) => {
       <div id="cookie-banner">
         <p className="p-cookie">
           This website uses cookies to ensure you get the best experience on our
-          website. <Link to="/privacy-policy">Learn more</Link>
+          website. <AnyLink internal link="/privacy-policy" title={'Learn more'} noArrow regular/>
         </p>
         <button className="btn btn-cookies" onClick={setCookie}>
           Got it!

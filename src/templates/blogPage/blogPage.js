@@ -13,7 +13,7 @@ import Section from '../../components/UiElements/Section/Section'
 import FeaturedTestimonialsSingle from '../../components/sections/featuredTestimonalSingle'
 import SEO from '../../components/seo'
 
-const Blog = ({ pageContext }) => {
+const Blog = ({ pageContext, location }) => {
 
   const page = pageContext.page
   const posts = pageContext.posts
@@ -32,6 +32,7 @@ const Blog = ({ pageContext }) => {
           notifyerHeightHandler={notifyerHeightHandler}
           locales={ locales }
           currentLocale={page.locale}
+          location={location}
         >     
         <SEO 
           title={ seoTags && seoTags.title ? seoTags.title : page.title } 

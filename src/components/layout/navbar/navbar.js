@@ -107,15 +107,28 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
               {!hideSignUp ?
               <div className={["visible-xs-up", Classes.mainMenuCta, subMenuExpanded !== null ? Classes.hiddenCta : null].join(' ')}>
                 {menuCta.secondaryLink && menuCta.secondaryLinkTitle ?
-                <a href={menuCta.secondaryLink} className={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
-                  {menuCta.secondaryLinkTitle}
-                </a>
+                // <a href={menuCta.secondaryLink +  search} className={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                //   {menuCta.secondaryLinkTitle}
+                // </a>
+                <AnyLink 
+                  external 
+                  link={menuCta.secondaryLink} 
+                  noArrow classes={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} 
+                  title={menuCta.secondaryLinkTitle}
+                  />
                 : null}
                 
                 {customCta && customCta.link || menuCta.primaryLink && menuCta.primaryLinkTitle ?
-                <a href={customCta && customCta.link ? customCta.link : menuCta.primaryLink} className={["btn", Classes.btnRight, !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
-                  {customCta && customCta.title ? customCta.title : menuCta.primaryLinkTitle }
-                </a>
+                // <a href={customCta && customCta.link ? customCta.link : menuCta.primaryLink} className={["btn", Classes.btnRight, !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} target="_blank" rel="noopener noreferrer">
+                //   {customCta && customCta.title ? customCta.title : menuCta.primaryLinkTitle }
+                // </a>
+                <AnyLink 
+                  external 
+                  link={customCta && customCta.link ? customCta.link : menuCta.primaryLink} 
+                  title={customCta && customCta.title ? customCta.title : menuCta.primaryLinkTitle} 
+                  classes={["btn", Classes.btnRight, !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} 
+                  noArrow 
+                  />
                 : null}       
               </div>
               : null}
