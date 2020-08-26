@@ -1,4 +1,4 @@
-@import url('https://use.typekit.net/dpj5gga.css');
+@import url("https://use.typekit.net/zul6agq.css");
 
 // @font-face {
 // 	font-family:"soleil";
@@ -24,29 +24,29 @@
 // 	font-display:swap;font-style:italic;font-weight:300;
 // 	}
 
-@font-face {
-	font-family:"soleil";
-	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
-	font-display:swap;font-style:normal;font-weight:700;
-	}
+// @font-face {
+// 	font-family:"soleil";
+// 	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
+// 	font-display:swap;font-style:normal;font-weight:700;
+// 	}
 	
-@font-face {
-	font-family:"soleil";
-	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
-	font-display:swap;font-style:normal;font-weight:200;
-	}
+// @font-face {
+// 	font-family:"soleil";
+// 	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
+// 	font-display:swap;font-style:normal;font-weight:200;
+// 	}
 	
-@font-face {
-	font-family:"soleil";
-	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
-	font-display:swap;font-style:normal;font-weight:600;
-	}
+// @font-face {
+// 	font-family:"soleil";
+// 	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
+// 	font-display:swap;font-style:normal;font-weight:600;
+// 	}
 	
-@font-face {
-	font-family:"soleil";
-	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
-	font-display:swap;font-style:italic;font-weight:300;
-	}
+// @font-face {
+// 	font-family:"soleil";
+// 	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
+// 	font-display:swap;font-style:italic;font-weight:300;
+// 	}
 	
 .tk-soleil { font-family: "soleil",sans-serif; }
 
@@ -94,7 +94,7 @@ $link-color: $blue;
 $text-color: $lightblack;
 $headings-color: $black;
 $font-family-base: 'Soleil', Arial, Sans-Serif;
-$font-weight-base: 200;
+$font-weight-base: 300;
 $headings-font-weight: 600;
 
 $border-radius: 5px;
