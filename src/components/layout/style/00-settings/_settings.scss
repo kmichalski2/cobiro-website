@@ -1,26 +1,50 @@
-// @import url('https://use.typekit.net/dpj5gga.css');
+@import url('https://use.typekit.net/dpj5gga.css');
+
+// @font-face {
+// 	font-family:"soleil";
+// 	src:url("https://use.typekit.net/af/1f781f/00000000000000003b9aef83/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/1f781f/00000000000000003b9aef83/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/1f781f/00000000000000003b9aef83/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+// 	font-display:swap;font-style:normal;font-weight:700;
+// 	}
+	
+// @font-face {
+// 	font-family:"soleil";
+// 	src:url("https://use.typekit.net/af/da0a6a/00000000000000003b9aef7a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),url("https://use.typekit.net/af/da0a6a/00000000000000003b9aef7a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),url("https://use.typekit.net/af/da0a6a/00000000000000003b9aef7a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
+// 	font-display:swap;font-style:normal;font-weight:300;
+// 	}
+	
+// @font-face {
+// 	font-family:"soleil";
+// 	src:url("https://use.typekit.net/af/273d01/00000000000000003b9aef81/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("woff2"),url("https://use.typekit.net/af/273d01/00000000000000003b9aef81/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("woff"),url("https://use.typekit.net/af/273d01/00000000000000003b9aef81/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("opentype");
+// 	font-display:swap;font-style:normal;font-weight:600;
+// 	}
+	
+// @font-face {
+// 	font-family:"soleil";
+// 	src:url("https://use.typekit.net/af/bdec83/00000000000000003b9aef7b/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff2"),url("https://use.typekit.net/af/bdec83/00000000000000003b9aef7b/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff"),url("https://use.typekit.net/af/bdec83/00000000000000003b9aef7b/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("opentype");
+// 	font-display:swap;font-style:italic;font-weight:300;
+// 	}
 
 @font-face {
 	font-family:"soleil";
-	src:url("https://use.typekit.net/af/1f781f/00000000000000003b9aef83/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/1f781f/00000000000000003b9aef83/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/1f781f/00000000000000003b9aef83/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
 	font-display:swap;font-style:normal;font-weight:700;
 	}
 	
 @font-face {
 	font-family:"soleil";
-	src:url("https://use.typekit.net/af/da0a6a/00000000000000003b9aef7a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),url("https://use.typekit.net/af/da0a6a/00000000000000003b9aef7a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),url("https://use.typekit.net/af/da0a6a/00000000000000003b9aef7a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
-	font-display:swap;font-style:normal;font-weight:300;
+	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
+	font-display:swap;font-style:normal;font-weight:200;
 	}
 	
 @font-face {
 	font-family:"soleil";
-	src:url("https://use.typekit.net/af/273d01/00000000000000003b9aef81/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("woff2"),url("https://use.typekit.net/af/273d01/00000000000000003b9aef81/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("woff"),url("https://use.typekit.net/af/273d01/00000000000000003b9aef81/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("opentype");
+	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
 	font-display:swap;font-style:normal;font-weight:600;
 	}
 	
 @font-face {
 	font-family:"soleil";
-	src:url("https://use.typekit.net/af/bdec83/00000000000000003b9aef7b/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff2"),url("https://use.typekit.net/af/bdec83/00000000000000003b9aef7b/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff"),url("https://use.typekit.net/af/bdec83/00000000000000003b9aef7b/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("opentype");
+	src:url("https://use.typekit.net/dpj5gga.css") format("woff2"),url("https://use.typekit.net/dpj5gga.css") format("woff"),url("https://use.typekit.net/dpj5gga.css") format("opentype");
 	font-display:swap;font-style:italic;font-weight:300;
 	}
 	
@@ -70,7 +94,7 @@ $link-color: $blue;
 $text-color: $lightblack;
 $headings-color: $black;
 $font-family-base: 'Soleil', Arial, Sans-Serif;
-$font-weight-base: 300;
+$font-weight-base: 200;
 $headings-font-weight: 600;
 
 $border-radius: 5px;
