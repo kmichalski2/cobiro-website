@@ -919,7 +919,7 @@ exports.createPages = async function({ graphql, actions }) {
 
       await graphql(`
       {
-        allDatoCmsBlogPost(sort: {fields: date}, filter: {title: {ne: null}}) {
+        allDatoCmsBlogPost(filter: {title: {ne: null}}, sort: {fields: date, order: DESC}) {
           nodes {
             _allSlugLocales {
               locale
@@ -1440,7 +1440,7 @@ exports.createPages = async function({ graphql, actions }) {
             subtitle
           }
         }
-        allDatoCmsBlogPost(filter: {title: {ne: null}}, sort: {fields: meta___createdAt, order: DESC}) {
+        allDatoCmsBlogPost(filter: {title: {ne: null}}, sort: {fields: date, order: DESC}) {
             nodes {
               locale
               title
