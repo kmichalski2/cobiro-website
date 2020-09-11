@@ -906,7 +906,7 @@ exports.createPages = async function({ graphql, actions }) {
 
           let matchPath
           if(item.node.slug === '404') {
-            matchPath = `/${locale}/*`
+            matchPath = `/${createPath(locale, '*')}`
           }  
 
           actions.createPage({
