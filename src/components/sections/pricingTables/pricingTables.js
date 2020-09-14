@@ -8,7 +8,8 @@ import Cross from '../../UiElements/cross/cross'
 import Label from '../../UiElements/label/label'
 
 const PricingTables = ({ data }) => {
-    const {pricingTables, columnHeadings} = data
+    console.log(data)
+    const {pricingTables, columnHeadings, pricingHeaderTable} = data
 
     const [activeCol, setActiveCol] = useState(0)
 
@@ -31,6 +32,27 @@ const PricingTables = ({ data }) => {
         <Section>
             <div className="container">
                 <div className="row">
+                    <div className="col col-xs-12 space-xs-up">
+                    <Table  
+                        headers={pricingHeaderTable.headers}
+                        activeCol={activeCol}
+                        name={' '}
+                        rows={
+                            pricingHeaderTable.row.map(r => { 
+                                return {
+                                    rowName: r.rowName, 
+                                    label: r.labelText ? <Label label={r.labelText} color={r.labelColor || "blue"}/> : null, 
+                                    nested: r.nestedRow, 
+                                    cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : [],
+                                    toolTip: r.tooltip
+                                }
+                            })
+                        }
+                         /> 
+                        
+                    </div>
+                </div>
+                <div className="row">
                     <div className="col col-xs-12">
                         
                         {pricingTables ? pricingTables.map((t, i) => 
@@ -50,8 +72,8 @@ const PricingTables = ({ data }) => {
                         : null}
                             <div key={i} className={Classes.table}>
                                 <Table  
-                                    name={t.tableName} icon={t.icon} 
-                                    headers={columnHeadings}
+                                    name={t.tableName}
+                                    // headers={columnHeadings}
                                     activeCol={activeCol}
                                     rows={
                                         t.row.map(r => { 

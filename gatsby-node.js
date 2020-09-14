@@ -698,6 +698,7 @@ exports.createPages = async function({ graphql, actions }) {
                       labelColor
                       nestedRow
                       rowName
+                      tooltip
                     }
                     tableName
                     icon {
@@ -710,6 +711,39 @@ exports.createPages = async function({ graphql, actions }) {
                         src
                         srcSet
                         width
+                      }
+                    }
+                  }
+                  pricingHeaderTable {
+                    row {
+                      columns
+                      labelText
+                      labelColor
+                      nestedRow
+                      rowName
+                      tooltip
+                    }
+                    tableName
+                    icon {
+                      url
+                      alt
+                      fixed(height: 10) {
+                        aspectRatio
+                        height
+                        sizes
+                        src
+                        srcSet
+                        width
+                      }
+                    }
+                    headers {
+                      title
+                      subtitle
+                      monthlyPrice
+                      yearlyPrice
+                      label
+                      bgColor {
+                        hex
                       }
                     }
                   }
