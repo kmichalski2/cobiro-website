@@ -11,7 +11,7 @@ import ButtonSwitch from '../../UiElements/buttonSwitch/buttonSwitch'
 const PricingTables = ({ data }) => {
     console.log(data)
 
-    const headers = data.pricingHeaderTable.headers
+    const headers = data.pricingHeaderTable && data.pricingHeaderTable.headers
     const bgColors = headers && headers.map(h => h.bgColor && h.bgColor.hex || '')
     
     const {pricingTables, pricingHeaderTable} = data
@@ -64,6 +64,9 @@ const PricingTables = ({ data }) => {
     return (
         <Section classes={Classes.tablesSection}>
             <div className="container">
+                {pricingHeaderTable ?
+                
+            
                 <div className="row space-big-xs-up">
                     <div className="col col-xs-12 text-center center">
                         <ButtonSwitch
@@ -84,9 +87,10 @@ const PricingTables = ({ data }) => {
                         />
                     </div>
                 </div>
+                : null}
                 
                 {tierSwitcher}
-                    
+                {pricingHeaderTable ?
                 <div className="row">
                     <div className="col col-xs-12 space-xs-up">
                     <Table  
@@ -110,6 +114,9 @@ const PricingTables = ({ data }) => {
                         
                     </div>
                 </div>
+                : null
+                }
+                
                 <div className="row">
                     <div className="col col-xs-12">
                         
