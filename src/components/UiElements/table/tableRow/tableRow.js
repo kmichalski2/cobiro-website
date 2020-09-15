@@ -2,13 +2,34 @@ import React from 'react'
 
 import Classes from './tableRow.module.scss'
 
-const TableRow = ({rowHeader, cols, label, nested, activeCol, toolTip}) => {
-    console.log(toolTip)
+const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, activeCol, toolTip, bgColors}) => {
+
     return (
-        <tr>
-            { rowHeader ? <th scope="row" className={nested ? Classes.nested : null}><span className={label ? Classes.marginRight : null}>{rowHeader}{toolTip}</span> {label}</th> : null }
-            { cols ? cols.map((c, i) => <td key={i} className={[activeCol ==! i ? Classes.hiddenMobile : null, Classes.tableCell].join(' ')}>{c}</td>) : null }
+        !nested || (nested && expanded) ?
+            <tr className={Classes.row}>
+            { rowHeader ? 
+                <th scope="row" className={[Classes.rowHeader, nested ? Classes.nested : null, expandHandler ? Classes.paddingLeft : null].join(' ')}>
+                    {expandHandler ?
+                        <button className={["btn btn-accordion btn-toggle btn-secondary", expanded ? "active" : null, Classes.expandButton].join(' ')} onClick={expandHandler}><span className="sr-only">Expand subrows</span></button>
+                    : null}
+                    <span className={label ? Classes.marginRight : null}>{rowHeader}</span> 
+                    {label}
+                    {toolTip ?
+                    <span className={Classes.toolTip}>
+                        <span className={[Classes.toolTipText, "text-normal text-black"].join(' ')}>
+                            {toolTip}
+                        </span>
+                    </span>
+                    : null}
+                </th> 
+            : null }
+            { cols ? cols.map((c, i) => 
+                <td key={i} className={[activeCol !== i ? Classes.hiddenMobile : null, Classes.tableCell].join(' ')} style={bgColors && bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                    {c}
+                </td>) 
+            : null }
         </tr>
+        : null
     )
 }
 

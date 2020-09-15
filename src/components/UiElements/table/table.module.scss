@@ -3,9 +3,9 @@
 .tableName {
     text-align: center !important;
 
-    @include mq($from: lg) {
-        width: 50%;
-    }
+    // @include mq($from: lg) {
+    //     width: 50%;
+    // }
 
     .icon {
         height: 1.25rem;
@@ -17,6 +17,24 @@
     font-size: 1.25rem;
     color: $black;
     text-align: center !important;
+    position: relative;
+    padding-top: 1.5rem !important;
+
+    .label {
+        font-size: 0.8rem;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 85%;
+        border: 1px solid $blue;
+        color: $blue;
+        border-radius: $border-radius;
+        background-color: #fff;
+        padding: 0.25rem 1rem;
+    }
+
+    
 }
 
 .table {
@@ -31,13 +49,14 @@
         }
     }
 
+    
     // @include mq($until: md) {
     //     display: block;
     // }
 
     tr {
         td, th {
-            padding: 2rem 1rem;
+            padding: 0.75rem 0.75rem;
             border-color: $lightgrey;
             border-width: 1px !important;
             border-left: 1px solid $lightgrey;
@@ -53,6 +72,6 @@
     // }
     tr {
         color: $black;
-        background-color: transparent !important;
+        
     }
 }
