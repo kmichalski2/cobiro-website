@@ -903,8 +903,15 @@ exports.createPages = async function({ graphql, actions }) {
           // const prefix = locale !== 'en' ? locale : ''
           // let p = `${prefix}/${item.node.slug ? item.node.slug : ''}`
           const p = createPath(locale, item.node.slug)
+
+          let matchPath
+          if(item.node.slug === '404') {
+            matchPath = `/${createPath(locale, '*')}`
+          }  
+
           actions.createPage({
             path: p,
+            matchPath: matchPath,
             component: path.resolve(`./src/templates/page.js`),
             context: {
               title: item.node.title,

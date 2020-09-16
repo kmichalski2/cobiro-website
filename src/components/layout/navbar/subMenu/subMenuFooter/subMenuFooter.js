@@ -13,7 +13,6 @@ const SubMenuFooter = ({ text, externalLink, internalLink, linkTitle }) => {
                 link={externalLink || internalLink && internalLink.slug}
                 title={linkTitle}
                 button
-                light
             />
         
     </div>

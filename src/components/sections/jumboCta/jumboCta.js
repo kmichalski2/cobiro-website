@@ -34,8 +34,8 @@ const JumboCta = ({ data }) => {
                   text={data.text}
                   links={[
                     {
-                      link: data.link || data.externalLinkCta,
-                      internal: data.link && data.link.slug ? true : false,
+                      link: data.externalLinkCta || data.link && data.link.slug,
+                      internal: !data.externalLinkUrl && data.link && (data.link.slug || data.link.slug === null) ? true : false,
                       external: data.externalLinkCta ? true : false,
                       title: data.linkTitle,
                       button: true,
@@ -46,7 +46,7 @@ const JumboCta = ({ data }) => {
                       link: data.secondaryExternalLinkUrl || data.secondaryLink && data.secondaryLink.slug,
                       title: data.secondaryLinkTitle,
                       external: data.secondaryExternalLinkUrl && true,
-                      internal: data.secondaryLink && data.secondaryLink.slug && true,
+                      internal: !data.secondaryExternalLinkUrl && data.secondaryLink && (data.secondaryLink.slug || data.secondaryLink.slug === null) && true,
                       button: true,
                       large: true,
                       secondary: true
