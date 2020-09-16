@@ -8,7 +8,6 @@ import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
 import ImageAll from "../../UiElements/ImageAll/ImageAll"
 
 const JumboHeader = ({ data,  notificationPadding }) => {
-
   const bgColor = data.bgColor ? data.bgColor.hex : null
   const alignment = data.alignment
   const imageToEdges = data.imageToEdges
@@ -33,7 +32,7 @@ const JumboHeader = ({ data,  notificationPadding }) => {
             link: data.externalLinkUrl || data.link && data.link.slug,
             title: data.linkTitle,
             external: data.externalLinkUrl && true,
-            internal: data.link && data.link.slug && true,
+            internal: !data.externalLinkUrl && data.link && (data.link.slug || data.link.slug === null) && true,
             button: true,
             large: true,
           },
@@ -42,7 +41,7 @@ const JumboHeader = ({ data,  notificationPadding }) => {
             link: data.secondaryExternalLinkUrl || data.secondaryLink && data.secondaryLink.slug,
             title: data.secondaryLinkTitle,
             external: data.secondaryExternalLinkUrl && true,
-            internal: data.secondaryLink && data.secondaryLink.slug && true,
+            internal: !data.secondaryExternalLinkUrl && data.secondaryLink && (data.secondaryLink.slug || data.link.slug === null) && true,
             button: true,
             large: true,
             secondary: true
