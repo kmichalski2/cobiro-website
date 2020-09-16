@@ -18,23 +18,25 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
         setSearch(location.search)
     }, [location.search])
 
-    const signUpIn = external && link.includes('app.cobiro.com/user/')
+    const signUpIn = external && link && link.includes('app.cobiro.com/user/')
+
+    const linkTransformed = link || (link === null && '/')
 
     const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null, noPadding && Classes.noPadding, regular && Classes.regular].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
     
     return (
         <>
         {
-        link && title && internal || link && children ?
+        linkTransformed && title && internal || linkTransformed && children ?
             <Link 
                 className={ classNames } 
                 to={
                     typeof currentLang === 'string' || currentLang instanceof String ? 
                         (currentLang === 'en' ? 
-                            (link.charAt(0) === '/' ? 
-                                link + search 
-                            : `/${link}${search}`) 
-                        : `/${customLangCode || currentLang || ''}/${link}${search}`) 
+                            (linkTransformed.charAt(0) === '/' ? 
+                            linkTransformed + search 
+                            : `/${linkTransformed}${search}`) 
+                        : `/${customLangCode || currentLang || ''}/${linkTransformed}${search}`) 
                     : '/' + (customLangCode || currentLang || '') + search}>
                 {title}
                 {children}
