@@ -692,6 +692,7 @@ exports.createPages = async function({ graphql, actions }) {
                 ... on DatoCmsPricingTable {
                   columnHeadings
                   pricingTables {
+                    expandable
                     row {
                       columns
                       labelText

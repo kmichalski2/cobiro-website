@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import Section from '../../UiElements/Section/Section'
-import Table from '../../UiElements/table/table'
+import BaseTable from '../../UiElements/table/baseTable/baseTable'
 import Checkmark from '../../UiElements/checkmark/checkmark'
 
 import Classes from './pricingTables.module.scss'
 import Cross from '../../UiElements/cross/cross'
 import Label from '../../UiElements/label/label'
 import ButtonSwitch from '../../UiElements/buttonSwitch/buttonSwitch'
+import Table from '../../UiElements/table/table'
 
 const PricingTables = ({ data }) => {
     console.log(data)
@@ -93,7 +94,7 @@ const PricingTables = ({ data }) => {
                 {pricingHeaderTable ?
                 <div className="row">
                     <div className="col col-xs-12 space-xs-up">
-                    <Table  
+                    <BaseTable  
                         headers={pricingHeaderTable.headers}
                         pricing={activePricing}
                         bgColors={bgColors}
@@ -121,13 +122,11 @@ const PricingTables = ({ data }) => {
                     <div className="col col-xs-12">
                         
                         {pricingTables ? pricingTables.map((t, i) => 
-                        <div key={i}>
-                            {tierSwitcher}
-                            <div key={i} className={Classes.table}>
-                                <h4 className="space-xs-up">{t.tableName}</h4>
-                                <Table  
-                                    // name={t.tableName}
-                                    // headers={columnHeadings}
+                            <div key={i}>
+                                {tierSwitcher}
+                                <Table 
+                                    expandable={t.expandable}
+                                    tableName={t.tableName}
                                     bgColors={bgColors}
                                     activeCol={activeCol}
                                     rows={
@@ -139,8 +138,46 @@ const PricingTables = ({ data }) => {
                                                 cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : []
                                             }
                                         })
-                                    } /> 
-                            </div>
+                                    }
+                                />
+                                {/* <div key={i} className={[Classes.table, t.expandable ? [Classes.expandable, Classes.collapsed].join(' ') : null].join(' ')}>
+                                    <div className={Classes.heading}>
+                                        <h4 className="space-xs-up">{t.tableName}</h4>
+                                        {t.expandable && 
+                                            <button 
+                                                className={
+                                                    [
+                                                        "btn btn-accordion btn-toggle btn-secondary", 
+                                                        // expanded ? "active" : null, 
+                                                        Classes.expandButton
+                                                    ].join(' ')
+                                                } 
+                                                // onClick={expandHandler}
+                                                >
+                                                    <span className="sr-only">Expand table</span>
+                                            </button>
+                                        }
+                                    </div>
+                                    <div className={Classes.tableWrapper}>
+                                        <BaseTable  
+                                            // name={t.tableName}
+                                            // headers={columnHeadings}
+                                            expandable={t.expandable}
+                                            bgColors={bgColors}
+                                            activeCol={activeCol}
+                                            rows={
+                                                t.row.map(r => { 
+                                                    return {
+                                                        rowName: r.rowName, 
+                                                        label: r.labelText ? <Label label={r.labelText} color={r.labelColor || "blue"}/> : null, 
+                                                        nested: r.nestedRow, 
+                                                        cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : []
+                                                    }
+                                                })
+                                            } 
+                                        /> 
+                                    </div>
+                                </div> */}
                             </div>
                         ) : null}
                     </div>

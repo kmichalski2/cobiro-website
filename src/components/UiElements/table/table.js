@@ -1,60 +1,74 @@
 import React, { useState } from 'react'
-
-import TableRow from './tableRow/tableRow'
-import ImageAll from '../ImageAll/ImageAll'
+import BaseTable from './baseTable/baseTable'
 
 import Classes from './table.module.scss'
 
-const Table = ({name, headers, activeCol, rows, icon, bgColors, pricing}) => {
-    const [expandedRow, setExpandedRow] = useState()
+const Table = ({expandable, tableName, bgColors, activeCol, rows}) => {
+    
+    const [maxHeight, setMaxHeight] = useState(1)
 
-    const rowExpanderCheck = (i) => {
-        let headerRow
-        for(i; i > -1; i--) {
-            if (!rows[i].nested) {
-                headerRow = i
-                break;
-            }
+    const tableWrap = React.createRef()
+
+    let rowHeights = 0
+
+    const expandClickHandler = () => {
+
+        if(maxHeight === 1) {
+            const tableHeight = tableWrap.current.firstChild.offsetHeight
+            // const tableHeight = Array.prototype.slice.call(tableWrap.current.children).reduce((accumulator, currentValue) => accumulator.offsetHeight + currentValue.offsetHeight)
+            
+            // reduce((accumulator, currentValue) => accumulator + currentValue.offsetHeight)
+                
+                
+            console.log(tableHeight)
+            setMaxHeight(tableHeight)
+        } else {
+            setMaxHeight(1)
         }
-        return headerRow || null
     }
 
-    return (
-        <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
-            {headers ?
-            <thead>
-                <tr>
-                { name ? <th className={[Classes.tableName, Classes.tableHeader].join(' ')}>{icon ? <ImageAll image={icon} alt={icon.alt || name} classes={Classes.icon} /> : null}{ name }</th> : null }
-                { headers ? headers.map((h, i) => 
-                    <th key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : null].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
-                        {h.label ? 
-                            <span className={Classes.label}>
-                                {h.label}
-                            </span> 
-                        : null}
-                        <span className="h4">{ h.title }</span>
-                        <span className="small text-normal block-xs space-small-xs-up">{h.subtitle}</span>
-                        <span className="h1 block-xs no-mt">{h[pricing]}</span>
-                    </th>) : null }
-                </tr>
-            </thead>
-            : null}
-            
-            <tbody>
-                { rows ? rows.map((r, i) =>  { 
-                    
-                    // if(r.nested) {
-                    //     rowExpanderCheck(i) 
-                    // }
-                    const subRows = rows[i + 1] && rows[i + 1].nested
+    const rowExpandHandler = (val) => {
+        
+        const oldMaxHeight = maxHeight
 
-                    return (
-                        <TableRow expanded={(r.nested ? rowExpanderCheck(i) === expandedRow : null) || expandedRow === i} expandHandler={subRows && !r.nested ? () => setExpandedRow(expandedRow !== i ? i : null) : null} key={i} rowHeader={r.rowName} label={r.label} cols={r.cols} nested={r.nested} activeCol={activeCol} toolTip={r.toolTip} bgColors={bgColors}/>
-                    )
-                })
-             : null}
-            </tbody>
-            </table>
+        rowHeights = rowHeights + val
+        console.log(val, maxHeight, rowHeights)
+        setMaxHeight(oldMaxHeight + rowHeights)
+    }
+
+    // const rowExpandHandler = (val, subtract) => {
+    //     console.log('VALUE: ', val, subtract)
+    // } 
+
+    return (
+        <div className={[Classes.table, expandable ? [Classes.expandable, maxHeight > 1 ? Classes.expanded : Classes.collapsed].join(' ') : null].join(' ')} >
+            <div className={Classes.heading}>
+                <h4 className="space-xs-up">{tableName}</h4>
+                {expandable && 
+                    <button 
+                        className={
+                            [
+                                "btn btn-accordion btn-toggle btn-secondary", 
+                                maxHeight > 1 ? "active" : null, 
+                                Classes.expandButton
+                            ].join(' ')
+                        } 
+                        onClick={() => expandClickHandler()}
+                        >
+                            <span className="sr-only">Expand table</span>
+                    </button>
+                }
+            </div>
+            <div ref={tableWrap} className={Classes.tableWrapper} style={{maxHeight: maxHeight + 'px'}}>
+                <BaseTable  
+                    expandable={expandable}
+                    bgColors={bgColors}
+                    activeCol={activeCol}
+                    rows={rows} 
+                    rowExpandHandler={rowExpandHandler}
+                /> 
+            </div>
+        </div>
     )
 }
 

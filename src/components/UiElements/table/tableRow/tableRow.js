@@ -1,18 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Classes from './tableRow.module.scss'
 
-const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, activeCol, toolTip, bgColors}) => {
+const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, activeCol, toolTip, bgColors, rowExpandHandler}) => {
+    
+    const [maxHeight, setMaxHeight] = useState(0)
+    const row = React.createRef()
+    
+    const expandClickHandler = (callback) => {
+        
+        if(expanded) {
+            const height = row.current.firstChild.offsetHeight
+            // console.log(height)
+            setMaxHeight(height)
+            rowExpandHandler(height)
+        } else {
+            // console.log(row.current.firstChild.offsetHeight)
+            
+            const height = row.current.firstChild.offsetHeight
+            rowExpandHandler(maxHeight * -1)
+            setMaxHeight(0)
+        }
+        if(callback) {
+            expandHandler(callback)
+        }
+    }
+
+    useEffect(() => {
+        console.log('EXPANDED CHANGED')
+        if(nested) {
+            expandClickHandler()
+        }
+    }, [expanded])
+
+    
 
     return (
-        !nested || (nested && expanded) ?
-            <tr className={Classes.row}>
+            <tr ref={row} className={[Classes.row, nested && !expanded ? Classes.collapsed : null].join(' ')}>
             { rowHeader ? 
                 <th scope="row" className={[Classes.rowHeader, nested ? Classes.nested : null, expandHandler ? Classes.paddingLeft : null].join(' ')}>
                     {expandHandler ?
-                        <button className={["btn btn-accordion btn-toggle btn-secondary", expanded ? "active" : null, Classes.expandButton].join(' ')} onClick={expandHandler}><span className="sr-only">Expand subrows</span></button>
+                        <button 
+                            className={["btn btn-accordion btn-toggle btn-secondary", expanded ? "active" : null, Classes.expandButton].join(' ')} 
+                            onClick={() => expandHandler()}
+                            >
+                                <span className="sr-only">Expand subrows</span>
+                        </button>
                     : null}
-                    <span className={label ? Classes.marginRight : null}>{rowHeader}</span> 
+                    <span className={[label ? Classes.marginRight : null, 'text-normal'].join(' ')}>{rowHeader}</span> 
                     {label}
                     {toolTip ?
                     <span className={Classes.toolTip}>
@@ -29,7 +64,6 @@ const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, acti
                 </td>) 
             : null }
         </tr>
-        : null
     )
 }
 

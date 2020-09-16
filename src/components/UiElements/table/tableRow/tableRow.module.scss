@@ -9,6 +9,7 @@
             background-color: $lightblue !important;
         }
     }
+    font-size: 0.8rem;
 
     @include mq($until: md) {
 
@@ -18,13 +19,21 @@
 
     }
 
+    &.collapsed {
+        display: none;
+    }
+
     .rowHeader {
         position: relative;
         
-        // @include mq($from: lg) {
-        //     width: 50%;
-        // }
+        &.paddingLeft {
+            padding-left: 2.5rem;
+        }
         .expandButton {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translate(0, -49%);
             padding: 0.6rem;
             margin-right: 0.5rem;
 
