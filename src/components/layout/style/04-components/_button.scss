@@ -44,7 +44,7 @@ $button-padding-horizontal: 1.5rem;
 	border-color: $white;
 	color: $blue;
 
-	&:hover, &:active {
+	&:hover, &:active, &:focus {
 		background-color: rgba($white, 0.8);
 		// border-color: $white;
 		color: $blue;

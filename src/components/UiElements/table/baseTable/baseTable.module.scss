@@ -37,6 +37,7 @@
     
 }
 
+
 .expandable {
     max-height: 0;
     overflow: hidden;
@@ -78,5 +79,21 @@
     tr {
         color: $black;
         
+    }
+}
+.fixedHeader {
+    position: absolute;
+    // top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    z-index: 10;  
+    .table {
+        margin-bottom: 0!important;
+    }
+    .tableHeader {
+        padding: 0.125rem 0.5rem!important;
     }
 }

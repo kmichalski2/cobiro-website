@@ -11,12 +11,9 @@ const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, acti
         
         if(expanded) {
             const height = row.current.firstChild.offsetHeight
-            // console.log(height)
             setMaxHeight(height)
             rowExpandHandler(height)
-        } else {
-            // console.log(row.current.firstChild.offsetHeight)
-            
+        } else {            
             const height = row.current.firstChild.offsetHeight
             rowExpandHandler(maxHeight * -1)
             setMaxHeight(0)
@@ -27,7 +24,6 @@ const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, acti
     }
 
     useEffect(() => {
-        console.log('EXPANDED CHANGED')
         if(nested) {
             expandClickHandler()
         }

@@ -3,8 +3,16 @@
 
 
 .tablesSection {
+    .tablesSectionInner {
+        overflow: hidden;
+    }
     .center {
         margin: auto;
+    }
+    .tableWrap:last-child {
+        >div {
+            margin-bottom: 0;
+        }
     }
 }
 

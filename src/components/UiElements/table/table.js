@@ -12,15 +12,8 @@ const Table = ({expandable, tableName, bgColors, activeCol, rows}) => {
     let rowHeights = 0
 
     const expandClickHandler = () => {
-
         if(maxHeight === 1) {
             const tableHeight = tableWrap.current.firstChild.offsetHeight
-            // const tableHeight = Array.prototype.slice.call(tableWrap.current.children).reduce((accumulator, currentValue) => accumulator.offsetHeight + currentValue.offsetHeight)
-            
-            // reduce((accumulator, currentValue) => accumulator + currentValue.offsetHeight)
-                
-                
-            console.log(tableHeight)
             setMaxHeight(tableHeight)
         } else {
             setMaxHeight(1)
@@ -28,17 +21,12 @@ const Table = ({expandable, tableName, bgColors, activeCol, rows}) => {
     }
 
     const rowExpandHandler = (val) => {
-        
         const oldMaxHeight = maxHeight
 
         rowHeights = rowHeights + val
-        console.log(val, maxHeight, rowHeights)
         setMaxHeight(oldMaxHeight + rowHeights)
+        
     }
-
-    // const rowExpandHandler = (val, subtract) => {
-    //     console.log('VALUE: ', val, subtract)
-    // } 
 
     return (
         <div className={[Classes.table, expandable ? [Classes.expandable, maxHeight > 1 ? Classes.expanded : Classes.collapsed].join(' ') : null].join(' ')} >

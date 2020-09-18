@@ -747,6 +747,8 @@ exports.createPages = async function({ graphql, actions }) {
                       monthlyPrice
                       yearlyPrice
                       label
+                      linkTitle
+                      link
                       bgColor {
                         hex
                       }
