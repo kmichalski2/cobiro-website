@@ -5,7 +5,7 @@ import Classes from './Section.module.scss'
 const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, centered, children, textColor, id, addedPadding, classes }) => {
     return (
         <section 
-            className={[classes, Classes.section, noBottomPadding ? Classes.noBottomPadding : null, paddingBottomXsSm ? Classes.paddingBottomXsSm : null].join(' ')} 
+            className={[classes ? classes : null, Classes.section, noBottomPadding ? Classes.noBottomPadding : null, paddingBottomXsSm ? Classes.paddingBottomXsSm : null].join(' ')} 
             style={ bgColor ? { backgroundColor: bgColor } : null }
             id={id}
             >
