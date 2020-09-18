@@ -1,4 +1,3 @@
-import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
 import logo from "../../../images/logo.svg"
 import logoInvert from "../../../images/logo_white.svg"
@@ -44,9 +43,10 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
   })
 
   useEffect(() => {
-    const navHeightTemp = navbarRef.current.offsetHeight
-    setNavbarHeight(navHeightTemp)
     if(navbarHeightHandler) {
+      const navHeightTemp = navbarRef.current.offsetHeight
+      setNavbarHeight(navHeightTemp)
+    
       navbarHeightHandler(navHeightTemp)
     }
   }, [navbarRef])
