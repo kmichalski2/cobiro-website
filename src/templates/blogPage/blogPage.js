@@ -22,13 +22,20 @@ const Blog = ({ pageContext, location }) => {
   const locales = pageContext.locales
 
   const [notificationPadding, setNotificationPadding] = useState(0)
+  const [navbarHeight, setNavbarHeight] = useState(0)
 
     const notifyerHeightHandler = (height) => {
         setNotificationPadding(height)
     }
+
+    const navbarHeightHandler = (height) => {
+      setNavbarHeight(height)
+    }
+
     return (
         <Layout 
           menuInverted 
+          navbarHeightHandler={navbarHeightHandler}
           notifyerHeightHandler={notifyerHeightHandler}
           locales={ locales }
           currentLocale={page.locale}
