@@ -10,7 +10,6 @@ import SEO from "../../components/seo"
 const BlogCagegory = ({ pageContext, location }) => {
 
     const [notificationPadding, setNotificationPadding] = useState(0)
-    const [navbarHeight, setNavbarHeight] = useState(0)
 
     const notifyerHeightHandler = (height) => {
         setNotificationPadding(height)
@@ -18,13 +17,8 @@ const BlogCagegory = ({ pageContext, location }) => {
 
     const {title, posts, bgColor, textColor, footerCtaTitle, footerCtaText, ctaLinks, quote, person, quoteBgColor, quoteImage, quoteTextColor, locale, locales} = pageContext
 
-    const navbarHeightHandler = (height) => {
-        setNavbarHeight(height)
-    }
-
     return (
-        <Layout
-            navbarHeightHandler={navbarHeightHandler}
+        <Layout 
             notifyerHeightHandler={notifyerHeightHandler} 
             currentLocale={locale} 
             locales={locales}

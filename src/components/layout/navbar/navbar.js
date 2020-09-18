@@ -46,7 +46,9 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
   useEffect(() => {
     const navHeightTemp = navbarRef.current.offsetHeight
     setNavbarHeight(navHeightTemp)
-    navbarHeightHandler(navHeightTemp)
+    if(navbarHeightHandler) {
+      navbarHeightHandler(navHeightTemp)
+    }
   }, [navbarRef])
 
   const resizeHandler = () => {

@@ -19,19 +19,13 @@ const BlogPost = ({pageContext, location}) => {
         return {__html: text}
     }
     const [notificationPadding, setNotificationPadding] = useState(0)
-    const [navbarHeight, setNavbarHeight] = useState(0)
 
     const notifyerHeightHandler = (height) => {
         setNotificationPadding(height)
     }
 
-    const navbarHeightHandler = (height) => {
-        setNavbarHeight(height)
-    }
-
     return (
         <Layout 
-            navbarHeightHandler={navbarHeightHandler}
             menuInverted={true}
             locales={ locales } 
             currentLocale={locale}
