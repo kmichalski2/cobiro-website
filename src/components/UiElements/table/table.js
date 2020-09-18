@@ -47,7 +47,7 @@ const Table = ({expandable, tableName, bgColors, activeCol, rows}) => {
                     </button>
                 }
             </div>
-            <div ref={tableWrap} className={Classes.tableWrapper} style={{maxHeight: maxHeight + 'px'}}>
+            <div ref={tableWrap} className={Classes.tableWrapper} style={expandable ? {maxHeight: maxHeight + 'px'} : null}>
                 <BaseTable  
                     expandable={expandable}
                     bgColors={bgColors}
