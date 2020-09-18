@@ -25,7 +25,6 @@ const PricingTables = ({ data, navbarHeight }) => {
     const [activeCol, setActiveCol] = useState(0)
     const [activePricing, setActivePricing] = useState(monthlyPricingName)
     const [headerFixed, setHeaderFixed] = useState(false)
-    const [tableHeight, setTableHeight] = useState()
     const [tableYPos, setTableYPos] = useState(0)
 
 
@@ -77,11 +76,15 @@ const PricingTables = ({ data, navbarHeight }) => {
     }
 
     useEffect(() => { 
-        tableHeader = tableHeaderRef.current   
+        if(tableHeaderRef.current) {
+            tableHeader = tableHeaderRef.current   
 
-        window.addEventListener('scroll', () => scrollHandler(), { passive: true })
+            window.addEventListener('scroll', () => scrollHandler(), { passive: true })
+
+            return () => window.removeEventListener('scroll', () => scrollHandler(), { passive: true })
+        }
  
-         return () => window.removeEventListener('scroll', () => scrollHandler(), { passive: true })
+         
      }, [navbarHeight])
 
      
