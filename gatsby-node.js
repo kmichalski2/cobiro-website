@@ -754,6 +754,17 @@ exports.createPages = async function({ graphql, actions }) {
                       }
                     }
                   }
+                  pricingFooterCtaTitle
+                  pricingFooterCtaText
+                  pricingFooterCtaLinkTitle
+                  pricingFooterCtaInternalLink {
+                    slug
+                  }
+                  pricingFooterCtaExternalLink
+                  pricingFooterCtaBgColor {
+                    hex
+                  }
+                  pricingFooterCtaTextColor
                 }
                 ... on DatoCmsFeatureList {
                   backgroundColor

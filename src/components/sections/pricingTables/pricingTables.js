@@ -8,6 +8,7 @@ import Cross from '../../UiElements/cross/cross'
 import Label from '../../UiElements/label/label'
 import ButtonSwitch from '../../UiElements/buttonSwitch/buttonSwitch'
 import Table from '../../UiElements/table/table'
+import CtaCard from '../../UiElements/ctaCard/ctaCard'
 
 const PricingTables = ({ data, navbarHeight }) => {
 
@@ -18,6 +19,8 @@ const PricingTables = ({ data, navbarHeight }) => {
 
     const monthlyPricingName = 'monthlyPrice'
     const yearlyPricingName = 'yearlyPrice'
+
+    const pricingCta = data.pricingFooterCtaTitle || data.pricingFooterCtaText 
 
     const [activeCol, setActiveCol] = useState(0)
     const [activePricing, setActivePricing] = useState(monthlyPricingName)
@@ -31,7 +34,16 @@ const PricingTables = ({ data, navbarHeight }) => {
 
     let tableHeader
 
-
+    // pricingFooterCta_title
+    // pricingFooterCtaText
+    // pricingFooterCtaLinkTitle
+    // pricingFooterCtaInternalLink {
+    //   slug
+    // }
+    // pricingFooterCtaExternalLink
+    // pricingFooterCtaBgColor {
+    //   hex
+    // }
 
     const tierElementPicker = (el) => {
         if(el === 'cross') {
@@ -149,7 +161,7 @@ const PricingTables = ({ data, navbarHeight }) => {
 
     return (
         <Section classes={Classes.tablesSection}>
-            <div className={["container", Classes.tablesSectionInner].join(' ')}>
+            <div className={["container", pricingCta ? "space-xs-up" : null, Classes.tablesSectionInner].join(' ')}>
                 {pricingHeaderTable ?
                 
             
@@ -233,8 +245,35 @@ const PricingTables = ({ data, navbarHeight }) => {
                     </div>
                 </div>
             </div>
+            {pricingCta ? 
+            <div className="container">
+                <div className="row">
+                    <div className="col col-col-xs-12">
+                        <CtaCard 
+                            title={data.pricingFooterCtaTitle}
+                            text={data.pricingFooterCtaText}
+                            internalLink={data.pricingFooterCtaInternalLink && data.pricingFooterCtaInternalLink.slug}
+                            externalLink={data.pricingFooterCtaExternalLink}
+                            linkTitle={data.pricingFooterCtaLinkTitle}
+                            bgColor={data.pricingFooterCtaBgColor && data.pricingFooterCtaBgColor.hex}
+                            lightText={data.pricingFooterCtaTextColor === 'light'}
+                        />
+                    </div>
+                </div>
+            </div>
+            : null}
         </Section>
     )
 }
+// pricingFooterCta_title
+    // pricingFooterCtaText
+    // pricingFooterCtaLinkTitle
+    // pricingFooterCtaInternalLink {
+    //   slug
+    // }
+    // pricingFooterCtaExternalLink
+    // pricingFooterCtaBgColor {
+    //   hex
+    // }
 
 export default PricingTables
