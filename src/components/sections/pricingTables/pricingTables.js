@@ -78,12 +78,13 @@ const PricingTables = ({ data, navbarHeight }) => {
     useEffect(() => { 
         if(tableHeaderRef.current) {
             tableHeader = tableHeaderRef.current   
+            if(typeof window !== 'undefined') {
 
-            window.addEventListener('scroll', () => scrollHandler(), { passive: true })
+                window.addEventListener('scroll', () => scrollHandler(), { passive: true })
 
-            return () => window.removeEventListener('scroll', () => scrollHandler(), { passive: true })
+                return () => window.removeEventListener('scroll', () => scrollHandler(), { passive: true })
+            }
         }
- 
          
      }, [navbarHeight])
 
