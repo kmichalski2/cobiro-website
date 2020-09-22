@@ -70,10 +70,12 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
           } else {
             lang = (partialMatchLocale && !exactMatchLocale) ? partialMatchLocale : myLanguage
           }
-          const currLocalePath = `${lang === 'en' ? '' : (locales && locales.length > 0 && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).customLang || lang) || null}/${locales && locales.length > 0 && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).value || ''}`
+
+          const currLangTranslationExists = locales && locales.length > 0 && locales.find(l => l.locale === lang)
+          const currLocalePath = `${lang === 'en' ? '' : (currLangTranslationExists && locales.find(l => l.locale === lang).customLang || lang) || null}/${locales && locales.length > 0 && locales.find(l => l.locale === lang) && locales.find(l => l.locale === lang).value || ''}`
 
 
-          if(lang !== currentLocale || chosenLang !== currentLocale) {
+          if(currLangTranslationExists && (lang !== currentLocale || chosenLang !== currentLocale)) {
             redirectUser(currLocalePath + (search || ''))
           }
         }  
