@@ -42,18 +42,96 @@
     max-height: 0;
     overflow: hidden;
 }
+
 .table {
-    border: 1px solid $lightgrey;
+    // border: 1px solid $lightgrey;
     table-layout: fixed;
     overflow-x: scroll;
     width: 100%;
+    border-collapse: separate;
 
     @include mq($until: md) {
         .hiddenMobile {
             display: none;
         }
+        .activeColMobile {
+            border-right: 1px solid $grey;
+            
+        }
     }
 
+    thead {
+        tr {
+            &:first-child {
+                th {
+                    border-top: 1px solid $lightgrey;
+
+                    &:first-child {
+                        border-left: 1px solid $lightgrey;
+                        border-top-left-radius: 5px;
+                    }
+                    &:last-child {
+                        border-right: 1px solid $lightgrey;
+                        border-top-right-radius: 5px;
+                    }
+
+                    @include mq($until: md) {   
+                        &.activeColMobile {
+                            border-right: 1px solid $lightgrey;
+                            border-top-right-radius: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            &:last-child {
+                // th {
+                //     border-top: 1px solid $lightgrey;
+                // }
+                th {
+                    &:first-child {
+                        border-left: 1px solid $lightgrey;
+                        border-bottom-left-radius: 5px;
+                    }
+                }
+                td {
+                    &:last-child {
+                        border-right: 1px solid $lightgrey;
+                        border-bottom-right-radius: 5px;
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    &.noHeaders {
+        tbody {
+            tr {
+                &:first-child {
+                    th {
+                        border-top: 1px solid $lightgrey;
+
+                        &:first-child {
+                            // border-left: 1px solid $lightgrey;
+                            border-top-left-radius: 5px;
+                        }
+                    }
+                    td {
+                        border-top: 1px solid $lightgrey;
+
+                        &:last-child {
+                            // border-left: 1px solid $lightgrey;
+                            border-top-right-radius: 5px;
+                        }
+                    }
+                }
+            }
+        } 
+    }
     
     
     // @include mq($until: md) {
@@ -67,8 +145,13 @@
             border-width: 1px !important;
             border-left: 1px solid $lightgrey;
             vertical-align: middle;
+
+            &:last-child {
+                border-right: hidden;
+            }
         }
     }
+    
     td {
         text-align: center !important;
         // min-width: 10rem;
@@ -78,8 +161,9 @@
     // }
     tr {
         color: $black;
-        
     }
+
+
 }
 .fixedHeader {
     position: absolute;

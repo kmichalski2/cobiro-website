@@ -16,6 +16,21 @@
         .hiddenMobile {
             display: none;
         }
+        .activeColMobile {
+            border-right: 1px solid $lightgrey;
+
+            &.topRow {
+                border-top-right-radius: 5px;
+            }
+        }
+        &:last-child {
+            .activeColMobile {
+                border-right: 1px solid $lightgrey;
+                border-bottom-right-radius: 5px;
+            }
+        }
+        
+        
 
     }
 
@@ -107,8 +122,8 @@
                     left: 0;
                     top: 50%;
                     transform: translate(-50%, -50%) rotate(135deg);
-                    border-bottom: 1px solid $grey;
-                    border-right: 1px solid $grey;
+                    border-bottom: 1px solid $lightgrey;
+                    border-right: 1px solid $lightgrey;
 
                     @include mq($from: lg) {
                         right: 0;

@@ -31,7 +31,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                 <tr>
                 { name ? <th className={[Classes.tableName, Classes.tableHeader].join(' ')}>{icon ? <ImageAll image={icon} alt={icon.alt || name} classes={Classes.icon} /> : null}{ name }</th> : null }
                 { headers ? headers.map((h, i) => 
-                    <th key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : null].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                    <th key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
                         {h.label ? 
                             <span className={Classes.label}>
                                 {h.label}
@@ -66,6 +66,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                             toolTip={r.toolTip} 
                             bgColors={bgColors}
                             rowExpandHandler={rowExpandHandler}
+                            topRow={!headers && i === 0}
                         />
                     )
                 })
@@ -81,7 +82,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                                 { name ? <th className={[Classes.tableName, Classes.tableHeader].join(' ')}>{icon ? <ImageAll image={icon} alt={icon.alt || name} classes={Classes.icon} /> : null}{ name }</th> : null }
 
                                 { headers ? headers.map((h, i) => 
-                                    <th key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : null].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                                    <th key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
                                         <span className="h5">{ h.title }</span>
                                         <span className="h3 block-xs no-mt">{h[pricing]}</span>
                                     </th>) 

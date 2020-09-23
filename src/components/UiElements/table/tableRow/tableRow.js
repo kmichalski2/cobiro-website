@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import Classes from './tableRow.module.scss'
 
-const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, activeCol, toolTip, bgColors, rowExpandHandler}) => {
+const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, activeCol, toolTip, bgColors, rowExpandHandler, topRow}) => {
     
     const [maxHeight, setMaxHeight] = useState(0)
     const row = React.createRef()
@@ -55,7 +55,7 @@ const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, acti
                 </th> 
             : null }
             { cols ? cols.map((c, i) => 
-                <td key={i} className={[activeCol !== i ? Classes.hiddenMobile : null, Classes.tableCell].join(' ')} style={bgColors && bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                <td key={i} className={[activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile, topRow ? Classes.topRow : null, Classes.tableCell].join(' ')} style={bgColors && bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
                     {c}
                 </td>) 
             : null }
