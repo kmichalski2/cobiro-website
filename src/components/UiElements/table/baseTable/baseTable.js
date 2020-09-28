@@ -1,0 +1,100 @@
+import React, { useState, useEffect } from 'react'
+
+import TableRow from '../tableRow/tableRow'
+import ImageAll from '../../ImageAll/ImageAll'
+
+import Classes from './baseTable.module.scss'
+import Fade from '../../../hoc/fade/fade'
+import AnyLink from '../../AnyLink/AnyLink'
+
+const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos}) => {
+
+    const [expandedRow, setExpandedRow] = useState()
+
+    const rowExpanderCheck = (i) => {
+        let headerRow
+        for(i; i > -1; i--) {
+            if (!rows[i].nested) {
+                headerRow = i
+                break;
+            }
+        }
+        return headerRow || null
+    }    
+
+
+    return (
+        <>
+        <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
+            {headers ?
+            <thead>
+                <tr>
+                { name ? <th className={[Classes.tableName, Classes.tableHeader].join(' ')}>{icon ? <ImageAll image={icon} alt={icon.alt || name} classes={Classes.icon} /> : null}{ name }</th> : null }
+                { headers ? headers.map((h, i) => 
+                    <th key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                        {h.label ? 
+                            <span className={Classes.label}>
+                                {h.label}
+                            </span> 
+                        : null}
+                        <span className="h4">{ h.title }</span>
+                        <span className="small text-normal block-xs space-small-xs-up">{h.subtitle}</span>
+                        <span className="h1 block-xs no-mt">{h[pricing]}</span>
+                        {h.link && h.linkTitle && <AnyLink external link={h.link} title={h.linkTitle} button classes="space-small-xs-up"/>}
+                    </th>) : null }
+                </tr>
+                
+            </thead>
+            : null}
+            
+            
+            <tbody>
+                { rows ? rows.map((r, i) =>  { 
+
+                    const subRows = rows[i + 1] && rows[i + 1].nested
+
+                    return (
+                        <TableRow 
+                            expanded={(r.nested ? rowExpanderCheck(i) === expandedRow : null) || expandedRow === i} 
+                            expandHandler={subRows && !r.nested ? () => setExpandedRow(expandedRow !== i ? i : null) : null} 
+                            key={i} 
+                            rowHeader={r.rowName} 
+                            label={r.label} 
+                            cols={r.cols} 
+                            nested={r.nested} 
+                            activeCol={activeCol} 
+                            toolTip={r.toolTip} 
+                            bgColors={bgColors}
+                            rowExpandHandler={rowExpandHandler}
+                            topRow={!headers && i === 0}
+                        />
+                    )
+                })
+             : null}
+            </tbody>
+            </table>
+            <Fade show={headers && headerFixed}>
+                <div className={[Classes.fixedHeader, "container"].join(' ')} style={navbarHeight ? {top: scrollPos + 'px'} : null}>
+                    <table className={["table space-xs-up", Classes.table].join(' ')}>
+                        <thead>
+                            <tr >
+
+                                { name ? <th className={[Classes.tableName, Classes.tableHeader].join(' ')}>{icon ? <ImageAll image={icon} alt={icon.alt || name} classes={Classes.icon} /> : null}{ name }</th> : null }
+
+                                { headers ? headers.map((h, i) => 
+                                    <th key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                                        <span className="h5">{ h.title }</span>
+                                        <span className="h3 block-xs no-mt">{h[pricing]}</span>
+                                    </th>) 
+                                : null }
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </Fade>
+             </>
+    )
+}
+
+export default BaseTable

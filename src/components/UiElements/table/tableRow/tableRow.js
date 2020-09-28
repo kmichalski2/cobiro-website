@@ -1,13 +1,64 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Classes from './tableRow.module.scss'
 
-const TableRow = ({rowHeader, cols, label, nested, activeCol}) => {
+const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, activeCol, toolTip, bgColors, rowExpandHandler, topRow}) => {
     
+    const [maxHeight, setMaxHeight] = useState(0)
+    const row = React.createRef()
+    
+    const expandClickHandler = (callback) => {
+        
+        if(expanded) {
+            const height = row.current.firstChild.offsetHeight
+            setMaxHeight(height)
+            rowExpandHandler(height)
+        } else {            
+            const height = row.current.firstChild.offsetHeight
+            rowExpandHandler(maxHeight * -1)
+            setMaxHeight(0)
+        }
+        if(callback) {
+            expandHandler(callback)
+        }
+    }
+
+    useEffect(() => {
+        if(nested) {
+            expandClickHandler()
+        }
+    }, [expanded])
+
+    
+
     return (
-        <tr>
-            { rowHeader ? <th scope="row" className={nested ? Classes.nested : null}><span className={label ? Classes.marginRight : null}>{rowHeader}</span> {label}</th> : null }
-            { cols ? cols.map((c, i) => <td key={i} className={[activeCol ==! i ? Classes.hiddenMobile : null, Classes.tableCell].join(' ')}>{c}</td>) : null }
+            <tr ref={row} className={[Classes.row, nested && !expanded ? Classes.collapsed : null].join(' ')}>
+            { rowHeader ? 
+                <th scope="row" className={[Classes.rowHeader, nested ? Classes.nested : null, expandHandler ? Classes.paddingLeft : null].join(' ')}>
+                    {expandHandler ?
+                        <button 
+                            className={["btn btn-accordion btn-toggle btn-secondary", expanded ? "active" : null, Classes.expandButton].join(' ')} 
+                            onClick={() => expandHandler()}
+                            >
+                                <span className="sr-only">Expand subrows</span>
+                        </button>
+                    : null}
+                    <span className={[label ? Classes.marginRight : null, 'text-normal'].join(' ')}>{rowHeader}</span> 
+                    {label}
+                    {toolTip ?
+                    <span className={Classes.toolTip}>
+                        <span className={[Classes.toolTipText, "text-normal text-black"].join(' ')}>
+                            {toolTip}
+                        </span>
+                    </span>
+                    : null}
+                </th> 
+            : null }
+            { cols ? cols.map((c, i) => 
+                <td key={i} className={[activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile, topRow ? Classes.topRow : null, Classes.tableCell].join(' ')} style={bgColors && bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                    {c}
+                </td>) 
+            : null }
         </tr>
     )
 }

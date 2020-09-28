@@ -1,0 +1,9 @@
+@import '../../layout/style/globals';
+
+.ctaCard {
+    padding: 3.75rem;
+
+    @include mq($until: sm) {
+        padding: 1.875rem;
+    }
+}

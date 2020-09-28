@@ -1,4 +1,3 @@
-import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
 import logo from "../../../images/logo.svg"
 import logoInvert from "../../../images/logo_white.svg"
@@ -8,7 +7,7 @@ import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 import Classes from './navbar.module.scss'
 
-const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler, hideSignUp, locales, currentLocale, menuCta, homeSlug, customLangCode }) => {
+const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler, hideSignUp, locales, currentLocale, menuCta, homeSlug, customLangCode, navbarHeightHandler }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
@@ -44,7 +43,12 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
   })
 
   useEffect(() => {
-    setNavbarHeight(navbarRef.current.offsetHeight)
+    if(navbarHeightHandler) {
+      const navHeightTemp = navbarRef.current.offsetHeight
+      setNavbarHeight(navHeightTemp)
+    
+      navbarHeightHandler(navHeightTemp)
+    }
   }, [navbarRef])
 
   const resizeHandler = () => {

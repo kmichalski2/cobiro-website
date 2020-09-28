@@ -1,24 +1,26 @@
 
 @import '../../layout/style/globals';
 
-.table {
-    margin-bottom: 3.75rem;
 
+.tablesSection {
+    .tablesSectionInner {
+        overflow: hidden;
+    }
     .center {
         margin: auto;
     }
-    .marginLeft {
-        margin-left: 1rem;
+    .tableWrap:last-child {
+        >div {
+            margin-bottom: 0;
+        }
     }
-
-    
 }
 
 .tabs {
     display: none;
     @include mq($until: md) {
     // position: fixed;
-    padding: 1.1rem 1.1rem;
+    // padding: 1.1rem 1.1rem;
     // bottom: 0;
     // left: 0;
     width: 100%;
@@ -28,6 +30,7 @@
     // box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
     // z-index: 10;
 
+    
     .tab {
         border-radius: 0;
         

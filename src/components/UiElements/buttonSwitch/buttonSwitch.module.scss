@@ -1,0 +1,23 @@
+@import '../../layout/style/globals';
+
+.buttonSwitch {
+    background-color: $lightgrey;
+    padding: 0.25rem;
+    margin: auto;
+    border-radius: $button-border-radius;
+
+    .button {
+        color: $black;
+
+        &.inactive {
+            background-color: transparent;
+            color: $black;
+            border-color: transparent;
+        }
+
+        .extraText {
+            color: $blue;
+            margin-left: 0.25rem;
+        }
+    }
+}
