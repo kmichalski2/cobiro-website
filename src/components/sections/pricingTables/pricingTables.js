@@ -27,22 +27,10 @@ const PricingTables = ({ data, navbarHeight }) => {
     const [headerFixed, setHeaderFixed] = useState(false)
     const [tableYPos, setTableYPos] = useState(0)
 
-
     const tableHeaderRef = React.createRef()
     const tablesRef = React.createRef()
 
     let tableHeader
-
-    // pricingFooterCta_title
-    // pricingFooterCtaText
-    // pricingFooterCtaLinkTitle
-    // pricingFooterCtaInternalLink {
-    //   slug
-    // }
-    // pricingFooterCtaExternalLink
-    // pricingFooterCtaBgColor {
-    //   hex
-    // }
 
     const tierElementPicker = (el) => {
         if(el === 'cross') {
@@ -87,58 +75,6 @@ const PricingTables = ({ data, navbarHeight }) => {
         }
          
      }, [navbarHeight])
-
-     
-
-    // let el
-
-
-    // let callback = (entries, observer) => {
-    //     entries.forEach(entry => {
-    //         // console.log('top', entry.boundingClientRect.top)
-    //         // console.log('window', window.pageYOffset)
-    //         const scrollPosPassedTables = entry.boundingClientRect.top < (-1 * entry.target.offsetHeight)
-            
-    //         if(entry.boundingClientRect.top < 0 && entry.boundingClientRect.top > (-1 * entry.target.offsetHeight)) {
-    //             console.log('scrolling in tables', entry.boundingClientRect.top, entry.target.offsetHeight)
-    //             setIsFixed(true)
-    //         } 
-    //         if(entry.boundingClientRect.top > 0) {
-    //             console.log('scrolling above tables', entry.boundingClientRect.top, entry.target.offsetHeight)
-    //             setIsFixed(false)
-    //         } 
-    //         if(scrollPosPassedTables) {
-    //             console.log('scrollPosPassedTables', entry.boundingClientRect.top, entry.target.offsetHeight)
-    //             setIsFixed(false)
-    //         } 
-    //       // Each entry describes an intersection change for one observed
-    //       // target element:
-    //       //   entry.boundingClientRect
-    //       //   entry.intersectionRatio
-    //       //   entry.intersectionRect
-    //       //   entry.isIntersecting
-    //       //   entry.rootBounds
-    //       //   entry.target
-    //       //   entry.time
-    //     })
-    //   }
-
-    // useEffect(() => {
-    //     el = table.current.getBoundingClientRect()
-
-        
-    //     const options = {
-    //         // root: tableSection.current,
-    //         root: null,
-    //         rootMargin: '50px 0px -100%',
-    //         threshold: 0
-    //     }
-        
-    //     const observer = new IntersectionObserver(callback, options);
-
-    //     const target = table.current;
-    //     observer.observe(target);
-    // }, [])
 
     
     const tierSwitcher = headers && headers.length > 1 ? 
@@ -200,6 +136,10 @@ const PricingTables = ({ data, navbarHeight }) => {
                         headerFixed={headerFixed}
                         scrollPos={tableYPos}
                         headers={pricingHeaderTable.headers}
+                        monthlyPriceBillingRate={pricingHeaderTable.monthlyPriceBillingRate}
+                        yearlyPriceBillingRate={pricingHeaderTable.yearlyPriceBillingRate}
+                        yearlyPriceName={yearlyPricingName}
+                        monthlyPriceName={monthlyPricingName}
                         pricing={activePricing}
                         bgColors={bgColors}
                         activeCol={activeCol}
@@ -239,7 +179,8 @@ const PricingTables = ({ data, navbarHeight }) => {
                                                 rowName: r.rowName, 
                                                 label: r.labelText ? <Label label={r.labelText} color={r.labelColor || "blue"}/> : null, 
                                                 nested: r.nestedRow, 
-                                                cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : []
+                                                cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : [],
+                                                toolTip: r.tooltip
                                             }
                                         })
                                     }
@@ -269,15 +210,5 @@ const PricingTables = ({ data, navbarHeight }) => {
         </Section>
     )
 }
-// pricingFooterCta_title
-    // pricingFooterCtaText
-    // pricingFooterCtaLinkTitle
-    // pricingFooterCtaInternalLink {
-    //   slug
-    // }
-    // pricingFooterCtaExternalLink
-    // pricingFooterCtaBgColor {
-    //   hex
-    // }
 
 export default PricingTables
