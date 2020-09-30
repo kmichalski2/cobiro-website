@@ -45,7 +45,7 @@ const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, acti
                     <span className={[label ? Classes.marginRight : null, 'text-normal'].join(' ')}>{rowHeader}</span> 
                     {label}
                     {toolTip ?
-                    <span className={Classes.toolTip}>
+                    <span className={[Classes.toolTip, "text-regular"].join(' ')}>
                         <span className={[Classes.toolTipText, "text-normal text-black"].join(' ')}>
                             {toolTip}
                         </span>
