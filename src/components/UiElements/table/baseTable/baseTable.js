@@ -7,21 +7,23 @@ import Classes from './baseTable.module.scss'
 import Fade from '../../../hoc/fade/fade'
 import AnyLink from '../../AnyLink/AnyLink'
 
-const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos}) => {
+const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, monthlyPriceName}) => {
 
-    const [expandedRow, setExpandedRow] = useState()
+    const [expandedRow, setExpandedRow] = useState(null)
 
     const rowExpanderCheck = (i) => {
-        let headerRow
+        
         for(i; i > -1; i--) {
             if (!rows[i].nested) {
-                headerRow = i
-                break;
+                return i
             }
         }
-        return headerRow || null
+        return null
     }    
 
+    const hasNumber = (myString) => {
+        return /\d/.test(myString);
+      }
 
     return (
         <>
@@ -39,14 +41,14 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                         : null}
                         <span className="h4">{ h.title }</span>
                         <span className="small text-normal block-xs space-small-xs-up">{h.subtitle}</span>
-                        <span className="h1 block-xs no-mt">{h[pricing]}</span>
+                        <span className="h2 block-xs no-mt">{h[pricing]} <span className="text-normal small">{pricing === yearlyPriceName ? yearlyPriceBillingRate : monthlyPriceBillingRate}</span></span>
+                        {pricing === yearlyPriceName && hasNumber(h[monthlyPriceName]) ? <span className={["block-xs no-mt space-xs-up text-normal text-overlined", Classes.overlinedText].join(' ')}>{h[monthlyPriceName]}</span> : pricing === yearlyPriceName ? <span className={["block-xs no-mt space-xs-up text-normal", Classes.hiddenText].join(' ')}>{h[monthlyPriceName]}</span> : null }
                         {h.link && h.linkTitle && <AnyLink external link={h.link} title={h.linkTitle} button classes="space-small-xs-up"/>}
                     </th>) : null }
                 </tr>
                 
             </thead>
             : null}
-            
             
             <tbody>
                 { rows ? rows.map((r, i) =>  { 
@@ -55,8 +57,9 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
 
                     return (
                         <TableRow 
-                            expanded={(r.nested ? rowExpanderCheck(i) === expandedRow : null) || expandedRow === i} 
+                            expanded={(r.nested ? rowExpanderCheck(i) === expandedRow : false) || expandedRow === i} 
                             expandHandler={subRows && !r.nested ? () => setExpandedRow(expandedRow !== i ? i : null) : null} 
+                            i={i}
                             key={i} 
                             rowHeader={r.rowName} 
                             label={r.label} 

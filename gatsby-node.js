@@ -718,8 +718,10 @@ exports.createPages = async function({ graphql, actions }) {
                   pricingHeaderTable {
                     monthlyPriceName
                     monthlyPriceExtraText
+                    monthlyPriceBillingRate
                     yearlyPriceName
                     yearlyPriceExtraText
+                    yearlyPriceBillingRate
                     row {
                       columns
                       labelText

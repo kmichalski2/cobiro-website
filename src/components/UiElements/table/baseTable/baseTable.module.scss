@@ -83,6 +83,14 @@
                     }
                 }
             }
+
+            .overlinedText {
+                color: $lightblack;
+                opacity: 0.3;
+            }
+            .hiddenText {
+                opacity: 0;
+            }
         }
     }
     tbody {
@@ -147,8 +155,13 @@
             vertical-align: middle;
 
             &:last-child {
-                border-right: hidden;
+                // border-right: hidden;
+                border-right: 1px solid $lightgrey;
             }
+        }
+
+        th {
+            vertical-align: top;
         }
     }
     

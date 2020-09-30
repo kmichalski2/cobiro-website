@@ -76,3 +76,44 @@ $button-padding-horizontal: 1.5rem;
 	}
 
 }
+
+.btn-toggle-small {
+	padding: 1rem;
+	position: relative;
+
+
+
+	span {
+		display: none;
+	}
+
+	&::before {
+		// content: '+';
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 1px;
+		height: 0.5rem;
+		background-color: $blue;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 0.5rem;
+		height: 1px;
+		background-color: $blue;
+	}
+
+	&.active {
+		&::before {
+			content: none;
+		}
+	}
+
+}

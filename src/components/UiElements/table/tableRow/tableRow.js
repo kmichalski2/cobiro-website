@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 
 import Classes from './tableRow.module.scss'
 
-const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, activeCol, toolTip, bgColors, rowExpandHandler, topRow}) => {
+const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, activeCol, toolTip, bgColors, rowExpandHandler, topRow, i}) => {
     
     const [maxHeight, setMaxHeight] = useState(0)
     const row = React.createRef()
     
-    const expandClickHandler = (callback) => {
-        
+    const expandChangeHandler = (callback) => {
         if(expanded) {
             const height = row.current.firstChild.offsetHeight
             setMaxHeight(height)
@@ -25,19 +24,19 @@ const TableRow = ({rowHeader, expanded, expandHandler, cols, label, nested, acti
 
     useEffect(() => {
         if(nested) {
-            expandClickHandler()
+            expandChangeHandler()
         }
     }, [expanded])
 
     
 
     return (
-            <tr ref={row} className={[Classes.row, nested && !expanded ? Classes.collapsed : null].join(' ')}>
+            <tr ref={row} className={[Classes.row, nested && !expanded ? Classes.collapsed : null, expanded && 'poo'].join(' ')}>
             { rowHeader ? 
                 <th scope="row" className={[Classes.rowHeader, nested ? Classes.nested : null, expandHandler ? Classes.paddingLeft : null].join(' ')}>
                     {expandHandler ?
                         <button 
-                            className={["btn btn-accordion btn-toggle btn-secondary", expanded ? "active" : null, Classes.expandButton].join(' ')} 
+                            className={["btn btn-accordion btn-toggle-small btn-secondary", expanded ? "active" : null, Classes.expandButton].join(' ')} 
                             onClick={() => expandHandler()}
                             >
                                 <span className="sr-only">Expand subrows</span>
