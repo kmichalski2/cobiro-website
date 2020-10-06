@@ -12,7 +12,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
     const location = useContext(CurrentLocaleContext).location
 
-    const [search, setSearch] = useState()
+    const [search, setSearch] = useState('')
     
     useEffect(() => {
         setSearch(location.search)
