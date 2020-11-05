@@ -13,6 +13,25 @@ $button-padding-horizontal: 1.5rem;
 	border-radius: 5rem;
 }
 
+.btn-unstyled {
+	font-size: 1rem;
+	font-weight: 600;
+	background-color: transparent;
+	border-color: transparent;
+	color: inherit;
+	border-radius: 5px;
+	padding: 0 0.5rem;
+
+	&:hover {
+		background-color: $lightgrey;
+		color: inherit;
+	}
+
+	&:active {
+		background-color: $grey;
+	}
+}
+
 @include mq($from: md) {
 	.btn-large {
 		font-size: 1.125rem;
