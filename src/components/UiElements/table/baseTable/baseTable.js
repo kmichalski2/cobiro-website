@@ -5,8 +5,7 @@ import ImageAll from '../../ImageAll/ImageAll'
 
 import Classes from './baseTable.module.scss'
 import Fade from '../../../hoc/fade/fade'
-// import AnyLink from '../../AnyLink/AnyLink'
-import Modal from '../../../UiElements/modal/modal'
+import PaymentModal from '../../paymentModal/paymentModal'
 
 const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, monthlyPriceName}) => {
 
@@ -30,7 +29,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
 
     return (
         <>
-        <Modal showModal={showModal} setShowModal={setShowModal}/>
+        <PaymentModal showModal={showModal} setShowModal={setShowModal} />
         <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
             {headers ?
             <thead>
@@ -48,7 +47,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                         <span className="h2 block-xs no-mt">{h[pricing]} <span className="text-normal small">{pricing === yearlyPriceName ? yearlyPriceBillingRate : monthlyPriceBillingRate}</span></span>
                         {pricing === yearlyPriceName && hasNumber(h[monthlyPriceName]) ? <span className={["block-xs no-mt space-xs-up text-normal text-overlined", Classes.overlinedText].join(' ')}>{h[monthlyPriceName]}</span> : pricing === yearlyPriceName ? <span className={["block-xs no-mt space-xs-up text-normal", Classes.hiddenText].join(' ')}>{h[monthlyPriceName]}</span> : null }
                         {/* h.link && h.linkTitle && <AnyLink external link={h.link} title={h.linkTitle} button classes="space-small-xs-up"/>*/}
-                        { h.linkTitle && <button className="btn space-small-xs-up" onClick={() => setShowModal(true)}>{h.linkTitle}</button> }
+                        { h.linkTitle && <button className="btn space-small-xs-up" onClick={() => setShowModal(h[`${pricing}Raw`])}>{h.linkTitle}</button> }
                     </th>) : null }
                 </tr>
                 
