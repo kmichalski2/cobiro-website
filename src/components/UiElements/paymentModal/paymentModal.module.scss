@@ -3,7 +3,7 @@
 .modalRight {
     text-align: left;
     display: flex column;
-    padding: 1rem;
+    padding: 1.5rem;
 
     .close {
         text-align: right!important;
@@ -12,7 +12,7 @@
 
 .modalLeft {
     text-align: left;
-    padding: 1rem;
+    padding: 2rem 1.5rem;
 
     @include mq($from: lg) {
         border-right: 1px solid $grey;
@@ -20,5 +20,9 @@
 
     @include mq($until: lg) {
         border-top: 1px solid $grey;
+    }
+
+    img {
+        vertical-align: super;
     }
 }
