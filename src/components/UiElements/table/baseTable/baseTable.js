@@ -6,7 +6,11 @@ import ImageAll from '../../ImageAll/ImageAll'
 import Classes from './baseTable.module.scss'
 import Fade from '../../../hoc/fade/fade'
 // import PaymentModal from '../../paymentModal/paymentModal'
-const PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
+let PaymentModal
+
+if(typeof window !== 'undefined') {
+    PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
+}
 
 const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, monthlyPriceName}) => {
 
@@ -39,7 +43,6 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
         <Suspense fallback={<></>}>
             <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName}/>
         </Suspense>
-        
         : null}
         <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
             {headers ?
