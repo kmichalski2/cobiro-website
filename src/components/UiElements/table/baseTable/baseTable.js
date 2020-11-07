@@ -6,11 +6,13 @@ import ImageAll from '../../ImageAll/ImageAll'
 import Classes from './baseTable.module.scss'
 import Fade from '../../../hoc/fade/fade'
 // import PaymentModal from '../../paymentModal/paymentModal'
-let PaymentModal = null
+// let PaymentModal = null
 
-if(typeof window !== 'undefined' && typeof window.location !== 'undefined') {
-    PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
-}
+// if(typeof window !== 'undefined' && typeof window.location !== 'undefined') {
+//     PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
+// }
+
+const PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
 
 const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, monthlyPriceName}) => {
 
@@ -37,21 +39,21 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
         return /\d/.test(myString);
       }
 
-    let paymentModalConditional = null
+    // let paymentModalConditional = null
     
-    useEffect(() => {
-        if(typeof window !== 'undefined' && typeof window.location !== 'undefined') {
-            console.log('WINDOW NOT UNDEFINED', window)
-            paymentModalConditional = (<Suspense fallback={<></>}>
-            <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName}/>
-        </Suspense>)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if(typeof window !== 'undefined' && typeof window.location !== 'undefined') {
+    //         console.log('WINDOW NOT UNDEFINED', window)
+    //         paymentModalConditional = (<Suspense fallback={<></>}>
+    //         <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName}/>
+    //     </Suspense>)
+    //     }
+    // }, [])
     
 
     return (
         <>
-        {paymentModalConditional}
+        {/* {paymentModalConditional} */}
         <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
             {headers ?
             <thead>
