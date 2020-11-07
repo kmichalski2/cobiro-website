@@ -4,7 +4,8 @@ import {CurrentLocaleContext} from '../../layout/layout'
 import AdyenCheckout from '@adyen/adyen-web';
 import '@adyen/adyen-web/dist/adyen.css';
 
-import Classes from './PaymentModal.module.scss'
+import Classes from './paymentModal.module.scss'
+
 const axios = require('axios');
 
 const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {

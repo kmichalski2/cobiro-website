@@ -54,6 +54,11 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
     return (
         <>
         {/* {paymentModalConditional} */}
+        {typeof window !== 'undefined' ?
+        <Suspense fallback={<></>}>
+            <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName}/>
+        </Suspense>
+        : null }
         <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
             {headers ?
             <thead>
