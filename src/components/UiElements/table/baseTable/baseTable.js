@@ -37,21 +37,21 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
         return /\d/.test(myString);
       }
 
-    let paymentModalConditional = null
+    // let paymentModalConditional = null
     
-    useEffect(() => {
-        if(typeof window !== 'undefined' && typeof window.location !== 'undefined') {
-            console.log('WINDOW NOT UNDEFINED', window)
-            paymentModalConditional = (<Suspense fallback={<></>}>
-            <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName}/>
-        </Suspense>)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if(typeof window !== 'undefined' && typeof window.location !== 'undefined') {
+    //         console.log('WINDOW NOT UNDEFINED', window)
+    //         paymentModalConditional = (<Suspense fallback={<></>}>
+    //         <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName}/>
+    //     </Suspense>)
+    //     }
+    // }, [])
     
 
     return (
         <>
-        {paymentModalConditional}
+        {/* {paymentModalConditional} */}
         <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
             {headers ?
             <thead>
