@@ -1,4 +1,4 @@
-import React, {useState, Suspense} from 'react'
+import React, {useState, Suspense, useEffect} from 'react'
 
 import TableRow from '../tableRow/tableRow'
 import ImageAll from '../../ImageAll/ImageAll'
@@ -37,13 +37,17 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
         return /\d/.test(myString);
       }
 
-    let paymentModalConditional
+    let paymentModalConditional = null
     
-    if(typeof window !== 'undefined') {
-        paymentModalConditional = (<Suspense fallback={<></>}>
-        <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName}/>
-    </Suspense>)
-    }
+    useEffect(() => {
+        if(typeof window !== 'undefined') {
+            console.log('WINDOW NOT UNDEFINED', window)
+            paymentModalConditional = (<Suspense fallback={<></>}>
+            <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName}/>
+        </Suspense>)
+        }
+    }, [])
+    
 
     return (
         <>
