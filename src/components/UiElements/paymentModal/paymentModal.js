@@ -22,12 +22,12 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
     const aydenRef = React.useRef()
 
     
-    const handlePayment = () => {
+    const handlePayment = (userId) => {
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
                 type: "make-payment",
                 attributes: {
-                    payment_id: "123",
+                    payment_id: userId,
                     email: submission.email,
                     plan_id: 123,
                     amount: rawPrice,
@@ -61,7 +61,8 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
             }
         }).then((res) => {
             console.log('res', res)
-            handlePayment()
+            const userId = res.data.data.id
+            handlePayment(userId)
         }).catch((err) => {
             console.log('err', err)
         })
@@ -93,7 +94,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
 
 
     useEffect(() => {
-        if(showModal && rawPrice) {
+        if(showModal && rawPrice && typeof window !== 'undefined') {
             console.log('showModal', rawPrice)
             axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
                 data: {
