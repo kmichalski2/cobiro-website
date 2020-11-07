@@ -8,7 +8,7 @@ import Fade from '../../../hoc/fade/fade'
 // import PaymentModal from '../../paymentModal/paymentModal'
 let PaymentModal
 
-if(typeof window !== 'undefined') {
+if(typeof window !== 'undefined' && typeof window.location !== 'undefined') {
     PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
 }
 
@@ -40,7 +40,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
     let paymentModalConditional = null
     
     useEffect(() => {
-        if(typeof window !== 'undefined') {
+        if(typeof window !== 'undefined' && typeof window.location !== 'undefined') {
             console.log('WINDOW NOT UNDEFINED', window)
             paymentModalConditional = (<Suspense fallback={<></>}>
             <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName}/>
