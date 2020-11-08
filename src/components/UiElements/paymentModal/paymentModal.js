@@ -12,17 +12,23 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
 
     const [loading, setLoading] = useState(true)
     const [submission, setSubmission] = useState({email: '', password: ''})
+    const [errors, setErrors] = useState({})
+    const [dirty, setDirty] = useState({})
     const [paymentInformation, setPaymentInformation] = useState()
 
     const majorUnitPrice = rawPrice / 100
     const price = majorUnitPrice.toLocaleString("en-US", {style:"currency", currency:"USD"})
+    const VAT = (majorUnitPrice * 0.2).toLocaleString("en-US", {style:"currency", currency:"USD"})
+    const priceExVAT = (majorUnitPrice * 0.8).toLocaleString("en-US", {style:"currency", currency:"USD"})
     
     const currentLang = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
     
     const aydenRef = React.useRef()
 
-    
+    let checkout
+
+
     const handlePayment = (userId) => {
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
@@ -43,6 +49,10 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
             }
         }).then((res) => {
             console.log('res', res)
+            if(res.data.data.action) {
+                const action = res.data.data.action
+                checkout.createFromAction(action).mount(aydenRef)
+            }
         }).catch((err) => {
             console.log('err', err)
         })
@@ -91,8 +101,31 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
         const key = e.target.name
         const value = e.target.value
         setSubmission({...submission, [key]: value})
+        setDirty({...dirty, [key]: true})
+
+        if(e.target.type === 'email') { 
+            const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm;
+            if(value.match(re)) {
+                const newErrors = {...errors}
+                delete newErrors[key]
+                setErrors(newErrors)
+            } else {
+                setErrors({...errors, [key]: 'Email is invalid'})
+            }
+        } else if(e.target.type === 'password') {
+            if(value.length < 6) {
+                setErrors({...errors, [key]: 'Needs to be a minimum of 6 characters long'})
+            } else {
+                const newErrors = {...errors}
+                delete newErrors[key]
+                setErrors(newErrors)
+            }
+        }
     }
 
+    const isObjEmpty = (obj) => {
+        return Object.keys(obj).length === 0 && obj.constructor === Object
+    }
 
     useEffect(() => {
         if(showModal && rawPrice && typeof window !== 'undefined') {
@@ -129,9 +162,9 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
                     amount: { value: rawPrice, currency: 'USD' }
                 };
 
-                const checkout = new AdyenCheckout(aydenConfiguration);
+                checkout = new AdyenCheckout(aydenConfiguration);
                 console.log('checkout', checkout)
-                const card = checkout.create('card').mount(aydenRef.current);
+                const card = checkout.create('dropin').mount(aydenRef.current);
 
 
 
@@ -148,30 +181,49 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
                                 <button className="btn btn-unstyled" onClick={() => setShowModal(false)}>&#10005;</button>
                             </div>
                             <h4>Cobiro {showModal}</h4>
-                            <p className="small">You’ll be charged {price} {monthlyPricing ? 'monthly' : 'yearly'} until you cancel your subscription. All amounts shown are in USD. Payment data is always encrypted and secure.</p>
+                            <p className="text-xs-small">You’ll be charged {price} {monthlyPricing ? 'monthly' : 'yearly'} until you cancel your subscription. All amounts shown are in USD. Payment data is always encrypted and secure.</p>
+                            <table class="table text-xs-small table-unstyled">
+                            <tbody>
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td className="text-right">{priceExVAT}</td>
+                                </tr>
+                                <tr>
+
+                                <td>VAT 25%</td>
+                                <td className="text-right">{VAT}</td>
+                                </tr>
+                                <tr>
+                                    <td className="text-bold">Total incl. VAT</td>
+                                    <td className="text-right text-bold">{price}/{monthlyPricing ? 'month' : 'year'}</td>
+                                </tr>
+                            </tbody>
+                            </table>
                         </div>
                         <div className={["col col-xs-12 col-lg-8 first-lg", Classes.modalLeft].join(' ')}>
                             {/* <img src={PaymentDummy} alt="" /> */}
                             <h3 className="space-xs-up">Account Information</h3>
                             <form>
-                                <div className="form-group">
+                                <div className={["form-group", Classes.formGroup, errors.email ? Classes.error : null, dirty.email ? Classes.dirty : null].join(' ')}>
                                     <label className="sr-only" htmlFor="email">Email address</label>
                                     <input id="email" type="email" name="email" placeholder="Email address" 
                                         value={submission.email} 
                                         onChange={handleUserRegistrationChange} 
                                         />
+                                        {errors.email ? <p className={["text-red text-xs-small", Classes.errorText].join(' ')}>{errors.email}</p> : null}
                                 </div>
-                                <div className="form-group">
+                                <div className={["form-group", Classes.formGroup, errors.password ? Classes.error : null, dirty.password ? Classes.dirty : null].join(' ')}>
                                     <label className="sr-only" htmlFor="password">Password</label>
                                     <input id="password" type="password" name="password" placeholder="Password" 
                                         value={submission.password} 
                                         onChange={handleUserRegistrationChange} 
                                         />
+                                        {errors.password ? <p className={["text-red text-xs-small", Classes.errorText,].join(' ')}>{errors.password}</p> : null}
                                 </div>
                             
                             </form>
                             <div className="space-xs-up" ref={aydenRef}></div>
-                            <button className="btn btn-full-width" onClick={handleOnSubmit} disabled={!paymentInformation || !paymentInformation.isValid}>Pay {price}</button>
+                            <button className="btn btn-full-width" onClick={handleOnSubmit} disabled={!paymentInformation || !paymentInformation.isValid || !isObjEmpty(errors)}>Pay {price}</button>
                         </div>
                     </div>
                 </div>

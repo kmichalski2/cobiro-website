@@ -1,1 +1,11 @@
 @import '~baseguide/scss/baseguide/04-components/table';
+
+.table-unstyled {
+    th, td {
+        border-bottom: hidden;
+    }
+
+    tbody tr:nth-child(2n+1) {
+        background-color: transparent;
+    }
+}
