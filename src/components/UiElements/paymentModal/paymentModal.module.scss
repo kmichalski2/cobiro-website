@@ -46,12 +46,28 @@
                 border-color: $red;
             }
         }
+    }
 
-        // .errorText {
-        //     // position: absolute;
-        //     // z-index: 0;
-        //     // bottom: 0;
-        //     animation: fadein 0.4s ease;
-        // }
+    .successBtn {
+        position: relative;
+        span {
+            opacity: 0;
+        }
+        
+        &::before {
+            content: '';
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cg id='checkmark-verify-interface-symbol-button' transform='translate(-167.333 -174.862)'%3E%3Cg id='_x31__30_' transform='translate(167.333 174.862)'%3E%3Cg id='Group_20457' data-name='Group 20457' transform='translate(0 0)'%3E%3Cpath id='Path_1895' data-name='Path 1895' d='M186.743,171.013a1.209,1.209,0,0,0-1.611.413l-7.541,12.5-4.219-3.724a1.216,1.216,0,0,0-1.666-.052,1.1,1.1,0,0,0-.054,1.6l5.391,4.759a1.216,1.216,0,0,0,1.666.052c.111-.1,5.109-8.411,7.381-12.193l1.086-1.808A1.105,1.105,0,0,0,186.743,171.013Z' transform='translate(-171.333 -170.862)' fill='%23fff'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            display: inline-block;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: 50% 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1em;
+            padding: 0 1rem;
+            height: 1em;
+            position: absolute;
+        }
     }
 }

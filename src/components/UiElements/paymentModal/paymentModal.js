@@ -4,6 +4,7 @@ import {CurrentLocaleContext} from '../../layout/layout'
 import AdyenCheckout from '@adyen/adyen-web'
 import '@adyen/adyen-web/dist/adyen.css'
 import { v4 as uuidv4 } from 'uuid'
+import LoadingSpinner from '../loadingSpinner/LoadingSpinner'
 
 import Classes from './paymentModal.module.scss'
 
@@ -15,7 +16,9 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
     const [submission, setSubmission] = useState({email: '', password: ''})
     const [errors, setErrors] = useState({})
     const [dirty, setDirty] = useState({})
-    const [paymentInformation, setPaymentInformation] = useState()
+    const [paymentInformation, setPaymentInformation] = useState({})
+    const [submitSuccess, setSubmitSuccess] = useState(false)
+    const [submitting, setSubmitting] = useState(false)
 
     const majorUnitPrice = rawPrice / 100
     const price = majorUnitPrice.toLocaleString("en-US", {style:"currency", currency:"USD"})
@@ -54,12 +57,14 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
                 const action = res.data.data.action
                 checkout.createFromAction(action).mount(aydenRef)
             }
+            setSubmitting(false)
+            setSubmitSuccess(true)
         }).catch((err) => {
             console.log('err', err)
         })
     }
 
-    const registerUser = () => {
+    const registerUser = (usePayment) => {
 
         console.log('paymentInformation.data', paymentInformation.data)
         axios.post(`${process.env.GATSBY_HUB_URL}/v1/register`, {
@@ -74,7 +79,13 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
         }).then((res) => {
             console.log('res', res)
             const userId = res.data.data.id
-            handlePayment(userId)
+
+            if(usePayment) {
+                handlePayment(userId)
+            } else {
+                setSubmitting(false)
+                setSubmitSuccess(true)
+            }
         }).catch((err) => {
             console.log('err', err)
         })
@@ -85,10 +96,13 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
     }
     
     const handleOnSubmit = () => {
+        setSubmitting(true)
         console.log('register user:', submission)
         console.log('make payment:', paymentInformation)
-        if(paymentInformation.isValid) {
-            registerUser()
+        if(rawPrice !== 0 && paymentInformation.isValid) {
+            registerUser(true)
+        } else if(rawPrice === 0) {
+            registerUser(false)
         } else {
             console.log('error')
         }
@@ -129,7 +143,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
     }
 
     useEffect(() => {
-        if(showModal && rawPrice && typeof window !== 'undefined') {
+        if(showModal && rawPrice && typeof window !== 'undefined' && rawPrice !== 0) {
             console.log('showModal', rawPrice)
             axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
                 data: {
@@ -170,6 +184,8 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
 
 
             })
+        } else if(showModal && rawPrice === 0) {
+            setLoading(false)
         }
     }, [showModal])
 
@@ -224,7 +240,20 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
                             
                             </form>
                             <div className="space-xs-up" ref={aydenRef}></div>
-                            <button className="btn btn-full-width" onClick={handleOnSubmit} disabled={!paymentInformation || !paymentInformation.isValid || !isObjEmpty(errors)}>Pay {price}</button>
+                            <button 
+                                className={["btn btn-full-width", submitSuccess ? Classes.successBtn : null].join(' ')} 
+                                onClick={handleOnSubmit} 
+                                disabled={(rawPrice !== 0 && (!paymentInformation || !paymentInformation.isValid)) || !isObjEmpty(errors)}>
+                                    <span>
+                                        {submitting ? 
+                                        <LoadingSpinner loading={submitting}>
+                                            Loading
+                                        </LoadingSpinner> 
+                                        : rawPrice !== 0 ? 
+                                            `Pay ${price}` 
+                                        : 'Register'}
+                                    </span>
+                            </button>
                         </div>
                     </div>
                 </div>
