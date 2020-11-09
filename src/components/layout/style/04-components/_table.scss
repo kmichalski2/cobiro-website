@@ -3,6 +3,13 @@
 .table-unstyled {
     th, td {
         border-bottom: hidden;
+
+        &:first-child {
+            padding-left: 0;
+        }
+        &:last-child {
+            padding-right: 0;
+        }
     }
 
     tbody tr:nth-child(2n+1) {

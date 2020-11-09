@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'
 import Modal from '../modal/modal'
 import {CurrentLocaleContext} from '../../layout/layout'
-import AdyenCheckout from '@adyen/adyen-web';
-import '@adyen/adyen-web/dist/adyen.css';
+import AdyenCheckout from '@adyen/adyen-web'
+import '@adyen/adyen-web/dist/adyen.css'
+import { v4 as uuidv4 } from 'uuid'
 
 import Classes from './paymentModal.module.scss'
 
@@ -34,7 +35,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
             data: {
                 type: "make-payment",
                 attributes: {
-                    payment_id: userId,
+                    payment_id: uuidv4(),
                     email: submission.email,
                     plan_id: 123,
                     amount: rawPrice,
@@ -146,7 +147,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
                 const aydenConfiguration = {
                     locale: customLangCode || currentLang, // The shopper's locale. For a list of supported locales, see https://docs.adyen.com/checkout/components-web/localization-components.
                     environment: "test", // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/checkout/components-web#testing-your-integration.  
-                    originKey: "pub.v2.8215883284862673.aHR0cDovL2xvY2FsaG9zdDo4MDAw.ixsPi4cTCsm_eykIhZaFbfMcMhY6zGnDxqIVc1BKT-E", // Your client key. To find out how to generate one, see https://docs.adyen.com/development-resources/client-side-authentication. Web Components versions before 3.10.1 use originKey instead of clientKey.
+                    originKey: process.env.GATSBY_AYDEN_ORIGIN_KEY, // Your client key. To find out how to generate one, see https://docs.adyen.com/development-resources/client-side-authentication. Web Components versions before 3.10.1 use originKey instead of clientKey.
                     paymentMethodsResponse: response, // The payment methods response returned in step 1.
                     onChange: handleOnChange, // Your function for handling onChange event
                     onAdditionalDetails: handleOnAdditionalDetails, // Your function for handling onAdditionalDetails event,
@@ -182,7 +183,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
                             </div>
                             <h4>Cobiro {showModal}</h4>
                             <p className="text-xs-small">You’ll be charged {price} {monthlyPricing ? 'monthly' : 'yearly'} until you cancel your subscription. All amounts shown are in USD. Payment data is always encrypted and secure.</p>
-                            <table class="table text-xs-small table-unstyled">
+                            <table className="table text-xs-small table-unstyled">
                             <tbody>
                                 <tr>
                                     <td>Subtotal</td>
