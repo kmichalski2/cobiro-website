@@ -10,7 +10,7 @@ import Classes from './paymentModal.module.scss'
 
 const axios = require('axios');
 
-const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
+const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId}) => {
 
     const [loading, setLoading] = useState(true)
     const [submission, setSubmission] = useState({email: '', password: ''})
@@ -20,7 +20,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
     const [submitSuccess, setSubmitSuccess] = useState(false)
     const [submitting, setSubmitting] = useState(false)
 
-    const majorUnitPrice = rawPrice / 100
+    const majorUnitPrice = (rawPrice / 100) * (monthlyPricing ? 1 : 12)
     const price = majorUnitPrice.toLocaleString("en-US", {style:"currency", currency:"USD"})
     const VAT = (majorUnitPrice * 0.2).toLocaleString("en-US", {style:"currency", currency:"USD"})
     const priceExVAT = (majorUnitPrice * 0.8).toLocaleString("en-US", {style:"currency", currency:"USD"})
@@ -32,6 +32,8 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
 
     let checkout
 
+    console.log('planId', planId)
+
 
     const handlePayment = (userId) => {
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
@@ -40,8 +42,8 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
                 attributes: {
                     payment_id: uuidv4(),
                     email: submission.email,
-                    plan_id: 123,
-                    amount: rawPrice,
+                    plan_id: planId,
+                    amount: rawPrice * (monthlyPricing ? 1 : 12),
                     currency: "USD",
                     return_url: "https://app.test-cobiro.com/sites",
                     origin: "https://app.test-cobiro.com",
@@ -149,7 +151,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
                 data: {
                     type: "payment-methods",
                     attributes: {
-                        amount: rawPrice,
+                        amount: rawPrice * (monthlyPricing ? 1 : 12),
                         locale: 'en-US',
                         currency: "USD" 
                     }
@@ -174,7 +176,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing}) => {
                     },
                     hasHolderName: true,
                     holderNameRequired: true,
-                    amount: { value: rawPrice, currency: 'USD' }
+                    amount: { value: rawPrice * (monthlyPricing ? 1 : 12), currency: 'USD' }
                 };
 
                 checkout = new AdyenCheckout(aydenConfiguration);

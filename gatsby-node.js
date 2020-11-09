@@ -755,6 +755,7 @@ exports.createPages = async function({ graphql, actions }) {
                       label
                       linkTitle
                       link
+                      buttonEmailLink
                       bgColor {
                         hex
                       }
