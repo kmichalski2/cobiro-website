@@ -19,11 +19,13 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
     const [paymentInformation, setPaymentInformation] = useState({})
     const [submitSuccess, setSubmitSuccess] = useState(false)
     const [submitting, setSubmitting] = useState(false)
+    const [submitError, setSubmitError] = useState(false)
+    const [paymentComponent, setPaymentComponent] = useState()
 
     const majorUnitPrice = (rawPrice / 100) * (monthlyPricing ? 1 : 12)
     const price = majorUnitPrice.toLocaleString("en-US", {style:"currency", currency:"USD"})
-    const VAT = (majorUnitPrice * 0.2).toLocaleString("en-US", {style:"currency", currency:"USD"})
-    const priceExVAT = (majorUnitPrice * 0.8).toLocaleString("en-US", {style:"currency", currency:"USD"})
+    const VAT = (majorUnitPrice * 0.25).toLocaleString("en-US", {style:"currency", currency:"USD"})
+    const priceIncVAT = (majorUnitPrice * 1.25).toLocaleString("en-US", {style:"currency", currency:"USD"})
     
     const currentLang = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
@@ -34,7 +36,36 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
 
     console.log('planId', planId)
 
+    const processPaymentResponse = (paymentRes) => {
+        const USER_TOKEN = "09dfpgjdpfgidfgi"
 
+        if (paymentRes.action) {
+            console.log('paymentComponent', paymentComponent)
+            paymentComponent.handleAction(paymentRes.action)
+        } else {
+          switch (paymentRes.resultCode) {
+            case "Authorised":
+                setSubmitting(false)
+                setSubmitSuccess(true)
+                setSubmitError(null)
+                window.location.href = `https://app.cobiro.com/user/login?token=${USER_TOKEN}&redirectUri=%2Fonboarding%2Fsite`
+              break;
+            case "Pending":
+              window.location.href = "/status/pending";
+              break;
+            case "Refused":
+                setSubmitting(false)
+                setSubmitSuccess(false)
+                setSubmitError('The transaction was refused.')
+              break;
+            default:
+                setSubmitting(false)
+                setSubmitSuccess(false)
+                setSubmitError('The transaction was refused.')
+              break;
+          }
+        }
+      }
     const handlePayment = (userId) => {
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
@@ -54,15 +85,23 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
                 }
             }
         }).then((res) => {
-            console.log('res', res)
-            if(res.data.data.action) {
-                const action = res.data.data.action
-                checkout.createFromAction(action).mount(aydenRef)
+            console.log('res', res.data.data)
+            if(res.data.data.attributes && res.data.data.attributes.payload) {
+                console.log('HANDLING RESPONSE', res.data.data.attributes.payload)
+                processPaymentResponse(res.data.data.attributes.payload)
             }
-            setSubmitting(false)
-            setSubmitSuccess(true)
+            // if(res.data.data.action) {
+            //     const action = res.data.data.action
+            //     checkout.createFromAction(action).mount(aydenRef)
+            // }
+            // setSubmitting(false)
+            // setSubmitSuccess(false)
+            // setSubmitError('Something went wrong. Please try again, and check you entered the correct values.')
         }).catch((err) => {
             console.log('err', err)
+            setSubmitting(false)
+            setSubmitSuccess(false)
+            setSubmitError('Something went wrong. Please try again, and check you entered the correct values.')
         })
     }
 
@@ -89,11 +128,18 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
                 setSubmitSuccess(true)
             }
         }).catch((err) => {
-            console.log('err', err)
+            const error = err
+            console.log('err', error.response)
+            console.log('err.data', error.data)
+            console.log('err.errors', error.errors)
+            setSubmitting(false)
+            setSubmitSuccess(false)
+            setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
         })
     }
     
     const handleOnChange = (state, component) => {
+        setPaymentComponent(component)
         setPaymentInformation(state)
     }
     
@@ -110,7 +156,8 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
         }
     }
     
-    const handleOnAdditionalDetails = (state, component) => {
+    const handleOnAdditionalDetails = (state, dropin) => {
+        console.log('handleOnAdditionalDetails', state, dropin)
         // setPaymentInformation(state)
     }
 
@@ -158,7 +205,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
                 }
             }).then((res) => {
                 const response = res.data.data.attributes
-                setLoading(false)
+                
 
                 const aydenConfiguration = {
                     locale: customLangCode || currentLang, // The shopper's locale. For a list of supported locales, see https://docs.adyen.com/checkout/components-web/localization-components.
@@ -181,8 +228,8 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
 
                 checkout = new AdyenCheckout(aydenConfiguration);
                 console.log('checkout', checkout)
-                const card = checkout.create('dropin').mount(aydenRef.current);
-
+                setLoading(false)
+                const card = checkout.create('dropin').mount(aydenRef.current)
 
 
             })
@@ -205,7 +252,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
                             <tbody>
                                 <tr>
                                     <td>Subtotal</td>
-                                    <td className="text-right">{priceExVAT}</td>
+                                    <td className="text-right">{price}</td>
                                 </tr>
                                 <tr>
 
@@ -214,7 +261,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
                                 </tr>
                                 <tr>
                                     <td className="text-bold">Total incl. VAT</td>
-                                    <td className="text-right text-bold">{price}/{monthlyPricing ? 'month' : 'year'}</td>
+                                    <td className="text-right text-bold">{priceIncVAT}/{monthlyPricing ? 'month' : 'year'}</td>
                                 </tr>
                             </tbody>
                             </table>
@@ -252,10 +299,11 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
                                             Loading
                                         </LoadingSpinner> 
                                         : rawPrice !== 0 ? 
-                                            `Pay ${price}` 
+                                            `Pay ${priceIncVAT}` 
                                         : 'Register'}
                                     </span>
                             </button>
+                            {submitError ? <p className="text-red space-top-xs-up small">{submitError}</p> : null}
                         </div>
                     </div>
                 </div>
