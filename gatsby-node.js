@@ -748,9 +748,11 @@ exports.createPages = async function({ graphql, actions }) {
                       subtitle
                       monthlyPrice
                       monthlyPriceRaw
+                      monthlyPriceRawExVat
                       monthlyPricePlanId
                       yearlyPrice
                       yearlyPriceRaw
+                      yearlyPriceRawExVat
                       yearlyPricePlanId
                       label
                       linkTitle

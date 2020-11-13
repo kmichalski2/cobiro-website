@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
+import { useStaticQuery, graphql } from "gatsby"
 import Modal from '../modal/modal'
 import {CurrentLocaleContext} from '../../layout/layout'
 import AdyenCheckout from '@adyen/adyen-web'
@@ -7,11 +8,45 @@ import { v4 as uuidv4 } from 'uuid'
 import LoadingSpinner from '../loadingSpinner/LoadingSpinner'
 
 import Classes from './paymentModal.module.scss'
+import ImageAll from '../ImageAll/ImageAll'
 
 const axios = require('axios');
 
-const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId}) => {
+const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, monthlyPricing, planId}) => {
 
+    const queryData = useStaticQuery(graphql`
+    query PaymentImages {
+        securePayment: file(relativePath: { eq: "logo-encrypt.jpg" }) {
+            childImageSharp {
+              fluid(maxWidth: 300, quality: 80) {
+                srcSet
+                src
+                sizes
+                base64
+                aspectRatio
+              }
+            }
+        }
+        googlePartner: file(relativePath: { eq: "logo-googlepartner.jpg" }) {
+            childImageSharp {
+              fluid(maxWidth: 300, quality: 80) {
+                srcSet
+                src
+                sizes
+                base64
+                aspectRatio
+              }
+            }
+        }
+    }
+    `)
+    
+    const securePaymentImage = queryData.securePayment
+    const googlePartnerImage = queryData.googlePartner
+
+    console.log(queryData)
+
+        
     const [loading, setLoading] = useState(true)
     const [submission, setSubmission] = useState({email: '', password: ''})
     const [errors, setErrors] = useState({})
@@ -22,10 +57,13 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
     const [submitError, setSubmitError] = useState(false)
     const [paymentComponent, setPaymentComponent] = useState()
 
-    const majorUnitPrice = (rawPrice / 100) * (monthlyPricing ? 1 : 12)
-    const price = majorUnitPrice.toLocaleString("en-US", {style:"currency", currency:"USD"})
-    const VAT = (majorUnitPrice * 0.25).toLocaleString("en-US", {style:"currency", currency:"USD"})
-    const priceIncVAT = (majorUnitPrice * 1.25).toLocaleString("en-US", {style:"currency", currency:"USD"})
+    const paymentId = uuidv4()
+
+    const majorUnitPriceIncVat = rawPriceIncVat / 100
+    const majorUnitPriceExVat = rawPriceExVat / 100
+    const price = majorUnitPriceExVat.toLocaleString("en-US", {style:"currency", currency:"USD"})
+    const VAT = (majorUnitPriceIncVat - majorUnitPriceExVat).toLocaleString("en-US", {style:"currency", currency:"USD"})
+    const priceIncVAT = majorUnitPriceIncVat.toLocaleString("en-US", {style:"currency", currency:"USD"})
     
     const currentLang = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
@@ -33,8 +71,6 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
     const aydenRef = React.useRef()
 
     let checkout
-
-    console.log('planId', planId)
 
     const processPaymentResponse = (paymentRes) => {
         const USER_TOKEN = "09dfpgjdpfgidfgi"
@@ -67,14 +103,16 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
         }
       }
     const handlePayment = (userId) => {
+
+
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
                 type: "make-payment",
                 attributes: {
-                    payment_id: uuidv4(),
+                    payment_id: paymentId,
                     email: submission.email,
                     plan_id: planId,
-                    amount: rawPrice * (monthlyPricing ? 1 : 12),
+                    amount: rawPriceIncVat,
                     currency: "USD",
                     return_url: "https://app.test-cobiro.com/sites",
                     origin: "https://app.test-cobiro.com",
@@ -105,6 +143,39 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
         })
     }
 
+    const loginUser = (usePayment, userId) => {
+        
+        axios.post(`${process.env.GATSBY_HUB_URL}/v1/login`, {
+            data: {
+                type: "login",
+                attributes: {
+                    email: submission.email,
+                    password: submission.password,
+                }
+            }
+        }).then((res) => {
+            console.log('res', res)
+            
+            // if(usePayment) {
+            //     handlePayment(userId, userToken)
+            // } else {
+            //     setSubmitting(false)
+            //     setSubmitSuccess(true)
+            // }
+            
+        }).catch((err) => {
+            const error = err
+            console.log('err', error.response)
+            console.log('err.data', error.data)
+            console.log('err.errors', error.errors)
+            setSubmitting(false)
+            setSubmitSuccess(false)
+            setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
+        })
+
+        
+    }
+
     const registerUser = (usePayment) => {
 
         console.log('paymentInformation.data', paymentInformation.data)
@@ -121,12 +192,15 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
             console.log('res', res)
             const userId = res.data.data.id
 
+            // loginUser(usePayment, userId)
+
             if(usePayment) {
                 handlePayment(userId)
             } else {
                 setSubmitting(false)
                 setSubmitSuccess(true)
             }
+            
         }).catch((err) => {
             const error = err
             console.log('err', error.response)
@@ -147,17 +221,47 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
         setSubmitting(true)
         console.log('register user:', submission)
         console.log('make payment:', paymentInformation)
-        if(rawPrice !== 0 && paymentInformation.isValid) {
+        if(rawPriceIncVat !== 0 && paymentInformation.isValid) {
             registerUser(true)
-        } else if(rawPrice === 0) {
+        } else if(rawPriceIncVat === 0) {
             registerUser(false)
         } else {
             console.log('error')
         }
     }
+
+    const handleShopperRedirect = (state) => {
+        console.log('PAYMENT ID', paymentId)
+
+        axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/handle-shopper-redirect`, {
+            data: {
+                type: "make-payment",
+                attributes: {
+                    payment_id: paymentId,
+                    paymentData: state.data.paymentData,
+                    payload:  {
+                        ...state.data.details
+                    }
+                }
+            }
+        }).then((res) => {
+            console.log('res', res)
+            processPaymentResponse(res.data.data.attributes.payload)
+            // loginUser(usePayment, userId)
+            
+        }).catch((err) => {
+            console.log(err.response)
+            setSubmitting(false)
+            setSubmitSuccess(false)
+            setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
+        })
+    }
     
     const handleOnAdditionalDetails = (state, dropin) => {
         console.log('handleOnAdditionalDetails', state, dropin)
+
+        handleShopperRedirect(state)
+        
         // setPaymentInformation(state)
     }
 
@@ -192,13 +296,13 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
     }
 
     useEffect(() => {
-        if(showModal && rawPrice && typeof window !== 'undefined' && rawPrice !== 0) {
-            console.log('showModal', rawPrice)
+        if(showModal && rawPriceIncVat && typeof window !== 'undefined' && rawPriceIncVat !== 0) {
+            console.log('showModal', rawPriceIncVat)
             axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
                 data: {
                     type: "payment-methods",
                     attributes: {
-                        amount: rawPrice * (monthlyPricing ? 1 : 12),
+                        amount: rawPriceIncVat,
                         locale: 'en-US',
                         currency: "USD" 
                     }
@@ -209,7 +313,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
 
                 const aydenConfiguration = {
                     locale: customLangCode || currentLang, // The shopper's locale. For a list of supported locales, see https://docs.adyen.com/checkout/components-web/localization-components.
-                    environment: "test", // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/checkout/components-web#testing-your-integration.  
+                    environment: process.env.GATSBY_AYDEN_ENVIRONMENT, // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/checkout/components-web#testing-your-integration.  
                     originKey: process.env.GATSBY_AYDEN_ORIGIN_KEY, // Your client key. To find out how to generate one, see https://docs.adyen.com/development-resources/client-side-authentication. Web Components versions before 3.10.1 use originKey instead of clientKey.
                     paymentMethodsResponse: response, // The payment methods response returned in step 1.
                     onChange: handleOnChange, // Your function for handling onChange event
@@ -223,7 +327,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
                     },
                     hasHolderName: true,
                     holderNameRequired: true,
-                    amount: { value: rawPrice * (monthlyPricing ? 1 : 12), currency: 'USD' }
+                    amount: { value: rawPriceIncVat, currency: 'USD' }
                 };
 
                 checkout = new AdyenCheckout(aydenConfiguration);
@@ -233,7 +337,7 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
 
 
             })
-        } else if(showModal && rawPrice === 0) {
+        } else if(showModal && rawPriceIncVat === 0) {
             setLoading(false)
         }
     }, [showModal])
@@ -265,10 +369,14 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
                                 </tr>
                             </tbody>
                             </table>
+                            <div className="flex">
+                                <ImageAll image={securePaymentImage.childImageSharp} classes={Classes.paymentImages}/>
+                                <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
+                            </div>
                         </div>
                         <div className={["col col-xs-12 col-lg-8 first-lg", Classes.modalLeft].join(' ')}>
-                            {/* <img src={PaymentDummy} alt="" /> */}
                             <h3 className="space-xs-up">Account Information</h3>
+                            <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.userInformation].join(' ')}>User information</p>
                             <form>
                                 <div className={["form-group", Classes.formGroup, errors.email ? Classes.error : null, dirty.email ? Classes.dirty : null].join(' ')}>
                                     <label className="sr-only" htmlFor="email">Email address</label>
@@ -288,17 +396,20 @@ const PaymentModal = ({showModal, setShowModal, rawPrice, monthlyPricing, planId
                                 </div>
                             
                             </form>
+                            {rawPriceIncVat !== 0 ?
+                                <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.paymentInformation].join(' ')}>Payment information</p>
+                            : null}
                             <div className="space-xs-up" ref={aydenRef}></div>
                             <button 
                                 className={["btn btn-full-width", submitSuccess ? Classes.successBtn : null].join(' ')} 
                                 onClick={handleOnSubmit} 
-                                disabled={(rawPrice !== 0 && (!paymentInformation || !paymentInformation.isValid)) || !isObjEmpty(errors)}>
+                                disabled={(rawPriceIncVat !== 0 && (!paymentInformation || !paymentInformation.isValid)) || !isObjEmpty(errors)}>
                                     <span>
                                         {submitting ? 
                                         <LoadingSpinner loading={submitting}>
                                             Loading
                                         </LoadingSpinner> 
-                                        : rawPrice !== 0 ? 
+                                        : rawPriceIncVat !== 0 ? 
                                             `Pay ${priceIncVAT}` 
                                         : 'Register'}
                                     </span>

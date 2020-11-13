@@ -19,11 +19,20 @@
     .close {
         text-align: right!important;
     }
+
+    .paymentImages {
+        width: 7rem;
+        height: auto;
+
+        &:first-child {
+            margin-right: 1rem;
+        }
+    }
 }
 
 .modalLeft {
     text-align: left;
-    padding: 2rem 1.5rem;
+    padding: 2.25rem 1.875rem;
 
     @include mq($from: lg) {
         border-right: 1px solid $grey;
@@ -46,6 +55,24 @@
                 border-color: $red;
             }
         }
+    }
+
+    .informationTitles {
+        padding-left: 2rem;
+
+        
+        background-repeat: no-repeat;
+        background-size: 1rem;
+        background-position: left;
+
+        &.userInformation {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cg id='user_2_' data-name='user (2)' transform='translate(-3 -3)'%3E%3Cpath id='Path_5319' data-name='Path 5319' d='M10.338,8.848a3.2,3.2,0,0,0,1.892.614,3.3,3.3,0,0,0,3.231-3.231,3.231,3.231,0,1,0-5.123,2.617Z' transform='translate(-3.231)' fill='%234c6c83'/%3E%3Cpath id='Path_5320' data-name='Path 5320' d='M11.843,16.55a4.14,4.14,0,0,1-5.686,0A6.009,6.009,0,0,0,3,21.835a.463.463,0,0,0,.462.462H14.538A.463.463,0,0,0,15,21.835,6.009,6.009,0,0,0,11.843,16.55Z' transform='translate(0 -7.296)' fill='%234c6c83'/%3E%3C/g%3E%3C/svg%3E%0A");
+        }
+        
+        &.paymentInformation {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='11' viewBox='0 0 12 11'%3E%3Cg id='credit-cards' transform='translate(0 -32.005)'%3E%3Cg id='Group_27435' data-name='Group 27435' transform='translate(0 37.505)'%3E%3Cg id='Group_27434' data-name='Group 27434'%3E%3Cpath id='Path_5321' data-name='Path 5321' d='M0,255.995v4.714a.769.769,0,0,0,.75.786h10.5a.769.769,0,0,0,.75-.786v-4.714Zm10.5,3.929h-9v-1.571h9Z' transform='translate(0 -255.995)' fill='%234c6c83'/%3E%3C/g%3E%3C/g%3E%3Cg id='Group_27437' data-name='Group 27437' transform='translate(0 34.362)'%3E%3Cg id='Group_27436' data-name='Group 27436'%3E%3Cpath id='Path_5322' data-name='Path 5322' d='M11.25,128H.75a.77.77,0,0,0-.75.786v.786H12v-.786A.769.769,0,0,0,11.25,128Z' transform='translate(0 -127.995)' fill='%234c6c83'/%3E%3C/g%3E%3C/g%3E%3Cg id='Group_27439' data-name='Group 27439' transform='translate(4.072 32.005)'%3E%3Cg id='Group_27438' data-name='Group 27438'%3E%3Cpath id='Path_5323' data-name='Path 5323' d='M179.387,32.273a.373.373,0,0,0-.459-.254l-5.2,1.557H179.8Z' transform='translate(-173.728 -32.005)' fill='%234c6c83'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+        }
+
     }
 
     .successBtn {

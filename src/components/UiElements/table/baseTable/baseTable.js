@@ -18,13 +18,15 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
 
     const [expandedRow, setExpandedRow] = useState(null)
     const [showModal, setShowModal] = useState(false)
-    const [rawPrice, setRawPrice] = useState(false)
+    const [rawPriceIncVat, setRawPriceIncVat] = useState(false)
+    const [rawPriceExVat, setRawPriceExVat] = useState(false)
     const [planId, setPlanId] = useState(false)
 
-    const handleShowModal = (rawPrice, title, id) => {
+    const handleShowModal = (rawPriceIncVat, rawPriceExVat, title, id) => {
         setPlanId(id)
         setShowModal(title)
-        setRawPrice(rawPrice)
+        setRawPriceIncVat(rawPriceIncVat)
+        setRawPriceExVat(rawPriceExVat)
     }
 
     const rowExpanderCheck = (i) => {
@@ -40,25 +42,13 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
     const hasNumber = (myString) => {
         return /\d/.test(myString);
       }
-
-    // let paymentModalConditional = null
-    
-    // useEffect(() => {
-    //     if(typeof window !== 'undefined' && typeof window.location !== 'undefined') {
-    //         console.log('WINDOW NOT UNDEFINED', window)
-    //         paymentModalConditional = (<Suspense fallback={<></>}>
-    //         <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName}/>
-    //     </Suspense>)
-    //     }
-    // }, [])
     
 
     return (
         <>
-        {/* {paymentModalConditional} */}
         {typeof window !== 'undefined' ?
         <Suspense fallback={<></>}>
-            <PaymentModal showModal={showModal} rawPrice={rawPrice} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName} planId={planId}/>
+            <PaymentModal showModal={showModal} rawPriceIncVat={rawPriceIncVat} rawPriceExVat={rawPriceExVat} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName} planId={planId}/>
         </Suspense>
         : null }
         <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
@@ -80,8 +70,16 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                         {/* h.link && h.linkTitle && <AnyLink external link={h.link} title={h.linkTitle} button classes="space-small-xs-up"/>*/}
                         <span className="text-xs-small text-normal space-xs-up block-xs">(excl. VAT)</span>
                         { h.linkTitle && h.buttonEmailLink ?
-                        <a className="btn space-small-xs-up" href={h.buttonEmailLink} rel="noopener noreferrer">{h.linkTitle}</a>
-                        : h.linkTitle && <button className="btn space-small-xs-up" onClick={() => handleShowModal(h[`${pricing}Raw`], h.title, h[`${pricing}PlanId`])}>{h.linkTitle}</button> }
+                            <a className="btn space-small-xs-up" href={h.buttonEmailLink} rel="noopener noreferrer">{h.linkTitle}</a>
+                        : h.linkTitle && 
+                            <button 
+                                className="btn space-small-xs-up" 
+                                onClick={
+                                    () => handleShowModal(h[`${pricing}Raw`], h[`${pricing}RawExVat`], h.title, h[`${pricing}PlanId`])}
+                                >
+                                    {h.linkTitle}
+                            </button> 
+                            }
                     </th>) : null }
                 </tr>
                 

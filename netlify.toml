@@ -2,8 +2,11 @@
 [build]
     functions = "./functions"
 
+[context.production]
+    environment = { GATSBY_AYDEN_ORIGIN_KEY = "pub.v2.8215883284862673.aHR0cHM6Ly9jb2Jpcm8uY29t.-ykbrlrvR6snsVv2oNVxhWgRA1y3GXM35jTjhcUEzpY", GATSBY_AYDEN_ENVIRONMENT = "live"}
+
 [context.development]
-    environment = { GATSBY_AYDEN_ORIGIN_KEY = "pub.v2.8215883284862673.aHR0cHM6Ly9kZXZlbG9wbWVudC0tY29iaXJvLm5ldGxpZnkuYXBw.eHYZtruiZR8w7eauE32vjShapAB7xeOwDj0mgfn5y6k"}
+    environment = { GATSBY_AYDEN_ORIGIN_KEY = "pub.v2.8215883284862673.aHR0cHM6Ly9kZXZlbG9wbWVudC0tY29iaXJvLm5ldGxpZnkuYXBw.eHYZtruiZR8w7eauE32vjShapAB7xeOwDj0mgfn5y6k", GATSBY_AYDEN_ENVIRONMENT = "test"}
 
 [context.feature-ayden-payments-setup]
-    environment = { GATSBY_AYDEN_ORIGIN_KEY = "pub.v2.8215883284862673.aHR0cHM6Ly9mZWF0dXJlLWF5ZGVuLXBheW1lbnRzLXNldHVwLS1jb2Jpcm8ubmV0bGlmeS5hcHA.lxEFByOVH7astbiftYDLHJnHLnI6jbFMkO9gDugElG4"}
+    environment = { GATSBY_AYDEN_ORIGIN_KEY = "pub.v2.8215883284862673.aHR0cHM6Ly9mZWF0dXJlLWF5ZGVuLXBheW1lbnRzLXNldHVwLS1jb2Jpcm8ubmV0bGlmeS5hcHA.lxEFByOVH7astbiftYDLHJnHLnI6jbFMkO9gDugElG4", GATSBY_AYDEN_ENVIRONMENT = "test"}
