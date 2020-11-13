@@ -13,8 +13,10 @@
 
 .modalRight {
     text-align: left;
-    display: flex column;
-    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2.25rem 1.875rem;
 
     .close {
         text-align: right!important;

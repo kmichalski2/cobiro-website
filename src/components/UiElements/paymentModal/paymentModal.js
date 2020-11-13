@@ -253,7 +253,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log(err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
+            setSubmitError(err.response && err.response.data && err.response.data.errors.map(e => e.detail).join('. '))
         })
     }
     
@@ -347,28 +347,30 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             <div className="container">
                     <div className="row">
                         <div className={["col col-xs-12 col-lg-4", Classes.modalRight].join(' ')}>
-                            <div className={Classes.close}>
-                                <button className="btn btn-unstyled" onClick={() => setShowModal(false)}>&#10005;</button>
-                            </div>
-                            <h4>Cobiro {showModal}</h4>
-                            <p className="text-xs-small">You’ll be charged {price} {monthlyPricing ? 'monthly' : 'yearly'} until you cancel your subscription. All amounts shown are in USD. Payment data is always encrypted and secure.</p>
-                            <table className="table text-xs-small table-unstyled">
-                            <tbody>
-                                <tr>
-                                    <td>Subtotal</td>
-                                    <td className="text-right">{price}</td>
-                                </tr>
-                                <tr>
+                                <div>
+                                <div className={Classes.close}>
+                                    <button className="btn btn-unstyled" onClick={() => setShowModal(false)}>&#10005;</button>
+                                </div>
+                                <h4>Cobiro {showModal}</h4>
+                                <p className="text-xs-small">You’ll be charged {price} {monthlyPricing ? 'monthly' : 'yearly'} until you cancel your subscription. All amounts shown are in USD. Payment data is always encrypted and secure.</p>
+                                <table className="table text-xs-small table-unstyled">
+                                <tbody>
+                                    <tr>
+                                        <td>Subtotal</td>
+                                        <td className="text-right">{price}</td>
+                                    </tr>
+                                    <tr>
 
-                                <td>VAT 25%</td>
-                                <td className="text-right">{VAT}</td>
-                                </tr>
-                                <tr>
-                                    <td className="text-bold">Total incl. VAT</td>
-                                    <td className="text-right text-bold">{priceIncVAT}/{monthlyPricing ? 'month' : 'year'}</td>
-                                </tr>
-                            </tbody>
-                            </table>
+                                    <td>VAT 25%</td>
+                                    <td className="text-right">{VAT}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-bold">Total incl. VAT</td>
+                                        <td className="text-right text-bold">{priceIncVAT}/{monthlyPricing ? 'month' : 'year'}</td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
                             <div className="flex">
                                 <ImageAll image={securePaymentImage.childImageSharp} classes={Classes.paymentImages}/>
                                 <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
