@@ -4,7 +4,7 @@
     @include card;
     @include card-visible;
         
-
+    
     display: flex column;
     align-items: stretch;
     z-index: 999;
@@ -19,6 +19,9 @@
     
     @include mq($until: md) {
         max-width: 95%;
+    }
+    @include mq($until: lg) {
+        top: 5rem;
     }
     
     /// dymmy content - delete before production ///
