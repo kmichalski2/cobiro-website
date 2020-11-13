@@ -56,8 +56,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [submitting, setSubmitting] = useState(false)
     const [submitError, setSubmitError] = useState(false)
     const [paymentComponent, setPaymentComponent] = useState()
+    const [paymentId, setPaymentId] = useState()
 
-    const paymentId = uuidv4()
 
     const majorUnitPriceIncVat = rawPriceIncVat / 100
     const majorUnitPriceExVat = rawPriceExVat / 100
@@ -71,6 +71,11 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const aydenRef = React.useRef()
 
     let checkout
+
+    useEffect(() => {
+        console.log('MOUNTED!')
+        setPaymentId(uuidv4())
+    }, [])
 
     const processPaymentResponse = (paymentRes) => {
         const USER_TOKEN = "09dfpgjdpfgidfgi"
