@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import Classes from './buttonSwitch.module.scss'
 
-const ButtonSwitch = ({buttons}) => {
+const ButtonSwitch = ({buttons, xsColumn}) => {
 
     const [activeBtn, setActiveBtn] = useState(0)
 
@@ -12,7 +12,7 @@ const ButtonSwitch = ({buttons}) => {
     }
     
     return (
-    <div className={Classes.buttonSwitch}>
+    <div className={[Classes.buttonSwitch, xsColumn ? Classes.xsColumn : null].join(' ')}>
         {buttons.map((button, i) => 
             <button key={i} className={['btn btn-white', Classes.button, !button.active ? Classes.inactive : null].join(' ')} onClick={() => switchClickHandler(i)}>
                 {button.title}{button.extraText && <span className={Classes.extraText}>{button.extraText}</span>}
