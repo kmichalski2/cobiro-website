@@ -243,7 +243,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 type: "make-payment",
                 attributes: {
                     payment_id: paymentId,
-                    paymentData: state.data.paymentData,
+                    // paymentData: state.data.paymentData,
                     payload:  {
                         ...state.data.details
                     }
