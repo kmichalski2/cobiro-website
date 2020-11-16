@@ -6,7 +6,7 @@ import AdyenCheckout from '@adyen/adyen-web'
 import '@adyen/adyen-web/dist/adyen.css'
 import { v4 as uuidv4 } from 'uuid'
 import LoadingSpinner from '../loadingSpinner/LoadingSpinner'
-
+import logo from "../../../images/logo.svg"
 import Classes from './paymentModal.module.scss'
 import ImageAll from '../ImageAll/ImageAll'
 
@@ -73,13 +73,12 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     let checkout
 
     useEffect(() => {
-        console.log('MOUNTED!')
         setPaymentId(uuidv4())
     }, [])
 
     const processPaymentResponse = (paymentRes) => {
         const USER_TOKEN = "09dfpgjdpfgidfgi"
-
+        console.log('paymentRes', paymentRes)
         if (paymentRes.action) {
             console.log('paymentComponent', paymentComponent)
             paymentComponent.handleAction(paymentRes.action)
@@ -109,7 +108,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
       }
     const handlePayment = (userId) => {
 
-
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
                 type: "make-payment",
@@ -119,8 +117,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                     plan_id: planId,
                     amount: rawPriceIncVat,
                     currency: "USD",
-                    return_url: "https://app.test-cobiro.com/sites",
-                    origin: "https://app.test-cobiro.com",
+                    return_url: `${window.location.href}?returning=1`,
+                    origin: window.location.href,
                     shopper_ip: "192.168.0.1",
                     browser_info: paymentInformation.data.browserInfo,
                     payment_method: paymentInformation.data.paymentMethod,
@@ -177,8 +175,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             setSubmitSuccess(false)
             setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
         })
-
-        
     }
 
     const registerUser = (usePayment) => {
@@ -263,9 +259,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
     
     const handleOnAdditionalDetails = (state, dropin) => {
-        console.log('handleOnAdditionalDetails', state, dropin)
+        console.log('handleOnAdditionalDetails', state)
 
-        handleShopperRedirect(state)
+        handleShopperRedirect(state) 
         
         // setPaymentInformation(state)
     }
@@ -348,9 +344,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }, [showModal])
 
     return (
-        <Modal showModal={showModal} setShowModal={setShowModal} loading={loading}>
+        <Modal showModal={showModal} setShowModal={setShowModal} loading={loading} small={rawPriceIncVat === 0 ? true : false}>
             <div className="container">
-                    <div className="row">
+                    <div className="row center-xs">
+                    {rawPriceIncVat !== 0 ?
                         <div className={["col col-xs-12 col-lg-4", Classes.modalRight].join(' ')}>
                                 <div>
                                 <div className={Classes.close}>
@@ -381,13 +378,27 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                 <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
                             </div>
                         </div>
-                        <div className={["col col-xs-12 col-lg-8 first-lg", Classes.modalLeft].join(' ')}>
+                        : null }
+                        <div className={["col col-xs-12", Classes.modalLeft, rawPriceIncVat !== 0 ? "col-lg-8 first-lg" : null, rawPriceIncVat === 0 ? Classes.modalFree : null].join(' ')}>
+                            {rawPriceIncVat === 0 ?
+                                <>
+                                    <div className={Classes.close}>
+                                        <button className="btn btn-unstyled" onClick={() => setShowModal(false)}>&#10005;</button>
+                                    </div>
+                                    <img className={Classes.logo} src={logo} alt="Cobiro logo" />
+                                    <h3 className="space-big-xs-up text-center">Sign up for free</h3>
+                                 </>
+                            : null }
+                            {rawPriceIncVat !== 0 ?
+                            <>
                             <h3 className="space-xs-up">Account Information</h3>
                             <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.userInformation].join(' ')}>User information</p>
+                            </>
+                            : null }
                             <form>
                                 <div className={["form-group", Classes.formGroup, errors.email ? Classes.error : null, dirty.email ? Classes.dirty : null].join(' ')}>
                                     <label className="sr-only" htmlFor="email">Email address</label>
-                                    <input id="email" type="email" name="email" placeholder="Email address" 
+                                    <input id="email" type="email" name="email" placeholder="E-mail" 
                                         value={submission.email} 
                                         onChange={handleUserRegistrationChange} 
                                         />
@@ -418,9 +429,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                         </LoadingSpinner> 
                                         : rawPriceIncVat !== 0 ? 
                                             `Pay ${priceIncVAT}` 
-                                        : 'Register'}
+                                        : 'Sign up'}
                                     </span>
                             </button>
+                            {rawPriceIncVat === 0 ?
+                            <p className="space-top-xs-up text-xs-small text-center">By clicking the "Sign up" button, you are creating a Cobiro account, and you agree to Cobiro's Terms &amp; Conditions.</p>
+                            : null}
+                            
                             {submitError ? <p className="text-red space-top-xs-up small">{submitError}</p> : null}
                         </div>
                     </div>

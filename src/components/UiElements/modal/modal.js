@@ -3,12 +3,12 @@ import Classes from './modal.module.scss'
 import Backdrop from '../backdrop/backdrop'
 import LoadingSpinner from '../loadingSpinner/LoadingSpinner'
 
-const Modal = ({showModal, setShowModal, loading, children}) => (
+const Modal = ({showModal, setShowModal, loading, children, small}) => (
     <>
     { showModal ?
         <Backdrop setShowModal={setShowModal}>
             {!loading ?
-            <div className={[Classes.modal].join(' ')}>
+            <div className={[Classes.modal, small ? Classes.modalSmall : null].join(' ')}>
                 {children}
             </div>
             : 

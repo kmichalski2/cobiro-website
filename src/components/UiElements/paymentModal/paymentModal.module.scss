@@ -11,6 +11,16 @@
     }
 }
 
+.close {
+    text-align: right!important;
+}
+
+.logo {
+    width: 5rem;
+    display: block;
+    margin: auto;
+}
+
 .modalRight {
     text-align: left;
     display: flex;
@@ -18,9 +28,7 @@
     justify-content: space-between;
     padding: 2.25rem 1.875rem;
 
-    .close {
-        text-align: right!important;
-    }
+    
 
     .paymentImages {
         width: 7rem;
@@ -42,6 +50,17 @@
 
     @include mq($until: lg) {
         border-top: 1px solid $grey;
+    }
+
+    &.modalFree {
+        border: none;
+        padding: 2.25rem 3.75rem;
+
+        .modalFree {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+        }
     }
 
     img {
