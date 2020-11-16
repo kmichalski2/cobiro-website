@@ -10,6 +10,7 @@ import logo from "../../../images/logo.svg"
 import Classes from './paymentModal.module.scss'
 import ImageAll from '../ImageAll/ImageAll'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import EmailVerificator from './emailVerificator/emailVerificator'
 
 const axios = require('axios');
 
@@ -79,6 +80,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         setPaymentId(uuidv4())
     }, [])
 
+    const redirectToApp = (userToken) => {
+        window.location.href = `https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
+    }
+
     const processPaymentResponse = (paymentRes, userToken) => {
 
         console.log('processPaymentResponse: paymentRes', paymentRes)
@@ -94,7 +99,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 setSubmitError(null)
                 console.log(`https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`)
                 console.log(`https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`)
-                // window.location.href = `https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
+                redirectToApp(userToken)
               break;
             case "Pending":
             //   window.location.href = "/status/pending";
@@ -163,6 +168,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             } else {
                 setSubmitting(false)
                 setSubmitSuccess(true)
+                redirectToApp(userToken)
             }
             
         }).catch((err) => {
@@ -177,7 +183,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const handleRecaptchaValidation = async (usePayment) => {
 
         setShowEmailValidation(true)
-        setLoading(false)
+        setSubmitting(false)
         console.log('handleRecaptchaValidation called')
         const result = await executeRecaptcha('homepage')
 
@@ -275,7 +281,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     const handleUserRegistrationChange = (e) => {
         setSubmitError(null)
-        
+
         const key = e.target.name
         const value = e.target.value
         setSubmission({...submission, [key]: value})
@@ -299,6 +305,31 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 setErrors(newErrors)
             }
         }
+    }
+
+    const handleEmailVerificationSubmit = (verificationCode) => {
+        console.log('verificationCode', verificationCode)
+
+        axios.post(`${process.env.GATSBY_HUB_URL}/v1/users/email/verify/pin`, {
+            data: {
+                type: "users",
+                code: verificationCode,
+                email: submission.email,
+                attributes: {
+                    email: submission.email, 
+                    code: verificationCode
+                }
+            }
+        }).then((res) => {
+            console.log('handleEmailVerificationSubmit: res', res)
+            loginUser(false)
+            
+        }).catch((err) => {
+            console.log(err.response)
+            setSubmitting(false)
+            setSubmitSuccess(false)
+            setSubmitError(err.response && err.response.data && err.response.data.errors.map(e => e.detail).join('. '))
+        })
     }
 
     const isObjEmpty = (obj) => {
@@ -402,6 +433,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             </>
                             : null }
                             {!showEmailValidation ? 
+                            <>
                             <form>
                                 <div className={["form-group", Classes.formGroup, errors.email ? Classes.error : null, dirty.email ? Classes.dirty : null].join(' ')}>
                                     <label className="sr-only" htmlFor="email">Email address</label>
@@ -421,9 +453,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                 </div>
                             
                             </form>
-                            : 
-                            <p>Email verification code...</p>
-                            }
+                            
                             {!isFreeTier ?
                                 <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.paymentInformation].join(' ')}>Payment information</p>
                             : null}
@@ -444,6 +474,15 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                         : 'Sign up'}
                                     </span>
                             </button>
+                            </>
+                            : 
+                            <EmailVerificator 
+                                submitSuccess={submitSuccess}
+                                submitting={submitting}
+                                setSubmitting={setSubmitting}
+                                handleEmailVerificationSubmit={handleEmailVerificationSubmit}
+                                />
+                            }
                             {isFreeTier ?
                             <p className="space-top-xs-up text-xs-small text-center">By clicking the "Sign up" button, you are creating a Cobiro account, and you agree to Cobiro's Terms &amp; Conditions.</p>
                             : null}
