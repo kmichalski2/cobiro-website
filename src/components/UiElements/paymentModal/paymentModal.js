@@ -9,6 +9,7 @@ import LoadingSpinner from '../loadingSpinner/LoadingSpinner'
 import logo from "../../../images/logo.svg"
 import Classes from './paymentModal.module.scss'
 import ImageAll from '../ImageAll/ImageAll'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 const axios = require('axios');
 
@@ -43,10 +44,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     
     const securePaymentImage = queryData.securePayment
     const googlePartnerImage = queryData.googlePartner
-
-    console.log(queryData)
-
-        
+    
     const [loading, setLoading] = useState(true)
     const [submission, setSubmission] = useState({email: '', password: ''})
     const [errors, setErrors] = useState({})
@@ -57,8 +55,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [submitError, setSubmitError] = useState(false)
     const [paymentComponent, setPaymentComponent] = useState()
     const [paymentId, setPaymentId] = useState()
+    const [showEmailValidation, setShowEmailValidation] = useState(false)
 
+    const [token, setToken] = useState('')
+    
+    const { executeRecaptcha } = useGoogleReCaptcha()
 
+    const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
     const majorUnitPriceExVat = rawPriceExVat / 100
     const price = majorUnitPriceExVat.toLocaleString("en-US", {style:"currency", currency:"USD"})
@@ -76,11 +79,12 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         setPaymentId(uuidv4())
     }, [])
 
-    const processPaymentResponse = (paymentRes) => {
-        const USER_TOKEN = "09dfpgjdpfgidfgi"
-        console.log('paymentRes', paymentRes)
+    const processPaymentResponse = (paymentRes, userToken) => {
+
+        console.log('processPaymentResponse: paymentRes', paymentRes)
+        console.log('processPaymentResponse: userToken', userToken)
+
         if (paymentRes.action) {
-            console.log('paymentComponent', paymentComponent)
             paymentComponent.handleAction(paymentRes.action)
         } else {
           switch (paymentRes.resultCode) {
@@ -88,10 +92,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 setSubmitting(false)
                 setSubmitSuccess(true)
                 setSubmitError(null)
-                window.location.href = `https://app.cobiro.com/user/login?token=${USER_TOKEN}&redirectUri=%2Fonboarding%2Fsite`
+                console.log(`https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`)
+                console.log(`https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`)
+                // window.location.href = `https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
               break;
             case "Pending":
-              window.location.href = "/status/pending";
+            //   window.location.href = "/status/pending";
+                console.log('processPaymentResponse: pending', paymentRes, userToken)
               break;
             case "Refused":
                 setSubmitting(false)
@@ -106,7 +113,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
           }
         }
       }
-    const handlePayment = (userId) => {
+    const handlePayment = (userToken) => {
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
@@ -126,27 +133,19 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 }
             }
         }).then((res) => {
-            console.log('res', res.data.data)
+            console.log('handlePayment: res', res.data.data)
             if(res.data.data.attributes && res.data.data.attributes.payload) {
-                console.log('HANDLING RESPONSE', res.data.data.attributes.payload)
-                processPaymentResponse(res.data.data.attributes.payload)
+                processPaymentResponse(res.data.data.attributes.payload, userToken)
             }
-            // if(res.data.data.action) {
-            //     const action = res.data.data.action
-            //     checkout.createFromAction(action).mount(aydenRef)
-            // }
-            // setSubmitting(false)
-            // setSubmitSuccess(false)
-            // setSubmitError('Something went wrong. Please try again, and check you entered the correct values.')
         }).catch((err) => {
-            console.log('err', err)
+            console.log('handlePayment: err', err)
             setSubmitting(false)
             setSubmitSuccess(false)
             setSubmitError('Something went wrong. Please try again, and check you entered the correct values.')
         })
     }
 
-    const loginUser = (usePayment, userId) => {
+    const loginUser = (usePayment) => {
         
         axios.post(`${process.env.GATSBY_HUB_URL}/v1/login`, {
             data: {
@@ -157,46 +156,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 }
             }
         }).then((res) => {
-            console.log('res', res)
-            
-            // if(usePayment) {
-            //     handlePayment(userId, userToken)
-            // } else {
-            //     setSubmitting(false)
-            //     setSubmitSuccess(true)
-            // }
-            
-        }).catch((err) => {
-            const error = err
-            console.log('err', error.response)
-            console.log('err.data', error.data)
-            console.log('err.errors', error.errors)
-            setSubmitting(false)
-            setSubmitSuccess(false)
-            setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
-        })
-    }
-
-    const registerUser = (usePayment) => {
-
-        console.log('paymentInformation.data', paymentInformation.data)
-        axios.post(`${process.env.GATSBY_HUB_URL}/v1/register`, {
-            data: {
-                type: "users",
-                attributes: {
-                    email: submission.email,
-                    password: submission.password,
-                    "partner_id": 1
-                }
-            }
-        }).then((res) => {
-            console.log('res', res)
-            const userId = res.data.data.id
-
-            // loginUser(usePayment, userId)
-
+            console.log('loginUser: res', res)
+            const userToken = res.data.data.attributes.access_token
             if(usePayment) {
-                handlePayment(userId)
+                handlePayment(userToken)
             } else {
                 setSubmitting(false)
                 setSubmitSuccess(true)
@@ -204,9 +167,54 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             
         }).catch((err) => {
             const error = err
-            console.log('err', error.response)
-            console.log('err.data', error.data)
-            console.log('err.errors', error.errors)
+            console.log('loginUser: err', error.response)
+            setSubmitting(false)
+            setSubmitSuccess(false)
+            setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
+        })
+    }
+
+    const handleRecaptchaValidation = async (usePayment) => {
+
+        setShowEmailValidation(true)
+        setLoading(false)
+        console.log('handleRecaptchaValidation called')
+        const result = await executeRecaptcha('homepage')
+
+        console.log('handleRecaptchaValidation: result', result)
+    }
+    
+
+    const registerUser = (usePayment) => {
+
+        const source = !isFreeTier ? {source: "payment"} : {}
+
+        console.log('paymentInformation.data', paymentInformation.data)
+
+        axios.post(`${process.env.GATSBY_HUB_URL}/v1/register`, {
+            data: {
+                type: "users",
+                attributes: {
+                    ...source,
+                    email: submission.email,
+                    password: submission.password,
+                    "partner_id": 1
+                }
+            }
+        }).then((res) => {
+            console.log('registerUser: res', res)
+            // const userId = res.data.data.id
+
+            if(!isFreeTier) {
+                loginUser(usePayment)
+            } else {
+                // handle email verification
+                handleRecaptchaValidation(usePayment)
+            }
+            
+        }).catch((err) => {
+            const error = err
+            console.log('registerUser: err', error.response)
             setSubmitting(false)
             setSubmitSuccess(false)
             setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
@@ -214,25 +222,25 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
     
     const handleOnChange = (state, component) => {
+        setSubmitError(null)
         setPaymentComponent(component)
         setPaymentInformation(state)
     }
     
     const handleOnSubmit = () => {
+        setSubmitError(null)
         setSubmitting(true)
-        console.log('register user:', submission)
-        console.log('make payment:', paymentInformation)
-        if(rawPriceIncVat !== 0 && paymentInformation.isValid) {
+        console.log('handleOnSubmit: submission', submission)
+        console.log('handleOnSubmit: paymentInformation', paymentInformation)
+        if(!isFreeTier && paymentInformation.isValid) {
             registerUser(true)
-        } else if(rawPriceIncVat === 0) {
+        } else if(isFreeTier) {
             registerUser(false)
-        } else {
-            console.log('error')
         }
     }
 
     const handleShopperRedirect = (state) => {
-        console.log('PAYMENT ID', paymentId)
+        console.log('handleShopperRedirect: paymentId', paymentId)
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/handle-shopper-redirect`, {
             data: {
@@ -246,7 +254,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 }
             }
         }).then((res) => {
-            console.log('res', res)
+            console.log('handleShopperRedirect: res', res)
             processPaymentResponse(res.data.data.attributes.payload)
             // loginUser(usePayment, userId)
             
@@ -259,14 +267,15 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
     
     const handleOnAdditionalDetails = (state, dropin) => {
-        console.log('handleOnAdditionalDetails', state)
+        console.log('handleOnAdditionalDetails: state', state)
 
         handleShopperRedirect(state) 
         
-        // setPaymentInformation(state)
     }
 
     const handleUserRegistrationChange = (e) => {
+        setSubmitError(null)
+        
         const key = e.target.name
         const value = e.target.value
         setSubmission({...submission, [key]: value})
@@ -297,8 +306,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
 
     useEffect(() => {
-        if(showModal && rawPriceIncVat && typeof window !== 'undefined' && rawPriceIncVat !== 0) {
-            console.log('showModal', rawPriceIncVat)
+        if(showModal && rawPriceIncVat && typeof window !== 'undefined' && !isFreeTier) {
             axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
                 data: {
                     type: "payment-methods",
@@ -332,22 +340,20 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 };
 
                 checkout = new AdyenCheckout(aydenConfiguration);
-                console.log('checkout', checkout)
                 setLoading(false)
                 const card = checkout.create('dropin').mount(aydenRef.current)
 
-
             })
-        } else if(showModal && rawPriceIncVat === 0) {
+        } else if(showModal && isFreeTier) {
             setLoading(false)
         }
     }, [showModal])
 
     return (
-        <Modal showModal={showModal} setShowModal={setShowModal} loading={loading} small={rawPriceIncVat === 0 ? true : false}>
+        <Modal showModal={showModal} setShowModal={setShowModal} loading={loading} small={isFreeTier ? true : false}>
             <div className="container">
                     <div className="row center-xs">
-                    {rawPriceIncVat !== 0 ?
+                    {!isFreeTier ?
                         <div className={["col col-xs-12 col-lg-4", Classes.modalRight].join(' ')}>
                                 <div>
                                 <div className={Classes.close}>
@@ -379,8 +385,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             </div>
                         </div>
                         : null }
-                        <div className={["col col-xs-12", Classes.modalLeft, rawPriceIncVat !== 0 ? "col-lg-8 first-lg" : null, rawPriceIncVat === 0 ? Classes.modalFree : null].join(' ')}>
-                            {rawPriceIncVat === 0 ?
+                        <div className={["col col-xs-12", Classes.modalLeft, !isFreeTier ? "col-lg-8 first-lg" : null, isFreeTier ? Classes.modalFree : null].join(' ')}>
+                            {isFreeTier ?
                                 <>
                                     <div className={Classes.close}>
                                         <button className="btn btn-unstyled" onClick={() => setShowModal(false)}>&#10005;</button>
@@ -389,12 +395,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                     <h3 className="space-big-xs-up text-center">Sign up for free</h3>
                                  </>
                             : null }
-                            {rawPriceIncVat !== 0 ?
+                            {!isFreeTier ?
                             <>
                             <h3 className="space-xs-up">Account Information</h3>
                             <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.userInformation].join(' ')}>User information</p>
                             </>
                             : null }
+                            {!showEmailValidation ? 
                             <form>
                                 <div className={["form-group", Classes.formGroup, errors.email ? Classes.error : null, dirty.email ? Classes.dirty : null].join(' ')}>
                                     <label className="sr-only" htmlFor="email">Email address</label>
@@ -414,25 +421,30 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                 </div>
                             
                             </form>
-                            {rawPriceIncVat !== 0 ?
+                            : 
+                            <p>Email verification code...</p>
+                            }
+                            {!isFreeTier ?
                                 <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.paymentInformation].join(' ')}>Payment information</p>
                             : null}
                             <div className="space-xs-up" ref={aydenRef}></div>
                             <button 
                                 className={["btn btn-full-width", submitSuccess ? Classes.successBtn : null].join(' ')} 
                                 onClick={handleOnSubmit} 
-                                disabled={(rawPriceIncVat !== 0 && (!paymentInformation || !paymentInformation.isValid)) || !isObjEmpty(errors)}>
+                                disabled={(!isFreeTier && (!paymentInformation || !paymentInformation.isValid)) || !isObjEmpty(errors)}>
                                     <span>
                                         {submitting ? 
                                         <LoadingSpinner loading={submitting}>
                                             Loading
                                         </LoadingSpinner> 
-                                        : rawPriceIncVat !== 0 ? 
+                                        : !isFreeTier ? 
                                             `Pay ${priceIncVAT}` 
+                                        : showEmailValidation ?
+                                            'Submit'
                                         : 'Sign up'}
                                     </span>
                             </button>
-                            {rawPriceIncVat === 0 ?
+                            {isFreeTier ?
                             <p className="space-top-xs-up text-xs-small text-center">By clicking the "Sign up" button, you are creating a Cobiro account, and you agree to Cobiro's Terms &amp; Conditions.</p>
                             : null}
                             
