@@ -165,14 +165,19 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }).then((res) => {
             console.log('loginUser: res', res)
             const userToken = res.data.data.attributes.access_token
-            if(usePayment) {
-                // handlePayment(userToken)
-                redirectToApp(userToken)
-            } else {
-                setSubmitting(false)
-                setSubmitSuccess(true)
-                redirectToApp(userToken)
-            }
+            
+            setSubmitting(false)
+            setSubmitSuccess(true)
+            redirectToApp(userToken)
+            
+            // if(usePayment) {
+            //     // handlePayment(userToken)
+            //     redirectToApp(userToken)
+            // } else {
+            //     setSubmitting(false)
+            //     setSubmitSuccess(true)
+            //     redirectToApp(userToken)
+            // }
             
         }).catch((err) => {
             const error = err
@@ -267,7 +272,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log('handleShopperRedirect: res', res)
             if(res.data && res.data.data && res.data.data.attributes && res.data.data.attributes.payload) {
                 processPaymentResponse(res.data.data.attributes.payload)
-            } else if(isObjEmpty(res)) {
+            } else if(isObjEmpty(res.data)) {
                 processPaymentResponse()
             }
                         
