@@ -18,16 +18,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     const queryData = useStaticQuery(graphql`
     query PaymentImages {
-        securePayment: file(relativePath: { eq: "logo-encrypt.jpg" }) {
-            childImageSharp {
-              fluid(maxWidth: 300, quality: 80) {
-                srcSet
-                src
-                sizes
-                base64
-                aspectRatio
-              }
-            }
+        securePayment: file(relativePath: { eq: "icon-sslencrypt.svg" }) {
+            publicURL
         }
         googlePartner: file(relativePath: { eq: "logo-googlepartner.jpg" }) {
             childImageSharp {
@@ -97,8 +89,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 setSubmitting(false)
                 setSubmitSuccess(true)
                 setSubmitError(null)
-                console.log(`https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`)
-                console.log(`https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`)
                 redirectToApp(userToken)
               break;
             case "Pending":
@@ -411,7 +401,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                 </table>
                             </div>
                             <div className="flex">
-                                <ImageAll image={securePaymentImage.childImageSharp} classes={Classes.paymentImages}/>
+                                <ImageAll image={securePaymentImage} classes={Classes.paymentImages}/>
                                 <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
                             </div>
                         </div>

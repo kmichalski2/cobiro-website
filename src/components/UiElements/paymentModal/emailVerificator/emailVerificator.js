@@ -4,20 +4,7 @@ import Classes from './emailVerificator.module.scss'
 
 const EmailVerificator = ({submitSuccess, submitting, setSubmitting, handleEmailVerificationSubmit}) => {
 
-    // const CODE_LENGTH = new Array(5).fill("");
-
-    // const [value, setValue] = useState({
-    //     0: "1",
-    //     1: "2",
-    //     2: "3",
-    //     3: "4",
-    //     4: "5",
-    // })
-
     const [value, setValue] = useState('')
-    // const [submitSuccess, setSubmitSuccess] = useState(false)
-    // const [submitting, setSubmitting] = useState(false)
-
     const valueValidator = (val) => {
 
         const regex = /^[0-9]+$/
@@ -31,16 +18,6 @@ const EmailVerificator = ({submitSuccess, submitting, setSubmitting, handleEmail
         }
 
     }
-    // const onChangeHandler = (e, index) => {
-    //     const val = e.target.value
-    //     const regex = "^[0-9]+$";
-    //     if(val.match(regex) || val === '') {
-    //         let newVal = value
-    //         newVal[index] = e.target.value
-    //         setValue(newVal)
-    //         console.log(index, e.target.value, value[index], value)
-    //     }
-    // }
 
     const onChangeHandler = (e) => {
         const val = e.target.value
