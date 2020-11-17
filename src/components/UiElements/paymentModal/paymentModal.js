@@ -88,13 +88,18 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         window.location.href = `https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
     }
 
-    const processPaymentResponse = (paymentRes) => {
+    const processPaymentResponse = (paymentRes, dropin) => {
 
         console.log('processPaymentResponse: paymentRes', paymentRes)
-        console.log('processPaymentResponse: userToken')
 
-        if (paymentRes && paymentRes.action) {
-            paymentComponent.handleAction(paymentRes.action)
+        if (paymentRes && (paymentRes.action || paymentRes.type)) {
+            console.log('HANDLE ACTION', paymentRes.action || paymentRes)
+            console.log('HANDLE ACTION: paymentComponent', paymentComponent)
+            if(dropin) {
+                dropin.handleAction(paymentRes.action || paymentRes)
+            } else {
+                paymentComponent.handleAction(paymentRes.action || paymentRes)
+            }
         } else if(!paymentRes) {
             setSubmitting(false)
             setSubmitSuccess(true)
@@ -263,7 +268,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }
     }
 
-    const handleShopperRedirect = (state) => {
+    const handleShopperRedirect = (state, dropin) => {
         console.log('handleShopperRedirect: paymentId', paymentId)
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/handle-shopper-redirect`, {
@@ -280,9 +285,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }).then((res) => {
             console.log('handleShopperRedirect: res', res)
             if(res.data && res.data.data && res.data.data.attributes && res.data.data.attributes.payload) {
-                processPaymentResponse(res.data.data.attributes.payload)
+                processPaymentResponse(res.data.data.attributes.payload, dropin)
             } else if(isObjEmpty(res.data)) {
-                processPaymentResponse()
+                processPaymentResponse(dropin)
             }
                         
         }).catch((err) => {
@@ -296,9 +301,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const handleOnAdditionalDetails = (state, dropin) => {
         console.log('handleOnAdditionalDetails: state', state)
         console.log('handleOnAdditionalDetails: submission', submission)
+        console.log('handleOnAdditionalDetails: submission', dropin)
         // Missing submission state - currently its stale
-        handleShopperRedirect(state) 
-        
+        setPaymentComponent(dropin)
+        handleShopperRedirect(state, dropin) 
         
     }
 
