@@ -100,7 +100,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             } else {
                 paymentComponent.handleAction(paymentRes.action || paymentRes)
             }
-        } else if(!paymentRes) {
+        } else if(isObjEmpty(paymentRes)) {
             setSubmitting(false)
             setSubmitSuccess(true)
             setSubmitError(null)
@@ -287,7 +287,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             if(res.data && res.data.data && res.data.data.attributes && res.data.data.attributes.payload) {
                 processPaymentResponse(res.data.data.attributes.payload, dropin)
             } else if(isObjEmpty(res.data)) {
-                processPaymentResponse(dropin)
+                processPaymentResponse({}, dropin)
             }
                         
         }).catch((err) => {
