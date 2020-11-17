@@ -49,6 +49,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [paymentComponent, setPaymentComponent] = useState()
     const [paymentId, setPaymentId] = useState()
     const [showEmailValidation, setShowEmailValidation] = useState(false)
+    const [startLogin, setStartLogin] = useState(false)
 
     const [token, setToken] = useState('')
     
@@ -72,6 +73,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         setPaymentId(uuidv4())
     }, [])
 
+    useEffect(() => {
+        if(startLogin) {
+            console.log('START LOGIN submission', startLogin, submission)
+            loginUser(true)
+        }
+    }, [startLogin])
+
     const isObjEmpty = (obj) => {
         return Object.keys(obj).length === 0 && obj.constructor === Object
     }
@@ -91,15 +99,16 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             setSubmitting(false)
             setSubmitSuccess(true)
             setSubmitError(null)
-            loginUser(true)
+            // loginUser(true)
+            setStartLogin(true)
         } else {
           switch (paymentRes.resultCode) {
             case "Authorised":
                 setSubmitting(false)
                 setSubmitSuccess(true)
                 setSubmitError(null)
-                loginUser(true)
-                
+                // loginUser(true)
+                setStartLogin(true)
               break;
             case "Pending":
             //   window.location.href = "/status/pending";
@@ -286,8 +295,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     
     const handleOnAdditionalDetails = (state, dropin) => {
         console.log('handleOnAdditionalDetails: state', state)
-
+        console.log('handleOnAdditionalDetails: submission', submission)
+        // Missing submission state - currently its stale
         handleShopperRedirect(state) 
+        
         
     }
 
