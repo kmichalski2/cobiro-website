@@ -85,7 +85,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         console.log('processPaymentResponse: paymentRes', paymentRes)
         console.log('processPaymentResponse: userToken')
 
-        if (paymentRes.action) {
+        if (paymentRes && paymentRes.action) {
             paymentComponent.handleAction(paymentRes.action)
         } else if(!paymentRes) {
             setSubmitting(false)
@@ -169,7 +169,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             setSubmitting(false)
             setSubmitSuccess(true)
             redirectToApp(userToken)
-            
+
             // if(usePayment) {
             //     // handlePayment(userToken)
             //     redirectToApp(userToken)
