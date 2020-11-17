@@ -72,28 +72,38 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         setPaymentId(uuidv4())
     }, [])
 
+    const isObjEmpty = (obj) => {
+        return Object.keys(obj).length === 0 && obj.constructor === Object
+    }
+
     const redirectToApp = (userToken) => {
         window.location.href = `https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
     }
 
-    const processPaymentResponse = (paymentRes, userToken) => {
+    const processPaymentResponse = (paymentRes) => {
 
         console.log('processPaymentResponse: paymentRes', paymentRes)
-        console.log('processPaymentResponse: userToken', userToken)
+        console.log('processPaymentResponse: userToken')
 
         if (paymentRes.action) {
             paymentComponent.handleAction(paymentRes.action)
+        } else if(!paymentRes) {
+            setSubmitting(false)
+            setSubmitSuccess(true)
+            setSubmitError(null)
+            loginUser(true)
         } else {
           switch (paymentRes.resultCode) {
             case "Authorised":
                 setSubmitting(false)
                 setSubmitSuccess(true)
                 setSubmitError(null)
-                redirectToApp(userToken)
+                loginUser(true)
+                
               break;
             case "Pending":
             //   window.location.href = "/status/pending";
-                console.log('processPaymentResponse: pending', paymentRes, userToken)
+                console.log('processPaymentResponse: pending', paymentRes)
               break;
             case "Refused":
                 setSubmitting(false)
@@ -108,7 +118,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
           }
         }
       }
-    const handlePayment = (userToken) => {
+    const handlePayment = () => {
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
@@ -129,8 +139,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             }
         }).then((res) => {
             console.log('handlePayment: res', res.data.data)
-            if(res.data.data.attributes && res.data.data.attributes.payload) {
-                processPaymentResponse(res.data.data.attributes.payload, userToken)
+            if(res && res.data && res.data.data && res.data.data.attributes && res.data.data.attributes.payload) {
+                processPaymentResponse(res.data.data.attributes.payload)
+            } else if(isObjEmpty(res)) {
+                processPaymentResponse()
             }
         }).catch((err) => {
             console.log('handlePayment: err', err)
@@ -154,7 +166,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log('loginUser: res', res)
             const userToken = res.data.data.attributes.access_token
             if(usePayment) {
-                handlePayment(userToken)
+                // handlePayment(userToken)
+                redirectToApp(userToken)
             } else {
                 setSubmitting(false)
                 setSubmitSuccess(true)
@@ -202,7 +215,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             // const userId = res.data.data.id
 
             if(!isFreeTier) {
-                loginUser(usePayment)
+                // loginUser(usePayment)
+                handlePayment()
             } else {
                 // handle email verification
                 handleRecaptchaValidation(usePayment)
@@ -251,9 +265,12 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             }
         }).then((res) => {
             console.log('handleShopperRedirect: res', res)
-            processPaymentResponse(res.data.data.attributes.payload)
-            // loginUser(usePayment, userId)
-            
+            if(res.data && res.data.data && res.data.data.attributes && res.data.data.attributes.payload) {
+                processPaymentResponse(res.data.data.attributes.payload)
+            } else if(isObjEmpty(res)) {
+                processPaymentResponse()
+            }
+                        
         }).catch((err) => {
             console.log(err.response)
             setSubmitting(false)
@@ -322,10 +339,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         })
     }
 
-    const isObjEmpty = (obj) => {
-        return Object.keys(obj).length === 0 && obj.constructor === Object
-    }
-
     useEffect(() => {
         if(showModal && rawPriceIncVat && typeof window !== 'undefined' && !isFreeTier) {
             axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
@@ -381,7 +394,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                     <button className="btn btn-unstyled" onClick={() => setShowModal(false)}>&#10005;</button>
                                 </div>
                                 <h4>Cobiro {showModal}</h4>
-                                <p className="text-xs-small">You’ll be charged {price} {monthlyPricing ? 'monthly' : 'yearly'} until you cancel your subscription. All amounts shown are in USD. Payment data is always encrypted and secure.</p>
+                                <p className="text-xs-small">
+                                    {monthlyPricing ?
+                                    "You’ll be charged monthly until you cancel your subscription."
+                                    :
+                                    "You’ll be charged yearly until you cancel your subscription."
+                                    }
+                                </p>
                                 <table className="table text-xs-small table-unstyled">
                                 <tbody>
                                     <tr>
@@ -451,7 +470,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             <button 
                                 className={["btn btn-full-width", submitSuccess ? Classes.successBtn : null].join(' ')} 
                                 onClick={handleOnSubmit} 
-                                disabled={(!isFreeTier && (!paymentInformation || !paymentInformation.isValid)) || !isObjEmpty(errors)}>
+                                disabled={(!isFreeTier && (!paymentInformation || !paymentInformation.isValid)) || !isObjEmpty(errors) || !submission.email || !submission.password}>
                                     <span>
                                         {submitting ? 
                                         <LoadingSpinner loading={submitting}>
