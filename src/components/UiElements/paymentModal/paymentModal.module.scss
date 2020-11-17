@@ -42,7 +42,7 @@
 
 .modalLeft {
     text-align: left;
-    padding: 2.25rem 1.875rem;
+    padding: 2.25rem 1.875rem !important;
 
     @include mq($from: lg) {
         border-right: 1px solid $grey;
