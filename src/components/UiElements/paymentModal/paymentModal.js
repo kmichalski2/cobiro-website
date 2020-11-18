@@ -50,6 +50,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [paymentId, setPaymentId] = useState()
     const [showEmailValidation, setShowEmailValidation] = useState(false)
     const [startLogin, setStartLogin] = useState(false)
+    const [ip, setIp] = useState("")
 
     const [token, setToken] = useState('')
     
@@ -71,7 +72,20 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     useEffect(() => {
         setPaymentId(uuidv4())
+
+        axios.get('https://www.cloudflare.com/cdn-cgi/trace').then((res) => {
+
+        res.data.split('\n').map(el => {
+            const keyValue = el.split(("="))
+
+            if(keyValue[0] === 'ip') {
+                setIp(keyValue[1])
+            }
+        })            
+    })
+
     }, [])
+
 
     useEffect(() => {
         if(startLogin) {
@@ -134,6 +148,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
       }
     const handlePayment = () => {
 
+        
+
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
                 type: "make-payment",
@@ -145,7 +161,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                     currency: "USD",
                     return_url: `${window.location.href}?returning=1`,
                     origin: window.location.href,
-                    shopper_ip: "192.168.0.1",
+                    shopper_ip: ip,
                     browser_info: paymentInformation.data.browserInfo,
                     payment_method: paymentInformation.data.paymentMethod,
                     riskData: paymentInformation.data.riskData
