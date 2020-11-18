@@ -85,7 +85,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
 
     const redirectToApp = (userToken) => {
-        window.location.href = `https://app.cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
+        window.location.href = `https://app.test-cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
     }
 
     const processPaymentResponse = (paymentRes, dropin) => {
