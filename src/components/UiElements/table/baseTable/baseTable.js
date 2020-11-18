@@ -1,15 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, Suspense, useEffect} from 'react'
 
 import TableRow from '../tableRow/tableRow'
 import ImageAll from '../../ImageAll/ImageAll'
 
 import Classes from './baseTable.module.scss'
 import Fade from '../../../hoc/fade/fade'
-import AnyLink from '../../AnyLink/AnyLink'
+// import PaymentModal from '../../paymentModal/paymentModal'
+// let PaymentModal = null
+
+// if(typeof window !== 'undefined' && typeof window.location !== 'undefined') {
+//     PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
+// }
+
+const PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
 
 const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, monthlyPriceName}) => {
 
     const [expandedRow, setExpandedRow] = useState(null)
+    const [showModal, setShowModal] = useState(false)
+    const [rawPriceIncVat, setRawPriceIncVat] = useState(false)
+    const [rawPriceExVat, setRawPriceExVat] = useState(false)
+    const [planId, setPlanId] = useState(false)
+
+    const handleShowModal = (rawPriceIncVat, rawPriceExVat, title, id) => {
+        setPlanId(id)
+        setShowModal(title)
+        setRawPriceIncVat(rawPriceIncVat)
+        setRawPriceExVat(rawPriceExVat)
+    }
 
     const rowExpanderCheck = (i) => {
         
@@ -24,9 +42,15 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
     const hasNumber = (myString) => {
         return /\d/.test(myString);
       }
+    
 
     return (
         <>
+        {typeof window !== 'undefined' ?
+        <Suspense fallback={<></>}>
+            <PaymentModal showModal={showModal} rawPriceIncVat={rawPriceIncVat} rawPriceExVat={rawPriceExVat} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName} planId={planId}/>
+        </Suspense>
+        : null }
         <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
             {headers ?
             <thead>
@@ -42,8 +66,20 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                         <span className="h4">{ h.title }</span>
                         <span className="small text-normal block-xs space-small-xs-up">{h.subtitle}</span>
                         <span className="h2 block-xs no-mt">{h[pricing]} <span className="text-normal small">{pricing === yearlyPriceName ? yearlyPriceBillingRate : monthlyPriceBillingRate}</span></span>
-                        {pricing === yearlyPriceName && hasNumber(h[monthlyPriceName]) ? <span className={["block-xs no-mt space-xs-up text-normal text-overlined", Classes.overlinedText].join(' ')}>{h[monthlyPriceName]}</span> : pricing === yearlyPriceName ? <span className={["block-xs no-mt space-xs-up text-normal", Classes.hiddenText].join(' ')}>{h[monthlyPriceName]}</span> : null }
-                        {h.link && h.linkTitle && <AnyLink external link={h.link} title={h.linkTitle} button classes="space-small-xs-up"/>}
+                        {pricing === yearlyPriceName && hasNumber(h[monthlyPriceName]) ? <span className={["block-xs no-mt no-mb space-xs-up text-normal text-overlined", Classes.overlinedText].join(' ')}>{h[monthlyPriceName]}</span> : pricing === yearlyPriceName ? <span className={["block-xs no-mt space-xs-up text-normal", Classes.hiddenText].join(' ')}>{h[monthlyPriceName]}</span> : null }
+                        {/* h.link && h.linkTitle && <AnyLink external link={h.link} title={h.linkTitle} button classes="space-small-xs-up"/>*/}
+                        <span className="text-xs-small text-normal space-xs-up block-xs">(excl. VAT)</span>
+                        { h.linkTitle && h.buttonEmailLink ?
+                            <a className="btn space-small-xs-up" href={h.buttonEmailLink} rel="noopener noreferrer">{h.linkTitle}</a>
+                        : h.linkTitle && 
+                            <button 
+                                className="btn space-small-xs-up" 
+                                onClick={
+                                    () => handleShowModal(h[`${pricing}Raw`], h[`${pricing}RawExVat`], h.title, h[`${pricing}PlanId`])}
+                                >
+                                    {h.linkTitle}
+                            </button> 
+                            }
                     </th>) : null }
                 </tr>
                 

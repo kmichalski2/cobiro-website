@@ -23,8 +23,8 @@ const ImageAll = ({ image, alt, classes, fadeIn, fullWidth, style, backgroundIma
                 alt={alt}
                 style={style}
                 />
-        : image && image.url ?
-            <img src={image.url} 
+        : image && (image.url || image.publicURL)?
+            <img src={image.url || image.publicURL} 
             className={["img-responsive", classes, backgroundImage ? Classes.backgroundImage: null, fullWidth ? "img-full-width" : null].join(' ')}
                 alt={alt}
                 style={style}

@@ -11,7 +11,7 @@
     }
     font-size: 0.8rem;
 
-    @include mq($until: md) {
+    @include mq($until: lg) {
 
         .hiddenMobile {
             display: none;

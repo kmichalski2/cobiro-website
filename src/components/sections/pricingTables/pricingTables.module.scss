@@ -16,20 +16,36 @@
     }
 }
 
+// .tabsWrapper {
+//     position: relative;
+//     &::before {
+//         content: '';
+//         position: absolute;
+//         right: 0;
+//         top: 0;
+//         background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 20%, rgba(255,255,255,1) 100%); 
+//         width: 1rem;
+//         height: 100%;
+//         z-index: 100;
+//     }
+// }
+
 .tabs {
     display: none;
-    @include mq($until: md) {
+    @include mq($until: lg) {
     // position: fixed;
     // padding: 1.1rem 1.1rem;
     // bottom: 0;
     // left: 0;
     width: 100%;
     display: flex;
-    justify-content: center;
+    // justify-content: center;
+    overflow-x: scroll;
+    justify-content: flex-start;
     // background-color: $white;
     // box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
     // z-index: 10;
-
+   
     
     .tab {
         border-radius: 0;

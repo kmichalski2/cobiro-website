@@ -50,7 +50,7 @@
     width: 100%;
     border-collapse: separate;
 
-    @include mq($until: md) {
+    @include mq($until: lg) {
         .hiddenMobile {
             display: none;
         }
@@ -75,7 +75,7 @@
                         border-top-right-radius: 5px;
                     }
 
-                    @include mq($until: md) {   
+                    @include mq($until: lg) {   
                         &.activeColMobile {
                             border-right: 1px solid $lightgrey;
                             border-top-right-radius: 5px;

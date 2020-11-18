@@ -80,20 +80,23 @@ const PricingTables = ({ data, navbarHeight }) => {
     const tierSwitcher = headers && headers.length > 1 ? 
         <div className="row space-xs-up">
             <div className="col col-xs-12">
-                <div className={Classes.tabs}>
-                    <ButtonSwitch
-                        buttons={
-                            headers.map((h, i) => {
-                                return {
-                                    clickHandler: () => setActiveCol(i),
-                                    title: h.title,
-                                    active: activeCol === i
+                <div className={Classes.tabsWrapper}>
+                    <div className={Classes.tabs}>
+                        <ButtonSwitch
+                            buttons={
+                                headers.map((h, i) => {
+                                    return {
+                                        clickHandler: () => setActiveCol(i),
+                                        title: h.title,
+                                        active: activeCol === i
+                                    }
                                 }
-                            }
 
-                            )
-                        }
-                    />
+                                )
+                            }
+                            xsColumn
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,6 +125,7 @@ const PricingTables = ({ data, navbarHeight }) => {
                                     active: activePricing === yearlyPricingName
                                 }
                             ]}
+                            xsColumn
                         />
                     </div>
                 </div>

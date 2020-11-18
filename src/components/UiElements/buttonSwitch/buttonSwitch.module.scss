@@ -5,6 +5,11 @@
     padding: 0.25rem;
     margin: auto;
     border-radius: $button-border-radius;
+    
+    @include mq($until: md) {
+        display: flex;
+        position: relative;
+    }
 
     .button {
         color: $black;
@@ -20,4 +25,12 @@
             margin-left: 0.25rem;
         }
     }
+    
+    @include mq($until: md) {
+        &.xsColumn {
+            flex-direction: column;
+            border-radius: 1.5rem;
+        }
+    }
+    
 }
