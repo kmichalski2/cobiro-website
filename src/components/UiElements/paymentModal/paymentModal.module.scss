@@ -54,7 +54,11 @@
 
     &.modalFree {
         border: none;
-        padding: 2.25rem 3.75rem;
+        // padding: 2.25rem 3.75rem;
+        @include mq($from: md) {
+            padding: 2.5rem 5rem !important;
+        }
+        
 
         .modalFree {
             position: absolute;

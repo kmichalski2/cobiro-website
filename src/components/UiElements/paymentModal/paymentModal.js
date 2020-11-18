@@ -112,22 +112,16 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 paymentComponent.handleAction(paymentRes.action || paymentRes)
             }
         } else if(isObjEmpty(paymentRes)) {
-            setSubmitting(false)
-            setSubmitSuccess(true)
             setSubmitError(null)
             setStartLogin(true)
         } else {
           switch (paymentRes.resultCode) {
             case "Authorised":
-                setSubmitting(false)
-                setSubmitSuccess(true)
                 setSubmitError(null)
                 setStartLogin(true)
               break;
             case "Pending":
                 console.log('processPaymentResponse: pending', paymentRes)
-                setSubmitting(false)
-                setSubmitSuccess(true)
                 setSubmitError(null)
                 setStartLogin(true)
               break;
@@ -312,7 +306,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         console.log('handleOnAdditionalDetails: submission', dropin)
         setPaymentComponent(dropin)
         handleShopperRedirect(state, dropin) 
-        
     }
 
     const handleUserRegistrationChange = (e) => {
