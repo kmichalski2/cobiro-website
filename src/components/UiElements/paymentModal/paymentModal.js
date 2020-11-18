@@ -68,6 +68,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     let checkout
 
     useEffect(() => {
+
+        console.log('GATSBY_AYDEN_ORIGIN_KEY', process.env.GATSBY_AYDEN_ORIGIN_KEY)
+
         setPaymentId(uuidv4())
 
         axios.get('https://www.cloudflare.com/cdn-cgi/trace').then((res) => {
