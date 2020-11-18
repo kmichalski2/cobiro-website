@@ -9,8 +9,8 @@ import LoadingSpinner from '../loadingSpinner/LoadingSpinner'
 import logo from "../../../images/logo.svg"
 import Classes from './paymentModal.module.scss'
 import ImageAll from '../ImageAll/ImageAll'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import EmailVerificator from './emailVerificator/emailVerificator'
+import ReCAPTCHA from "react-google-recaptcha";
 
 const axios = require('axios');
 
@@ -51,10 +51,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [showEmailValidation, setShowEmailValidation] = useState(false)
     const [startLogin, setStartLogin] = useState(false)
     const [ip, setIp] = useState("")
-
-    const [token, setToken] = useState('')
-    
-    const { executeRecaptcha } = useGoogleReCaptcha()
+    const [recaptchaValid, setRecaptchaValid] = useState(false)
 
     const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
@@ -74,15 +71,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         setPaymentId(uuidv4())
 
         axios.get('https://www.cloudflare.com/cdn-cgi/trace').then((res) => {
-
-        res.data.split('\n').map(el => {
-            const keyValue = el.split(("="))
-
-            if(keyValue[0] === 'ip') {
-                setIp(keyValue[1])
-            }
-        })            
-    })
+            res.data.split('\n').map(el => {
+                const keyValue = el.split(("="))
+                if(keyValue && keyValue[0] === 'ip') {
+                    setIp(keyValue[1])
+                }
+            })            
+        })
 
     }, [])
 
@@ -94,13 +89,15 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }
     }, [startLogin])
 
+
     const isObjEmpty = (obj) => {
         return Object.keys(obj).length === 0 && obj.constructor === Object
     }
 
     const redirectToApp = (userToken) => {
-        window.location.href = `https://app.test-cobiro.com/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
+        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
     }
+
 
     const processPaymentResponse = (paymentRes, dropin) => {
 
@@ -118,7 +115,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             setSubmitting(false)
             setSubmitSuccess(true)
             setSubmitError(null)
-            // loginUser(true)
             setStartLogin(true)
         } else {
           switch (paymentRes.resultCode) {
@@ -126,12 +122,14 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 setSubmitting(false)
                 setSubmitSuccess(true)
                 setSubmitError(null)
-                // loginUser(true)
                 setStartLogin(true)
               break;
             case "Pending":
-            //   window.location.href = "/status/pending";
                 console.log('processPaymentResponse: pending', paymentRes)
+                setSubmitting(false)
+                setSubmitSuccess(true)
+                setSubmitError(null)
+                setStartLogin(true)
               break;
             case "Refused":
                 setSubmitting(false)
@@ -146,9 +144,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
           }
         }
       }
-    const handlePayment = () => {
 
-        
+
+    const handlePayment = () => {
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
@@ -199,15 +197,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             setSubmitting(false)
             setSubmitSuccess(true)
             redirectToApp(userToken)
-
-            // if(usePayment) {
-            //     // handlePayment(userToken)
-            //     redirectToApp(userToken)
-            // } else {
-            //     setSubmitting(false)
-            //     setSubmitSuccess(true)
-            //     redirectToApp(userToken)
-            // }
             
         }).catch((err) => {
             const error = err
@@ -218,14 +207,18 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         })
     }
 
-    const handleRecaptchaValidation = async (usePayment) => {
-
-        setShowEmailValidation(true)
-        setSubmitting(false)
-        console.log('handleRecaptchaValidation called')
-        const result = await executeRecaptcha('homepage')
-
-        console.log('handleRecaptchaValidation: result', result)
+    const handleRecaptchaValidation = (rCToken) => {
+        
+        axios.post(`${process.env.GATSBY_HUB_URL}/v1/verifyRecaptcha`, {
+            recaptcha_token: rCToken
+        }).then((res) => {
+            console.log(res.data)
+            setRecaptchaValid(true)
+        }).catch((err) => {
+            const error = err
+            console.log('handleRecaptchaValidation: err', error.response)
+            setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.title).join('. '))
+        })
     }
     
 
@@ -247,14 +240,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             }
         }).then((res) => {
             console.log('registerUser: res', res)
-            // const userId = res.data.data.id
-
             if(!isFreeTier) {
-                // loginUser(usePayment)
                 handlePayment()
             } else {
                 // handle email verification
-                handleRecaptchaValidation(usePayment)
+                // handleRecaptchaValidation(usePayment)
+                setShowEmailValidation(true)
+                setSubmitting(false)
             }
             
         }).catch((err) => {
@@ -318,7 +310,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         console.log('handleOnAdditionalDetails: state', state)
         console.log('handleOnAdditionalDetails: submission', submission)
         console.log('handleOnAdditionalDetails: submission', dropin)
-        // Missing submission state - currently its stale
         setPaymentComponent(dropin)
         handleShopperRedirect(state, dropin) 
         
@@ -500,6 +491,12 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                 </div>
                             
                             </form>
+                            {isFreeTier ?
+                            <ReCAPTCHA
+                                sitekey={process.env.GATSBY_RECAPTCHA_SITE_KEY}
+                                onChange={handleRecaptchaValidation}
+                                />
+                            : null}
                             
                             {!isFreeTier ?
                                 <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.paymentInformation].join(' ')}>Payment information</p>
@@ -508,7 +505,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             <button 
                                 className={["btn btn-full-width", submitSuccess ? Classes.successBtn : null].join(' ')} 
                                 onClick={handleOnSubmit} 
-                                disabled={(!isFreeTier && (!paymentInformation || !paymentInformation.isValid)) || !isObjEmpty(errors) || !submission.email || !submission.password}>
+                                disabled={(!isFreeTier && (!paymentInformation || !paymentInformation.isValid)) || !isObjEmpty(errors) || !submission.email || !submission.password || (isFreeTier && !recaptchaValid)}>
                                     <span>
                                         {submitting ? 
                                         <LoadingSpinner loading={submitting}>
