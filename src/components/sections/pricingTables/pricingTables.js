@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Section from '../../UiElements/Section/Section'
 import BaseTable from '../../UiElements/table/baseTable/baseTable'
 import Checkmark from '../../UiElements/checkmark/checkmark'
+import {CurrentLocaleContext} from '../../layout/layout'
 
 import Classes from './pricingTables.module.scss'
 import Cross from '../../UiElements/cross/cross'
@@ -9,6 +10,8 @@ import Label from '../../UiElements/label/label'
 import ButtonSwitch from '../../UiElements/buttonSwitch/buttonSwitch'
 import Table from '../../UiElements/table/table'
 import CtaCard from '../../UiElements/ctaCard/ctaCard'
+const queryString = require('query-string');
+
 
 const PricingTables = ({ data, navbarHeight }) => {
 
@@ -26,6 +29,20 @@ const PricingTables = ({ data, navbarHeight }) => {
     const [activePricing, setActivePricing] = useState(monthlyPricingName)
     const [headerFixed, setHeaderFixed] = useState(false)
     const [tableYPos, setTableYPos] = useState(0)
+    const [showModal, setShowModal] = useState()
+
+    const location = useContext(CurrentLocaleContext).location
+    const parsedLocation = queryString.parse(location.search);
+
+    useEffect(() => {
+        
+            console.log('location', location)
+            console.log('parsed', parsedLocation);
+            let {returning, ...returningData} = parsedLocation;
+            if(parsedLocation && returning === "1") {                
+                setShowModal(returningData)
+            }
+    }, [])
 
     const tableHeaderRef = React.createRef()
     const tablesRef = React.createRef()
@@ -136,6 +153,7 @@ const PricingTables = ({ data, navbarHeight }) => {
                 <div ref={tableHeaderRef} className="row">
                     <div className="col col-xs-12 space-xs-up">
                     <BaseTable
+                        returnedModalOpen={showModal}
                         navbarHeight={navbarHeight}
                         headerFixed={headerFixed}
                         scrollPos={tableYPos}

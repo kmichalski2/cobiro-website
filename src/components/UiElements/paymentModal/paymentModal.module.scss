@@ -30,13 +30,15 @@
 
     
 
-    .paymentImages {
-        width: 7rem;
-        height: auto;
+    
+}
 
-        &:first-child {
-            margin-right: 1rem;
-        }
+.paymentImages {
+    width: 7rem;
+    height: auto;
+
+    &:first-child {
+        margin-right: 1rem;
     }
 }
 
@@ -121,5 +123,13 @@
             height: 1em;
             position: absolute;
         }
+    }
+}
+
+.returning {
+    padding: 2.5rem 5rem !important;
+
+    .logo { 
+        margin-bottom: 5rem;
     }
 }

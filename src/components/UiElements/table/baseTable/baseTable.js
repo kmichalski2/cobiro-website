@@ -5,6 +5,8 @@ import ImageAll from '../../ImageAll/ImageAll'
 
 import Classes from './baseTable.module.scss'
 import Fade from '../../../hoc/fade/fade'
+
+
 // import PaymentModal from '../../paymentModal/paymentModal'
 // let PaymentModal = null
 
@@ -14,19 +16,30 @@ import Fade from '../../../hoc/fade/fade'
 
 const PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
 
-const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, monthlyPriceName}) => {
+const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, monthlyPriceName, returnedModalOpen}) => {
 
+    const RETURNING = 'returning'
     const [expandedRow, setExpandedRow] = useState(null)
     const [showModal, setShowModal] = useState(false)
     const [rawPriceIncVat, setRawPriceIncVat] = useState(false)
     const [rawPriceExVat, setRawPriceExVat] = useState(false)
     const [planId, setPlanId] = useState(false)
+    const [returningData, setReturningData] = useState()
+    
+    useEffect(() => {
+        console.log('returnedModalOpen', returnedModalOpen)
+        if(returnedModalOpen) {
+            handleShowModal(0, 0, RETURNING, null, returnedModalOpen)
+        }
+    }, [returnedModalOpen])
 
-    const handleShowModal = (rawPriceIncVat, rawPriceExVat, title, id) => {
+    const handleShowModal = (rawPriceIncVat, rawPriceExVat, title, id, data) => {
+        
         setPlanId(id)
         setShowModal(title)
         setRawPriceIncVat(rawPriceIncVat)
         setRawPriceExVat(rawPriceExVat)
+        setReturningData(data)
     }
 
     const rowExpanderCheck = (i) => {
@@ -46,9 +59,9 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
 
     return (
         <>
-        {typeof window !== 'undefined' ?
+        {typeof window !== 'undefined' && headers ?
         <Suspense fallback={<></>}>
-            <PaymentModal showModal={showModal} rawPriceIncVat={rawPriceIncVat} rawPriceExVat={rawPriceExVat} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName} planId={planId}/>
+            <PaymentModal showModal={showModal} rawPriceIncVat={rawPriceIncVat} rawPriceExVat={rawPriceExVat} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName} planId={planId} pricing={pricing} RETURNING={RETURNING} returningData={returningData}/>
         </Suspense>
         : null }
         <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>

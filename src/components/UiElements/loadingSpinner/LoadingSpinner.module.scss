@@ -1,3 +1,4 @@
+@import '../../layout/style/globals';
 
 @keyframes spinner {
     to {transform: rotate(360deg);}
@@ -5,6 +6,14 @@
 .loading {
     position: relative;
     z-index: 200;
+
+    &.relative {
+        width: 40px;
+        height: 40px;
+        display: block;
+        margin: auto;
+        margin-bottom: 5rem;
+    }
     span {
         visibility: hidden;
         opacity: 0;
@@ -31,5 +40,11 @@
         margin-left: -20px;
         border-top: 4px solid white;
         border-right: 4px solid transparent;
+    }
+
+    &.dark {
+        &::after, &.large:after {
+            border-color: $grey;
+        }
     }
 }

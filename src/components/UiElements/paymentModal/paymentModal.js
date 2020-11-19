@@ -14,8 +14,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 const axios = require('axios');
 
-const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, monthlyPricing, planId}) => {
-
+const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, monthlyPricing, planId, pricing, returningData}) => {
+    
     const queryData = useStaticQuery(graphql`
     query PaymentImages {
         securePayment: file(relativePath: { eq: "icon-sslencrypt.svg" }) {
@@ -63,13 +63,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const currentLang = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
     
+    
+    
     const aydenRef = React.useRef()
 
     let checkout
 
     useEffect(() => {
-
-        console.log('GATSBY_AYDEN_ORIGIN_KEY', process.env.GATSBY_AYDEN_ORIGIN_KEY)
 
         setPaymentId(uuidv4())
 
@@ -82,8 +82,17 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             })            
         })
 
-    }, [])
+        console.log('returningData', returningData)
 
+        if(returningData) {
+            
+
+            const {payment_id, ...payload} = returningData
+
+            setPaymentId(payment_id)
+            handleShopperRedirect(payload, null, payment_id)
+        }
+    }, [])
 
     useEffect(() => {
         if(startLogin) {
@@ -92,7 +101,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }
     }, [startLogin])
 
-
     const isObjEmpty = (obj) => {
         return Object.keys(obj).length === 0 && obj.constructor === Object
     }
@@ -100,7 +108,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const redirectToApp = (userToken) => {
         window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
     }
-
 
     const processPaymentResponse = (paymentRes, dropin) => {
 
@@ -142,7 +149,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }
       }
 
-
     const handlePayment = () => {
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
@@ -154,7 +160,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                     plan_id: planId,
                     amount: rawPriceIncVat,
                     currency: "USD",
-                    return_url: `${window.location.href}?returning=1`,
+                    return_url: `${window.location.href}?returning=1&payment_id=${paymentId}`,
                     origin: window.location.href,
                     shopper_ip: ip,
                     browser_info: paymentInformation.data.browserInfo,
@@ -273,17 +279,17 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }
     }
 
-    const handleShopperRedirect = (state, dropin) => {
+    const handleShopperRedirect = (payload, dropin, payId) => {
         console.log('handleShopperRedirect: paymentId', paymentId)
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/handle-shopper-redirect`, {
             data: {
                 type: "make-payment",
                 attributes: {
-                    payment_id: paymentId,
+                    payment_id: paymentId || payId,
                     // paymentData: state.data.paymentData,
                     payload:  {
-                        ...state.data.details
+                        ...payload
                     }
                 }
             }
@@ -308,7 +314,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         console.log('handleOnAdditionalDetails: submission', submission)
         console.log('handleOnAdditionalDetails: submission', dropin)
         setPaymentComponent(dropin)
-        handleShopperRedirect(state, dropin) 
+        handleShopperRedirect(state.data.details, dropin) 
     }
 
     const handleUserRegistrationChange = (e) => {
@@ -412,6 +418,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         <Modal showModal={showModal} setShowModal={setShowModal} loading={loading} small={isFreeTier ? true : false}>
             <div className="container">
                     <div className="row center-xs">
+                    {!returningData ?
+                    <>
                     {!isFreeTier ?
                         <div className={["col col-xs-12 col-lg-4", Classes.modalRight].join(' ')}>
                                 <div>
@@ -449,7 +457,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                 <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
                             </div>
                         </div>
-                        : null }
+                        : null }    
                         <div className={["col col-xs-12", Classes.modalLeft, !isFreeTier ? "col-lg-8 first-lg" : null, isFreeTier ? Classes.modalFree : null].join(' ')}>
                             {isFreeTier ?
                                 <>
@@ -529,6 +537,19 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             
                             {submitError ? <p className="text-red space-top-xs-up small">{submitError}</p> : null}
                         </div>
+                        </>
+                        : 
+                        <div className={Classes.returning}>
+                            <img className={Classes.logo} src={logo} alt="Cobiro logo" />
+                            <LoadingSpinner loading={true} large relative dark>
+                                Loading
+                            </LoadingSpinner>  
+                            <div className="flex">
+                                <ImageAll image={securePaymentImage} classes={Classes.paymentImages}/>
+                                <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
+                            </div> 
+                        </div>
+                        }
                     </div>
                 </div>
         </Modal>
