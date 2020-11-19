@@ -86,8 +86,12 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
         if(returningData) {
             
-
-            const {payment_id, ...payload} = returningData
+            const {payment_id} = returningData
+            
+            const redirectPayload = JSON.parse(localStorage.getItem('redirectPayload'))
+            const {accesToken, ...payload} = redirectPayload
+            
+            console.log('redirectPayload', redirectPayload)
 
             setPaymentId(payment_id)
             handleShopperRedirect(payload, null, payment_id)
@@ -97,7 +101,22 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     useEffect(() => {
         if(startLogin) {
             console.log('START LOGIN submission', startLogin, submission)
-            loginUser(true)
+            
+
+            const loginRediect = async () => {
+
+                const redirectPayload = await JSON.parse(localStorage.getItem('redirectPayload'))
+                console.log('redirectPayload', redirectPayload)
+
+                if(redirectPayload && redirectPayload.token) {
+                    redirectToApp(redirectPayload.token)
+                } else {
+                    loginUser(false)
+                }
+            }
+
+            loginRediect()
+            
         }
     }, [startLogin])
 
@@ -109,17 +128,33 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
     }
 
-    const processPaymentResponse = (paymentRes, dropin) => {
+    const processPaymentResponse = async (paymentRes, dropin) => {
 
         console.log('processPaymentResponse: paymentRes', paymentRes)
+        
+        const action = paymentRes.action || paymentRes
 
         if (paymentRes && (paymentRes.action || paymentRes.type)) {
             console.log('HANDLE ACTION', paymentRes.action || paymentRes)
             console.log('HANDLE ACTION: paymentComponent', paymentComponent)
+
+            
+            if(action.type === 'redirect' && paymentRes.redirect) {
+                const {TermUrl, ...redirectPayload} = paymentRes.redirect.data
+                console.log('redirectPayload', redirectPayload)
+
+                const token = await loginUser(true)
+                console.log('token', token)
+                localStorage.setItem('redirectPayload', JSON.stringify({...redirectPayload, accesToken: token}))
+
+                // login
+                
+
+            }
             if(dropin) {
-                dropin.handleAction(paymentRes.action || paymentRes)
+                dropin.handleAction(action)
             } else {
-                paymentComponent.handleAction(paymentRes.action || paymentRes)
+                paymentComponent.handleAction(action)
             }
         } else if(isObjEmpty(paymentRes)) {
             setSubmitError(null)
@@ -183,9 +218,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         })
     }
 
-    const loginUser = (usePayment) => {
+    const loginUser = async (returnToken) => {
+
         
-        axios.post(`${process.env.GATSBY_HUB_URL}/v1/login`, {
+        const tokenReturned = await axios.post(`${process.env.GATSBY_HUB_URL}/v1/login`, {
             data: {
                 type: "login",
                 attributes: {
@@ -197,9 +233,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log('loginUser: res', res)
             const userToken = res.data.data.attributes.access_token
             
-            setSubmitting(false)
-            setSubmitSuccess(true)
-            redirectToApp(userToken)
+            if(!returnToken) {
+                setSubmitting(false)
+                setSubmitSuccess(true)
+                redirectToApp(userToken)
+            }
+
+            return userToken
             
         }).catch((err) => {
             const error = err
@@ -207,7 +247,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             setSubmitting(false)
             setSubmitSuccess(false)
             setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
+            return false
         })
+
+        return tokenReturned
     }
 
     const handleRecaptchaValidation = (rCToken) => {
@@ -305,7 +348,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log(err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors.map(e => e.detail).join('. '))
+            setSubmitError(err.response && err.response.data && err.response.data.errors && err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. '))
         })
     }
     
@@ -541,9 +584,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                         : 
                         <div className={Classes.returning}>
                             <img className={Classes.logo} src={logo} alt="Cobiro logo" />
+                            {!submitError ?
                             <LoadingSpinner loading={true} large relative dark>
                                 Loading
-                            </LoadingSpinner>  
+                            </LoadingSpinner> 
+                            : <h3 className="text-center space-big-xs-up text-red">{submitError}</h3>
+                            }
+                             
                             <div className="flex">
                                 <ImageAll image={securePaymentImage} classes={Classes.paymentImages}/>
                                 <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
