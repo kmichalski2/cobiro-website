@@ -86,12 +86,11 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
         if(returningData) {
             
-            const {payment_id} = returningData
+            const {payment_id, ...payload} = returningData
             
-            const redirectPayload = JSON.parse(localStorage.getItem('redirectPayload'))
-            const {accesToken, ...payload} = redirectPayload
+            // const redirectPayload = JSON.parse(localStorage.getItem('redirectPayload'))
             
-            console.log('redirectPayload', redirectPayload)
+            // console.log('redirectPayload', redirectPayload)
 
             setPaymentId(payment_id)
             handleShopperRedirect(payload, null, payment_id)
@@ -105,11 +104,11 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
             const loginRediect = async () => {
 
-                const redirectPayload = await JSON.parse(localStorage.getItem('redirectPayload'))
-                console.log('redirectPayload', redirectPayload)
+                const token = await localStorage.getItem('loginToken')
+                console.log('Token', token)
 
-                if(redirectPayload && redirectPayload.token) {
-                    redirectToApp(redirectPayload.token)
+                if(token) {
+                    redirectToApp(token)
                 } else {
                     loginUser(false)
                 }
@@ -145,7 +144,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
                 const token = await loginUser(true)
                 console.log('token', token)
-                localStorage.setItem('redirectPayload', JSON.stringify({...redirectPayload, accesToken: token}))
+                localStorage.setItem('loginToken', token)
 
                 // login
                 
@@ -196,6 +195,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                     amount: rawPriceIncVat,
                     currency: "USD",
                     return_url: `${window.location.href}?returning=1&payment_id=${paymentId}`,
+                    redirect_from_issuer_method: "GET",
                     origin: window.location.href,
                     shopper_ip: ip,
                     browser_info: paymentInformation.data.browserInfo,
