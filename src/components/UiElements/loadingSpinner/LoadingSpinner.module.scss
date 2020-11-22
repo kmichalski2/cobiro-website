@@ -1,0 +1,50 @@
+@import '../../layout/style/globals';
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+  }
+.loading {
+    position: relative;
+    z-index: 200;
+
+    &.relative {
+        width: 40px;
+        height: 40px;
+        display: block;
+        margin: auto;
+        margin-bottom: 5rem;
+    }
+    span {
+        visibility: hidden;
+        opacity: 0;
+    }
+    &::after {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        margin-left: -10px;
+        border-radius: 50%;
+        border-top: 2px solid white;
+        border-right: 2px solid transparent;
+        animation: spinner .6s linear infinite;
+    }
+    &.large:after {
+        width: 40px;
+        height: 40px;
+        margin-top: -20px;
+        margin-left: -20px;
+        border-top: 4px solid white;
+        border-right: 4px solid transparent;
+    }
+
+    &.dark {
+        &::after, &.large:after {
+            border-color: $grey;
+        }
+    }
+}

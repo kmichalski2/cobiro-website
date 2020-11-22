@@ -1,3 +1,12 @@
   
 [build]
     functions = "./functions"
+
+[context.production]
+    environment = { GATSBY_AYDEN_ORIGIN_KEY = "pub.v2.2615918883970029.aHR0cHM6Ly9jb2Jpcm8uY29t.Qp3eO2GnlgDwPCpDHpopDpFEd-z_3N33THF-Yv_R2Ao", GATSBY_AYDEN_ENVIRONMENT = "live", GATSBY_APP_URL = "https://app.cobiro.com", GATSBY_HUB_URL = "https://hub.cobiro.com"}
+
+[context.development]
+    environment = { GATSBY_AYDEN_ORIGIN_KEY = "pub.v2.2615918883970029.aHR0cHM6Ly9kZXZlbG9wbWVudC0tY29iaXJvLm5ldGxpZnkuYXBw.5U1wxdZSEgq0WsVLi6zAMiZkrA42FamIJch7PQbjafU", GATSBY_AYDEN_ENVIRONMENT = "live", GATSBY_APP_URL = "https://app.staging-cobiro.com", GATSBY_HUB_URL = "https://hub.staging-cobiro.com"}
+
+[context."feature/ayden-payments-setup"]
+    environment = { GATSBY_AYDEN_ORIGIN_KEY = "pub.v2.8215883284862673.aHR0cHM6Ly9mZWF0dXJlLWF5ZGVuLXBheW1lbnRzLXNldHVwLS1jb2Jpcm8ubmV0bGlmeS5hcHA.lxEFByOVH7astbiftYDLHJnHLnI6jbFMkO9gDugElG4", GATSBY_AYDEN_ENVIRONMENT = "test", GATSBY_APP_URL = "https://app.test-cobiro.com", GATSBY_HUB_URL = "https://hub.test-cobiro.com"}

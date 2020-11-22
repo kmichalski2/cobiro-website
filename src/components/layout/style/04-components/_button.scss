@@ -1,6 +1,6 @@
 $button-bg: $blue;
 $button-hover-bg: darken($blue, 20);
-$button-border-radius: 5px;
+$button-border-radius: 5rem;
 $button-border-color: $blue;
 $button-padding-vertical: 0.5rem;
 $button-padding-horizontal: 1.5rem;
@@ -11,6 +11,29 @@ $button-padding-horizontal: 1.5rem;
 	font-size: 0.875rem;
 	font-weight: 600;
 	border-radius: 5rem;
+
+	&.btn-full-width {
+		width: 100%;
+	}
+}
+
+.btn-unstyled {
+	font-size: 1rem;
+	font-weight: 600;
+	background-color: transparent;
+	border-color: transparent;
+	color: inherit;
+	border-radius: 5px;
+	padding: 0 0.5rem;
+
+	&:hover {
+		background-color: $lightgrey;
+		color: inherit;
+	}
+
+	&:active {
+		background-color: $grey;
+	}
 }
 
 @include mq($from: md) {
@@ -44,7 +67,7 @@ $button-padding-horizontal: 1.5rem;
 	border-color: $white;
 	color: $blue;
 
-	&:hover, &:active {
+	&:hover, &:active, &:focus {
 		background-color: rgba($white, 0.8);
 		// border-color: $white;
 		color: $blue;
@@ -72,6 +95,47 @@ $button-padding-horizontal: 1.5rem;
 	&.active {
 		&::before {
 			content: '-';
+		}
+	}
+
+}
+
+.btn-toggle-small {
+	padding: 1rem;
+	position: relative;
+
+
+
+	span {
+		display: none;
+	}
+
+	&::before {
+		// content: '+';
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 1px;
+		height: 0.5rem;
+		background-color: $blue;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 0.5rem;
+		height: 1px;
+		background-color: $blue;
+	}
+
+	&.active {
+		&::before {
+			content: none;
 		}
 	}
 

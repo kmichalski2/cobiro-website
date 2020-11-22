@@ -1,0 +1,135 @@
+@import '../../layout/style/globals';
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+        transform: translateY(-0.2rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close {
+    text-align: right!important;
+}
+
+.logo {
+    width: 5rem;
+    display: block;
+    margin: auto;
+}
+
+.modalRight {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2.25rem 1.875rem !important;
+
+    
+
+    
+}
+
+.paymentImages {
+    width: 7rem;
+    height: auto;
+
+    &:first-child {
+        margin-right: 1rem;
+    }
+}
+
+.modalLeft {
+    text-align: left;
+    padding: 2.25rem 1.875rem !important;
+
+    @include mq($from: lg) {
+        border-right: 1px solid $grey;
+    }
+
+    @include mq($until: lg) {
+        border-top: 1px solid $grey;
+    }
+
+    &.modalFree {
+        border: none;
+        // padding: 2.25rem 3.75rem;
+        @include mq($from: md) {
+            padding: 2.5rem 5rem !important;
+        }
+        
+
+        .modalFree {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+        }
+    }
+
+    img {
+        vertical-align: super;
+    }
+
+    .formGroup {
+        position: relative;
+
+        &.dirty.error {
+
+            input, textarea, select {
+                border-color: $red;
+            }
+        }
+    }
+
+    .informationTitles {
+        padding-left: 2rem;
+
+        
+        background-repeat: no-repeat;
+        background-size: 1rem;
+        background-position: left;
+
+        &.userInformation {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cg id='user_2_' data-name='user (2)' transform='translate(-3 -3)'%3E%3Cpath id='Path_5319' data-name='Path 5319' d='M10.338,8.848a3.2,3.2,0,0,0,1.892.614,3.3,3.3,0,0,0,3.231-3.231,3.231,3.231,0,1,0-5.123,2.617Z' transform='translate(-3.231)' fill='%234c6c83'/%3E%3Cpath id='Path_5320' data-name='Path 5320' d='M11.843,16.55a4.14,4.14,0,0,1-5.686,0A6.009,6.009,0,0,0,3,21.835a.463.463,0,0,0,.462.462H14.538A.463.463,0,0,0,15,21.835,6.009,6.009,0,0,0,11.843,16.55Z' transform='translate(0 -7.296)' fill='%234c6c83'/%3E%3C/g%3E%3C/svg%3E%0A");
+        }
+        
+        &.paymentInformation {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='11' viewBox='0 0 12 11'%3E%3Cg id='credit-cards' transform='translate(0 -32.005)'%3E%3Cg id='Group_27435' data-name='Group 27435' transform='translate(0 37.505)'%3E%3Cg id='Group_27434' data-name='Group 27434'%3E%3Cpath id='Path_5321' data-name='Path 5321' d='M0,255.995v4.714a.769.769,0,0,0,.75.786h10.5a.769.769,0,0,0,.75-.786v-4.714Zm10.5,3.929h-9v-1.571h9Z' transform='translate(0 -255.995)' fill='%234c6c83'/%3E%3C/g%3E%3C/g%3E%3Cg id='Group_27437' data-name='Group 27437' transform='translate(0 34.362)'%3E%3Cg id='Group_27436' data-name='Group 27436'%3E%3Cpath id='Path_5322' data-name='Path 5322' d='M11.25,128H.75a.77.77,0,0,0-.75.786v.786H12v-.786A.769.769,0,0,0,11.25,128Z' transform='translate(0 -127.995)' fill='%234c6c83'/%3E%3C/g%3E%3C/g%3E%3Cg id='Group_27439' data-name='Group 27439' transform='translate(4.072 32.005)'%3E%3Cg id='Group_27438' data-name='Group 27438'%3E%3Cpath id='Path_5323' data-name='Path 5323' d='M179.387,32.273a.373.373,0,0,0-.459-.254l-5.2,1.557H179.8Z' transform='translate(-173.728 -32.005)' fill='%234c6c83'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+        }
+
+    }
+
+    .successBtn {
+        position: relative;
+        span {
+            opacity: 0;
+        }
+        
+        &::before {
+            content: '';
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cg id='checkmark-verify-interface-symbol-button' transform='translate(-167.333 -174.862)'%3E%3Cg id='_x31__30_' transform='translate(167.333 174.862)'%3E%3Cg id='Group_20457' data-name='Group 20457' transform='translate(0 0)'%3E%3Cpath id='Path_1895' data-name='Path 1895' d='M186.743,171.013a1.209,1.209,0,0,0-1.611.413l-7.541,12.5-4.219-3.724a1.216,1.216,0,0,0-1.666-.052,1.1,1.1,0,0,0-.054,1.6l5.391,4.759a1.216,1.216,0,0,0,1.666.052c.111-.1,5.109-8.411,7.381-12.193l1.086-1.808A1.105,1.105,0,0,0,186.743,171.013Z' transform='translate(-171.333 -170.862)' fill='%23fff'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            display: inline-block;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: 50% 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1em;
+            padding: 0 1rem;
+            height: 1em;
+            position: absolute;
+        }
+    }
+}
+
+.returning {
+    padding: 2.5rem 5rem !important;
+
+    .logo { 
+        margin-bottom: 5rem;
+    }
+}

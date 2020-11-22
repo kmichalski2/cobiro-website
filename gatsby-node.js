@@ -692,12 +692,14 @@ exports.createPages = async function({ graphql, actions }) {
                 ... on DatoCmsPricingTable {
                   columnHeadings
                   pricingTables {
+                    expandable
                     row {
                       columns
                       labelText
                       labelColor
                       nestedRow
                       rowName
+                      tooltip
                     }
                     tableName
                     icon {
@@ -713,6 +715,65 @@ exports.createPages = async function({ graphql, actions }) {
                       }
                     }
                   }
+                  pricingHeaderTable {
+                    monthlyPriceName
+                    monthlyPriceExtraText
+                    monthlyPriceBillingRate
+                    yearlyPriceName
+                    yearlyPriceExtraText
+                    yearlyPriceBillingRate
+                    row {
+                      columns
+                      labelText
+                      labelColor
+                      nestedRow
+                      rowName
+                      tooltip
+                    }
+                    tableName
+                    icon {
+                      url
+                      alt
+                      fixed(height: 10) {
+                        aspectRatio
+                        height
+                        sizes
+                        src
+                        srcSet
+                        width
+                      }
+                    }
+                    headers {
+                      title
+                      subtitle
+                      monthlyPrice
+                      monthlyPriceRaw
+                      monthlyPriceRawExVat
+                      monthlyPricePlanId
+                      yearlyPrice
+                      yearlyPriceRaw
+                      yearlyPriceRawExVat
+                      yearlyPricePlanId
+                      label
+                      linkTitle
+                      link
+                      buttonEmailLink
+                      bgColor {
+                        hex
+                      }
+                    }
+                  }
+                  pricingFooterCtaTitle
+                  pricingFooterCtaText
+                  pricingFooterCtaLinkTitle
+                  pricingFooterCtaInternalLink {
+                    slug
+                  }
+                  pricingFooterCtaExternalLink
+                  pricingFooterCtaBgColor {
+                    hex
+                  }
+                  pricingFooterCtaTextColor
                 }
                 ... on DatoCmsFeatureList {
                   backgroundColor

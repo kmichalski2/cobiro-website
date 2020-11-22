@@ -1,1 +1,18 @@
 @import "~baseguide/scss/baseguide/04-components/form";
+
+
+.adyen-checkout__input--focus, .adyen-checkout__input--focus:hover, .adyen-checkout__input:active, .adyen-checkout__input:active:hover, .adyen-checkout__input:focus, .adyen-checkout__input:focus:hover {
+    border-color: $darkgrey !important;
+    box-shadow: none !important;
+}
+
+.adyen-checkout__label, .adyen-checkout__helper-text, .adyen-checkout__label__text, .adyen-checkout__label--focused .adyen-checkout__label__text {
+    color: $mediumblack !important;
+}
+
+.adyen-checkout__payment-method__header__title {
+    display: none !important;
+}
+.adyen-checkout__payment-method__header {
+    justify-content: flex-end !important;
+}
