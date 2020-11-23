@@ -93,6 +93,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             // console.log('redirectPayload', redirectPayload)
 
             setPaymentId(payment_id)
+            
             handleShopperRedirect(payload, null, payment_id)
         }
     }, [])
@@ -157,26 +158,31 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             }
         } else if(isObjEmpty(paymentRes)) {
             setSubmitError(null)
+            window.dataLayer.push({'event': '/Pricing - Payment Success'})
             setStartLogin(true)
         } else {
           switch (paymentRes.resultCode) {
             case "Authorised":
                 setSubmitError(null)
+                window.dataLayer.push({'event': '/Pricing - Payment Success'})
                 setStartLogin(true)
               break;
             case "Pending":
                 console.log('processPaymentResponse: pending', paymentRes)
                 setSubmitError(null)
+                window.dataLayer.push({'event': '/Pricing - Payment Success'})
                 setStartLogin(true)
               break;
             case "Refused":
                 setSubmitting(false)
                 setSubmitSuccess(false)
+                window.dataLayer.push({'event': '/Pricing - Payment failed'})
                 setSubmitError('The transaction was refused.')
               break;
             default:
                 setSubmitting(false)
                 setSubmitSuccess(false)
+                window.dataLayer.push({'event': '/Pricing - Payment failed'})
                 setSubmitError('The transaction was refused.')
               break;
           }
@@ -184,6 +190,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
       }
 
     const handlePayment = () => {
+
+        window.dataLayer.push({'event': '/Pricing - Payment started','payment_id': paymentId })
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
@@ -286,6 +294,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             }
         }).then((res) => {
             console.log('registerUser: res', res)
+            
+            window.dataLayer.push({'event': '/Pricing - Account - Account Created'})
+            
             if(!isFreeTier) {
                 handlePayment()
             } else {
