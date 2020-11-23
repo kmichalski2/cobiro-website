@@ -130,6 +130,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
                   external 
                   link={customCta && customCta.link ? customCta.link : menuCta.primaryLink} 
                   title={customCta && customCta.title ? customCta.title : menuCta.primaryLinkTitle} 
+                  targetSelf
                   classes={["btn", Classes.btnRight, !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} 
                   noArrow 
                   />
