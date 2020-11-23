@@ -94,8 +94,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
             setPaymentId(payment_id)
             
-            window.dataLayer.push({'event': '/Pricing - Payment started','payment_id': payment_id })
-            
             handleShopperRedirect(payload, null, payment_id)
         }
     }, [])
@@ -192,6 +190,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
       }
 
     const handlePayment = () => {
+
+        window.dataLayer.push({'event': '/Pricing - Payment started','payment_id': paymentId })
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
