@@ -6,7 +6,7 @@ import Checkmark from '../checkmark/checkmark'
 import Loader from '../loader/loader'
 import Cross from '../cross/cross'
 
-const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes, noArrow, noPadding, disabled, submitting, submitted, submitError, children, regular}) => {
+const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes, noArrow, noPadding, disabled, submitting, submitted, submitError, children, regular, targetSelf}) => {
 
     const currentLang = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
@@ -42,7 +42,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
                 {children}
             </Link>
         : link && title && external || link && children ?
-            <a className={ classNames } href={`${link}${signUpIn && search ? search : ''}`} target="_blank" rel="noopener noreferrer">
+            <a className={ classNames } href={`${link}${signUpIn && search ? search : ''}`} target={targetSelf ? "_self" : "_blank"} rel="noopener noreferrer">
                 { title }
                 {children}
             </a>
