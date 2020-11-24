@@ -63,8 +63,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const currentLang = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
     
-    
-    
     const aydenRef = React.useRef()
 
     let checkout
@@ -87,13 +85,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         if(returningData) {
             
             const {payment_id, ...payload} = returningData
-            
-            // const redirectPayload = JSON.parse(localStorage.getItem('redirectPayload'))
-            
-            // console.log('redirectPayload', redirectPayload)
-
             setPaymentId(payment_id)
-            
             handleShopperRedirect(payload, null, payment_id)
         }
     }, [])
@@ -102,7 +94,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         if(startLogin) {
             console.log('START LOGIN submission', startLogin, submission)
             
-
             const loginRediect = async () => {
 
                 const token = await localStorage.getItem('loginToken')
@@ -122,6 +113,12 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     const isObjEmpty = (obj) => {
         return Object.keys(obj).length === 0 && obj.constructor === Object
+    }
+
+    const pushWindowEvent = (event) => {
+        if(window && window.dataLayer) {
+            window.dataLayer.push({'event': event})
+        }
     }
 
     const redirectToApp = (userToken) => {
@@ -147,9 +144,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 console.log('token', token)
                 localStorage.setItem('loginToken', token)
 
-                // login
-                
-
             }
             if(dropin) {
                 dropin.handleAction(action)
@@ -158,31 +152,46 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             }
         } else if(isObjEmpty(paymentRes)) {
             setSubmitError(null)
-            window.dataLayer.push({'event': '/Pricing - Payment Success'})
+            pushWindowEvent('/Pricing - Payment Success')
+            // if(window && window.dataLayer) {
+            //     window.dataLayer.push({'event': '/Pricing - Payment Success'})
+            // }
             setStartLogin(true)
         } else {
           switch (paymentRes.resultCode) {
             case "Authorised":
                 setSubmitError(null)
-                window.dataLayer.push({'event': '/Pricing - Payment Success'})
+                pushWindowEvent('/Pricing - Payment Success')
+                // if(window && window.dataLayer) {
+                //     window.dataLayer.push({'event': '/Pricing - Payment Success'})
+                // }
                 setStartLogin(true)
               break;
             case "Pending":
                 console.log('processPaymentResponse: pending', paymentRes)
                 setSubmitError(null)
-                window.dataLayer.push({'event': '/Pricing - Payment Success'})
+                pushWindowEvent('/Pricing - Payment Success')
+                // if(window && window.dataLayer) {
+                //     window.dataLayer.push({'event': '/Pricing - Payment Success'})
+                // }
                 setStartLogin(true)
               break;
             case "Refused":
                 setSubmitting(false)
                 setSubmitSuccess(false)
-                window.dataLayer.push({'event': '/Pricing - Payment failed'})
+                pushWindowEvent('/Pricing - Payment failed')
+                // if(window && window.dataLayer) {
+                //     window.dataLayer.push({'event': '/Pricing - Payment failed'})
+                // }
                 setSubmitError('The transaction was refused.')
               break;
             default:
                 setSubmitting(false)
                 setSubmitSuccess(false)
-                window.dataLayer.push({'event': '/Pricing - Payment failed'})
+                pushWindowEvent('/Pricing - Payment failed')
+                // if(window && window.dataLayer) {
+                //     window.dataLayer.push({'event': '/Pricing - Payment failed'})
+                // }
                 setSubmitError('The transaction was refused.')
               break;
           }
@@ -191,7 +200,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     const handlePayment = () => {
 
-        window.dataLayer.push({'event': '/Pricing - Payment started','payment_id': paymentId })
+        if(window && window.dataLayer) {
+            window.dataLayer.push({'event': '/Pricing - Payment started','payment_id': paymentId })
+        }
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
@@ -222,7 +233,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log('handlePayment: err', err)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError('Something went wrong. Please try again, and check you entered the correct values.')
+            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')) || 'Something went wrong. Please try again, and check you entered the correct values.')
         })
     }
 
@@ -250,11 +261,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             return userToken
             
         }).catch((err) => {
-            const error = err
-            console.log('loginUser: err', error.response)
+            console.log('loginUser: err', err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
+            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
             return false
         })
 
@@ -269,9 +279,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log(res.data)
             setRecaptchaValid(true)
         }).catch((err) => {
-            const error = err
-            console.log('handleRecaptchaValidation: err', error.response)
-            setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.title).join('. '))
+            console.log('handleRecaptchaValidation: err', err.response)
+            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.title).join('. ')))
         })
     }
     
@@ -295,7 +304,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }).then((res) => {
             console.log('registerUser: res', res)
             
-            window.dataLayer.push({'event': '/Pricing - Account - Account Created'})
+            pushWindowEvent('/Pricing - Account - Account Created')
+            // if(window && window.dataLayer) {
+            //     window.dataLayer.push({'event': '/Pricing - Account - Account Created'})
+            // }
             
             if(!isFreeTier) {
                 handlePayment()
@@ -307,11 +319,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             }
             
         }).catch((err) => {
-            const error = err
-            console.log('registerUser: err', error.response)
+            console.log('registerUser: err', err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(error.response && error.response.data && error.response.data.errors.map(e => e.detail).join('. '))
+            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
         })
     }
     
@@ -359,7 +370,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log(err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. '))
+            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
         })
     }
     
@@ -420,7 +431,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log(err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors.map(e => e.detail).join('. '))
+            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
         })
     }
 
