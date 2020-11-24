@@ -115,6 +115,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         return Object.keys(obj).length === 0 && obj.constructor === Object
     }
 
+    const errorFormatHandler = (err) => {
+
+        const errorString = err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail || e.title).join('. ')) || 'Something went wrong. Please try again, and check you entered the correct values.'
+
+        return errorString
+    }
+
     const pushWindowEvent = (event) => {
         if(window && window.dataLayer) {
             window.dataLayer.push({'event': event})
@@ -133,8 +140,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
         if (paymentRes && (paymentRes.action || paymentRes.type)) {
             console.log('HANDLE ACTION', paymentRes.action || paymentRes)
-            console.log('HANDLE ACTION: paymentComponent', paymentComponent)
-
             
             if(action.type === 'redirect' && paymentRes.redirect) {
                 const {TermUrl, ...redirectPayload} = paymentRes.redirect.data
@@ -153,45 +158,30 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         } else if(isObjEmpty(paymentRes)) {
             setSubmitError(null)
             pushWindowEvent('/Pricing - Payment Success')
-            // if(window && window.dataLayer) {
-            //     window.dataLayer.push({'event': '/Pricing - Payment Success'})
-            // }
             setStartLogin(true)
         } else {
           switch (paymentRes.resultCode) {
             case "Authorised":
                 setSubmitError(null)
                 pushWindowEvent('/Pricing - Payment Success')
-                // if(window && window.dataLayer) {
-                //     window.dataLayer.push({'event': '/Pricing - Payment Success'})
-                // }
                 setStartLogin(true)
               break;
             case "Pending":
                 console.log('processPaymentResponse: pending', paymentRes)
                 setSubmitError(null)
                 pushWindowEvent('/Pricing - Payment Success')
-                // if(window && window.dataLayer) {
-                //     window.dataLayer.push({'event': '/Pricing - Payment Success'})
-                // }
                 setStartLogin(true)
               break;
             case "Refused":
                 setSubmitting(false)
                 setSubmitSuccess(false)
                 pushWindowEvent('/Pricing - Payment failed')
-                // if(window && window.dataLayer) {
-                //     window.dataLayer.push({'event': '/Pricing - Payment failed'})
-                // }
                 setSubmitError('The transaction was refused.')
               break;
             default:
                 setSubmitting(false)
                 setSubmitSuccess(false)
                 pushWindowEvent('/Pricing - Payment failed')
-                // if(window && window.dataLayer) {
-                //     window.dataLayer.push({'event': '/Pricing - Payment failed'})
-                // }
                 setSubmitError('The transaction was refused.')
               break;
           }
@@ -233,7 +223,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log('handlePayment: err', err)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')) || 'Something went wrong. Please try again, and check you entered the correct values.')
+            setSubmitError(errorFormatHandler(err))
         })
     }
 
@@ -264,7 +254,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log('loginUser: err', err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
+            setSubmitError(errorFormatHandler(err))
             return false
         })
 
@@ -280,7 +270,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             setRecaptchaValid(true)
         }).catch((err) => {
             console.log('handleRecaptchaValidation: err', err.response)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.title).join('. ')))
+            setSubmitError(errorFormatHandler(err))
         })
     }
     
@@ -322,7 +312,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log('registerUser: err', err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
+            setSubmitError(errorFormatHandler(err))
         })
     }
     
@@ -360,8 +350,17 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             }
         }).then((res) => {
             console.log('handleShopperRedirect: res', res)
-            if(res.data && res.data.data && res.data.data.attributes && res.data.data.attributes.payload) {
-                processPaymentResponse(res.data.data.attributes.payload, dropin)
+
+            const attributes = res.data && res.data.data && res.data.data.attributes
+            
+            if(attributes && attributes.result_code && (!attributes.payload || (attributes.payload && attributes.payload.length === 0))) {
+                console.log('!attributes.payload', attributes)
+                const resultMutated = {
+                        resultCode: attributes.result_code
+                    }
+                processPaymentResponse(resultMutated, dropin)
+            } else if(attributes && attributes.payload) {
+                processPaymentResponse(attributes.payload, dropin)
             } else if(isObjEmpty(res.data)) {
                 processPaymentResponse({}, dropin)
             }
@@ -370,7 +369,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log(err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
+            setSubmitError(errorFormatHandler(err))
         })
     }
     
@@ -431,7 +430,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             console.log(err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
+            setSubmitError(errorFormatHandler(err))
         })
     }
 
@@ -613,7 +612,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             : <h3 className="text-center space-big-xs-up text-red">{submitError}</h3>
                             }
                              
-                            <div className="flex">
+                            <div className={["flex", isFreeTier ? "center-xs" : null].join(' ')}>
                                 <ImageAll image={securePaymentImage} classes={Classes.paymentImages}/>
                                 <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
                             </div> 
