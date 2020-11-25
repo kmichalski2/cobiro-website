@@ -226,7 +226,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }).then((res) => {
             const userToken = res.data.data.attributes.access_token
             
-            window.dataLayer.push({'event': '/Pricing - Account - login'})
+            pushWindowEvent('/Pricing - Account - login')
             
             if(!returnToken) {
                 setSubmitting(false)
