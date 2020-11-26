@@ -26,6 +26,7 @@ function SEO({ description, lang, meta, title, locales, location }) {
   )
   const url = typeof window !== 'undefined' ? window.location.origin : '';
   const metaDescription = description || site.siteMetadata.description
+
   return (
     <Helmet
       htmlAttributes={{
@@ -35,39 +36,7 @@ function SEO({ description, lang, meta, title, locales, location }) {
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        // {
-        //   property: `og:title`,
-        //   content: title,
-        // },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        // {
-        //   property: `og:type`,
-        //   content: `website`,
-        // },
-        // {
-        //   name: `twitter:card`,
-        //   content: `summary`,
-        // },
-        // {
-        //   name: `twitter:creator`,
-        //   content: site.siteMetadata.author,
-        // },
-        // {
-        //   name: `twitter:title`,
-        //   content: title,
-        // },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-        ...meta.filter(m => m.attributes ? m.attributes : false)
+        ...meta.map(m => m.attributes ? m.attributes : {})
       ]}
     > 
     {locales && locales.length > 0 && locales.map(locale => 
