@@ -80,8 +80,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             })            
         })
 
-        console.log('returningData', returningData)
-
         if(returningData) {
             
             const {payment_id, ...payload} = returningData
@@ -91,14 +89,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }, [])
 
     useEffect(() => {
-        if(startLogin) {
-            console.log('START LOGIN submission', startLogin, submission)
-            
+        if(startLogin) {            
             const loginRediect = async () => {
 
                 const token = await localStorage.getItem('loginToken')
-                console.log('Token', token)
-
                 if(token) {
                     redirectToApp(token)
                 } else {
@@ -115,6 +109,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         return Object.keys(obj).length === 0 && obj.constructor === Object
     }
 
+    const errorFormatHandler = (err) => {
+
+        const errorString = err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail || e.title).join('. ')) || 'Something went wrong. Please try again, and check you entered the correct values.'
+
+        return errorString
+    }
+
     const pushWindowEvent = (event) => {
         if(window && window.dataLayer) {
             window.dataLayer.push({'event': event})
@@ -126,24 +127,15 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
 
     const processPaymentResponse = async (paymentRes, dropin) => {
-
-        console.log('processPaymentResponse: paymentRes', paymentRes)
         
         const action = paymentRes.action || paymentRes
 
         if (paymentRes && (paymentRes.action || paymentRes.type)) {
-            console.log('HANDLE ACTION', paymentRes.action || paymentRes)
-            console.log('HANDLE ACTION: paymentComponent', paymentComponent)
-
             
             if(action.type === 'redirect' && paymentRes.redirect) {
                 const {TermUrl, ...redirectPayload} = paymentRes.redirect.data
-                console.log('redirectPayload', redirectPayload)
-
                 const token = await loginUser(true)
-                console.log('token', token)
                 localStorage.setItem('loginToken', token)
-
             }
             if(dropin) {
                 dropin.handleAction(action)
@@ -153,45 +145,29 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         } else if(isObjEmpty(paymentRes)) {
             setSubmitError(null)
             pushWindowEvent('/Pricing - Payment Success')
-            // if(window && window.dataLayer) {
-            //     window.dataLayer.push({'event': '/Pricing - Payment Success'})
-            // }
             setStartLogin(true)
         } else {
           switch (paymentRes.resultCode) {
             case "Authorised":
                 setSubmitError(null)
                 pushWindowEvent('/Pricing - Payment Success')
-                // if(window && window.dataLayer) {
-                //     window.dataLayer.push({'event': '/Pricing - Payment Success'})
-                // }
                 setStartLogin(true)
               break;
             case "Pending":
-                console.log('processPaymentResponse: pending', paymentRes)
                 setSubmitError(null)
                 pushWindowEvent('/Pricing - Payment Success')
-                // if(window && window.dataLayer) {
-                //     window.dataLayer.push({'event': '/Pricing - Payment Success'})
-                // }
                 setStartLogin(true)
               break;
             case "Refused":
                 setSubmitting(false)
                 setSubmitSuccess(false)
                 pushWindowEvent('/Pricing - Payment failed')
-                // if(window && window.dataLayer) {
-                //     window.dataLayer.push({'event': '/Pricing - Payment failed'})
-                // }
                 setSubmitError('The transaction was refused.')
               break;
             default:
                 setSubmitting(false)
                 setSubmitSuccess(false)
                 pushWindowEvent('/Pricing - Payment failed')
-                // if(window && window.dataLayer) {
-                //     window.dataLayer.push({'event': '/Pricing - Payment failed'})
-                // }
                 setSubmitError('The transaction was refused.')
               break;
           }
@@ -223,17 +199,16 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 }
             }
         }).then((res) => {
-            console.log('handlePayment: res', res.data.data)
-            if(res && res.data && res.data.data && res.data.data.attributes && res.data.data.attributes.payload) {
-                processPaymentResponse(res.data.data.attributes.payload)
+            const attributes = res && res.data && res.data.data && res.data.data.attributes
+            if(attributes && attributes.payload) {
+                processPaymentResponse(attributes.payload)
             } else if(isObjEmpty(res)) {
                 processPaymentResponse()
             }
         }).catch((err) => {
-            console.log('handlePayment: err', err)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')) || 'Something went wrong. Please try again, and check you entered the correct values.')
+            setSubmitError(errorFormatHandler(err))
         })
     }
 
@@ -249,8 +224,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 }
             }
         }).then((res) => {
-            console.log('loginUser: res', res)
             const userToken = res.data.data.attributes.access_token
+            
+            pushWindowEvent('/Pricing - Account - login')
             
             if(!returnToken) {
                 setSubmitting(false)
@@ -261,10 +237,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             return userToken
             
         }).catch((err) => {
-            console.log('loginUser: err', err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
+            setSubmitError(errorFormatHandler(err))
             return false
         })
 
@@ -276,11 +251,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         axios.post(`${process.env.GATSBY_HUB_URL}/v1/verifyRecaptcha`, {
             recaptcha_token: rCToken
         }).then((res) => {
-            console.log(res.data)
             setRecaptchaValid(true)
         }).catch((err) => {
-            console.log('handleRecaptchaValidation: err', err.response)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.title).join('. ')))
+            setSubmitError(errorFormatHandler(err))
         })
     }
     
@@ -288,8 +261,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const registerUser = (usePayment) => {
 
         const source = !isFreeTier ? {source: "payment"} : {}
-
-        console.log('paymentInformation.data', paymentInformation.data)
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v1/register`, {
             data: {
@@ -302,27 +273,20 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 }
             }
         }).then((res) => {
-            console.log('registerUser: res', res)
             
             pushWindowEvent('/Pricing - Account - Account Created')
-            // if(window && window.dataLayer) {
-            //     window.dataLayer.push({'event': '/Pricing - Account - Account Created'})
-            // }
             
             if(!isFreeTier) {
                 handlePayment()
             } else {
-                // handle email verification
-                // handleRecaptchaValidation(usePayment)
                 setShowEmailValidation(true)
                 setSubmitting(false)
             }
             
         }).catch((err) => {
-            console.log('registerUser: err', err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
+            setSubmitError(errorFormatHandler(err))
         })
     }
     
@@ -335,8 +299,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const handleOnSubmit = () => {
         setSubmitError(null)
         setSubmitting(true)
-        console.log('handleOnSubmit: submission', submission)
-        console.log('handleOnSubmit: paymentInformation', paymentInformation)
         if(!isFreeTier && paymentInformation.isValid) {
             registerUser(true)
         } else if(isFreeTier) {
@@ -345,39 +307,41 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
 
     const handleShopperRedirect = (payload, dropin, payId) => {
-        console.log('handleShopperRedirect: paymentId', paymentId)
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/handle-shopper-redirect`, {
             data: {
                 type: "make-payment",
                 attributes: {
                     payment_id: paymentId || payId,
-                    // paymentData: state.data.paymentData,
                     payload:  {
                         ...payload
                     }
                 }
             }
         }).then((res) => {
-            console.log('handleShopperRedirect: res', res)
-            if(res.data && res.data.data && res.data.data.attributes && res.data.data.attributes.payload) {
-                processPaymentResponse(res.data.data.attributes.payload, dropin)
-            } else if(isObjEmpty(res.data)) {
-                processPaymentResponse({}, dropin)
+
+            const attributes = res.data && res.data.data && res.data.data.attributes
+            
+            if(attributes && attributes.result_code && (!attributes.payload || (attributes.payload && attributes.payload.length === 0))) {
+
+                const resultMutated = {
+                        resultCode: attributes.result_code
+                    }
+                    
+                processPaymentResponse(resultMutated, dropin)
+
+            } else if(attributes && attributes.payload) {
+                processPaymentResponse(attributes.payload, dropin)
             }
                         
         }).catch((err) => {
-            console.log(err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
+            setSubmitError(errorFormatHandler(err))
         })
     }
     
     const handleOnAdditionalDetails = (state, dropin) => {
-        console.log('handleOnAdditionalDetails: state', state)
-        console.log('handleOnAdditionalDetails: submission', submission)
-        console.log('handleOnAdditionalDetails: submission', dropin)
         setPaymentComponent(dropin)
         handleShopperRedirect(state.data.details, dropin) 
     }
@@ -411,7 +375,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
 
     const handleEmailVerificationSubmit = (verificationCode) => {
-        console.log('verificationCode', verificationCode)
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v1/users/email/verify/pin`, {
             data: {
@@ -424,14 +387,12 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 }
             }
         }).then((res) => {
-            console.log('handleEmailVerificationSubmit: res', res)
             loginUser(false)
             
         }).catch((err) => {
-            console.log(err.response)
             setSubmitting(false)
             setSubmitSuccess(false)
-            setSubmitError(err.response && err.response.data && err.response.data.errors && (err.response.data.errors.message || err.response.data.errors.map(e => e.detail).join('. ')))
+            setSubmitError(errorFormatHandler(err))
         })
     }
 
@@ -613,7 +574,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             : <h3 className="text-center space-big-xs-up text-red">{submitError}</h3>
                             }
                              
-                            <div className="flex">
+                            <div className={["flex", isFreeTier ? "center-xs" : null].join(' ')}>
                                 <ImageAll image={securePaymentImage} classes={Classes.paymentImages}/>
                                 <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
                             </div> 
