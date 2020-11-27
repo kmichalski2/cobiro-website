@@ -224,40 +224,18 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 }
             }
         }).then((res) => {
-
             const userToken = res.data.data.attributes.access_token
-            let shouldReturn = false
-
-            const handleResult = () => {
-
-                if(!returnToken) {
-                    setSubmitting(false)
-                    setSubmitSuccess(true)
-                    redirectToApp(userToken)
-                }
-
-                shouldReturn = true
-            }
-
-            if(window['google_tag_manager']) {
-
-                window.dataLayer = window.dataLayer || []
-
-                window.dataLayer.push({
-                    'event' : '/Pricing - Account - login',
-                    'eventCallback' : () => {
-                        handleResult()
-                    },
-                    'eventTimeout' : 2000
-                });
-            } else {
-                handleResult()
-            }
             
-            if(shouldReturn) {
-                return userToken
+            pushWindowEvent('/Pricing - Account - login')
+            
+            if(!returnToken) {
+                setSubmitting(false)
+                setSubmitSuccess(true)
+                redirectToApp(userToken)
             }
 
+            return userToken
+            
         }).catch((err) => {
             setSubmitting(false)
             setSubmitSuccess(false)
