@@ -18,7 +18,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
         setSearch(location.search)
     }, [location.search])
 
-    const signUpIn = external && link && link.includes('app.cobiro.com/user/')
+    const signUpIn = external && link && (link.includes('app.cobiro.com/user/') || link.includes('cobiro.com/'))
 
     const linkTransformed = link || (link === null && '/')
 
