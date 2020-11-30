@@ -13,6 +13,7 @@ import EmailVerificator from './emailVerificator/emailVerificator'
 import ReCAPTCHA from "react-google-recaptcha";
 
 const axios = require('axios');
+const queryString = require('query-string');
 
 const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, monthlyPricing, planId, pricing, returningData}) => {
     
@@ -52,6 +53,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [startLogin, setStartLogin] = useState(false)
     const [ip, setIp] = useState("")
     const [recaptchaValid, setRecaptchaValid] = useState(false)
+    const [urlParams, setUrlParams] = useState('')
 
     const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
@@ -66,6 +68,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const aydenRef = React.useRef()
 
     let checkout
+
+    const location = useContext(CurrentLocaleContext).location
+    const parsedLocation = queryString.parse(location.search);
 
     useEffect(() => {
 
@@ -86,6 +91,15 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             setPaymentId(payment_id)
             handleShopperRedirect(payload, null, payment_id)
         }
+
+        if(parsedLocation) {
+            
+            const {MD, PaRes, ...urlParams} = parsedLocation
+            const stringified = queryString.stringify(urlParams);
+            console.log('stringified', stringified)
+            setUrlParams(stringified)
+        }
+
     }, [])
 
     useEffect(() => {
@@ -123,7 +137,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
 
     const redirectToApp = (userToken) => {
-        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite`
+        // window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}`
+
+        console.log('redirect:', `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}`)
     }
 
     const processPaymentResponse = async (paymentRes, dropin) => {
@@ -189,9 +205,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                     plan_id: planId,
                     amount: rawPriceIncVat,
                     currency: "USD",
-                    return_url: `${window.location.href}?returning=1&payment_id=${paymentId}`,
+                    return_url: `${window.location.origin}${window.location.pathname}?returning=1&payment_id=${paymentId}${urlParams ? '&' + urlParams : ''}`,
                     redirect_from_issuer_method: "GET",
-                    origin: window.location.href,
+                    origin: window.location.origin,
                     shopper_ip: ip,
                     browser_info: paymentInformation.data.browserInfo,
                     payment_method: paymentInformation.data.paymentMethod,
@@ -337,7 +353,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 attributes: {
                     payment_id: paymentId || payId,
                     payload:  {
-                        ...payload
+                        MD: payload.MD,
+                        PaRes: payload.PaRes
                     }
                 }
             }
