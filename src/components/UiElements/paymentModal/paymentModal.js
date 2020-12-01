@@ -54,6 +54,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [ip, setIp] = useState("")
     const [recaptchaValid, setRecaptchaValid] = useState(false)
     const [urlParams, setUrlParams] = useState('')
+    const [utmInterest, setUtmInterest] = useState('')
 
     const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
@@ -94,10 +95,15 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
         if(parsedLocation) {
             
-            const {MD, PaRes, ...urlParams} = parsedLocation
+            const {MD, PaRes, utm_interest, ...urlParams} = parsedLocation
             const stringified = queryString.stringify(urlParams);
             console.log('stringified', stringified)
+
             setUrlParams(stringified)
+
+            if(utm_interest) {
+                setUtmInterest(utm_interest)
+            }
         }
 
     }, [])
@@ -136,7 +142,31 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }
     }
 
-    const redirectToApp = (userToken) => {
+    const redirectToApp = async (userToken) => {
+
+        const awaitdataLayerPush = () => {
+            return new Promise(resolve => {
+                if(window['google_tag_manager']) {
+
+                    window.dataLayer = window.dataLayer || []
+
+                    window.dataLayer.push({
+                        'event' : '/Pricing - Account - login',
+                        'eventCallback' : () => {
+                            console.log('running callback')
+                            resolve()
+                        },
+                        'eventTimeout' : 2000
+                    });
+                } else {
+                    console.log('running else')
+                    resolve()
+                }
+            });
+        }
+
+        await awaitdataLayerPush()
+        
         window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}`
     }
 
@@ -203,7 +233,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                     plan_id: planId,
                     amount: rawPriceIncVat,
                     currency: "USD",
-                    return_url: `${window.location.origin}${window.location.pathname}?returning=1&payment_id=${paymentId}${urlParams ? '&' + urlParams : ''}`,
+                    return_url: `${window.location.origin}${window.location.pathname}?returning=1&utm_nooverride=1&payment_id=${paymentId}${urlParams ? '&' + urlParams : ''}`,
                     redirect_from_issuer_method: "GET",
                     origin: window.location.origin,
                     shopper_ip: ip,
@@ -241,29 +271,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
             const userToken = res.data.data.attributes.access_token
 
-            const awaitdataLayerPush = () => {
-                return new Promise(resolve => {
-                    if(window['google_tag_manager']) {
-
-                        window.dataLayer = window.dataLayer || []
-
-                        window.dataLayer.push({
-                            'event' : '/Pricing - Account - login',
-                            'eventCallback' : () => {
-                                console.log('running callback')
-                                resolve()
-                            },
-                            'eventTimeout' : 2000
-                        });
-                    } else {
-                        console.log('running else')
-                        resolve()
-                    }
-                });
-            }
-
-            await awaitdataLayerPush()
-
             if(!returnToken) {
                 setSubmitting(false)
                 setSubmitSuccess(true)
@@ -298,12 +305,14 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const registerUser = (usePayment) => {
 
         const source = !isFreeTier ? {source: "payment"} : {}
+        const utm_interest = utmInterest ? {utm_interest: utmInterest} : {}
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v1/register`, {
             data: {
                 type: "users",
                 attributes: {
                     ...source,
+                    ...utm_interest,
                     email: submission.email,
                     password: submission.password,
                     "partner_id": 1
