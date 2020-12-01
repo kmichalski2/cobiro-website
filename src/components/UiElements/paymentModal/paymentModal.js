@@ -89,7 +89,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             
             const {payment_id, ...payload} = returningData
             setPaymentId(payment_id)
-            handleShopperRedirect(payload, null, payment_id)
+            handleShopperRedirect({MD: payload.MD, PaRes: payload.PaRes}, null, payment_id)
         }
 
         if(parsedLocation) {
@@ -351,8 +351,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 attributes: {
                     payment_id: paymentId || payId,
                     payload:  {
-                        MD: payload.MD,
-                        PaRes: payload.PaRes
+                        ...payload
                     }
                 }
             }
@@ -380,6 +379,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
     
     const handleOnAdditionalDetails = (state, dropin) => {
+        console.log('handleShopperRedirect called', state.data.details)
         setPaymentComponent(dropin)
         handleShopperRedirect(state.data.details, dropin) 
     }
