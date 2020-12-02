@@ -304,14 +304,12 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     const registerUser = (usePayment) => {
 
-        const source = !isFreeTier ? {source: "payment"} : {}
         const utm_interest = utmInterest ? {utm_interest: utmInterest} : {}
 
         axios.post(`${process.env.GATSBY_HUB_URL}/v1/register`, {
             data: {
                 type: "users",
                 attributes: {
-                    ...source,
                     ...utm_interest,
                     email: submission.email,
                     password: submission.password,
