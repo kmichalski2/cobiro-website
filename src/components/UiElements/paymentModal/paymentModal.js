@@ -144,6 +144,20 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     const redirectToApp = async (userToken) => {
 
+        let linkerParam = ''
+
+        if(window.ga) {
+            window.ga(function () {
+                var trackers = window.ga.getAll();
+                trackers.forEach(function (tracker) {
+                    if(!linkerParam) {
+                        const param = tracker.get('linkerParam')
+                        linkerParam = param
+                    }
+                });
+            });
+        }
+
         const awaitdataLayerPush = () => {
             return new Promise(resolve => {
                 if(window['google_tag_manager']) {
@@ -167,7 +181,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
         await awaitdataLayerPush()
         
-        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}`
+        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
     }
 
     const processPaymentResponse = async (paymentRes, dropin) => {
