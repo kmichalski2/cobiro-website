@@ -55,6 +55,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [recaptchaValid, setRecaptchaValid] = useState(false)
     const [urlParams, setUrlParams] = useState('')
     const [utmInterest, setUtmInterest] = useState('')
+    const [linkerParam, setLinkerParam] = useState('')
 
     const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
@@ -92,6 +93,19 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             setPaymentId(payment_id)
             handleShopperRedirect({MD: payload.MD, PaRes: payload.PaRes}, null, payment_id)
         }
+
+        if(window.ga) {
+            window.ga(function () {
+                var trackers = window.ga.getAll();
+                trackers.forEach(function (tracker) {
+                    if(!linkerParam) {
+                        const param = tracker.get('linkerParam')
+                        setLinkerParam(param)
+                    }
+                });
+            });
+        }
+
 
         if(parsedLocation) {
             
@@ -167,7 +181,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
         await awaitdataLayerPush()
         
-        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}`
+        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
     }
 
     const processPaymentResponse = async (paymentRes, dropin) => {
