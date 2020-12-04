@@ -8,7 +8,7 @@ const IframeForm = ({data}) => {
     }
 
     return (
-        <section>
+        <section className="section">
             <div className="container">
                 <div className="row middle-xs center-xs">
                     <div className="first-xs col col-xs-12 col-md-10 col-lg-6 space-xs-up">
