@@ -2,7 +2,7 @@ import React from 'react'
 import Classes from './iframeForm.module.scss'
 
 const IframeForm = ({data}) => {
-    console.log(data)
+
     const createMarkup = (text)  => {
         return {__html: text}
     }
