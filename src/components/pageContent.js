@@ -26,6 +26,7 @@ import ContactPerson from './sections/contactPerson/contactPerson'
 import PricingTables from "./sections/pricingTables/pricingTables"
 import MediaDownload from './sections/mediaDownload/mediaDownload'
 import ExpandablePersonsCard from './sections/expandablePersonsCard/expandablePersonsCard'
+import IframeForm from "./sections/iframeForm/iframeForm"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -119,6 +120,8 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <ExplanationGiftCard data={data.sections[index]} key={index}/>
                 case 'FormSection':
                     return <Form data={data.sections[index]} key={index}/>
+                case 'IframeForm':
+                    return <IframeForm data={data.sections[index]} key={index}/>
                 case 'ContactPerson':
                     return <ContactPerson data={data.sections[index]} key={index}/>
                 case 'PricingTable':
