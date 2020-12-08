@@ -158,8 +158,9 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 });
             });
         }
+        // window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&&planId=${planId || 0}&planStatus=1&userId=${paymentId}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
 
-        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&plan_id=${planId || 0}&status=${resultCode}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
+        console.log(`${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&planId=${planId || 0}&planStatus=1&userId=${paymentId}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`)
     }
 
     const processPaymentResponse = async (paymentRes, dropin) => {
