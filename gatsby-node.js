@@ -846,6 +846,11 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                 }
+                ... on DatoCmsIframeForm {
+                  text
+                  title
+                  iframeEmbed
+                }
                 ... on DatoCmsFormSection {
                   text
                   title
