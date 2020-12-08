@@ -55,7 +55,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [recaptchaValid, setRecaptchaValid] = useState(false)
     const [urlParams, setUrlParams] = useState('')
     const [utmInterest, setUtmInterest] = useState('')
-    const [resultCode, setResultCode] = useState('')
 
     const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
@@ -158,9 +157,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 });
             });
         }
-        // window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&&planId=${planId || 0}&planStatus=1&userId=${paymentId}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
+        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&planId=${planId || 0}&planStatus=1&userId=${paymentId}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
 
-        console.log(`${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&planId=${planId || 0}&planStatus=1&userId=${paymentId}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`)
     }
 
     const processPaymentResponse = async (paymentRes, dropin) => {
@@ -184,8 +182,6 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             pushWindowEvent('/Pricing - Payment Success')
             setStartLogin(true)
         } else {
-
-            setResultCode(paymentRes.resultCode)
 
             switch (paymentRes.resultCode) {
                 case "Authorised":
