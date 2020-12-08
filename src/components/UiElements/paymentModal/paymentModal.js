@@ -55,6 +55,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [recaptchaValid, setRecaptchaValid] = useState(false)
     const [urlParams, setUrlParams] = useState('')
     const [utmInterest, setUtmInterest] = useState('')
+    const [resultCode, setResultCode] = useState('')
 
     const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
@@ -158,30 +159,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             });
         }
 
-        const awaitdataLayerPush = () => {
-            return new Promise(resolve => {
-                if(window['google_tag_manager']) {
-
-                    window.dataLayer = window.dataLayer || []
-
-                    window.dataLayer.push({
-                        'event' : '/Pricing - Account - login',
-                        'eventCallback' : () => {
-                            console.log('running callback')
-                            resolve()
-                        },
-                        'eventTimeout' : 2000
-                    });
-                } else {
-                    console.log('running else')
-                    resolve()
-                }
-            });
-        }
-
-        await awaitdataLayerPush()
-        
-        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
+        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&plan_id=${planId || 0}&status=${resultCode}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
     }
 
     const processPaymentResponse = async (paymentRes, dropin) => {
@@ -205,32 +183,35 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             pushWindowEvent('/Pricing - Payment Success')
             setStartLogin(true)
         } else {
-          switch (paymentRes.resultCode) {
-            case "Authorised":
-                setSubmitError(null)
-                pushWindowEvent('/Pricing - Payment Success')
-                setStartLogin(true)
-              break;
-            case "Pending":
-                setSubmitError(null)
-                pushWindowEvent('/Pricing - Payment Success')
-                setStartLogin(true)
-              break;
-            case "Refused":
-                setSubmitting(false)
-                setSubmitSuccess(false)
-                pushWindowEvent('/Pricing - Payment failed')
-                setSubmitError('The transaction was refused.')
-              break;
-            default:
-                setSubmitting(false)
-                setSubmitSuccess(false)
-                pushWindowEvent('/Pricing - Payment failed')
-                setSubmitError('The transaction was refused.')
-              break;
-          }
+
+            setResultCode(paymentRes.resultCode)
+
+            switch (paymentRes.resultCode) {
+                case "Authorised":
+                    setSubmitError(null)
+                    pushWindowEvent('/Pricing - Payment Success')
+                    setStartLogin(true)
+                break;
+                case "Pending":
+                    setSubmitError(null)
+                    pushWindowEvent('/Pricing - Payment Success')
+                    setStartLogin(true)
+                break;
+                case "Refused":
+                    setSubmitting(false)
+                    setSubmitSuccess(false)
+                    pushWindowEvent('/Pricing - Payment failed')
+                    setSubmitError('The transaction was refused.')
+                break;
+                default:
+                    setSubmitting(false)
+                    setSubmitSuccess(false)
+                    pushWindowEvent('/Pricing - Payment failed')
+                    setSubmitError('The transaction was refused.')
+                break;
+            }
         }
-      }
+    }
 
     const handlePayment = () => {
 
