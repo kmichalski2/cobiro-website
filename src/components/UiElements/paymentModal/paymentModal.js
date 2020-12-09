@@ -49,12 +49,14 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [submitError, setSubmitError] = useState(false)
     const [paymentComponent, setPaymentComponent] = useState()
     const [paymentId, setPaymentId] = useState()
+    const [userId, setUserId] = useState()
     const [showEmailValidation, setShowEmailValidation] = useState(false)
     const [startLogin, setStartLogin] = useState(false)
     const [ip, setIp] = useState("")
     const [recaptchaValid, setRecaptchaValid] = useState(false)
     const [urlParams, setUrlParams] = useState('')
     const [utmInterest, setUtmInterest] = useState('')
+    const [planIdParam, setPlanIdParam] = useState('')
 
     const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
@@ -88,14 +90,16 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
         if(returningData) {
             
-            const {payment_id, ...payload} = returningData
+            const {payment_id, user_id, plan_id, ...payload} = returningData
             setPaymentId(payment_id)
+            setUserId(user_id)
+            setPlanIdParam(plan_id)
             handleShopperRedirect({MD: payload.MD, PaRes: payload.PaRes}, null, payment_id)
         }
 
         if(parsedLocation) {
             
-            const {MD, PaRes, utm_interest, ...urlParams} = parsedLocation
+            const {MD, PaRes, utm_interest, user_id, plan_id, ...urlParams} = parsedLocation
             const stringified = queryString.stringify(urlParams);
             console.log('stringified', stringified)
 
@@ -157,8 +161,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 });
             });
         }
-        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&planId=${planId || 0}&planStatus=1&userId=${paymentId}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
-
+        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&planId=${planId || planIdParam || 0}&planStatus=1&userId=${userId}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
     }
 
     const processPaymentResponse = async (paymentRes, dropin) => {
@@ -210,7 +213,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }
     }
 
-    const handlePayment = () => {
+    const handlePayment = (id) => {
 
         if(window && window.dataLayer) {
             window.dataLayer.push({'event': '/Pricing - Payment started','payment_id': paymentId })
@@ -225,7 +228,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                     plan_id: planId,
                     amount: rawPriceIncVat,
                     currency: "USD",
-                    return_url: `${window.location.origin}${window.location.pathname}?returning=1&utm_nooverride=1&payment_id=${paymentId}${urlParams ? '&' + urlParams : ''}`,
+                    return_url: `${window.location.origin}${window.location.pathname}?returning=1&utm_nooverride=1&payment_id=${paymentId}&user_id=${id}&plan_id=${planId}${urlParams ? '&' + urlParams : ''}`,
                     redirect_from_issuer_method: "GET",
                     origin: window.location.origin,
                     shopper_ip: ip,
@@ -313,9 +316,11 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }).then((res) => {
             
             pushWindowEvent('/Pricing - Account - Account Created')
-            
+            const resUserId = res.data.data.id
+            setUserId(resUserId)
+
             if(!isFreeTier) {
-                handlePayment()
+                handlePayment(resUserId)
             } else {
                 setShowEmailValidation(true)
                 setSubmitting(false)
