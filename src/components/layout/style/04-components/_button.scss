@@ -1,7 +1,8 @@
-$button-bg: $blue;
-$button-hover-bg: darken($blue, 20);
+$button-bg: $black;
+$button-hover-bg: $darkblack;
+$button-hover-border-color: $darkblack;
 $button-border-radius: 5rem;
-$button-border-color: $blue;
+$button-border-color: $black;
 $button-padding-vertical: 0.5rem;
 $button-padding-horizontal: 1.5rem;
 
@@ -46,8 +47,8 @@ $button-padding-horizontal: 1.5rem;
 
 .btn-secondary {
 	background-color: transparent;
-	color: $blue;
-	border-color: $blue;
+	color: $black;
+	border-color: $black;
 }
 
 .btn-secondary-white {
@@ -65,12 +66,12 @@ $button-padding-horizontal: 1.5rem;
 .btn-white {
 	background-color: $white;
 	border-color: $white;
-	color: $blue;
+	color: $black;
 
 	&:hover, &:active, &:focus {
 		background-color: rgba($white, 0.8);
 		// border-color: $white;
-		color: $blue;
+		color: $black;
 	}
 }
 
@@ -119,7 +120,7 @@ $button-padding-horizontal: 1.5rem;
 		transform: translate(-50%, -50%);
 		width: 1px;
 		height: 0.5rem;
-		background-color: $blue;
+		background-color: $black;
 	}
 
 	&::after {
@@ -130,7 +131,7 @@ $button-padding-horizontal: 1.5rem;
 		transform: translate(-50%, -50%);
 		width: 0.5rem;
 		height: 1px;
-		background-color: $blue;
+		background-color: $black;
 	}
 
 	&.active {
