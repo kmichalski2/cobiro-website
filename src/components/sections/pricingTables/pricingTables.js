@@ -148,7 +148,7 @@ const PricingTables = ({ data, navbarHeight }) => {
                 </div>
                 : null}
                 
-                {tierSwitcher}
+                
                 {pricingHeaderTable ?
                 <div ref={tableHeaderRef} className="row">
                     <div className="col col-xs-12 space-xs-up">
@@ -166,17 +166,17 @@ const PricingTables = ({ data, navbarHeight }) => {
                         bgColors={bgColors}
                         activeCol={activeCol}
                         name={' '}
-                        rows={
-                            pricingHeaderTable.row.map(r => { 
-                                return {
-                                    rowName: r.rowName, 
-                                    label: r.labelText ? <Label label={r.labelText} color={r.labelColor || "blue"}/> : null, 
-                                    nested: r.nestedRow, 
-                                    cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : [],
-                                    toolTip: r.tooltip
-                                }
-                            })
-                        }
+                        // rows={
+                        //     pricingHeaderTable.row.map(r => { 
+                        //         return {
+                        //             rowName: r.rowName, 
+                        //             label: r.labelText ? <Label label={r.labelText} color={r.labelColor || "blue"}/> : null, 
+                        //             nested: r.nestedRow, 
+                        //             cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : [],
+                        //             toolTip: r.tooltip
+                        //         }
+                        //     })
+                        // }
                          /> 
                         
                     </div>

@@ -761,6 +761,8 @@ exports.createPages = async function({ graphql, actions }) {
                       bgColor {
                         hex
                       }
+                      featureListTitle
+                      featureList
                     }
                   }
                   pricingFooterCtaTitle

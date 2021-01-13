@@ -42,15 +42,15 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
         setReturningData(data)
     }
 
-    const rowExpanderCheck = (i) => {
+    // const rowExpanderCheck = (i) => {
         
-        for(i; i > -1; i--) {
-            if (!rows[i].nested) {
-                return i
-            }
-        }
-        return null
-    }    
+    //     for(i; i > -1; i--) {
+    //         if (!rows[i].nested) {
+    //             return i
+    //         }
+    //     }
+    //     return null
+    // }    
 
     const hasNumber = (myString) => {
         return /\d/.test(myString);
@@ -64,13 +64,13 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
             <PaymentModal showModal={showModal} rawPriceIncVat={rawPriceIncVat} rawPriceExVat={rawPriceExVat} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName} planId={planId} pricing={pricing} RETURNING={RETURNING} returningData={returningData}/>
         </Suspense>
         : null }
-        <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
-            {headers ?
-            <thead>
-                <tr>
-                { name ? <th className={[Classes.tableName, Classes.tableHeader].join(' ')}>{icon ? <ImageAll image={icon} alt={icon.alt || name} classes={Classes.icon} /> : null}{ name }</th> : null }
+
+{headers ?
+            <div className="flex between-xs" style={{width: '100%'}}>
+
                 { headers ? headers.map((h, i) => 
-                    <th key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                    h.title ?
+                    <div key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
                         {h.label ? 
                             <span className={Classes.label}>
                                 {h.label}
@@ -93,11 +93,21 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                                     {h.linkTitle}
                             </button> 
                             }
-                    </th>) : null }
-                </tr>
+                            <p>{h.featureListTitle}</p>
+                            <ul class=" text-left price-list list-unstyled">
+                                {h.featureList.map((l, i) => 
+                                    <li key={i}>{l}</li>
+                                )}
+                            </ul>
+                    </div>
+                    : null
+                ) : null }
                 
-            </thead>
+            </div>
             : null}
+
+        <table className={["table space-xs-up", Classes.table, !headers ? Classes.noHeaders : null].join(' ')}>
+            
             
             <tbody>
                 { rows ? rows.map((r, i) =>  { 
@@ -106,8 +116,8 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
 
                     return (
                         <TableRow 
-                            expanded={(r.nested ? rowExpanderCheck(i) === expandedRow : false) || expandedRow === i} 
-                            expandHandler={subRows && !r.nested ? () => setExpandedRow(expandedRow !== i ? i : null) : null} 
+                            // expanded={(r.nested ? rowExpanderCheck(i) === expandedRow : false) || expandedRow === i} 
+                            // expandHandler={subRows && !r.nested ? () => setExpandedRow(expandedRow !== i ? i : null) : null} 
                             i={i}
                             key={i} 
                             rowHeader={r.rowName} 
@@ -117,7 +127,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                             activeCol={activeCol} 
                             toolTip={r.toolTip} 
                             bgColors={bgColors}
-                            rowExpandHandler={rowExpandHandler}
+                            // rowExpandHandler={rowExpandHandler}
                             topRow={!headers && i === 0}
                         />
                     )
