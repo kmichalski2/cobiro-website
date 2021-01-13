@@ -310,7 +310,12 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                     ...utm_interest,
                     email: submission.email,
                     password: submission.password,
-                    "partner_id": 1
+                    "partner_id": 1,
+                    signup_params: {
+                        payment: !isFreeTier,
+                        has_gtm: window.ga && true || false,
+                        ...queryString.parse(urlParams)
+                    }
                 }
             }
         }).then((res) => {
