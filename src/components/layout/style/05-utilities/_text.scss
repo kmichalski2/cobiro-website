@@ -36,15 +36,15 @@ p {
 // }
 
 p, a {
-	font-size: 1.2rem;
+	font-size: 1rem;
 
 	&.small {
-		font-size: 1rem !important;
+		font-size: 0.8rem !important;
 	}
 }
 
 .small p, .small a, .small {
-	font-size: 1rem !important;
+	font-size: 0.8rem !important;
 }
 .text-overlined {
 	text-decoration: line-through;
