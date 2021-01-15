@@ -22,6 +22,7 @@
     "gatsby-plugin-scroll-reveal": "0.0.6",
     "gatsby-plugin-sharp": "^2.5.4",
     "gatsby-plugin-sitemap": "^2.3.2",
+    "gatsby-plugin-webfonts": "^1.1.4",
     "gatsby-source-datocms": "^2.1.29",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-transformer-sharp": "^2.4.4",
