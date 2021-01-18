@@ -12,7 +12,20 @@
         margin-right: 0.5rem;
     }
 }
+.headerWrapper {
+    display: flex;
+    justify-content: between-xs;
+    align-items: center;
+    width: 100%;
 
+    @include mq($until: lg) {
+        flex-direction: column;
+    }
+
+    .tableHeader {
+        display: block;
+    }
+}
 .tableHeader {
     // font-size: 1.25rem;
     color: $black;
@@ -20,6 +33,7 @@
     position: relative;
     border-radius: 0 !important;
     padding: 1.875rem;
+    // display: block;
 
     &:first-child {
         border-radius: $border-radius !important;
@@ -67,8 +81,11 @@
     &.highlightedHeader {
         padding-top: 3.5rem;
         border-radius: $border-radius !important;
-        transform: scale(1.1);
         z-index: 2;
+
+        @include mq($from: lg) {
+            transform: scale(1.1);
+        }
 
         &::before {
             content: '';
@@ -229,7 +246,7 @@
 
 }
 .fixedHeader {
-    position: absolute;
+    position: fixed;
     // top: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -237,10 +254,15 @@
     display: flex;
     background-color: #fff;
     z-index: 10;  
+
+    th {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
     .table {
         margin-bottom: 0!important;
     }
     .tableHeader {
-        padding: 0.125rem 0.5rem!important;
+        padding: 1rem 0.5rem!important;
     }
 }

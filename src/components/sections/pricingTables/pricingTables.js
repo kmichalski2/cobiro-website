@@ -48,7 +48,7 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
     const tableHeaderRef = React.createRef()
     const tablesRef = React.createRef()
 
-    let tableHeader
+    let tableDomEl
 
     const tierElementPicker = (el) => {
         if(el === 'cross') {
@@ -67,11 +67,14 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
 
     const scrollHandler = () => {
         // if(tableHeight) {
-            const tableRect = tableHeader.getBoundingClientRect()
+            const tableRect = tableDomEl.getBoundingClientRect()
             // const scrolledPassed = tableRect.top < ((tableHeight - navbarHeight - 100) * -1)
-            if(tableRect.top < 0) {
+            console.log('tableRect.height', tableRect.height)
+            console.log('tableRect.top', tableRect.top)
+            console.log('-1 * tableRect.height - 200', -1 * tableRect.height + 200)
+            if(tableRect.top < 100 && tableRect.top > (-1 * tableRect.height + 200)) {
                 setHeaderFixed(true)
-                setTableYPos((-1 * tableRect.top) + navbarHeight)
+                // setTableYPos((-1 * tableRect.top) + navbarHeight)
             // } else if(scrolledPassed) {
             //     setHeaderFixed(false)
             } else {
@@ -82,8 +85,8 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
     }
 
     useEffect(() => { 
-        if(tableHeaderRef.current) {
-            tableHeader = tableHeaderRef.current   
+        if(tablesRef.current) {
+            tableDomEl = tablesRef.current   
             if(typeof window !== 'undefined') {
 
                 window.addEventListener('scroll', () => scrollHandler(), { passive: true })
@@ -123,10 +126,9 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
     return (
         <>
         {pricingHeaderTable ?
-        <Section
-            
-            classes="bg-gradiant-faded"
-            >
+        <>
+        <div className={Classes.backgroundGradiant}></div>
+        <Section classes={Classes.tableHeaderSection}>
             <div className="container">
                 <div className="row space-big-xs-up">
                     <div className="col col-xs-12 text-center center">
@@ -164,13 +166,13 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
                     </div>
                 </div>
 
-                <div ref={tableHeaderRef} className="row">
+                <div  className="row">
                     <div className="col col-xs-12 space-xs-up">
                     <BaseTable
                         returnedModalOpen={showModal}
-                        navbarHeight={navbarHeight}
+                        navbarHeight={navbarHeight + notificationPadding}
                         headerFixed={headerFixed}
-                        scrollPos={tableYPos}
+                        // scrollPos={tableYPos}
                         headers={pricingHeaderTable.headers}
                         monthlyPriceBillingRate={pricingHeaderTable.monthlyPriceBillingRate}
                         yearlyPriceBillingRate={pricingHeaderTable.yearlyPriceBillingRate}
@@ -197,9 +199,10 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
                 </div>
             </div>
         </Section>
+        </>
         : null }
         <Section classes={Classes.tablesSection}>
-            <div className={["container", pricingCta ? "space-xs-up" : null, Classes.tablesSectionInner].join(' ')}> 
+            <div ref={tableHeaderRef} className={["container", pricingCta ? "space-xs-up" : null, Classes.tablesSectionInner].join(' ')}> 
                 <div ref={tablesRef}  className="row">
                     <div className="col col-xs-12">
                         

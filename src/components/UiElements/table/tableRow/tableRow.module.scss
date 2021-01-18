@@ -62,10 +62,6 @@
         &.nested {
             font-weight: 400;
             font-style: italic;
-
-            @include mq($from: md) {
-                padding-left: 2rem !important;
-            }
         }
         
         .marginRight {

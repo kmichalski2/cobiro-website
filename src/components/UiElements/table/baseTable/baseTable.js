@@ -65,8 +65,8 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
         </Suspense>
         : null }
 
-{headers ?
-            <div className="flex between-xs" style={{width: '100%'}}>
+        {headers ?
+            <div className={Classes.headerWrapper}>
 
                 { headers ? headers.map((h, i) => 
                     h.title ?
@@ -137,7 +137,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
             </tbody>
             </table>
             <Fade show={headers && headerFixed}>
-                <div className={[Classes.fixedHeader, "container"].join(' ')} style={navbarHeight ? {top: scrollPos + 'px'} : null}>
+                <div className={[Classes.fixedHeader, "container"].join(' ')} style={navbarHeight ? {top: navbarHeight + 32 + 'px'} : null}>
                     <table className={["table space-xs-up", Classes.table].join(' ')}>
                         <thead>
                             <tr >
