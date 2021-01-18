@@ -34,7 +34,7 @@ const TableRow = ({rowHeader, expandHandler, cols, label, nested, activeCol, too
             <tr className={[Classes.row].join(' ')}>
             { rowHeader ? 
                 <th scope="row" className={[Classes.rowHeader, nested ? Classes.nested : null].join(' ')}>
-                    <span className={[label ? Classes.marginRight : null, 'text-normal'].join(' ')}>{rowHeader}</span> 
+                    <span className={[label ? Classes.marginRight : null, nested ? 'text-normal' : 'text-bold'].join(' ')}>{rowHeader}</span> 
                     {label}
                     {toolTip ?
                     <span className={[Classes.toolTip, "text-regular"].join(' ')}>

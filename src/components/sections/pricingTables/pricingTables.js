@@ -10,6 +10,7 @@ import Label from '../../UiElements/label/label'
 import ButtonSwitch from '../../UiElements/buttonSwitch/buttonSwitch'
 import Table from '../../UiElements/table/table'
 import CtaCard from '../../UiElements/ctaCard/ctaCard'
+import Switch from '../../UiElements/switch/switch'
 const queryString = require('query-string');
 
 
@@ -129,7 +130,21 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
             <div className="container">
                 <div className="row space-big-xs-up">
                     <div className="col col-xs-12 text-center center">
-                        <ButtonSwitch
+                    <Switch 
+                        leftEl={{
+                            clickHandler: () => setActivePricing(monthlyPricingName),
+                            title: pricingHeaderTable.monthlyPriceName,
+                            extraText: pricingHeaderTable.monthlyPriceExtraText,
+                            active: activePricing === monthlyPricingName
+                        }}
+                        rightEl={{
+                            clickHandler: () => setActivePricing(yearlyPricingName),
+                            title: pricingHeaderTable.yearlyPriceName,
+                            extraText: pricingHeaderTable.yearlyPriceExtraText,
+                            active: activePricing === yearlyPricingName
+                        }}
+                        />
+                        {/* <ButtonSwitch
                             buttons={[
                                 {
                                     clickHandler: () => setActivePricing(monthlyPricingName),
@@ -145,7 +160,7 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
                                 }
                             ]}
                             xsColumn
-                        />
+                        /> */}
                     </div>
                 </div>
 

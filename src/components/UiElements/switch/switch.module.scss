@@ -1,0 +1,54 @@
+@import '../../layout/style/globals';
+
+.switchWrapper {
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+        button {
+            z-index: 5;
+        }
+        button:first-child {
+            padding-right: 2.75rem;
+            margin-right: -2rem;
+        }
+        button:last-child {
+            padding-left: 2.75rem;
+            margin-left: -2rem;
+        }
+
+    .switch {
+        position: relative;
+        background-color: $extra-ligt-grey;
+        height: 2rem;
+        width: 3.5rem;
+        border-radius: 5rem;
+        pointer-events: none;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: $white;
+            box-shadow: 0.075rem 0.075rem 0.075rem rgba(0, 0, 0, 0.15);
+            border-radius: 5rem;
+            top: 0.25rem;
+            transition: all 0.1s linear;
+        }
+
+        &.left {
+            &::before { 
+                left: 0.25rem;
+            }
+        }
+        &.right {
+            &::before { 
+                left: 1.75rem;
+            }
+        }
+
+
+    }
+}
