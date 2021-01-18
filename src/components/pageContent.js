@@ -125,7 +125,7 @@ const PageContent = ({ data, locales, redirect, location }) => {
                 case 'ContactPerson':
                     return <ContactPerson data={data.sections[index]} key={index}/>
                 case 'PricingTable':
-                    return <PricingTables data={data.sections[index]} navbarHeight={navbarHeight} key={index}/>
+                    return <PricingTables data={data.sections[index]} navbarHeight={navbarHeight} key={index} notificationPadding={index === 0 ? notificationPadding : null}/>
                 case 'MediaDownload':
                     return <MediaDownload data={data.sections[index]} key={index}/>
                 case 'ExpandablePersonsCard':

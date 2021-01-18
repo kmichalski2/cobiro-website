@@ -13,7 +13,7 @@ import CtaCard from '../../UiElements/ctaCard/ctaCard'
 const queryString = require('query-string');
 
 
-const PricingTables = ({ data, navbarHeight }) => {
+const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
 
     const headers = data.pricingHeaderTable && data.pricingHeaderTable.headers
     const bgColors = headers && headers.map(h => h.bgColor && h.bgColor.hex || '')
@@ -120,11 +120,13 @@ const PricingTables = ({ data, navbarHeight }) => {
     : null
 
     return (
-        <Section classes={Classes.tablesSection}>
-            <div className={["container", pricingCta ? "space-xs-up" : null, Classes.tablesSectionInner].join(' ')}>
-                {pricingHeaderTable ?
-                
+        <>
+        {pricingHeaderTable ?
+        <Section
             
+            classes="bg-gradiant-faded"
+            >
+            <div className="container">
                 <div className="row space-big-xs-up">
                     <div className="col col-xs-12 text-center center">
                         <ButtonSwitch
@@ -146,10 +148,7 @@ const PricingTables = ({ data, navbarHeight }) => {
                         />
                     </div>
                 </div>
-                : null}
-                
-                
-                {pricingHeaderTable ?
+
                 <div ref={tableHeaderRef} className="row">
                     <div className="col col-xs-12 space-xs-up">
                     <BaseTable
@@ -181,9 +180,11 @@ const PricingTables = ({ data, navbarHeight }) => {
                         
                     </div>
                 </div>
-                : null
-                }
-                
+            </div>
+        </Section>
+        : null }
+        <Section classes={Classes.tablesSection}>
+            <div className={["container", pricingCta ? "space-xs-up" : null, Classes.tablesSectionInner].join(' ')}> 
                 <div ref={tablesRef}  className="row">
                     <div className="col col-xs-12">
                         
@@ -230,6 +231,7 @@ const PricingTables = ({ data, navbarHeight }) => {
             </div>
             : null}
         </Section>
+        </>
     )
 }
 

@@ -9,3 +9,10 @@
 	}
 
 }
+
+.bg-gradiant-faded {
+	@include gradiant-background-faded;
+}
+.border-bottom-gradiant {
+	@include gradiant-bottom-border;
+}

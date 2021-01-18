@@ -70,31 +70,32 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
 
                 { headers ? headers.map((h, i) => 
                     h.title ?
-                    <div key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                    <div key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile, h.label ? Classes.highlightedHeader : '', "card card-visible"].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
                         {h.label ? 
                             <span className={Classes.label}>
                                 {h.label}
                             </span> 
                         : null}
                         <span className="h4">{ h.title }</span>
-                        <span className="small text-normal block-xs space-small-xs-up">{h.subtitle}</span>
-                        <span className="h2 block-xs no-mt">{h[pricing]} <span className="text-normal small">{pricing === yearlyPriceName ? yearlyPriceBillingRate : monthlyPriceBillingRate}</span></span>
-                        {pricing === yearlyPriceName && hasNumber(h[monthlyPriceName]) ? <span className={["block-xs no-mt no-mb space-xs-up text-normal text-overlined", Classes.overlinedText].join(' ')}>{h[monthlyPriceName]}</span> : pricing === yearlyPriceName ? <span className={["block-xs no-mt space-xs-up text-normal", Classes.hiddenText].join(' ')}>{h[monthlyPriceName]}</span> : null }
+                        <span className="small text-normal block-xs space-xs-up">{h.subtitle}</span>
+                        <span className="h2 block-xs no-mt no-mb">{h[pricing]}</span>
+                        <span className="text-normal small">{pricing === yearlyPriceName ? yearlyPriceBillingRate : monthlyPriceBillingRate}</span>
+                        {pricing === yearlyPriceName && hasNumber(h[monthlyPriceName]) ? <span className={["block-xs no-mb space-xs-up text-normal text-overlined space-xs-up", Classes.overlinedText].join(' ')}>{h[monthlyPriceName]}</span> : pricing === yearlyPriceName ? <span className={["block-xs no-mt space-xs-up text-normal space-xs-up", Classes.hiddenText].join(' ')}>{h[monthlyPriceName]}</span> : null }
                         {/* h.link && h.linkTitle && <AnyLink external link={h.link} title={h.linkTitle} button classes="space-small-xs-up"/>*/}
-                        <span className="text-xs-small text-normal space-xs-up block-xs">(excl. VAT)</span>
+                        {/* <span className="text-xs-small text-normal space-xs-up block-xs">(excl. VAT)</span> */}
                         { h.linkTitle && h.buttonEmailLink ?
-                            <a className="btn space-small-xs-up" href={h.buttonEmailLink} rel="noopener noreferrer">{h.linkTitle}</a>
+                            <a className="btn space-xs-up mt space-top-xs-up" href={h.buttonEmailLink} rel="noopener noreferrer">{h.linkTitle}</a>
                         : h.linkTitle && 
                             <button 
-                                className="btn space-small-xs-up" 
+                                className={["btn space-xs-up mt space-top-xs-up", h.label ? "" : "btn-secondary" ].join(' ')}
                                 onClick={
                                     () => handleShowModal(h[`${pricing}Raw`], h[`${pricing}RawExVat`], h.title, h[`${pricing}PlanId`])}
                                 >
                                     {h.linkTitle}
                             </button> 
                             }
-                            <p>{h.featureListTitle}</p>
-                            <ul class=" text-left price-list list-unstyled">
+                            <p className="space-small-xs-up small text-bold">{h.featureListTitle}</p>
+                            <ul className=" text-left price-list list-unstyled small">
                                 {h.featureList.map((l, i) => 
                                     <li key={i}>{l}</li>
                                 )}
