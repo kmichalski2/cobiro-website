@@ -71,8 +71,8 @@
 
 .secondary {
 	background-color: transparent;
-	color: $blue;
-    border-color: $blue;
+	color: $black;
+    border-color: $black;
     
     &.white {
         background-color: transparent;
@@ -90,12 +90,12 @@
 .white {
 	background-color: $white;
 	border-color: $white;
-	color: $blue;
+	color: $black;
 
 	&:hover, &:active {
 		background-color: rgba($white, 0.8);
 		// border-color: $white;
-		color: $blue;
+		color: $black;
 	}
 }
 .btnDanger {

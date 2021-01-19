@@ -819,6 +819,12 @@ exports.createPages = async function({ graphql, actions }) {
                   title
                   text
                   narrowImage
+                  wideImage
+                  textAboveImage
+                  linkTitle
+                  internalLinkImage {
+                    slug
+                  }
                   videoEmbedCode
                   bgColor {
                     hex

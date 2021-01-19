@@ -231,7 +231,7 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
                     </div>
                 </div>
             </div>
-            {pricingCta ? 
+            {/* {pricingCta ? 
             <div className="container">
                 <div className="row">
                     <div className="col col-col-xs-12">
@@ -247,7 +247,7 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
                     </div>
                 </div>
             </div>
-            : null}
+            : null} */}
         </Section>
         </>
     )
