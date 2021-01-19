@@ -10,6 +10,10 @@
 
             button {
                 z-index: 5;
+                
+                &:focus {
+                    outline: none;
+                }
             }
             button:first-child {
                 padding-right: 2.75rem;
