@@ -42,7 +42,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
                 {children}
             </Link>
         : link && title && external || link && children ?
-            <a className={ classNames } href={`${link}${signUpIn && search ? search : ''}`} target={targetSelf ? "_self" : "_blank"} rel="noopener noreferrer">
+            <a className={ classNames } href={`${link}${signUpIn && search ? search : ''}`} target={targetSelf || signUpIn ? "_self" : "_blank"} rel="noopener noreferrer">
                 { title }
                 {children}
             </a>
