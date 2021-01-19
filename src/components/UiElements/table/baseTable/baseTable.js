@@ -94,12 +94,16 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                                     {h.linkTitle}
                             </button> 
                             }
+                            {h.featureList ?
+                            <>
                             <p className="space-small-xs-up small text-bold">{h.featureListTitle}</p>
                             <ul className=" text-left price-list list-unstyled small">
                                 {h.featureList.map((l, i) => 
                                     <li key={i}>{l}</li>
                                 )}
                             </ul>
+                            </>
+                            : null}
                     </div>
                     : null
                 ) : null }
