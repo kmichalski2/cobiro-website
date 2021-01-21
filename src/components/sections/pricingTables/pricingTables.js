@@ -10,10 +10,11 @@ import Label from '../../UiElements/label/label'
 import ButtonSwitch from '../../UiElements/buttonSwitch/buttonSwitch'
 import Table from '../../UiElements/table/table'
 import CtaCard from '../../UiElements/ctaCard/ctaCard'
+import Switch from '../../UiElements/switch/switch'
 const queryString = require('query-string');
 
 
-const PricingTables = ({ data, navbarHeight }) => {
+const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
 
     const headers = data.pricingHeaderTable && data.pricingHeaderTable.headers
     const bgColors = headers && headers.map(h => h.bgColor && h.bgColor.hex || '')
@@ -47,7 +48,7 @@ const PricingTables = ({ data, navbarHeight }) => {
     const tableHeaderRef = React.createRef()
     const tablesRef = React.createRef()
 
-    let tableHeader
+    let tableDomEl
 
     const tierElementPicker = (el) => {
         if(el === 'cross') {
@@ -66,11 +67,14 @@ const PricingTables = ({ data, navbarHeight }) => {
 
     const scrollHandler = () => {
         // if(tableHeight) {
-            const tableRect = tableHeader.getBoundingClientRect()
+            const tableRect = tableDomEl.getBoundingClientRect()
             // const scrolledPassed = tableRect.top < ((tableHeight - navbarHeight - 100) * -1)
-            if(tableRect.top < 0) {
+            console.log('tableRect.height', tableRect.height)
+            console.log('tableRect.top', tableRect.top)
+            console.log('-1 * tableRect.height - 200', -1 * tableRect.height + 200)
+            if(tableRect.top < 100 && tableRect.top > (-1 * tableRect.height + 200)) {
                 setHeaderFixed(true)
-                setTableYPos((-1 * tableRect.top) + navbarHeight)
+                // setTableYPos((-1 * tableRect.top) + navbarHeight)
             // } else if(scrolledPassed) {
             //     setHeaderFixed(false)
             } else {
@@ -81,8 +85,8 @@ const PricingTables = ({ data, navbarHeight }) => {
     }
 
     useEffect(() => { 
-        if(tableHeaderRef.current) {
-            tableHeader = tableHeaderRef.current   
+        if(tablesRef.current) {
+            tableDomEl = tablesRef.current   
             if(typeof window !== 'undefined') {
 
                 window.addEventListener('scroll', () => scrollHandler(), { passive: true })
@@ -120,14 +124,29 @@ const PricingTables = ({ data, navbarHeight }) => {
     : null
 
     return (
-        <Section classes={Classes.tablesSection}>
-            <div className={["container", pricingCta ? "space-xs-up" : null, Classes.tablesSectionInner].join(' ')}>
-                {pricingHeaderTable ?
-                
-            
+        <>
+        {pricingHeaderTable ?
+        <>
+        <div className={Classes.backgroundGradiant}></div>
+        <Section classes={Classes.tableHeaderSection}>
+            <div className="container">
                 <div className="row space-big-xs-up">
                     <div className="col col-xs-12 text-center center">
-                        <ButtonSwitch
+                    <Switch 
+                        leftEl={{
+                            clickHandler: () => setActivePricing(monthlyPricingName),
+                            title: pricingHeaderTable.monthlyPriceName,
+                            extraText: pricingHeaderTable.monthlyPriceExtraText,
+                            active: activePricing === monthlyPricingName
+                        }}
+                        rightEl={{
+                            clickHandler: () => setActivePricing(yearlyPricingName),
+                            title: pricingHeaderTable.yearlyPriceName,
+                            extraText: pricingHeaderTable.yearlyPriceExtraText,
+                            active: activePricing === yearlyPricingName
+                        }}
+                        />
+                        {/* <ButtonSwitch
                             buttons={[
                                 {
                                     clickHandler: () => setActivePricing(monthlyPricingName),
@@ -143,20 +162,17 @@ const PricingTables = ({ data, navbarHeight }) => {
                                 }
                             ]}
                             xsColumn
-                        />
+                        /> */}
                     </div>
                 </div>
-                : null}
-                
-                {tierSwitcher}
-                {pricingHeaderTable ?
-                <div ref={tableHeaderRef} className="row">
+
+                <div  className="row">
                     <div className="col col-xs-12 space-xs-up">
                     <BaseTable
                         returnedModalOpen={showModal}
-                        navbarHeight={navbarHeight}
+                        navbarHeight={navbarHeight + notificationPadding}
                         headerFixed={headerFixed}
-                        scrollPos={tableYPos}
+                        // scrollPos={tableYPos}
                         headers={pricingHeaderTable.headers}
                         monthlyPriceBillingRate={pricingHeaderTable.monthlyPriceBillingRate}
                         yearlyPriceBillingRate={pricingHeaderTable.yearlyPriceBillingRate}
@@ -166,24 +182,27 @@ const PricingTables = ({ data, navbarHeight }) => {
                         bgColors={bgColors}
                         activeCol={activeCol}
                         name={' '}
-                        rows={
-                            pricingHeaderTable.row.map(r => { 
-                                return {
-                                    rowName: r.rowName, 
-                                    label: r.labelText ? <Label label={r.labelText} color={r.labelColor || "blue"}/> : null, 
-                                    nested: r.nestedRow, 
-                                    cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : [],
-                                    toolTip: r.tooltip
-                                }
-                            })
-                        }
+                        // rows={
+                        //     pricingHeaderTable.row.map(r => { 
+                        //         return {
+                        //             rowName: r.rowName, 
+                        //             label: r.labelText ? <Label label={r.labelText} color={r.labelColor || "blue"}/> : null, 
+                        //             nested: r.nestedRow, 
+                        //             cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : [],
+                        //             toolTip: r.tooltip
+                        //         }
+                        //     })
+                        // }
                          /> 
                         
                     </div>
                 </div>
-                : null
-                }
-                
+            </div>
+        </Section>
+        </>
+        : null }
+        <Section classes={Classes.tablesSection}>
+            <div ref={tableHeaderRef} className={["container", pricingCta ? "space-xs-up" : null, Classes.tablesSectionInner].join(' ')}> 
                 <div ref={tablesRef}  className="row">
                     <div className="col col-xs-12">
                         
@@ -212,7 +231,7 @@ const PricingTables = ({ data, navbarHeight }) => {
                     </div>
                 </div>
             </div>
-            {pricingCta ? 
+            {/* {pricingCta ? 
             <div className="container">
                 <div className="row">
                     <div className="col col-col-xs-12">
@@ -228,8 +247,9 @@ const PricingTables = ({ data, navbarHeight }) => {
                     </div>
                 </div>
             </div>
-            : null}
+            : null} */}
         </Section>
+        </>
     )
 }
 

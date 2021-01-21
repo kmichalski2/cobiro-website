@@ -37,6 +37,21 @@ $button-padding-horizontal: 1.5rem;
 	}
 }
 
+.btn-text {
+	font-size: 1rem;
+	font-weight: normal;
+	background-color: transparent;
+	border-color: transparent;
+	color: inherit;
+	border-radius: 5px;
+	padding: 0 0.5rem;
+
+	&:hover, &:active {
+		background-color: transparent;
+		color: inherit;
+	}
+}
+
 @include mq($from: md) {
 	.btn-large {
 		font-size: 1.125rem;

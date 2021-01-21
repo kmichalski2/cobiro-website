@@ -1,0 +1,81 @@
+@import '../../layout/style/globals';
+
+.switchWrapper {
+    
+    .switchWrapperInner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.9375rem;
+
+            button {
+                z-index: 5;
+                
+                &:focus {
+                    outline: none;
+                }
+            }
+            button:first-child {
+                padding-right: 2.75rem;
+                margin-right: -2rem;
+            }
+            button:last-child {
+                padding-left: 2.75rem;
+                margin-left: -2rem;
+            }
+
+        .switch {
+            position: relative;
+            background-color: $extra-ligt-grey;
+            height: 2rem;
+            width: 3.5rem;
+            border-radius: 5rem;
+            pointer-events: none;
+            
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 1.5rem;
+                height: 1.5rem;
+                background-color: $white;
+                box-shadow: 0.075rem 0.075rem 0.075rem rgba(0, 0, 0, 0.15);
+                border-radius: 5rem;
+                top: 0.25rem;
+                transition: all 0.1s linear;
+            }
+
+            &.left {
+                &::before { 
+                    left: 0.25rem;
+                }
+            }
+            &.right {
+                &::before { 
+                    left: 1.75rem;
+                }
+            }
+
+
+        }
+    }
+    .extraText {
+        position: relative;
+        display: inline-block;
+        color: $blue;
+
+        &::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 2rem;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='26.804' height='27.604' viewBox='0 0 26.804 27.604'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='18.655' height='20.994' transform='translate(0 0)' fill='%230063ff'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg transform='translate(15.991 27.604) rotate(-149)'%3E%3Cg transform='translate(0 0)' clip-path='url(%23a)'%3E%3Cpath d='M.73,17.11c.7.161,1.4.308,2.089.5a6.6,6.6,0,0,0,1.432.327A11.972,11.972,0,0,1,3.716,13.8a13.989,13.989,0,0,1,1.2-4.309A18.678,18.678,0,0,1,9.781,3.013C11.556,1.481,13.945.02,16.369,0c.454,0,2.637.354,2.238,1.23-.187.41-.643.1-.977.043a4.715,4.715,0,0,0-2.007.144C10.643,2.656,6.892,8.631,6.144,13.379a7.639,7.639,0,0,0,.244,3.8c.1.27.41,1.272.691,1.28s.818-1.516.963-1.781a12.176,12.176,0,0,1,1.892-2.995c.361-.336.788-.533,1.2-.159.492.448.14,1.046-.069,1.527a38.8,38.8,0,0,1-2.172,3.9c-.679,1.167-1.113,2.45-2.639,1.922A48.035,48.035,0,0,1,1.78,18.894c-.408-.19-1.565-.58-1.735-1.119-.25-.793.612-.338.685-.666.625.144,0,.019,0,0' transform='translate(0 0)' fill='%230063ff'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+    }
+}
