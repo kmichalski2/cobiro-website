@@ -854,6 +854,55 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                 }
+                ... on DatoCmsCtaCardWithImageAndBullit {
+                  id
+                  title
+                  textColor
+                  subtitle
+                  linkTitle
+                  internalLinkCtaCard {
+                    slug
+                  }
+                  externalLinkCtaCard
+                  backgroundColorCtaCardSection {
+                    hex
+                  }
+                  ctaCard {
+                    title
+                    price
+                    paymentRate
+                    cardTextColor
+                    cardLabel
+                    cardBackgroundColor {
+                      hex
+                    }
+                    bullit {
+                      text
+                      icon {
+                        fixed(width: 32) {
+                          aspectRatio
+                          height
+                          sizes
+                          src
+                          srcSet
+                          width
+                        }
+                        url
+                      }
+                    }
+                    cardImage {
+                      fluid(maxWidth: 800) {
+                        aspectRatio
+                        height
+                        sizes
+                        src
+                        srcSet
+                        width
+                      }
+                      url
+                    }
+                  }
+                }
                 ... on DatoCmsIframeForm {
                   text
                   title
