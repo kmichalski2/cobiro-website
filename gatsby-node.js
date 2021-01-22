@@ -761,6 +761,8 @@ exports.createPages = async function({ graphql, actions }) {
                       bgColor {
                         hex
                       }
+                      featureListTitle
+                      featureList
                     }
                   }
                   pricingFooterCtaTitle
@@ -817,6 +819,12 @@ exports.createPages = async function({ graphql, actions }) {
                   title
                   text
                   narrowImage
+                  wideImage
+                  textAboveImage
+                  linkTitle
+                  internalLinkImage {
+                    slug
+                  }
                   videoEmbedCode
                   bgColor {
                     hex
@@ -843,6 +851,55 @@ exports.createPages = async function({ graphql, actions }) {
                         }
                         text
                       }
+                    }
+                  }
+                }
+                ... on DatoCmsCtaCardWithImageAndBullit {
+                  id
+                  title
+                  textColor
+                  subtitle
+                  linkTitle
+                  internalLinkCtaCard {
+                    slug
+                  }
+                  externalLinkCtaCard
+                  backgroundColorCtaCardSection {
+                    hex
+                  }
+                  ctaCard {
+                    title
+                    price
+                    paymentRate
+                    cardTextColor
+                    cardLabel
+                    cardBackgroundColor {
+                      hex
+                    }
+                    bullit {
+                      text
+                      icon {
+                        fixed(width: 32) {
+                          aspectRatio
+                          height
+                          sizes
+                          src
+                          srcSet
+                          width
+                        }
+                        url
+                      }
+                    }
+                    cardImage {
+                      fluid(maxWidth: 800) {
+                        aspectRatio
+                        height
+                        sizes
+                        src
+                        srcSet
+                        width
+                      }
+                      url
                     }
                   }
                 }
