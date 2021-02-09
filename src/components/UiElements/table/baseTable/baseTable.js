@@ -70,7 +70,11 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
 
                 { headers ? headers.map((h, i) => 
                     h.title ?
-                    <div key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile, h.label ? Classes.highlightedHeader : '', "card card-visible"].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                    <div key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile, h.label ? Classes.highlightedHeader : '', "card card-visible"].join(' ')}>
+                    {/* 
+                        /// OUTDATED. ACTIVATE FOR ABILITY TO CHANGE BACKGROUND COLOR. CAN BE USED, STILL IN CMS ///
+                        <div key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile, h.label ? Classes.highlightedHeader : '', "card card-visible"].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}> 
+                    */}
                         {h.label ? 
                             <span className={Classes.label}>
                                 {h.label}
