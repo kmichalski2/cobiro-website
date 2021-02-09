@@ -722,6 +722,7 @@ exports.createPages = async function({ graphql, actions }) {
                     yearlyPriceName
                     yearlyPriceExtraText
                     yearlyPriceBillingRate
+                    paymentModalRightColTitle
                     row {
                       columns
                       labelText

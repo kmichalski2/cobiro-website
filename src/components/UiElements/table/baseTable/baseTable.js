@@ -16,7 +16,7 @@ import Fade from '../../../hoc/fade/fade'
 
 const PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
 
-const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, monthlyPriceName, returnedModalOpen}) => {
+const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, paymentModalRightColTitle, monthlyPriceName, returnedModalOpen}) => {
 
     const RETURNING = 'returning'
     const [expandedRow, setExpandedRow] = useState(null)
@@ -61,7 +61,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
         <>
         {typeof window !== 'undefined' && headers ?
         <Suspense fallback={<></>}>
-            <PaymentModal showModal={showModal} rawPriceIncVat={rawPriceIncVat} rawPriceExVat={rawPriceExVat} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName} planId={planId} pricing={pricing} RETURNING={RETURNING} returningData={returningData}/>
+            <PaymentModal showModal={showModal} rawPriceIncVat={rawPriceIncVat} rawPriceExVat={rawPriceExVat} setShowModal={setShowModal} monthlyPricing={pricing === monthlyPriceName} planId={planId} pricing={pricing} RETURNING={RETURNING} returningData={returningData} rightColTitle={paymentModalRightColTitle}/>
         </Suspense>
         : null }
 

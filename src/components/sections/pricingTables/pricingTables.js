@@ -182,6 +182,7 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
                         bgColors={bgColors}
                         activeCol={activeCol}
                         name={' '}
+                        paymentModalRightColTitle={pricingHeaderTable.paymentModalRightColTitle}
                         // rows={
                         //     pricingHeaderTable.row.map(r => { 
                         //         return {

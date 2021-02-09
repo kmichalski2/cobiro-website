@@ -15,7 +15,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 const axios = require('axios');
 const queryString = require('query-string');
 
-const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, monthlyPricing, planId, pricing, returningData}) => {
+const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, monthlyPricing, planId, pricing, returningData, rightColTitle}) => {
     
     const queryData = useStaticQuery(graphql`
     query PaymentImages {
@@ -53,10 +53,16 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [showEmailValidation, setShowEmailValidation] = useState(false)
     const [startLogin, setStartLogin] = useState(false)
     const [ip, setIp] = useState("")
+    const [countryCode, setCountryCode] = useState("")
     const [recaptchaValid, setRecaptchaValid] = useState(false)
     const [urlParams, setUrlParams] = useState('')
     const [utmInterest, setUtmInterest] = useState('')
     const [planIdParam, setPlanIdParam] = useState('')
+
+    const [priceWVat, setPriceWVat] = useState()
+    const [priceExVat, setPriceExVat] = useState()
+    const [vatRate, setVatRate] = useState()
+    const [vatAmunt, setVatAmount] = useState()
 
     const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
@@ -79,11 +85,14 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
         setPaymentId(uuidv4())
 
-        axios.get('https://www.cloudflare.com/cdn-cgi/trace').then((res) => {
+        axios.get('https://www.cloudflare.com/cdn-cgi/trace').then((res) => {   
             res.data.split('\n').map(el => {
                 const keyValue = el.split(("="))
                 if(keyValue && keyValue[0] === 'ip') {
                     setIp(keyValue[1])
+                }
+                if(keyValue && keyValue[0] === 'loc') {
+                    setCountryCode(keyValue[1])
                 }
             })            
         })
@@ -446,20 +455,20 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
 
     useEffect(() => {
-        if(showModal && rawPriceIncVat && typeof window !== 'undefined' && !isFreeTier) {
+
+        const setupPaymentUi = (priceToPay, country) => {
             axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
                 data: {
                     type: "payment-methods",
                     attributes: {
-                        amount: rawPriceIncVat,
-                        locale: 'en-US',
+                        amount: priceToPay,
+                        locale: country,
                         currency: "USD" 
                     }
                 }
             }).then((res) => {
                 const response = res.data.data.attributes
                 
-
                 const aydenConfiguration = {
                     locale: customLangCode || currentLang, // The shopper's locale. For a list of supported locales, see https://docs.adyen.com/checkout/components-web/localization-components.
                     environment: process.env.GATSBY_AYDEN_ENVIRONMENT, // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/checkout/components-web#testing-your-integration.  
@@ -476,7 +485,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                     },
                     hasHolderName: true,
                     holderNameRequired: true,
-                    amount: { value: rawPriceIncVat, currency: 'USD' }
+                    amount: { value: priceToPay, currency: 'USD' }
                 };
 
                 checkout = new AdyenCheckout(aydenConfiguration);
@@ -484,6 +493,23 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 const card = checkout.create('dropin').mount(aydenRef.current)
 
             })
+        }
+
+        if(showModal && countryCode && typeof window !== 'undefined' && !isFreeTier) {
+            axios.get(`https://vat.abstractapi.com/v1/calculate?api_key=e6e4df1a0bec4e62aa1806f71de1c9dd&amount=${majorUnitPriceExVat}&country_code=${countryCode}`)
+            .then((res) => {
+                console.log('VAT RES', res)
+                if(res.data) {
+                    setPriceWVat(res.data.amount_including_vat)
+                    setPriceExVat(res.data.amount_excluding_vat)
+                    setVatRate(res.data.vat_rate)
+                    setVatAmount(res.data.vat_amount)
+
+                    setupPaymentUi(res.data.amount_including_vat * 100, countryCode)
+                }
+            }).catch((err) => {
+                console.log('VAT ERR', err)
+            })   
         } else if(showModal && isFreeTier) {
             setLoading(false)
         }
@@ -501,7 +527,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                 <div className={Classes.close}>
                                     <button className="btn btn-unstyled" onClick={() => setShowModal(false)}>&#10005;</button>
                                 </div>
-                                <h4>Cobiro {showModal}</h4>
+                                <h3 className="space-xs-up no-mt">{rightColTitle}</h3>
+                                <p className="text-bold small space-small-xs-up">Cobiro {showModal}</p>
                                 <p className="text-xs-small">
                                     {monthlyPricing ?
                                     "You’ll be charged monthly until you cancel your subscription."
@@ -509,20 +536,25 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                     "You’ll be charged yearly until you cancel your subscription."
                                     }
                                 </p>
+                                <div className={Classes.borderSpacer}></div>
                                 <table className="table text-xs-small table-unstyled">
                                 <tbody>
                                     <tr>
-                                        <td>Subtotal</td>
-                                        <td className="text-right">{price}</td>
+                                        <td>Item subtotal</td>
+                                        <td className="text-right">${priceExVat}</td>
                                     </tr>
                                     <tr>
 
-                                    <td>VAT 25%</td>
-                                    <td className="text-right">{VAT}</td>
+                                    <td>VAT {vatRate * 100}%</td>
+                                    <td className="text-right">${vatAmunt}</td>
                                     </tr>
                                     <tr>
+                                        <td><button className={["btn btn-text small", Classes.VATBtn].join(' ')}>Enter VAT ID</button></td>
+                                    </tr>
+                                    <tr><td className={Classes.borderSpacer}></td><td className={Classes.borderSpacer}></td></tr>
+                                    <tr>
                                         <td className="text-bold">Total incl. VAT</td>
-                                        <td className="text-right text-bold">{priceIncVAT}/{monthlyPricing ? 'month' : 'year'}</td>
+                                        <td className="text-right text-bold">${priceWVat}/{monthlyPricing ? 'month' : 'year'}</td>
                                     </tr>
                                 </tbody>
                                 </table>

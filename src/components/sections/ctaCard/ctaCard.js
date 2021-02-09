@@ -8,7 +8,6 @@ import Classes from './ctaCard.module.scss'
 
 const CtaCard = ({data}) => {
 
-    console.log(data)
     return (
         <Section bgColor={data.backgroundColorCtaCardSection && data.backgroundColorCtaCardSection.hex}>
             
@@ -32,7 +31,7 @@ const CtaCard = ({data}) => {
                                 <h3 className={[data.ctaCard.cardTextColor === 'light' ? "text-white" : null, "space-xs-up"].join(' ')}>{data.ctaCard.title}</h3>
                                 {data.ctaCard.bullit && data.ctaCard.bullit.length > 0 ?
                                     data.ctaCard.bullit.map((b, i) => (
-                                        <div className={Classes.bullit}>
+                                        <div key={i} className={Classes.bullit}>
                                             <ImageAll image={b.icon} classes={Classes.icon}/>
                                             <p className={[data.ctaCard.cardTextColor === 'light' ? "text-white" : null, "small"].join(' ')}>{b.text}</p>
                                         </div>
