@@ -15,7 +15,7 @@
 .headerWrapper {
     display: flex;
     justify-content: between-xs;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
 
     @include mq($until: lg) {
@@ -79,7 +79,7 @@
     }
 
     &.highlightedHeader {
-        padding-top: 3.5rem;
+        // padding-top: 30px;
         border-radius: $border-radius !important;
         z-index: 2;
 

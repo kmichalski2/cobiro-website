@@ -91,7 +91,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                                 onClick={
                                     () => handleShowModal(h[`${pricing}Raw`], h[`${pricing}RawExVat`], h.title, h[`${pricing}PlanId`])}
                                 >
-                                    {h.linkTitle}
+                                {h.linkTitle}
                             </button> 
                             }
                             {h.featureList ?
