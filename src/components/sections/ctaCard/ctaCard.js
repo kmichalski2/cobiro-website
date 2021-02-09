@@ -8,10 +8,9 @@ import Classes from './ctaCard.module.scss'
 
 const CtaCard = ({data}) => {
 
-    console.log(data)
     return (
-        <Section bgColor={data.backgroundColorCtaCardSection && data.backgroundColorCtaCardSection.hex}>
-            
+        <Section bgColor={data.ctaSectionBackgroundImage ? null : data.backgroundColorCtaCardSection && data.backgroundColorCtaCardSection.hex}>
+        <ImageAll image={data.ctaSectionBackgroundImage} classes={Classes.backgroundImage}/>
         <div className="container">
             <div className={["row center-xs", data.textColor === 'light' ? "text-white" : null].join(' ')}>
                 <div className="col col-xs-12 col-md-8 text-center">

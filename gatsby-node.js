@@ -867,6 +867,19 @@ exports.createPages = async function({ graphql, actions }) {
                   backgroundColorCtaCardSection {
                     hex
                   }
+                  ctaSectionBackgroundImage {
+                    alt
+                    url
+                    fluid(maxWidth: 2000) {
+                      aspectRatio
+                      base64
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
+                  }
                   ctaCard {
                     title
                     price
