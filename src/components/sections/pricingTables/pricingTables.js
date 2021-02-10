@@ -98,30 +98,30 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
      }, [navbarHeight])
 
     
-    const tierSwitcher = headers && headers.length > 1 ? 
-        <div className="row space-xs-up">
-            <div className="col col-xs-12">
-                <div className={Classes.tabsWrapper}>
-                    <div className={Classes.tabs}>
-                        <ButtonSwitch
-                            buttons={
-                                headers.map((h, i) => {
-                                    return {
-                                        clickHandler: () => setActiveCol(i),
-                                        title: h.title,
-                                        active: activeCol === i
-                                    }
-                                }
+    // const tierSwitcher = headers && headers.length > 1 ? 
+    //     <div className="row space-xs-up">
+    //         <div className="col col-xs-12">
+    //             <div className={Classes.tabsWrapper}>
+    //                 <div className={Classes.tabs}>
+    //                     <ButtonSwitch
+    //                         buttons={
+    //                             headers.map((h, i) => {
+    //                                 return {
+    //                                     clickHandler: () => setActiveCol(i),
+    //                                     title: h.title,
+    //                                     active: activeCol === i
+    //                                 }
+    //                             }
 
-                                )
-                            }
-                            xsColumn
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-    : null
+    //                             )
+    //                         }
+    //                         xsColumn
+    //                     />
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div>
+    // : null
 
     return (
         <>
@@ -181,7 +181,9 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
                         pricing={activePricing}
                         bgColors={bgColors}
                         activeCol={activeCol}
+                        tierSwitchHandler={setActiveCol}
                         name={' '}
+                        paymentModalRightColTitle={pricingHeaderTable.paymentModalRightColTitle}
                         // rows={
                         //     pricingHeaderTable.row.map(r => { 
                         //         return {
@@ -208,7 +210,6 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
                         
                         {pricingTables ? pricingTables.map((t, i) => 
                             <div key={i} className={Classes.tableWrap}>
-                                {tierSwitcher}
                                 <Table 
                                     expandable={t.expandable}                                    
                                     tableName={t.tableName}
