@@ -46,15 +46,15 @@
 }
 
 .VATBtn {
-    color: $blue;
-    padding: 0;
-    background-color: transparent;
-    border: none;
+    color: $blue !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+    border: none !important;
 
     &:hover, &:focus {
-        color: $blue;
-        padding: 0;
-        border: none;
-        background-color: transparent;
+        color: $blue !important;
+        padding: 0 !important;
+        border: none !important;
+        background-color: transparent !important;
     }
 }
