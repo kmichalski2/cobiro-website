@@ -11,6 +11,7 @@ import Classes from './paymentModal.module.scss'
 import ImageAll from '../ImageAll/ImageAll'
 import EmailVerificator from './emailVerificator/emailVerificator'
 import ReCAPTCHA from "react-google-recaptcha";
+import VatVerificator from './vatVerificator/vatVerificator'
 
 const axios = require('axios');
 const queryString = require('query-string');
@@ -63,6 +64,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [priceExVat, setPriceExVat] = useState()
     const [vatRate, setVatRate] = useState()
     const [vatAmunt, setVatAmount] = useState()
+    const [vatValidated, setVatValidated] = useState()
+    const [reloadPaymentForm, setReloadPaymentForm] = useState()
 
     const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
@@ -454,58 +457,70 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         })
     }
 
-    useEffect(() => {
-
-        const setupPaymentUi = (priceToPay, country) => {
-            axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
-                data: {
-                    type: "payment-methods",
-                    attributes: {
-                        amount: priceToPay,
-                        locale: country,
-                        currency: "USD" 
-                    }
+    const setupPaymentUi = (priceToPay, country) => {
+        console.log('priceToPay', priceToPay)
+        axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
+            data: {
+                type: "payment-methods",
+                attributes: {
+                    amount: priceToPay,
+                    locale: country,
+                    currency: "USD" 
                 }
-            }).then((res) => {
-                const response = res.data.data.attributes
-                
-                const aydenConfiguration = {
-                    locale: customLangCode || currentLang, // The shopper's locale. For a list of supported locales, see https://docs.adyen.com/checkout/components-web/localization-components.
-                    environment: process.env.GATSBY_AYDEN_ENVIRONMENT, // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/checkout/components-web#testing-your-integration.  
-                    originKey: process.env.GATSBY_AYDEN_ORIGIN_KEY, // Your client key. To find out how to generate one, see https://docs.adyen.com/development-resources/client-side-authentication. Web Components versions before 3.10.1 use originKey instead of clientKey.
-                    paymentMethodsResponse: response, // The payment methods response returned in step 1.
-                    onChange: handleOnChange, // Your function for handling onChange event
-                    onAdditionalDetails: handleOnAdditionalDetails, // Your function for handling onAdditionalDetails event,
-                    showPayButton: false,
-                    paymentMethodsConfiguration: {
-                        card: {
-                            hasHolderName: true,
-                            holderNameRequired: true
-                        }
-                    },
-                    hasHolderName: true,
-                    holderNameRequired: true,
-                    amount: { value: priceToPay, currency: 'USD' }
-                };
+            }
+        }).then((res) => {
+            const response = res.data.data.attributes
+            
+            const aydenConfiguration = {
+                locale: customLangCode || currentLang, // The shopper's locale. For a list of supported locales, see https://docs.adyen.com/checkout/components-web/localization-components.
+                environment: process.env.GATSBY_AYDEN_ENVIRONMENT, // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/checkout/components-web#testing-your-integration.  
+                originKey: process.env.GATSBY_AYDEN_ORIGIN_KEY, // Your client key. To find out how to generate one, see https://docs.adyen.com/development-resources/client-side-authentication. Web Components versions before 3.10.1 use originKey instead of clientKey.
+                paymentMethodsResponse: response, // The payment methods response returned in step 1.
+                onChange: handleOnChange, // Your function for handling onChange event
+                onAdditionalDetails: handleOnAdditionalDetails, // Your function for handling onAdditionalDetails event,
+                showPayButton: false,
+                paymentMethodsConfiguration: {
+                    card: {
+                        hasHolderName: true,
+                        holderNameRequired: true
+                    }
+                },
+                hasHolderName: true,
+                holderNameRequired: true,
+                amount: { value: priceToPay, currency: 'USD' }
+            };
 
-                checkout = new AdyenCheckout(aydenConfiguration);
-                setLoading(false)
-                const card = checkout.create('dropin').mount(aydenRef.current)
+            checkout = new AdyenCheckout(aydenConfiguration);
+            setLoading(false)
+            let card = checkout.create('dropin').mount(aydenRef.current)
+            
+        })
+    }
 
-            })
-        }
+    const setVatValidatedHandler = (valid) => {
+        setReloadPaymentForm(true)
+        setVatValidated(valid)
+        setReloadPaymentForm(false)
+        checkout = null
+        console.log('valid!')
+        setupPaymentUi(priceExVat * 100, countryCode)
+        
+    }
+
+    useEffect(() => {        
 
         if(showModal && countryCode && typeof window !== 'undefined' && !isFreeTier) {
-            axios.get(`https://vat.abstractapi.com/v1/calculate?api_key=e6e4df1a0bec4e62aa1806f71de1c9dd&amount=${majorUnitPriceExVat}&country_code=${countryCode}`)
+            axios.get(`${process.env.GATSBY_HUB_URL}/v1/subscriptions/payments/vats/calculate?amount=${majorUnitPriceExVat}&country_code=${countryCode}`)
             .then((res) => {
                 console.log('VAT RES', res)
-                if(res.data) {
-                    setPriceWVat(res.data.amount_including_vat)
-                    setPriceExVat(res.data.amount_excluding_vat)
-                    setVatRate(res.data.vat_rate)
-                    setVatAmount(res.data.vat_amount)
+                if(res.data && res.data.data && res.data.data.attributes) {
+                    const vatData = res.data.data.attributes
+                    setPriceWVat(vatData.amount_including_vat)
+                    setPriceExVat(vatData.amount_excluding_vat)
+                    setVatRate(vatData.vat_rate)
+                    setVatAmount(vatData.vat_amount)
 
-                    setupPaymentUi(res.data.amount_including_vat * 100, countryCode)
+                    setupPaymentUi(vatData.amount_including_vat * 100, countryCode)
                 }
             }).catch((err) => {
                 console.log('VAT ERR', err)
@@ -545,16 +560,18 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                     </tr>
                                     <tr>
 
-                                    <td>VAT {vatRate * 100}%</td>
-                                    <td className="text-right">${vatAmunt}</td>
+                                    <td className={vatValidated ? Classes.lineThrough : null}>VAT {vatRate * 100}%</td>
+                                    <td className={["text-right", vatValidated ? Classes.lineThrough : null].join(' ')}>${vatAmunt}</td>
                                     </tr>
-                                    <tr>
-                                        <td><button className={["btn btn-text small", Classes.VATBtn].join(' ')}>Enter VAT ID</button></td>
-                                    </tr>
+                                     <tr>
+                                        <td colSpan="2">
+                                            <VatVerificator vatValidatedHandler={setVatValidatedHandler} />
+                                        </td>
+                                    </tr>                                   
                                     <tr><td className={Classes.borderSpacer}></td><td className={Classes.borderSpacer}></td></tr>
                                     <tr>
-                                        <td className="text-bold">Total incl. VAT</td>
-                                        <td className="text-right text-bold">${priceWVat}/{monthlyPricing ? 'month' : 'year'}</td>
+                                        <td className="text-bold">Total {vatValidated ? '' : 'incl. VAT'}</td>
+                                        <td className="text-right text-bold">${vatValidated ? priceExVat : priceWVat}/{monthlyPricing ? 'month' : 'year'}</td>
                                     </tr>
                                 </tbody>
                                 </table>
@@ -612,7 +629,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             {!isFreeTier ?
                                 <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.paymentInformation].join(' ')}>Payment information</p>
                             : null}
-                            <div className="space-xs-up" ref={aydenRef}></div>
+                            {!reloadPaymentForm ? <div className="space-xs-up" ref={aydenRef}></div> : null}
                             <button 
                                 className={["btn btn-full-width", submitSuccess ? Classes.successBtn : null].join(' ')} 
                                 onClick={handleOnSubmit} 
@@ -623,7 +640,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                             Loading
                                         </LoadingSpinner> 
                                         : !isFreeTier ? 
-                                            `Pay ${priceIncVAT}` 
+                                            `Pay $${vatValidated ? priceExVat : priceWVat}` 
                                         : showEmailValidation ?
                                             'Submit'
                                         : 'Sign up'}

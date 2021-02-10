@@ -1,4 +1,7 @@
 import React, {useState} from 'react'
+import LoadingSpinner from '../../loadingSpinner/LoadingSpinner';
+
+import Classes from './vatVerificator.module.scss'
 
 const axios = require('axios');
 
@@ -7,36 +10,57 @@ const VatVerificator = ({vatValidatedHandler}) => {
 
     const [value, setValue] = useState('')
     const [loading, setLoading] = useState(false)
-    const [success, setSuccess] = useState(false)
+    const [succes, setSucces] = useState(false)
     const [failure, setFailure] = useState(false)
+    const [showValidator, setShowValidator] = useState(false)
 
     const onSubmitHandler = () => {
         setLoading(true)
 
-        axios.get(`https://vat.abstractapi.com/v1/validate?api_key=YOUR_API_KEY&vat_number=${value}`)
+        const validHandler = () => {
+            setLoading(false)
+            setSucces(true)
+            setFailure(false)
+            vatValidatedHandler(true)
+        }
+
+        const inValidHandler = () => {
+            setLoading(false)
+            setSucces(false)
+            setFailure(true)
+            vatValidatedHandler(false)
+        }
+
+        axios.get(`${process.env.GATSBY_HUB_URL}/v1/subscriptions/payments/vats/validate?vat_number=${value}`)
             .then((res) => {
-                console.log('VAT RES', res)
-                setLoading(false)
-                setSuccess(true)
-                setFailure(false)
-                vatValidatedHandler(true)
+                if(res.data.data.attributes.valid) {
+                    validHandler()
+                } else {
+                    inValidHandler()
+                }
             }).catch((err) => {
-                console.log('VAT ERR', err)
-                setLoading(false)
-                setSuccess(false)
-                setFailure(true)
-                vatValidatedHandler(false)
+                inValidHandler()
             })   
         
         }
 
     return (
-        <div className="flex">
-            <form>
-                <input type="text" value={value} onChange={event => setValue(event.target.value)}/>
+        <>
+        <button className={["btn btn-text small space-small-xs-up", Classes.VATBtn].join(' ')} onClick={setShowValidator}>Enter VAT ID</button>
+        {showValidator ?
+        <div className="flex between-xs middle-xs">
+            <form className={Classes.form}>
+                <input className={Classes.input} type="text" value={value} onChange={event => setValue(event.target.value)}/>
+                <div className={[succes ? Classes.succes : null, failure ? Classes.failure : null].join(' ')}></div>
             </form>
-            <button className={[Classes.btn, success && Classes.success, failure && Classes.failure].join(' ')} onClick={() => onSubmitHandler()}>Submit</button>
+            <button className={[Classes.btn, 'btn btn-small'].join(' ')} onClick={() => onSubmitHandler()}>
+                <span className={loading ? Classes.submitLoading : null}>Submit</span>
+                    <span className={Classes.Spinner}><LoadingSpinner loading={loading}/></span>
+
+            </button>
         </div>
+        : null}
+        </>
     )
 }
 

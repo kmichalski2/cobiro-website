@@ -16,7 +16,7 @@ import Fade from '../../../hoc/fade/fade'
 
 const PaymentModal = React.lazy(() => import('../../paymentModal/paymentModal'))
 
-const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, paymentModalRightColTitle, monthlyPriceName, returnedModalOpen}) => {
+const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, rowExpandHandler, headerFixed, navbarHeight, scrollPos, monthlyPriceBillingRate, yearlyPriceBillingRate, yearlyPriceName, paymentModalRightColTitle, monthlyPriceName, returnedModalOpen, tierSwitchHandler}) => {
 
     const RETURNING = 'returning'
     const [expandedRow, setExpandedRow] = useState(null)
@@ -32,6 +32,10 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
             handleShowModal(0, 0, RETURNING, null, returnedModalOpen)
         }
     }, [returnedModalOpen])
+
+    useEffect(() => {
+        console.log('activeCol', activeCol)
+    }, [activeCol])
 
     const handleShowModal = (rawPriceIncVat, rawPriceExVat, title, id, data) => {
         
@@ -55,6 +59,29 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
     const hasNumber = (myString) => {
         return /\d/.test(myString);
       }
+
+    const switchTier = (direction) => {
+        const tiersNumbers = headers.length - 1
+
+        console.log('tiersNumbers', tiersNumbers)
+
+        if(direction === 'next') {
+            if(activeCol === tiersNumbers) {
+                tierSwitchHandler(0)
+            } else {
+                tierSwitchHandler(activeCol + 1)
+            }
+        }
+
+        if(direction === 'previous') {
+            if(activeCol === 0) {
+                tierSwitchHandler(tiersNumbers)
+            } else {
+                tierSwitchHandler(activeCol - 1)
+            }
+        }
+
+    }
     
 
     return (
@@ -146,12 +173,14 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                         <thead>
                             <tr >
 
-                                { name ? <th className={[Classes.tableName, Classes.tableHeader].join(' ')}>{icon ? <ImageAll image={icon} alt={icon.alt || name} classes={Classes.icon} /> : null}{ name }</th> : null }
+                                { name ? <th className={[Classes.tableName, Classes.tableHeader, "hidden-xs hidden-sm hidden-md"].join(' ')}>{icon ? <ImageAll image={icon} alt={icon.alt || name} classes={Classes.icon} /> : null}{ name }</th> : null }
 
                                 { headers ? headers.map((h, i) => 
-                                    <th key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
-                                        <span className="h5">{ h.title }</span>
-                                        <span className="h3 block-xs no-mt">{h[pricing]}</span>
+                                    <th key={i} className={[Classes.tableHeader, activeCol !== i ? Classes.hiddenMobile : Classes.activeColMobile, "text-center"].join(' ')} style={bgColors[i] ? {backgroundColor: bgColors[i]} : null}>
+                                        <button className={[Classes.arrowBtn, Classes.arrowBtnPrev].join(' ')} onClick={() => switchTier('previous')}><span className="hidden-xs hidden-sm hidden-md hidden-lg hidden-xl">Previous tier</span></button>
+                                        <span className="h5 text-bold space-xs-up">{ h.title }</span>
+                                        <span className="h3 block-xs no-mt text-bold">{h[pricing]}<span className="text-normal small">{pricing === yearlyPriceName ? yearlyPriceBillingRate : monthlyPriceBillingRate}</span></span>
+                                        <button className={[Classes.arrowBtn, Classes.arrowBtnNext].join(' ')} onClick={() =>  switchTier('next')}><span className="hidden-xs hidden-sm hidden-md hidden-lg hidden-xl">Previous tier</span></button>
                                     </th>) 
                                 : null }
 
