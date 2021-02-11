@@ -48,6 +48,8 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
                         submenuFooterExternalLink: item.submenuFooterExternalLink,
                         submenuFooterLinkTitle: item.submenuFooterLinkTitle,
                         submenuFooterText: item.submenuFooterText,
+                        submenuFooterTitle: item.submenuFooterTitle,
+                        submenuFooterImage: item.submenuFooterImage,
 
                     }}
                     submenuTitle={item.submenuTitle}
@@ -78,6 +80,7 @@ const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, ex
                     columnRight={item.rightColumnLinks || item.rightColumnLinks.length > 0 ? {
                         title: item.rightColumnTitle,
                         description: item.rightColumnDescription,
+                        logo: item.rightColumnLogo,
                         subMenuTitle: item.submenuColumnRightTitle,
                         link: item.submenuColumnRightLink,
                         subMenuIcon: item.submenuColumnRightIcon,
