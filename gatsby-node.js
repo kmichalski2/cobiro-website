@@ -321,6 +321,8 @@ exports.createPages = async function({ graphql, actions }) {
                   textColor
                   title
                   text
+                  textLeft
+                  invisibleBoxes
                   bigIcons
                   imagesInsteadOfIcons
                   box1Icon {

@@ -23,3 +23,16 @@
         transform: translateX(calc(-50vw + 1.1rem))
     }
 }
+
+.centerOverlap {
+    margin-top: -12.5rem;
+    @include mq($until: md) {
+        margin-top: -10rem;
+    }
+    width: calc(100% + 10rem);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    max-width: 98vw;
+    max-width: calc(100vw - 2.2rem);
+    z-index: -1;
+}
