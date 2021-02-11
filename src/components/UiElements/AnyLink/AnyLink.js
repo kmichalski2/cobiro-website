@@ -27,7 +27,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
     return (
         <>
         {
-        linkTransformed && title && internal || linkTransformed && children ?
+        linkTransformed && title && internal || linkTransformed && children && internal ?
             <Link 
                 className={ classNames } 
                 to={
