@@ -239,6 +239,80 @@ exports.createPages = async function({ graphql, actions }) {
                   footnote
                   leftText
                 }
+                ... on DatoCmsFourUp {
+                  text
+                  sectionBackgroundColor {
+                    hex
+                  }
+                  box1Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 400, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box1Text
+                  box2Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 400, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box2Text
+                  box3Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 400, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                    box3Text
+                    box4Icon {
+                      path
+                      url
+                      alt
+                      width
+                      height
+                      fluid(maxWidth: 400, imgixParams: {q: 80}) {
+                        width
+                        height
+                        srcSet
+                        base64
+                        aspectRatio
+                        src
+                        sizes
+                      }
+                    }
+                  box4Text
+                }
                 ... on DatoCmsThreeUp {
                   backgroundColor
                   bgColor {

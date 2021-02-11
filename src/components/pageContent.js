@@ -28,6 +28,7 @@ import MediaDownload from './sections/mediaDownload/mediaDownload'
 import ExpandablePersonsCard from './sections/expandablePersonsCard/expandablePersonsCard'
 import IframeForm from "./sections/iframeForm/iframeForm"
 import CtaCard from "./sections/ctaCard/ctaCard"
+import FourUp from "./sections/foruUp/fourUp"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -133,6 +134,8 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <ExpandablePersonsCard data={data.sections[index]} key={index}/>
                 case 'CtaCardWithImageAndBullit':
                     return <CtaCard data={data.sections[index]} key={index}/>
+                case 'FourUp':
+                    return <FourUp data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }

@@ -6,10 +6,10 @@ import AnyLink from '../AnyLink/AnyLink'
 
 import Classes from './IconCard.module.scss'
 
-const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg }) => {
+const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg, classes }) => {
 
     return (
-        <Card shadow={shadow}>
+        <Card shadow={shadow} classes={classes}>
             <ImageAll 
                 image={image} 
                 classes={[Classes.icon, iconImg ? Classes.iconImg : iconBig ? Classes.iconBig : null].join(' ')}
