@@ -1207,6 +1207,108 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                   textColor
                 }
+                ... on DatoCmsThreeUpDottedLine {
+                  text
+                  box1Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box1Text
+                  box1Image {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box2Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box2Text
+                  box2Image {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box3Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box3Text
+                  box3Image {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                }
               }
             }
           }
