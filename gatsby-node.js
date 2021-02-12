@@ -1281,6 +1281,8 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                   boxBgColor {
                     hex
+                  }
+                }
                 ... on DatoCmsThreeUpDottedLine {
                   text
                   box1Icon {
