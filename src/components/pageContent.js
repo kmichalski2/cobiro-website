@@ -33,6 +33,7 @@ import ExplanationImageWithLogos from "./sections/explanationImageWithLogos/expl
 import ImageTextThreeUp from "./sections/imageTextThreeUp/imageTextThreeUp"
 import OfficeLocations from "./sections/officeLocations/officeLocations"
 import CtaCardSimple from "./sections/ctaCardSimple/ctaCardSimple"
+import ThreeUpDottedLine from "./sections/threeUpDottedLine/threeUpDottedLine"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -148,6 +149,8 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <OfficeLocations data={data.sections[index]} key={index}/>
                 case 'CtaCardSimple':
                     return <CtaCardSimple data={data.sections[index]} key={index}/>
+                case 'ThreeUpDottedLine':
+                    return <ThreeUpDottedLine data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }
