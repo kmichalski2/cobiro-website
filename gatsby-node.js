@@ -1245,6 +1245,44 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                   textColor
                 }
+                ... on DatoCmsCtaCardSimple {
+                  title
+                  text
+                  linkTitle
+                  externalLinkCtaCard
+                  internalLinkCtaCard {
+                    slug
+                  }
+                  image {
+                    fluid(maxWidth: 800) {
+                      aspectRatio
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
+                    url
+                  }
+                  backgroundLogo {
+                    fluid(maxWidth: 600) {
+                      aspectRatio
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
+                    url
+                  }
+                  imageOverflowing
+                  sectionBgColor {
+                    hex
+                  }
+                  boxBgColor {
+                    hex
+                  }
+                }
               }
             }
           }
