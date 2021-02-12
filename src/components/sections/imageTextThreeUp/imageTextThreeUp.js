@@ -8,7 +8,6 @@ import Section from '../../UiElements/Section/Section'
 import Classes from './imageTextThreeUp.module.scss'
 
 const ImageTextThreeUp = ({data}) => {
-
     const numbersArray = [1, 2, 3]
 
     let linkBoxes = false
@@ -93,7 +92,7 @@ const ImageTextThreeUp = ({data}) => {
                         <div className="space-md space-sm space-xs">
                             <ImageAll 
                                 image={data.image}
-                                alt={data.image.alt ? data.image.alt : data.title} />
+                                alt={data.image && data.image.alt ? data.image.alt : data.title} />
                         </div>
                     </div>
                     <div className="col col-xs-12 col-lg-6">
