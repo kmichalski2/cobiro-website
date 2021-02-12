@@ -9,7 +9,7 @@ const FourUp = ({ data }) => {
   console.log(data, 'data')
 
   return (
-    <Section bgColor={data.sectionBackgroundColor && data.sectionBackgroundColor.hex}>
+    <Section bgColor={data.sectionBackgroundColor && data.sectionBackgroundColor.hex} classes={Classes.section}>
         <div className="container">
 
           <div className={["row center-xs", Classes.text].join(' ')}>

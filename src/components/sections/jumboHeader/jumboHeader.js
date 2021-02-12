@@ -55,7 +55,7 @@ const JumboHeader = ({ data,  notificationPadding }) => {
   const imageSide = data.image ? (
     <div className={[
       "col col-xs-12", 
-      alignment === 'centered' ? 'col-md-8' : alignment === 'centered-wide-with-overlap' ? 'col-md-12' : 'col-lg-12',
+      alignment === 'centered' ? 'col-md-8' : alignment === 'centered-wide-with-overlap' ? 'col-md-12' : 'col-lg-6',
       alignment === 'image-left' ? "end-xs space-xs space-sm space-md" : null,
       imageToEdges ? "flex bottom-xs" : null
       ].join(' ')}
