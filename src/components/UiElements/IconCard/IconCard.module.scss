@@ -6,8 +6,8 @@
     // max-width: 5rem;
     width: auto;
     max-width: 100%;
-    height: 4rem;
-    max-height: 4rem;
+    height: 3rem;
+    max-height: 3rem;
 
     @include mq($until: md) {
         max-width: 8rem;
