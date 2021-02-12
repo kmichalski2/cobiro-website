@@ -29,13 +29,10 @@ import ExpandablePersonsCard from './sections/expandablePersonsCard/expandablePe
 import IframeForm from "./sections/iframeForm/iframeForm"
 import CtaCard from "./sections/ctaCard/ctaCard"
 import FourUp from "./sections/foruUp/fourUp"
-<<<<<<< HEAD
 import ExplanationImageWithLogos from "./sections/explanationImageWithLogos/explanationImageWithLogos"
 import ImageTextThreeUp from "./sections/imageTextThreeUp/imageTextThreeUp"
 import OfficeLocations from "./sections/officeLocations/officeLocations"
 import CtaCardSimple from "./sections/ctaCardSimple/ctaCardSimple"
-=======
->>>>>>> dotted lines not done
 import ThreeUpDottedLine from "./sections/ThreeUpDottedLine/ThreeUpDottedLine"
 
 
@@ -144,7 +141,6 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <CtaCard data={data.sections[index]} key={index}/>
                 case 'FourUp':
                     return <FourUp data={data.sections[index]} key={index}/>
-<<<<<<< HEAD
                 case 'ExplanationImageWithLogo':
                     return <ExplanationImageWithLogos data={data.sections[index]} key={index}/>
                 case 'ImageWithTextAndThreeUp':
@@ -153,8 +149,6 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <OfficeLocations data={data.sections[index]} key={index}/>
                 case 'CtaCardSimple':
                     return <CtaCardSimple data={data.sections[index]} key={index}/>
-=======
->>>>>>> dotted lines not done
                 case 'ThreeUpDottedLine':
                     return <ThreeUpDottedLine data={data.sections[index]} key={index}/>
                 default:

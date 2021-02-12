@@ -1,19 +1,11 @@
 @import '../../layout/style/globals';
 
-.IconCardRounded {
-    border-radius: 0;
-}
-
-.IconCardRounded {
+.IconCardRounded, .IconCardRoundedTwo, .IconCardRoundedThree{
     padding-bottom: 1rem!important;
     font-size: 0.9rem;
     color: $black;
     box-shadow: none!important;
-    border-right: dashed 1px #707070;
-}
-
-.IconCardRounded:last-child {
-    border-right: none!important;
+    border-radius: 0;
 }
 
 .text {
@@ -22,4 +14,70 @@
 
 .imageWrapper {
     padding: 0 2rem 0 2rem;
+}
+
+.dottedLineOne {
+    border-right: dashed 1px #707070;
+    position: absolute;
+    left: 33%;
+    width: 1px;
+    height: 100%;
+}
+
+.dottedLineTwo {
+    border-right: dashed 1px #707070;
+    position: absolute;
+    left: 66%;
+    width: 1px;
+    height: 100%;
+}
+
+@include mq($until: lg) {
+    .dottedLineOne {
+        border-right: none;
+    }
+    .dottedLineTwo {
+        border-right: none;
+    }
+
+    .IconCardRoundedTwo {
+        border-top: dashed 1px #707070;
+        max-width: 70%;
+        margin-bottom: 0!important;
+    }
+    .IconCardRoundedThree {
+        border-top: dashed 1px #707070;
+        max-width: 70%;
+        margin-bottom: 0!important;
+    }
+
+    .imageWrapper {
+        padding: 0 0 3rem 0;
+    }
+}
+
+@include mq($until: md) {
+    .IconCardRounded {
+        max-width: 85%
+    }
+}
+@include mq($until: sm) {
+    .IconCardRounded {
+        max-width: 100%
+    }
+}
+
+@include mq($from: lg) {
+    .rowRelative {
+        position: relative;
+    }
+}
+
+.iconCardWrapper {
+    @include mq($until: lg) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 }
