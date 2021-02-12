@@ -33,7 +33,7 @@ import ExplanationImageWithLogos from "./sections/explanationImageWithLogos/expl
 import ImageTextThreeUp from "./sections/imageTextThreeUp/imageTextThreeUp"
 import OfficeLocations from "./sections/officeLocations/officeLocations"
 import CtaCardSimple from "./sections/ctaCardSimple/ctaCardSimple"
-import ThreeUpDottedLine from "./sections/ThreeUpDottedLine/ThreeUpDottedLine"
+import ThreeUpDottedLine from "./sections/threeUpDottedLine/threeUpDottedLine"
 
 
 // export const CurrentLocaleContext = React.createContext({})
