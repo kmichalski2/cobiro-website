@@ -31,6 +31,7 @@ import CtaCard from "./sections/ctaCard/ctaCard"
 import FourUp from "./sections/foruUp/fourUp"
 import ExplanationImageWithLogos from "./sections/explanationImageWithLogos/explanationImageWithLogos"
 import ImageTextThreeUp from "./sections/imageTextThreeUp/imageTextThreeUp"
+import ThreeUpDottedLine from "./sections/ThreeUpDottedLine/ThreeUpDottedLine"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -142,6 +143,8 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <ExplanationImageWithLogos data={data.sections[index]} key={index}/>
                 case 'ImageWithTextAndThreeUp':
                     return <ImageTextThreeUp data={data.sections[index]} key={index}/>
+                case 'ThreeUpDottedLine':
+                    return <ThreeUpDottedLine data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }
