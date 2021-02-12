@@ -29,6 +29,7 @@ import ExpandablePersonsCard from './sections/expandablePersonsCard/expandablePe
 import IframeForm from "./sections/iframeForm/iframeForm"
 import CtaCard from "./sections/ctaCard/ctaCard"
 import FourUp from "./sections/foruUp/fourUp"
+import ThreeUpDottedLine from "./sections/ThreeUpDottedLine/ThreeUpDottedLine"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -136,6 +137,8 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <CtaCard data={data.sections[index]} key={index}/>
                 case 'FourUp':
                     return <FourUp data={data.sections[index]} key={index}/>
+                case 'ThreeUpDottedLine':
+                    return <ThreeUpDottedLine data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }
