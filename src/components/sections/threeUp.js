@@ -9,6 +9,8 @@ const ThreeUpPeople = ({ data }) => {
   const bigIcon = data.bigIcons
   const iconImg = data.imagesInsteadOfIcons
 
+  console.log('data', data)
+
   return (
     <Section bgColor={data.bgColor && data.bgColor.hex}>
       <div className={data.backgroundColor ? "bg-sway-inner" : null}>
@@ -37,6 +39,8 @@ const ThreeUpPeople = ({ data }) => {
                   external={data.box1ExternalLink || false} 
                   linkTitle={data.box1LinkText} 
                   shadow={!data.bgColor}
+                  textLeft={data.textLeft}
+                  invisibleBoxes={data.invisibleBoxes}
                   />
               </div>
             ) : null}
@@ -56,6 +60,8 @@ const ThreeUpPeople = ({ data }) => {
                   external={data.box2ExternalLink || false} 
                   linkTitle={data.box2LinkText} 
                   shadow={!data.bgColor}
+                  textLeft={data.textLeft}
+                  invisibleBoxes={data.invisibleBoxes}
                   />
               </div>
             ) : null}
@@ -75,6 +81,8 @@ const ThreeUpPeople = ({ data }) => {
                   external={data.box3ExternalLink || false} 
                   linkTitle={data.box3LinkText} 
                   shadow={!data.bgColor}
+                  textLeft={data.textLeft}
+                  invisibleBoxes={data.invisibleBoxes}
                   />
               </div>
             ) : null}
@@ -94,6 +102,8 @@ const ThreeUpPeople = ({ data }) => {
                   external={data.box4ExternalLink || false} 
                   linkTitle={data.box4LinkText} 
                   shadow={!data.bgColor}
+                  textLeft={data.textLeft}
+                  invisibleBoxes={data.invisibleBoxes}
                   />
               </div>
             ) : null}
@@ -113,6 +123,8 @@ const ThreeUpPeople = ({ data }) => {
                   external={data.box5ExternalLink || false} 
                   linkTitle={data.box5LinkText} 
                   shadow={!data.bgColor}
+                  textLeft={data.textLeft}
+                  invisibleBoxes={data.invisibleBoxes}
                   />
               </div>
             ) : null}
@@ -132,6 +144,8 @@ const ThreeUpPeople = ({ data }) => {
                   external={data.box6ExternalLink || false} 
                   linkTitle={data.box6LinkText} 
                   shadow={!data.bgColor}
+                  textLeft={data.textLeft}
+                  invisibleBoxes={data.invisibleBoxes}
                   />
               </div>
             ) : null}

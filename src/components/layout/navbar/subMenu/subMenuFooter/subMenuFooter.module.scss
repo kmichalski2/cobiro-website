@@ -1,29 +1,50 @@
 @import '../../../style/globals';
 
 .subMenuFooter {
+        position: relative;
         padding: 2rem 0;
+        border-radius: 10px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1423.831' height='1441.991' viewBox='0 0 1423.831 1441.991'%3E%3Cpath id='Path_10264' data-name='Path 10264' d='M1080.052,1453.185c-146.437-42.924-278.205-134.075-371-256.672-95.755-126.495-146.365-277.48-146.365-436.641,0-398.652,324.326-722.974,722.991-722.974,218,0,422.172,96.929,560.224,265.937,32.76,40.1,64.759,84.76,64.759,150.352,0,185.492-237.682,264.45-348.76,115.856l-.067.044a335.485,335.485,0,0,0-276.156-144.846c-185.071,0-335.643,150.568-335.643,335.63,0,119.736,67.631,278.492,257.428,364.961,102.949,46.911,235.692,72.388,359.11,54.575,35.588-88.234,41.7-166.85,45.7-205.515,3.347-32.546,8.416-81.735,29.268-125.394,75.188-157.408,342.973-130.539,342.973,95.044,0,116.825-126.635,284.833-344.366,337.585C1522.884,1459.88,1285.5,1513.4,1080.052,1453.185ZM1285.677,150.806c-335.855,0-609.089,273.227-609.089,609.066,0,268.709,179.083,508.858,435.5,584.006,92,26.971,240.091,34.646,353.887-45.2-104.172-2.689-211.113-27.079-305.74-70.186-238.971-108.87-324.105-313.462-324.105-468.617,0-247.876,201.661-449.537,449.545-449.537a449.44,449.44,0,0,1,367.138,190.081c45.657,61.9,143.933,29.629,143.933-47.227,0-25.9-12.6-45.893-39.075-78.287C1641.354,232.478,1469.324,150.806,1285.677,150.806Zm508.9,712.912c-69.08,4.48-61.53,90.012-72.963,153.251-2.153,11.9-13.447,84.4-22.572,123.191,113.906-54.631,170.871-149.58,171.561-196.712C1870.605,890.511,1847.835,860.288,1794.58,863.718Z' transform='translate(-561.686 -35.898)' fill='none' stroke='%23E5E9ED' stroke-width='2'/%3E%3C/svg%3E%0A");
+        background-size: 60%;
+        background-position: 0 -3rem;
+        background-repeat: no-repeat;
+        overflow: hidden;
 
-        .subMenuFooterText {
-            margin-bottom: 0!important;
-            padding-right: 3.125rem;
-            font-size: 1rem;
+        .image {
+            position: absolute !important;
+            width: 40%;
+            bottom: 0;
+            right: 5rem;
+            transform: translateY(40%);
+        }
 
-            @include mq($until: lg) {
-                font-size: 1.125rem;
-                margin-bottom: 0.9375rem !important;
-                padding-right: 0;
+        .textWrapper {
+            @include mq($from: lg) {
+                width: 40%;
+            }
 
+            .subMenuFooterText {
+                padding-right: 3.125rem;
+                font-size: 1rem;
+
+                @include mq($until: lg) {
+                    font-size: 1.125rem;
+                    margin-bottom: 0.9375rem !important;
+                    padding-right: 0;
+
+                }
             }
         }
 
         @include mq($from: lg) {
-            padding: 2.5rem;
+            padding: 3rem;
+            padding-left: 5rem;
             margin: 0 2.2rem 2.2rem 2.2rem;
-            background-color: $lightgrey;
+            background-color: $extra-ligt-grey;
         }
         @include mq($until: lg) {
             display: flex;
-            background-color: $lightgrey;
+            background-color: $extra-ligt-grey;
             flex-direction: column;
             padding: 1.75rem;
             margin-top: 1.875rem;

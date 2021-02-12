@@ -15,11 +15,11 @@ const JumboHeader = ({ data,  notificationPadding }) => {
   const textSide = (
     <div className={[
         "col col-xs-12", 
-        alignment === 'centered' ? 'col-md-8 text-center space-xs-up' : 'col-lg-6 text-left-md',
+        alignment === 'centered' ? 'col-md-8 text-center space-xs-up' : alignment === 'centered-wide-with-overlap' ? 'col-md-10 space-xs-up' : 'col-lg-6 text-left-md',
         imageToEdges && alignment !== 'centered' ? "flex flex-column center-xs" : null
         ].join(' ')}>
       <HeaderWText 
-        classes={["space-xs space-sm space-md", alignment === 'centered' || imageToEdges ? 'space-xs-up' : null].join(' ')}
+        classes={["space-xs space-sm space-md", alignment === 'centered' || alignment === 'centered-wide-with-overlap' || imageToEdges ? 'space-xs-up' : null].join(' ')}
         centered={alignment === 'centered' ? true : false}
         icon={data.icon}
         iconTitle={data.iconTitle}
@@ -55,12 +55,12 @@ const JumboHeader = ({ data,  notificationPadding }) => {
   const imageSide = data.image ? (
     <div className={[
       "col col-xs-12", 
-      alignment === 'centered' ? 'col-md-8' : 'col-lg-6',
+      alignment === 'centered' ? 'col-md-8' : alignment === 'centered-wide-with-overlap' ? 'col-md-12' : 'col-lg-6',
       alignment === 'image-left' ? "end-xs space-xs space-sm space-md" : null,
       imageToEdges ? "flex bottom-xs" : null
       ].join(' ')}
       >
-        <ImageAll image={data.image} alt={data.image.alt || data.heading} classes={imageToEdges ? Classes.imageToEdges : null} fullWidth />
+        <ImageAll image={data.image} alt={data.image.alt || data.heading} classes={[imageToEdges ? Classes.imageToEdges : null, alignment === 'centered-wide-with-overlap' ? Classes.centerOverlap : null].join(' ')} fullWidth />
     </div> 
   ) : null  
   
@@ -79,8 +79,8 @@ const JumboHeader = ({ data,  notificationPadding }) => {
               "row",
             ].join(" ")}
           >
-            { alignment === 'image-right' || alignment === 'centered' ? textSide : imageSide }
-            { alignment === 'image-right' || alignment === 'centered' ? imageSide : textSide }
+            { alignment === 'image-right' || alignment === 'centered' || alignment === 'centered-wide-with-overlap' ? textSide : imageSide }
+            { alignment === 'image-right' || alignment === 'centered' || alignment === 'centered-wide-with-overlap' ? imageSide : textSide }
           </div>
         </div>
     </Section>  

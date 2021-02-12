@@ -84,7 +84,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
           <div ref={contentContainer} className="row between-xs middle-xs">
             <div className={["col col-auto-lg", Classes.navbarMobile].join(' ')} >
               <div className={[Classes.brand, menuInverted ? Classes.invert : null, isExpanded ? Classes.invert : null, isScrolled ? Classes.invert : null].join(' ')}>
-                <AnyLink link={`/${!homeSlug ? '' : homeSlug}`} noArrow noPadding regular>
+                <AnyLink link={`/${!homeSlug ? '' : homeSlug}`} noArrow noPadding regular internal>
                   <img className={Classes.logoMobile} src={menuInverted || isScrolled ? logo : logoInvert} alt="Cobiro logo" />
                 </AnyLink>
               </div>

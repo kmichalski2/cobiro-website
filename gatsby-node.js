@@ -313,6 +313,106 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   box4Text
                 }
+                ... on DatoCmsExplanationImageWithLogo {
+                  title
+                  text
+                  image {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 1200, imgixParams: {q: 50}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  backgroundImage {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 1200, imgixParams: {q: 50}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  bgColor {
+                    hex
+                  }
+                  logosTitle
+                  logosText
+                  logos {
+                    alt
+                    width
+                    height
+                    url
+                    fixed(height: 50) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                    
+                }
+                ... on DatoCmsImageWithTextAndThreeUp {
+                  title
+                  text
+                  image {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 1200, imgixParams: {q: 50}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box1Title
+                  box2Title
+                  box3Title
+                  box1Subtitle
+                  box2Subtitle
+                  box3Subtitle
+                  box1Text
+                  box2Text
+                  box3Text
+                  box1InternalLink {
+                    slug
+                  }
+                  box2InternalLink {
+                    slug
+                  }
+                  box3InternalLink {
+                    slug
+                  }
+                  box1ExternalLink
+                  box2ExternalLink
+                  box3ExternalLink
+                  bgColor {
+                    hex
+                  }
+                }
                 ... on DatoCmsThreeUp {
                   backgroundColor
                   bgColor {
@@ -321,6 +421,10 @@ exports.createPages = async function({ graphql, actions }) {
                   textColor
                   title
                   text
+                  textLeft
+                  invisibleBoxes
+                  textLeft
+                  invisibleBoxes
                   bigIcons
                   imagesInsteadOfIcons
                   box1Icon {

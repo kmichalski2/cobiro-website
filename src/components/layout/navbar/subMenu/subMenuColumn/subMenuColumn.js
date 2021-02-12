@@ -6,7 +6,7 @@ import HtmlText from '../../../../UiElements/HtmlText/HtmlText'
 import {CurrentLocaleContext} from '../../../layout'
 import Classes from './subMenuColumn.module.scss'
 
-const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borderLeft, isSingleColumn }) => {
+const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borderLeft, isSingleColumn, logo }) => {
     
     
     const currentLocale = useContext(CurrentLocaleContext).locale
@@ -19,6 +19,7 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
         setSearch(location.search)
     }, [location.search])
 
+    console.log('logo', logo, title)
     
     const subSubMenuClickHandler = (event) => {
         
@@ -37,24 +38,39 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
     
     return (
         <div className={ [Classes.subMenuColumn, isSingleColumn && !title ? Classes.narrow : null, borderLeft ? Classes.borderLeft : null, "submenuColumn", submenuLinks.length > 0 ? Classes.hasSubSubMenu : null ].join(' ')}>
-            {title || icon ? 
+            
+            {title || icon || logo ? 
                 link && link.slug ?
                 <Link 
-                    className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
+                    className={[Classes.subMenuTitle, logo ? Classes.subMenuLogo : null, "text-bold text-black"].join(' ')} 
                     to={(link && link.slug ? `${currentLocale !== 'en' ? '/' + (customLangCode || currentLocale) : ''}/${link.slug}` : "#") + search || ''} 
                     target="_self" 
                     onClick={(e) => subSubMenuClickHandler(e)}>
-                
+
+                    {logo ?
+                    <ImageAll image={logo} alt={logo && logo.alt ? logo.alt : `Cobiro logo`}/>
+                    : 
+                    <>
                     <ImageAll classes={Classes.subMenuIcon} image={icon} alt={icon && icon.alt ? icon.alt : `${title} icon`}/>
                     {title}
+                    </>
+                    }
+                
+                    
                 </Link>
                 :
                 <div
-                    className={[Classes.subMenuTitle, "text-bold text-black"].join(' ')} 
+                    className={[Classes.subMenuTitle, logo ? Classes.subMenuLogo : null, "text-bold text-black"].join(' ')} 
                                        onClick={(e) => subSubMenuClickHandler(e)}>
                 
-                <ImageAll classes={Classes.subMenuIcon} image={icon} alt={icon && icon.alt ? icon.alt : `${title} icon`}/>
+                {logo ?
+                    <ImageAll image={logo} alt={logo && logo.alt ? logo.alt : `Cobiro logo`}/>
+                    : 
+                    <>
+                    <ImageAll classes={Classes.subMenuIcon} image={icon} alt={icon && icon.alt ? icon.alt : `${title} icon`}/>
                     {title}
+                    </>
+                    }
                 </div>
             : null}
             <div className={[Classes.subSubMenu, expandedDefault ? Classes.expandedDefault : null].join(' ')}>
