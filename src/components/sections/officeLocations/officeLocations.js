@@ -26,7 +26,7 @@ const OfficeLocations = ({data}) => {
                     classes={Classes.mapImage}
                     />
                 {data.offices && data.offices.map((o, i) => (
-                    <div className="col col-xs-12 col-md-4">
+                    <div key={i} className="col col-xs-12 col-md-4">
                         <ImageAll 
                             image={o.image}
                             alt={o.image && o.image.alt || o.title}
