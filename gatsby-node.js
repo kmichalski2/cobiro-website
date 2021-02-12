@@ -500,6 +500,44 @@ exports.createPages = async function({ graphql, actions }) {
                   box5Footnote
                   box6Footnote
                 }
+                ... on DatoCmsOffice {
+                  title
+                  text
+                  mapImage {
+                    alt
+                    url
+                    fluid(maxWidth: 1800) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  bgColor {
+                    hex
+                  }
+                  offices {
+                    title
+                    text
+                    
+                    image {
+                      alt
+                      url
+                      fluid(maxWidth: 600) {
+                        width
+                        height
+                        srcSet
+                        base64
+                        aspectRatio
+                        src
+                        sizes
+                      }
+                    }
+                  }
+                }
                 ... on DatoCmsExplanationWImage {
                   backgroundColor
                   topGradiantColor {

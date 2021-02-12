@@ -1,0 +1,22 @@
+@import '../../layout/style/globals';
+
+.imageRow {
+    padding-top: 30rem;
+    padding-top: calc(10rem + 15vw);
+    position: relative;
+
+    .mapImage {
+        position: absolute !important;
+        width: 100vw;
+        left: 50%;
+        margin-left: -50vw;
+        top: 0;
+        max-width: none;
+
+        @include mq($until: lg) {
+            width: 120vw;
+            margin-left: -60vw;
+        }
+        
+    }
+}
