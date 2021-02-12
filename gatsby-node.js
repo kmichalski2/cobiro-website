@@ -177,6 +177,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                   secondaryExternalLinkUrl
                   alignment
+                  paddingBottom
                   bgColor {
                     hex
                   }
@@ -200,7 +201,7 @@ exports.createPages = async function({ graphql, actions }) {
                     alt
                     width
                     height
-                    fluid(maxWidth: 1200, imgixParams: {q: 50}) {
+                    fluid(maxWidth: 2000, imgixParams: {q: 50}) {
                       width
                       height
                       srcSet

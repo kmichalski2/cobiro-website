@@ -12,7 +12,7 @@ const CtaCardSimple = ({data}) => {
         <div className="container">
             <div className="row center-xs">
                 <div className="col col-xs-12">
-                    <div className="card card-visible text-left" style={data.boxBgColor && data.boxBgColor.hex ? {backgroundColor: data.boxBgColor.hex} : null}>
+                    <div className={["card card-visible text-left", Classes.card].join(' ')} style={data.boxBgColor && data.boxBgColor.hex ? {backgroundColor: data.boxBgColor.hex} : null}>
                         <div className={Classes.backgroundLogoWrapper}>
                             <ImageAll 
                                 image={data.backgroundLogo}

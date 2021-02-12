@@ -67,7 +67,7 @@ const JumboHeader = ({ data,  notificationPadding }) => {
   return (
     <Section 
       bgColor={bgColor} 
-      noBottomPadding={imageToEdges}
+      noBottomPadding={imageToEdges && !data.paddingBottom}
       paddingBottomXsSm={alignment === 'image-left'}
       addedPadding={notificationPadding}
       >
