@@ -23,7 +23,7 @@ const CardsIconBottom = ({ data }) => {
                 </div>
                 <div className="row center-xs flex stretch-xs">
                     {data.cards && data.cards.cards && data.cards.cards.map((c, i) => (
-                        <div key={i} className="col col-xs-12 col-md-3 flex stretch-xs">
+                        <div key={i} className="col col-xs-12 col-md-6 col-lg-3 flex stretch-xs">
                             <div className="card card-visible text-left flex between-xs stretch-xs flex-column-xs">
                                 <HeaderWText
                                     h3
