@@ -232,6 +232,23 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                   textColor
                 }
+                ... on DatoCmsMultipleLink {
+                  title
+                  text
+                  bgColor {
+                    hex
+                  }
+                  linkCollection {
+                    links {
+                      title
+                      text
+                      internalLink {
+                        slug
+                      }
+                      externalLink
+                    }
+                  }
+                }
                 ... on DatoCmsExplanationGiftCard {
                   title
                   text
