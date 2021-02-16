@@ -32,14 +32,4 @@
             
         }
     }
-
-    .gradiantBar {
-        margin: 1rem 0;
-        margin-top: 0.5rem;
-        width: 3rem;
-        height: 0.3125rem;
-        @include gradiant;
-        border-radius: 2rem;
-    }
-
 }

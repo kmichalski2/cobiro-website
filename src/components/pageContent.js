@@ -35,6 +35,8 @@ import OfficeLocations from "./sections/officeLocations/officeLocations"
 import CtaCardSimple from "./sections/ctaCardSimple/ctaCardSimple"
 import ThreeUpDottedLine from "./sections/threeUpDottedLine/threeUpDottedLine"
 import MulitpleLinks from "./sections/multipleLinks/multipleLinks"
+import CardsIconBottom from "./sections/cardsIconBottom/cardsIconBottom"
+import CtaCardGradiantLine from "./sections/ctaCardGradiantLine/ctaCardGradiantLine"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -154,6 +156,10 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <ThreeUpDottedLine data={data.sections[index]} key={index}/>
                 case 'MultipleLink':
                     return <MulitpleLinks data={data.sections[index]} key={index}/>
+                case 'CardsWithIconBottom':
+                    return <CardsIconBottom data={data.sections[index]} key={index}/>
+                case 'CtaCardWithGradiantLine':
+                    return <CtaCardGradiantLine data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }
