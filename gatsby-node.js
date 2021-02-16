@@ -257,6 +257,53 @@ exports.createPages = async function({ graphql, actions }) {
                   footnote
                   leftText
                 }
+                ... on DatoCmsCtaCardWithGradiantLine {
+                  title
+                  text
+                  linkTitle
+                  internalLinkGradiantCard {
+                    slug
+                  }
+                  externalLinkGradiantCard
+                  boxBackgroundColor {
+                    hex
+                  }
+                  sectionBackgroundColor {
+                    hex
+                  }
+                }
+                ... on DatoCmsCardsWithIconBottom {
+                  title
+                  text
+                  cards {
+                    cards {
+                      title
+                      text
+                      linkTitle
+                      internalLink {
+                        slug
+                      }
+                      externalLink
+                      icon {
+                        alt
+                        width
+                        height
+                        url
+                        fixed(width: 132) {
+                          width
+                          height
+                          srcSet
+                          base64
+                          aspectRatio
+                          src
+                        }
+                      }
+                    }
+                  }
+                  bgColor {
+                    hex
+                  }
+                }
                 ... on DatoCmsFourUp {
                   text
                   sectionBackgroundColor {
