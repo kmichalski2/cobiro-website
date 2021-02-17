@@ -22,7 +22,7 @@ const MulitpleLinks = ({data}) => {
                 <div className="row center-xs">
                     {data.linkCollection.links.map((l, i) => 
                     l.internalLink && l.internalLink.slug || l.externalLink ? 
-                    <div key={i} className="col col-xs-6 col-md-4">
+                    <div key={i} className="col col-xs-12 col-md-6 col-lg-4">
                         <BoxLink subtitle={l.title} text={l.text} link={l.internalLink && l.internalLink.slug || l.externalLink} internal={l.internalLink && l.internalLink.slug} />
                     </div>
                     : null

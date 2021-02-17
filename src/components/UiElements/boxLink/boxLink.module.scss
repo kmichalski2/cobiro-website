@@ -23,6 +23,7 @@
 
     &>div {
         border: none !important;
+        padding-right: 3.2rem !important;
     }
 
     @include mq($until: md) {
