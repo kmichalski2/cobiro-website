@@ -2,13 +2,19 @@ import React from 'react'
 
 import Classes from './Section.module.scss'
 
-const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, centered, children, textColor, id, addedPadding, classes }) => {
+const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, centered, children, textColor, id, addedPadding, classes, gradiantBottom, bottomBgColor }) => {
     return (
         <section 
-            className={[classes ? classes : null, Classes.section, noBottomPadding ? Classes.noBottomPadding : null, paddingBottomXsSm ? Classes.paddingBottomXsSm : null].join(' ')} 
+            className={[classes ? classes : null, Classes.section, noBottomPadding ? Classes.noBottomPadding : null, paddingBottomXsSm ? Classes.paddingBottomXsSm : null, gradiantBottom ? Classes.gradiantBottom : null].join(' ')} 
             style={ bgColor ? { backgroundColor: bgColor } : null }
             id={id}
             >
+                {gradiantBottom ? 
+                    <div className={Classes.backgroundGradiant}></div>
+                : null}
+                {bottomBgColor ? 
+                    <div className={Classes.bottomBgColor} style={{backgroundColor: bottomBgColor}}></div>
+                : null}
                 {addedPadding ? <div style={{ height: addedPadding + 'px', width: '100%'}} ></div> : null}
 
                 {children ? 

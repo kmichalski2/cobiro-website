@@ -145,11 +145,96 @@ exports.createPages = async function({ graphql, actions }) {
                     mediaDownloadText
                     mediaDownloadTitle
                   }
+                ... on DatoCmsButtonMosaik {
+                  title
+                  text
+                  bgColor {
+                    hex
+                  }
+                  narrowButtonTopLeftText
+                  narrowButtonTopLeftImage {
+                    url
+                    fixed(height: 100) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  narrowButtonTopMiddleImage {
+                    url
+                    fixed(height: 500) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  narrowButtonTopMiddleText
+                  narrowButtonTopMiddleLinkText
+                  narrowButtonTopMiddleInternalLink {
+                    slug
+                  }
+                  narrowButtonTopMiddleExternalLink
+                  wideButtonBottomLeftText
+                  wideButtonBottomLeftLinkText
+                  wideButtonBottomLeftInternalLink {
+                    slug
+                  }
+                  wideButtonBottomLeftExternalLink
+                  wideButtonBottomLeftImage {
+                    url
+                    fixed(height: 500) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  buttonRightBigText
+                  buttonRightBigLinkText
+                  buttonRightBigInternalLink {
+                    slug
+                  }
+                  buttonRightBigExternalLink
+                  buttonRightBigBackgroundImage {
+                    url
+                    fixed(height: 800) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  buttonRightBigImage {
+                    url
+                    fixed(height: 800) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                }
                 ... on DatoCmsJumboHeader {
                   backgroundColor
+                  bottomBgColor {
+                    hex
+                  }
                   topGradiantColor {
                     hex
                   }
+                  gradiantBottomWGradiantLine
                   bottomGradiantColor {
                     hex
                   }
