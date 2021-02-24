@@ -6,7 +6,8 @@
 
 @mixin box-shadow {
     // box-shadow:0px 3px 10px 0px rgba(0, 0, 0, 0.05);
-    box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.06);
+    // box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
 }
 
 @mixin box-shadow-hover {

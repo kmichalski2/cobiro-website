@@ -17,6 +17,10 @@
     justify-content: between-xs;
     align-items: stretch;
     width: 100%;
+    @include mq($from: lg) {
+        @include box-shadow;
+        border-radius: 5px !important;
+    }
 
     @include mq($until: lg) {
         flex-direction: column;
@@ -31,20 +35,35 @@
     color: $black;
     text-align: left;
     position: relative;
-    border-radius: 0 !important;
+    border-radius: 5px !important;
     padding: 1.875rem;
     // display: block;
+    border-right: 1px solid $extra-ligt-grey;
+    margin-bottom: 0;
 
-    &:first-child {
-        border-radius: $border-radius !important;
-        border-bottom-right-radius: 0 !important;
-        border-top-right-radius: 0 !important;
+    
+    
+    @include mq($until: lg) {
+        margin-bottom: 2rem;
+        @include box-shadow;
     }
-    &:last-child {
-        border-radius: $border-radius !important;
-        border-bottom-left-radius: 0 !important;
-        border-top-left-radius: 0 !important;
+
+    @include mq($from: lg) {
+        border-radius: 0 !important;
+        &:first-child {
+            border-radius: $border-radius !important;
+            border-bottom-right-radius: 0 !important;
+            border-top-right-radius: 0 !important;
+        }
+        &:last-child {
+            border-radius: $border-radius !important;
+            border-bottom-left-radius: 0 !important;
+            border-top-left-radius: 0 !important;
+            border-right: none;
+        }
     }
+
+    
 
     button {
         width: 100%;
@@ -80,9 +99,10 @@
 
     &.highlightedHeader {
         // padding-top: 30px;
+        border-right: none;
         border-radius: $border-radius !important;
         z-index: 2;
-
+        @include box-shadow;
         @include mq($from: lg) {
             transform: scale(1.1);
         }
