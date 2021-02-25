@@ -63,16 +63,16 @@
 
 @include mq($from: md) {
 	.large {
-		font-size: 1.125rem;
-		padding: 1rem 3.25rem;
-		border-radius: 6.25rem;
+		font-size: 1.125rem !important;
+		padding: 1rem 3.25rem !important;
+		border-radius: 6.25rem !important;
 	}
 }
 
 .secondary {
-	background-color: transparent;
-	color: $black;
-    border-color: $black;
+	background-color: transparent !important;
+	color: $black !important;
+    border-color: $black !important;
     
     &.white {
         background-color: transparent;
@@ -85,6 +85,12 @@
             border-color: $white;
         }
     }
+
+	&:hover, &:active {
+		background-color: $black !important;
+		color: $white !important;
+		border-color: $black !important;
+	}
 }
 
 .white {
