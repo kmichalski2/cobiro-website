@@ -859,6 +859,21 @@ exports.createPages = async function({ graphql, actions }) {
                   videoEmbedUrl
                 }
                 ... on DatoCmsCtaJumbo {
+                  jumboCtaImage {
+                    alt
+                    url
+                    width
+                    height
+                    fluid(maxWidth: 1200) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
                   icon {
                     url
                     alt
