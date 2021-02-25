@@ -4,6 +4,7 @@ import Classes from './explanationImage.module.scss'
 import Section from "../../UiElements/Section/Section"
 import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
 import ImageAll from "../../UiElements/ImageAll/ImageAll"
+import IconCard from "../../UiElements/IconCard/IconCard"
 
 const ExplanationImage = ({ data }) => {
  console.log('DATA', data)
@@ -18,6 +19,13 @@ const ExplanationImage = ({ data }) => {
 
   const text = (
     <div className="text-padding">
+      {data.iconsTop && data.iconsTop.length > 0 ?
+        <div className={Classes.iconsTop}>
+          {data.iconsTop.map((icon, i) => (
+            <ImageAll key={i} image={icon} alt={icon.alt} classes={Classes.icon} />
+          ))}
+        </div>
+      : null}
       <HeaderWText
         title={data.title}
         h2
@@ -36,10 +44,9 @@ const ExplanationImage = ({ data }) => {
       />
       {data.iconWText && data.iconWText.features && data.iconWText.features.length > 0 ?
       <div className={Classes.featureWrapper}>
-        {data.iconWText && data.iconWText.features.map((f, i) => {
-          console.log('feature', f)
+        {!data.showIconWTextAsCards && data.iconWText && data.iconWText.features.map((f, i) => {
           return (
-          <div className={Classes.feature}>
+          <div key={i} className={Classes.feature}>
             <ImageAll image={f.icon} alt={f.icon.alt} classes={Classes.featureIcon}/>
             <p>{f.text}</p>
           </div>
@@ -60,7 +67,23 @@ const ExplanationImage = ({ data }) => {
           {data.leftText ? image : text}
         </div>
       </div>
-    </div>
+      {data.showIconWTextAsCards && data.iconWText && data.iconWText.features && data.iconWText.features.length > 0 ?
+      <div className="row center-xs stretch-xs mt space-top-xs-up">
+            {data.iconWText.features.map((f, i) => {
+              return (
+                <div key={i} className="col col-xs-12 col-md-6 col-lg-4 flex">
+                <IconCard 
+                  image={f.icon}
+                  alt={f.icon.alt || null }
+                  text={f.text} 
+                  classes={Classes.IconCardRounded}
+                  checkmark
+                  />
+              </div>
+            )})}
+      </div>
+      : null}
+      </div>
   </Section>
   )
 }

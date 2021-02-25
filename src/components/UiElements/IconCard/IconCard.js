@@ -6,7 +6,7 @@ import AnyLink from '../AnyLink/AnyLink'
 
 import Classes from './IconCard.module.scss'
 
-const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg, textLeft, invisibleBoxes, classes }) => {
+const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg, textLeft, invisibleBoxes, classes, checkmark }) => {
 
     return (
         <Card shadow={shadow} leftAligned={textLeft} invisibleBox={invisibleBoxes} classes={classes}>
@@ -35,6 +35,9 @@ const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, 
                     />
                     : null}
                 </div>
+                {checkmark ?
+                    <div className={Classes.checkmark}/>
+                : null}
         </Card>
     )
 }

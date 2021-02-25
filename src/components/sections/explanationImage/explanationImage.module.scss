@@ -61,3 +61,24 @@
         }
     }
 }
+
+.iconsTop {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 3rem;
+
+    .icon {
+        height: 1.5rem;
+        margin-right: 1.5rem;
+    }
+}
+
+.IconCardRounded {
+    border-radius: 1.25rem;
+    padding-bottom: 1rem!important;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: $black;
+    box-shadow: none!important;
+}

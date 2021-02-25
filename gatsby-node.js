@@ -746,6 +746,21 @@ exports.createPages = async function({ graphql, actions }) {
                       }
                     }
                   }
+                  showIconWTextAsCards
+                  iconsTop {
+                    alt
+                    width
+                    height
+                    url
+                    fixed(width: 30) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
                 }
                 ... on DatoCmsGallery {
                   title
