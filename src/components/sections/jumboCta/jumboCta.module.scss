@@ -13,7 +13,7 @@
     padding: 4rem 0;
 
     @include mq($until: lg) {
-        padding: 0rem 0;
+        padding: 0rem 2.75rem;
     }
 }
 

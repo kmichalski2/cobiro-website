@@ -25,8 +25,8 @@ const JumboCta = ({ data }) => {
       bgColor={bgColor && !backgroundImage ? bgColor : null}
     >
         <div className="container">
-          <div className="row">
-            <div className={["col col-xs-12", jumboCtaImage ? "col-lg-6" : null].join(' ')}>
+          <div className={["row", !jumboCtaImage ? "center-xs" : null ].join(' ')}>
+            <div className={["col col-xs-12", jumboCtaImage ? "col-lg-6" : "col-lg-6 col-md-8"].join(' ')}>
               <div className={backgroundImage ? Classes.content : null}>
                 <HeaderWText
                   jumboCtaImage={jumboCtaImage}
