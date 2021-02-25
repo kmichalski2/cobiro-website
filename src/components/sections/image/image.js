@@ -34,7 +34,7 @@ const ImageSection = ({ data }) => {
                 data.backgroundImageTop ?
                     <ImageAll
                         image={data.backgroundImageTop}
-                        alt={data.backgroundImageTop}
+                        alt={data.backgroundImageTop.alt}
                         classes={Classes.backgroundTop}
                         />
                 : null
@@ -43,7 +43,14 @@ const ImageSection = ({ data }) => {
     )
 
     return (
-        <Section bgColor={data.bgColor && data.bgColor.hex} classes={Classes.section}>
+        <Section bgColor={data.bgColor && data.bgColor.hex} classes={[Classes.section, data.backgroundImageOverflowingUpperSection ? Classes.paddingTopBig : null].join(' ')}>
+            {data.backgroundImageOverflowingUpperSection ?
+                <ImageAll
+                    image={data.backgroundImageOverflowingUpperSection}
+                    alt={data.backgroundImageOverflowingUpperSection.alt}
+                    classes={Classes.backgroundTopOverFlowing}
+                    />
+            : null}
             <div className="container">
                 <div className={["row center-xs", data.textColor === 'light' ? "text-white" : null].join(' ')}>
                     <div className="col col-xs-12 col-md-8 text-center">
@@ -52,9 +59,9 @@ const ImageSection = ({ data }) => {
                     </div>
                 </div>
                 <div className={["row center-xs", data.textColor === 'light' ? "text-white" : null].join(' ')}>
-                    <div className={["col col-xs-12 text-center", data.narrowImage ? "col-md-8" : ""].join(' ')}>
+                    <div className={["col col-xs-12 text-center", data.narrowImage ? "col-md-8" : data.imageContainerWidth ? "col-md-12" : ""].join(' ')}>
                         {data.image ? 
-                            <ImageAll image={data.image} fullWidth alt={data.image.alt || data.title} classes={[data.narrowImage ? null : data.wideImage ? Classes.extraFullWidth : Classes.fullWidth, data.text || data.featuresWIcon ? "space-big-xs-up" : null].join(' ')} />
+                            <ImageAll image={data.image} fullWidth alt={data.image.alt || data.title} classes={[data.narrowImage || data.imageContainerWidth ? null : data.wideImage ? Classes.extraFullWidth : Classes.fullWidth, data.text || data.featuresWIcon ? "space-big-xs-up" : null].join(' ')} />
                         : null}
                         {data.videoEmbedCode && !data.image ?
                             <div className={["embed-responsive", data.narrowImage ? null : [Classes.fullWidth, Classes.noBorderRadius].join(' '), data.text || data.featuresWIcon ? "space-big-xs-up" : null].join(' ')}>

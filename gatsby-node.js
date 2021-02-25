@@ -1222,6 +1222,7 @@ exports.createPages = async function({ graphql, actions }) {
                   title
                   text
                   narrowImage
+                  imageContainerWidth
                   wideImage
                   textAboveImage
                   linkTitle
@@ -1233,7 +1234,22 @@ exports.createPages = async function({ graphql, actions }) {
                     url
                     width
                     height
-                    fluid(maxWidth: 1200) {
+                    fluid(maxWidth: 1600) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  backgroundImageOverflowingUpperSection {
+                    alt
+                    url
+                    width
+                    height
+                    fluid(maxWidth: 1600) {
                       width
                       height
                       srcSet
