@@ -25,13 +25,14 @@ const JumboCta = ({ data }) => {
       bgColor={bgColor && !backgroundImage ? bgColor : null}
     >
         <div className="container">
-          <div className="row text-center center-xs">
-            <div className="col-xs-12 col-md-8 col-lg-6">
+          <div className="row">
+            <div className={["col col-xs-12", jumboCtaImage ? "col-lg-6" : null].join(' ')}>
               <div className={backgroundImage ? Classes.content : null}>
-                <HeaderWText 
+                <HeaderWText
+                  jumboCtaImage={jumboCtaImage}
                   icon={icon}
                   iconLarge
-                  centered
+                  centered={!jumboCtaImage}
                   title={data.title}
                   h2
                   text={data.text}
@@ -57,9 +58,12 @@ const JumboCta = ({ data }) => {
                     : ""
                   ]}
                   light={textColor}
-
                 />
+                
               </div>
+            </div>
+            <div className={[Classes.jumboCtaImage, "col-xs-12 col-lg-6"].join(' ')}>
+              <ImageAll image={jumboCtaImage} />
             </div>
           </div>
         </div>
