@@ -40,7 +40,7 @@ const ExplanationImage = ({ data }) => {
           console.log('feature', f)
           return (
           <div className={Classes.feature}>
-            <ImageAll image={f.icon} alt={f.icon.alt}/>
+            <ImageAll image={f.icon} alt={f.icon.alt} classes={Classes.featureIcon}/>
             <p>{f.text}</p>
           </div>
         )})}
