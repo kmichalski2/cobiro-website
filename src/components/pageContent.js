@@ -38,6 +38,7 @@ import MulitpleLinks from "./sections/multipleLinks/multipleLinks"
 import CardsIconBottom from "./sections/cardsIconBottom/cardsIconBottom"
 import CtaCardGradiantLine from "./sections/ctaCardGradiantLine/ctaCardGradiantLine"
 import ButtonMosaik from "./sections/buttonMosaik/buttonMosaik"
+import ImageSlider from "./sections/imageSlider/imageSlider"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -163,6 +164,8 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <CtaCardGradiantLine data={data.sections[index]} key={index}/>
                 case 'ButtonMosaik':
                     return <ButtonMosaik data={data.sections[index]} key={index}/>
+                case 'ImageSlider':
+                    return <ImageSlider data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }
