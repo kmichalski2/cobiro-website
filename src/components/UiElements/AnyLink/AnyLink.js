@@ -5,6 +5,7 @@ import Classes from './AnyLink.module.scss'
 import Checkmark from '../checkmark/checkmark'
 import Loader from '../loader/loader'
 import Cross from '../cross/cross'
+import Modal from '../modal/modal'
 
 const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes, noArrow, noPadding, disabled, submitting, submitted, submitError, children, regular, targetSelf}) => {
 
@@ -13,12 +14,15 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
     const location = useContext(CurrentLocaleContext).location
 
     const [search, setSearch] = useState('')
+    const [showModal, setShowModal] = useState(false)
     
     useEffect(() => {
         setSearch(location.search)
     }, [location.search])
 
     const signUpIn = external && link && (link.includes('app.cobiro.com/user/') || link.includes('cobiro.com/'))
+
+    const videoEmbed = external && link && (link.includes('youtube.com/embed'))
 
     const linkTransformed = link || (link === null && '/')
 
@@ -27,7 +31,19 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
     return (
         <>
         {
-        linkTransformed && title && internal || linkTransformed && children && internal ?
+        videoEmbed && title ?
+            <>
+            <button className={ classNames }  onClick={() => setShowModal(true)}>
+                {title}
+                {children}
+            </button>
+            <Modal showModal={showModal} setShowModal={() => setShowModal()}>
+                <div className="embed-responsive">
+                    <iframe src={`${link}/?autoplay=1`} width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                </div>
+            </Modal>
+            </>
+        : linkTransformed && title && internal || linkTransformed && children && internal ?
             <Link 
                 className={ classNames } 
                 to={
