@@ -5,7 +5,7 @@ import Classes from './HeaderWText.module.scss'
 import AnyLink from '../AnyLink/AnyLink'
 import ImageAll from '../ImageAll/ImageAll'
 
-const HeaderWText = ({ title, h1, h2, h3, h4, text, links, light, classes, icon, iconLarge, iconTitle, centered, children, jumboCtaImage }) => {
+const HeaderWText = ({ title, h1, h2, h3, h4, text, links, light, darkButton, classes, icon, iconLarge, iconTitle, centered, children, jumboCtaImage }) => {
 
     const headerSpacing = !text && !children ? Classes.headerSpacing : null
     return (
@@ -46,7 +46,7 @@ const HeaderWText = ({ title, h1, h2, h3, h4, text, links, light, classes, icon,
                 large={l.large || false} 
                 button={l.button}
                 secondary={l.secondary || false} 
-                light={ light || false }
+                light={ !darkButton && light || false }
                 classes={i > 0 ? Classes.spaceLeft : null}
             />
         )) : null}

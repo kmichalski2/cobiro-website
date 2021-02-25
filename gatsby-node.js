@@ -1486,7 +1486,18 @@ exports.createPages = async function({ graphql, actions }) {
                     slug
                   }
                   image {
-                    fluid(maxWidth: 800) {
+                    fluid(maxWidth: 1000) {
+                      aspectRatio
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
+                    url
+                  }
+                  backgroundImage {
+                    fluid(maxWidth: 1200) {
                       aspectRatio
                       height
                       sizes
@@ -1615,6 +1626,28 @@ exports.createPages = async function({ graphql, actions }) {
                       src
                       sizes
                     }
+                  }
+                }
+                ... on DatoCmsImageSlider {
+                  title
+                  text
+                  linkTitle
+
+                  externalLinkSlider
+                  images {
+                    fixed(width: 600) {
+                      aspectRatio
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
+                    url
+                    alt
+                  }
+                  bgColor {
+                    hex
                   }
                 }
               }
