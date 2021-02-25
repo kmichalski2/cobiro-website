@@ -11,16 +11,18 @@ const JumboHeader = ({ data,  notificationPadding }) => {
   const bgColor = data.bgColor ? data.bgColor.hex : null
   const alignment = data.alignment
   const imageToEdges = data.imageToEdges
+  const gradiantBottom = data.gradiantBottomWGradiantLine
+
 
   const textSide = (
     <div className={[
         "col col-xs-12", 
-        alignment === 'centered' ? 'col-md-8 text-center space-xs-up' : alignment === 'centered-wide-with-overlap' ? 'col-md-10 space-xs-up' : 'col-lg-6 text-left-md',
+        alignment === 'centered' || alignment === 'centered-wide' ? 'col-md-8 text-center space-xs-up' : alignment === 'centered-wide-with-overlap' ? 'col-md-10 space-xs-up' : 'col-lg-6 text-left-md',
         imageToEdges && alignment !== 'centered' ? "flex flex-column center-xs" : null
         ].join(' ')}>
       <HeaderWText 
-        classes={["space-xs space-sm space-md", alignment === 'centered' || alignment === 'centered-wide-with-overlap' || imageToEdges ? 'space-xs-up' : null].join(' ')}
-        centered={alignment === 'centered' ? true : false}
+        classes={["space-xs space-sm space-md", alignment === 'centered' || alignment === 'centered-wide' || alignment === 'centered-wide-with-overlap' || imageToEdges ? 'space-xs-up' : null].join(' ')}
+        centered={alignment === 'centered' || alignment === 'centered-wide' ? true : false}
         icon={data.icon}
         iconTitle={data.iconTitle}
         title={data.heading}
@@ -55,7 +57,7 @@ const JumboHeader = ({ data,  notificationPadding }) => {
   const imageSide = data.image ? (
     <div className={[
       "col col-xs-12", 
-      alignment === 'centered' ? 'col-md-8' : alignment === 'centered-wide-with-overlap' ? 'col-md-12' : 'col-lg-6',
+      alignment === 'centered' ? 'col-md-8' : alignment === 'centered-wide' ? 'col-md-12' : alignment === 'centered-wide-with-overlap' ? 'col-md-12' : 'col-lg-6',
       alignment === 'image-left' ? "end-xs space-xs space-sm space-md" : null,
       imageToEdges ? "flex bottom-xs" : null
       ].join(' ')}
@@ -70,17 +72,19 @@ const JumboHeader = ({ data,  notificationPadding }) => {
       noBottomPadding={imageToEdges && !data.paddingBottom}
       paddingBottomXsSm={alignment === 'image-left'}
       addedPadding={notificationPadding}
+      gradiantBottom={gradiantBottom}
+      bottomBgColor={data.bottomBgColor && data.bottomBgColor.hex || null}
       >
         <div className="container">
           <div
             className={[
-              alignment === 'centered' ? ['center-xs', Classes.centered].join(' ') : null,
+              alignment === 'centered' || alignment === 'centered-wide' ? ['center-xs', Classes.centered].join(' ') : null,
               imageToEdges && alignment !== 'centered' ? "stretch-xs" : "middle-xs",
               "row",
             ].join(" ")}
           >
-            { alignment === 'image-right' || alignment === 'centered' || alignment === 'centered-wide-with-overlap' ? textSide : imageSide }
-            { alignment === 'image-right' || alignment === 'centered' || alignment === 'centered-wide-with-overlap' ? imageSide : textSide }
+            { alignment === 'image-right' || alignment === 'centered' || alignment === 'centered-wide' || alignment === 'centered-wide-with-overlap' ? textSide : imageSide }
+            { alignment === 'image-right' || alignment === 'centered' || alignment === 'centered-wide' || alignment === 'centered-wide-with-overlap' ? imageSide : textSide }
           </div>
         </div>
     </Section>  

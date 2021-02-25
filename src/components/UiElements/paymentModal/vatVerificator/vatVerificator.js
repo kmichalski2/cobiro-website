@@ -46,7 +46,7 @@ const VatVerificator = ({vatValidatedHandler}) => {
 
     return (
         <>
-        <button className={["btn btn-text small space-small-xs-up", Classes.VATBtn].join(' ')} onClick={setShowValidator}>Enter VAT ID</button>
+        <button className={["btn btn-text small space-small-xs-up", Classes.VATBtn].join(' ')} onClick={setShowValidator}>Enter VAT number</button>
         {showValidator ?
         <div className="flex between-xs middle-xs">
             <form className={Classes.form}>

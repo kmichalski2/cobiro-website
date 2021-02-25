@@ -1,0 +1,90 @@
+@import '../../layout/style/globals';
+
+.card {
+    padding: 4rem 1.5rem;
+    overflow: hidden;
+    @include mq($until: lg) {       
+        display: block !important;
+    }
+
+    .narrowImage {
+
+        max-height: 5.625rem;
+        img {
+            max-width: 100%;
+            left: 50% !important;
+            transform: translateX(-50%);
+        }
+    }
+
+        
+    .bottomWideImage {
+
+        @include mq($from: lg) {        
+            position: absolute !important;
+            top: 50%;
+            left: 0;
+            width: 112.5% !important;
+            max-width: none !important;
+            transform: translateY(-50%);
+        }
+        @include mq($until: lg) {       
+            margin-top: 2.5rem;
+        }
+
+        img {
+            max-width: none;
+            
+        }
+    }
+    .buttonBigText {
+        position: relative;
+        z-index: 1;
+    }
+    .buttonRightBigBackground {
+        position: absolute !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100% !important;
+        min-height: 100% !important;
+        max-width: none !important;
+        max-height: none !important;
+        width: auto !important;
+        height: auto !important;
+        z-index: 0;
+
+        img {
+            min-width: 100% !important;
+            min-height: 100% !important;
+            max-width: none !important;
+            max-height: none !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+
+    }
+    .buttonRightBigImage {
+        height: 100% !important;
+        width: 100% !important;
+        width: calc(100% + 2rem) !important;
+        // height: auto 100% !important;
+        max-width: none !important;     
+
+        img {
+            width: 100% !important;
+            // width: calc(100% + 4rem) !important;
+            max-width: none !important;
+            height: auto !important;
+            bottom: 0;
+            top: auto !important;
+        }
+
+        @include mq($until: lg) {
+            
+                height: 22rem !important;
+                margin-bottom: -5.5rem;
+        }
+    }
+}

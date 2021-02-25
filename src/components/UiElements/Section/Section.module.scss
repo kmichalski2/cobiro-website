@@ -13,4 +13,17 @@
             padding-bottom: 7.5rem;
         }
     }
+    .backgroundGradiant {
+        @include gradiant-background-faded;
+        position: absolute;
+        height: 25rem;
+        bottom: 15rem;
+        width: 100%;
+    }
+    .bottomBgColor {
+        position: absolute;
+        height: 15rem;
+        bottom: 0;
+        width: 100%;
+    }
 }
