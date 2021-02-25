@@ -725,6 +725,27 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                   leftText
+                  iconWText {
+                    features {
+                      ... on DatoCmsFeatureItem {
+                        icon {
+                          alt
+                          width
+                          height
+                          url
+                          fixed(width: 30) {
+                            width
+                            height
+                            srcSet
+                            base64
+                            aspectRatio
+                            src
+                          }
+                        }
+                        text
+                      }
+                    }
+                  }
                 }
                 ... on DatoCmsGallery {
                   title
@@ -1191,6 +1212,21 @@ exports.createPages = async function({ graphql, actions }) {
                   linkTitle
                   internalLinkImage {
                     slug
+                  }
+                  backgroundImageTop {
+                    alt
+                    url
+                    width
+                    height
+                    fluid(maxWidth: 1200) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
                   }
                   videoEmbedCode
                   bgColor {

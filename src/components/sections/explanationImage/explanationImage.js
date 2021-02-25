@@ -1,14 +1,14 @@
 import React from "react"
 
-import expImageStyles from './explanationImage.module.scss'
+import Classes from './explanationImage.module.scss'
 import Section from "../../UiElements/Section/Section"
 import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
 import ImageAll from "../../UiElements/ImageAll/ImageAll"
 
 const ExplanationImage = ({ data }) => {
- 
+ console.log('DATA', data)
   const image = (
-    <div className={["space-sm space-xs", data.leftText && data.imageToEdge ? expImageStyles.imageLeftEdge : !data.leftText && data.imageToEdge ? expImageStyles.imageRightEdge : null].join(' ')}>
+    <div className={["space-sm space-xs", data.leftText && data.imageToEdge ? Classes.imageLeftEdge : !data.leftText && data.imageToEdge ? Classes.imageRightEdge : null].join(' ')}>
       <ImageAll 
         image={data.image}
         alt={data.image.alt ? data.image.alt : data.title}
@@ -34,6 +34,18 @@ const ExplanationImage = ({ data }) => {
           }
         ]}
       />
+      {data.iconWText && data.iconWText.features && data.iconWText.features.length > 0 ?
+      <div className={Classes.featureWrapper}>
+        {data.iconWText && data.iconWText.features.map((f, i) => {
+          console.log('feature', f)
+          return (
+          <div className={Classes.feature}>
+            <ImageAll image={f.icon} alt={f.icon.alt}/>
+            <p>{f.text}</p>
+          </div>
+        )})}
+        </div>
+      : null}
     </div>
   )
 

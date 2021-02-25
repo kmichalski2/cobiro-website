@@ -31,3 +31,28 @@
 .section {
     overflow: hidden;
 }
+
+.featureWrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    .feature {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 50%;
+        margin-bottom: 1.5rem;
+        padding-right: 1rem;
+
+        @include mq($until: sm) {
+            width: 100%
+        }
+
+        p {
+            margin-left: 1rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: $black;
+        }
+    }
+}
