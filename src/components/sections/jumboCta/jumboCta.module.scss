@@ -21,7 +21,16 @@
    position: absolute;
    bottom: 0;
    right: 0;
-   max-height: 600px;
+   max-height: 90%;
+   padding-left: 4rem;
+}
 
+@include mq($until: lg) {
+    .jumboCtaImage {
+        position: relative;
+        margin-bottom: -7.5rem;
+        padding-top: 4rem;
+
+     }
 }
 
