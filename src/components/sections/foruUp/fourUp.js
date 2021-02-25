@@ -28,8 +28,8 @@ const FourUp = ({ data }) => {
                   text={data.box1Text} 
                   shadow={!data.bgColor}
                   classes={Classes.IconCardRounded}
+                  checkmark
                   />
-                  <div className={Classes.checkmark}/>
               </div>
             ) : null}
 
@@ -41,8 +41,8 @@ const FourUp = ({ data }) => {
                   text={data.box2Text} 
                   shadow={!data.bgColor}
                   classes={Classes.IconCardRounded}
+                  checkmark
                   />
-                  <div className={Classes.checkmark}/>
               </div>
             ) : null}
 
@@ -54,8 +54,8 @@ const FourUp = ({ data }) => {
                   text={data.box3Text} 
                   shadow={!data.bgColor}
                   classes={Classes.IconCardRounded}
+                  checkmark
                   />
-                  <div className={Classes.checkmark}/>
               </div>
             ) : null}
 
@@ -67,8 +67,8 @@ const FourUp = ({ data }) => {
                   text={data.box4Text} 
                   shadow={!data.bgColor}
                   classes={Classes.IconCardRounded}
+                  checkmark
                   />
-                  <div className={Classes.checkmark}/>
               </div>
             ) : null}
 
