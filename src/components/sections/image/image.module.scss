@@ -36,6 +36,7 @@
         max-width: none;
         opacity: 0.1;
     }
+    
     .backgroundTopOverFlowing {
         position: absolute !important;
         top: 0;
@@ -45,7 +46,7 @@
 
         img {
             object-fit: cover !important;
-            object-position: top center;
+            object-position: top center !important;
         }
     }
 }

@@ -10,7 +10,7 @@ const ImageSection = ({ data }) => {
 
     const text = (
         <>
-            <HtmlText RawHtml={data.text} classes={["space-big-xs-up", data.textColor === 'light' ? "text-white" : null].join(' ')}/>
+            <HtmlText RawHtml={data.text} classes={["space-big-xs-up", data.textColor === 'light' ? "text-white" : null, data.backgroundImageOverflowingUpperSection ? "text-black" : null].join(' ')}/>
             {data.featuresWIcon ?
                 <div className="row center-xs space-xs-up">
                 {data.featuresWIcon.features.map((f, i) => 

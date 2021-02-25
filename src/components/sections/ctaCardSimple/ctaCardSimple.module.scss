@@ -43,6 +43,7 @@
     left: 0;
     top: 0;
     overflow: hidden;
+    border-radius: 1.25rem;
 
     .backgroundLogo {
         position: absolute !important;
@@ -50,6 +51,19 @@
         top: 4rem;
         width: 75% !important;
         max-width: none !important;   
+    }
+    .backgroundImage {
+        position: absolute !important;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        max-width: none !important;   
+
+        img {
+            max-width: none !important;
+        }
     }
 }
 
