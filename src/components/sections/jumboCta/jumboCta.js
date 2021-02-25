@@ -12,10 +12,13 @@ import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
 const JumboCta = ({ data }) => {
 
   const bgColor = data.ctaBgColor && data.ctaBackgroundColor ? data.ctaBackgroundColor.hex : null
-  const textColor = data.ctaBgColor && data.textColor === 'light' ? "text-white" : "text-black"
-  const btnColor = data.ctaBgColor && data.textColor === 'light' ? "btn-white" : null
+  const textColor = data.textColor === 'light' || null
+  // const btnColor = data.textColor === 'light' ? "btn-white" : null
   const backgroundImage = data.backgroundImage
   const icon = data.icon
+  const jumboCtaImage = data.jumboCtaImage
+
+  console.log(data, 'data')
 
   return (
     <Section
@@ -53,7 +56,7 @@ const JumboCta = ({ data }) => {
                     }
                     : ""
                   ]}
-                  light={data.textColor === 'light'}
+                  light={textColor}
 
                 />
               </div>
