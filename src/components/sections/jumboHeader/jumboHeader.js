@@ -36,7 +36,6 @@ const JumboHeader = ({ data,  notificationPadding }) => {
             external: data.externalLinkUrl && true,
             internal: !data.externalLinkUrl && data.link && (data.link.slug || data.link.slug === null) && true,
             button: true,
-            large: true,
           },
           data.secondaryLinkTitle && (data.secondaryLink || data.secondaryExternalLinkUrl) ?
           {
@@ -45,7 +44,6 @@ const JumboHeader = ({ data,  notificationPadding }) => {
             external: data.secondaryExternalLinkUrl && true,
             internal: !data.secondaryExternalLinkUrl && data.secondaryLink && (data.secondaryLink.slug || data.link.slug === null) && true,
             button: true,
-            large: true,
             secondary: true
           }
           : ""

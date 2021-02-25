@@ -26,7 +26,7 @@ const ImageSlider = ({ data }) => {
                     { data.images ? 
                         <Carousel
                             itemWidth={500}
-                            offset={30}
+                            offset={0}
                             slidesPerPage={4}
                             centered={true} 
                             stopAutoPlayOnHover={false}
