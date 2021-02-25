@@ -37,6 +37,7 @@ import ThreeUpDottedLine from "./sections/threeUpDottedLine/threeUpDottedLine"
 import MulitpleLinks from "./sections/multipleLinks/multipleLinks"
 import CardsIconBottom from "./sections/cardsIconBottom/cardsIconBottom"
 import CtaCardGradiantLine from "./sections/ctaCardGradiantLine/ctaCardGradiantLine"
+import ButtonMosaik from "./sections/buttonMosaik/buttonMosaik"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -160,6 +161,8 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <CardsIconBottom data={data.sections[index]} key={index}/>
                 case 'CtaCardWithGradiantLine':
                     return <CtaCardGradiantLine data={data.sections[index]} key={index}/>
+                case 'ButtonMosaik':
+                    return <ButtonMosaik data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }

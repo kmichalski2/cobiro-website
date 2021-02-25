@@ -145,11 +145,96 @@ exports.createPages = async function({ graphql, actions }) {
                     mediaDownloadText
                     mediaDownloadTitle
                   }
+                ... on DatoCmsButtonMosaik {
+                  title
+                  text
+                  bgColor {
+                    hex
+                  }
+                  narrowButtonTopLeftText
+                  narrowButtonTopLeftImage {
+                    url
+                    fixed(height: 100) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  narrowButtonTopMiddleImage {
+                    url
+                    fixed(height: 500) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  narrowButtonTopMiddleText
+                  narrowButtonTopMiddleLinkText
+                  narrowButtonTopMiddleInternalLink {
+                    slug
+                  }
+                  narrowButtonTopMiddleExternalLink
+                  wideButtonBottomLeftText
+                  wideButtonBottomLeftLinkText
+                  wideButtonBottomLeftInternalLink {
+                    slug
+                  }
+                  wideButtonBottomLeftExternalLink
+                  wideButtonBottomLeftImage {
+                    url
+                    fixed(height: 500) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  buttonRightBigText
+                  buttonRightBigLinkText
+                  buttonRightBigInternalLink {
+                    slug
+                  }
+                  buttonRightBigExternalLink
+                  buttonRightBigBackgroundImage {
+                    url
+                    fixed(height: 800) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  buttonRightBigImage {
+                    url
+                    fixed(height: 800) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                }
                 ... on DatoCmsJumboHeader {
                   backgroundColor
+                  bottomBgColor {
+                    hex
+                  }
                   topGradiantColor {
                     hex
                   }
+                  gradiantBottomWGradiantLine
                   bottomGradiantColor {
                     hex
                   }
@@ -640,6 +725,27 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                   leftText
+                  iconWText {
+                    features {
+                      ... on DatoCmsFeatureItem {
+                        icon {
+                          alt
+                          width
+                          height
+                          url
+                          fixed(width: 30) {
+                            width
+                            height
+                            srcSet
+                            base64
+                            aspectRatio
+                            src
+                          }
+                        }
+                        text
+                      }
+                    }
+                  }
                 }
                 ... on DatoCmsGallery {
                   title
@@ -1106,6 +1212,21 @@ exports.createPages = async function({ graphql, actions }) {
                   linkTitle
                   internalLinkImage {
                     slug
+                  }
+                  backgroundImageTop {
+                    alt
+                    url
+                    width
+                    height
+                    fluid(maxWidth: 1200) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
                   }
                   videoEmbedCode
                   bgColor {
