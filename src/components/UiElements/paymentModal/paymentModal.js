@@ -11,11 +11,12 @@ import Classes from './paymentModal.module.scss'
 import ImageAll from '../ImageAll/ImageAll'
 import EmailVerificator from './emailVerificator/emailVerificator'
 import ReCAPTCHA from "react-google-recaptcha";
+import VatVerificator from './vatVerificator/vatVerificator'
 
 const axios = require('axios');
 const queryString = require('query-string');
 
-const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, monthlyPricing, planId, pricing, returningData}) => {
+const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, monthlyPricing, planId, pricing, returningData, rightColTitle}) => {
     
     const queryData = useStaticQuery(graphql`
     query PaymentImages {
@@ -53,10 +54,18 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const [showEmailValidation, setShowEmailValidation] = useState(false)
     const [startLogin, setStartLogin] = useState(false)
     const [ip, setIp] = useState("")
+    const [countryCode, setCountryCode] = useState("")
     const [recaptchaValid, setRecaptchaValid] = useState(false)
     const [urlParams, setUrlParams] = useState('')
     const [utmInterest, setUtmInterest] = useState('')
     const [planIdParam, setPlanIdParam] = useState('')
+
+    const [priceWVat, setPriceWVat] = useState()
+    const [priceExVat, setPriceExVat] = useState()
+    const [vatRate, setVatRate] = useState()
+    const [vatAmunt, setVatAmount] = useState()
+    const [vatValidated, setVatValidated] = useState()
+    const [reloadPaymentForm, setReloadPaymentForm] = useState()
 
     const isFreeTier = rawPriceIncVat === 0
     const majorUnitPriceIncVat = rawPriceIncVat / 100
@@ -79,11 +88,14 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
         setPaymentId(uuidv4())
 
-        axios.get('https://www.cloudflare.com/cdn-cgi/trace').then((res) => {
+        axios.get('https://www.cloudflare.com/cdn-cgi/trace').then((res) => {   
             res.data.split('\n').map(el => {
                 const keyValue = el.split(("="))
                 if(keyValue && keyValue[0] === 'ip') {
                     setIp(keyValue[1])
+                }
+                if(keyValue && keyValue[0] === 'loc') {
+                    setCountryCode(keyValue[1])
                 }
             })            
         })
@@ -445,45 +457,74 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         })
     }
 
-    useEffect(() => {
-        if(showModal && rawPriceIncVat && typeof window !== 'undefined' && !isFreeTier) {
-            axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
-                data: {
-                    type: "payment-methods",
-                    attributes: {
-                        amount: rawPriceIncVat,
-                        locale: 'en-US',
-                        currency: "USD" 
-                    }
+    const setupPaymentUi = (priceToPay, country) => {
+        console.log('priceToPay', priceToPay)
+        axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
+            data: {
+                type: "payment-methods",
+                attributes: {
+                    amount: priceToPay,
+                    locale: country,
+                    currency: "USD" 
                 }
-            }).then((res) => {
-                const response = res.data.data.attributes
-                
+            }
+        }).then((res) => {
+            const response = res.data.data.attributes
+            
+            const aydenConfiguration = {
+                locale: customLangCode || currentLang, // The shopper's locale. For a list of supported locales, see https://docs.adyen.com/checkout/components-web/localization-components.
+                environment: process.env.GATSBY_AYDEN_ENVIRONMENT, // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/checkout/components-web#testing-your-integration.  
+                originKey: process.env.GATSBY_AYDEN_ORIGIN_KEY, // Your client key. To find out how to generate one, see https://docs.adyen.com/development-resources/client-side-authentication. Web Components versions before 3.10.1 use originKey instead of clientKey.
+                paymentMethodsResponse: response, // The payment methods response returned in step 1.
+                onChange: handleOnChange, // Your function for handling onChange event
+                onAdditionalDetails: handleOnAdditionalDetails, // Your function for handling onAdditionalDetails event,
+                showPayButton: false,
+                paymentMethodsConfiguration: {
+                    card: {
+                        hasHolderName: true,
+                        holderNameRequired: true
+                    }
+                },
+                hasHolderName: true,
+                holderNameRequired: true,
+                amount: { value: priceToPay, currency: 'USD' }
+            };
 
-                const aydenConfiguration = {
-                    locale: customLangCode || currentLang, // The shopper's locale. For a list of supported locales, see https://docs.adyen.com/checkout/components-web/localization-components.
-                    environment: process.env.GATSBY_AYDEN_ENVIRONMENT, // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/checkout/components-web#testing-your-integration.  
-                    originKey: process.env.GATSBY_AYDEN_ORIGIN_KEY, // Your client key. To find out how to generate one, see https://docs.adyen.com/development-resources/client-side-authentication. Web Components versions before 3.10.1 use originKey instead of clientKey.
-                    paymentMethodsResponse: response, // The payment methods response returned in step 1.
-                    onChange: handleOnChange, // Your function for handling onChange event
-                    onAdditionalDetails: handleOnAdditionalDetails, // Your function for handling onAdditionalDetails event,
-                    showPayButton: false,
-                    paymentMethodsConfiguration: {
-                        card: {
-                            hasHolderName: true,
-                            holderNameRequired: true
-                        }
-                    },
-                    hasHolderName: true,
-                    holderNameRequired: true,
-                    amount: { value: rawPriceIncVat, currency: 'USD' }
-                };
+            checkout = new AdyenCheckout(aydenConfiguration);
+            setLoading(false)
+            let card = checkout.create('dropin').mount(aydenRef.current)
+            
+        })
+    }
 
-                checkout = new AdyenCheckout(aydenConfiguration);
-                setLoading(false)
-                const card = checkout.create('dropin').mount(aydenRef.current)
+    const setVatValidatedHandler = (valid) => {
+        setReloadPaymentForm(true)
+        setVatValidated(valid)
+        setReloadPaymentForm(false)
+        checkout = null
+        console.log('valid!')
+        setupPaymentUi(priceExVat * 100, countryCode)
+        
+    }
 
-            })
+    useEffect(() => {        
+
+        if(showModal && countryCode && typeof window !== 'undefined' && !isFreeTier) {
+            axios.get(`${process.env.GATSBY_HUB_URL}/v1/subscriptions/payments/vats/calculate?amount=${majorUnitPriceExVat}&country_code=${countryCode}`)
+            .then((res) => {
+                console.log('VAT RES', res)
+                if(res.data && res.data.data && res.data.data.attributes) {
+                    const vatData = res.data.data.attributes
+                    setPriceWVat(vatData.amount_including_vat)
+                    setPriceExVat(vatData.amount_excluding_vat)
+                    setVatRate(vatData.vat_rate)
+                    setVatAmount(vatData.vat_amount)
+
+                    setupPaymentUi(vatData.amount_including_vat * 100, countryCode)
+                }
+            }).catch((err) => {
+                console.log('VAT ERR', err)
+            })   
         } else if(showModal && isFreeTier) {
             setLoading(false)
         }
@@ -501,7 +542,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                 <div className={Classes.close}>
                                     <button className="btn btn-unstyled" onClick={() => setShowModal(false)}>&#10005;</button>
                                 </div>
-                                <h4>Cobiro {showModal}</h4>
+                                <h3 className="space-xs-up no-mt">{rightColTitle}</h3>
+                                <p className="text-bold small space-small-xs-up">Cobiro {showModal}</p>
                                 <p className="text-xs-small">
                                     {monthlyPricing ?
                                     "You’ll be charged monthly until you cancel your subscription."
@@ -509,20 +551,27 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                     "You’ll be charged yearly until you cancel your subscription."
                                     }
                                 </p>
+                                <div className={Classes.borderSpacer}></div>
                                 <table className="table text-xs-small table-unstyled">
                                 <tbody>
                                     <tr>
-                                        <td>Subtotal</td>
-                                        <td className="text-right">{price}</td>
+                                        <td>Item subtotal</td>
+                                        <td className="text-right">${priceExVat}</td>
                                     </tr>
                                     <tr>
 
-                                    <td>VAT 25%</td>
-                                    <td className="text-right">{VAT}</td>
+                                    <td className={vatValidated ? Classes.lineThrough : null}>VAT {vatRate * 100}%</td>
+                                    <td className={["text-right", vatValidated ? Classes.lineThrough : null].join(' ')}>${vatAmunt}</td>
                                     </tr>
+                                     <tr>
+                                        <td colSpan="2">
+                                            <VatVerificator vatValidatedHandler={setVatValidatedHandler} />
+                                        </td>
+                                    </tr>                                   
+                                    <tr><td className={Classes.borderSpacer}></td><td className={Classes.borderSpacer}></td></tr>
                                     <tr>
-                                        <td className="text-bold">Total incl. VAT</td>
-                                        <td className="text-right text-bold">{priceIncVAT}/{monthlyPricing ? 'month' : 'year'}</td>
+                                        <td className="text-bold">Total {vatValidated ? '' : 'incl. VAT'}</td>
+                                        <td className="text-right text-bold">${vatValidated ? priceExVat : priceWVat}/{monthlyPricing ? 'month' : 'year'}</td>
                                     </tr>
                                 </tbody>
                                 </table>
@@ -580,7 +629,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             {!isFreeTier ?
                                 <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.paymentInformation].join(' ')}>Payment information</p>
                             : null}
-                            <div className="space-xs-up" ref={aydenRef}></div>
+                            {!reloadPaymentForm ? <div className="space-xs-up" ref={aydenRef}></div> : null}
                             <button 
                                 className={["btn btn-full-width", submitSuccess ? Classes.successBtn : null].join(' ')} 
                                 onClick={handleOnSubmit} 
@@ -591,7 +640,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                             Loading
                                         </LoadingSpinner> 
                                         : !isFreeTier ? 
-                                            `Pay ${priceIncVAT}` 
+                                            `Pay $${vatValidated ? priceExVat : priceWVat}` 
                                         : showEmailValidation ?
                                             'Submit'
                                         : 'Sign up'}

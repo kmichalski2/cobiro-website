@@ -1,0 +1,17 @@
+@import '../../layout/style/globals';
+
+.IconCardRounded {
+    border-radius: 1.25rem;
+}
+
+.IconCardRounded {
+    padding-bottom: 1rem!important;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: $black;
+    box-shadow: none!important;
+}
+
+.text {
+    padding-bottom: 4rem;
+}

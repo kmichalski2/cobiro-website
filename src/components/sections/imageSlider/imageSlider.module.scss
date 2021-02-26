@@ -1,0 +1,21 @@
+@import '../../layout/style/globals';
+
+.image {
+    width: 31.25rem;
+}
+
+// .btnLast {
+//     margin-left: 1rem;
+// }
+
+.cards {
+    width: 100vw;
+    margin: 0 0.3rem;
+
+    &::-webkit-scrollbar { width: 0 !important }
+
+    .image {
+        margin: 0.8375rem;
+    }
+}
+

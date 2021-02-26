@@ -1,0 +1,12 @@
+@import '../../layout/style/globals';
+
+.card {
+    display: block !important;
+    padding: 2.5rem;
+}
+
+@include mq($from: lg) {
+    .card {
+        padding: 5rem;
+    }
+}

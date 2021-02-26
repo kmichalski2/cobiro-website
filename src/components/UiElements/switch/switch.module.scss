@@ -46,13 +46,17 @@
             }
 
             &.left {
+                transition: all 0.1s;
                 &::before { 
                     left: 0.25rem;
                 }
             }
             &.right {
+                background-color: #42CB91;
+                transition: all 0.1s;
                 &::before { 
                     left: 1.75rem;
+
                 }
             }
 

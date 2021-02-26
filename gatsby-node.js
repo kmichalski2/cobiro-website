@@ -145,11 +145,96 @@ exports.createPages = async function({ graphql, actions }) {
                     mediaDownloadText
                     mediaDownloadTitle
                   }
+                ... on DatoCmsButtonMosaik {
+                  title
+                  text
+                  bgColor {
+                    hex
+                  }
+                  narrowButtonTopLeftText
+                  narrowButtonTopLeftImage {
+                    url
+                    fixed(height: 100) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  narrowButtonTopMiddleImage {
+                    url
+                    fixed(height: 500) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  narrowButtonTopMiddleText
+                  narrowButtonTopMiddleLinkText
+                  narrowButtonTopMiddleInternalLink {
+                    slug
+                  }
+                  narrowButtonTopMiddleExternalLink
+                  wideButtonBottomLeftText
+                  wideButtonBottomLeftLinkText
+                  wideButtonBottomLeftInternalLink {
+                    slug
+                  }
+                  wideButtonBottomLeftExternalLink
+                  wideButtonBottomLeftImage {
+                    url
+                    fixed(height: 500) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  buttonRightBigText
+                  buttonRightBigLinkText
+                  buttonRightBigInternalLink {
+                    slug
+                  }
+                  buttonRightBigExternalLink
+                  buttonRightBigBackgroundImage {
+                    url
+                    fixed(height: 800) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  buttonRightBigImage {
+                    url
+                    fixed(height: 800) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                }
                 ... on DatoCmsJumboHeader {
                   backgroundColor
+                  bottomBgColor {
+                    hex
+                  }
                   topGradiantColor {
                     hex
                   }
+                  gradiantBottomWGradiantLine
                   bottomGradiantColor {
                     hex
                   }
@@ -177,6 +262,7 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                   secondaryExternalLinkUrl
                   alignment
+                  paddingBottom
                   bgColor {
                     hex
                   }
@@ -200,7 +286,7 @@ exports.createPages = async function({ graphql, actions }) {
                     alt
                     width
                     height
-                    fluid(maxWidth: 1200, imgixParams: {q: 50}) {
+                    fluid(maxWidth: 2000, imgixParams: {q: 50}) {
                       width
                       height
                       srcSet
@@ -231,6 +317,23 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                   textColor
                 }
+                ... on DatoCmsMultipleLink {
+                  title
+                  text
+                  bgColor {
+                    hex
+                  }
+                  linkCollection {
+                    links {
+                      title
+                      text
+                      internalLink {
+                        slug
+                      }
+                      externalLink
+                    }
+                  }
+                }
                 ... on DatoCmsExplanationGiftCard {
                   title
                   text
@@ -238,6 +341,227 @@ exports.createPages = async function({ graphql, actions }) {
                   linkUrl
                   footnote
                   leftText
+                }
+                ... on DatoCmsCtaCardWithGradiantLine {
+                  title
+                  text
+                  linkTitle
+                  internalLinkGradiantCard {
+                    slug
+                  }
+                  externalLinkGradiantCard
+                  boxBackgroundColor {
+                    hex
+                  }
+                  sectionBackgroundColor {
+                    hex
+                  }
+                }
+                ... on DatoCmsCardsWithIconBottom {
+                  title
+                  text
+                  cards {
+                    cards {
+                      title
+                      text
+                      linkTitle
+                      internalLink {
+                        slug
+                      }
+                      externalLink
+                      icon {
+                        alt
+                        width
+                        height
+                        url
+                        fixed(width: 132) {
+                          width
+                          height
+                          srcSet
+                          base64
+                          aspectRatio
+                          src
+                        }
+                      }
+                    }
+                  }
+                  bgColor {
+                    hex
+                  }
+                }
+                ... on DatoCmsFourUp {
+                  text
+                  sectionBackgroundColor {
+                    hex
+                  }
+                  box1Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 400, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box1Text
+                  box2Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 400, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box2Text
+                  box3Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 400, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                    box3Text
+                    box4Icon {
+                      path
+                      url
+                      alt
+                      width
+                      height
+                      fluid(maxWidth: 400, imgixParams: {q: 80}) {
+                        width
+                        height
+                        srcSet
+                        base64
+                        aspectRatio
+                        src
+                        sizes
+                      }
+                    }
+                  box4Text
+                }
+                ... on DatoCmsExplanationImageWithLogo {
+                  title
+                  text
+                  image {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 1200, imgixParams: {q: 50}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  backgroundImage {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 1200, imgixParams: {q: 50}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  bgColor {
+                    hex
+                  }
+                  logosTitle
+                  logosText
+                  logos {
+                    alt
+                    width
+                    height
+                    url
+                    fixed(height: 50) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                    
+                }
+                ... on DatoCmsImageWithTextAndThreeUp {
+                  title
+                  text
+                  image {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 1200, imgixParams: {q: 50}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box1Title
+                  box2Title
+                  box3Title
+                  box1Subtitle
+                  box2Subtitle
+                  box3Subtitle
+                  box1Text
+                  box2Text
+                  box3Text
+                  box1InternalLink {
+                    slug
+                  }
+                  box2InternalLink {
+                    slug
+                  }
+                  box3InternalLink {
+                    slug
+                  }
+                  box1ExternalLink
+                  box2ExternalLink
+                  box3ExternalLink
+                  bgColor {
+                    hex
+                  }
                 }
                 ... on DatoCmsThreeUp {
                   backgroundColor
@@ -247,6 +571,10 @@ exports.createPages = async function({ graphql, actions }) {
                   textColor
                   title
                   text
+                  textLeft
+                  invisibleBoxes
+                  textLeft
+                  invisibleBoxes
                   bigIcons
                   imagesInsteadOfIcons
                   box1Icon {
@@ -322,6 +650,44 @@ exports.createPages = async function({ graphql, actions }) {
                   box5Footnote
                   box6Footnote
                 }
+                ... on DatoCmsOffice {
+                  title
+                  text
+                  mapImage {
+                    alt
+                    url
+                    fluid(maxWidth: 1800) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  bgColor {
+                    hex
+                  }
+                  offices {
+                    title
+                    text
+                    
+                    image {
+                      alt
+                      url
+                      fluid(maxWidth: 600) {
+                        width
+                        height
+                        srcSet
+                        base64
+                        aspectRatio
+                        src
+                        sizes
+                      }
+                    }
+                  }
+                }
                 ... on DatoCmsExplanationWImage {
                   backgroundColor
                   topGradiantColor {
@@ -359,6 +725,42 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                   }
                   leftText
+                  iconWText {
+                    features {
+                      ... on DatoCmsFeatureItem {
+                        icon {
+                          alt
+                          width
+                          height
+                          url
+                          fixed(width: 30) {
+                            width
+                            height
+                            srcSet
+                            base64
+                            aspectRatio
+                            src
+                          }
+                        }
+                        text
+                      }
+                    }
+                  }
+                  showIconWTextAsCards
+                  iconsTop {
+                    alt
+                    width
+                    height
+                    url
+                    fixed(width: 30) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
                 }
                 ... on DatoCmsGallery {
                   title
@@ -457,6 +859,21 @@ exports.createPages = async function({ graphql, actions }) {
                   videoEmbedUrl
                 }
                 ... on DatoCmsCtaJumbo {
+                  jumboCtaImage {
+                    alt
+                    url
+                    width
+                    height
+                    fluid(maxWidth: 1200) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
                   icon {
                     url
                     alt
@@ -722,6 +1139,7 @@ exports.createPages = async function({ graphql, actions }) {
                     yearlyPriceName
                     yearlyPriceExtraText
                     yearlyPriceBillingRate
+                    paymentModalRightColTitle
                     row {
                       columns
                       labelText
@@ -819,11 +1237,42 @@ exports.createPages = async function({ graphql, actions }) {
                   title
                   text
                   narrowImage
+                  imageContainerWidth
                   wideImage
                   textAboveImage
                   linkTitle
                   internalLinkImage {
                     slug
+                  }
+                  backgroundImageTop {
+                    alt
+                    url
+                    width
+                    height
+                    fluid(maxWidth: 1600) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  backgroundImageOverflowingUpperSection {
+                    alt
+                    url
+                    width
+                    height
+                    fluid(maxWidth: 1600) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
                   }
                   videoEmbedCode
                   bgColor {
@@ -866,6 +1315,19 @@ exports.createPages = async function({ graphql, actions }) {
                   externalLinkCtaCard
                   backgroundColorCtaCardSection {
                     hex
+                  }
+                  ctaSectionBackgroundImage {
+                    alt
+                    url
+                    fluid(maxWidth: 2000) {
+                      aspectRatio
+                      base64
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
                   }
                   ctaCard {
                     title
@@ -1014,6 +1476,179 @@ exports.createPages = async function({ graphql, actions }) {
                     hex
                   }
                   textColor
+                }
+                ... on DatoCmsCtaCardSimple {
+                  title
+                  text
+                  linkTitle
+                  externalLinkCtaCard
+                  internalLinkCtaCard {
+                    slug
+                  }
+                  image {
+                    fluid(maxWidth: 1000) {
+                      aspectRatio
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
+                    url
+                  }
+                  backgroundImage {
+                    fluid(maxWidth: 1200) {
+                      aspectRatio
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
+                    url
+                  }
+                  backgroundLogo {
+                    fluid(maxWidth: 600) {
+                      aspectRatio
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
+                    url
+                  }
+                  imageOverflowing
+                  sectionBgColor {
+                    hex
+                  }
+                  boxBgColor {
+                    hex
+                  }
+                }
+                ... on DatoCmsThreeUpDottedLine {
+                  text
+                  box1Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box1Text
+                  box1Image {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box2Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box2Text
+                  box2Image {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box3Icon {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  box3Text
+                  box3Image {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                }
+                ... on DatoCmsImageSlider {
+                  title
+                  text
+                  linkTitle
+
+                  externalLinkSlider
+                  images {
+                    fixed(width: 600) {
+                      aspectRatio
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
+                    url
+                    alt
+                  }
+                  bgColor {
+                    hex
+                  }
                 }
               }
             }

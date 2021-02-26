@@ -10,7 +10,7 @@ const ImageSection = ({ data }) => {
 
     const text = (
         <>
-            <HtmlText RawHtml={data.text} classes={["space-big-xs-up", data.textColor === 'light' ? "text-white" : null].join(' ')}/>
+            <HtmlText RawHtml={data.text} classes={["space-big-xs-up", data.textColor === 'light' ? "text-white" : null, data.backgroundImageOverflowingUpperSection ? "text-black" : null].join(' ')}/>
             {data.featuresWIcon ?
                 <div className="row center-xs space-xs-up">
                 {data.featuresWIcon.features.map((f, i) => 
@@ -21,11 +21,36 @@ const ImageSection = ({ data }) => {
                 )}
                 </div>
             : null }
+            {data.linkTitle && data.internalLinkImage ?
+                <AnyLink 
+                    link={data.internalLinkImage.slug} 
+                    internal
+                    title={data.linkTitle} 
+                    button
+                    classes="space-xs-up"
+                />
+            : null }
+            {
+                data.backgroundImageTop ?
+                    <ImageAll
+                        image={data.backgroundImageTop}
+                        alt={data.backgroundImageTop.alt}
+                        classes={Classes.backgroundTop}
+                        />
+                : null
+            }
         </>
     )
 
     return (
-        <Section bgColor={data.bgColor && data.bgColor.hex}>
+        <Section bgColor={data.bgColor && data.bgColor.hex} classes={[Classes.section, data.backgroundImageOverflowingUpperSection ? Classes.paddingTopBig : null].join(' ')}>
+            {data.backgroundImageOverflowingUpperSection ?
+                <ImageAll
+                    image={data.backgroundImageOverflowingUpperSection}
+                    alt={data.backgroundImageOverflowingUpperSection.alt}
+                    classes={Classes.backgroundTopOverFlowing}
+                    />
+            : null}
             <div className="container">
                 <div className={["row center-xs", data.textColor === 'light' ? "text-white" : null].join(' ')}>
                     <div className="col col-xs-12 col-md-8 text-center">
@@ -34,9 +59,9 @@ const ImageSection = ({ data }) => {
                     </div>
                 </div>
                 <div className={["row center-xs", data.textColor === 'light' ? "text-white" : null].join(' ')}>
-                    <div className={["col col-xs-12 text-center", data.narrowImage ? "col-md-8" : ""].join(' ')}>
+                    <div className={["col col-xs-12 text-center", data.narrowImage ? "col-md-8" : data.imageContainerWidth ? "col-md-12" : ""].join(' ')}>
                         {data.image ? 
-                            <ImageAll image={data.image} fullWidth alt={data.image.alt || data.title} classes={[data.narrowImage || data.wideImage ? null : Classes.fullWidth, data.text || data.featuresWIcon ? "space-big-xs-up" : null].join(' ')} />
+                            <ImageAll image={data.image} fullWidth alt={data.image.alt || data.title} classes={[data.narrowImage || data.imageContainerWidth ? null : data.wideImage ? Classes.extraFullWidth : Classes.fullWidth, data.text || data.featuresWIcon ? "space-big-xs-up" : null].join(' ')} />
                         : null}
                         {data.videoEmbedCode && !data.image ?
                             <div className={["embed-responsive", data.narrowImage ? null : [Classes.fullWidth, Classes.noBorderRadius].join(' '), data.text || data.featuresWIcon ? "space-big-xs-up" : null].join(' ')}>
@@ -49,15 +74,7 @@ const ImageSection = ({ data }) => {
                 <div className={["row center-xs", data.textColor === 'light' ? "text-white" : null].join(' ')}>
                     <div className="col col-xs-12 col-md-8 text-center">
                         {!data.textAboveImage ? text : null }
-                        {data.linkTitle && data.internalLinkImage ?
-                            <AnyLink 
-                                link={data.internalLinkImage.slug} 
-                                internal
-                                title={data.linkTitle} 
-                                button
-                                light={ true }
-                            />
-                        : null }
+                        
                     </div>
                 </div>
                 : null }

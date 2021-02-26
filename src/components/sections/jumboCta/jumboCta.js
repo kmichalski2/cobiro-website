@@ -12,23 +12,27 @@ import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
 const JumboCta = ({ data }) => {
 
   const bgColor = data.ctaBgColor && data.ctaBackgroundColor ? data.ctaBackgroundColor.hex : null
-  const textColor = data.ctaBgColor && data.textColor === 'light' ? "text-white" : "text-black"
-  const btnColor = data.ctaBgColor && data.textColor === 'light' ? "btn-white" : null
+  const textColor = data.textColor === 'light' || null
+  // const btnColor = data.textColor === 'light' ? "btn-white" : null
   const backgroundImage = data.backgroundImage
   const icon = data.icon
+  const jumboCtaImage = data.jumboCtaImage
+
+  console.log(data, 'data')
 
   return (
     <Section
       bgColor={bgColor && !backgroundImage ? bgColor : null}
     >
         <div className="container">
-          <div className="row text-center center-xs">
-            <div className="col-xs-12 col-md-8 col-lg-6">
+          <div className={["row", !jumboCtaImage ? "center-xs" : null ].join(' ')}>
+            <div className={["col col-xs-12", jumboCtaImage ? "col-lg-6" : "col-lg-6 col-md-8"].join(' ')}>
               <div className={backgroundImage ? Classes.content : null}>
-                <HeaderWText 
+                <HeaderWText
+                  jumboCtaImage={jumboCtaImage}
                   icon={icon}
                   iconLarge
-                  centered
+                  centered={!jumboCtaImage}
                   title={data.title}
                   h2
                   text={data.text}
@@ -53,10 +57,13 @@ const JumboCta = ({ data }) => {
                     }
                     : ""
                   ]}
-                  light={data.textColor === 'light'}
-
+                  light={textColor}
                 />
+                
               </div>
+            </div>
+            <div className={[Classes.jumboCtaImage, "col-xs-12 col-lg-6"].join(' ')}>
+              <ImageAll image={jumboCtaImage} />
             </div>
           </div>
         </div>

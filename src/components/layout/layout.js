@@ -52,6 +52,20 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
         menuItemOrder
         submenuFooterLinkTitle
         submenuFooterText
+        submenuFooterTitle
+        submenuFooterImage {
+          alt
+          fluid {
+            aspectRatio
+            base64
+            height
+            src
+            srcSet
+            width
+            sizes
+          }
+          url
+        }
         submenuFooterLink {
           slug
         }
@@ -176,6 +190,18 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
 
         rightColumnTitle
         rightColumnDescription
+        rightColumnLogo {
+          alt
+          url
+          fixed(height: 18) {
+            width
+            srcSet
+            src
+            sizes
+            height
+            aspectRatio
+          }
+        }
         submenuColumnRightTitle
         submenuColumnRightLink {
           slug

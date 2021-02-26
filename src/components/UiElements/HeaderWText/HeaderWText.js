@@ -5,7 +5,7 @@ import Classes from './HeaderWText.module.scss'
 import AnyLink from '../AnyLink/AnyLink'
 import ImageAll from '../ImageAll/ImageAll'
 
-const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes, icon, iconLarge, iconTitle, centered, children }) => {
+const HeaderWText = ({ title, h1, h2, h3, h4, text, links, light, darkButton, classes, icon, iconLarge, iconTitle, centered, children, jumboCtaImage }) => {
 
     const headerSpacing = !text && !children ? Classes.headerSpacing : null
     return (
@@ -13,7 +13,7 @@ const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes, icon, ico
         { icon || iconTitle ?
         <div className={[Classes.iconRow, centered ? Classes.center : null, iconLarge ? Classes.iconLarge : null].join(' ')}>
             {icon ?
-            <ImageAll image={icon} />     
+            <ImageAll image={icon} />
             : null}
             {iconTitle ?
             <h3 className={light ? Classes.white : null}>{iconTitle}</h3>
@@ -26,6 +26,8 @@ const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes, icon, ico
             <h2 className={[headerSpacing, light ? Classes.white : null].join(' ')}>{ title }</h2>
         : h3 && title ? 
             <h3 className={[headerSpacing, light ? Classes.white : null].join(' ')}> { title } </h3>
+        : h4 && title ? 
+            <h4 className={[headerSpacing, light ? Classes.white : null].join(' ')}> { title } </h4>
         : null }
         <HtmlText RawHtml={text} classes={[Classes.text, light ? Classes.white : null].join(' ')}/>
         { children ? 
@@ -44,7 +46,7 @@ const HeaderWText = ({ title, h1, h2, h3, text, links, light, classes, icon, ico
                 large={l.large || false} 
                 button={l.button}
                 secondary={l.secondary || false} 
-                light={ light || false }
+                light={ !darkButton && light || false }
                 classes={i > 0 ? Classes.spaceLeft : null}
             />
         )) : null}

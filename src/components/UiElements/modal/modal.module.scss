@@ -4,13 +4,17 @@
     @include card;
     @include card-visible;
         
-    
+    position: absolute;
+    left: 50%;
+    top: 5rem;
     display: flex column;
     align-items: stretch;
     z-index: 999;
     max-width: 60rem;
     animation: slide-up 0.6s;
     padding: 0!important;
+    transform: translateX(-50%);
+
     
     @include mq($from: lg) {
         &.modalSmall {
@@ -25,17 +29,7 @@
     @include mq($until: md) {
         max-width: 95%;
     }
-    @include mq($until: lg) {
-        top: 5rem;
-    }
-    
-    /// dymmy content - delete before production ///
-    img {
-        
-    }
-    ///////////////////////////////////////////////
 
-    
 }
 
 @keyframes slide-up {

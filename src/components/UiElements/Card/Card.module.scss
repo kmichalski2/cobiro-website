@@ -23,4 +23,10 @@
     &.leftAligned {
         text-align: left;
     }
+
+    &.invisibleBox {
+        background-color: transparent;
+        padding: 0;
+        padding-right: 5rem;
+    }
 }

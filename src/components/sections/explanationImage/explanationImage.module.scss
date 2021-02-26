@@ -31,3 +31,54 @@
 .section {
     overflow: hidden;
 }
+
+.featureWrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    .feature {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 50%;
+        margin-bottom: 1.5rem;
+        padding-right: 1rem;
+
+        @include mq($until: sm) {
+            width: 100%
+        }
+
+        p {
+            margin-left: 0.7rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: $black;
+        }
+
+        .featureIcon {
+            width: 1.8375rem;
+            padding: 0.25rem;
+        }
+    }
+}
+
+.iconsTop {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 3rem;
+
+    .icon {
+        height: 1.5rem;
+        margin-right: 1.5rem;
+    }
+}
+
+.IconCardRounded {
+    border-radius: 1.25rem;
+    padding-bottom: 1rem!important;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: $black;
+    box-shadow: none!important;
+}

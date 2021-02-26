@@ -28,6 +28,17 @@ import MediaDownload from './sections/mediaDownload/mediaDownload'
 import ExpandablePersonsCard from './sections/expandablePersonsCard/expandablePersonsCard'
 import IframeForm from "./sections/iframeForm/iframeForm"
 import CtaCard from "./sections/ctaCard/ctaCard"
+import FourUp from "./sections/foruUp/fourUp"
+import ExplanationImageWithLogos from "./sections/explanationImageWithLogos/explanationImageWithLogos"
+import ImageTextThreeUp from "./sections/imageTextThreeUp/imageTextThreeUp"
+import OfficeLocations from "./sections/officeLocations/officeLocations"
+import CtaCardSimple from "./sections/ctaCardSimple/ctaCardSimple"
+import ThreeUpDottedLine from "./sections/threeUpDottedLine/threeUpDottedLine"
+import MulitpleLinks from "./sections/multipleLinks/multipleLinks"
+import CardsIconBottom from "./sections/cardsIconBottom/cardsIconBottom"
+import CtaCardGradiantLine from "./sections/ctaCardGradiantLine/ctaCardGradiantLine"
+import ButtonMosaik from "./sections/buttonMosaik/buttonMosaik"
+import ImageSlider from "./sections/imageSlider/imageSlider"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -133,6 +144,28 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <ExpandablePersonsCard data={data.sections[index]} key={index}/>
                 case 'CtaCardWithImageAndBullit':
                     return <CtaCard data={data.sections[index]} key={index}/>
+                case 'FourUp':
+                    return <FourUp data={data.sections[index]} key={index}/>
+                case 'ExplanationImageWithLogo':
+                    return <ExplanationImageWithLogos data={data.sections[index]} key={index}/>
+                case 'ImageWithTextAndThreeUp':
+                    return <ImageTextThreeUp data={data.sections[index]} key={index}/>
+                case 'Office':
+                    return <OfficeLocations data={data.sections[index]} key={index}/>
+                case 'CtaCardSimple':
+                    return <CtaCardSimple data={data.sections[index]} key={index}/>
+                case 'ThreeUpDottedLine':
+                    return <ThreeUpDottedLine data={data.sections[index]} key={index}/>
+                case 'MultipleLink':
+                    return <MulitpleLinks data={data.sections[index]} key={index}/>
+                case 'CardsWithIconBottom':
+                    return <CardsIconBottom data={data.sections[index]} key={index}/>
+                case 'CtaCardWithGradiantLine':
+                    return <CtaCardGradiantLine data={data.sections[index]} key={index}/>
+                case 'ButtonMosaik':
+                    return <ButtonMosaik data={data.sections[index]} key={index}/>
+                case 'ImageSlider':
+                    return <ImageSlider data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }

@@ -18,7 +18,7 @@ const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
           return a.footerItemOrder - b.footerItemOrder;
         }).map((col, index) => (
           <div key={index} className="col col-xs-12 col-sm-6 col-md-4 col-lg-2 text-left-lg center-xs start-lg space-xs space-sm space-md">
-           <h4 className="space-xs-up">{col.columnHeading}</h4>
+           <h4 style={{marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '1px solid #D6D6D6'}}>{col.columnHeading}</h4>
            <ul className="list-unstyled menu">
              {col.column.map((el, index) => (
                <li key={index} className={el.text ? 'text-darkgrey' : null}>
@@ -49,8 +49,13 @@ const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
     <div className="footer-bottom">
       <div className="container">
         <div className="row space-between text-center-xs text-left-sm">
-          <div className="col col-sm-12 col-lg-4 text-center-sm space-xs space-sm space-md flex-lg middle-lg">
-            <ul className="list-inline block-xs flex-lg menu">
+          <div className="col col-sm-12 col-lg-6 text-center-sm space-xs space-sm space-md flex-lg middle-lg">
+            <ul className="list-inline block-xs flex-lg middle-xs menu">
+              <li className="space-xs space-sm space-md">
+              <AnyLink link="/" noArrow noPadding regular internal>
+                  <img style={{width: '150px'}} src={logo} alt="Cobiro logo" />
+                </AnyLink>
+              </li>
               <li>
                 <p className="small text-darkgrey">
                   Copyright &#169; {new Date().getFullYear()} Cobiro
@@ -58,7 +63,7 @@ const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks }) => {
               </li>
             </ul>
           </div>
-          <div className="col col-sm-12 col-lg-8 text-center-sm space-xs space-sm space-md center-xs end-lg middle-lg flex">
+          <div className="col col-sm-12 col-lg-6 text-center-sm space-xs space-sm space-md center-xs end-lg middle-lg flex">
               <ul className="list-inline block-xs flex-lg middle-xs menu">
                 {bottomLinks && bottomLinks.linkItems && bottomLinks.linkItems.length > 0 ?
                 bottomLinks.linkItems.map((l, i ) => (

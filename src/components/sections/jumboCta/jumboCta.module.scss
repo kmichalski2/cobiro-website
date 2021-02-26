@@ -13,7 +13,24 @@
     padding: 4rem 0;
 
     @include mq($until: lg) {
-        padding: 0rem 0;
+        padding: 0rem 2.75rem;
     }
+}
+
+.jumboCtaImage {
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   max-height: 90%;
+   padding-left: 4rem;
+}
+
+@include mq($until: lg) {
+    .jumboCtaImage {
+        position: relative;
+        margin-bottom: -7.5rem;
+        padding-top: 4rem;
+
+     }
 }
 

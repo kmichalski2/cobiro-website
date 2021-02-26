@@ -6,17 +6,17 @@ import AnyLink from '../AnyLink/AnyLink'
 
 import Classes from './IconCard.module.scss'
 
-const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg }) => {
+const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg, textLeft, invisibleBoxes, classes, checkmark }) => {
 
     return (
-        <Card shadow={shadow}>
+        <Card shadow={shadow} leftAligned={textLeft} invisibleBox={invisibleBoxes} classes={classes}>
             <ImageAll 
                 image={image} 
                 classes={[Classes.icon, iconImg ? Classes.iconImg : iconBig ? Classes.iconBig : null].join(' ')}
                 alt={alt}/>
            
-                <div className={Classes.textWrapper}>
-                    <h3 className={light ? Classes.white : null}>{title}</h3>
+                <div className={[Classes.textWrapper, textLeft ? Classes.textLeft : null].join(' ')}>
+                    <h4 className={light ? Classes.white : null}>{title}</h4>
                     
                     {text ? 
                         <HtmlText RawHtml={text} classes={[Classes.text, light ? Classes.white : null].join(' ')}/>
@@ -35,6 +35,9 @@ const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, 
                     />
                     : null}
                 </div>
+                {checkmark ?
+                    <div className={Classes.checkmark}/>
+                : null}
         </Card>
     )
 }

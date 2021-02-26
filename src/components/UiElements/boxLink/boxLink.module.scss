@@ -1,0 +1,36 @@
+@import '../../layout/style/globals';
+
+.linkBox {
+    color: $lightblack !important;
+    font-weight: inherit;
+    position: relative;
+    display: block;
+    padding-right: 0;
+
+    &::after {
+        content: '';
+        position: absolute;
+        right: 2rem  !important;
+        top: 50%  !important;
+        transform: translateY(-50%)  !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16'%3E%3Cpath d='M1.176,0A1.1,1.1,0,0,0,.117.742,1.161,1.161,0,0,0,.45,2.016L7.2,7.982.45,13.945a1.155,1.155,0,0,0-.436,1.1,1.128,1.128,0,0,0,.75.9,1.08,1.08,0,0,0,1.119-.277l7.73-6.821a1.162,1.162,0,0,0,0-1.731L1.883.287A1.085,1.085,0,0,0,1.176,0Z' transform='translate(0 0)' fill='%23707070'/%3E%3C/svg%3E")  !important;
+    }
+    &:hover {
+        &::after {
+            right: 1rem  !important;
+        }
+    }
+
+    &>div {
+        border: none !important;
+        padding-right: 3.2rem !important;
+    }
+
+    @include mq($until: md) {
+        &>div {
+            display: block;
+            padding: 2.5rem;
+            
+        }
+    }
+}

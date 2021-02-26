@@ -1,0 +1,19 @@
+
+
+.section {
+    overflow: visible;
+
+    .imageWrapper {
+        position: relative;
+        
+
+        .backgroundImage {
+            position: absolute;
+            height: 160%;
+            max-width: none;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
