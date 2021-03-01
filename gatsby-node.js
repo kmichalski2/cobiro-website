@@ -778,6 +778,19 @@ exports.createPages = async function({ graphql, actions }) {
                       src
                     }
                   }
+                  backgroundImage {
+                    alt
+                    url
+                    fluid(maxWidth: 2000) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
                 }
                 ... on DatoCmsGallery {
                   title
@@ -1253,6 +1266,7 @@ exports.createPages = async function({ graphql, actions }) {
                 ... on DatoCmsImage {
                   title
                   text
+                  noPaddingBottom
                   narrowImage
                   imageContainerWidth
                   wideImage

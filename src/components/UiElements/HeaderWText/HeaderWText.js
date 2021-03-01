@@ -5,7 +5,7 @@ import Classes from './HeaderWText.module.scss'
 import AnyLink from '../AnyLink/AnyLink'
 import ImageAll from '../ImageAll/ImageAll'
 
-const HeaderWText = ({ title, h1, h2, h3, h4, text, links, light, darkButton, classes, icon, iconLarge, iconTitle, centered, children, jumboCtaImage }) => {
+const HeaderWText = ({ title, h1, h2, h3, h4, text, links, light, darkButton, classes, icon, iconLarge, iconTitle, centered, children, jumboCtaImage, proFeature }) => {
 
     const headerSpacing = !text && !children ? Classes.headerSpacing : null
     return (
@@ -21,13 +21,13 @@ const HeaderWText = ({ title, h1, h2, h3, h4, text, links, light, darkButton, cl
         </div>
         : null }
         {h1 && title ? 
-            <h1 className={[headerSpacing, light ? Classes.white : null].join(' ')}>{ title }</h1>
+            <h1 className={[headerSpacing, light ? Classes.white : null, proFeature ? Classes.proFeature : null].join(' ')}>{ title }</h1>
         : h2 && title ? 
-            <h2 className={[headerSpacing, light ? Classes.white : null].join(' ')}>{ title }</h2>
+            <h2 className={[headerSpacing, light ? Classes.white : null, proFeature ? Classes.proFeature : null].join(' ')}>{ title }</h2>
         : h3 && title ? 
-            <h3 className={[headerSpacing, light ? Classes.white : null].join(' ')}> { title } </h3>
+            <h3 className={[headerSpacing, light ? Classes.white : null, proFeature ? Classes.proFeature : null].join(' ')}> { title } </h3>
         : h4 && title ? 
-            <h4 className={[headerSpacing, light ? Classes.white : null].join(' ')}> { title } </h4>
+            <h4 className={[headerSpacing, light ? Classes.white : null, proFeature ? Classes.proFeature : null].join(' ')}> { title } </h4>
         : null }
         <HtmlText RawHtml={text} classes={[Classes.text, light ? Classes.white : null].join(' ')}/>
         { children ? 

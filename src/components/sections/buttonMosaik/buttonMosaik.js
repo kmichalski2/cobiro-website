@@ -9,7 +9,6 @@ import Classes from './buttonMosaik.module.scss'
 
 
 const ButtonMosaik = ({ data }) => {
-    console.log('DATA', data)
     return (
         <Section bgColor={data.bgColor && data.bgColor.hex || null}>
             <div className="container">

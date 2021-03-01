@@ -43,7 +43,7 @@ const ImageSection = ({ data }) => {
     )
 
     return (
-        <Section bgColor={data.bgColor && data.bgColor.hex} classes={[Classes.section, data.backgroundImageOverflowingUpperSection ? Classes.paddingTopBig : null].join(' ')}>
+        <Section bgColor={data.bgColor && data.bgColor.hex} classes={[Classes.section, data.backgroundImageOverflowingUpperSection ? Classes.paddingTopBig : null, data.noPaddingBottom ? Classes.noPaddingBottom : null].join(' ')}>
             {data.backgroundImageOverflowingUpperSection ?
                 <ImageAll
                     image={data.backgroundImageOverflowingUpperSection}
@@ -61,10 +61,10 @@ const ImageSection = ({ data }) => {
                 <div className={["row center-xs", data.textColor === 'light' ? "text-white" : null].join(' ')}>
                     <div className={["col col-xs-12 text-center", data.narrowImage ? "col-md-8" : data.imageContainerWidth ? "col-md-12" : ""].join(' ')}>
                         {data.image ? 
-                            <ImageAll image={data.image} fullWidth alt={data.image.alt || data.title} classes={[data.narrowImage || data.imageContainerWidth ? null : data.wideImage ? Classes.extraFullWidth : Classes.fullWidth, data.text || data.featuresWIcon ? "space-big-xs-up" : null].join(' ')} />
+                            <ImageAll image={data.image} fullWidth alt={data.image.alt || data.title} classes={[data.narrowImage || data.imageContainerWidth ? null : data.wideImage ? Classes.extraFullWidth : Classes.fullWidth, data.text && !data.noPaddingBottom || data.featuresWIcon && !data.noPaddingBottom ? "space-big-xs-up" : null].join(' ')} />
                         : null}
                         {data.videoEmbedCode && !data.image ?
-                            <div className={["embed-responsive", data.narrowImage ? null : [Classes.fullWidth, Classes.noBorderRadius].join(' '), data.text || data.featuresWIcon ? "space-big-xs-up" : null].join(' ')}>
+                            <div className={["embed-responsive", data.narrowImage ? null : [Classes.fullWidth, Classes.noBorderRadius].join(' '), data.text && !data.noPaddingBottom || data.featuresWIcon && !data.noPaddingBottom ? "space-big-xs-up" : null].join(' ')}>
                                 <iframe src={data.videoEmbedCode} width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                             </div>
                         : null }

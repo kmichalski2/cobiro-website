@@ -7,8 +7,6 @@ import ImageAll from "../../UiElements/ImageAll/ImageAll"
 
 const ThreeUpDottedLine = ({ data }) => {
 
-  console.log(data, "date")
-
   return (
     <Section bgColor={data.sectionBackgroundColor && data.sectionBackgroundColor.hex}>
         <div className="container">

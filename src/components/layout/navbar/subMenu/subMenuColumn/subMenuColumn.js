@@ -18,8 +18,6 @@ const SubMenuColumn = ({ title, icon, link, submenuLinks, expandedDefault, borde
     useEffect(() => {
         setSearch(location.search)
     }, [location.search])
-
-    console.log('logo', logo, title)
     
     const subSubMenuClickHandler = (event) => {
         

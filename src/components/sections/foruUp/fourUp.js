@@ -6,8 +6,6 @@ import Classes from "./fourUp.module.scss"
 
 const FourUp = ({ data }) => {
 
-  console.log(data, 'data')
-
   return (
     <Section bgColor={data.sectionBackgroundColor && data.sectionBackgroundColor.hex} classes={Classes.section}>
         <div className="container">

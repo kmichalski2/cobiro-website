@@ -9,8 +9,6 @@ const ThreeUpPeople = ({ data }) => {
   const bigIcon = data.bigIcons
   const iconImg = data.imagesInsteadOfIcons
 
-  console.log('data', data)
-
   return (
     <Section bgColor={data.bgColor && data.bgColor.hex}>
       <div className={data.backgroundColor ? "bg-sway-inner" : null}>
