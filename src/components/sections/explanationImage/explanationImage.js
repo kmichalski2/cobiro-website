@@ -7,7 +7,7 @@ import ImageAll from "../../UiElements/ImageAll/ImageAll"
 import IconCard from "../../UiElements/IconCard/IconCard"
 
 const ExplanationImage = ({ data }) => {
- console.log('DATA', data)
+ console.log('DATAAAAAA', data)
   const image = (
     <div className={["space-sm space-xs", data.leftText && data.imageToEdge ? Classes.imageLeftEdge : !data.leftText && data.imageToEdge ? Classes.imageRightEdge : null].join(' ')}>
       <ImageAll 
@@ -28,6 +28,7 @@ const ExplanationImage = ({ data }) => {
       : null}
       <HeaderWText
         title={data.title}
+        proFeature={data.proFeature}
         h2
         text={data.text}
         light={data.textColor === 'light'}
@@ -93,6 +94,9 @@ const ExplanationImage = ({ data }) => {
       </div>
       : null}
       </div>
+      {data.backgroundImage ? 
+        <ImageAll backgroundImage image={data.backgroundImage}/> 
+      : null}
   </Section>
   )
 }
