@@ -19,6 +19,10 @@
         height: 25rem;
         bottom: 15rem;
         width: 100%;
+
+        &.gradiantAtBottom {
+            bottom: 0;
+        }
     }
     .bottomBgColor {
         position: absolute;

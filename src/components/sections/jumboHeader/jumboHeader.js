@@ -71,6 +71,7 @@ const JumboHeader = ({ data,  notificationPadding }) => {
       paddingBottomXsSm={alignment === 'image-left'}
       addedPadding={notificationPadding}
       gradiantBottom={gradiantBottom}
+      gradiantAtBottom={data.gradiantPositionAtBottom}
       bottomBgColor={data.bottomBgColor && data.bottomBgColor.hex || null}
       >
         <div className="container">

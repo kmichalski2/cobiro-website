@@ -60,6 +60,25 @@
             padding: 0.25rem;
         }
     }
+
+    &.vertical {
+        display: block;
+
+        .feature {
+            width: 100%;
+        }
+    }
+}
+
+.iconsBottomWrapper {
+    .iconBottom {
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }
 
 .iconsTop {
