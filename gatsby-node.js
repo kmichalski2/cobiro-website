@@ -100,6 +100,7 @@ exports.createPages = async function({ graphql, actions }) {
               hiddenMenuItems {
                 id
               }
+              blackBackground
               sections {
                 __typename
                 ... on DatoCmsContactPerson {
@@ -296,6 +297,61 @@ exports.createPages = async function({ graphql, actions }) {
                       src
                       sizes
                     }
+                  }
+                  backgroundImage {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 2000, imgixParams: {q: 50}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                }
+                ... on DatoCmsAnimatedExplanationImageSection {
+                  bgColor {
+                    hex
+                  }
+                  explanationImageSection {
+                    section {
+                      ... on DatoCmsSection {
+                        title
+                        text
+                        linkTitle
+                        externalLink
+                  
+                        image {
+                          path
+                          url
+                          alt
+                          width
+                          height
+                          fluid(maxWidth: 2000, imgixParams: {q: 50}) {
+                            width
+                            height
+                            srcSet
+                            base64
+                            aspectRatio
+                            src
+                            sizes
+                          }
+                        }
+                        alignment
+                        textColor
+                      }
+                    }
+                  }
+                }
+                ... on DatoCmsVoucherHeader {
+                  bgColor {
+                    hex
                   }
                 }
                 ... on DatoCmsVoucherHeader {

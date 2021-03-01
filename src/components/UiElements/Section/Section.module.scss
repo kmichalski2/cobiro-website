@@ -30,4 +30,24 @@
         bottom: 0;
         width: 100%;
     }
+
+    &.backgroundImageSection {
+        padding: 30rem 0;
+
+        .backgroundImage {
+            min-height: auto !important;
+            width: 110%;
+            max-width: none !important;
+            
+        }
+
+        @include mq($until: xl) {
+            padding: 7.5rem 0;
+            .backgroundImage {
+                opacity: 0.3;
+                width: 150%;
+                max-width: none !important;
+            }
+        } 
+    }
 }
