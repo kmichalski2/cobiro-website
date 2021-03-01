@@ -235,6 +235,7 @@ exports.createPages = async function({ graphql, actions }) {
                     hex
                   }
                   gradiantBottomWGradiantLine
+                  gradiantPositionAtBottom
                   bottomGradiantColor {
                     hex
                   }
@@ -746,8 +747,24 @@ exports.createPages = async function({ graphql, actions }) {
                       }
                     }
                   }
+                  stackIconWTextVertically
+                  proFeature
                   showIconWTextAsCards
                   iconsTop {
+                    alt
+                    width
+                    height
+                    url
+                    fixed(width: 30) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                    }
+                  }
+                  iconsBelowText {
                     alt
                     width
                     height

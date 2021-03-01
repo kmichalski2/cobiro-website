@@ -2,7 +2,7 @@ import React from 'react'
 
 import Classes from './Section.module.scss'
 
-const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, centered, children, textColor, id, addedPadding, classes, gradiantBottom, bottomBgColor }) => {
+const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, centered, children, textColor, id, addedPadding, classes, gradiantBottom, gradiantAtBottom, bottomBgColor }) => {
     return (
         <section 
             className={[classes ? classes : null, Classes.section, noBottomPadding ? Classes.noBottomPadding : null, paddingBottomXsSm ? Classes.paddingBottomXsSm : null, gradiantBottom ? Classes.gradiantBottom : null].join(' ')} 
@@ -10,7 +10,7 @@ const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, cen
             id={id}
             >
                 {gradiantBottom ? 
-                    <div className={Classes.backgroundGradiant}></div>
+                    <div className={[Classes.backgroundGradiant, gradiantAtBottom ? Classes.gradiantAtBottom : null].join(' ')}></div>
                 : null}
                 {bottomBgColor ? 
                     <div className={Classes.bottomBgColor} style={{backgroundColor: bottomBgColor}}></div>

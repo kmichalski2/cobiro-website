@@ -41,9 +41,9 @@ const ExplanationImage = ({ data }) => {
             large: data.showAsButton
           }
         ]}
-      />
+      >
       {data.iconWText && data.iconWText.features && data.iconWText.features.length > 0 ?
-      <div className={Classes.featureWrapper}>
+      <div className={[Classes.featureWrapper, data.stackIconWTextVertically ? Classes.vertical : null].join(' ')}>
         {!data.showIconWTextAsCards && data.iconWText && data.iconWText.features.map((f, i) => {
           return (
           <div key={i} className={Classes.feature}>
@@ -53,6 +53,15 @@ const ExplanationImage = ({ data }) => {
         )})}
         </div>
       : null}
+      {data.iconsBelowText && data.iconsBelowText && data.iconsBelowText.length > 0 ?
+      <div className={Classes.iconsBottomWrapper}>
+        {data.iconsBelowText.map((icon, i) => {
+          return (
+            <ImageAll key={i} image={icon} alt={icon.alt} classes={Classes.iconBottom}/>
+        )})}
+        </div>
+      : null}
+      </HeaderWText>
     </div>
   )
 
