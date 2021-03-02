@@ -1,0 +1,26 @@
+@import '../../layout/style/globals';
+
+.hr {
+    border-top: 2px solid $lightgrey;
+    margin: 2rem 0;
+}
+
+.card {
+    padding: 1rem;
+    background: #151515;
+    border-radius: 5px;
+    margin-bottom: 1.875rem;
+    border:none;
+    text-align: left;
+
+    &:focus {
+        outline: none;
+    }
+
+    &.invertedCard {
+        h4, p  {
+            color: $white;
+        }
+    }
+
+}

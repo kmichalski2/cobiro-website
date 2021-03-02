@@ -1,13 +1,67 @@
+@import '../../layout/style/globals';
+
+@include mq($from: lg) {
+    .section {
+        overflow: visible;
+        padding: 15rem 0;
+
+        .sections {
+            height: 90vh;
+            overflow: visible;
+            display: block;
+
+            .inner {
+                position: sticky;
+                top: 50%;
+                // transform: translateY(-50%);
+
+                // .visibleImage {
+                //     position: fixed !important;
+                //     top: 50%;
+
+                // }
 
 
-.imageAside {
-    opacity: 0;
-    transition: all 0.4s ease;
+                .image {
+                    position: fixed !important;
+                    top: 50%;
+                    width: 40%;
+                    width: calc(50vw - 0.9375rem);
+                    
+                    transform: translateY(-50%);
+                    opacity: 0;
+                    transition: opacity 0.4s ease;
+
+                    &.visibleImage {
+                        opacity: 1;
+                    }
+                    
+                }
+                .text {
+                    transform: translateY(-50%);
+                }
+            }
+
+            // .lastSection {
+            //     transform: translateY(-50%);
+
+            //     .image {
+            //         position: relative !important;
+            //         transform: none;
+            //     }
+            //     .text {
+            //         transform: none;
+            //     }
+            // }
+        }
+    }
 }
+@include mq($until: lg) {
+    .reverseMobile {
+        flex-direction: column-reverse;   
 
-.sticky { 
-    top: 10rem !important;
-    .imageAside {
-        opacity: 1;
+        .image {
+            margin-bottom: 1.8375rem;
+        }
     }
 }

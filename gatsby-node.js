@@ -103,6 +103,26 @@ exports.createPages = async function({ graphql, actions }) {
               blackBackground
               sections {
                 __typename
+                ... on DatoCmsCourseSection {
+                  title
+                  text
+                  textColor
+                  youtubeEmbedLink
+                  linkTitle
+                  externalLinkButton
+                  lessonsNamePlural
+                  buildCategoryName
+                  growCategoryName
+                  promoteCategoryName
+                  allName
+                  beginnerLevelName
+                  intermediateLevelName
+                  advancedLevelName
+                  coursesTitle
+                  bgColor {
+                    hex
+                  }
+                }
                 ... on DatoCmsContactPerson {
                   bgColor {
                     hex
