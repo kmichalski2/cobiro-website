@@ -366,13 +366,14 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
     menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === (currentLocale || 'en'))
     
   }
-
-  if(blackBackground) {
-    const body = document.querySelector('body')
-    body.style.backgroundColor = '#000';
-  } else {
-    const body = document.querySelector('body')
-    body.style.backgroundColor = '#fff';
+  if(typeof document !== 'undefined') {
+    if(blackBackground) {
+      const body = document.querySelector('body')
+      body.style.backgroundColor = '#000';
+    } else {
+      const body = document.querySelector('body')
+      body.style.backgroundColor = '#fff';
+    }
   }
   
     return (
