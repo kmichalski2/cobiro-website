@@ -10,6 +10,10 @@ import Classes from './courseSection.module.scss'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import Label from '../../UiElements/label/label'
 import Modal from '../../UiElements/modal/modal'
+import HtmlText from '../../UiElements/HtmlText/HtmlText'
+import AnyLink from '../../UiElements/AnyLink/AnyLink'
+import MetaElements from './metaElements/metaElements'
+import CourseDetail from './courseDetail/courseDetail'
 
 const CourseSection = ({ data }) => {
 
@@ -52,6 +56,18 @@ const CourseSection = ({ data }) => {
     const GROW = 'grow'
     const PROMOTE = 'promote'
 
+    const categoryNames = {
+        build: data.buildCategoryName,
+        grow: data.growCategoryName,
+        promote: data.promoteCategoryName
+    }
+
+    const levelNames = {
+        beginner: data.beginnerLevelName,
+        intermediate: data.intermediateLevelName,
+        advanced: data.advancedLevelName,
+    }
+
     const [activeCourses, setActiveCourses] = useState(ALL_COURSES)
     const [showCourse, setShowCourse] = useState(null)
 
@@ -59,6 +75,7 @@ const CourseSection = ({ data }) => {
         setShowCourse(null)
     }
 
+    console.log('courses', courses)
     return (
         <Section bgColor={data.backgroundColor && data.backgroundColor.hex}>
             <Modal 
@@ -66,15 +83,22 @@ const CourseSection = ({ data }) => {
                 setShowModal={hideCourseModal}
                 dark={lightText}
                 closeButton
-                >
-                    {showCourse !== null ?
-                    <h2 className={lightText ? "text-white" : null}>{courses[showCourse].title}</h2>    
-                    : null }
-                
+                >  
+                {showCourse !== null ?
+                <div className={Classes.modalWrapper}>
+                    <CourseDetail
+                        lightText={lightText}
+                        course={courses[showCourse]}
+                        category={categoryNames[courses[showCourse].category]}
+                        level={levelNames[courses[showCourse].level]}
+                        lessonsNamePlural={data.lessonsNamePlural}
+                    />
+                </div>
+                : null }          
             </Modal>
             <div className="container">
                 <div className="row middle-xs space-big-xs-up">
-                    <div className="col col-xs-12 col-lg-6">
+                    <div className="col col-xs-12 col-lg-6 space-xs space-sm space-md">
                         <VideoEmbed 
                             embedCode={data.youtubeEmbedLink}
                             />
@@ -100,7 +124,7 @@ const CourseSection = ({ data }) => {
                 </div>
                 <div className="row middle-xs">
                     <div className="col col-xs-12 col-lg-6">
-                            <h3 className={lightText ? "text-white" : null}>{data.coursesTitle}</h3>
+                            <h3 className={lightText ? "text-white space-xs-up" : null}>{data.coursesTitle}</h3>
                     </div>
                     <div className="col col-xs-12 col-lg-6 end-lg flex-lg">
                         <div style={{display: 'inline-block'}}>
@@ -118,23 +142,30 @@ const CourseSection = ({ data }) => {
                     </div>
                 </div>
                 <div className="row">
-                    {courses && courses.map((c, i) => (
+                    {courses && courses.filter(c => activeCourses === ALL_COURSES ? true : c.category === activeCourses).map((c, i) => (
                         <div key={i} className="col col-xs-12 col-md-6 col-lg-4">
                             <button className={[Classes.card, lightText ? Classes.invertedCard : null].join(' ')} onClick={() => setShowCourse(i)}>
                                 {c.icon ? <ImageAll image={c.icon} alt={c.icon.alt} /> : null }
                                 <h4>{c.title}</h4>
-                                <div className="flex">
-                                    <p className={Classes.catLabel}>{c.category}</p>
-                                    <div className={Classes.level}>{c.level}</div>
-                                    <p>{c.videoes.length} {data.lessonsNamePlural}</p>
-                                </div>
+                                <MetaElements 
+                                    course={c} 
+                                    light={lightText}
+                                    category={categoryNames[c.category]} 
+                                    level={levelNames[c.level]}
+                                    lessonsNamePlural={data.lessonsNamePlural}
+                                        />
+                                <div className={Classes.videoesFade}>
                                 {c.videoes && c.videoes.map((v, i) => {
                                     if(i < 3) {
                                         return (
-                                            <p key={i}>{v.title}</p>
+                                            <div key={i} className="flex middle-xs between-xs">
+                                                <p>{v.title}</p>
+                                                <p>{v.duration}</p>
+                                            </div>
                                         )
                                     }
                                 })}
+                                </div>
                             </button>
                         </div>
                     ))}
