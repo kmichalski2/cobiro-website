@@ -103,6 +103,38 @@ exports.createPages = async function({ graphql, actions }) {
               blackBackground
               sections {
                 __typename
+                ... on DatoCmsAcademyCourseTrack {
+                  title
+                  text
+                  courseTrackCards {
+                    cards {
+                      featuredCard
+                      icon {
+                        url
+                        alt
+                        fixed(height: 45) {
+                          width
+                          height
+                          srcSet
+                          base64
+                          aspectRatio
+                          src
+                        }
+                      }
+                      title
+                      text
+                      linkTitle
+                      externalLink
+                      listTitle
+                      checkmarkList
+                      blueLabelText
+                    }
+                  }
+                  textColor
+                  bgColor {
+                    hex
+                  }
+                }
                 ... on DatoCmsCourseSection {
                   title
                   text
@@ -792,6 +824,21 @@ exports.createPages = async function({ graphql, actions }) {
                     width
                     height
                     fluid(maxWidth: 1200) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                  imageGridBottom {
+                    alt
+                    url
+                    width
+                    height
+                    fluid(maxWidth: 600) {
                       width
                       height
                       srcSet

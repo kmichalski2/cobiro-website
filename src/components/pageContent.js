@@ -41,6 +41,7 @@ import ButtonMosaik from "./sections/buttonMosaik/buttonMosaik"
 import ImageSlider from "./sections/imageSlider/imageSlider"
 import AnimatedExplanationImage from "./sections/animatedExplanationImage/animatedExplanationImage"
 import CourseSection from "./sections/courseSection/courseSection"
+import AcademyTrackCards from "./sections/academyTrackCards/academyTrackCards"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -173,6 +174,8 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <AnimatedExplanationImage data={data.sections[index]} key={index}/>
                 case 'CourseSection':
                     return <CourseSection data={data.sections[index]} key={index}/>
+                case 'AcademyCourseTrack':
+                    return <AcademyTrackCards data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }
