@@ -24,10 +24,14 @@ const JumboCta = ({ data }) => {
     <Section
       bgColor={bgColor && !backgroundImage ? bgColor : null}
     >
+      {backgroundImage && bgColor ?
+                <div className={Classes.overlay} style={{backgroundColor: bgColor}}></div>
+                : null}
         <div className="container">
           <div className={["row", !jumboCtaImage ? "center-xs" : null ].join(' ')}>
             <div className={["col col-xs-12", jumboCtaImage ? "col-lg-6" : "col-lg-6 col-md-8"].join(' ')}>
               <div className={backgroundImage ? Classes.content : null}>
+                
                 <HeaderWText
                   jumboCtaImage={jumboCtaImage}
                   icon={icon}
