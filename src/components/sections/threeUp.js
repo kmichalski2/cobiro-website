@@ -22,11 +22,11 @@ const ThreeUpPeople = ({ data }) => {
             ) : null}
           </div>
           <div className="row center-xs stretch-xs">
-            {data.box1Title && data.box1Text && data.box1Icon ? (
+            {data.box1Title || data.box1Text && data.box1Icon ? (
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box1Icon} 
-                  alt={data.box1Icon.alt ? data.box1Icon.alt : data.box1Title} 
+                  alt={data.box1Icon && data.box1Icon.alt ? data.box1Icon.alt : data.box1Title} 
                   iconBig={bigIcon} 
                   iconImg={iconImg} 
                   title={data.box1Title} 
@@ -39,15 +39,16 @@ const ThreeUpPeople = ({ data }) => {
                   shadow={!data.bgColor}
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
+                  light={data.textColor === 'light'}
                   />
               </div>
             ) : null}
 
-            {data.box2Title && data.box2Text && data.box2Icon ? (
+            {data.box2Title || data.box2Text && data.box2Icon ? (
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box2Icon} 
-                  alt={data.box2Icon.alt ? data.box2Icon.alt : data.box2Title} 
+                  alt={data.box2Icon && data.box2Icon.alt ? data.box2Icon.alt : data.box2Title} 
                   iconBig={bigIcon}
                   iconImg={iconImg}
                   title={data.box2Title} 
@@ -60,15 +61,16 @@ const ThreeUpPeople = ({ data }) => {
                   shadow={!data.bgColor}
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
+                  light={data.textColor === 'light'}
                   />
               </div>
             ) : null}
 
-            {data.box3Title && data.box3Text && data.box3Icon ? (
+            {data.box3Title || data.box3Text && data.box3Icon ? (
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box3Icon} 
-                  alt={data.box3Icon.alt ? data.box3Icon.alt : data.box3Title} 
+                  alt={data.box3Icon && data.box3Icon.alt ? data.box3Icon.alt : data.box3Title} 
                   iconBig={bigIcon}
                   iconImg={iconImg}
                   title={data.box3Title} 
@@ -81,15 +83,16 @@ const ThreeUpPeople = ({ data }) => {
                   shadow={!data.bgColor}
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
+                  light={data.textColor === 'light'}
                   />
               </div>
             ) : null}
             
-            {data.box4Title && data.box4Text && data.box4Icon ? (
+            {data.box4Title || data.box4Text && data.box4Icon ? (
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box4Icon} 
-                  alt={data.box4Icon.alt ? data.box4Icon.alt : data.box4Title} 
+                  alt={data.box4Icon && data.box4Icon.alt ? data.box4Icon.alt : data.box4Title} 
                   iconBig={bigIcon}
                   iconImg={iconImg}
                   title={data.box4Title} 
@@ -102,15 +105,16 @@ const ThreeUpPeople = ({ data }) => {
                   shadow={!data.bgColor}
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
+                  light={data.textColor === 'light'}
                   />
               </div>
             ) : null}
 
-            {data.box5Title && data.box5Text && data.box5Icon ? (
+            {data.box5Title || data.box5Text && data.box5Icon ? (
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box5Icon} 
-                  alt={data.box5Icon.alt ? data.box5Icon.alt : data.box5Title} 
+                  alt={data.box5Icon && data.box5Icon.alt ? data.box5Icon.alt : data.box5Title} 
                   iconBig={bigIcon}
                   iconImg={iconImg}
                   title={data.box5Title} 
@@ -123,15 +127,16 @@ const ThreeUpPeople = ({ data }) => {
                   shadow={!data.bgColor}
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
+                  light={data.textColor === 'light'}
                   />
               </div>
             ) : null}
 
-            {data.box6Title && data.box6Text && data.box6Icon ? (
+            {data.box6Title || data.box6Text && data.box6Icon ? (
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box6Icon} 
-                  alt={data.box6Icon.alt ? data.box6Icon.alt : data.box6Title} 
+                  alt={data.box6Icon && data.box6Icon.alt ? data.box6Icon.alt : data.box6Title} 
                   iconBig={bigIcon}
                   iconImg={iconImg}
                   title={data.box6Title} 
@@ -144,6 +149,7 @@ const ThreeUpPeople = ({ data }) => {
                   shadow={!data.bgColor}
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
+                  light={data.textColor === 'light'}
                   />
               </div>
             ) : null}

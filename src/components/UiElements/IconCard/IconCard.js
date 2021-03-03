@@ -8,6 +8,7 @@ import Classes from './IconCard.module.scss'
 
 const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg, textLeft, invisibleBoxes, classes, checkmark }) => {
 
+    console.log('light', light)
     return (
         <Card shadow={shadow} leftAligned={textLeft} invisibleBox={invisibleBoxes} classes={classes}>
             <ImageAll 
@@ -16,7 +17,7 @@ const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, 
                 alt={alt}/>
            
                 <div className={[Classes.textWrapper, textLeft ? Classes.textLeft : null].join(' ')}>
-                    <h4 className={light ? Classes.white : null}>{title}</h4>
+                    {title ? <h4 className={light ? Classes.white : null}>{title}</h4> : null }
                     
                     {text ? 
                         <HtmlText RawHtml={text} classes={[Classes.text, light ? Classes.white : null].join(' ')}/>

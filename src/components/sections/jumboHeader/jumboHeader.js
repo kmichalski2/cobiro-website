@@ -17,7 +17,7 @@ const JumboHeader = ({ data,  notificationPadding }) => {
   const textSide = (
     <div className={[
         "col col-xs-12", 
-        alignment === 'centered' || alignment === 'centered-wide' ? 'col-md-8 text-center space-xs-up' : alignment === 'centered-wide-with-overlap' ? 'col-md-10 space-xs-up' : 'col-lg-6 text-left-md',
+        alignment === 'centered' || alignment === 'centered-wide' ? 'col-md-6 text-center space-xs-up' : alignment === 'centered-wide-with-overlap' ? 'col-md-10 space-xs-up' : 'col-lg-6 text-left-md',
         imageToEdges && alignment !== 'centered' ? "flex flex-column center-xs" : null
         ].join(' ')}>
       <HeaderWText 
@@ -73,6 +73,7 @@ const JumboHeader = ({ data,  notificationPadding }) => {
       gradiantBottom={gradiantBottom}
       gradiantAtBottom={data.gradiantPositionAtBottom}
       bottomBgColor={data.bottomBgColor && data.bottomBgColor.hex || null}
+      backgroundImage={data.backgroundImage}
       >
         <div className="container">
           <div

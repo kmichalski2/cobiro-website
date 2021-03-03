@@ -39,6 +39,8 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
     //   window.removeEventListener("resize", resizeHandler)
     // }
 
+      console.log('menuInverted', menuInverted)
+      console.log('isScrolled', isScrolled)
     
   })
 

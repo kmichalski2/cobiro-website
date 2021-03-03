@@ -100,8 +100,29 @@ exports.createPages = async function({ graphql, actions }) {
               hiddenMenuItems {
                 id
               }
+              blackBackground
               sections {
                 __typename
+                ... on DatoCmsCourseSection {
+                  title
+                  text
+                  textColor
+                  youtubeEmbedLink
+                  linkTitle
+                  externalLinkButton
+                  lessonsNamePlural
+                  buildCategoryName
+                  growCategoryName
+                  promoteCategoryName
+                  allName
+                  beginnerLevelName
+                  intermediateLevelName
+                  advancedLevelName
+                  coursesTitle
+                  bgColor {
+                    hex
+                  }
+                }
                 ... on DatoCmsContactPerson {
                   bgColor {
                     hex
@@ -296,6 +317,61 @@ exports.createPages = async function({ graphql, actions }) {
                       src
                       sizes
                     }
+                  }
+                  backgroundImage {
+                    path
+                    url
+                    alt
+                    width
+                    height
+                    fluid(maxWidth: 2000, imgixParams: {q: 50}) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
+                }
+                ... on DatoCmsAnimatedExplanationImageSection {
+                  bgColor {
+                    hex
+                  }
+                  explanationImageSection {
+                    section {
+                      ... on DatoCmsSection {
+                        title
+                        text
+                        linkTitle
+                        externalLink
+                  
+                        image {
+                          path
+                          url
+                          alt
+                          width
+                          height
+                          fluid(maxWidth: 2000, imgixParams: {q: 50}) {
+                            width
+                            height
+                            srcSet
+                            base64
+                            aspectRatio
+                            src
+                            sizes
+                          }
+                        }
+                        alignment
+                        textColor
+                      }
+                    }
+                  }
+                }
+                ... on DatoCmsVoucherHeader {
+                  bgColor {
+                    hex
                   }
                 }
                 ... on DatoCmsVoucherHeader {

@@ -39,6 +39,8 @@ import CardsIconBottom from "./sections/cardsIconBottom/cardsIconBottom"
 import CtaCardGradiantLine from "./sections/ctaCardGradiantLine/ctaCardGradiantLine"
 import ButtonMosaik from "./sections/buttonMosaik/buttonMosaik"
 import ImageSlider from "./sections/imageSlider/imageSlider"
+import AnimatedExplanationImage from "./sections/animatedExplanationImage/animatedExplanationImage"
+import CourseSection from "./sections/courseSection/courseSection"
 
 
 // export const CurrentLocaleContext = React.createContext({})
@@ -66,7 +68,8 @@ const PageContent = ({ data, locales, redirect, location }) => {
         currentLocale={data.locale}
         redirect={redirect}
         hiddenMenuItems={data.hiddenMenuItems}
-        menuInverted={menuInverted}
+        menuInverted={!data.blackBackground || menuInverted}
+        blackBackground={data.blackBackground}
         slug={data.slug}
         notifyerHeightHandler={notifyerHeightHandler}
         hideSignUp={hideSignUp}
@@ -166,6 +169,10 @@ const PageContent = ({ data, locales, redirect, location }) => {
                     return <ButtonMosaik data={data.sections[index]} key={index}/>
                 case 'ImageSlider':
                     return <ImageSlider data={data.sections[index]} key={index}/>
+                case 'AnimatedExplanationImageSection':
+                    return <AnimatedExplanationImage data={data.sections[index]} key={index}/>
+                case 'CourseSection':
+                    return <CourseSection data={data.sections[index]} key={index}/>
                 default:
                     return null
                 }

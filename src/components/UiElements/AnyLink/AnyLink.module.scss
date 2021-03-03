@@ -59,6 +59,17 @@
 	&.regular {
 		font-weight: 400;
 	}
+
+	&.white {
+		background-color: transparent !important;
+		color: $white !important;
+
+		&:hover, &:active {
+			background-color: transparent !important;
+			// border-color: $white;
+			color: $white!important;
+		}
+	}
 }
 
 @include mq($from: md) {
@@ -75,8 +86,8 @@
     border-color: $black !important;
     
     &.white {
-        background-color: transparent;
-        color: $white;
+        background-color: transparent !important;
+        color: $white !important;
         border-color: $white;
     
         &:hover, &:active {

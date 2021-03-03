@@ -17,7 +17,7 @@ import CookieBanner from "./cookieConsent"
 export const CurrentLocaleContext = React.createContext({})
 export const CurrentLocaleProvicer = CurrentLocaleContext.Provider
 
-const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenMenuItems, menuInverted, slug, notifyerHeightHandler, hideSignUp, location, navbarHeightHandler }) => {
+const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenMenuItems, menuInverted, slug, notifyerHeightHandler, hideSignUp, location, navbarHeightHandler, blackBackground }) => {
   
 
   if (typeof window !== 'undefined') {
@@ -366,6 +366,16 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
     menuItems = data.allDatoCmsMenu.nodes.filter(n => n.locale === (currentLocale || 'en'))
     
   }
+  if(typeof document !== 'undefined') {
+    if(blackBackground) {
+      const body = document.querySelector('body')
+      body.style.backgroundColor = '#000';
+    } else {
+      const body = document.querySelector('body')
+      body.style.backgroundColor = '#fff';
+    }
+  }
+  
     return (
     <CurrentLocaleProvicer 
       value={{
@@ -373,10 +383,10 @@ const Layout = ({ children, customCta, locales, currentLocale, redirect, hiddenM
         customLangCode: locales && locales.length > 0 && locales.find(l => l.locale === currentLocale) && locales.find(l => l.locale === currentLocale).customLang,
         location: location
       }}>
-      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale || 'en'} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]} homeSlug={homeSlug} customLangCode={locales && locales.length > 0 && locales.find(l => l.locale === currentLocale) && locales.find(l => l.locale === currentLocale).customLang} navbarHeightHandler={navbarHeightHandler}/>
+      <Navbar hideSignUp={hideSignUp} menuItems={menuItems} customCta={customCta} hiddenMenuItems={hiddenMenuItems} menuInverted={!blackBackground || menuInverted} notification={getNotification(slug)} notifyerHeightHandler={notifyerHeightHandler} locales={locales} currentLocale={currentLocale || 'en'} menuCta={data.allDatoCmsMenuCta.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]} homeSlug={homeSlug} customLangCode={locales && locales.length > 0 && locales.find(l => l.locale === currentLocale) && locales.find(l => l.locale === currentLocale).customLang} navbarHeightHandler={navbarHeightHandler}/>
       {children}
       <CookieBanner />
-      <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === (currentLocale || 'en'))} locales={locales} currentLocale={currentLocale || 'en'} redirect={redirect} bottomLinks={data.allDatoCmsFooterBottom.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]}/>
+      <Footer columns={data.allDatoCmsFooter.nodes.filter(n => n.locale === (currentLocale || 'en'))} locales={locales} currentLocale={currentLocale || 'en'} redirect={redirect} bottomLinks={data.allDatoCmsFooterBottom.nodes.filter(n => n.locale === (currentLocale || 'en'))[0]} inverted={blackBackground} />
       </CurrentLocaleProvicer>
   )
 }

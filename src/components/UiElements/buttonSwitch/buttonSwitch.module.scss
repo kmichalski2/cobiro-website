@@ -1,10 +1,12 @@
 @import '../../layout/style/globals';
 
 .buttonSwitch {
-    background-color: $lightgrey;
-    padding: 0.25rem;
+    background-color: $white;
     margin: auto;
-    border-radius: $button-border-radius;
+    border-radius: 0.25rem;
+    border: 1px solid $lightgrey;
+    overflow: hidden;
+    
     
     @include mq($until: md) {
         display: flex;
@@ -13,16 +15,43 @@
 
     .button {
         color: $black;
+        border-radius: 0;
+        border: none;
+        border-right: 1px solid $lightgrey;
+        background-color: $lightgrey;
+        transition: background-color 0.3s ease;
+
+        &:last-child {
+            border-right: none;
+        }
+        
 
         &.inactive {
             background-color: transparent;
             color: $black;
-            border-color: transparent;
         }
+
+        
 
         .extraText {
             color: $blue;
             margin-left: 0.25rem;
+        }
+    }
+
+    &.inverted {
+        background-color: #0A0A0A;
+        border-color: #262626;
+
+        .button {
+            color: $white;
+            background-color: #262626;
+            border-color: #262626;
+            &.inactive {
+                background-color: transparent;
+                color: #FFFFFF;
+            }
+
         }
     }
     
