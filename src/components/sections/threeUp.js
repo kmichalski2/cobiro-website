@@ -28,7 +28,7 @@ const ThreeUpPeople = ({ data }) => {
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box1Icon} 
-                  alt={data.box1Icon.alt ? data.box1Icon.alt : data.box1Title} 
+                  alt={data.box1Icon && data.box1Icon.alt ? data.box1Icon.alt : data.box1Title} 
                   iconBig={bigIcon} 
                   iconImg={iconImg} 
                   title={data.box1Title} 
@@ -50,7 +50,7 @@ const ThreeUpPeople = ({ data }) => {
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box2Icon} 
-                  alt={data.box2Icon.alt ? data.box2Icon.alt : data.box2Title} 
+                  alt={data.box2Icon && data.box2Icon.alt ? data.box2Icon.alt : data.box2Title} 
                   iconBig={bigIcon}
                   iconImg={iconImg}
                   title={data.box2Title} 
@@ -72,7 +72,7 @@ const ThreeUpPeople = ({ data }) => {
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box3Icon} 
-                  alt={data.box3Icon.alt ? data.box3Icon.alt : data.box3Title} 
+                  alt={data.box3Icon && data.box3Icon.alt ? data.box3Icon.alt : data.box3Title} 
                   iconBig={bigIcon}
                   iconImg={iconImg}
                   title={data.box3Title} 
@@ -94,7 +94,7 @@ const ThreeUpPeople = ({ data }) => {
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box4Icon} 
-                  alt={data.box4Icon.alt ? data.box4Icon.alt : data.box4Title} 
+                  alt={data.box4Icon && data.box4Icon.alt ? data.box4Icon.alt : data.box4Title} 
                   iconBig={bigIcon}
                   iconImg={iconImg}
                   title={data.box4Title} 
@@ -116,7 +116,7 @@ const ThreeUpPeople = ({ data }) => {
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box5Icon} 
-                  alt={data.box5Icon.alt ? data.box5Icon.alt : data.box5Title} 
+                  alt={data.box5Icon && data.box5Icon.alt ? data.box5Icon.alt : data.box5Title} 
                   iconBig={bigIcon}
                   iconImg={iconImg}
                   title={data.box5Title} 
@@ -138,7 +138,7 @@ const ThreeUpPeople = ({ data }) => {
               <div className="col col-xs-12 col-lg-4 flex">
                 <IconCard 
                   image={data.box6Icon} 
-                  alt={data.box6Icon.alt ? data.box6Icon.alt : data.box6Title} 
+                  alt={data.box6Icon && data.box6Icon.alt ? data.box6Icon.alt : data.box6Title} 
                   iconBig={bigIcon}
                   iconImg={iconImg}
                   title={data.box6Title} 
