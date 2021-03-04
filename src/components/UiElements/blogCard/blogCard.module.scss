@@ -30,7 +30,7 @@
     align-items: stretch;
 }
 .cardVisible {
-    @include card-visible;
+    @include card-blog;
 }
 
 .dotPaddingRight {
