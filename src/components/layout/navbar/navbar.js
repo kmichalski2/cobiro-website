@@ -7,7 +7,7 @@ import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 import Classes from './navbar.module.scss'
 
-const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeightHandler, hideSignUp, locales, currentLocale, menuCta, homeSlug, customLangCode, navbarHeightHandler }) => {
+const Navbar = ({ menuItems, customCta, menuInverted, blackBackground, notification, notifyerHeightHandler, hideSignUp, locales, currentLocale, menuCta, homeSlug, customLangCode, navbarHeightHandler }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [isToggleTouched, setIsToggleTouched] = useState(false)
@@ -81,13 +81,13 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
   }
   return (
     <header>
-      <nav ref={navbarRef} className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, isScrolled ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">
+      <nav ref={navbarRef} className={[Classes.nav, Classes.mainMenu, isExpanded ? Classes.opened : Classes.closed, isToggleTouched ? Classes.touched : null, blackBackground ? Classes.blackBackground : null, isScrolled && !blackBackground ? Classes.navbarBorder : null, !mainMenuHovered && windowWidth > "959" ? Classes.unhovered : mainMenuHovered && windowWidth > "959" ? Classes.hovered : null].join(' ')} id="navbar">
         <div  className="container">
           <div ref={contentContainer} className="row between-xs middle-xs">
             <div className={["col col-auto-lg", Classes.navbarMobile].join(' ')} >
               <div className={[Classes.brand, menuInverted ? Classes.invert : null, isExpanded ? Classes.invert : null, isScrolled ? Classes.invert : null].join(' ')}>
                 <AnyLink link={`/${!homeSlug ? '' : homeSlug}`} noArrow noPadding regular internal>
-                  <img className={Classes.logoMobile} src={menuInverted || isScrolled ? logo : logoInvert} alt="Cobiro logo" />
+                  <img className={Classes.logoMobile} src={menuInverted || (isScrolled && !blackBackground) || isExpanded ? logo : logoInvert} alt="Cobiro logo" />
                 </AnyLink>
               </div>
 
@@ -107,7 +107,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
             <div className={["col col-auto-lg", Classes.mainMenuInner, isScrolled || menuInverted ? Classes.menuItems : null].join(' ')}>
               <ul className={["list-inline", Classes.menuItemsList].join(' ')}>
                 {menuItems.sort((a, b) => a.menu_item_order - b.menu_item_order).map((item, index) => (
-                    <MenuItem key={index} inverted={isScrolled || menuInverted ? true : false} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer} expandHandler={expandHandler} subMenuExpanded={subMenuExpanded} index={index} currentLocale={currentLocale} customLangCode={customLangCode}/>
+                    <MenuItem key={index} inverted={(isScrolled && !blackBackground) || menuInverted ? true : false} item={item} mainMenuHoveredHandler={mainMenuHoveredHandler} contentContainer={contentContainer} expandHandler={expandHandler} subMenuExpanded={subMenuExpanded} index={index} currentLocale={currentLocale} customLangCode={customLangCode}/>
                 ))}
               </ul>
               {!hideSignUp ?
@@ -119,7 +119,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
                 <AnyLink 
                   external 
                   link={menuCta.secondaryLink} 
-                  noArrow classes={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted ? 'btn-secondary-white' : null].join(' ')} 
+                  noArrow classes={["btn btn-secondary", Classes.btnLeft, !isScrolled && !menuInverted && !isExpanded || (blackBackground && !isExpanded) ? 'btn-secondary-white' : null].join(' ')} 
                   title={menuCta.secondaryLinkTitle}
                   />
                 : null}
@@ -133,7 +133,7 @@ const Navbar = ({ menuItems, customCta, menuInverted, notification, notifyerHeig
                   link={customCta && customCta.link ? customCta.link : menuCta.primaryLink} 
                   title={customCta && customCta.title ? customCta.title : menuCta.primaryLinkTitle} 
                   targetSelf
-                  classes={["btn", Classes.btnRight, !isScrolled && !menuInverted ? 'btn-white' : null].join(' ')} 
+                  classes={["btn", Classes.btnRight, !isScrolled && !menuInverted && !isExpanded ||  (blackBackground && !isExpanded) ? 'btn-white' : null].join(' ')} 
                   noArrow 
                   />
                 : null}       
