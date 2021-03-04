@@ -1935,6 +1935,7 @@ exports.createPages = async function({ graphql, actions }) {
               }
             }
             writer
+            jobTitle
             writerImage {
               fixed(width: 48) {
                 width
@@ -1976,6 +1977,38 @@ exports.createPages = async function({ graphql, actions }) {
             locale
             quote
             quotedPerson
+            ctaImage {
+              path
+              url
+              alt
+              width
+              height
+              fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                width
+                height
+                srcSet
+                base64
+                aspectRatio
+                src
+                sizes
+              }
+            }
+            ctaBackgroundImage {
+              path
+              url
+              alt
+              width
+              height
+              fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                width
+                height
+                srcSet
+                base64
+                aspectRatio
+                src
+                sizes
+              }
+            }
             quoteImage {
               alt
               url
@@ -1990,6 +2023,9 @@ exports.createPages = async function({ graphql, actions }) {
             }
             quoteTextColor
             otherPostsTitle
+            otherPostsBgColor {
+              hex
+            }
             quoteBgColor {
               hex
             }
@@ -2119,6 +2155,7 @@ exports.createPages = async function({ graphql, actions }) {
                   subtitle: item.subtitle,
                   content: item.content,
                   writer: item.writer,
+                  jobTitle: item.jobTitle,
                   writerImage: item.writerImage,
                   category: category || item.category,
                   readLength: item.readLength,
@@ -2131,10 +2168,13 @@ exports.createPages = async function({ graphql, actions }) {
                   footerCtaText: localBlogPage.footerCtaText,
                   ctaLinks: localBlogPage.ctaLinks,
                   otherPostsTitle: localBlogPage.otherPostsTitle,
+                  otherPostsBgColor: localBlogPage.otherPostsBgColor,
                   otherPosts: otherPosts,
                   seoMetaTags: item.seoMetaTags,
                   locale: locale,
-                  locales: postLocales
+                  locales: postLocales, 
+                  ctaBackgroundImage: localBlogPage.ctaBackgroundImage, 
+                  ctaImage: localBlogPage.ctaImage
                 },
               })
               
@@ -2285,6 +2325,38 @@ exports.createPages = async function({ graphql, actions }) {
               title
               description
             }
+            ctaImage {
+              path
+              url
+              alt
+              width
+              height
+              fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                width
+                height
+                srcSet
+                base64
+                aspectRatio
+                src
+                sizes
+              }
+            }
+            ctaBackgroundImage {
+              path
+              url
+              alt
+              width
+              height
+              fluid(maxWidth: 600, imgixParams: {q: 80}) {
+                width
+                height
+                srcSet
+                base64
+                aspectRatio
+                src
+                sizes
+              }
+            }
             ctaLinks {
               ... on DatoCmsInternalLink {
                 internalLink {
@@ -2354,6 +2426,7 @@ exports.createPages = async function({ graphql, actions }) {
               alt
               url
             }
+            topPostButtonText
             promiseSignatureTitle
             promiseTitle
             subtitle

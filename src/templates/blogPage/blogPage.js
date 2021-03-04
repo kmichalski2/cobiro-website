@@ -12,6 +12,8 @@ import CategoryLabel from '../../components/UiElements/categoryLabel/categoryLab
 import Section from '../../components/UiElements/Section/Section'
 import FeaturedTestimonialsSingle from '../../components/sections/featuredTestimonalSingle'
 import SEO from '../../components/seo'
+import CtaCardSimple from '../../components/sections/ctaCardSimple/ctaCardSimple'
+import ImageAll from '../../components/UiElements/ImageAll/ImageAll'
 
 const Blog = ({ pageContext, location }) => {
 
@@ -20,12 +22,16 @@ const Blog = ({ pageContext, location }) => {
   const categories = pageContext.categories
   const seoTags = page.seoTags
   const locales = pageContext.locales
+  const topPostButtonText = page.topPostButtonText
 
   const [notificationPadding, setNotificationPadding] = useState(0)
 
     const notifyerHeightHandler = (height) => {
         setNotificationPadding(height)
     }
+
+console.log(page, 'page')
+
     return (
         <Layout 
           menuInverted 
@@ -41,12 +47,11 @@ const Blog = ({ pageContext, location }) => {
           locales={locales}
           location={pageContext.location}
           />
-          <BlogPosts blogPosts={posts} offset={0} fixedMax={1} addedAmount={0} firstLarge horizontal searchTitle={page.searchTitle} notificationPadding={notificationPadding}/>
+          <BlogPosts blogPosts={posts} offset={0} fixedMax={1} addedAmount={0} firstLarge horizontal={false} topPostButtonText={page.topPostButtonText} searchTitle={page.searchTitle} notificationPadding={notificationPadding}/>
           <Section>
             <div className="container">
-              
               <div className="row center-xs">
-                <BlogPosts blogPosts={posts} offset={1} fixedMax={9} addedAmount={2} horizontal />
+                <BlogPosts blogPosts={posts} offset={1} fixedMax={7} addedAmount={2} horizontal={false} />
               </div>
             </div>
           </Section>
@@ -59,7 +64,7 @@ const Blog = ({ pageContext, location }) => {
               </div>
               <div className="row center-xs">
               { categories.length > 0 ? categories.map((cat, i) => 
-                <div key={i} className="col col-xs-12 col-sm-6 col-md-4">
+                <div key={i} className={["center", Classes.categorySection].join(' ')}>
                   <CategoryLabel category={cat.category} link={`/blog/${cat.slug}`} large background/>
                 </div>) : null }
               </div>
@@ -68,12 +73,23 @@ const Blog = ({ pageContext, location }) => {
           <Section>
             <div className="container">
             <div className="row center-xs">
-              <BlogPosts blogPosts={posts} offset={9} addedAmount={4} horizontal />
+              <BlogPosts blogPosts={posts} offset={9} addedAmount={3} horizontal={false} />
             </div>
           </div>
           </Section>
-          <FeaturedTestimonialsSingle data={{quote: page.quote, person: page.quotedPerson, testimonialColor: page.quoteBgColor, image: page.quoteImage, testimonialTextColor: page.quoteTextColor}}/>
-          <JumboCta data={{ctaBgColor: page.ctaBgColor, ctaBackgroundColor: page.ctaBgColor, textColor: page.footerCtaTextColor, title: page.footerCtaTitle, text: page.footerCtaText, linkTitle: page.ctaLinks && page.ctaLinks[0] ? page.ctaLinks[0].linkTitle : null, link: page.ctaLinks[0] && page.ctaLinks[0].internalLink ? {slug: `${page.ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${page.ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (page.ctaLinks[0] && page.ctaLinks[0].externalLink) ? page.ctaLinks[0].externalLink : null}}  />
+          {/* <FeaturedTestimonialsSingle data={{quote: page.quote, person: page.quotedPerson, testimonialColor: page.quoteBgColor, image: page.quoteImage, testimonialTextColor: page.quoteTextColor}}/> */}
+          <CtaCardSimple 
+            data={{
+              imageOverflowing: true,
+              image: page.ctaImage, 
+              backgroundImage: page.ctaBackgroundImage, 
+              textColor: page.footerCtaTextColor, 
+              title: page.footerCtaTitle, 
+              text: page.footerCtaText, 
+              linkTitle: page.ctaLinks && page.ctaLinks[0] ? page.ctaLinks[0].linkTitle : null,
+              internalLinkCtaCard: page.ctaLinks[0] && page.ctaLinks[0].internalLink ? {slug: `${page.ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${page.ctaLinks[0].internalLink.slug}`} : null,
+              externalLinkCtaCard: (page.ctaLinks[0] && page.ctaLinks[0].externalLink) ? page.ctaLinks[0].externalLink : null}}/>
+          {/* <JumboCta data={{ctaBgColor: page.ctaBgColor, ctaBackgroundColor: page.ctaBgColor, textColor: page.footerCtaTextColor, title: page.footerCtaTitle, text: page.footerCtaText, linkTitle: page.ctaLinks && page.ctaLinks[0] ? page.ctaLinks[0].linkTitle : null, link: page.ctaLinks[0] && page.ctaLinks[0].internalLink ? {slug: `${page.ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${page.ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (page.ctaLinks[0] && page.ctaLinks[0].externalLink) ? page.ctaLinks[0].externalLink : null}}  /> */}
         </Layout>
     )
 }

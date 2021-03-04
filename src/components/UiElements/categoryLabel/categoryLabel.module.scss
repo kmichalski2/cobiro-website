@@ -1,27 +1,29 @@
 @import '../../layout/style/globals';
 
-.categoryCard {
-    font-size: 0.875rem;
-    display: inline-block;
-    color: $blue;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    
-    &.large {
-        font-size: 1.25rem;
+    .category {
+        margin: 0 0 0 0;
     }
 
-    &.background {
+    .categoryCard {
+        // font-size: 0.875rem;
+        color: $black;
+        margin: 2rem;
+        // margin-bottom: 0.5rem;
+        // text-transform: uppercase;
+        font-weight: bold;
+        @include box-shadow;
+    }
+
+    .background {
         background-color: $white;
-        padding: 1.125rem 1.5rem;
-        border-left: 4px solid $blue;
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 1.875rem;
+        padding: 1.3rem 1.8rem;
+        // border-left: 4px solid $blue;
+        // width: 100%;
+        // margin-right: 0;
+        // margin-bottom: 1.875rem;
         text-transform: initial;
         color: $black;
         font-weight: 600;
     }
-}
+
+

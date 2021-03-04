@@ -42,7 +42,7 @@ const BlogCagegory = ({ pageContext, location }) => {
             <Section>
                 <div className="container">
                     <div className="row">
-                        <BlogPosts blogPosts={posts} addedAmount={4} horizontal/>
+                        <BlogPosts blogPosts={posts} addedAmount={3}/>
                     </div>
                 </div>
             </Section>
