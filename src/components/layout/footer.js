@@ -9,7 +9,7 @@ import AnyLink from "../UiElements/AnyLink/AnyLink"
 
 const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks, inverted }) => {
   return (
-  <footer>
+  <footer className={inverted ? "footer-inverted" : null}>
     <div className="container">
       <div className="row section end-sm text-center-xs text-left-sm">
       <div className="col col-xs-12 col-sm-6 col-md-4 col-lg-2 text-left-lg center-xs start-lg space-xs space-sm space-md flex-xs block-sm">
@@ -19,7 +19,7 @@ const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks, invert
           return a.footerItemOrder - b.footerItemOrder;
         }).map((col, index) => (
           <div key={index} className="col col-xs-12 col-sm-6 col-md-4 col-lg-2 text-left-lg center-xs start-lg space-xs space-sm space-md">
-           <h4 style={{marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '1px solid #D6D6D6'}} className={inverted ? "text-white" : null}>{col.columnHeading}</h4>
+           <h4 style={{...{marginBottom: '1rem', paddingBottom: '1rem'}, ...{borderBottom: inverted ? '1px solid #242424' : '1px solid #D6D6D6'}}} className={inverted ? "text-white" : null}>{col.columnHeading}</h4>
            <ul className="list-unstyled menu">
              {col.column.map((el, index) => (
                <li key={index} className={el.text ? 'text-darkgrey' : null}>

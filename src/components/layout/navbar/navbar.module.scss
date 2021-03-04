@@ -21,6 +21,10 @@
 
 	}
 
+	&.blackBackground {
+		background-color: #000;
+	}
+
 	@include mq($until: lg) {
 		padding: 1.5rem 0;
 

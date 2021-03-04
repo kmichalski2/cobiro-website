@@ -19,7 +19,7 @@ const SubMenuFooter = ({ text, externalLink, internalLink, linkTitle, title, ima
                 />
             </div>
             {image ? 
-            <ImageAll classes={Classes.image} image={image} alt={image.alt}/>
+            <ImageAll classes={[Classes.image, "hidden-sm hidden-md hidden-xs"].join(' ')} image={image} alt={image.alt}/>
             : null}
             
     </div>

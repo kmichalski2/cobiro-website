@@ -27,6 +27,14 @@ footer {
 			display: block;
 		}
 	}
+
+	&.footer-inverted {
+		border-top: 1px solid #242424;
+
+		.footer-bottom {
+			border-top: 1px solid #242424;
+		}
+	}
 }
 
 .footer-logo {
