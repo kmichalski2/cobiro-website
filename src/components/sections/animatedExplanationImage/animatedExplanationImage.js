@@ -37,7 +37,7 @@ const AnimatedExplanationImage = ({ data }) => {
            
                 {data.explanationImageSection && data.explanationImageSection.section && data.explanationImageSection.section.map((s, i) => {
                     return (
-                    <div key={i} className={["section", Classes.sections].join(' ')} data-sal="fade" data-sal-duration="500" data-index={i}>
+                    <div key={i} className={["section", Classes.sections].join(' ')} data-sal="fade" data-sal-duration={i > 0 && i < data.explanationImageSection.section.length ? "500" : "250"} data-index={i}>
                         <div className={Classes.inner}>
                         <div className={["row middle-xs", s.alignment === 'text_left' ? Classes.reverseMobile : "reverse", Classes.imageAside].join(' ')}>
                             <div className="col col-xs-12 col-lg-6">
