@@ -54,7 +54,7 @@ const Footer = ({ columns, locales, currentLocale, redirect, bottomLinks, invert
             <ul className="list-inline block-xs flex-lg middle-xs menu">
               <li className="space-xs space-sm space-md">
               <AnyLink link="/" noArrow noPadding regular internal>
-                  <img style={{width: '150px'}} src={inverted ? logoInverted : logo} alt="Cobiro logo" />
+                  <img style={{width: '100px'}} src={inverted ? logoInverted : logo} alt="Cobiro logo" />
                 </AnyLink>
               </li>
               <li>
