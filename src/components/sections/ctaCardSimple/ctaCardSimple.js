@@ -6,6 +6,7 @@ import Section from '../../UiElements/Section/Section'
 import Classes from './ctaCardSimple.module.scss'
 
 const CtaCardSimple = ({data}) => {
+
     return (
         <Section bgColor={data.sectionBgColor && data.sectionBgColor.hex}>
         <div className="container">

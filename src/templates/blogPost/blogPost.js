@@ -12,12 +12,16 @@ import BlogPosts from "../../components/UiElements/blogPosts/blogPosts"
 import BlogPostsHeader from "../../components/UiElements/blogPostsHeader/blogPostsHeader"
 import SEO from "../../components/seo"
 import AnyLink from "../../components/UiElements/AnyLink/AnyLink"
+import ImageAll from "../../components/UiElements/ImageAll/ImageAll"
+import CtaCardSimple from '../../components/sections/ctaCardSimple/ctaCardSimple'
+
 
 const BlogPost = ({pageContext, location}) => {
-    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, seoMetaTags, locale, writerImage, otherPostsTitle, locales } = pageContext
+    const {title, featuredImage, subtitle, content, writer, category, readLength, date, topGradiantColor, bottomGradiantColor, footerCtaTitle, footerCtaText, ctaLinks, ctaBackgroundColor, textColor, otherPosts, seoTags, seoMetaTags, locale, writerImage, jobTitle, otherPostsTitle, otherPostsBgColor, locales, ctaBackgroundImage, ctaImage } = pageContext
     const createMarkup = (text)  => {
         return {__html: text}
     }
+
     const [notificationPadding, setNotificationPadding] = useState(0)
 
     const notifyerHeightHandler = (height) => {
@@ -42,11 +46,20 @@ const BlogPost = ({pageContext, location}) => {
                 />
 
 
-            <BlogPostsHeader post={{title, subtitle, category, featuredImage, writer, readLength, writerImage, date}} metaFields  notificationPadding={notificationPadding}/>
+            <BlogPostsHeader post={{title, subtitle, category, featuredImage, writer, readLength, writerImage, jobTitle, date}} metaFields  notificationPadding={notificationPadding}/>
             <article className={Classes.article}>
                 <div className="container">
                     <div className="row center-xs">
                         <div className="col col-xs-12 col-md-10 col-lg-8" >
+                            {writer || writerImage || jobTitle ? 
+                                <div className={Classes.meta}>
+                                    <ImageAll image={writerImage} classes={Classes.writerIcon}/>
+                                    <div>
+                                        <p className="small no-mb text-bold text-black">{writer}</p>
+                                        <p className="small no-mb">{jobTitle}</p>
+                                    </div>
+                                </div>
+                            : null}
                             {content.map((s,i) => {
                                 if(s.__typename){
                                     switch(s.__typename.replace("DatoCms", "")) {
@@ -112,17 +125,28 @@ const BlogPost = ({pageContext, location}) => {
                     </div>
                 </div>
             </article>
-            <Section>
+            <Section bgColor={otherPostsBgColor ? otherPostsBgColor.hex : null} classes={Classes.OtherPostsSection}>
                 <div className="container">
                     <div className="row">
-                        <div className="col col-xs-12 space-xs-up text-center">
-                            <h2>{otherPostsTitle || 'People also read'}</h2>
+                        <div className="col col-xs-12 space-xs-up">
+                            <h3>{otherPostsTitle || 'People also read'}</h3>
                         </div>
                         <BlogPosts blogPosts={otherPosts} shadow />
                     </div>
                 </div>
             </Section>
-            <JumboCta data={{ctaBackgroundColor: ctaBackgroundColor, ctaBgColor: ctaBackgroundColor ? true : false, textColor: textColor, title: footerCtaTitle, text: footerCtaText, linkTitle: ctaLinks[0].linkTitle, link: ctaLinks && ctaLinks[0].internalLink ? {slug: `${ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (ctaLinks && ctaLinks[0].externalLink) ? ctaLinks[0].externalLink : null}} />
+            <CtaCardSimple 
+            data={{
+              imageOverflowing: true,
+              image: ctaImage, 
+              backgroundImage: ctaBackgroundImage, 
+              textColor: textColor, 
+              title: footerCtaTitle, 
+              text: footerCtaText, 
+              linkTitle: ctaLinks && ctaLinks[0] ? ctaLinks[0].linkTitle : null,
+              internalLinkCtaCard: ctaLinks[0] && ctaLinks[0].internalLink ? {slug: `${ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${ctaLinks[0].internalLink.slug}`} : null,
+              externalLinkCtaCard: (ctaLinks[0] && ctaLinks[0].externalLink) ? ctaLinks[0].externalLink : null}}/>
+            {/* <JumboCta data={{ctaBackgroundColor: ctaBackgroundColor, ctaBgColor: ctaBackgroundColor ? true : false, textColor: textColor, title: footerCtaTitle, text: footerCtaText, linkTitle: ctaLinks[0].linkTitle, link: ctaLinks && ctaLinks[0].internalLink ? {slug: `${ctaLinks[0].internalLink.__typename === "DatoCmsBlogPost" ? '/blog/' : ""}${ctaLinks[0].internalLink.slug}`} : null, externalLinkCta: (ctaLinks && ctaLinks[0].externalLink) ? ctaLinks[0].externalLink : null}} /> */}
         </Layout>
     )
 }
