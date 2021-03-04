@@ -22,8 +22,10 @@ const BlogCard = ({ large, post, animate, shadow, horizontal }) => {
             : null }
               <AnyLink link={`/blog/${post.slug}`} noArrow noPadding title={post.title} classes="h4 block-xs no-mt" internal/>
               <div className={Classes.textWrapper}>
-              {post.category ? post.category.map((cat, i) => <CategoryLabel key={i} category={cat.category} link={`/blog/${cat.slug}`} />) : null}
-              {post.readLength ? <p className="small inline-block"><span className={Classes.dotPaddingRight}>&bull;</span>{ post.readLength } min read</p> : null }
+                {post.category && post.category[0] ? 
+                  <CategoryLabel category={post.category[0].category} link={`/blog/${post.category[0].slug}`} /> 
+                : null}
+                {post.readLength ? <p><span className={Classes.dotPaddingRight}>&bull;</span>{ post.readLength } min read</p> : null }
             </div>
           </Card>
         </div>
