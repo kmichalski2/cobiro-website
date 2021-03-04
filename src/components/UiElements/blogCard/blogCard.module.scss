@@ -36,3 +36,16 @@
 .dotPaddingRight {
     padding-right: 0.5rem;
 }
+
+.textWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    
+    p {
+        font-size: 0.8rem;
+    }
+    p:first-child {
+        margin-right: 0.5rem;
+    }
+}
