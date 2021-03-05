@@ -36,7 +36,7 @@ const ThreeUpPeople = ({ data }) => {
                   internal={data.box1Link || false} 
                   external={data.box1ExternalLink || false} 
                   linkTitle={data.box1LinkText} 
-                  shadow={!data.bgColor}
+                  shadow
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
@@ -58,7 +58,7 @@ const ThreeUpPeople = ({ data }) => {
                   internal={data.box2Link || false} 
                   external={data.box2ExternalLink || false} 
                   linkTitle={data.box2LinkText} 
-                  shadow={!data.bgColor}
+                  shadow
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
@@ -80,7 +80,7 @@ const ThreeUpPeople = ({ data }) => {
                   internal={data.box3Link || false} 
                   external={data.box3ExternalLink || false} 
                   linkTitle={data.box3LinkText} 
-                  shadow={!data.bgColor}
+                  shadow
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
@@ -102,7 +102,7 @@ const ThreeUpPeople = ({ data }) => {
                   internal={data.box4Link || false} 
                   external={data.box4ExternalLink || false} 
                   linkTitle={data.box4LinkText} 
-                  shadow={!data.bgColor}
+                  shadow
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
@@ -124,7 +124,7 @@ const ThreeUpPeople = ({ data }) => {
                   internal={data.box5Link || false} 
                   external={data.box5ExternalLink || false} 
                   linkTitle={data.box5LinkText} 
-                  shadow={!data.bgColor}
+                  shadow
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
@@ -146,7 +146,7 @@ const ThreeUpPeople = ({ data }) => {
                   internal={data.box6Link || false} 
                   external={data.box6ExternalLink || false} 
                   linkTitle={data.box6LinkText} 
-                  shadow={!data.bgColor}
+                  shadow
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}

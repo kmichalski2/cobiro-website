@@ -39,7 +39,7 @@ const ExplanationImage = ({ data }) => {
             external: data.externalLinkUrl,
             title: data.linkTitle,
             button: data.showAsButton,
-            large: data.showAsButton
+            large: false
           }
         ]}
       >
