@@ -39,7 +39,7 @@ const ExplanationImage = ({ data }) => {
             external: data.externalLinkUrl,
             title: data.linkTitle,
             button: data.showAsButton,
-            large: data.showAsButton
+            large: false
           }
         ]}
       >
@@ -96,7 +96,7 @@ const ExplanationImage = ({ data }) => {
       {data.imageGridBottom && data.imageGridBottom.length > 0 ?
       <div className={["row", Classes.imageGrid].join(' ')}>
         {data.imageGridBottom.map((im, i) => (
-          <div className="col col-xs-12 col-md-4">
+          <div className="col col-xs-12 col-md-4 space-xs space-sm">
             <ImageAll image={im} alt={im && im.alt} />
           </div>
         ))}
