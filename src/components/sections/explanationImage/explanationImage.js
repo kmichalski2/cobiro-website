@@ -69,7 +69,7 @@ const ExplanationImage = ({ data }) => {
    <Section bgColor={data.bgColor && data.bgColor.hex} >
     <div className="container">
       <div className="row middle-xs reverse">
-        <div className={[data.leftText && !data.imageToBottom ? "last-xs last-sm first-md first-lg first-xl" : null, !data.imageToBottom  ? "col col-sm-12 col-md-6" : "col col-xs-12 col-lg-6", data.imageToBottom && !data.leftText ? "last-xs last-sm last-md last-lg last-xl" : "space-xs space-sm space-md"].join(' ')}>
+        <div className={[data.leftText && !data.imageToBottom ? "last-xs last-sm first-md first-lg first-xl" : null, !data.imageToBottom  ? "col col-sm-12 col-md-6" : "col col-xs-12 col-lg-6", data.imageToBottom && !data.leftText ? "last-xs last-sm last-md first-lg first-xl" : "space-xs space-sm space-md"].join(' ')}>
           {data.leftText ? text : image}
         </div>
         <div className={!data.imageToBottom ? "col col-sm-12 col-md-6" : !data.leftText ? "col col-xs-12 col-lg-6 space-xs space-sm space-md" : "col col-xs-12 col-lg-6"}>
