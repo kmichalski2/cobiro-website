@@ -28,6 +28,12 @@
         margin: 0;
     }
 }
+
+.imageToBottom {
+    margin-bottom: -7.5rem !important;
+    height: calc(100% + 7.5rem);
+}
+
 .section {
     overflow: hidden;
 }

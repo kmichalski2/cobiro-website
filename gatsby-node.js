@@ -818,6 +818,7 @@ exports.createPages = async function({ graphql, actions }) {
                   externalLinkUrl
                   showAsButton
                   imageToEdge
+                  imageToBottom
                   image {
                     alt
                     url

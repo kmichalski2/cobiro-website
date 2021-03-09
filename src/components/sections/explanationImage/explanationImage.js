@@ -7,9 +7,8 @@ import ImageAll from "../../UiElements/ImageAll/ImageAll"
 import IconCard from "../../UiElements/IconCard/IconCard"
 
 const ExplanationImage = ({ data }) => {
- console.log('DATAAAAAA', data)
   const image = (
-    <div className={["space-sm space-xs", data.leftText && data.imageToEdge ? Classes.imageLeftEdge : !data.leftText && data.imageToEdge ? Classes.imageRightEdge : null].join(' ')}>
+    <div className={["space-sm space-xs", data.leftText && data.imageToEdge ? Classes.imageLeftEdge : !data.leftText && data.imageToEdge ? Classes.imageRightEdge : null, data.imageToBottom ? Classes.imageToBottom : null].join(' ')}>
       <ImageAll 
         image={data.image}
         alt={data.image.alt ? data.image.alt : data.title}
@@ -70,10 +69,10 @@ const ExplanationImage = ({ data }) => {
    <Section bgColor={data.bgColor && data.bgColor.hex} >
     <div className="container">
       <div className="row middle-xs reverse">
-        <div className={[data.leftText ? "last-xs last-sm first-md first-lg first-xl" : null, "col col-sm-12 col-md-6"].join(' ')}>
+        <div className={[data.leftText && !data.imageToBottom ? "last-xs last-sm first-md first-lg first-xl" : null, !data.imageToBottom  ? "col col-sm-12 col-md-6" : "col col-xs-12 col-lg-6", data.imageToBottom && !data.leftText ? "last-xs last-sm last-md last-lg last-xl" : "space-xs space-sm space-md"].join(' ')}>
           {data.leftText ? text : image}
         </div>
-        <div className="col col-sm-12 col-md-6">
+        <div className={!data.imageToBottom ? "col col-sm-12 col-md-6" : !data.leftText ? "col col-xs-12 col-lg-6 space-xs space-sm space-md" : "col col-xs-12 col-lg-6"}>
           {data.leftText ? image : text}
         </div>
       </div>
