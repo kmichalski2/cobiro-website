@@ -39,7 +39,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
             </button>
             <Modal showModal={showModal} setShowModal={() => setShowModal()}>
                 <div className="embed-responsive">
-                    <iframe src={`${link}/?autoplay=1`} width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <iframe src={`${link}/?rel=0&autoplay=1&modestbranding=1`} width="500" height="281" frameBorder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowFullScreen></iframe>
                 </div>
             </Modal>
             </>
