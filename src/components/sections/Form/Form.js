@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Classes from './form.module.scss'
+import * as Classes from './form.module.scss'
 import AnyLink from '../../UiElements/AnyLink/AnyLink';
 
 const Form = ({ data }) => {

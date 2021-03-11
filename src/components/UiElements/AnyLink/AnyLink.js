@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import {CurrentLocaleContext} from '../../layout/layout'
-import Classes from './AnyLink.module.scss'
+import * as Classes from './AnyLink.module.scss'
 import Checkmark from '../checkmark/checkmark'
 import Loader from '../loader/loader'
 import Cross from '../cross/cross'
@@ -52,7 +52,9 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
                             (linkTransformed.charAt(0) === '/' ? 
                             linkTransformed + search 
                             : `/${linkTransformed}${search}`) 
-                        : `/${customLangCode || currentLang || ''}/${linkTransformed}${search}`) 
+                        : `/${customLangCode || currentLang || ''}${linkTransformed.charAt(0) === '/' ? 
+                            linkTransformed + search 
+                            : `/${linkTransformed}${search}`}${search}`) 
                     : '/' + (customLangCode || currentLang || '') + search}>
                 {title}
                 {children}

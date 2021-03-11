@@ -6,7 +6,7 @@ import HeaderWText from '../../UiElements/HeaderWText/HeaderWText'
 import Section from '../../UiElements/Section/Section'
 import VideoEmbed from '../../UiElements/videoEmbed/videoEmbed'
 
-import Classes from './courseSection.module.scss'
+import * as Classes from './courseSection.module.scss'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import Label from '../../UiElements/label/label'
 import Modal from '../../UiElements/modal/modal'

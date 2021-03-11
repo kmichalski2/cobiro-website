@@ -1,6 +1,5 @@
 import React from "react"
 
-import VoucherStyles from "./voucher.module.scss"
 import VoucherForm from "./voucherForm/voucherForm";
 import Section from "../../UiElements/Section/Section";
 import HeaderWText from "../../UiElements/HeaderWText/HeaderWText";

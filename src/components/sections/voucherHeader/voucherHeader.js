@@ -2,7 +2,7 @@ import React from 'react'
 
 import VoucherForm from '../voucher/voucherForm/voucherForm'
 import SwayTop from '../../UiElements/SwayTop/SwayTop'
-import voucherHeaderStyles from './voucherHeader.module.scss'
+import * as Classes from './voucherHeader.module.scss'
 import GiftCard from '../../UiElements/GiftCard/GiftCard'
 import Section from '../../UiElements/Section/Section'
 import HeaderWText from '../../UiElements/HeaderWText/HeaderWText'
@@ -28,7 +28,7 @@ const VoucherHeader = (props) => {
                             h1
                             text={text}
                             light={light}
-                            classes={["space-xs space-sm space-md", voucherHeaderStyles.textWrap].join(' ')}
+                            classes={["space-xs space-sm space-md", Classes.textWrap].join(' ')}
                             links={[
                                 link && linkTitle ?
                                 {

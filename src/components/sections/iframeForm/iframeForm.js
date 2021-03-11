@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Classes from './iframeForm.module.scss'
+import * as Classes from './iframeForm.module.scss'
 
 const IframeForm = ({data}) => {
     const [loaded, setLoaded] = useState(false)

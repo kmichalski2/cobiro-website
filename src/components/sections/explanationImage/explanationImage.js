@@ -1,6 +1,6 @@
 import React from "react"
 
-import Classes from './explanationImage.module.scss'
+import * as Classes from './explanationImage.module.scss'
 import Section from "../../UiElements/Section/Section"
 import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
 import ImageAll from "../../UiElements/ImageAll/ImageAll"

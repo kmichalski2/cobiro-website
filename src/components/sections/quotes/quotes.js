@@ -1,5 +1,5 @@
 import React from "react"
-import Classes from "./quotes.module.scss"
+import * as Classes from "./quotes.module.scss"
 import Img from "gatsby-image"
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';

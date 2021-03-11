@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-import VoucherFormStyles from './voucherForm.module.scss'
+import * as Classes from './voucherForm.module.scss'
 
 const VoucherForm = ({env, footnote, formType}) => {
 
@@ -19,13 +19,13 @@ const VoucherForm = ({env, footnote, formType}) => {
     // const password = Math.random().toString(36).substring(1)
 
     const handleFocus = (event) => {
-        event.target.classList.add(VoucherFormStyles.focus)
+        event.target.classList.add(Classes.focus)
     }
     const handleBlur = (event) => {
-        if((!event.target.value && !event.target.classList.contains(VoucherFormStyles.invalid))) {
-            event.target.classList.add(VoucherFormStyles.invalid)
+        if((!event.target.value && !event.target.classList.contains(Classes.invalid))) {
+            event.target.classList.add(Classes.invalid)
         }
-        event.target.classList.remove(VoucherFormStyles.focus)
+        event.target.classList.remove(Classes.focus)
     }
 
     const handleChange = (event) => {
@@ -45,10 +45,10 @@ const VoucherForm = ({env, footnote, formType}) => {
         const email = event.target.value
         const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm;
         if(email.match(re)) {
-            event.target.classList.remove(VoucherFormStyles.invalid)
+            event.target.classList.remove(Classes.invalid)
             setIsEmailValid(true)
         } else {
-            event.target.classList.add(VoucherFormStyles.invalid)
+            event.target.classList.add(Classes.invalid)
             setIsEmailValid(false)
         }   
     }
@@ -57,10 +57,10 @@ const VoucherForm = ({env, footnote, formType}) => {
         const url = event.target.value
         if(url && validateUrl(url)) {
             setIsWebsiteValid(true)
-            event.target.classList.remove(VoucherFormStyles.invalid)
+            event.target.classList.remove(Classes.invalid)
         } else {
             setIsWebsiteValid(false)
-            event.target.classList.add(VoucherFormStyles.invalid)
+            event.target.classList.add(Classes.invalid)
         }
     }
 
@@ -69,10 +69,10 @@ const VoucherForm = ({env, footnote, formType}) => {
         if(password.length >= 6 ) {
             console.log('password length: ', password.length)
             setIsPasswordValid(true)
-            event.target.classList.remove(VoucherFormStyles.invalid)
+            event.target.classList.remove(Classes.invalid)
         } else {
             setIsPasswordValid(false)
-            event.target.classList.add(VoucherFormStyles.invalid)
+            event.target.classList.add(Classes.invalid)
         }
     }
 
@@ -255,63 +255,63 @@ const VoucherForm = ({env, footnote, formType}) => {
         <div className="card card-visible">
     <div className="row start-xs">
         {formType === 'voucher' ?
-        <div className={["col col-xs-12", VoucherFormStyles.depositButtons].join(' ')}>
-            <p className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your monthly budget</p>
+        <div className={["col col-xs-12", Classes.depositButtons].join(' ')}>
+            <p className={["text-bold", Classes.labelText].join(' ')}>Your monthly budget</p>
             <div className="flex between-xs flex-wrap">
-                <button className={["btn btn-large btn-select", planId === 1 ? VoucherFormStyles.active : null].join(' ')} onClick={() => setPlanId(1)}>$25</button>
-                <button className={["btn btn-large btn-select", planId === 2 ? VoucherFormStyles.active : null].join(' ')} onClick={() => setPlanId(2)}>$50</button>
+                <button className={["btn btn-large btn-select", planId === 1 ? Classes.active : null].join(' ')} onClick={() => setPlanId(1)}>$25</button>
+                <button className={["btn btn-large btn-select", planId === 2 ? Classes.active : null].join(' ')} onClick={() => setPlanId(2)}>$50</button>
 
-                <button className={["btn btn-large btn-select", VoucherFormStyles.mostUsed, planId === 3 ? VoucherFormStyles.active : null].join(' ')} onClick={() => setPlanId(3)}>$100{/*<span>Most used</span>*/}</button>
-                <button className={["btn btn-large btn-select", planId === 4 ? VoucherFormStyles.active : null].join(' ')} onClick={() => setPlanId(4)}>$200</button>
+                <button className={["btn btn-large btn-select", Classes.mostUsed, planId === 3 ? Classes.active : null].join(' ')} onClick={() => setPlanId(3)}>$100{/*<span>Most used</span>*/}</button>
+                <button className={["btn btn-large btn-select", planId === 4 ? Classes.active : null].join(' ')} onClick={() => setPlanId(4)}>$200</button>
             </div>
         </div>
         : null }
         <div className="col col-xs-12">
             <div className="space-xs-up">
                 <label className={["text-left", ].join(' ')}>
-                    <span className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your website</span>
-                    <div className={VoucherFormStyles.inputWebsite}>
-                        <span className={['small text-darkgrey', VoucherFormStyles.prefix].join(' ')}>http://</span>
-                        <input className={["input-inline", VoucherFormStyles.placeholderBig].join(' ')} type="text" placeholder="yourwebsite.com" name="website" value={website} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
+                    <span className={["text-bold", Classes.labelText].join(' ')}>Your website</span>
+                    <div className={Classes.inputWebsite}>
+                        <span className={['small text-darkgrey', Classes.prefix].join(' ')}>http://</span>
+                        <input className={["input-inline", Classes.placeholderBig].join(' ')} type="text" placeholder="yourwebsite.com" name="website" value={website} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                     </div>
                 </label>
             </div>
             {/* <div className="space-xs-up">
                 <label className="text-left">
-                    <span className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your name</span>
+                    <span className={["text-bold", Classes.labelText].join(' ')}>Your name</span>
                     <input className="input-inline" type="text" name="name" value={name} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                 </label>
             </div> */}
             <div className="space-xs-up">
                 <label className="text-left">
-                    <span className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your email</span>
+                    <span className={["text-bold", Classes.labelText].join(' ')}>Your email</span>
                     <input className="input-inline" type="email" name="email" value={email} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                 </label>
             </div>
             { formType === 'izettle' ? 
             <div className="space-xs-up">
                 <label className="text-left">
-                    <span className={["text-bold", VoucherFormStyles.labelText].join(' ')}>Your password</span>
+                    <span className={["text-bold", Classes.labelText].join(' ')}>Your password</span>
                     <input className="input-inline" type="password" name="password" value={password} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange}/>
                 </label>
             </div>
             : null }
         </div>
         { errors ? 
-            <div className={["col col-xs-12 space-xs-up", VoucherFormStyles.errorTexts].join(' ')}>
+            <div className={["col col-xs-12 space-xs-up", Classes.errorTexts].join(' ')}>
                 <p className="small text-left text-red">{errors.map((err, i) => (i < errors.length - 1 && errors.length > 1) ? `${err.detail} ` : err.detail || err.title)}</p> 
             </div>
         : null }
-        <div className={["col col-xs-12", VoucherFormStyles.formFooter].join(' ')}>
+        <div className={["col col-xs-12", Classes.formFooter].join(' ')}>
             <button 
-                className={["btn btn-large", VoucherFormStyles.btn, isLoading ? VoucherFormStyles.btnSpinner : null, footnote ? "space-xs-up" : null]
+                className={["btn btn-large", Classes.btn, isLoading ? Classes.btnSpinner : null, footnote ? "space-xs-up" : null]
                     .join(' ')} 
                 onClick={handleSubmit} 
                 disabled={isEmailValid && isWebsiteValid && isPasswordvalid && !isLoading ? false : true}>
-                    <span className={VoucherFormStyles.submitText}>Get started</span>
-                    <span className={VoucherFormStyles.spinner}></span>
+                    <span className={Classes.submitText}>Get started</span>
+                    <span className={Classes.spinner}></span>
             </button>
-            {footnote ? <p className={["text-left text-black", VoucherFormStyles.footnote].join(' ')}>{footnote}</p> : null }
+            {footnote ? <p className={["text-left text-black", Classes.footnote].join(' ')}>{footnote}</p> : null }
             
         </div>
         </div>

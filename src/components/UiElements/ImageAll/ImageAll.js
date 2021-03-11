@@ -1,6 +1,6 @@
 import React from 'react'
 import Img from "gatsby-image"
-import Classes from './imageAll.module.scss'
+import * as Classes from './imageAll.module.scss'
 
 const ImageAll = ({ image, alt, classes, fadeIn, fullWidth, style, backgroundImage }) => {
     

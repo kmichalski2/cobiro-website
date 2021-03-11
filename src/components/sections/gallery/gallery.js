@@ -4,7 +4,7 @@ import HeaderWText from '../../UiElements/HeaderWText/HeaderWText'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import Carousel from '@brainhubeu/react-carousel';
 
-import Classes from './gallery.module.scss'
+import * as Classes from './gallery.module.scss'
 import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
 const Gallery = ({ data }) => {

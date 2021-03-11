@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import Waves from "../../waves/waves"
-import priceStyles from './listPricing.module.scss'
+import * as Classes from './listPricing.module.scss'
 
 const ListPricing = ({ data }) => {
   const backgroundColor = data.backgroundColor
@@ -22,7 +22,7 @@ const ListPricing = ({ data }) => {
   })
 
   return (
-    <section className={[priceStyles.section, backgroundColor ? priceStyles.whiteBox : null, "section"].join(' ')} style={{backgroundImage: backgroundColor ? `linear-gradient(${topColor}, ${bottomColor})` : null, paddingBottom: backgroundColor ? 0 : null }} >
+    <section className={[Classes.section, backgroundColor ? Classes.whiteBox : null, "section"].join(' ')} style={{backgroundImage: backgroundColor ? `linear-gradient(${topColor}, ${bottomColor})` : null, paddingBottom: backgroundColor ? 0 : null }} >
         <div className="container">
           <div className="row center-xs" style={{paddingTop: '7.5rem'}}>
             <div className="col col-xs-12 col-md-8 text-center section-header">
@@ -32,7 +32,7 @@ const ListPricing = ({ data }) => {
           </div>
           <div className="row center-xs">
             <div className="col col-xs-12 col-md-6 col-lg-4">
-              <div className={["card card-visible flex center list-pricing", priceStyles.card].join(' ')}>
+              <div className={["card card-visible flex center list-pricing", Classes.card].join(' ')}>
                 <div>
                   <h4>{data.tier1Title}</h4>
                   <p className="price h1">${data.tier1Price}{data.tier1RecurringDescriptor ? <span className="h3 text-normal"> / {data.tier1RecurringDescriptor}</span> : null}</p>
@@ -56,7 +56,7 @@ const ListPricing = ({ data }) => {
             </div>
             { data.tier2Title ? 
             <div className="col col-xs-12 col-md-6 col-lg-4">
-              <div className={["card card-visible flex center list-pricing", priceStyles.card].join(' ')} >
+              <div className={["card card-visible flex center list-pricing", Classes.card].join(' ')} >
                 <div>
                   <h4>{data.tier2Title}</h4>
                   {data.tier2Price ? <p className="price h1">${data.tier2Price}</p> : null }
@@ -83,7 +83,7 @@ const ListPricing = ({ data }) => {
             : null }
           </div>
         </div>
-      <Waves className={priceStyles.whiteSways} bottom="25%" whiteSway={backgroundColor ? true : false} transparentSways={backgroundColor ? true : false} highWaveRight={true}/>
+      <Waves className={Classes.whiteSways} bottom="25%" whiteSway={backgroundColor ? true : false} transparentSways={backgroundColor ? true : false} highWaveRight={true}/>
     </section>
   )
 }

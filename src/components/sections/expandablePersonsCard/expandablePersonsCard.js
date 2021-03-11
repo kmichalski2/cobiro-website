@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import Img from "gatsby-image"
-import Classes from "./expandablePersonsCard.module.scss"
+import * as Classes from "./expandablePersonsCard.module.scss"
 import ExpandedPerson from "./expandedPerson/expandedPerson"
 
 const ExpandablePersonsCard = ({ data }) => {

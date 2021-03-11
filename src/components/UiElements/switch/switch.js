@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import Classes from './switch.module.scss'
+import * as Classes from './switch.module.scss'
 
 const Switch = ({leftEl, rightEl}) => {
 
@@ -26,7 +26,7 @@ const Switch = ({leftEl, rightEl}) => {
                 <button className="btn-text" onClick={() => onClickHandler('left')}>
                     {leftEl.title}{leftEl.extraText && <span className={Classes.extraText}>{leftEl.extraText}</span>}
                 </button>
-                <div className={[Classes.switch, active === 'left' ? Classes.left : Classes.right].join(' ')}></div>
+                <div className={[Classes.switchEl, active === 'left' ? Classes.left : Classes.right].join(' ')}></div>
                 <button className="btn-text" onClick={() =>  onClickHandler('right')}>
                     {rightEl.title}
                 </button>

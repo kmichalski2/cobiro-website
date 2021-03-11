@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import LoadingSpinner from '../../loadingSpinner/LoadingSpinner';
 
-import Classes from './vatVerificator.module.scss'
+import * as Classes from './vatVerificator.module.scss'
 
 const axios = require('axios');
 

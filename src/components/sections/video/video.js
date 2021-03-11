@@ -1,5 +1,5 @@
 import React from "react"
-import VideoStyles from "./video.module.scss"
+import * as Classes from "./video.module.scss"
 
 import splash from "../../../images/video-splash-left.png"
 
@@ -11,7 +11,7 @@ const Video = ({ data }) => (
         <div className="col col-xs-12">
           <div className="embed-responsive">
             <iframe
-              className={VideoStyles.video}
+              className={Classes.video}
               src={data.videoEmbedUrl}
               frameBorder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -27,7 +27,7 @@ const Video = ({ data }) => (
       </div>
     </div>
     </div>
-    <img src={splash} className={VideoStyles.splash} alt="splash" />
+    <img src={splash} className={Classes.splash} alt="splash" />
   </section>
 )
 

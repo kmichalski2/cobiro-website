@@ -4,7 +4,7 @@ import HtmlText from '../../../UiElements/HtmlText/HtmlText'
 import VideoEmbed from '../../../UiElements/videoEmbed/videoEmbed'
 import MetaElements from '../metaElements/metaElements'
 
-import Classes from './courseDetail.module.scss'
+import * as Classes from './courseDetail.module.scss'
 
 const CourseDetail = ({ lightText, course, category, level, lessonsNamePlural}) => {
     // let activeVidMap

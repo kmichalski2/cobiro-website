@@ -1,7 +1,7 @@
 import React from 'react'
 import ImageAll from '../ImageAll/ImageAll'
 
-import Classes from './Section.module.scss'
+import * as Classes from './Section.module.scss'
 
 const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, centered, children, textColor, id, addedPadding, classes, gradiantBottom, gradiantAtBottom, bottomBgColor, backgroundImage }) => {
     return (

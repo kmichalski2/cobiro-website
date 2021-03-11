@@ -1,6 +1,6 @@
 import React from "react"
 
-import FeaturedCarouselSlideStyles from "./featuredCarouselSlide.module.scss"
+import * as Classes from "./featuredCarouselSlide.module.scss"
 
 import arrow from "../../../../images/arrow_blue_up.svg"
 import Img from "gatsby-image"
@@ -11,29 +11,29 @@ const FeaturedCarouselSlide = props => {
     <li
       onClick={props.click}
       className={[
-        props.active ? [FeaturedCarouselSlideStyles.active, 'active'].join(' ') : "",
-        FeaturedCarouselSlideStyles.slide,
+        props.active ? [Classes.active, 'active'].join(' ') : "",
+        Classes.slide,
       ].join(" ")}
     >
-      <div className={FeaturedCarouselSlideStyles.slideWrapper}>
+      <div className={Classes.slideWrapper}>
       <h4>
         <img
           src={props.icon}
-          className={FeaturedCarouselSlideStyles.icon}
+          className={Classes.icon}
           alt={[props.title, "icon"].join(" ")}
         />
         {props.title}
         <img
           src={arrow}
-          className={FeaturedCarouselSlideStyles.arrow}
+          className={Classes.arrow}
           alt={[props.title, "arrow"].join(" ")}
         />
       </h4>
       <div
         className={
           props.active
-            ? ["open slide-text space-xs space-sm space-md", FeaturedCarouselSlideStyles.text].join(" ")
-            : [FeaturedCarouselSlideStyles.text, "slide-text"].join(" ")
+            ? ["open slide-text space-xs space-sm space-md", Classes.text].join(" ")
+            : [Classes.text, "slide-text"].join(" ")
         }
       >
         
@@ -41,17 +41,17 @@ const FeaturedCarouselSlide = props => {
           </div>
           </div>
           {props.active ? 
-          <div className={[FeaturedCarouselSlideStyles.imageWrapper, "hidden-lg hidden-xl"].join(' ')}>
+          <div className={[Classes.imageWrapper, "hidden-lg hidden-xl"].join(' ')}>
           {props.image.fluid ?
             <Img
               fluid={props.image.fluid}
-              className={FeaturedCarouselSlideStyles.animate}
+              className={Classes.animate}
               alt={props.image.alt ? props.image.alt : 'Carousel image'}
             />
             :
             <img
               src={props.image.url}
-              className={FeaturedCarouselSlideStyles.animate}
+              className={Classes.animate}
               alt={props.image.alt ? props.image.alt : 'Carousel image'}
             />}
             </div>

@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 
 import CategoryLabel from '../categoryLabel/categoryLabel'
 
-import Classes from './blogCard.module.scss'
+import * as Classes from './blogCard.module.scss'
 import Card from '../Card/Card'
 import ImageAll from '../ImageAll/ImageAll'
 import AnyLink from '../AnyLink/AnyLink'

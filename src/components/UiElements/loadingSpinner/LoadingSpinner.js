@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Classes from './LoadingSpinner.module.scss'
+import * as Classes from './LoadingSpinner.module.scss'
 
 const LoadingSpinner = ({loading, large, children, relative, dark, center}) => {
 

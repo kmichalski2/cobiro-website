@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Link } from "gatsby"
 import SubMenu from '../subMenu/subMenu'
 import {CurrentLocaleContext} from '../../layout'
-import Classes from './menuItem.module.scss'
+import * as Classes from './menuItem.module.scss'
 
 const MenuItem = ({ item, inverted, mainMenuHoveredHandler, contentContainer, expandHandler, index, subMenuExpanded, currentLocale, customLangCode }) => {
     

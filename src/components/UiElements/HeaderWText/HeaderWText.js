@@ -1,7 +1,7 @@
 import React from 'react'
 import HtmlText from '../HtmlText/HtmlText'
 
-import Classes from './HeaderWText.module.scss'
+import * as Classes from './HeaderWText.module.scss'
 import AnyLink from '../AnyLink/AnyLink'
 import ImageAll from '../ImageAll/ImageAll'
 

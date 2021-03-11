@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Classes from './metaElements.module.scss'
+import * as Classes from './metaElements.module.scss'
 
 const MetaElements = ({ course, light, category, level, lessonsNamePlural }) => (
     <div className={["flex middle-xs", Classes.meta, light ? Classes.inverted : null].join(' ')}>

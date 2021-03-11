@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import AccordionStyles from './AccordionFaq.module.scss'
+import * as Classes from './AccordionFaq.module.scss'
 
 const AccordionFaq = ({ data }) => {
   const accordions = data.accordion.accordionTabs
@@ -24,13 +24,13 @@ const AccordionFaq = ({ data }) => {
       setExpandedAccordion(i)
       if (parentNode.classList.contains("accordion-header")) {
         setAccordionMaxHeight(parentNode.nextElementSibling.scrollHeight)
-      } else if(sibling && sibling.classList.contains(AccordionStyles.accordionText)) {
+      } else if(sibling && sibling.classList.contains(Classes.accordionText)) {
         setAccordionMaxHeight(sibling.scrollHeight)
-      } else if(parentNode.classList.contains(AccordionStyles.accordionText)) {
+      } else if(parentNode.classList.contains(Classes.accordionText)) {
         setAccordionMaxHeight(parentNode.scrollHeight)
       } else if (event.target.classList.contains("card")) {
         setAccordionMaxHeight(event.target.childNodes[1].scrollHeight)
-      } else if(event.target.classList.contains(AccordionStyles.accordionText)) {
+      } else if(event.target.classList.contains(Classes.accordionText)) {
         setAccordionMaxHeight(event.target.scrollHeight)
       }
       
@@ -47,7 +47,7 @@ const AccordionFaq = ({ data }) => {
               { data.title ? <h2>{data.title}</h2> : null }
               { data.text ? <p>{data.text}</p> : null }
             </div>
-            <div className={["col col-xs-12", AccordionStyles.accordion].join(' ')}>
+            <div className={["col col-xs-12", Classes.accordion].join(' ')}>
               {accordions.map((acc, index) => (
               <div key={index} className={["card card-visible text-left", expandedAccordion === index ? "expanded-accordion" : null].join(' ')} onClick={event => newAccordionClickHandler(event, index)}>
                 <div className={["flex between-xs middle-xs accordion-header"]}>
@@ -60,7 +60,7 @@ const AccordionFaq = ({ data }) => {
                     <span>+</span>
                   </button>
                 </div>
-                <div className={["small", AccordionStyles.accordionText, expandedAccordion === index ? AccordionStyles.expandedAccordion : null].join(' ')} dangerouslySetInnerHTML={createMarkup(acc.text)} style={expandedAccordion === index ? {maxHeight: accordionMaxHeight + "px"} : null}>
+                <div className={["small", Classes.accordionText, expandedAccordion === index ? Classes.expandedAccordion : null].join(' ')} dangerouslySetInnerHTML={createMarkup(acc.text)} style={expandedAccordion === index ? {maxHeight: accordionMaxHeight + "px"} : null}>
                 </div>
               </div> 
               ))}      

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import Classes from "./fade.module.scss"
+import * as Classes from "./fade.module.scss"
 
 const Fade = ({ show, children }) => {
   const [shouldRender, setRender] = useState(show);

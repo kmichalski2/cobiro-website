@@ -3,7 +3,7 @@ import BoxLink from '../../UiElements/boxLink/boxLink'
 import HeaderWText from '../../UiElements/HeaderWText/HeaderWText'
 import Section from '../../UiElements/Section/Section'
 
-import Classes from './multipleLinks.module.scss'
+import * as Classes from './multipleLinks.module.scss'
 
 const MulitpleLinks = ({data}) => {
 

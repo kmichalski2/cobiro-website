@@ -4,7 +4,7 @@ import HtmlText from '../../UiElements/HtmlText/HtmlText'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import Section from '../../UiElements/Section/Section'
 
-import Classes from './ctaCard.module.scss'
+import * as Classes from './ctaCard.module.scss'
 
 const CtaCard = ({data}) => {
 

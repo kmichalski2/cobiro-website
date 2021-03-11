@@ -4,7 +4,7 @@ import GradiantBar from '../../UiElements/gradiantBar/gradiantBar'
 import HtmlText from '../../UiElements/HtmlText/HtmlText'
 import Section from '../../UiElements/Section/Section'
 
-import Classes from './ctaCardGradiantLine.module.scss'
+import * as Classes from './ctaCardGradiantLine.module.scss'
 
 const CtaCardGradiantLine = ({ data }) => {
 

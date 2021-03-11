@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import BlogCard from '../blogCard/blogCard'
 
-import Classes from './blogPosts.module.scss'
+import * as Classes from './blogPosts.module.scss'
 import BlogPostsHeader from '../blogPostsHeader/blogPostsHeader'
 
 

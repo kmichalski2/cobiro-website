@@ -3,7 +3,7 @@ import HeaderWText from '../../UiElements/HeaderWText/HeaderWText'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import Section from '../../UiElements/Section/Section'
 
-import Classes from './ctaCardSimple.module.scss'
+import * as Classes from './ctaCardSimple.module.scss'
 
 const CtaCardSimple = ({data}) => {
 

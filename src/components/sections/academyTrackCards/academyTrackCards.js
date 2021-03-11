@@ -3,7 +3,7 @@ import HeaderWText from '../../UiElements/HeaderWText/HeaderWText'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import Section from '../../UiElements/Section/Section'
 
-import Classes from './academyTrackCards.module.scss'
+import * as Classes from './academyTrackCards.module.scss'
 
 
 const AcademyTrackCards = ({ data }) => {
@@ -55,7 +55,7 @@ const AcademyTrackCards = ({ data }) => {
                                             />
                                             <p className={["text-bold", light ? "text-white" : null].join(' ')}>{c.listTitle}</p>
                                             <ul className=" text-left price-list list-unstyled small">
-                                            {c.checkmarkList.map((c, i) => (
+                                            {JSON.parse(c.checkmarkList).map((c, i) => (
                                                 
                                                     <li key={i}>{c}</li>
                                             

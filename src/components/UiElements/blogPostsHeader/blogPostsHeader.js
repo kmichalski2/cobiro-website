@@ -4,7 +4,7 @@ import HtmlText from "../HtmlText/HtmlText"
 import CategoryLabel from "../categoryLabel/categoryLabel"
 import ImageAll from "../ImageAll/ImageAll"
 
-import Classes from './blogPostsHeader.module.scss'
+import * as Classes from './blogPostsHeader.module.scss'
 import BlogSearch from '../../sections/blogSearch/blogSearch'
 import { Link } from 'gatsby'
 import AnyLink from '../AnyLink/AnyLink'

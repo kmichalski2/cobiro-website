@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import Classes from './animatedExplanationImage.module.scss'
+import * as Classes from './animatedExplanationImage.module.scss'
 import Section from '../../UiElements/Section/Section'
 import HeaderWText from '../../UiElements/HeaderWText/HeaderWText'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'

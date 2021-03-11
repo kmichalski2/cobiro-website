@@ -4,7 +4,7 @@ import SubMenuColumn from './subMenuColumn/subMenuColumn'
 import HtmlText from '../../../UiElements/HtmlText/HtmlText'
 import AnyLink from '../../../UiElements/AnyLink/AnyLink'
 
-import Classes from './subMenu.module.scss'
+import * as Classes from './subMenu.module.scss'
 import SubMenuFooter from './subMenuFooter/subMenuFooter'
 
 

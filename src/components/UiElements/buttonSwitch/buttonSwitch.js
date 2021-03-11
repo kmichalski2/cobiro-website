@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import Classes from './buttonSwitch.module.scss'
+import * as Classes from './buttonSwitch.module.scss'
 
 const ButtonSwitch = ({buttons, xsColumn, inverted}) => {
 

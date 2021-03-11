@@ -5,7 +5,7 @@ import HtmlText from '../../UiElements/HtmlText/HtmlText'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import Section from '../../UiElements/Section/Section'
 
-import Classes from './buttonMosaik.module.scss'
+import * as Classes from './buttonMosaik.module.scss'
 
 
 const ButtonMosaik = ({ data }) => {

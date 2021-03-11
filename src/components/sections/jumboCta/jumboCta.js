@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import Section from '../../UiElements/Section/Section'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 
-import Classes from "./jumboCta.module.scss"
+import * as Classes from "./jumboCta.module.scss"
 import HeaderWText from "../../UiElements/HeaderWText/HeaderWText"
 // import Waves from "../../waves/waves"
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import Classes from './backdrop.module.scss'
+import * as Classes from './backdrop.module.scss'
 
 const Backdrop = ({children, setShowModal}) => (
     <div className={Classes.wrapper}>

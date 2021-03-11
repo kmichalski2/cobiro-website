@@ -2,7 +2,7 @@ import React from "react"
 import Section from "../../UiElements/Section/Section"
 import IconCard from "../../UiElements/IconCard/IconCard"
 import HtmlText from "../../UiElements/HtmlText/HtmlText"
-import Classes from "./fourUp.module.scss"
+import * as Classes from "./fourUp.module.scss"
 
 const FourUp = ({ data }) => {
 

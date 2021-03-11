@@ -4,7 +4,7 @@ import ImageAll from '../ImageAll/ImageAll'
 import HtmlText from '../HtmlText/HtmlText'
 import AnyLink from '../AnyLink/AnyLink'
 
-import Classes from './IconCard.module.scss'
+import * as Classes from './IconCard.module.scss'
 
 const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg, textLeft, invisibleBoxes, classes, checkmark }) => {
 

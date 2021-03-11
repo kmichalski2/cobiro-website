@@ -4,7 +4,7 @@ import BaseTable from '../../UiElements/table/baseTable/baseTable'
 import Checkmark from '../../UiElements/checkmark/checkmark'
 import {CurrentLocaleContext} from '../../layout/layout'
 
-import Classes from './pricingTables.module.scss'
+import * as Classes from './pricingTables.module.scss'
 import Cross from '../../UiElements/cross/cross'
 import Label from '../../UiElements/label/label'
 import ButtonSwitch from '../../UiElements/buttonSwitch/buttonSwitch'
@@ -20,7 +20,7 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
     const bgColors = headers && headers.map(h => h.bgColor && h.bgColor.hex || '')
     
     const {pricingTables, pricingHeaderTable} = data
-
+    console.log('pricingTables', pricingTables)
     const monthlyPricingName = 'monthlyPrice'
     const yearlyPricingName = 'yearlyPrice'
 
@@ -221,7 +221,7 @@ const PricingTables = ({ data, navbarHeight, notificationPadding }) => {
                                                 rowName: r.rowName, 
                                                 label: r.labelText ? <Label label={r.labelText} color={r.labelColor || "blue"}/> : null, 
                                                 nested: r.nestedRow, 
-                                                cols: r.columns ? r.columns.map(col => tierElementPicker(col)) : [],
+                                                cols: r.columns && (JSON.parse(r.columns).length > 0 || r.columns.length > 0) ? JSON.parse(r.columns).map(col => tierElementPicker(col)) : [],
                                                 toolTip: r.tooltip
                                             }
                                         })

@@ -1,6 +1,5 @@
 import React from "react"
-
-import TextStyles from "./text.module.scss"
+import * as Classes from "./text.module.scss"
 
   const Text = ({ data }) => {
 
@@ -17,7 +16,7 @@ import TextStyles from "./text.module.scss"
         <div className="row center-xs">
           <div className="col col-xs-12 col-md-8">
             { data.title ? <h2>{data.title}</h2> : null }
-            { data.text ? <div className={TextStyles.text} dangerouslySetInnerHTML={createMarkup()}></div> : null }
+            { data.text ? <div className={Classes.text} dangerouslySetInnerHTML={createMarkup()}></div> : null }
           </div>
         </div>
       </div>

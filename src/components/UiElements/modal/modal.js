@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Classes from './modal.module.scss'
+import * as Classes from './modal.module.scss'
 import Backdrop from '../backdrop/backdrop'
 import LoadingSpinner from '../loadingSpinner/LoadingSpinner'
 

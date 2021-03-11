@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import BaseTable from './baseTable/baseTable'
 
-import Classes from './table.module.scss'
+import * as Classes from './table.module.scss'
 
 const Table = ({expandable, tableName, bgColors, activeCol, rows}) => {
     

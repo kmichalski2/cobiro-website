@@ -4,7 +4,7 @@ import SwayTop from "../../components/UiElements/SwayTop/SwayTop"
 import JumboCta from "../../components/sections/jumboCta/jumboCta"
 
 import Layout from "../../components/layout/layout"
-import Classes from "./blogPost.module.scss"
+import * as Classes from "./blogPost.module.scss"
 import { Link } from "gatsby"
 import CategoryLabel from "../../components/UiElements/categoryLabel/categoryLabel"
 import Section from "../../components/UiElements/Section/Section"

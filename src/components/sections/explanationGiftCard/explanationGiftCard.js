@@ -1,14 +1,14 @@
 import React from 'react'
 import GiftCard from '../../UiElements/GiftCard/GiftCard'
-
-import explanationGiftCardStyles from './explanationGiftCard.module.scss'
+ 
+import * as Classes from './explanationGiftCard.module.scss'
 
 const ExplanationGiftCard = ({data}) => {
 
       const text = (
         <div className="text-padding">
           {data.title ? <h3 className="">{data.title}</h3> : null}
-            {data.text ? <div className={explanationGiftCardStyles.text} dangerouslySetInnerHTML={{__html: data.text}}></div> : null}
+            {data.text ? <div className={Classes.text} dangerouslySetInnerHTML={{__html: data.text}}></div> : null}
       
           {data.linkTitle && data.linkUrl ? 
           <a className="btn space-xs-up" href={data.linkUrl}>{data.linkTitle}</a>

@@ -4,7 +4,8 @@ import browserLang from 'browser-lang';
 
 import {cookieAccepted, cookieConsent} from '../../layout/cookieConsent'
 import {CurrentLocaleContext} from '../../layout/layout'
-import langStyles from './langSwitcher.module.scss'
+
+import * as langStyles from  './langSwitcher.module.scss'
 
 const LangSwitcher = ({ locales, currentLocale, redirect }) => {
   const [wrapperXY, setWrapperXY] = useState(null)
@@ -43,7 +44,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
         }
 
         const redirectUser = (path) => {
-            navigate(`/${path}`, 
+            navigate(path.charAt(0) === '/' ? path : '/' + path, 
               {
                 state: { redirect: false },
               }
@@ -86,7 +87,8 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
     const langSwitcherClickHandler = (e, l) => {
       e.preventDefault()
 
-      const path = `${l.locale === 'en' ? '/' : `/${l.customLang || l.locale}`}/${l.value || ''}${search || ''}`
+      const path = `${l.locale === 'en' ? '' : `/${l.customLang || l.locale}`}/${l.value || ''}${search || ''}`
+      console.log('PATTTH:', path)
       if(cookieAccepted(cookieConsent)) {
 
         // Setting Cookie
@@ -96,7 +98,7 @@ const LangSwitcher = ({ locales, currentLocale, redirect }) => {
         document.cookie = `${chosenLangCookie}=${l.locale};${expires};path=/`
         navigate(path)
       } else {
-        navigate(`/${path}`, 
+        navigate(`${path}`, 
           {
             state: { redirect: false },
           }

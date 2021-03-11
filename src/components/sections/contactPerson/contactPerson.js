@@ -1,5 +1,5 @@
 import React from 'react'
-import Classes from './contactPerson.module.scss'
+import * as Classes from './contactPerson.module.scss'
 import Section from '../../UiElements/Section/Section'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import HeaderWText from '../HeaderWText/HeaderWText'
-import Classes from './ctaCard.module.scss'
+import * as Classes from './ctaCard.module.scss'
 
 const CtaCard = ({title, text, internalLink, externalLink, linkTitle, bgColor, lightText}) => {
 

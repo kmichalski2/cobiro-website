@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { graphql, Link } from 'gatsby'
 import Img from "gatsby-image"
 
-import Classes from './blog.module.scss'
+import * as Classes from './blog.module.scss'
 import BlogCard from '../../components/UiElements/blogCard/blogCard'
 import Layout from '../../components/layout/layout'
 import SwayTop from '../../components/UiElements/SwayTop/SwayTop'

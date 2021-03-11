@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import Classes from './tableRow.module.scss'
+import * as Classes from './tableRow.module.scss'
 
 const TableRow = ({rowHeader, expandHandler, cols, label, nested, activeCol, toolTip, bgColors, topRow, i}) => {
     

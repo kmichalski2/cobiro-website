@@ -2,7 +2,7 @@ import React from "react"
 import Section from "../../UiElements/Section/Section"
 import IconCard from "../../UiElements/IconCard/IconCard"
 import HtmlText from "../../UiElements/HtmlText/HtmlText"
-import Classes from "./threeUpDottedLine.module.scss"
+import * as Classes from "./threeUpDottedLine.module.scss"
 import ImageAll from "../../UiElements/ImageAll/ImageAll"
 
 const ThreeUpDottedLine = ({ data }) => {

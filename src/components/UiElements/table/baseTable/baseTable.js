@@ -3,7 +3,7 @@ import React, {useState, Suspense, useEffect} from 'react'
 import TableRow from '../tableRow/tableRow'
 import ImageAll from '../../ImageAll/ImageAll'
 
-import Classes from './baseTable.module.scss'
+import * as Classes from './baseTable.module.scss'
 import Fade from '../../../hoc/fade/fade'
 
 
@@ -129,7 +129,7 @@ const BaseTable = ({name, headers, activeCol, rows, icon, bgColors, pricing, row
                             <>
                             <p className="space-small-xs-up small text-bold">{h.featureListTitle}</p>
                             <ul className=" text-left price-list list-unstyled small">
-                                {h.featureList.map((l, i) => 
+                                {JSON.parse(h.featureList).map((l, i) => 
                                     <li key={i}>{l}</li>
                                 )}
                             </ul>

@@ -3,7 +3,7 @@ import AnyLink from '../AnyLink/AnyLink'
 import GradiantBar from '../gradiantBar/gradiantBar'
 import HtmlText from '../HtmlText/HtmlText'
 
-import Classes from './boxLink.module.scss'
+import * as Classes from './boxLink.module.scss'
 
 const BoxLink = ({title, subtitle, text, link, internal}) => {
 

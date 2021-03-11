@@ -4,7 +4,7 @@ import HeaderWText from '../../UiElements/HeaderWText/HeaderWText'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import Section from '../../UiElements/Section/Section'
 
-import Classes from './cardsIconBottom.module.scss'
+import * as Classes from './cardsIconBottom.module.scss'
 
 const CardsIconBottom = ({ data }) => {
 

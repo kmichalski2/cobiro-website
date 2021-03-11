@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Classes from './Card.module.scss'
+import * as Classes from './Card.module.scss'
 
 const Card = ({ children, smallPadding, noPadding, leftAligned, invisibleBox, shadow, classes }) => {
 

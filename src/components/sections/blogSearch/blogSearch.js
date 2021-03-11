@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import { useFlexSearch } from 'react-use-flexsearch'
 import { useStaticQuery, graphql } from "gatsby"
 import {CurrentLocaleContext} from '../../layout/layout'
-import Classes from './blogSearch.module.scss'
+import * as Classes from './blogSearch.module.scss'
 import { Link } from 'gatsby'
 import BlogPosts from '../../UiElements/blogPosts/blogPosts'
 import cloneDeep from 'lodash/cloneDeep';
@@ -24,7 +24,7 @@ const BlogSearch = ({ title }) => {
   const [query, setQuery] = useState('')
   const [posts, setPosts] = useState([])
 
-  const results = useFlexSearch(query, index, JSON.parse(store))
+  const results = useFlexSearch(query, index, store)
   
   // .filter(post => {
           

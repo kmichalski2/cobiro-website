@@ -1,5 +1,5 @@
 import React from 'react'
-import Classes from './subMenuFooter.module.scss'
+import * as Classes from './subMenuFooter.module.scss'
 import AnyLink from '../../../../UiElements/AnyLink/AnyLink'
 import ImageAll from '../../../../UiElements/ImageAll/ImageAll'
 

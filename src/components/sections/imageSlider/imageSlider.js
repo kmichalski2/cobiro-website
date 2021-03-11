@@ -5,7 +5,7 @@ import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import Carousel from '@brainhubeu/react-carousel';
 import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
-import Classes from './imageSlider.module.scss'
+import * as Classes from './imageSlider.module.scss'
 
 const ImageSlider = ({ data }) => {
 

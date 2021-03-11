@@ -1,7 +1,7 @@
 import React from "react"
 import ImageAll from "../../UiElements/ImageAll/ImageAll"
 
-import Classes from "./image.module.scss"
+import * as Classes from "./image.module.scss"
 import Section from "../../UiElements/Section/Section"
 import HtmlText from "../../UiElements/HtmlText/HtmlText"
 import AnyLink from "../../UiElements/AnyLink/AnyLink"

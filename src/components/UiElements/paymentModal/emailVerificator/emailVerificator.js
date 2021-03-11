@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import LoadingSpinner from '../../loadingSpinner/LoadingSpinner';
-import Classes from './emailVerificator.module.scss'
+import * as Classes from './emailVerificator.module.scss'
 
 const EmailVerificator = ({submitSuccess, submitting, setSubmitting, handleEmailVerificationSubmit}) => {
 

@@ -7,7 +7,7 @@ import '@adyen/adyen-web/dist/adyen.css'
 import { v4 as uuidv4 } from 'uuid'
 import LoadingSpinner from '../loadingSpinner/LoadingSpinner'
 import logo from "../../../images/logo.svg"
-import Classes from './paymentModal.module.scss'
+import * as Classes from './paymentModal.module.scss'
 import ImageAll from '../ImageAll/ImageAll'
 import EmailVerificator from './emailVerificator/emailVerificator'
 import ReCAPTCHA from "react-google-recaptcha";

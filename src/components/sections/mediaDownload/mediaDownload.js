@@ -1,5 +1,5 @@
 import React from 'react'
-import Classes from './mediaDownload.module.scss'
+import * as Classes from './mediaDownload.module.scss'
 import Section from '../../UiElements/Section/Section'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import HtmlText from '../../UiElements/HtmlText/HtmlText'

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 
-import FeaturedCarouselStyles from "./featuredCarousel.module.scss"
+import * as Classes from "./featuredCarousel.module.scss"
+
 import FeaturedCarouselSlide from "./featuredCarouselSlide/featuredCarouselSlide"
 
 import Img from "gatsby-image"
@@ -45,7 +46,7 @@ const FeaturedCarousel = ({ data }) => {
           <div className="row center-xs">
             <div
               className={[
-                FeaturedCarouselStyles.carousel,
+                Classes.carousel,
                 "col col-xs-12 col-lg-4 space-xs-up",
               ].join(" ")}
             >
@@ -69,13 +70,13 @@ const FeaturedCarousel = ({ data }) => {
                 images[activeSlide].fluid ?
                 <Img
                   fluid={images[activeSlide].fluid}
-                  className={FeaturedCarouselStyles.image}
+                  className={Classes.image}
                   alt={images[activeSlide].alt ? images[activeSlide].alt : 'Carousel image'}
                 />
                 :
                 <img
                   src={images[activeSlide].url}
-                  className={FeaturedCarouselStyles.image}
+                  className={Classes.image}
                   alt={images[activeSlide].alt ? images[activeSlide].alt : 'Carousel image'}
                 />
               ) : null}

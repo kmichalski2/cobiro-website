@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import HtmlText from '../HtmlText/HtmlText'
 
-import Classes from './notification.module.scss'
+import * as Classes from './notification.module.scss'
 
 const Notification = ({ text, textColor, bgColor, notifyerHeightHandler }) => {
  

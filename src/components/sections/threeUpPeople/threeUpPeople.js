@@ -1,7 +1,7 @@
 import React from "react"
 import Img from "gatsby-image"
 import linkedin from "../../../images/linkedin.svg"
-import ThreeUpPeopleStyles from "./threeUpPeople.module.scss"
+import * as Classes from "./threeUpPeople.module.scss"
 
 
 const ThreeUpPeople = ({ data }) => {
@@ -17,28 +17,28 @@ const ThreeUpPeople = ({ data }) => {
             </div>
             {data.people.map((p, index) => (
               <div key={index} className="col col-xs-12 col-md-6 col-lg-4">
-              <div className={["card", ThreeUpPeopleStyles.people].join(' ')}>
-                <div className={ThreeUpPeopleStyles.cardHeaderWrapper}>
+              <div className={["card", Classes.people].join(' ')}>
+                <div className={Classes.cardHeaderWrapper}>
                   {p.image.fluid ?
-                  <Img fluid={p.image.fluid} className={[ThreeUpPeopleStyles.image, "card-img-full"].join(' ')} alt={p.name} />
+                  <Img fluid={p.image.fluid} className={[Classes.image, "card-img-full"].join(' ')} alt={p.name} />
                   : 
-                  <img src={p.image.url} className={[ThreeUpPeopleStyles.image, "card-img-full"].join(' ')} alt={p.name} />
+                  <img src={p.image.url} className={[Classes.image, "card-img-full"].join(' ')} alt={p.name} />
                   }
-                  <div className={[ThreeUpPeopleStyles.textWrapper, "flex between-xs text-left"].join(' ')}>
+                  <div className={[Classes.textWrapper, "flex between-xs text-left"].join(' ')}>
                     <div className="space-md-up">
                       <h4>{p.name}</h4>
                       <h5>{p.title}</h5>
                     </div>
-                    <div className={ThreeUpPeopleStyles.icons}>
+                    <div className={Classes.icons}>
                     { p.customLogo ? 
-                      <a className={[ThreeUpPeopleStyles.customIcon].join('')} href={p.customLogoLink ? p.customLogoLink : null} target="_blank" rel="noopener noreferrer">
-                        <img src={p.customLogo.url} className={ThreeUpPeopleStyles.socialIcon}/>
+                      <a className={[Classes.customIcon].join('')} href={p.customLogoLink ? p.customLogoLink : null} target="_blank" rel="noopener noreferrer">
+                        <img src={p.customLogo.url} className={Classes.socialIcon}/>
                       </a>
                       : null }
                     {p.linkedinLink ? 
-                    <a className={ThreeUpPeopleStyles.linkedinLink} href={p.linkedinLink} target="_blank" rel="noopener noreferrer">
+                    <a className={Classes.linkedinLink} href={p.linkedinLink} target="_blank" rel="noopener noreferrer">
                       <img
-                        className={ThreeUpPeopleStyles.socialIcon}
+                        className={Classes.socialIcon}
                         src={linkedin}
                         alt={p.name}
                       />

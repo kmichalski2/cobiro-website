@@ -1,7 +1,7 @@
 import React from 'react'
 import Img from "gatsby-image"
 import linkedin from "../../../../images/linkedin.svg"
-import Classes from "../expandablePersonsCard.module.scss"
+import * as Classes from "../expandablePersonsCard.module.scss"
 
 const ExpandedPerson = ( {persons, expanded} ) => {
     

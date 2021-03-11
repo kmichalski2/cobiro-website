@@ -5,7 +5,7 @@ import HtmlText from '../../UiElements/HtmlText/HtmlText'
 import ImageAll from '../../UiElements/ImageAll/ImageAll'
 import Section from '../../UiElements/Section/Section'
 
-import Classes from './imageTextThreeUp.module.scss'
+import * as Classes from './imageTextThreeUp.module.scss'
 
 const ImageTextThreeUp = ({data}) => {
     const numbersArray = [1, 2, 3]

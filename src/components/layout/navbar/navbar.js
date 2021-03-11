@@ -5,7 +5,7 @@ import Notification from '../../UiElements/notification/notification'
 import MenuItem from './menuItem/menuItem'
 import AnyLink from '../../UiElements/AnyLink/AnyLink'
 
-import Classes from './navbar.module.scss'
+import * as Classes from './navbar.module.scss'
 
 const Navbar = ({ menuItems, customCta, menuInverted, blackBackground, notification, notifyerHeightHandler, hideSignUp, locales, currentLocale, menuCta, homeSlug, customLangCode, navbarHeightHandler }) => {
 
