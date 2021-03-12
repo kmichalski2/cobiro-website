@@ -1,6 +1,10 @@
   
 [build]
     functions = "./functions"
+    publish = "public"
+
+[[plugins]]
+  package = "netlify-plugin-gatsby-cache"
 
 [context.production]
     environment = { GATSBY_AYDEN_ORIGIN_KEY = "pub.v2.2615918883970029.aHR0cHM6Ly9jb2Jpcm8uY29t.Qp3eO2GnlgDwPCpDHpopDpFEd-z_3N33THF-Yv_R2Ao", GATSBY_AYDEN_ENVIRONMENT = "live", GATSBY_APP_URL = "https://app.cobiro.com", GATSBY_HUB_URL = "https://hub.cobiro.com"}

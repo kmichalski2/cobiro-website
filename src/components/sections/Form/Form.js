@@ -15,7 +15,7 @@ const Form = ({ data }) => {
     let emptySubmission = {}
         form.formFields.map(f => {
             if(f.internal.type === 'DatoCmsCheckbox') {
-                f.checkboxes.map(c => { emptySubmission = {...emptySubmission, [c]: "false"}})
+                JSON.parse(f.checkboxes).map(c => { emptySubmission = {...emptySubmission, [c]: "false"}})
             } else {
                 emptySubmission = {...emptySubmission, [f.name]: ""}
             }
@@ -198,7 +198,7 @@ const Form = ({ data }) => {
 
                             : f.internal.type === 'DatoCmsCheckbox' ?
 
-                                f.checkboxes.map((b, i) =>
+                                JSON.parse(f.checkboxes).map((b, i) =>
                                     <div key={i} >
                                         <input 
                                             type="checkbox" 
@@ -230,7 +230,7 @@ const Form = ({ data }) => {
                                         {f.placeholder}
                                     </option>
 
-                                    {f.options.map((o, i) => 
+                                    {JSON.parse(f.options).map((o, i) => 
                                         <option key={i} value={o}>
                                             {o}
                                         </option>
@@ -240,7 +240,7 @@ const Form = ({ data }) => {
 
                             : f.internal.type === 'DatoCmsRadioButtonField' ?
 
-                                f.radioButtons.map((b, i) => 
+                                JSON.parse(f.radioButtons).map((b, i) => 
                                 <div key={i} className={Classes.radio}>
                                     <label >
                                     <input 
