@@ -21,7 +21,10 @@ const AnimatedExplanationImage = ({ data }) => {
         });
         element.addEventListener('sal:out', ({ detail }) => {
             console.log('exiting', detail.target.dataset.index);
-            // setVisibleImage(null)
+
+            if(visibleImage === detail.target.dataset.index) {
+                setVisibleImage(null)
+            }
         });
     }, [])
 
