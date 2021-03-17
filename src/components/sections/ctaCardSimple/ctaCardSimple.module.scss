@@ -33,6 +33,7 @@
     
     @include mq($until: xl) {
         padding: 2rem 3rem;
+        color: black!important;
     }
 }
 
@@ -50,7 +51,7 @@
         left: 2rem;
         top: 4rem;
         width: 75% !important;
-        max-width: none !important;   
+        max-width: none !important;
     }
     .backgroundImage {
         position: absolute !important;
@@ -59,10 +60,12 @@
         transform: translate(-50%, -50%);
         min-width: 100%;
         min-height: 100%;
-        max-width: none !important;   
+        max-width: none !important;
 
         img {
             max-width: none !important;
+            object-fit: cover!important;
+
         }
     }
 }
