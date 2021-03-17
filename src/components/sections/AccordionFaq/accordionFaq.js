@@ -42,8 +42,8 @@ const AccordionFaq = ({ data }) => {
     <section className={[data.backgroundColor ? "bg-extra-ligt-grey" : null, "section"].join(' ')}>
       <div className={data.backgroundColor ? "bg-sway-inner" : null}>
         <div className="container center">
-          <div className="row">
-            <div className="col col-xs-12 text-center section-header">
+          <div className="row center">
+            <div className="col col-xs-12 col-md-10 col-lg-8 text-center section-header">
               { data.title ? <h2>{data.title}</h2> : null }
               { data.text ? <p>{data.text}</p> : null }
             </div>
