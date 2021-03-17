@@ -21,7 +21,7 @@ const ImageSection = ({ data }) => {
                 )}
                 </div>
             : null }
-            {data.linkTitle && data.internalLinkImage ?
+            {data.linkTitle && data.internalLinkImage && !data.buttonUnderImage ?
                 <AnyLink 
                     link={data.internalLinkImage.slug} 
                     internal
@@ -43,7 +43,7 @@ const ImageSection = ({ data }) => {
     )
 
     return (
-        <Section bgColor={data.bgColor && data.bgColor.hex} classes={[Classes.section, data.backgroundImageOverflowingUpperSection ? Classes.paddingTopBig : null, data.noPaddingBottom ? Classes.noPaddingBottom : null].join(' ')}>
+        <Section backgroundImageStandard={data.backgroundImage || null} bgColor={data.bgColor && data.bgColor.hex} classes={[Classes.section, data.backgroundImageOverflowingUpperSection ? Classes.paddingTopBig : null, data.noPaddingBottom ? Classes.noPaddingBottom : null].join(' ')}>
             {data.backgroundImageOverflowingUpperSection ?
                 <ImageAll
                     image={data.backgroundImageOverflowingUpperSection}
@@ -68,6 +68,15 @@ const ImageSection = ({ data }) => {
                                 <iframe src={data.videoEmbedCode} width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                             </div>
                         : null }
+                           {data.linkTitle && data.internalLinkImage && data.buttonUnderImage ?
+                                <AnyLink 
+                                    link={data.internalLinkImage.slug} 
+                                    internal
+                                    title={data.linkTitle} 
+                                    button
+                                    classes="space-xs-up"
+                                />
+                            : null }
                     </div>
                 </div>
                 {!data.textAboveImage || (data.linkTitle && data.internalLinkImage) ? 

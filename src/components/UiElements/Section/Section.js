@@ -3,7 +3,7 @@ import ImageAll from '../ImageAll/ImageAll'
 
 import Classes from './Section.module.scss'
 
-const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, centered, children, textColor, id, addedPadding, classes, gradiantBottom, gradiantAtBottom, bottomBgColor, backgroundImage }) => {
+const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, centered, children, textColor, id, addedPadding, classes, gradiantBottom, gradiantAtBottom, bottomBgColor, backgroundImage, backgroundImageStandard }) => {
     return (
         <section 
             className={[classes ? classes : null, Classes.section, noBottomPadding ? Classes.noBottomPadding : null, paddingBottomXsSm ? Classes.paddingBottomXsSm : null, gradiantBottom ? Classes.gradiantBottom : null, backgroundImage ? Classes.backgroundImageSection : null].join(' ')} 
@@ -12,6 +12,9 @@ const Section = ({ left, right, bgColor, noBottomPadding, paddingBottomXsSm, cen
             >
                 { backgroundImage ?
                 <ImageAll image={backgroundImage} alt={backgroundImage.alt} backgroundImage classes={Classes.backgroundImage}/>
+                : null }
+                { backgroundImageStandard ?
+                <ImageAll image={backgroundImageStandard} alt={backgroundImageStandard.alt || null} backgroundImage classes={Classes.backgroundImage}/>
                 : null }
 
                 {gradiantBottom ? 

@@ -1393,11 +1393,27 @@ exports.createPages = async function({ graphql, actions }) {
                   noPaddingBottom
                   narrowImage
                   imageContainerWidth
+                  buttonUnderImage
                   wideImage
                   textAboveImage
                   linkTitle
                   internalLinkImage {
                     slug
+                  }
+                  backgroundImage {
+                    alt
+                    url
+                    width
+                    height
+                    fluid(maxWidth: 2000) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
                   }
                   backgroundImageTop {
                     alt
