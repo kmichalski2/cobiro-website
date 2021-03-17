@@ -101,16 +101,26 @@ $button-padding-horizontal: 1.5rem;
 	}
 
 	&::before {
-		content: '+';
+		content: "\2303";
+		display: inline-block;
+		transform: rotate(180deg);
 		position: absolute;
-		top: 48%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		top: 10%;
+		// left: 50%;
+		// transform: translate(-50%, -50%);
+		transition: all 0.2s;
 	}
 
 	&.active {
 		&::before {
-			content: '-';
+			content: "\2303";
+		display: inline-block;
+		transform: rotate(0deg);
+		position: absolute;
+		top: 10%;
+		// left: 50%;
+		transition: all 0.2s;
+		//   transform: translate(-50%, -50%);
 		}
 	}
 
@@ -154,5 +164,17 @@ $button-padding-horizontal: 1.5rem;
 			content: none;
 		}
 	}
+}
 
+
+.btn-accordion {
+
+	&:hover, &:active {
+		border-color:rgba(0, 0, 0, 0)!important;
+		background-color: rgba(0, 0, 0, 0)!important;
+	}
+	&:focus {
+		border-color:rgba(0, 0, 0, 0)!important;
+		background-color: rgba(0, 0, 0, 0)!important;
+	}
 }
