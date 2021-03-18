@@ -1667,6 +1667,17 @@ exports.createPages = async function({ graphql, actions }) {
                     }
                     url
                   }
+                  ctaImageBackground {
+                    fluid(maxWidth: 1000) {
+                      aspectRatio
+                      height
+                      sizes
+                      src
+                      srcSet
+                      width
+                    }
+                    url
+                  }
                   backgroundImage {
                     fluid(maxWidth: 1200) {
                       aspectRatio
