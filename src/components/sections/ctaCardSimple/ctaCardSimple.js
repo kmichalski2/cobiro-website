@@ -48,7 +48,7 @@ const CtaCardSimple = ({data}) => {
                                       }
                                 ]}/>
                             </div>
-                            <div className="col col-xs-12 col-lg-6">
+                            <div className={["col col-xs-12 col-lg-6", Classes.imageWrapper].join(' ')}>
                                     {data.ctaImageBackground && ! data.imageOverflowing ?
                                         <ImageAll 
                                             image={data.ctaImageBackground}

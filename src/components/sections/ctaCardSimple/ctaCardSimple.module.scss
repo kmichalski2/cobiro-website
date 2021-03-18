@@ -83,3 +83,9 @@
     width: 135%;
     max-width: 135%;
 }
+
+@include mq($until: lg) {
+    .imageWrapper {
+        padding-top: 14%;
+    }
+}
