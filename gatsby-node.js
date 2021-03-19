@@ -1651,6 +1651,7 @@ exports.createPages = async function({ graphql, actions }) {
                 ... on DatoCmsCtaCardSimple {
                   title
                   text
+                  ctaSimpleDarkText
                   linkTitle
                   externalLinkCtaCard
                   internalLinkCtaCard {
