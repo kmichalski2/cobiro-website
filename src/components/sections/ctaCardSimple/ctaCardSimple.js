@@ -7,6 +7,7 @@ import Classes from './ctaCardSimple.module.scss'
 
 const CtaCardSimple = ({data}) => {
 
+    console.log(data, 'data')
     return (
         <Section bgColor={data.sectionBgColor && data.sectionBgColor.hex}>
         <div className="container">
@@ -33,7 +34,7 @@ const CtaCardSimple = ({data}) => {
                                 classes={Classes.textWrapper}
                                 title={data.title}
                                 h2
-                                light={data.backgroundImage || false}
+                                light={data.ctaSimpleDarkText ? false : data.backgroundImage && !data.ctaSimpleDarkText ? true : false}
                                 darkButton={true}
                                 text={data.text}
                                 centered={false}

@@ -29,7 +29,7 @@ const HeaderWText = ({ title, h1, h2, h3, h4, text, links, light, darkButton, cl
         : h4 && title ? 
             <h4 className={[headerSpacing, light ? Classes.white : null, proFeature ? Classes.proFeature : null].join(' ')}> { title } </h4>
         : null }
-        <HtmlText RawHtml={text} classes={[Classes.text, light ? Classes.white : null].join(' ')}/>
+        <HtmlText RawHtml={text} classes={[Classes.text, light ? Classes.white : Classes.black].join(' ')}/>
         { children ? 
             <div className={Classes.children}>
                 {children}
