@@ -26,7 +26,7 @@ const ExplanationImageWithLogos = ({data}) => {
                                 alt={data.image.alt ? data.image.alt : data.title} />
                             <ImageAll 
                                 image={data.backgroundImage}
-                                alt={data.backgroundImage.alt ? data.backgroundImage.alt : data.title} 
+                                // alt={data.backgroundImage && data.backgroundImag.alt ? data.backgroundImag.alt : data.title} 
                                 classes={Classes.backgroundImage}/>
                         </div>
                     </div>
