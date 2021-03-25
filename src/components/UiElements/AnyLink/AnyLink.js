@@ -7,7 +7,7 @@ import Loader from '../loader/loader'
 import Cross from '../cross/cross'
 import Modal from '../modal/modal'
 
-const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes, noArrow, noPadding, disabled, submitting, submitted, submitError, children, regular, targetSelf}) => {
+const AnyLink = ({link, title, external, internal, callBack, button, large, secondary, light, classes, noArrow, noPadding, disabled, submitting, submitted, submitError, children, regular, targetSelf, showLinkAsButton}) => {
 
     const currentLang = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
@@ -26,7 +26,7 @@ const AnyLink = ({link, title, external, internal, callBack, button, large, seco
 
     const linkTransformed = link || (link === null && '/')
 
-    const classNames = [classes, button ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null, noPadding && Classes.noPadding, regular && Classes.regular].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
+    const classNames = [classes, button || showLinkAsButton ? [Classes.btn, "btn"].join(' ') : [Classes.textLink, !noArrow ? Classes.arrow : null, noPadding && Classes.noPadding, regular && Classes.regular].join(' '), large ? Classes.large : null, secondary ? Classes.secondary : null, light ? Classes.white : null, submitError && Classes.btnDanger].join(' ')
     
     return (
         <>
