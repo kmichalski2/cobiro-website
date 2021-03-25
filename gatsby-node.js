@@ -673,6 +673,19 @@ exports.createPages = async function({ graphql, actions }) {
                   }
                 }
                 ... on DatoCmsThreeUp {
+                  backgroundImage {
+                    alt
+                    url
+                    fluid(maxWidth: 1800) {
+                      width
+                      height
+                      srcSet
+                      base64
+                      aspectRatio
+                      src
+                      sizes
+                    }
+                  }
                   backgroundColor
                   bgColor {
                     hex
@@ -981,6 +994,9 @@ exports.createPages = async function({ graphql, actions }) {
                   testimonialTextColor
                 }
                 ... on DatoCmsFeaturedCompany {
+                  featuredCompaniesBackgroundColor {
+                    hex
+                  }
                   backgroundColor
                   title
                   text

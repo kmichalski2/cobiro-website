@@ -8,9 +8,10 @@ import HtmlText from "../UiElements/HtmlText/HtmlText"
 const ThreeUpPeople = ({ data }) => {
   const bigIcon = data.bigIcons
   const iconImg = data.imagesInsteadOfIcons
+  const bgImage = data.backgroundImage
 
   return (
-    <Section bgColor={data.bgColor && data.bgColor.hex}>
+    <Section bgColor={data.bgColor && data.bgColor.hex} backgroundImageStandard={bgImage}>
       <div className={data.backgroundColor ? "bg-sway-inner" : null}>
         <div className="container">
           <div className="row center-xs">
@@ -40,7 +41,8 @@ const ThreeUpPeople = ({ data }) => {
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
-                  />
+                  showLinkAsButton
+                />
               </div>
             ) : null}
 
@@ -62,6 +64,7 @@ const ThreeUpPeople = ({ data }) => {
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
+                  showLinkAsButton
                   />
               </div>
             ) : null}
@@ -84,6 +87,7 @@ const ThreeUpPeople = ({ data }) => {
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
+                  showLinkAsButton
                   />
               </div>
             ) : null}
@@ -106,6 +110,7 @@ const ThreeUpPeople = ({ data }) => {
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
+                  showLinkAsButton
                   />
               </div>
             ) : null}
@@ -128,6 +133,7 @@ const ThreeUpPeople = ({ data }) => {
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
+                  showLinkAsButton
                   />
               </div>
             ) : null}
@@ -150,6 +156,7 @@ const ThreeUpPeople = ({ data }) => {
                   textLeft={data.textLeft}
                   invisibleBoxes={data.invisibleBoxes}
                   light={data.textColor === 'light'}
+                  showLinkAsButton
                   />
               </div>
             ) : null}

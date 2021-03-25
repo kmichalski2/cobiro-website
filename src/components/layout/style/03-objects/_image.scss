@@ -18,8 +18,12 @@
 // }
 
 .customer-logo {
-	width: 12.5rem;
+    height: 4.25rem!important;
 	margin: 0.75rem;
+}
+
+.google-logoes {
+	display: flex;
 }
 
 .gatsby-image-wrapper {

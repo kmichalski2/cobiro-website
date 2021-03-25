@@ -6,9 +6,10 @@ import AnyLink from '../AnyLink/AnyLink'
 
 import Classes from './IconCard.module.scss'
 
-const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg, textLeft, invisibleBoxes, classes, checkmark }) => {
+const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, external, linkTitle, light, shadow, iconImg, textLeft, invisibleBoxes, classes, checkmark, showLinkAsButton }) => {
 
-    console.log('light', light)
+    console.log('link', link)
+
     return (
         <Card shadow={shadow} leftAligned={textLeft} invisibleBox={invisibleBoxes} classes={classes}>
             <ImageAll 
@@ -32,7 +33,8 @@ const IconCard = ({ image, alt, iconBig, title, text, footnote, link, internal, 
                         external={external || false} 
                         title={linkTitle} 
                         light={ light || false }
-                        classes={Classes.link}
+                        classes={Classes.link, showLinkAsButton ? "margin-top" : null}
+                        showLinkAsButton={showLinkAsButton}
                     />
                     : null}
                 </div>
