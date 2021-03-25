@@ -88,7 +88,7 @@ const CourseSection = ({ data }) => {
                 <div className={Classes.modalWrapper}>
                     <CourseDetail
                         lightText={lightText}
-                        course={courses[showCourse]}
+                        course={courses.filter(c => activeCourses === ALL_COURSES ? true : c.category === activeCourses)[showCourse]}
                         category={categoryNames[courses[showCourse].category]}
                         level={levelNames[courses[showCourse].level]}
                         lessonsNamePlural={data.lessonsNamePlural}
