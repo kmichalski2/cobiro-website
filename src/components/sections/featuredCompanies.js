@@ -17,7 +17,7 @@ return (
             { data.title ? <h2>{data.title}</h2> : null }
             { data.text ? <p className="text-black">{data.text}</p> : null }
           </div>
-          <div className="col col-xs-12 col-lg-8 center">
+          <div className="col col-xs-12 col-lg-8 center google-logoes">
           {/* <script src="https://apis.google.com/js/platform.js" async defer></script> */}
 
           { data.logos.map((l, index) => (

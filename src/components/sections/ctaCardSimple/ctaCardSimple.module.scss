@@ -89,3 +89,26 @@
         padding-top: 14%;
     }
 }
+
+// @include mq($from: lg) {
+//     .toEdge {
+//         position: absolute;
+//         right: 0;
+//         padding-right: 0;
+//     }
+// }
+
+// @include mq($until: lg) {
+//     .toEdge {
+//         padding-right: 0;
+//         // min-width: 100vw;
+//     }
+//     .card {
+//         padding: 1.25rem;
+//     }
+
+//     .ctaCardSimple {
+        
+//     }
+
+// }

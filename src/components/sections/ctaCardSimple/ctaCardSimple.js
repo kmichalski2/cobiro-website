@@ -7,6 +7,8 @@ import Classes from './ctaCardSimple.module.scss'
 
 const CtaCardSimple = ({data}) => {
 
+    data.toEdge = true;
+
     console.log(data, 'data')
     return (
         <Section bgColor={data.sectionBgColor && data.sectionBgColor.hex}>
