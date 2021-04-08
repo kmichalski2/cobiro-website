@@ -528,7 +528,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                     setupPaymentUi(vatData.amount_including_vat * 100, countryCode)
                 }
             }).catch((err) => {
-                console.log('VAT ERR', err)
+                console.log('VAT ERR 222', err)
             })
         } else if(showModal && isFreeTier) {
             setLoading(false)
