@@ -16,8 +16,13 @@ import VatVerificator from './vatVerificator/vatVerificator'
 const axios = require('axios');
 const queryString = require('query-string');
 
+const GATSBY_HUB_URL = "https://hub.cobiro.com";
+const GATSBY_APP_URL = "https://app.cobiro.com";
+const GATSBY_AYDEN_ORIGIN_KEY = "pub.v2.2615918883970029.aHR0cHM6Ly9jb2Jpcm8uY29t.Qp3eO2GnlgDwPCpDHpopDpFEd-z_3N33THF-Yv_R2Ao";
+const GATSBY_AYDEN_ENVIRONMENT = "live";
+
 const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, monthlyPricing, planId, pricing, returningData, rightColTitle}) => {
-    
+
     const queryData = useStaticQuery(graphql`
     query PaymentImages {
         securePayment: file(relativePath: { eq: "icon-sslencrypt.svg" }) {
@@ -36,10 +41,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }
     }
     `)
-    
+
     const securePaymentImage = queryData.securePayment
     const googlePartnerImage = queryData.googlePartner
-    
+
     const [loading, setLoading] = useState(true)
     const [submission, setSubmission] = useState({email: '', password: ''})
     const [errors, setErrors] = useState({})
@@ -73,10 +78,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     const price = majorUnitPriceExVat.toLocaleString("en-US", {style:"currency", currency:"USD"})
     const VAT = (majorUnitPriceIncVat - majorUnitPriceExVat).toLocaleString("en-US", {style:"currency", currency:"USD"})
     const priceIncVAT = majorUnitPriceIncVat.toLocaleString("en-US", {style:"currency", currency:"USD"})
-    
+
     const currentLang = useContext(CurrentLocaleContext).locale
     const customLangCode = useContext(CurrentLocaleContext).customLangCode
-    
+
     const aydenRef = React.useRef()
 
     let checkout
@@ -88,7 +93,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
         setPaymentId(uuidv4())
 
-        axios.get('https://www.cloudflare.com/cdn-cgi/trace').then((res) => {   
+        axios.get('https://www.cloudflare.com/cdn-cgi/trace').then((res) => {
             res.data.split('\n').map(el => {
                 const keyValue = el.split(("="))
                 if(keyValue && keyValue[0] === 'ip') {
@@ -97,11 +102,11 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 if(keyValue && keyValue[0] === 'loc') {
                     setCountryCode(keyValue[1])
                 }
-            })            
+            })
         })
 
         if(returningData) {
-            
+
             const {payment_id, user_id, plan_id, ...payload} = returningData
             setPaymentId(payment_id)
             setUserId(user_id)
@@ -110,7 +115,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }
 
         if(parsedLocation) {
-            
+
             const {MD, PaRes, utm_interest, user_id, plan_id, ...urlParams} = parsedLocation
             const stringified = queryString.stringify(urlParams);
             console.log('stringified', stringified)
@@ -125,7 +130,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }, [])
 
     useEffect(() => {
-        if(startLogin) {            
+        if(startLogin) {
             const loginRediect = async () => {
 
                 const token = await localStorage.getItem('loginToken')
@@ -137,7 +142,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             }
 
             loginRediect()
-            
+
         }
     }, [startLogin])
 
@@ -173,15 +178,15 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 });
             });
         }
-        window.location.href = `${process.env.GATSBY_APP_URL}/user/login?token=${userToken}&planId=${planId || planIdParam || 0}&planStatus=1&userId=${userId}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
+        window.location.href = `${GATSBY_APP_URL}/user/login?token=${userToken}&planId=${planId || planIdParam || 0}&planStatus=1&userId=${userId}&redirectUri=%2Fonboarding%2Fsite${urlParams ? '&' + urlParams : ''}${linkerParam ? '&' + linkerParam : ''}`
     }
 
     const processPaymentResponse = async (paymentRes, dropin) => {
-        
+
         const action = paymentRes.action || paymentRes
 
         if (paymentRes && (paymentRes.action || paymentRes.type)) {
-            
+
             if(action.type === 'redirect' && paymentRes.redirect) {
                 const {TermUrl, ...redirectPayload} = paymentRes.redirect.data
                 const token = await loginUser(true)
@@ -231,7 +236,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             window.dataLayer.push({'event': '/Pricing - Payment started','payment_id': paymentId })
         }
 
-        axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
+        axios.post(`${GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/make-payment`, {
             data: {
                 type: "make-payment",
                 attributes: {
@@ -265,8 +270,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     const loginUser = async (returnToken) => {
 
-        
-        const tokenReturned = await axios.post(`${process.env.GATSBY_HUB_URL}/v1/login`, {
+
+        const tokenReturned = await axios.post(`${GATSBY_HUB_URL}/v1/login`, {
             data: {
                 type: "login",
                 attributes: {
@@ -282,10 +287,10 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 setSubmitting(false)
                 setSubmitSuccess(true)
                 redirectToApp(userToken)
-            }  
+            }
 
             return userToken
-            
+
         }).catch((err) => {
             setSubmitting(false)
             setSubmitSuccess(false)
@@ -298,8 +303,8 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     }
 
     const handleRecaptchaValidation = (rCToken) => {
-        
-        axios.post(`${process.env.GATSBY_HUB_URL}/v1/verifyRecaptcha`, {
+
+        axios.post(`${GATSBY_HUB_URL}/v1/verifyRecaptcha`, {
             recaptcha_token: rCToken
         }).then((res) => {
             setRecaptchaValid(true)
@@ -307,14 +312,14 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             setSubmitError(errorFormatHandler(err))
         })
     }
-    
+
 
     const registerUser = (usePayment) => {
 
         const source = !isFreeTier ? {source: "payment"} : {}
         const utm_interest = utmInterest ? {utm_interest: utmInterest} : {}
 
-        axios.post(`${process.env.GATSBY_HUB_URL}/v1/register`, {
+        axios.post(`${GATSBY_HUB_URL}/v1/register`, {
             data: {
                 type: "users",
                 attributes: {
@@ -331,7 +336,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 }
             }
         }).then((res) => {
-            
+
             pushWindowEvent('/Pricing - Account - Account Created')
             const resUserId = res.data.data.id
             setUserId(resUserId)
@@ -342,20 +347,20 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 setShowEmailValidation(true)
                 setSubmitting(false)
             }
-            
+
         }).catch((err) => {
             setSubmitting(false)
             setSubmitSuccess(false)
             setSubmitError(errorFormatHandler(err))
         })
     }
-    
+
     const handleOnChange = (state, component) => {
         setSubmitError(null)
         setPaymentComponent(component)
         setPaymentInformation(state)
     }
-    
+
     const handleOnSubmit = () => {
         setSubmitError(null)
         setSubmitting(true)
@@ -368,7 +373,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     const handleShopperRedirect = (payload, dropin, payId) => {
 
-        axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/handle-shopper-redirect`, {
+        axios.post(`${GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/handle-shopper-redirect`, {
             data: {
                 type: "make-payment",
                 attributes: {
@@ -381,30 +386,30 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         }).then((res) => {
 
             const attributes = res.data && res.data.data && res.data.data.attributes
-            
+
             if(attributes && attributes.result_code && (!attributes.payload || (attributes.payload && attributes.payload.length === 0))) {
 
                 const resultMutated = {
                         resultCode: attributes.result_code
                     }
-                    
+
                 processPaymentResponse(resultMutated, dropin)
 
             } else if(attributes && attributes.payload) {
                 processPaymentResponse(attributes.payload, dropin)
             }
-                        
+
         }).catch((err) => {
             setSubmitting(false)
             setSubmitSuccess(false)
             setSubmitError(errorFormatHandler(err))
         })
     }
-    
+
     const handleOnAdditionalDetails = (state, dropin) => {
         console.log('handleShopperRedirect called', state.data.details)
         setPaymentComponent(dropin)
-        handleShopperRedirect(state.data.details, dropin) 
+        handleShopperRedirect(state.data.details, dropin)
     }
 
     const handleUserRegistrationChange = (e) => {
@@ -415,7 +420,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         setSubmission({...submission, [key]: value})
         setDirty({...dirty, [key]: true})
 
-        if(e.target.type === 'email') { 
+        if(e.target.type === 'email') {
             const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/igm;
             if(value.match(re)) {
                 const newErrors = {...errors}
@@ -437,19 +442,19 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     const handleEmailVerificationSubmit = (verificationCode) => {
 
-        axios.post(`${process.env.GATSBY_HUB_URL}/v1/users/email/verify/pin`, {
+        axios.post(`${GATSBY_HUB_URL}/v1/users/email/verify/pin`, {
             data: {
                 type: "users",
                 code: verificationCode,
                 email: submission.email,
                 attributes: {
-                    email: submission.email, 
+                    email: submission.email,
                     code: verificationCode
                 }
             }
         }).then((res) => {
             loginUser(false)
-            
+
         }).catch((err) => {
             setSubmitting(false)
             setSubmitSuccess(false)
@@ -459,22 +464,22 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
 
     const setupPaymentUi = (priceToPay, country) => {
         console.log('priceToPay', priceToPay)
-        axios.post(`${process.env.GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
+        axios.post(`${GATSBY_HUB_URL}/v2/subscriptions/payments/adyen/payment-methods`, {
             data: {
                 type: "payment-methods",
                 attributes: {
                     amount: priceToPay,
                     locale: country,
-                    currency: "USD" 
+                    currency: "USD"
                 }
             }
         }).then((res) => {
             const response = res.data.data.attributes
-            
+
             const aydenConfiguration = {
                 locale: customLangCode || currentLang, // The shopper's locale. For a list of supported locales, see https://docs.adyen.com/checkout/components-web/localization-components.
-                environment: process.env.GATSBY_AYDEN_ENVIRONMENT, // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/checkout/components-web#testing-your-integration.  
-                originKey: process.env.GATSBY_AYDEN_ORIGIN_KEY, // Your client key. To find out how to generate one, see https://docs.adyen.com/development-resources/client-side-authentication. Web Components versions before 3.10.1 use originKey instead of clientKey.
+                environment: GATSBY_AYDEN_ENVIRONMENT, // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/checkout/components-web#testing-your-integration.
+                originKey: GATSBY_AYDEN_ORIGIN_KEY, // Your client key. To find out how to generate one, see https://docs.adyen.com/development-resources/client-side-authentication. Web Components versions before 3.10.1 use originKey instead of clientKey.
                 paymentMethodsResponse: response, // The payment methods response returned in step 1.
                 onChange: handleOnChange, // Your function for handling onChange event
                 onAdditionalDetails: handleOnAdditionalDetails, // Your function for handling onAdditionalDetails event,
@@ -493,7 +498,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
             checkout = new AdyenCheckout(aydenConfiguration);
             setLoading(false)
             let card = checkout.create('dropin').mount(aydenRef.current)
-            
+
         })
     }
 
@@ -504,13 +509,13 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
         checkout = null
         console.log('valid!')
         setupPaymentUi(priceExVat * 100, countryCode)
-        
+
     }
 
-    useEffect(() => {        
+    useEffect(() => {
 
         if(showModal && countryCode && typeof window !== 'undefined' && !isFreeTier) {
-            axios.get(`${process.env.GATSBY_HUB_URL}/v1/subscriptions/payments/vats/calculate?amount=${majorUnitPriceExVat}&country_code=${countryCode}`)
+            axios.get(`${GATSBY_HUB_URL}/v1/subscriptions/payments/vats/calculate?amount=${majorUnitPriceExVat}&country_code=${countryCode}`)
             .then((res) => {
                 console.log('VAT RES', res)
                 if(res.data && res.data.data && res.data.data.attributes) {
@@ -524,7 +529,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 }
             }).catch((err) => {
                 console.log('VAT ERR', err)
-            })   
+            })
         } else if(showModal && isFreeTier) {
             setLoading(false)
         }
@@ -567,7 +572,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                         <td colSpan="2">
                                             <VatVerificator vatValidatedHandler={setVatValidatedHandler} />
                                         </td>
-                                    </tr>                                   
+                                    </tr>
                                     <tr><td className={Classes.borderSpacer}></td><td className={Classes.borderSpacer}></td></tr>
                                     <tr>
                                         <td className="text-bold">Total {vatValidated ? '' : 'incl. VAT'}</td>
@@ -581,7 +586,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                 <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
                             </div>
                         </div>
-                        : null }    
+                        : null }
                         <div className={["col col-xs-12", Classes.modalLeft, !isFreeTier ? "col-lg-8 first-lg" : null, isFreeTier ? Classes.modalFree : null].join(' ')}>
                             {isFreeTier ?
                                 <>
@@ -598,26 +603,26 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.userInformation].join(' ')}>User information</p>
                             </>
                             : null }
-                            {!showEmailValidation ? 
+                            {!showEmailValidation ?
                             <>
                             <form>
                                 <div className={["form-group", Classes.formGroup, errors.email ? Classes.error : null, dirty.email ? Classes.dirty : null].join(' ')}>
                                     <label className="sr-only" htmlFor="email">Email address</label>
-                                    <input id="email" type="email" name="email" placeholder="E-mail" 
-                                        value={submission.email} 
-                                        onChange={handleUserRegistrationChange} 
+                                    <input id="email" type="email" name="email" placeholder="E-mail"
+                                        value={submission.email}
+                                        onChange={handleUserRegistrationChange}
                                         />
                                         {errors.email ? <p className={["text-red text-xs-small", Classes.errorText].join(' ')}>{errors.email}</p> : null}
                                 </div>
                                 <div className={["form-group", Classes.formGroup, errors.password ? Classes.error : null, dirty.password ? Classes.dirty : null].join(' ')}>
                                     <label className="sr-only" htmlFor="password">Password</label>
-                                    <input id="password" type="password" name="password" placeholder="Password" 
-                                        value={submission.password} 
-                                        onChange={handleUserRegistrationChange} 
+                                    <input id="password" type="password" name="password" placeholder="Password"
+                                        value={submission.password}
+                                        onChange={handleUserRegistrationChange}
                                         />
                                         {errors.password ? <p className={["text-red text-xs-small", Classes.errorText,].join(' ')}>{errors.password}</p> : null}
                                 </div>
-                            
+
                             </form>
                             {isFreeTier ?
                             <ReCAPTCHA
@@ -625,30 +630,30 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                                 onChange={handleRecaptchaValidation}
                                 />
                             : null}
-                            
+
                             {!isFreeTier ?
                                 <p className={["text-bold small space-small-xs-up", Classes.informationTitles, Classes.paymentInformation].join(' ')}>Payment information</p>
                             : null}
                             {!reloadPaymentForm ? <div className="space-xs-up" ref={aydenRef}></div> : null}
-                            <button 
-                                className={["btn btn-full-width", submitSuccess ? Classes.successBtn : null].join(' ')} 
-                                onClick={handleOnSubmit} 
+                            <button
+                                className={["btn btn-full-width", submitSuccess ? Classes.successBtn : null].join(' ')}
+                                onClick={handleOnSubmit}
                                 disabled={(!isFreeTier && (!paymentInformation || !paymentInformation.isValid)) || !isObjEmpty(errors) || !submission.email || !submission.password || (isFreeTier && !recaptchaValid)}>
                                     <span>
-                                        {submitting ? 
+                                        {submitting ?
                                         <LoadingSpinner loading={submitting}>
                                             Loading
-                                        </LoadingSpinner> 
-                                        : !isFreeTier ? 
-                                            `Pay $${vatValidated ? priceExVat : priceWVat}` 
+                                        </LoadingSpinner>
+                                        : !isFreeTier ?
+                                            `Pay $${vatValidated ? priceExVat : priceWVat}`
                                         : showEmailValidation ?
                                             'Submit'
                                         : 'Sign up'}
                                     </span>
                             </button>
                             </>
-                            : 
-                            <EmailVerificator 
+                            :
+                            <EmailVerificator
                                 submitSuccess={submitSuccess}
                                 submitting={submitting}
                                 setSubmitting={setSubmitting}
@@ -658,24 +663,24 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                             {isFreeTier ?
                             <p className="space-top-xs-up text-xs-small text-center">By clicking the "Sign up" button, you are creating a Cobiro account, and you agree to Cobiro's Terms &amp; Conditions.</p>
                             : null}
-                            
+
                             {submitError ? <p className="text-red space-top-xs-up small">{submitError}</p> : null}
                         </div>
                         </>
-                        : 
+                        :
                         <div className={Classes.returning}>
                             <img className={Classes.logo} src={logo} alt="Cobiro logo" />
                             {!submitError ?
                             <LoadingSpinner loading={true} large relative dark>
                                 Loading
-                            </LoadingSpinner> 
+                            </LoadingSpinner>
                             : <h3 className="text-center space-big-xs-up text-red">{submitError}</h3>
                             }
-                             
+
                             <div className={["flex", isFreeTier ? "center-xs" : null].join(' ')}>
                                 <ImageAll image={securePaymentImage} classes={Classes.paymentImages}/>
                                 <ImageAll image={googlePartnerImage.childImageSharp} classes={Classes.paymentImages}/>
-                            </div> 
+                            </div>
                         </div>
                         }
                     </div>
