@@ -223,7 +223,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
                 default:
                     setSubmitting(false)
                     setSubmitSuccess(false)
-                    pushWindowEvent('/Pricing - Pament failed')
+                    pushWindowEvent('/Pricing - Payment failed')
                     setSubmitError('The transaction was refused.')
                 break;
             }
