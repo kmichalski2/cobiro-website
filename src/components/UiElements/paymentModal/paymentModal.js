@@ -515,7 +515,7 @@ const PaymentModal = ({showModal, setShowModal, rawPriceIncVat, rawPriceExVat, m
     useEffect(() => {
 
         if(showModal && countryCode && typeof window !== 'undefined' && !isFreeTier) {
-            axios.get(`${GATSBY_HUB_URL}/v1/subscriptions/payments/vats/calculate?amount=${majorUnitPriceExVat}&country_code=${countryCode}`)
+            axios.get(`https://hub.cobiro.com/v1/subscriptions/payments/vats/calculate?amount=${majorUnitPriceExVat}&country_code=${countryCode}`)
             .then((res) => {
                 console.log('VAT RES', res)
                 if(res.data && res.data.data && res.data.data.attributes) {
